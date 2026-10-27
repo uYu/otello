@@ -121,10 +121,23 @@ struct SearchResult {
     std::uint64_t nodes = 0;
     std::uint64_t ttHits = 0;
     std::uint64_t ttCutoffs = 0, betaCutoffs = 0, pvsResearches = 0, aspirationRetries = 0, evaluations = 0;
+    std::uint64_t accumulatorUpdates = 0;
     bool exact = false;
     std::vector<Candidate> candidates;
 };
 struct SearchOptions { int milliseconds = 800, maxDepth = 64, level = 2; std::uint32_t seed = 1; const nnue::Network* network = nullptr; };
+struct OpeningPolicy { int plies=12, temperature=32, maxLoss=64; };
+struct MoveSelection {
+    int move=-1, score=0, bestScore=0, eligible=0, temperatureMilli=0, lossLimit=0;
+    bool sampled=false;
+};
+// Select from a fully completed root iteration. Search scores/TT stay untouched.
+// Plies count placed discs since the standard four-disc start; passes do not count.
+MoveSelection selectMove(const Position& position,const SearchResult& analysis,
+                         OpeningPolicy policy,std::uint32_t seed);
 SearchResult search(const Position& position, SearchOptions options = {});
+// Searches on one thread reuse an 8 MiB TT. Changing evaluator contents clears
+// it automatically. Scores are reused only at the requested horizon.
+void clearSearchCache(); // clears the calling thread's TT, e.g. for a cold benchmark
 int evaluate(const Position& position);
 }

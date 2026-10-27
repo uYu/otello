@@ -20,7 +20,7 @@ def read(path):
 
 def display(config):
     stamp = datetime.datetime.now(ZoneInfo('Asia/Shanghai')).strftime('%H:%M:%S')
-    lines = [f'Otello v1 对局监控  {stamp}', '']
+    lines = [f"Otello {config.get('version', 'v1')} 对局监控  {stamp}", '']
     for item in config['experiments']:
         path = ROOT / item['report']
         live = read(path.with_suffix('.live.json'))
@@ -29,6 +29,15 @@ def display(config):
         games = result.get('games', 0)
         planned = result.get('plannedGames', item['games'])
         state = '已完成' if result.get('complete') else ('进行中' if result else '排队中')
+        if item.get('status') == 'stopped':state = '已停止'
+        if result.get('experiment') in ('search-matrix', 'nnue-search-100ms'):
+            lines.extend([item['name'],f'  {state}  {games}/{planned} 局'])
+            for c in result['configs']:
+                r=counts[c['id']]
+                lines.append(f"  {c['name']}: 胜 {r['win']} 平 {r['draw']} 负 {r['loss']}，得分率 {r['scoreRate']:.1%}")
+            current=result.get('currentGame')
+            if current:lines.append(f"  当前第 {current['number']} 局，第 {current['ply']} 步：{current['black']} / {current['white']}")
+            lines.append('');continue
         lines.extend([item['name'], f"  统计视角：{item['focus']}",
                       f"  {state}  {games}/{planned} 局    胜 {counts.get('win', 0)}  平 {counts.get('draw', 0)}  负 {counts.get('loss', 0)}"])
         if games:

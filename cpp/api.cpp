@@ -1,6 +1,8 @@
 #include "api.h"
 #include "othello.hpp"
 #include "nnue.hpp"
+#include "mcts.hpp"
+#include "default_engine.hpp"
 #include <climits>
 struct ot_nnue {othello::nnue::Network network;};
 namespace {
@@ -39,6 +41,7 @@ int ot_search(const int* cells,int turn,int ms,int depth,int level,unsigned seed
         encode(r,output);return 1;
     } catch(...) {return -1;}
 }
+void ot_search_clear_cache(void){othello::clearSearchCache();}
 ot_nnue* ot_nnue_load(const char* path){
     try{nnueError.clear();if(!path)throw std::invalid_argument("Model path is null");
         return new ot_nnue{othello::nnue::Network::load(path)};
@@ -56,6 +59,51 @@ int ot_nnue_search(const ot_nnue* model,const int* cells,int turn,int ms,int dep
     }catch(const std::exception& e){nnueError=e.what();return -1;}catch(...){nnueError="NNUE search failed";return -1;}
 }
 const char* ot_nnue_error(){return nnueError.c_str();}
+const char* ot_default_model_sha256(){return othello::defaultNetworkSha256();}
+int ot_default_evaluate(const int* cells,int turn,int* score){
+    try{nnueError.clear();if(!score)throw std::invalid_argument("Null default score");
+        *score=othello::defaultNetwork().evaluate(decode(cells,turn));return 1;
+    }catch(const std::exception& e){nnueError=e.what();return -1;}catch(...){nnueError="Default evaluation failed";return -1;}
+}
+int ot_default_search(const int* cells,int turn,int ms,unsigned seed,int* output){
+    try{nnueError.clear();if(!output)throw std::invalid_argument("Null default output");
+        auto p=decode(cells,turn);auto r=othello::mcts(p,{ms,0,seed,&othello::defaultNetwork()});
+        auto selected=othello::selectMove(p,r.analysis,{},seed);
+        r.analysis.move=selected.move;r.analysis.score=selected.score;encode(r.analysis,output);return 1;
+    }catch(const std::exception& e){nnueError=e.what();return -1;}catch(...){nnueError="Default search failed";return -1;}
+}
+void ot_mcts_clear_cache(void){othello::clearMctsCache();}
+int ot_nnue_mcts_play(const ot_nnue* model,const int* cells,int turn,int ms,unsigned simulations,unsigned seed,
+                      int plies,int temperature,int maxLoss,int* output,int* policyOutput,int* visits,double* stats){
+    try{
+        nnueError.clear();if(!model||!output||!policyOutput||!visits||!stats)throw std::invalid_argument("Null MCTS argument");
+        auto p=decode(cells,turn);othello::selectMove(p,{}, {plies,temperature,maxLoss},seed);
+        auto r=othello::mcts(p,{ms,simulations,seed,&model->network});
+        auto selected=othello::selectMove(p,r.analysis,{plies,temperature,maxLoss},seed);
+        r.analysis.move=selected.move;r.analysis.score=selected.score;encode(r.analysis,output);
+        for(std::size_t i=0;i<r.visits.size();++i){visits[i]=int(std::min<std::uint64_t>(INT_MAX,r.visits[i]));stats[8+i]=r.values[i];}
+        policyOutput[0]=selected.eligible;policyOutput[1]=selected.temperatureMilli;policyOutput[2]=selected.lossLimit;
+        policyOutput[3]=selected.bestScore;policyOutput[4]=selected.bestScore-selected.score;policyOutput[5]=selected.sampled;
+        stats[0]=double(r.analysis.nodes);stats[1]=double(r.analysis.evaluations);stats[2]=r.meanDepth*1000;
+        stats[3]=double(r.reusedNodes);stats[4]=double(r.treeNodes);stats[5]=r.analysis.elapsed;
+        stats[6]=r.analysis.exact;stats[7]=r.memoryLimited;return 1;
+    }catch(const std::exception& e){nnueError=e.what();return -1;}catch(...){nnueError="MCTS failed";return -1;}
+}
+int ot_nnue_play(const ot_nnue* model,const int* cells,int turn,int ms,int depth,int level,unsigned seed,
+                  int plies,int temperature,int maxLoss,int* output,int* policyOutput){
+    try{
+        nnueError.clear();if(!model||!output||!policyOutput)throw std::invalid_argument("Null NNUE play argument");
+        auto p=decode(cells,turn);
+        // Validate before spending the search budget.
+        othello::selectMove(p,{}, {plies,temperature,maxLoss},seed);
+        auto r=othello::search(p,{ms,depth,level,seed,&model->network});
+        auto selected=othello::selectMove(p,r,{plies,temperature,maxLoss},seed);
+        r.move=selected.move;r.score=selected.score;encode(r,output);
+        policyOutput[0]=selected.eligible;policyOutput[1]=selected.temperatureMilli;policyOutput[2]=selected.lossLimit;
+        policyOutput[3]=selected.bestScore;policyOutput[4]=selected.bestScore-selected.score;policyOutput[5]=selected.sampled;
+        return 1;
+    }catch(const std::exception& e){nnueError=e.what();return -1;}catch(...){nnueError="NNUE play failed";return -1;}
+}
 // Single-threaded shared scratch space only for the browser adapter. Native callers use caller-owned buffers above.
 int* ot_input() {static int cells[64];return cells;}
 int* ot_output() {static int output[136];return output;}

@@ -1,0 +1,12 @@
+{
+  "version": "v1.1",
+  "millisecondsPerMove": 50,
+  "experiments": [
+    {
+      "name": "v1.1 NNUE vs v1 NNUE",
+      "focus": "v1.1 NNUE",
+      "games": 100,
+      "report": "models/v1.1-vs-v1-nnue.json"
+    }
+  ]
+}

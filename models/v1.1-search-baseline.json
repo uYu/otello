@@ -1,0 +1,127 @@
+{
+  "version": "v1.1",
+  "status": "measured",
+  "date": "2026-10-27",
+  "kind": "fixed-depth performance; not a strength or Elo measurement",
+  "model": "models/nnue256-v1.otnnue",
+  "modelSha256": "76065bb73de03b83fff6f805f32c5efeaa91a152f4b2a109c485819465eb1961",
+  "changes": [
+    "Four-way 8 MiB per-thread persistent transposition table; depth/exactness/age replacement; evaluator content invalidation; equal-depth score reuse",
+    "Fixed-capacity stable move sorting, one priority calculation per move, no per-node heap allocation",
+    "Lazy NNUE accumulators, skipping updates for terminal and TT-cutoff subtrees"
+  ],
+  "sourceSha256": {
+    "cpp/api.cpp": "cf816931832827c9a4f7a41a9942a176c0bffcba6e356a56d2a532e81b851184",
+    "cpp/api.h": "cd2cdc7006511e175d7a0d756489f5437da8472ade68674f91a565eda20886af",
+    "cpp/dataset.cpp": "12cce8ca17a751433503e983b824de87e8fddc21de7a1dfba047f8201356354b",
+    "cpp/egaroucid.cpp": "ac750510b136c21e271f1195dee5716b47362e7883af509be8ed2e3beb65ce29",
+    "cpp/egaroucid.hpp": "6e93deb32736a10a3edb2fd030e1e1586c6a929889d17663c09dd44d0ea6b07e",
+    "cpp/egaroucid_api.h": "efa6dd4fdb3cefebb2400ca3b98823ac78de83572268a93f57f960f0d1c2f640",
+    "cpp/egaroucid_bridge.cpp": "a12e52246f0fa14f69403eb2212f52a1ed4a6940749b16bf027ea50bd3a1f230",
+    "cpp/main.cpp": "2146c730e4ede06c8dbc65f646b6a8e7c97c5accde1d80aee83c8dd1f1db059e",
+    "cpp/nnue.cpp": "b8ce51ba1a2a45d007c99d3d406d16b9b0ab9b20b3862e5152973af0bb67680f",
+    "cpp/nnue.hpp": "d2dab5be3591f111431abc5df032e6ef523d841d794c6d4037ad1b4b75d6e045",
+    "cpp/othello.hpp": "d3d0e32235a635c835a3844df7d7da61c9d1111ce6323a34c134ae55a588fff2",
+    "cpp/search.cpp": "a5f540f893c6c14ffb5de342e596ba02a6eefbdec70b0dac7bdf8262df519878",
+    "cpp/search_table.hpp": "fbb8c057a36e8b83adaee4232bc8e3764ec54e283fe980888b36a6cca6371624",
+    "cpp/model/tiny_nn.h": "5900a0125246045fa4536df2e4a47f09690c944a017c7f4a9ce7f05eba8f3d0e",
+    "CMakeLists.txt": "f53b0e019e4b33712bdb7ffa508c28c03a94605b74a5abdd8e0843ecac13f917",
+    "scripts/benchmark-search.py": "cf420351709449010efaf3e8065acf61c72d4f5d82569366a57adfadf6ec4567",
+    "scripts/build-wasm.sh": "1d1b97c5e1da656f8c32d2e3beb8355962b3bcb8d42d8865f2c3ac35adc3690f",
+    "scripts/verify-baseline.py": "219ef2827e2e09cb9748eafdeac0370f0a2e819826643c7f4385141498e5e45d",
+    "scripts/train-nnue.py": "d361670b878ce6f93962b432dca91f79ad960c5b186f148d2e34c9611ada9115",
+    "scripts/compare-evaluators.py": "1ec6c0df248ac65e0fe8527e6adef690970c690912baf65b59216aebb06372e2",
+    "tests/native.cpp": "c156c16a1737219a7be535deb2c34e7ba6bf6db2ca20494688bc7f36ede6a673",
+    "tests/search-cache.test.ts": "2a676d62e1fa8f74346f101266284b8a27a614bc0156b7117be1a6f396ad5bf9",
+    "src/game/wasm/othello.d.mts": "c357821e242d291d5e0213a24c10fc38550ce8c84977fb803ae8a6294025d56c",
+    "scripts/run-v1-experiments.py": "e79b237be7a6b2aa37931092856a229fdaa7e715459f3e9e947d5f995ec30df4",
+    "package.json": "a60d9e8147899517e87ab2c8cc6b5da57a7c22f6b9ea4dcc9c8d7caf5bcb0bf3",
+    "package-lock.json": "7001070535feb32aa871084a1078ea1f6410d56dc5df08b55f5157bc1862d5e9",
+    "scripts/compare-versions.py": "5e1010d1a8956942d5031e67857cc89b5225050725ba6969d1d4299ffec2a676",
+    "scripts/watch-matches.py": "5ec05bea9f593af12f7ba169118d8c13c980aa78279bd85683e2d9dc02b549f9",
+    "tests/version_comparison_test.py": "5ecebea0820240306b37de02caad96bf9b33bc26c352459853f9fcdf61a6741a"
+  },
+  "artifactSha256": {
+    "src/game/wasm/othello.mjs": "7de797001460c7b3873f8959d3a92385f3ffb03dddbb6ce8e49facab3c59da2e"
+  },
+  "environment": {
+    "system": "Darwin",
+    "machine": "arm64",
+    "compiler": "Apple clang version 16.0.0 (clang-1600.0.26.6)",
+    "buildType": "Release"
+  },
+  "benchmark": {
+    "version": "v1.1-search",
+    "depth": 6,
+    "rounds": 7,
+    "seed": [
+      91,
+      2026
+    ],
+    "beforeLibrarySha256": "6c437209ddbd797b8f7478d0ec5a3c737908054977710eb936d5d6f72210edc4",
+    "afterLibrarySha256": "0de7eae904b8abf09322f8bf372ea1b82147034cbab5315149301a5f04814a2e",
+    "modelSha256": "76065bb73de03b83fff6f805f32c5efeaa91a152f4b2a109c485819465eb1961",
+    "results": [
+      {
+        "evaluator": "nnue256-v1",
+        "mode": "cold",
+        "positions": 8,
+        "before": {
+          "ms": 133.604627,
+          "nodes": 206729,
+          "ttHits": 25392
+        },
+        "after": {
+          "ms": 113.514833,
+          "nodes": 206445,
+          "ttHits": 25549
+        },
+        "allCandidateScoresEqual": true,
+        "speedup": 1.176979461353742
+      },
+      {
+        "evaluator": "nnue256-v1",
+        "mode": "sequence",
+        "positions": 8,
+        "before": {
+          "ms": 226.13962399999997,
+          "nodes": 361457,
+          "ttHits": 35348
+        },
+        "after": {
+          "ms": 187.315917,
+          "nodes": 344935,
+          "ttHits": 37447
+        },
+        "allCandidateScoresEqual": true,
+        "speedup": 1.2072632567578332
+      },
+      {
+        "evaluator": "nnue256-v1",
+        "mode": "repeat",
+        "positions": 8,
+        "before": {
+          "ms": 130.26608099999999,
+          "nodes": 206729,
+          "ttHits": 25392
+        },
+        "after": {
+          "ms": 28.701958,
+          "nodes": 57461,
+          "ttHits": 19787
+        },
+        "allCandidateScoresEqual": true,
+        "speedup": 4.538578204316234
+      }
+    ]
+  },
+  "checks": [
+    "CMake Release build and ctest passed",
+    "ASan/UBSan native suite passed: perft depth 8, 120 games, forced passes, exhaustive minimax, 32/256 NNUE, persistent-cache isolation",
+    "Wasm rebuilt; npm test: 11 passed; npm run build passed",
+    "12 concurrent native tasks with shared immutable NNUE model and alternating evaluators passed",
+    "All root candidate scores equal v1 in every benchmark request",
+    "v1 experiment runner rejects changed source trees before writing frozen reports",
+    "Version-comparison runner: independent move/replay unit tests and a two-game smoke test passed"
+  ]
+}

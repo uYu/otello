@@ -1,6 +1,6 @@
 {
   "name": "otello",
-  "version": "1.0.0",
+  "version": "1.7.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -25,7 +25,25 @@
     "preview": "vite preview --host 127.0.0.1",
     "test": "node --experimental-strip-types --test tests/*.test.ts",
     "build:wasm": "sh scripts/build-wasm.sh",
-    "test:native": "sh scripts/test-native.sh"
+    "test:native": "sh scripts/test-native.sh",
+    "training:baseline:v1.1": "python3 scripts/compare-versions.py",
+    "training:watch:v1.1": "python3 scripts/watch-matches.py --config models/v1.1-experiments.json",
+    "training:run:v1.2": "python3 scripts/train-nnue.py --architecture turn --hidden 256 --train-positions 1000000 --cache .build/training/v1/positions.npz --output .build/training/v1.2/nnue256-v1.2.otnnue --library .build/native-v1.2/libothello.dylib --epochs 30 --batch-size 1024 --parity-positions 1024",
+    "training:baseline:v1.2": "python3 scripts/compare-model-versions.py",
+    "training:watch:v1.2": "python3 scripts/watch-matches.py --config models/v1.2-experiments.json",
+    "training:baseline:v1.3": "python3 scripts/compare-opening-policy.py",
+    "training:watch:v1.3": "python3 scripts/watch-matches.py --config models/v1.3-experiments.json",
+    "training:run:cnn": "python3 scripts/train-cnn.py",
+    "training:baseline:v1.4": "python3 scripts/compare-cnn.py",
+    "training:watch:v1.4": "python3 scripts/watch-matches.py --config models/v1.4-experiments.json",
+    "training:run:resnet": "python3 scripts/train-resnet.py",
+    "training:baseline:v1.5": "python3 scripts/compare-resnet.py",
+    "training:watch:v1.5": "python3 scripts/watch-matches.py --config models/v1.5-experiments.json",
+    "training:baseline:v1.6": "python3 scripts/compare-search-matrix.py",
+    "training:watch:v1.6": "python3 scripts/watch-matches.py --config models/v1.6-experiments.json",
+    "training:baseline:nnue-search": "python3 scripts/compare-nnue-search.py",
+    "training:watch:nnue-search": "python3 scripts/watch-matches.py --config models/v1.6-100ms-experiments.json",
+    "model:check": "python3 scripts/embed-default-model.py --check"
   },
   "dependencies": {
     "react": "^19.1.0",

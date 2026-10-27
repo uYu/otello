@@ -11,6 +11,10 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def run():
+    baseline = json.loads((ROOT / 'models/v1-baseline.json').read_text())
+    if any(hashlib.sha256((ROOT / name).read_bytes()).hexdigest() != expected
+           for name, expected in baseline['sourceSha256'].items()):
+        raise ValueError('Frozen v1 experiments require the original v1 sources. Use models/archive/v1-sources.tar.gz or write a new versioned experiment; v1 reports were not modified.')
     config = json.loads((ROOT / 'models/v1-experiments.json').read_text())
     model = ROOT / 'models/nnue256-v1.otnnue'
     metadata = json.loads(model.with_suffix('.json').read_text())

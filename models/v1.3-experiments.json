@@ -1,0 +1,12 @@
+{
+  "version": "v1.3",
+  "millisecondsPerMove": 50,
+  "experiments": [
+    {
+      "name": "v1.3 NNUE + decaying opening variety vs original v1.1",
+      "focus": "v1.3 NNUE",
+      "games": 100,
+      "report": "models/v1.3-vs-v1.1-nnue.json"
+    }
+  ]
+}

@@ -17,15 +17,20 @@ SPLITS = ('train', 'validation', 'test')
 
 
 class ValueNet(nn.Module):
-    def __init__(self, hidden):
+    def __init__(self, hidden, architecture='legacy'):
         super().__init__()
+        self.architecture = architecture
         self.transform = nn.Linear(128, hidden)
-        self.head = nn.Linear(hidden, 1, bias=False)
+        self.head = nn.Linear(hidden * (2 if architecture == 'turn' else 1), 1, bias=architecture == 'turn')
 
     def forward(self, features, turn):
         swapped = torch.cat((features[:, 64:], features[:, :64]), dim=1)
         black = self.transform(features).clamp(0, 1)
         white = self.transform(swapped).clamp(0, 1)
+        if self.architecture == 'turn':
+            actor = (turn > 0).unsqueeze(1)
+            own, opponent = torch.where(actor, black, white), torch.where(actor, white, black)
+            return torch.tanh(self.head(torch.cat((own, opponent), dim=1)).squeeze(1))
         return torch.tanh(self.head(black - white).squeeze(1) * turn * 0.5)
 
 
@@ -153,22 +158,27 @@ def features(board):
 
 
 def quantized(net):
-    def convert(tensor, dtype):
-        scaled = np.rint(tensor.detach().cpu().numpy() * 256)
+    def convert(tensor, dtype, scale=256):
+        scaled = np.rint(tensor.detach().cpu().numpy() * scale)
         limits = np.iinfo(dtype)
         if not np.isfinite(scaled).all() or scaled.min() < limits.min or scaled.max() > limits.max:
             raise ValueError('Weights exceed quantized format')
         return scaled.astype(dtype)
-    return (convert(net.transform.weight.T, '<i2'), convert(net.transform.bias, '<i4'),
-            convert(net.head.weight.reshape(-1), '<i2'))
+    arrays = (convert(net.transform.weight.T, '<i2'), convert(net.transform.bias, '<i4'),
+              convert(net.head.weight.reshape(-1), '<i2'))
+    return arrays + (convert(net.head.bias, '<i4', 256 * 256),) if net.architecture == 'turn' else arrays
 
 
 def quantized_predict(weights, board, turn):
-    w, bias, head = [x.astype(np.int64) for x in weights]
+    w, bias, head = [x.astype(np.int64) for x in weights[:3]]
     x = np.concatenate((board == 1, board == -1), axis=1).astype(np.int64)
     swapped = np.concatenate((x[:, 64:], x[:, :64]), axis=1)
     b = np.clip(x @ w + bias, 0, 256)
     other = np.clip(swapped @ w + bias, 0, 256)
+    if len(weights) == 4:
+        own = np.where((turn > 0)[:, None], b, other)
+        opponent = np.where((turn > 0)[:, None], other, b)
+        return np.tanh((np.concatenate((own, opponent), axis=1) @ head + weights[3][0]) / (256 * 256))
     return np.tanh(((b - other) @ head) * turn / (2 * 256 * 256))
 
 
@@ -193,7 +203,8 @@ def train(args):
         if meta.get('cacheSha256') and meta['cacheSha256'] != hashlib.sha256(args.cache.read_bytes()).hexdigest():
             raise ValueError('Cache checksum mismatch')
         data = dict(np.load(args.cache))
-    net = ValueNet(args.hidden)
+    architecture = getattr(args, 'architecture', 'legacy')
+    net = ValueNet(args.hidden, architecture)
     opt = torch.optim.AdamW(net.parameters(), lr=args.learning_rate, weight_decay=0.001)
     boards = torch.from_numpy(data['train_board'])
     turns = torch.from_numpy(data['train_turn'])
@@ -229,11 +240,13 @@ def train(args):
     net.eval()
     weights = quantized(net)
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    binary = struct.pack('<8sIIII', b'OTNNUE1\0', 128, args.hidden, 256, 256)
+    binary = struct.pack('<8sIIII', b'OTNNUE2\0' if architecture == 'turn' else b'OTNNUE1\0', 128, args.hidden, 256, 256)
     binary += b''.join(x.tobytes() for x in weights)
     args.output.write_bytes(binary)
     torch.save(net.state_dict(), args.output.with_suffix('.pt'))
-    report = dict(architecture=f'128->{args.hidden}->1, shared black/white transform and head; clipped ReLU; tanh',
+    description = (f'128->{args.hidden} shared transform; side-to-move ordered concatenation {2*args.hidden}->1 with bias; clipped ReLU; tanh'
+                   if architecture == 'turn' else f'128->{args.hidden}->1, shared black/white transform and head; clipped ReLU; tanh')
+    report = dict(architecture=description, modelFormat=2 if architecture == 'turn' else 1,
                   parameters=sum(x.numel() for x in net.parameters()), bytes=len(binary),
                   sha256=hashlib.sha256(binary).hexdigest(), seed=args.seed,
                   bestEpoch=min(history, key=lambda row: row['mse'])['epoch'],
@@ -294,6 +307,7 @@ if __name__ == '__main__':
     parser.add_argument('--train-positions', type=int, default=0, help='Override training reservoir cap')
     parser.add_argument('--parity-positions', type=int, default=64)
     parser.add_argument('--hidden', type=int, choices=(32, 64, 128, 256), default=256)
+    parser.add_argument('--architecture', choices=('legacy', 'turn'), default='legacy')
     parser.add_argument('--seed', type=int, default=20261027)
     parser.add_argument('--max-games', type=int, default=6000)
     parser.add_argument('--max-positions', type=int, default=60000)

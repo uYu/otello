@@ -1,0 +1,12 @@
+{
+  "version": "v1.6 four-way search matrix",
+  "millisecondsPerMove": 1000,
+  "experiments": [
+    {
+      "name": "v1.3/CNN32x2 x alpha-beta/MCTS",
+      "focus": "four combinations",
+      "games": 24,
+      "report": "models/v1.6-search-matrix.json"
+    }
+  ]
+}

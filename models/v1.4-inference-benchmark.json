@@ -1,0 +1,81 @@
+{
+  "positions": 16,
+  "evaluationsPerRound": 4096,
+  "rounds": 7,
+  "librarySha256": "1ecfa1d2649dd6223bbd4c7e8b1d5a80277b467521d7a7ee4f49b9cdd68e10f7",
+  "scriptSha256": "385f30dcd738a06173763c81f6ff217929089f8732b76a493bedf52079f61999",
+  "results": [
+    {
+      "model": "v1.3 NNUE full refresh",
+      "modelSha256": "8805ce125579869cdca99c9efe85aeaa9ec92a0b1d0cbd7ddcf438fad1d20159",
+      "medianMicroseconds": 1.42042041015625,
+      "samples": [
+        {
+          "microsecondsPerEvaluation": 1.45350146484375,
+          "checksum": 290304
+        },
+        {
+          "microsecondsPerEvaluation": 1.43048095703125,
+          "checksum": 290304
+        },
+        {
+          "microsecondsPerEvaluation": 1.389302490234375,
+          "checksum": 290304
+        },
+        {
+          "microsecondsPerEvaluation": 1.467661376953125,
+          "checksum": 290304
+        },
+        {
+          "microsecondsPerEvaluation": 1.406158447265625,
+          "checksum": 290304
+        },
+        {
+          "microsecondsPerEvaluation": 1.42042041015625,
+          "checksum": 290304
+        },
+        {
+          "microsecondsPerEvaluation": 1.4098408203125,
+          "checksum": 290304
+        }
+      ]
+    },
+    {
+      "model": "8x8 CNN",
+      "modelSha256": "a9b72e4520af6c2c60b598c46261ac7825db0abf46114e71035aec6e43005bfd",
+      "medianMicroseconds": 3.1724140625,
+      "samples": [
+        {
+          "microsecondsPerEvaluation": 3.142649169921875,
+          "checksum": 257792
+        },
+        {
+          "microsecondsPerEvaluation": 3.142771484375,
+          "checksum": 257792
+        },
+        {
+          "microsecondsPerEvaluation": 3.1724140625,
+          "checksum": 257792
+        },
+        {
+          "microsecondsPerEvaluation": 3.12650537109375,
+          "checksum": 257792
+        },
+        {
+          "microsecondsPerEvaluation": 3.2656044921875,
+          "checksum": 257792
+        },
+        {
+          "microsecondsPerEvaluation": 3.227508544921875,
+          "checksum": 257792
+        },
+        {
+          "microsecondsPerEvaluation": 3.2348837890625,
+          "checksum": 257792
+        }
+      ]
+    }
+  ],
+  "limits": "Same boards, direct C ABI scores, NNUE includes full refresh; actual NNUE search uses incremental updates. Includes Python/C ABI call overhead.",
+  "cnnToNnueLatencyRatio": 2.233433172190919
+}

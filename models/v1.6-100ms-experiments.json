@@ -1,0 +1,12 @@
+{
+  "version": "v1.6 NNUE AB vs MCTS at 100ms",
+  "millisecondsPerMove": 100,
+  "experiments": [
+    {
+      "name": "v1.3 MCTS vs AB; 100ms each",
+      "focus": "v1.3 model only",
+      "games": 100,
+      "report": "models/v1.6-nnue-mcts-vs-ab-100ms.json"
+    }
+  ]
+}

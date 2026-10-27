@@ -1,0 +1,25 @@
+{
+  "archive": "models/archive/v1-sources.tar.gz",
+  "sha256": "f01ef9c54b990b507005c8b40c49d204042a23c2db2a95c674a0f371810a31a9",
+  "baselineSha256": "dc6423bc0700c3144f4581306cdd0eac374c4de8a2d794e281a6ebae340bce08",
+  "files": {
+    "cpp/api.cpp": "51fa3cd7142a4a0eedc3b5abc5d0205ae7c7b34d7882651cd235d1aef2a9455d",
+    "cpp/api.h": "bdafce7dabcab08996009101f93bde336cb63eed3033391e5e3a417bdf411b42",
+    "cpp/dataset.cpp": "12cce8ca17a751433503e983b824de87e8fddc21de7a1dfba047f8201356354b",
+    "cpp/egaroucid.cpp": "ac750510b136c21e271f1195dee5716b47362e7883af509be8ed2e3beb65ce29",
+    "cpp/egaroucid.hpp": "6e93deb32736a10a3edb2fd030e1e1586c6a929889d17663c09dd44d0ea6b07e",
+    "cpp/egaroucid_api.h": "efa6dd4fdb3cefebb2400ca3b98823ac78de83572268a93f57f960f0d1c2f640",
+    "cpp/egaroucid_bridge.cpp": "a12e52246f0fa14f69403eb2212f52a1ed4a6940749b16bf027ea50bd3a1f230",
+    "cpp/main.cpp": "2146c730e4ede06c8dbc65f646b6a8e7c97c5accde1d80aee83c8dd1f1db059e",
+    "cpp/nnue.cpp": "b8ce51ba1a2a45d007c99d3d406d16b9b0ab9b20b3862e5152973af0bb67680f",
+    "cpp/nnue.hpp": "d2dab5be3591f111431abc5df032e6ef523d841d794c6d4037ad1b4b75d6e045",
+    "cpp/othello.hpp": "13d39bacba6df7cfbe1d33f88063d5c5bf376fafa4689006f85bf19aa71f6860",
+    "cpp/search.cpp": "98588ea5c1a81f07169e04bd0f1e995b7e132715a16906f900294cfb411f536b",
+    "CMakeLists.txt": "06c361a35d14b7fdb244ed26712e0589647113ce2465750186a7b80a58d84631",
+    "cpp/model/tiny_nn.h": "5900a0125246045fa4536df2e4a47f09690c944a017c7f4a9ce7f05eba8f3d0e",
+    "scripts/compare-evaluators.py": "1ec6c0df248ac65e0fe8527e6adef690970c690912baf65b59216aebb06372e2",
+    "scripts/train-nnue.py": "d361670b878ce6f93962b432dca91f79ad960c5b186f148d2e34c9611ada9115",
+    "tests/native.cpp": "53cace8b08c728e30be0e21fd0fa564ef228522c9840288af3d900fd08d9a6ad",
+    "tests/egaroucid.cpp": "7761471bb8c041f7a5b7db6470e9c710e3fdb717a446c111231bbc9921233db4"
+  }
+}

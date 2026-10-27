@@ -8,17 +8,65 @@ import json
 from pathlib import Path
 import random
 import subprocess
+import struct
 import sys
 import tempfile
 from types import SimpleNamespace
 import unittest
 import numpy as np
+import torch
 
 ROOT = Path(__file__).resolve().parents[1]
 LIBRARY = ROOT / ('.build/native/libothello.' + ('dylib' if sys.platform == 'darwin' else 'so'))
 spec = importlib.util.spec_from_file_location('nnue_trainer', ROOT / 'scripts/train-nnue.py')
 trainer = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(trainer)
+
+
+class TurnArchitecture(unittest.TestCase):
+    def test_initiative_and_color_relabeling(self):
+        net = trainer.ValueNet(32, 'turn')
+        with torch.no_grad():
+            net.head.weight.zero_()
+            net.head.bias.fill_(0.25)
+        board = torch.zeros((2, 64), dtype=torch.int8)
+        board[:, 28] = 1
+        board[:, 27] = -1
+        turn = torch.tensor([1.0, -1.0])
+        output = net(trainer.features(board), turn)
+        self.assertTrue(torch.all(output > 0))
+        torch.testing.assert_close(output, net(trainer.features(-board), -turn), rtol=0, atol=0)
+
+    def test_both_formats_match_cpp_and_reject_truncated_heads(self):
+        lib = ctypes.CDLL(str(LIBRARY))
+        lib.ot_nnue_load.argtypes = [ctypes.c_char_p]
+        lib.ot_nnue_load.restype = ctypes.c_void_p
+        lib.ot_nnue_destroy.argtypes = [ctypes.c_void_p]
+        lib.ot_nnue_evaluate.argtypes = [ctypes.c_void_p, ctypes.POINTER(ctypes.c_int), ctypes.c_int, ctypes.POINTER(ctypes.c_int)]
+        torch.manual_seed(781)
+        board = np.random.default_rng(781).integers(-1, 2, size=(12, 64), dtype=np.int8)
+        turn = np.array([1, -1] * 6)
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / 'test.otnnue'
+            for architecture in ('legacy', 'turn'):
+                for hidden in (32, 256):
+                    net = trainer.ValueNet(hidden, architecture)
+                    arrays = trainer.quantized(net)
+                    binary = struct.pack('<8sIIII', b'OTNNUE1\0' if architecture == 'legacy' else b'OTNNUE2\0', 128, hidden, 256, 256)
+                    binary += b''.join(x.tobytes() for x in arrays)
+                    path.write_bytes(binary)
+                    handle = lib.ot_nnue_load(str(path).encode())
+                    self.assertTrue(handle)
+                    try:
+                        expected = trainer.quantized_predict(arrays, board, turn) * 1000
+                        for cells, actor, value in zip(board, turn, expected):
+                            result = ctypes.c_int()
+                            self.assertEqual(lib.ot_nnue_evaluate(handle, (ctypes.c_int * 64)(*map(int, cells)), int(actor), ctypes.byref(result)), 1)
+                            self.assertLessEqual(abs(result.value - value), 0.501)
+                    finally:
+                        lib.ot_nnue_destroy(handle)
+                    path.write_bytes(binary[:-1])
+                    self.assertFalse(lib.ot_nnue_load(str(path).encode()))
 
 
 class TrainingIsolation(unittest.TestCase):

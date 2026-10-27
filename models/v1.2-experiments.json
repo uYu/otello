@@ -1,0 +1,12 @@
+{
+  "version": "v1.2",
+  "millisecondsPerMove": 50,
+  "experiments": [
+    {
+      "name": "v1.2 turn-aware NNUE vs v1.1 NNUE",
+      "focus": "v1.2 NNUE",
+      "games": 100,
+      "report": "models/v1.2-vs-v1.1-nnue.json"
+    }
+  ]
+}

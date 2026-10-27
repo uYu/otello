@@ -1,0 +1,185 @@
+{
+  "version": "v1.6",
+  "experiment": "nnue-search-100ms",
+  "packageVersion": "1.6.0",
+  "status": "frozen",
+  "date": "2026-10-27",
+  "sourceSha256": {
+    "CMakeLists.txt": "7c88670f458cc2711c08b7e6a7afaea4d79e478304b2ef04df54d50e2d27cc7a",
+    "cpp/api.cpp": "e3a8d94162076afbefdeab2c61fddbd94be4496afcc6b8a9e66e24e6d4ed4d95",
+    "cpp/api.h": "6fd91e2fa76d2bb87cb06fd845e53e4f0417638d2e45b08d240d06639d967c93",
+    "cpp/cnn.cpp": "c03ec191aa1fbe763abedce6b774891603513c97595aab8a569238dbb59b8d10",
+    "cpp/cnn.hpp": "63b4ca4c4aeba9a1c2e15a274751f90c5f09c148c4fefc407bff4032e3cb1fc4",
+    "cpp/dataset.cpp": "12cce8ca17a751433503e983b824de87e8fddc21de7a1dfba047f8201356354b",
+    "cpp/egaroucid.cpp": "ac750510b136c21e271f1195dee5716b47362e7883af509be8ed2e3beb65ce29",
+    "cpp/egaroucid.hpp": "6e93deb32736a10a3edb2fd030e1e1586c6a929889d17663c09dd44d0ea6b07e",
+    "cpp/egaroucid_api.h": "efa6dd4fdb3cefebb2400ca3b98823ac78de83572268a93f57f960f0d1c2f640",
+    "cpp/egaroucid_bridge.cpp": "a12e52246f0fa14f69403eb2212f52a1ed4a6940749b16bf027ea50bd3a1f230",
+    "cpp/main.cpp": "f3202f65eed9cd3e0f6b3178f9bd0f71400950782ea66a8e46059f3c02981b42",
+    "cpp/mcts.cpp": "3f54331b6453acd5c431762a5a74a3daa610282d6833fbdc94e98418b21bc429",
+    "cpp/mcts.hpp": "eafc3a18938a10316c86f4fc223ae1b731db9e20d9619b3cddde6f5181badbd6",
+    "cpp/model/tiny_nn.h": "5900a0125246045fa4536df2e4a47f09690c944a017c7f4a9ce7f05eba8f3d0e",
+    "cpp/move_policy.cpp": "51275ebd1340286997510553fde17262f87da838b8fb332f9052c00ffe4df996",
+    "cpp/nnue.cpp": "4347c370f220c063af68ab58358fd3e00386134c56e59f6ae2b6e2c998250c84",
+    "cpp/nnue.hpp": "c88d56b1f68b0b862b661280ae339ce8c18aa288b63c9d7c367a4f265636ea20",
+    "cpp/othello.hpp": "58305fc837c2cd50bab0c51ab8676350c91d79072803361a1874cede9f2bc47e",
+    "cpp/resnet.cpp": "179ed430a4ac473742cb670ec923bb20eca295ff000c2a91ba815336e17e85ab",
+    "cpp/resnet.hpp": "142091eb4e267b22fb427247b2659ec2b653b547e7879f066f9a60cd55dbec85",
+    "cpp/search.cpp": "12f17042ff5e9afb075d57add7b06d6110fe8939c5eb24243eb53a0411bfdc5f",
+    "cpp/search_table.hpp": "fbb8c057a36e8b83adaee4232bc8e3764ec54e283fe980888b36a6cca6371624",
+    "examples/nnue_ffi.py": "2380fbb2c63091d875c177304911ba1298ffab124884fcedb7bb7998156d8739",
+    "package-lock.json": "68aa455a6cda4a74ce4d1db7d081c9fe4b26b229c1c066a4f9bc3fbac61442ec",
+    "package.json": "5e3fb71c82b9abcc6bd9f44011e5e06c517dd22ae5c271c42ad2586e965edb64",
+    "requirements-training.txt": "544770b00b90e3d353e8ac9668ae1e25f0aaaf0d5080f48bff288c59dd929e4f",
+    "scripts/benchmark-cnn.py": "385f30dcd738a06173763c81f6ff217929089f8732b76a493bedf52079f61999",
+    "scripts/benchmark-resnet.py": "dd3be38d081d5a1f71044368ba2ba85723fd8d88db7bd6ba06589a7642e18ddb",
+    "scripts/benchmark-search.py": "cf420351709449010efaf3e8065acf61c72d4f5d82569366a57adfadf6ec4567",
+    "scripts/build-wasm.sh": "55a96f8669903159380b311fbce3d63c46647cb6f3f8f5da42b3a5b7fd56104f",
+    "scripts/compare-cnn.py": "45c0a05544a2015b7d7a740d6761223bb41c301c78d29eba8aa340cf3ffcbf3c",
+    "scripts/compare-evaluators.py": "1ec6c0df248ac65e0fe8527e6adef690970c690912baf65b59216aebb06372e2",
+    "scripts/compare-model-versions.py": "f1673c468c557272eb3344f8c0d21d15d36044c0f0f9a0216183ec316d58a8ee",
+    "scripts/compare-nnue-search.py": "e6ad01d3d7192d62856e6c647f33d5c9fbfae5fddbc4d96f39f2a8bb6e5f6b31",
+    "scripts/compare-opening-policy.py": "ea3b6f1817cf298c8c3f2b7c3b2d73de5c0cfb36b36754fa2036d7f2ba4244dc",
+    "scripts/compare-resnet.py": "f3e794feb32a09d7c3629d969ae6d5c5b394d823764065b120da8e72fea723e7",
+    "scripts/compare-search-matrix.py": "6e965358db5e2f8f118638d254128b9b65bd20d8dffeb5dbfbcb54d99ee52c01",
+    "scripts/compare-versions.py": "5e1010d1a8956942d5031e67857cc89b5225050725ba6969d1d4299ffec2a676",
+    "scripts/opening_policy.py": "da5adf2fa2ff17cc54081ac26ca984f9f6aaf2a0f40d302d8bc0ee400d54453a",
+    "scripts/run-v1-experiments.py": "e79b237be7a6b2aa37931092856a229fdaa7e715459f3e9e947d5f995ec30df4",
+    "scripts/test-native.sh": "8d3cc00949efe04f60be40bf75e433ddc1f367cc694c90949955695638cdedff",
+    "scripts/train-cnn.py": "d370da0d9d3a56c5daf7b85c8c0f783e6b9d11cd585682f6f3a9251be5b3f399",
+    "scripts/train-nnue.py": "f4977077cb890f4bb8d714532f762398268e89999fc329a65f6fd8dfb5074313",
+    "scripts/train-resnet.py": "81c8e32c875f3116d0471397b2c8b35387cc6fa1efcb3e0810d7e9fdab0cd461",
+    "scripts/verify-baseline.py": "5519ce7375b2c18a1af2e389d2a6aacd69a04bc2533d800875ad2e88ab124a84",
+    "scripts/watch-matches.py": "986fe91b81f4445969b8ecfa9c17a9b1fee05b8922a276ee465c2cfadcda0816",
+    "src/game/wasm/othello.d.mts": "c357821e242d291d5e0213a24c10fc38550ce8c84977fb803ae8a6294025d56c",
+    "tests/cnn_training_test.py": "5ac1bb0ec3ae54ec9ba86d59701138fd6d295c714580fc64f742f4c61e8b3070",
+    "tests/egaroucid.cpp": "7761471bb8c041f7a5b7db6470e9c710e3fdb717a446c111231bbc9921233db4",
+    "tests/mcts_comparison_test.py": "f897e516e1940d5eb7a4a093957a92ba01839643d4f213a2715c0497c0503749",
+    "tests/model_version_comparison_test.py": "8f3d249f2167475a8ac262933e03457f2bd6ba380e6f82e03a52ae9a91c5fcac",
+    "tests/native.cpp": "54686da7cb5892d68105b400a19cbf73c229016480a60bd3fea62f80dfa83b6a",
+    "tests/nnue_training_test.py": "5b94581333f98ff00a5369c912f7ab66c8e9b2143981723211cda2d18a5187c9",
+    "tests/opening_policy_test.py": "15eabb01df68cc81830874757c1b8bf1461f641fe3f789a4cf6c6f637bf87af7",
+    "tests/resnet_training_test.py": "c583f2a32a7305debb9eb58b11eb316f854376d59445068f91f3ed2eead142da",
+    "tests/search-cache.test.ts": "2a676d62e1fa8f74346f101266284b8a27a614bc0156b7117be1a6f396ad5bf9",
+    "tests/version_comparison_test.py": "5ecebea0820240306b37de02caad96bf9b33bc26c352459853f9fcdf61a6741a"
+  },
+  "artifactSha256": {
+    "models/nnue256-v1.2.otnnue": "8805ce125579869cdca99c9efe85aeaa9ec92a0b1d0cbd7ddcf438fad1d20159",
+    "src/game/wasm/othello.mjs": "116614a2e2de4d643c4eea7c27266004379624e766984e169e8254846af3694d"
+  },
+  "librarySha256": "ea02d1390e1a7aa99104f30cf695b69afb82e6efa4cb54b12335ecb564dcb375",
+  "strengthReport": {
+    "path": "models/v1.6-nnue-mcts-vs-ab-100ms.json",
+    "sha256": "1c03b6d3b10a8b588c607acfd660adf7e3b764c19597dba86b55f3f106cdef1a",
+    "games": 100,
+    "results": {
+      "nnue_ab": {
+        "games": 100,
+        "win": 26,
+        "draw": 11,
+        "loss": 63,
+        "discDifference": -465,
+        "scoreRate": 0.315,
+        "meanDiscDifference": -4.65,
+        "moves": 3001,
+        "meanWallMs": 80.48595069776742,
+        "meanSearchUnits": 158511.24625124957,
+        "searchUnit": "nodes",
+        "meanNonExactDepth": 7.854166666666667,
+        "depthKind": "completed",
+        "meanSimulationDepth": null,
+        "memoryLimitedSearches": 0,
+        "reusedMctsSearches": 0,
+        "exactMoves": 649
+      },
+      "nnue_mcts": {
+        "games": 100,
+        "win": 63,
+        "draw": 11,
+        "loss": 26,
+        "discDifference": 465,
+        "scoreRate": 0.685,
+        "meanDiscDifference": 4.65,
+        "moves": 2998,
+        "meanWallMs": 90.89224689759843,
+        "meanSearchUnits": 341675.3388925951,
+        "searchUnit": "simulations",
+        "meanNonExactDepth": 19.39897134459956,
+        "depthKind": "maximumVisited",
+        "meanSimulationDepth": 4.363419368690048,
+        "memoryLimitedSearches": 0,
+        "reusedMctsSearches": 2898,
+        "exactMoves": 276
+      }
+    },
+    "matrix": {
+      "nnue_ab": {
+        "nnue_mcts": {
+          "win": 26,
+          "draw": 11,
+          "loss": 63
+        }
+      },
+      "nnue_mcts": {
+        "nnue_ab": {
+          "win": 63,
+          "draw": 11,
+          "loss": 26
+        }
+      }
+    }
+  },
+  "protocol": {
+    "millisecondsPerMove": 100,
+    "gamesPerPair": 100,
+    "start": "standard initial board; all moves selected by algorithms",
+    "useBook": false,
+    "openingPolicy": {
+      "plies": 12,
+      "temperature": 32,
+      "max_loss": 64
+    },
+    "configs": [
+      {
+        "id": "nnue_ab",
+        "name": "v1.3 + AB",
+        "search": "ab",
+        "model": "models/nnue256-v1.2.otnnue",
+        "modelSha256": "8805ce125579869cdca99c9efe85aeaa9ec92a0b1d0cbd7ddcf438fad1d20159"
+      },
+      {
+        "id": "nnue_mcts",
+        "name": "v1.3 + MCTS",
+        "search": "mcts",
+        "model": "models/nnue256-v1.2.otnnue",
+        "modelSha256": "8805ce125579869cdca99c9efe85aeaa9ec92a0b1d0cbd7ddcf438fad1d20159"
+      }
+    ]
+  },
+  "checks": {
+    "replayedGames": 100,
+    "replayedActions": 6047,
+    "allMovesLegal": true,
+    "openingSelectionsAudited": true,
+    "mctsVisitsValuesAndSeededTiesAudited": true,
+    "pairingColorsAndSeedsAudited": true,
+    "aggregateStatsRecomputed": true,
+    "nativeAndSanitizersPassed": true,
+    "matrixIntegrationTests": 2,
+    "wasmTests": 12,
+    "frontendBuildPassed": true
+  },
+  "limits": "Paired-color 100-game comparison from the standard initial board. Repeated paths possible; no Elo or reliable win-rate claim. AB completed depth and MCTS visited depth/search units differ.",
+  "mcts": {
+    "algorithm": "uniform-prior PUCT",
+    "exploration": 1.5,
+    "maxNodes": 2097152,
+    "rootChoice": "maximum visits, then mean value, then seeded tie",
+    "value": "side-to-move expected final disc difference / 64; terminal actual disc difference / 64",
+    "rollout": false,
+    "policyHead": false,
+    "subtreeReuse": true
+  },
+  "productionModel": "models/nnue256-v1.2.otnnue",
+  "productionPolicy": "v1.3"
+}

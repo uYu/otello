@@ -1,0 +1,144 @@
+{
+  "version": "v1.2",
+  "packageVersion": "1.2.0",
+  "status": "frozen",
+  "date": "2026-10-27",
+  "model": "models/nnue256-v1.2.otnnue",
+  "modelMetadata": "models/nnue256-v1.2.json",
+  "modelSha256": "8805ce125579869cdca99c9efe85aeaa9ec92a0b1d0cbd7ddcf438fad1d20159",
+  "parameters": 33537,
+  "bytes": 67612,
+  "architecture": "128->256 shared transform; side-to-move ordered concatenation 512->1 with bias; clipped ReLU; tanh",
+  "sourceSha256": {
+    "cpp/api.cpp": "cf816931832827c9a4f7a41a9942a176c0bffcba6e356a56d2a532e81b851184",
+    "cpp/api.h": "cd2cdc7006511e175d7a0d756489f5437da8472ade68674f91a565eda20886af",
+    "cpp/dataset.cpp": "12cce8ca17a751433503e983b824de87e8fddc21de7a1dfba047f8201356354b",
+    "cpp/egaroucid.cpp": "ac750510b136c21e271f1195dee5716b47362e7883af509be8ed2e3beb65ce29",
+    "cpp/egaroucid.hpp": "6e93deb32736a10a3edb2fd030e1e1586c6a929889d17663c09dd44d0ea6b07e",
+    "cpp/egaroucid_api.h": "efa6dd4fdb3cefebb2400ca3b98823ac78de83572268a93f57f960f0d1c2f640",
+    "cpp/egaroucid_bridge.cpp": "a12e52246f0fa14f69403eb2212f52a1ed4a6940749b16bf027ea50bd3a1f230",
+    "cpp/main.cpp": "801fa80d00358b4f5aa0af1ed02746c4fc244d85cba1721ba115333165e33878",
+    "cpp/nnue.cpp": "8183cfd58db465298e8ab04199ec1a00ff63d834008f76bba1eeda75efa2c0fd",
+    "cpp/nnue.hpp": "ef008531e05c01dbaa7985a17ed338f486e241fd16c17e7aabd7bf8d516d8528",
+    "cpp/othello.hpp": "d3d0e32235a635c835a3844df7d7da61c9d1111ce6323a34c134ae55a588fff2",
+    "cpp/search.cpp": "76463182715287d0ec29047275570314dd1c0e36fa9b23f4257644fb1301d5e7",
+    "cpp/search_table.hpp": "fbb8c057a36e8b83adaee4232bc8e3764ec54e283fe980888b36a6cca6371624",
+    "cpp/model/tiny_nn.h": "5900a0125246045fa4536df2e4a47f09690c944a017c7f4a9ce7f05eba8f3d0e",
+    "CMakeLists.txt": "c079f6974b1fbb9eb99a7e02f8ebeb8a5df6421b77054590f4897439a43bb906",
+    "scripts/benchmark-search.py": "cf420351709449010efaf3e8065acf61c72d4f5d82569366a57adfadf6ec4567",
+    "scripts/build-wasm.sh": "1d1b97c5e1da656f8c32d2e3beb8355962b3bcb8d42d8865f2c3ac35adc3690f",
+    "scripts/verify-baseline.py": "7071a2be0f9725db6fd5514f36c1968ba25c4cfeb80afd250fa7fc559de4f6f7",
+    "scripts/train-nnue.py": "f4977077cb890f4bb8d714532f762398268e89999fc329a65f6fd8dfb5074313",
+    "scripts/compare-evaluators.py": "1ec6c0df248ac65e0fe8527e6adef690970c690912baf65b59216aebb06372e2",
+    "tests/native.cpp": "7f94984bf399a8b65828b88b0ba370172147c8b2bac4844d43a86f5884f8802e",
+    "tests/search-cache.test.ts": "2a676d62e1fa8f74346f101266284b8a27a614bc0156b7117be1a6f396ad5bf9",
+    "src/game/wasm/othello.d.mts": "c357821e242d291d5e0213a24c10fc38550ce8c84977fb803ae8a6294025d56c",
+    "scripts/run-v1-experiments.py": "e79b237be7a6b2aa37931092856a229fdaa7e715459f3e9e947d5f995ec30df4",
+    "package.json": "1996ebf30d36722051fb74df6f72f468f3ceb3bf7c5db03bf95adca8b132ed1e",
+    "package-lock.json": "fbbfcd6bed740b0f50345caf4e4157ba8e5500b93d6bfef2089385d19e9fcce9",
+    "scripts/compare-versions.py": "5e1010d1a8956942d5031e67857cc89b5225050725ba6969d1d4299ffec2a676",
+    "scripts/watch-matches.py": "5ec05bea9f593af12f7ba169118d8c13c980aa78279bd85683e2d9dc02b549f9",
+    "tests/version_comparison_test.py": "5ecebea0820240306b37de02caad96bf9b33bc26c352459853f9fcdf61a6741a",
+    "scripts/compare-model-versions.py": "f1673c468c557272eb3344f8c0d21d15d36044c0f0f9a0216183ec316d58a8ee",
+    "tests/model_version_comparison_test.py": "8f3d249f2167475a8ac262933e03457f2bd6ba380e6f82e03a52ae9a91c5fcac",
+    "tests/nnue_training_test.py": "5b94581333f98ff00a5369c912f7ab66c8e9b2143981723211cda2d18a5187c9",
+    "requirements-training.txt": "544770b00b90e3d353e8ac9668ae1e25f0aaaf0d5080f48bff288c59dd929e4f"
+  },
+  "artifactSha256": {
+    "src/game/wasm/othello.mjs": "317f163bf296caf79467341300a8a32abc53ca40ae4231515833b2a96ccc8361",
+    "models/nnue256-v1.2.otnnue": "8805ce125579869cdca99c9efe85aeaa9ec92a0b1d0cbd7ddcf438fad1d20159",
+    "models/nnue256-v1.2.json": "3bf4497c390f73c07832e0c82dbcab313499abd4502bd256c72e83563022a755",
+    "models/nnue256-v1.2.pt": "3e2ebfb3a61c47eb72cadf1cad3f449c95cf8284215831de997098529d31d616"
+  },
+  "librarySha256": {
+    "v1.1": "0de7eae904b8abf09322f8bf372ea1b82147034cbab5315149301a5f04814a2e",
+    "v1.2": "5e676534020986537cd454e0db29c3610f41e2e6caf4f91a4fb9c4e6833a2622"
+  },
+  "strengthReport": {
+    "path": "models/v1.2-vs-v1.1-nnue.json",
+    "sha256": "3cd4e3d7619986db72056f1563d0ac79ad9ed1855bc0815ab33c77d262e52189",
+    "games": 100,
+    "results": {
+      "win": 68,
+      "draw": 0,
+      "loss": 32,
+      "discDifference": 308
+    },
+    "scoreRate": 0.68,
+    "meanDiscDifference": 3.08,
+    "uniqueTranscripts": 13
+  },
+  "training": {
+    "cacheSha256": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6",
+    "sameDatasetAsV1": true,
+    "positions": {
+      "test": 6000,
+      "validation": 6000,
+      "train": 1000000
+    },
+    "seed": 20261027,
+    "epochs": 30,
+    "bestEpoch": 26,
+    "batchSize": 1024,
+    "learningRate": 0.001,
+    "weightDecay": 0.001,
+    "checkpointSelection": "minimum validation MSE; weights frozen before games",
+    "testMaeDiscs": 10.166666603057413,
+    "previousTestMaeDiscs": 10.578651056557591
+  },
+  "protocol": {
+    "evaluator": "NNUE only",
+    "games": 100,
+    "millisecondsPerMove": 50,
+    "maxDepth": 64,
+    "start": "standard initial board; all moves selected by each algorithm",
+    "useBook": false,
+    "colors": "v1.2 black 50 games, white 50 games",
+    "processes": "separate persistent processes; sequential games and moves",
+    "cache": "clear at each game, retain within game"
+  },
+  "turnProbe": {
+    "board": ".BBBBBBB.WWWBWWWBWWWBWWBBWWWWWBBBWWBWWBBBBWBBBB.WBBBBWW.BBBBWW..",
+    "empty": 6,
+    "exactBlackDiscDifferenceWhenBlackOrWhiteMoves": [
+      -2,
+      30
+    ],
+    "models": {
+      "nnue256-v1": {
+        "sideToMoveScores": [
+          201,
+          -201
+        ],
+        "blackPerspectiveScores": [
+          201,
+          201
+        ]
+      },
+      "nnue256-v1.2": {
+        "sideToMoveScores": [
+          137,
+          -209
+        ],
+        "blackPerspectiveScores": [
+          137,
+          209
+        ]
+      }
+    }
+  },
+  "checks": {
+    "trainingTestsPassed": 9,
+    "comparisonUnitTestsPassed": 4,
+    "cppParityPositions": 1024,
+    "replayedGames": 100,
+    "replayedActions": 6103,
+    "allMovesLegal": true,
+    "outcomesRecomputed": true,
+    "searchStatsRecomputed": true,
+    "nativeAndSanitizersPassed": true,
+    "wasmTestsPassed": 12,
+    "frontendBuildPassed": true
+  },
+  "limits": "Repeated standard initial position; games can repeat and are not independent opening samples. No Elo or statistical significance claim. Time-limited decisions depend on system load."
+}

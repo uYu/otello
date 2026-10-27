@@ -1,0 +1,12 @@
+{
+  "version": "v1.4 CNN experiment",
+  "millisecondsPerMove": 50,
+  "experiments": [
+    {
+      "name": "8x8 CNN vs v1.3 NNUE; same opening variety",
+      "focus": "v1.4 CNN",
+      "games": 100,
+      "report": "models/v1.4-cnn-vs-v1.3.json"
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "positions": 16,
+  "evaluationsPerRound": 4096,
+  "rounds": 7,
+  "librarySha256": "86edeaac5d0710cf6c3786e85d440434109c7fa1e8f7a5bc0af69422db14fb7f",
+  "scriptSha256": "dd3be38d081d5a1f71044368ba2ba85723fd8d88db7bd6ba06589a7642e18ddb",
+  "results": [
+    {
+      "model": "v1.3 NNUE full refresh",
+      "modelSha256": "8805ce125579869cdca99c9efe85aeaa9ec92a0b1d0cbd7ddcf438fad1d20159",
+      "medianMicroseconds": 1.434183837890625,
+      "samples": [
+        {
+          "microsecondsPerEvaluation": 1.454243896484375,
+          "checksum": 290304
+        },
+        {
+          "microsecondsPerEvaluation": 1.47615576171875,
+          "checksum": 290304
+        },
+        {
+          "microsecondsPerEvaluation": 1.436869140625,
+          "checksum": 290304
+        },
+        {
+          "microsecondsPerEvaluation": 1.4214375,
+          "checksum": 290304
+        },
+        {
+          "microsecondsPerEvaluation": 1.42992138671875,
+          "checksum": 290304
+        },
+        {
+          "microsecondsPerEvaluation": 1.434183837890625,
+          "checksum": 290304
+        },
+        {
+          "microsecondsPerEvaluation": 1.4271240234375,
+          "checksum": 290304
+        }
+      ]
+    },
+    {
+      "model": "ResNet 32 channels / 2 blocks",
+      "modelSha256": "3e22a27a6b80b015b5c01a7d590f1223b47cfec8554516aaaefe0b9b9383e47c",
+      "medianMicroseconds": 102.89656567382812,
+      "samples": [
+        {
+          "microsecondsPerEvaluation": 102.79151416015625,
+          "checksum": 290560
+        },
+        {
+          "microsecondsPerEvaluation": 102.80769848632812,
+          "checksum": 290560
+        },
+        {
+          "microsecondsPerEvaluation": 149.22533178710938,
+          "checksum": 290560
+        },
+        {
+          "microsecondsPerEvaluation": 105.9473876953125,
+          "checksum": 290560
+        },
+        {
+          "microsecondsPerEvaluation": 103.16685986328125,
+          "checksum": 290560
+        },
+        {
+          "microsecondsPerEvaluation": 102.89656567382812,
+          "checksum": 290560
+        },
+        {
+          "microsecondsPerEvaluation": 102.74483251953124,
+          "checksum": 290560
+        }
+      ]
+    }
+  ],
+  "limits": "Same boards, direct C ABI scores, NNUE includes full refresh; actual NNUE search uses incremental updates. Includes Python/C ABI call overhead.",
+  "resnetToNnueLatencyRatio": 71.74572949111375
+}

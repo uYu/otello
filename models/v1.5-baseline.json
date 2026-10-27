@@ -1,0 +1,172 @@
+{
+  "version": "v1.5",
+  "packageVersion": "1.5.0",
+  "status": "frozen",
+  "date": "2026-10-27",
+  "model": "models/resnet32x2-v1.5.otres",
+  "modelMetadata": "models/resnet32x2-v1.5.json",
+  "modelSha256": "3e22a27a6b80b015b5c01a7d590f1223b47cfec8554516aaaefe0b9b9383e47c",
+  "sourceSha256": {
+    "CMakeLists.txt": "8baa23d93d18c01e7665796093735baaebe016599dae97c0fa9970c4c9461c69",
+    "cpp/api.cpp": "b5dac0687abcf8049a480219d727f7d15a7f74e3c36a1cbce2dc87371d17bf16",
+    "cpp/api.h": "44d5c5e1f777b513372a924dde08ed5b91a877ecfc48816ba865c9adc4ae6634",
+    "cpp/cnn.cpp": "c03ec191aa1fbe763abedce6b774891603513c97595aab8a569238dbb59b8d10",
+    "cpp/cnn.hpp": "63b4ca4c4aeba9a1c2e15a274751f90c5f09c148c4fefc407bff4032e3cb1fc4",
+    "cpp/dataset.cpp": "12cce8ca17a751433503e983b824de87e8fddc21de7a1dfba047f8201356354b",
+    "cpp/egaroucid.cpp": "ac750510b136c21e271f1195dee5716b47362e7883af509be8ed2e3beb65ce29",
+    "cpp/egaroucid.hpp": "6e93deb32736a10a3edb2fd030e1e1586c6a929889d17663c09dd44d0ea6b07e",
+    "cpp/egaroucid_api.h": "efa6dd4fdb3cefebb2400ca3b98823ac78de83572268a93f57f960f0d1c2f640",
+    "cpp/egaroucid_bridge.cpp": "a12e52246f0fa14f69403eb2212f52a1ed4a6940749b16bf027ea50bd3a1f230",
+    "cpp/main.cpp": "a0a7790cfb0135736aeda67ace9eb7372613b4800e397aaa314f3b35cac566a3",
+    "cpp/model/tiny_nn.h": "5900a0125246045fa4536df2e4a47f09690c944a017c7f4a9ce7f05eba8f3d0e",
+    "cpp/move_policy.cpp": "51275ebd1340286997510553fde17262f87da838b8fb332f9052c00ffe4df996",
+    "cpp/nnue.cpp": "4347c370f220c063af68ab58358fd3e00386134c56e59f6ae2b6e2c998250c84",
+    "cpp/nnue.hpp": "c88d56b1f68b0b862b661280ae339ce8c18aa288b63c9d7c367a4f265636ea20",
+    "cpp/othello.hpp": "58305fc837c2cd50bab0c51ab8676350c91d79072803361a1874cede9f2bc47e",
+    "cpp/resnet.cpp": "179ed430a4ac473742cb670ec923bb20eca295ff000c2a91ba815336e17e85ab",
+    "cpp/resnet.hpp": "142091eb4e267b22fb427247b2659ec2b653b547e7879f066f9a60cd55dbec85",
+    "cpp/search.cpp": "12f17042ff5e9afb075d57add7b06d6110fe8939c5eb24243eb53a0411bfdc5f",
+    "cpp/search_table.hpp": "fbb8c057a36e8b83adaee4232bc8e3764ec54e283fe980888b36a6cca6371624",
+    "examples/nnue_ffi.py": "2380fbb2c63091d875c177304911ba1298ffab124884fcedb7bb7998156d8739",
+    "package-lock.json": "54d204bcc5c2dd068153de1da7cb1b542947fca3822446c1b90f002763a2a4a6",
+    "package.json": "a6ddfacb0b8a6411bcb4da3b24b39d4f34f033ce7a1983bd4c98c9fb9a24c5a3",
+    "requirements-training.txt": "544770b00b90e3d353e8ac9668ae1e25f0aaaf0d5080f48bff288c59dd929e4f",
+    "scripts/benchmark-cnn.py": "385f30dcd738a06173763c81f6ff217929089f8732b76a493bedf52079f61999",
+    "scripts/benchmark-resnet.py": "dd3be38d081d5a1f71044368ba2ba85723fd8d88db7bd6ba06589a7642e18ddb",
+    "scripts/benchmark-search.py": "cf420351709449010efaf3e8065acf61c72d4f5d82569366a57adfadf6ec4567",
+    "scripts/build-wasm.sh": "1a5921475428768f0347d5876a4c025e012442c324d0dc2fd0a8d7922643b09b",
+    "scripts/compare-cnn.py": "45c0a05544a2015b7d7a740d6761223bb41c301c78d29eba8aa340cf3ffcbf3c",
+    "scripts/compare-evaluators.py": "1ec6c0df248ac65e0fe8527e6adef690970c690912baf65b59216aebb06372e2",
+    "scripts/compare-model-versions.py": "f1673c468c557272eb3344f8c0d21d15d36044c0f0f9a0216183ec316d58a8ee",
+    "scripts/compare-opening-policy.py": "ea3b6f1817cf298c8c3f2b7c3b2d73de5c0cfb36b36754fa2036d7f2ba4244dc",
+    "scripts/compare-resnet.py": "f3e794feb32a09d7c3629d969ae6d5c5b394d823764065b120da8e72fea723e7",
+    "scripts/compare-versions.py": "5e1010d1a8956942d5031e67857cc89b5225050725ba6969d1d4299ffec2a676",
+    "scripts/opening_policy.py": "da5adf2fa2ff17cc54081ac26ca984f9f6aaf2a0f40d302d8bc0ee400d54453a",
+    "scripts/run-v1-experiments.py": "e79b237be7a6b2aa37931092856a229fdaa7e715459f3e9e947d5f995ec30df4",
+    "scripts/test-native.sh": "601e12b8af9d0b3cfcc04031ebedb2dc7346fb9c2d9ae1c51953ecb2963841e8",
+    "scripts/train-cnn.py": "d370da0d9d3a56c5daf7b85c8c0f783e6b9d11cd585682f6f3a9251be5b3f399",
+    "scripts/train-nnue.py": "f4977077cb890f4bb8d714532f762398268e89999fc329a65f6fd8dfb5074313",
+    "scripts/train-resnet.py": "81c8e32c875f3116d0471397b2c8b35387cc6fa1efcb3e0810d7e9fdab0cd461",
+    "scripts/verify-baseline.py": "4e5bd51ea70333ef49167354f882ac2f97c9688929a283a0cda9be44cf1c03bd",
+    "scripts/watch-matches.py": "5ec05bea9f593af12f7ba169118d8c13c980aa78279bd85683e2d9dc02b549f9",
+    "src/game/wasm/othello.d.mts": "c357821e242d291d5e0213a24c10fc38550ce8c84977fb803ae8a6294025d56c",
+    "tests/cnn_training_test.py": "5ac1bb0ec3ae54ec9ba86d59701138fd6d295c714580fc64f742f4c61e8b3070",
+    "tests/egaroucid.cpp": "7761471bb8c041f7a5b7db6470e9c710e3fdb717a446c111231bbc9921233db4",
+    "tests/model_version_comparison_test.py": "8f3d249f2167475a8ac262933e03457f2bd6ba380e6f82e03a52ae9a91c5fcac",
+    "tests/native.cpp": "6c687d596fd5ad7fde0fc9316f3f14d54f9dcd21043ef52f2ee2e3972f9976cb",
+    "tests/nnue_training_test.py": "5b94581333f98ff00a5369c912f7ab66c8e9b2143981723211cda2d18a5187c9",
+    "tests/opening_policy_test.py": "15eabb01df68cc81830874757c1b8bf1461f641fe3f789a4cf6c6f637bf87af7",
+    "tests/resnet_training_test.py": "c583f2a32a7305debb9eb58b11eb316f854376d59445068f91f3ed2eead142da",
+    "tests/search-cache.test.ts": "2a676d62e1fa8f74346f101266284b8a27a614bc0156b7117be1a6f396ad5bf9",
+    "tests/version_comparison_test.py": "5ecebea0820240306b37de02caad96bf9b33bc26c352459853f9fcdf61a6741a"
+  },
+  "artifactSha256": {
+    "models/resnet32x2-v1.5.otres": "3e22a27a6b80b015b5c01a7d590f1223b47cfec8554516aaaefe0b9b9383e47c",
+    "models/resnet32x2-v1.5.pt": "e0cf3199b4a4a7d8918101b27d0498f256aa8791e670cd8cae54acc4588cdeeb",
+    "models/resnet32x2-v1.5.json": "17a25a4ca88fe3b556ec6a24c499cb92a6ebbebc14a4d88c566dbcda247ff8e0",
+    "src/game/wasm/othello.mjs": "116614a2e2de4d643c4eea7c27266004379624e766984e169e8254846af3694d"
+  },
+  "sourceArchive": "models/archive/v1.5-sources.tar.gz",
+  "sourceArchiveSha256": "3d2acd211fb3574a1e6e2de8f6b7f67c69c4a87714a19ba9d5432ab6f7fc9f3f",
+  "librarySha256": {
+    "v1.3": "77dc7e65cfa927888543b442d625f2de627801374cd736a86e46618f4d9c9dc7",
+    "v1.5": "86edeaac5d0710cf6c3786e85d440434109c7fa1e8f7a5bc0af69422db14fb7f"
+  },
+  "strengthReport": {
+    "path": "models/v1.5-resnet-vs-v1.3.json",
+    "sha256": "8e4cd301bcb6cbd94e3a8bf4e40b55962547ab1242e439a5b3958ea33606fe31",
+    "games": 100,
+    "results": {
+      "win": 2,
+      "draw": 0,
+      "loss": 98,
+      "discDifference": -3787
+    },
+    "scoreRate": 0.02,
+    "meanDiscDifference": -37.87
+  },
+  "inferenceBenchmark": "models/v1.5-inference-benchmark.json",
+  "inferenceBenchmarkSha256": "f348ab86fcaaed28c1511c3f88e8e30288c5e1b9a16921e52f84dcae56d46b75",
+  "threeSecondPilot": {
+    "path": "models/v1.5-3s-pilot.json",
+    "sha256": "ce426059b0253e0ce9d8c17abb4f5ed601360683fb3414dcab75b3adf6927acc",
+    "games": 3,
+    "plannedGames": 4,
+    "millisecondsPerMove": 3000,
+    "results": {
+      "win": 0,
+      "draw": 0,
+      "loss": 3,
+      "discDifference": -80
+    },
+    "scoreRate": 0.0,
+    "status": "stopped",
+    "reason": "User replaced the 3s pilot with a 1s four-way search comparison; only completed games retained."
+  },
+  "training": {
+    "architecture": "2x8x8 own/opponent -> Conv3x3 32/BN/ReLU -> 2 residual blocks (Conv3x3 32/BN/ReLU/Conv3x3 32/BN/add/ReLU) -> Conv1x1 1/BN/ReLU -> Flatten64 -> Linear64/ReLU -> Linear1/tanh",
+    "parameters": 42019,
+    "inferenceParameters": 41858,
+    "channels": 32,
+    "residualBlocks": 2,
+    "epochs": 30,
+    "bestEpoch": 24,
+    "device": "mps",
+    "datasetCacheSha256": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6",
+    "metrics": {
+      "validation": {
+        "float": {
+          "mse": 0.05060521513223648,
+          "maeDiscs": 10.337573051452637
+        },
+        "zeroBaseline": {
+          "mse": 0.08625097572803497,
+          "maeDiscs": 12.726333618164062
+        }
+      },
+      "test": {
+        "float": {
+          "mse": 0.04855095595121384,
+          "maeDiscs": 9.831984519958496
+        },
+        "zeroBaseline": {
+          "mse": 0.07845816761255264,
+          "maeDiscs": 11.89133358001709
+        }
+      }
+    }
+  },
+  "decision": {
+    "retained": false,
+    "productionModel": "models/nnue256-v1.2.otnnue",
+    "productionPolicy": "v1.3",
+    "reason": "Better offline value error, substantially slower CPU evaluation, weaker alpha-beta at 50ms. Search-method comparison follows separately in v1.6."
+  },
+  "protocol": {
+    "games": 100,
+    "millisecondsPerMove": 50,
+    "maxDepth": 64,
+    "start": "standard initial board; all moves selected by algorithms",
+    "useBook": false,
+    "candidateVariety": true,
+    "referenceVariety": true,
+    "openingPolicy": {
+      "plies": 12,
+      "temperature": 32,
+      "max_loss": 64
+    }
+  },
+  "checks": {
+    "replayedGames": 100,
+    "replayedActions": 6174,
+    "threeSecondCompletedGames": 3,
+    "threeSecondReplayedActions": 182,
+    "cppParityPositions": 6000,
+    "cppMaxRoundingError": 0.49991607666015625,
+    "nativeAndSanitizersPassed": true,
+    "trainingTests": 13,
+    "wasmTests": 12,
+    "frontendBuildPassed": true
+  },
+  "limits": "Value-only 32-channel/two-block network with recorded final-disc targets; no policy head or MCTS in this v1.5 test. Fixed initial board and seeded opening variety; no Elo claim. Supplementary 3s pilot stopped before planned completion at user direction."
+}

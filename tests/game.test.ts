@@ -7,6 +7,7 @@ import { classicPosition, INAUGURAL_FINAL } from '../src/game/classic-games.ts';
 import { history, parseSave, MAX_SAVE_BYTES } from '../src/game/storage.ts';
 import { requestRemoteMove, requestNativeAnalysis, nativeEngineReady } from '../src/game/remote.ts';
 import type { Save } from '../src/game/types.ts';
+import createModule from '../src/game/wasm/othello.mjs';
 await initEngine();
 test('hero uses the legal 1977 world final transcript and reproduces the historical result', () => {
   const shown = classicPosition();
@@ -49,11 +50,13 @@ test('corrupt, oversized, unsupported and illegal saves are rejected', () => {
   assert.throws(() => parseSave(JSON.stringify({ ...s, engine: 'unknown' })));
   for (const bad of ['not json', 'null', '{}', 'x'.repeat(MAX_SAVE_BYTES + 1), JSON.stringify({ ...s, version: 2 }), JSON.stringify({ ...s, actions: [0] }), JSON.stringify({ ...s, actions: [19, 19] }), JSON.stringify({ ...s, human: 0 }), JSON.stringify({ ...s, createdAt: 'bad' }), JSON.stringify({ ...s, actions: [1.5] })]) assert.throws(() => parseSave(bad));
 });
-test('every AI level returns a legal move and high-level search reuses transpositions', () => {
+test('normal and hard use NNUE/MCTS while easy keeps the weak heuristic', () => {
   for (const difficulty of ['easy', 'normal', 'hard'] as const) {
     const result = analyze(initial(), difficulty, 123);
     assert.ok(legal(initial()).includes(result.move)); assert.ok(result.depth >= 1);
-    if (difficulty !== 'easy') assert.ok(result.ttHits !== null && result.ttHits > 0);
+    if (difficulty !== 'easy') {
+      assert.equal(result.search, 'mcts'); assert.equal(result.evaluator, 'nnue'); assert.equal(result.ttHits, null);
+    } else { assert.equal(result.search, 'ab'); assert.equal(result.evaluator, 'heuristic'); }
     assert.ok(result.candidates.every(c => legal(initial()).includes(c.move)));
   }
 });
@@ -73,7 +76,7 @@ test('native client requires a real book-enabled engine and rejects illegal move
     assert.equal(await nativeEngineReady(), false);
   } finally { globalThis.fetch = original; }
 });
-test('Wasm and native ABI agree on legal moves, board transition and fixed-depth AI', { skip: !existsSync('.build/native/otello') }, () => {
+test('Wasm and native ABI agree on legal moves, board transition and legacy fixed-depth AI', { skip: !existsSync('.build/native/otello') }, async () => {
   let p = initial();
   const native = (command: string, extra: string[] = []) => JSON.parse(execFileSync('.build/native/otello', [command, '--board', p.cells.map(c => c === 1 ? 'B' : c === -1 ? 'W' : '.').join(''), '--turn', String(p.turn), ...extra], { encoding: 'utf8' }));
   const coord = (m: number) => `${'ABCDEFGH'[m % 8]}${Math.floor(m / 8) + 1}`;
@@ -84,9 +87,12 @@ test('Wasm and native ABI agree on legal moves, board transition and fixed-depth
     assert.equal(result.board, next.cells.map(c => c === 1 ? 'B' : c === -1 ? 'W' : '.').join(''));
     p = next;
   }
-  const result = native('analyze', ['--time', '10000', '--depth', '5']);
-  const wasm = analyze(p, 'normal');
-  if (wasm.depth === 5) { assert.equal(coord(wasm.move), result.move); assert.equal(wasm.score, result.score); }
+  const result = native('analyze', ['--time', '10000', '--depth', '5', '--network', 'heuristic', '--search', 'ab']);
+  const module = await createModule(), input = module._ot_input(), output = module._ot_output();
+  module.HEAP32.set(p.cells, input / 4);
+  assert.equal(module._ot_search(input,p.turn,0,5,2,1,output),1);
+  const values=module.HEAP32.slice(output/4,output/4+136);
+  assert.equal(values[2],5); assert.equal(coord(values[0]),result.move); assert.equal(values[1],result.score);
 });
 test('HTTP adapter validates legal responses, request encoding and errors', async () => {
   const original = globalThis.fetch;

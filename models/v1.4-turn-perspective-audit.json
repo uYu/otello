@@ -1,0 +1,31 @@
+{
+  "positions": 6000,
+  "maxColorRelabelDifference": 0.0,
+  "byTurn": {
+    "blackToMove": {
+      "positions": 3083,
+      "correctMaeDiscs": 10.542133331298828,
+      "wrongOutputSignMaeDiscs": 17.564043045043945
+    },
+    "whiteToMove": {
+      "positions": 2917,
+      "correctMaeDiscs": 10.7340726852417,
+      "wrongOutputSignMaeDiscs": 17.858842849731445
+    }
+  },
+  "cppAllTestPositions": 6000,
+  "maxCppScoreRoundingError": 0.5019683837890625,
+  "maxCppRoundedScoreDifference": 1,
+  "roundedScoreDifferences": 4,
+  "note": "FP32 accumulation can cross integer rounding boundaries; full 6000-position audit differs by at most one integer score unit, not a perspective inversion.",
+  "modelSha256": "a9b72e4520af6c2c60b598c46261ac7825db0abf46114e71035aec6e43005bfd",
+  "datasetCacheSha256": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6",
+  "inputConvention": "plane 0: side-to-move stones; plane 1: opponent stones",
+  "targetConvention": "recorded final black disc difference / 64 * turn; turn +1 black, -1 white",
+  "sourceSha256": {
+    "scripts/train-cnn.py": "d370da0d9d3a56c5daf7b85c8c0f783e6b9d11cd585682f6f3a9251be5b3f399",
+    "scripts/train-nnue.py": "f4977077cb890f4bb8d714532f762398268e89999fc329a65f6fd8dfb5074313",
+    "cpp/cnn.cpp": "c03ec191aa1fbe763abedce6b774891603513c97595aab8a569238dbb59b8d10",
+    "cpp/search.cpp": "9b8e855aee20c3f58227dda8a874bdda07b079b558c0254ebd5856784736772d"
+  }
+}

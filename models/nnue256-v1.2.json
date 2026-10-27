@@ -1,0 +1,231 @@
+{
+  "architecture": "128->256 shared transform; side-to-move ordered concatenation 512->1 with bias; clipped ReLU; tanh",
+  "modelFormat": 2,
+  "parameters": 33537,
+  "bytes": 67612,
+  "sha256": "8805ce125579869cdca99c9efe85aeaa9ec92a0b1d0cbd7ddcf438fad1d20159",
+  "seed": 20261027,
+  "bestEpoch": 26,
+  "torchVersion": "2.10.0",
+  "numpyVersion": "1.26.4",
+  "trainingScriptSha256": "f4977077cb890f4bb8d714532f762398268e89999fc329a65f6fd8dfb5074313",
+  "dataset": {
+    "seed": 20261027,
+    "inputSha256": "6332fd01b27c11a81f3fbd344e52aaf8f70e60c644780fb453cc7ef64ae359ac",
+    "games": {
+      "logistello:test": 300,
+      "wthor:test": 300,
+      "wthor:validation": 300,
+      "logistello:validation": 300,
+      "logistello:train": 60775,
+      "wthor:train": 80561
+    },
+    "positions": {
+      "test": 6000,
+      "validation": 6000,
+      "train": 1000000
+    },
+    "filters": "complete games; placements 8..56, stride 3; 8-symmetry/color-relative position dedup; test/validation ownership before train",
+    "split": "native converter canonical first 8 moves; no move-wise split",
+    "target": "recorded final black disc difference / 64, from side-to-move view",
+    "maxGames": 6000,
+    "maxPositions": 60000,
+    "allTrainingGames": true,
+    "trainPositions": 1000000,
+    "frozenHoldout": {
+      "path": ".build/training/positions.npz",
+      "sha256": "ac3941a55613abc92944062b49c6b9c71883a93ce02973cf3dc8fc2be670ef4c"
+    },
+    "cacheSha256": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6"
+  },
+  "epochs": 30,
+  "batchSize": 1024,
+  "learningRate": 0.001,
+  "seconds": 96.50449424982071,
+  "history": [
+    {
+      "epoch": 1,
+      "mse": 0.05873224884271622,
+      "maeDiscs": 11.585591316223145
+    },
+    {
+      "epoch": 2,
+      "mse": 0.05706855282187462,
+      "maeDiscs": 11.284966468811035
+    },
+    {
+      "epoch": 3,
+      "mse": 0.05635428801178932,
+      "maeDiscs": 11.248771667480469
+    },
+    {
+      "epoch": 4,
+      "mse": 0.05629269778728485,
+      "maeDiscs": 11.188323020935059
+    },
+    {
+      "epoch": 5,
+      "mse": 0.055895864963531494,
+      "maeDiscs": 11.219185829162598
+    },
+    {
+      "epoch": 6,
+      "mse": 0.054987262934446335,
+      "maeDiscs": 11.026739120483398
+    },
+    {
+      "epoch": 7,
+      "mse": 0.05480169504880905,
+      "maeDiscs": 10.993492126464844
+    },
+    {
+      "epoch": 8,
+      "mse": 0.054543741047382355,
+      "maeDiscs": 10.982632637023926
+    },
+    {
+      "epoch": 9,
+      "mse": 0.05492169037461281,
+      "maeDiscs": 11.021692276000977
+    },
+    {
+      "epoch": 10,
+      "mse": 0.05427319183945656,
+      "maeDiscs": 10.960455894470215
+    },
+    {
+      "epoch": 11,
+      "mse": 0.05456123873591423,
+      "maeDiscs": 10.972705841064453
+    },
+    {
+      "epoch": 12,
+      "mse": 0.05416262894868851,
+      "maeDiscs": 10.962163925170898
+    },
+    {
+      "epoch": 13,
+      "mse": 0.054122548550367355,
+      "maeDiscs": 10.936697959899902
+    },
+    {
+      "epoch": 14,
+      "mse": 0.05362763628363609,
+      "maeDiscs": 10.876646041870117
+    },
+    {
+      "epoch": 15,
+      "mse": 0.05418310686945915,
+      "maeDiscs": 10.929253578186035
+    },
+    {
+      "epoch": 16,
+      "mse": 0.054963257163763046,
+      "maeDiscs": 11.017010688781738
+    },
+    {
+      "epoch": 17,
+      "mse": 0.053248025476932526,
+      "maeDiscs": 10.777862548828125
+    },
+    {
+      "epoch": 18,
+      "mse": 0.05421821027994156,
+      "maeDiscs": 10.899203300476074
+    },
+    {
+      "epoch": 19,
+      "mse": 0.05355353280901909,
+      "maeDiscs": 10.847037315368652
+    },
+    {
+      "epoch": 20,
+      "mse": 0.05378168821334839,
+      "maeDiscs": 10.88349723815918
+    },
+    {
+      "epoch": 21,
+      "mse": 0.05336363613605499,
+      "maeDiscs": 10.840360641479492
+    },
+    {
+      "epoch": 22,
+      "mse": 0.052939027547836304,
+      "maeDiscs": 10.77851390838623
+    },
+    {
+      "epoch": 23,
+      "mse": 0.05291564017534256,
+      "maeDiscs": 10.78565502166748
+    },
+    {
+      "epoch": 24,
+      "mse": 0.052940383553504944,
+      "maeDiscs": 10.747818946838379
+    },
+    {
+      "epoch": 25,
+      "mse": 0.05231912061572075,
+      "maeDiscs": 10.698230743408203
+    },
+    {
+      "epoch": 26,
+      "mse": 0.05225928872823715,
+      "maeDiscs": 10.684725761413574
+    },
+    {
+      "epoch": 27,
+      "mse": 0.053095027804374695,
+      "maeDiscs": 10.747306823730469
+    },
+    {
+      "epoch": 28,
+      "mse": 0.05308843031525612,
+      "maeDiscs": 10.798944473266602
+    },
+    {
+      "epoch": 29,
+      "mse": 0.052311014384031296,
+      "maeDiscs": 10.702188491821289
+    },
+    {
+      "epoch": 30,
+      "mse": 0.05293184518814087,
+      "maeDiscs": 10.770188331604004
+    }
+  ],
+  "metrics": {
+    "validation": {
+      "float": {
+        "mse": 0.05225928872823715,
+        "maeDiscs": 10.684725761413574
+      },
+      "quantized": {
+        "mse": 0.052269422517568956,
+        "maeDiscs": 10.682364166946575
+      },
+      "zeroBaseline": {
+        "mse": 0.08625097572803497,
+        "maeDiscs": 12.726333618164062
+      },
+      "maxQuantizationError": 0.022018115188440546
+    },
+    "test": {
+      "float": {
+        "mse": 0.049615345895290375,
+        "maeDiscs": 10.17148208618164
+      },
+      "quantized": {
+        "mse": 0.04960723038569916,
+        "maeDiscs": 10.166666603057413
+      },
+      "zeroBaseline": {
+        "mse": 0.07845816761255264,
+        "maeDiscs": 11.89133358001709
+      },
+      "maxQuantizationError": 0.021634129418320387
+    }
+  },
+  "cppParityPositions": 1024,
+  "cppMaxRoundingError": 0.4997487896387156
+}

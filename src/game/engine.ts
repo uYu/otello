@@ -36,8 +36,11 @@ export function flips(p: Position, move: number): number[] {
 }
 export function score(p: Position) { return { black: p.cells.filter(c => c === 1).length, white: p.cells.filter(c => c === -1).length }; }
 export function analyze(p: Position, difficulty: Difficulty, seed = 1): Analysis {
-  const settings = { easy: [80, 1, 0], normal: [450, 5, 1], hard: [1500, 64, 2] }[difficulty];
-  if (module._ot_search(input(p), p.turn, settings[0], settings[1], settings[2], seed, module._ot_output()) !== 1) throw new Error('AI 分析失败');
+  const mcts = difficulty !== 'easy';
+  const ok = mcts
+    ? module._ot_default_search(input(p), p.turn, difficulty === 'hard' ? 1000 : 100, seed, module._ot_output())
+    : module._ot_search(input(p), p.turn, 80, 1, 0, seed, module._ot_output());
+  if (ok !== 1) throw new Error('AI 分析失败');
   const out = Array.from(module.HEAP32.subarray(module._ot_output() / 4, module._ot_output() / 4 + 136));
-  return { move: out[0], score: out[1], depth: out[2], elapsed: out[3], nodes: out[4], ttHits: out[135], exact: !!out[5], candidates: Array.from({ length: out[6] }, (_, i) => ({ move: out[7 + i * 2], score: out[8 + i * 2] })) };
+  return { move: out[0], score: out[1], depth: out[2], elapsed: out[3], nodes: out[4], ttHits: mcts ? null : out[135], exact: !!out[5], search: mcts ? 'mcts' : 'ab', evaluator: mcts ? 'nnue' : 'heuristic', candidates: Array.from({ length: out[6] }, (_, i) => ({ move: out[7 + i * 2], score: out[8 + i * 2] })) };
 }

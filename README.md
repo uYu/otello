@@ -84,26 +84,42 @@ npm run build:wasm        # 修改 C++ 后重新编译网页适配层
 
 ## AI 与哈希
 
-双 `uint64_t` 位棋盘；PVS + α–β 剪枝、aspiration window、迭代加深、历史/continuation history 走法排序；默认用行动力/角位/前沿子/位置权重估值。可选 256 维量化 NNUE 增量评估。时间耗尽时返回最后一轮完整搜索的结果；深度按实际落子递减，停着不消耗深度。
+默认对弈为 **v1.3 NNUE＋MCTS**，权重直接嵌入原生库和浏览器 Wasm，无需额外模型文件或下载。MCTS 使用均匀先验 PUCT 与神经网络估值，并复用实际走到的子树。仍可用 `--search ab` 选择原 PVS/α–β、aspiration window、迭代加深和 NNUE 增量评估；`--network heuristic` 显式使用较弱的启发式。
 
-**Zobrist 哈希**包含棋子颜色、格子和行棋方，落子/翻子/停着时增量异或更新。固定 SplitMix64 种子保证跨进程、原生和 Wasm 结果稳定。每次搜索的 262,144 项置换表跨迭代深度复用，保存搜索深度、分数上下界和最佳落点；命中后还比较完整双方位棋盘，防止哈希碰撞误用。当前不跨不同搜索请求保留置换表。
+**Zobrist 哈希**包含棋子颜色、格子和行棋方，落子/翻子/停着时增量异或更新。固定 SplitMix64 种子保证跨进程、原生和 Wasm 结果稳定。v1.1 的 262,144 项置换表分为四项一桶，在同一线程内跨请求复用，按深度、准确性和代数替换；命中后比较完整双方位棋盘，切换评估器或修改模型参数时自动清表。递归搜索使用固定数组排序，NNUE 累加器延迟到需要评分时更新。[v1.1 性能记录](models/v1.1-search.md)包含对比结果和复现命令。
 
-网页入门档从位置评估靠前的三种走法中探索选择；熟练档最多 5 层、450ms；高级档迭代加深、1500ms，时间允许时精确搜索至终局。原生接口可自行设置时间和深度。以上描述的是本项目的内置启发式 AI；Egaroucid 是单独的可选原生引擎，使用其随附评估数据与开局库，网页难度映射到上游等级 1/5/10。
+网页入门档保留较弱的启发式；熟练档为 NNUE＋MCTS、每手最多 100ms，高级档每手最多 1 秒。正常连续对弈保留 worker 和 MCTS 子树；取消思考或重开棋局会清理。检测到本机 Egaroucid 时也不自动切换默认选择，仍可手动选用其原生引擎与开局库（等级 1/5/10）。MCTS 的最大访问路径与 AB 的完整搜索深度不同，界面分别显示模拟次数或搜索节点。
 
 ## 训练模型与对战验证
 
-已下载并清洗 WTHOR / Logistello，共 258,418 局有效去重棋谱；v1 从其中 141,336 局训练分组的完整对局抽取 **100 万个训练局面**，冻结验证/测试集各 6,000 个局面。交付模型为 `128→256→1` NNUE，33,280 参数、约 67KB，支持 C++/C ABI 与 CLI 离线使用：
+已下载并清洗 WTHOR / Logistello，共 258,418 局有效去重棋谱；v1 从其中 141,336 局训练分组的完整对局抽取 **100 万个训练局面**，冻结验证/测试集各 6,000 个局面。初版 v1 模型为 `128→256→1` NNUE，33,280 参数、约 67KB，支持 C++/C ABI 与 CLI 离线使用：
 
 ```sh
-.build/native/otello analyze --network models/nnue256-v1.otnnue --time 1000
+.build/native/otello analyze --time 100
+# 显式保留旧搜索：--search ab；弱对手：--network heuristic
 python3 examples/nnue_ffi.py
 ```
 
-v1 测试集平均子差误差为 10.58 子，原型为 11.24 子。基线记录两组实验：纯搜索 vs 模型搜索、模型搜索 vs 模型搜索＋开局库，双方每步 50ms，从初始局面交换黑白。网页使用原有内置评估或 Egaroucid。详见 [训练与数据](docs/TRAINING.md)、[Stockfish 方法适配](docs/STOCKFISH_FRAMEWORK.md)和[v1 基线](models/comparison.md)。
+v1 测试集平均子差误差为 10.58 子，原型为 11.24 子。基线记录两组实验：纯搜索 vs 模型搜索、模型搜索 vs 模型搜索＋开局库，双方每步 50ms，从初始局面交换黑白。网页默认已在 v1.7 切换到 NNUE＋MCTS，Egaroucid 保留为可选项。详见 [训练与数据](docs/TRAINING.md)、[Stockfish 方法适配](docs/STOCKFISH_FRAMEWORK.md)和[v1 基线](models/comparison.md)。
+
+**v1.3** 在 v1.2 NNUE 上增加开局近分加权选步：前 12 次落子逐渐收紧随机范围，之后恢复最高分走法。原生 NNUE 自对弈默认启用，分析接口可显式开关，每局记录种子。[v1.3 对战与多样性记录](models/v1.3-comparison.md)比较该策略对原版 v1.1 的表现。模型权重不变，启发式引擎保留为较弱的玩家对手。
+
+v1.4 包含独立的 8×8 小 CNN 实验及加载支持，推荐算法仍为 v1.3：CNN 在每步 50ms 的 100 局中 4 胜 96 负，未替换默认权重。[实验报告](models/v1.4-comparison.md)包含同深度诊断及 AlphaGo 原论文结构对照。
+
+v1.5 的 32 通道、2 个残差块模型将测试集误差降到 9.83 子，但在 50ms 的 alpha-beta 对战中为 2 胜 98 负。v1.6 增加价值网络 MCTS（均匀先验 PUCT），对 NNUE/CNN × AB/MCTS 四组合进行每步 1 秒的两两对战；见[结果表与完整协议](models/v1.6-comparison.md)。v1.7 将 NNUE＋MCTS 接为默认，原生 CLI 可用 `--search ab` 回到 AB。
+
+同一 v1.3 NNUE、每步各 100ms 的 100 局补充对战中，MCTS 对 AB 为 63 胜、11 平、26 负，得分率 68.5%，平均多 4.65 子。[完整记录与限制](models/v1.6-100ms-comparison.md)；全部从初始棋盘自行走棋，各执黑白 50 局。
+
+v1.2 新增考虑行棋方的 NNUE 模型，使用同一百万局面缓存重新训练，保留 v1.1 的搜索优化。共享特征层是 128→256，当前行棋方与对方的特征按顺序拼接后输出评分，参数为 33,537，模型约 67.6KB。[v1.2 对战结果](models/v1.2-comparison.md)记录原最高分选步对 v1.1 的 100 局测试；双方从标准初始棋盘自行走棋，不使用开局库，每步各 50ms，交替执黑白。
+
+v1.1 的工程优化与原模型保持冻结，见 [v1.1 对战结果](models/v1.1-comparison.md)及[性能记录](models/v1.1-search.md)。新旧模型使用独立文件，原生 CLI 可通过 `--network models/nnue256-v1.2.otnnue` 选择新模型；浏览器的内置对手仍使用启发式评估或可选原生 Egaroucid。
 
 ```sh
-npm run training:baseline    # 顺序运行两组实验
+npm run training:baseline    # 仅供原始 v1 源码；当前 v1.1 会拒绝覆盖冻结报告
 npm run training:watch       # 实时查看当前对局和胜/平/负
+npm run training:watch:v1.1  # v1.1 对 v1 的 NNUE 对战进度
+npm run training:watch:v1.2  # v1.2 对 v1.1 的 NNUE 对战进度
+npm run training:watch:v1.3  # 开局随机选步对原版 v1.1 的对战进度
 ```
 
 ## 公开 AI 接口调研

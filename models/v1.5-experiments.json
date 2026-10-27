@@ -1,0 +1,20 @@
+{
+  "version": "v1.5 ResNet32x2 experiment",
+  "millisecondsPerMove": 50,
+  "experiments": [
+    {
+      "name": "8x8 ResNet32x2 vs v1.3 NNUE; same opening variety",
+      "focus": "v1.5 ResNet32x2",
+      "games": 100,
+      "report": "models/v1.5-resnet-vs-v1.3.json"
+    },
+    {
+      "name": "ResNet32x2 vs v1.3 NNUE; 3 seconds per move pilot",
+      "focus": "v1.5 ResNet32x2",
+      "games": 4,
+      "report": "models/v1.5-3s-pilot.json",
+      "millisecondsPerMove": 3000,
+      "status": "stopped"
+    }
+  ]
+}

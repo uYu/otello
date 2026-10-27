@@ -1,0 +1,261 @@
+{
+  "version": "v1.5-resnet-experiment",
+  "architecture": "2x8x8 own/opponent -> Conv3x3 32/BN/ReLU -> 2 residual blocks (Conv3x3 32/BN/ReLU/Conv3x3 32/BN/add/ReLU) -> Conv1x1 1/BN/ReLU -> Flatten64 -> Linear64/ReLU -> Linear1/tanh",
+  "modelFormat": 4,
+  "formatMagic": "OTRES1",
+  "precision": "FP32; batch normalization folded into convolutions for inference",
+  "channels": 32,
+  "residualBlocks": 2,
+  "headWidth": 64,
+  "parameters": 42019,
+  "inferenceParameters": 41858,
+  "bytes": 167460,
+  "sha256": "3e22a27a6b80b015b5c01a7d590f1223b47cfec8554516aaaefe0b9b9383e47c",
+  "seed": 20261027,
+  "bestEpoch": 24,
+  "epochs": 30,
+  "batchSize": 1024,
+  "learningRate": 0.001,
+  "weightDecay": 0.001,
+  "threads": 2,
+  "torchVersion": "2.10.0",
+  "numpyVersion": "1.26.4",
+  "device": "mps",
+  "dataset": {
+    "seed": 20261027,
+    "inputSha256": "6332fd01b27c11a81f3fbd344e52aaf8f70e60c644780fb453cc7ef64ae359ac",
+    "games": {
+      "logistello:test": 300,
+      "wthor:test": 300,
+      "wthor:validation": 300,
+      "logistello:validation": 300,
+      "logistello:train": 60775,
+      "wthor:train": 80561
+    },
+    "positions": {
+      "test": 6000,
+      "validation": 6000,
+      "train": 1000000
+    },
+    "filters": "complete games; placements 8..56, stride 3; 8-symmetry/color-relative position dedup; test/validation ownership before train",
+    "split": "native converter canonical first 8 moves; no move-wise split",
+    "target": "recorded final black disc difference / 64, from side-to-move view",
+    "maxGames": 6000,
+    "maxPositions": 60000,
+    "allTrainingGames": true,
+    "trainPositions": 1000000,
+    "frozenHoldout": {
+      "path": ".build/training/positions.npz",
+      "sha256": "ac3941a55613abc92944062b49c6b9c71883a93ce02973cf3dc8fc2be670ef4c"
+    },
+    "cacheSha256": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6"
+  },
+  "trainingScriptSha256": "81c8e32c875f3116d0471397b2c8b35387cc6fa1efcb3e0810d7e9fdab0cd461",
+  "seconds": 479.9462992907502,
+  "history": [
+    {
+      "epoch": 1,
+      "seconds": 17.771393499802798,
+      "mse": 0.058310557156801224,
+      "maeDiscs": 11.39792537689209
+    },
+    {
+      "epoch": 2,
+      "seconds": 34.27078554080799,
+      "mse": 0.05684946849942207,
+      "maeDiscs": 11.205562591552734
+    },
+    {
+      "epoch": 3,
+      "seconds": 50.15574791608378,
+      "mse": 0.05416133999824524,
+      "maeDiscs": 10.831003189086914
+    },
+    {
+      "epoch": 4,
+      "seconds": 65.69765933277085,
+      "mse": 0.05358869582414627,
+      "maeDiscs": 10.808719635009766
+    },
+    {
+      "epoch": 5,
+      "seconds": 81.1396963330917,
+      "mse": 0.053702760487794876,
+      "maeDiscs": 10.73373031616211
+    },
+    {
+      "epoch": 6,
+      "seconds": 96.48873724974692,
+      "mse": 0.054067462682724,
+      "maeDiscs": 10.857211112976074
+    },
+    {
+      "epoch": 7,
+      "seconds": 112.29314320813864,
+      "mse": 0.05240940302610397,
+      "maeDiscs": 10.624046325683594
+    },
+    {
+      "epoch": 8,
+      "seconds": 128.27801120793447,
+      "mse": 0.052237726747989655,
+      "maeDiscs": 10.55851936340332
+    },
+    {
+      "epoch": 9,
+      "seconds": 145.56605091597885,
+      "mse": 0.057968251407146454,
+      "maeDiscs": 11.397716522216797
+    },
+    {
+      "epoch": 10,
+      "seconds": 161.50497775012627,
+      "mse": 0.052795685827732086,
+      "maeDiscs": 10.650944709777832
+    },
+    {
+      "epoch": 11,
+      "seconds": 178.1782222497277,
+      "mse": 0.05258110165596008,
+      "maeDiscs": 10.649539947509766
+    },
+    {
+      "epoch": 12,
+      "seconds": 194.56867662491277,
+      "mse": 0.05292881280183792,
+      "maeDiscs": 10.682574272155762
+    },
+    {
+      "epoch": 13,
+      "seconds": 209.84980566613376,
+      "mse": 0.05223097652196884,
+      "maeDiscs": 10.558541297912598
+    },
+    {
+      "epoch": 14,
+      "seconds": 225.29792504105717,
+      "mse": 0.05273647606372833,
+      "maeDiscs": 10.61844253540039
+    },
+    {
+      "epoch": 15,
+      "seconds": 241.71888537472114,
+      "mse": 0.0518290214240551,
+      "maeDiscs": 10.529924392700195
+    },
+    {
+      "epoch": 16,
+      "seconds": 257.509811332915,
+      "mse": 0.051249612122774124,
+      "maeDiscs": 10.400984764099121
+    },
+    {
+      "epoch": 17,
+      "seconds": 273.9988880408928,
+      "mse": 0.05223629251122475,
+      "maeDiscs": 10.564435958862305
+    },
+    {
+      "epoch": 18,
+      "seconds": 290.7528010830283,
+      "mse": 0.05185210704803467,
+      "maeDiscs": 10.472816467285156
+    },
+    {
+      "epoch": 19,
+      "seconds": 308.50256245816126,
+      "mse": 0.05160768702626228,
+      "maeDiscs": 10.451146125793457
+    },
+    {
+      "epoch": 20,
+      "seconds": 324.0359543329105,
+      "mse": 0.05323827639222145,
+      "maeDiscs": 10.656310081481934
+    },
+    {
+      "epoch": 21,
+      "seconds": 339.1777157499455,
+      "mse": 0.05093787610530853,
+      "maeDiscs": 10.370387077331543
+    },
+    {
+      "epoch": 22,
+      "seconds": 355.5608327081427,
+      "mse": 0.051687031984329224,
+      "maeDiscs": 10.462285041809082
+    },
+    {
+      "epoch": 23,
+      "seconds": 372.38869374990463,
+      "mse": 0.051361165940761566,
+      "maeDiscs": 10.448426246643066
+    },
+    {
+      "epoch": 24,
+      "seconds": 388.7649693749845,
+      "mse": 0.05060521513223648,
+      "maeDiscs": 10.337573051452637
+    },
+    {
+      "epoch": 25,
+      "seconds": 403.7445459999144,
+      "mse": 0.05152961239218712,
+      "maeDiscs": 10.496061325073242
+    },
+    {
+      "epoch": 26,
+      "seconds": 418.77086633304134,
+      "mse": 0.05144542455673218,
+      "maeDiscs": 10.465046882629395
+    },
+    {
+      "epoch": 27,
+      "seconds": 433.93187170801684,
+      "mse": 0.050859659910202026,
+      "maeDiscs": 10.358802795410156
+    },
+    {
+      "epoch": 28,
+      "seconds": 449.21235674992204,
+      "mse": 0.0506976917386055,
+      "maeDiscs": 10.355670928955078
+    },
+    {
+      "epoch": 29,
+      "seconds": 464.48462787503377,
+      "mse": 0.051365673542022705,
+      "maeDiscs": 10.509377479553223
+    },
+    {
+      "epoch": 30,
+      "seconds": 479.76315691601485,
+      "mse": 0.05174143612384796,
+      "maeDiscs": 10.474848747253418
+    }
+  ],
+  "metrics": {
+    "validation": {
+      "float": {
+        "mse": 0.05060521513223648,
+        "maeDiscs": 10.337573051452637
+      },
+      "zeroBaseline": {
+        "mse": 0.08625097572803497,
+        "maeDiscs": 12.726333618164062
+      }
+    },
+    "test": {
+      "float": {
+        "mse": 0.04855095595121384,
+        "maeDiscs": 9.831984519958496
+      },
+      "zeroBaseline": {
+        "mse": 0.07845816761255264,
+        "maeDiscs": 11.89133358001709
+      }
+    }
+  },
+  "cppMaxRoundingError": 0.49991607666015625,
+  "cppParityPositions": 6000
+}
