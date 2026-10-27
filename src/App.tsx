@@ -6,6 +6,7 @@ import { Dialog } from './components/Dialog.tsx';
 import { initial, legal, score } from './game/engine.ts';
 import { downloadSave, history, MAX_SAVE_BYTES, parseSave, SAVE_KEY } from './game/storage.ts';
 import { nativeEngineReady, requestNativeAnalysis } from './game/remote.ts';
+import { AI_MIN_THINK_MS, PASS_PAUSE_MS, presentedPosition, REPLAY_STEP_MS, TURN_SETTLE_MS } from './game/presentation.ts';
 import { colorName, coordinate, LEVELS, MODES } from './game/types.ts';
 import type { Analysis, Color, Difficulty, Engine, Mode, Save } from './game/types.ts';
 
@@ -46,20 +47,49 @@ export default function App() {
   const [watchPaused, setWatchPaused] = useState(false);
   const [retry, setRetry] = useState(0);
   const file = useRef<HTMLInputElement>(null);
+  const passConfirm = useRef<HTMLButtonElement>(null);
+  const passNotice = useRef<HTMLElement>(null);
+  const [passAttempt, setPassAttempt] = useState({ key: '', count: 0 });
+  const opening = useMemo(() => initial(), []);
   const entries = useMemo(() => save ? history(save) : [], [save]);
-  const finalPosition = entries.at(-1)?.after ?? initial();
+  const finalPosition = entries.at(-1)?.after ?? opening;
   const shown = replay ?? entries.length;
-  const position = shown ? entries[shown - 1].after : initial();
+  const position = shown ? entries[shown - 1].after : opening;
   const counts = score(position), moves = legal(position);
   const isReplay = replay !== null;
   const humanTurn = !!save && (save.mode === 'local' || save.mode === 'ai' && position.turn === save.human);
   const active = screen === 'game' && !modal && !isReplay && !position.over;
-  const interactive = active && humanTurn && !thinking;
-  const automatic = !!save && active && !humanTurn && !(save.mode === 'watch' && watchPaused);
+  const [settledPosition, setSettledPosition] = useState(position);
+  const [confirmedPass, setConfirmedPass] = useState<string | null>(null);
+  const settling = settledPosition !== position;
+  const passKey = save ? `${save.createdAt}:${save.actions.join(',')}` : '';
+  const manualPassPending = !!save && save.mode !== 'watch' && confirmedPass !== passKey
+    && !!position.passed && !position.over && !isReplay;
+  const passPending = manualPassPending || (save?.mode === 'watch' && settling && !!position.passed && !position.over && !isReplay);
+  const boardPosition = useMemo(() => presentedPosition(position, passPending), [position, passPending]);
+  const humanPassed = save?.mode === 'ai' && position.passed === save.human;
+  const interactive = active && humanTurn && !passPending;
+  const automatic = !!save && active && !humanTurn && !settling && !passPending && !(save.mode === 'watch' && watchPaused);
   const commit = (move: number) => {
     if (!save || !interactive || !moves.includes(move)) return;
-    setSave({ ...save, actions: [...save.actions, move] }); setHint(null); setStats(null); setAIError('');
+    setSave(previous => previous === save ? { ...save, actions: [...save.actions, move] } : previous); setHint(null); setStats(null); setAIError('');
   };
+  const explainPass = () => {
+    setPassAttempt(previous => ({ key: passKey, count: previous.key === passKey ? previous.count + 1 : 1 }));
+    passNotice.current?.scrollIntoView({ block: 'nearest' });
+    passConfirm.current?.focus({ preventScroll: true });
+  };
+  useEffect(() => {
+    if (screen === 'game' && !modal && manualPassPending) {
+      passNotice.current?.scrollIntoView({ block: 'nearest' });
+      passConfirm.current?.focus({ preventScroll: true });
+    }
+  }, [screen, modal, manualPassPending]);
+  useEffect(() => {
+    if (screen !== 'game' || modal || isReplay || (save?.mode === 'watch' && watchPaused && !position.over)) return;
+    const timer = setTimeout(() => setSettledPosition(position), position.passed && save?.mode === 'watch' ? PASS_PAUSE_MS : TURN_SETTLE_MS);
+    return () => clearTimeout(timer);
+  }, [position, screen, modal, isReplay, save?.mode, watchPaused]);
   useEffect(() => {
     const controller = new AbortController();
     nativeEngineReady(controller.signal).then(ready => {
@@ -76,21 +106,26 @@ export default function App() {
   useEffect(() => { setStats(null); }, [screen, replay]);
   useEffect(() => { setStats(null); }, [save?.engine]);
   useEffect(() => {
-    const hintTask = task === 'hint' && active && humanTurn;
+    const hintTask = task === 'hint' && active && humanTurn && !passPending;
     if ((!automatic && !hintTask) || !save) { setThinking(false); return; }
     setThinking(true); setAIError('');
     const useNative = save.engine === 'egaroucid';
     const worker = useNative ? null : new Worker(new URL('./game/ai.worker.ts', import.meta.url), { type: 'module' });
     const controller = new AbortController();
     let cancelled = false;
+    let resultTimer: ReturnType<typeof setTimeout> | undefined;
+    const started = performance.now();
     const finishError = (message: string) => { if (cancelled) return; setThinking(false); setAIError(message); setTask(null); worker?.terminate(); };
     const acceptResult = (result?: Analysis, message?: string) => {
       if (cancelled) return;
       if (!result || !moves.includes(result.move)) { finishError(message ?? 'AI 返回了非法落点'); return; }
-      setStats(result); setThinking(false); setTask(null);
-      if (hintTask) setHint(result.move);
-      else setSave(previous => previous === save ? { ...save, actions: [...save.actions, result.move] } : previous);
       worker?.terminate();
+      resultTimer = setTimeout(() => {
+        if (cancelled) return;
+        setStats(result); setThinking(false); setTask(null);
+        if (hintTask) setHint(result.move);
+        else setSave(previous => previous === save ? { ...save, actions: [...save.actions, result.move] } : previous);
+      }, hintTask ? 0 : Math.max(0, AI_MIN_THINK_MS - (performance.now() - started)));
     };
     if (worker) {
       worker.onmessage = (event: MessageEvent<{ result?: Analysis; error?: string }>) => acceptResult(event.data.result, event.data.error);
@@ -99,20 +134,20 @@ export default function App() {
     const timer = setTimeout(() => {
       if (useNative) requestNativeAnalysis(position, hintTask ? 'hard' : save.difficulty, controller.signal).then(result => acceptResult(result)).catch(e => finishError(e instanceof Error ? e.message : '本机引擎调用失败'));
       else worker?.postMessage({ position, difficulty: hintTask ? 'hard' : save.difficulty, seed: (save.actions.length + 1) * 7919 });
-    }, save.mode === 'watch' ? 700 : 280);
-    return () => { cancelled = true; clearTimeout(timer); controller.abort(); worker?.terminate(); };
+    }, 0);
+    return () => { cancelled = true; clearTimeout(timer); clearTimeout(resultTimer); controller.abort(); worker?.terminate(); };
     // Position and moves are derived solely from save/replay; keep the worker stable during UI renders.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [save, automatic, task, active, humanTurn, retry]);
+  }, [save, automatic, task, active, humanTurn, retry, passPending]);
   useEffect(() => {
-    if (screen === 'game' && finalPosition.over && replay === null) setModal('result');
-  }, [save, finalPosition.over, screen, replay]);
+    if (screen === 'game' && finalPosition.over && replay === null && !settling) setModal('result');
+  }, [save, finalPosition.over, screen, replay, settling]);
   useEffect(() => {
     if (!replayPlaying || replay === null || modal || screen !== 'game') return;
     if (replay >= entries.length) { setReplayPlaying(false); return; }
-    const timer = setTimeout(() => setReplay(i => (i ?? 0) + 1), 850);
+    const timer = setTimeout(() => setReplay(i => (i ?? 0) + 1), position.passed ? PASS_PAUSE_MS : REPLAY_STEP_MS);
     return () => clearTimeout(timer);
-  }, [replayPlaying, replay, entries.length, modal, screen]);
+  }, [replayPlaying, replay, entries.length, modal, screen, position.passed]);
   const start = () => {
     setSave({ version: 1, mode, difficulty, human, engine: mode === 'local' ? 'builtin' : engine, actions: [], createdAt: new Date().toISOString() });
     setReplay(null); setReplayPlaying(false); setWatchPaused(false); setModal(null); setScreen('game'); setError('');
@@ -128,7 +163,7 @@ export default function App() {
   const aiName = save?.engine === 'egaroucid' ? 'Egaroucid' : `${LEVELS[save?.difficulty ?? 'normal']} AI`;
   const who = (color: Color) => !save ? '' : save.mode === 'local' ? (color === 1 ? '玩家一' : '玩家二') : save.mode === 'watch' ? aiName : color === save.human ? '你' : aiName;
   const canUndo = !!save && !!entries.length && (save.mode !== 'ai' || entries.some(e => e.color === save.human));
-  const title = position.over ? counts.black === counts.white ? '棋逢对手，平分秋色' : `${counts.black > counts.white ? '黑棋' : '白棋'}获胜` : isReplay ? '重温每一个转折' : thinking ? task === 'hint' ? '正在寻找好棋…' : 'AI 正在思考…' : `${colorName(position.turn)}行棋`;
+  const title = position.over ? counts.black === counts.white ? '棋逢对手，平分秋色' : `${counts.black > counts.white ? '黑棋' : '白棋'}获胜` : isReplay ? '重温每一个转折' : passPending ? humanPassed ? '你的回合：无子可走' : `${colorName(position.passed!)}无子可走` : thinking ? task === 'hint' ? '正在寻找好棋…' : 'AI 正在思考…' : `${colorName(position.turn)}行棋`;
   return <div className="app-shell">
     <header className="topbar"><button className="brand" onClick={() => { setScreen('menu'); setModal(null); }} aria-label="黑白之间，返回首页"><BrandMark /><span>黑白之间<small>OTHELLO ATELIER</small></span></button>
       <nav>{screen === 'game' && <button className="text-btn home-link" onClick={() => setScreen('menu')}><Home size={16} />首页</button>}<button className="text-btn" onClick={() => setModal('rules')}><BookOpen size={16} />游戏规则</button><span className="nav-divider" /><span className="edition">经典黑白棋</span></nav>
@@ -149,14 +184,18 @@ export default function App() {
       <div className="mode-preview"><div className="mode-preview-intro"><span className="eyebrow">YOUR TABLE, YOUR PACE</span><h2>选一种方式，坐下来。</h2></div>{(['ai', 'local', 'watch'] as Mode[]).map(m => { const Icon = m === 'ai' ? Cpu : m === 'local' ? Users : Eye; return <button className="mode-preview-card" key={m} onClick={() => { setMode(m); setModal('new'); }}><Icon size={21} strokeWidth={1.4} /><div><h3>{MODES[m]}</h3><p>{m === 'ai' ? '与 AI 切磋，慢慢精进' : m === 'local' ? '与身边的人，面对面对弈' : '暂歇片刻，看好棋发生'}</p></div><ArrowUpRight size={16} /></button>; })}</div>
     </> : <main className="game">
       <div className="game-heading"><div><div className="eyebrow">A QUIET MOMENT. A THOUGHTFUL MOVE.</div><h1>{isReplay ? '棋谱回放' : '棋局进行中'}<span>{save && MODES[save.mode]}</span></h1></div><div className="heading-actions"><button className="text-btn" onClick={() => setModal('new')}><Plus size={16} />新对局</button><button className="icon-btn" aria-label="暂停与棋局菜单" onClick={() => setModal('pause')}><Pause size={18} /></button></div></div>
-      <div className="game-layout"><section className="table"><div className="table-status"><span className={`status-disc ${position.turn === 1 ? 'black' : 'white'}`} /><div role="status" aria-live="polite"><strong>{title}</strong><small>{position.over ? '终局以盘面实际棋子数计分' : isReplay ? `第 ${shown} / ${entries.length} 手` : `${who(position.turn)} · ${moves.length} 个合法落点`}</small></div><span className="move-label">MOVE <b>{String(shown).padStart(2, '0')}</b></span></div>
-        <Board position={position} interactive={interactive} onMove={commit} showLegal={showLegal && !position.over && (!isReplay || showLegal)} hint={hint} />
-        <div className="board-legend"><span><i className="legend-dot" />可落点</span><span><i className="legend-last" />最后落子</span><span className="keyboard-note">方向键移动 · Enter 落子</span></div>
-        {position.passed && !position.over && <div className="pass-notice" role="status">{colorName(position.passed)}无合法落点，自动停着。{colorName(position.turn)}继续行棋。</div>}
+      <div className="game-layout"><section className="table"><div className="table-status"><span className={`status-disc ${boardPosition.turn === 1 ? 'black' : 'white'}`} /><div role="status" aria-live="polite"><strong>{title}</strong><small>{position.over ? '终局以盘面实际棋子数计分' : isReplay ? `第 ${shown} / ${entries.length} 手` : passPending ? `${who(boardPosition.turn)}执${colorName(boardPosition.turn)} · 0 个合法落点` : `${who(position.turn)} · ${moves.length} 个合法落点`}</small></div><span className="move-label">MOVE <b>{String(shown).padStart(2, '0')}</b></span></div>
+        <div className={`board-area ${passPending ? 'awaiting-pass' : ''} ${manualPassPending ? 'needs-confirm' : ''}`}><Board position={boardPosition} interactive={interactive} onMove={commit} onUnavailableClick={manualPassPending ? explainPass : undefined} showLegal={showLegal && !position.over && !passPending && (isReplay || save?.mode !== 'ai' || humanTurn)} hint={passPending ? null : hint} />
+          {passPending && <section ref={passNotice} className="turn-notice" aria-label="停着提示"><Pause size={20} aria-hidden="true" /><div role="status" aria-live="polite" aria-atomic="true"><strong>{humanPassed ? '你的回合：无子可走' : `${colorName(position.passed!)}无子可走`}</strong><span>{manualPassPending ? `你可以查看棋盘，确认跳过${colorName(position.passed!)}回合后，由${colorName(position.turn)}继续。` : `${colorName(position.passed!)}本回合自动跳过，稍后由${colorName(position.turn)}继续。`}</span>
+            {manualPassPending && passAttempt.key === passKey && <span key={passAttempt.count} className="pass-feedback">这里不能落子，请先确认跳过本回合。</span>}
+          </div>{manualPassPending && <button ref={passConfirm} className="primary" onClick={() => setConfirmedPass(passKey)}>确认跳过回合<ArrowRight size={16} /></button>}</section>}
+        </div>
+        <div className="board-legend"><span><i className="legend-dot" />可落点</span><span><i className="legend-last" />最后落子</span><span><i className="legend-flip">↻</i>将翻面</span><span className="keyboard-note">方向键移动 · Enter 落子</span></div>
+        {position.passed && !position.over && !passPending && <div className="pass-notice" role="status">{colorName(position.passed)}无合法落点，自动停着。{colorName(position.turn)}继续行棋。</div>}
         {aiError && <div className="ai-error" role="alert">{aiError}<button onClick={() => { setTask(null); setRetry(i => i + 1); }}>重试</button></div>}
         <div className="board-tools"><button className="tool" disabled={!canUndo || isReplay} onClick={undo}><Undo2 size={17} /><span>悔棋</span></button>{save?.mode !== 'watch' && <button className={`tool ${hint !== null ? 'selected' : ''}`} disabled={!interactive || thinking} onClick={() => { if (hint !== null) setHint(null); else setTask('hint'); }}><Lightbulb size={17} /><span>{thinking && task === 'hint' ? '分析中' : '提示'}</span></button>}<label className="legal-toggle"><input type="checkbox" checked={showLegal} onChange={e => setShowLegal(e.target.checked)} /><span>显示可落点</span></label>{save?.mode === 'watch' && !isReplay && <button className="tool" disabled={position.over} onClick={() => setWatchPaused(p => !p)}>{watchPaused ? <Play size={17} /> : <Pause size={17} />}<span>{watchPaused ? '继续' : '暂停'}</span></button>}</div>
       </section><aside className="sidebar"><section className="panel score-panel"><div className="panel-title"><h2>棋局概览</h2><span className="pill">{isReplay ? '回放中' : position.over ? '已结束' : '进行中'}</span></div>
-        <div className="players">{([1, -1] as Color[]).map(c => <div key={c} className={`player ${!position.over && position.turn === c ? 'current' : ''}`}><span className={`score-disc ${c === 1 ? 'black' : 'white'}`} /><span className="player-name">{colorName(c)}<small>{who(c)}</small></span><strong>{c === 1 ? counts.black : counts.white}</strong></div>)}</div>
+        <div className="players">{([1, -1] as Color[]).map(c => <div key={c} className={`player ${!position.over && boardPosition.turn === c ? 'current' : ''}`}><span className={`score-disc ${c === 1 ? 'black' : 'white'}`} /><span className="player-name">{colorName(c)}<small>{who(c)}</small></span><strong>{c === 1 ? counts.black : counts.white}</strong></div>)}</div>
         <div className="score-bar"><i style={{ width: `${counts.black / (counts.black + counts.white) * 100}%` }} /></div><div className="score-caption"><span>黑 {counts.black}</span><span>空位 {64 - counts.black - counts.white}</span><span>白 {counts.white}</span></div>
       </section>
       <section className="panel insight-panel"><div className="panel-title"><h2><Leaf size={15} />一手之间</h2>{thinking && <span className="thinking-dots"><i /><i /><i /></span>}</div><p>{hint !== null ? `试试 ${coordinate(hint)}。提示会综合行动力、角位和前沿子，不只看眼前的翻子数。` : position.over ? counts.black === counts.white ? '这盘棋平分秋色。回放棋谱，找找那些改变走向的瞬间。' : `最终比分 ${counts.black} : ${counts.white}。回到棋谱里，看看局势是从哪一步开始改变的。` : '角位无法被翻转。比起一时的子数，保留选择的余地往往更重要。'}</p>
@@ -173,7 +212,7 @@ export default function App() {
       {mode === 'ai' && <><label className="field-label">选择执子 <small>黑棋先行</small></label><div className="color-options">{([1, -1] as Color[]).map(c => <button key={c} className={`choice ${human === c ? 'chosen' : ''}`} onClick={() => setHuman(c)}><i className={`mini-disc ${c === 1 ? 'black' : 'white'}`} />{colorName(c)}{human === c && <Check size={14} />}</button>)}</div></>}
       {save && <p className="replace-note">开始新局会替换当前存档。<button onClick={() => downloadSave(save)}>先导出棋谱</button></p>}<button className="primary dialog-start" onClick={start}>坐下来，开始吧<ArrowRight size={17} /></button>
     </Dialog>}
-    {modal === 'rules' && <Dialog title="一分钟，学会黑白棋" onClose={() => setModal(null)}><div className="rules-lead"><span className="tiny-discs"><i /><i /></span><p>规则很简单，好棋值得慢慢想。</p></div><ol className="rules-list"><li><b>黑棋先行，轮流落子</b><p>棋盘为 8 × 8 格。开局中央四子交错摆放，双方轮流下一枚棋子。</p></li><li><b>夹住对方，全部翻转</b><p>新棋子与己方棋子之间，若在横、竖或斜线方向连续夹住对方棋子，必须将这些棋子全部翻成己方颜色。一手可同时翻转多个方向。</p></li><li><b>每一手，必须有所翻转</b><p>不能下在已有棋子的格子，也不能下在无法翻转任何对手棋子的位置。小圆点标出了所有合法落点，悬停可预览将要翻转的棋子。</p></li><li><b>无处可下，自动停着</b><p>一方无合法落点时，自动跳过该方，由对手继续。双方都无合法落点即终局，即使棋盘还没填满。</p></li><li><b>终局子多者胜</b><p>以盘面上实际棋子数量计分，子数相同则平局。中盘领先不代表胜利，角位和行动力尤其重要。</p></li></ol><div className="rules-tip"><Lightbulb size={18} /><p>人机模式的悔棋会退回到你上一次落子之前；点击落子记录即可回放。手机也可以直接点击棋盘操作。</p></div><button className="primary dialog-start" onClick={() => setModal(null)}>明白了，落子吧<ArrowRight size={16} /></button></Dialog>}
+    {modal === 'rules' && <Dialog title="一分钟，学会黑白棋" onClose={() => setModal(null)}><div className="rules-lead"><span className="tiny-discs"><i /><i /></span><p>规则很简单，好棋值得慢慢想。</p></div><ol className="rules-list"><li><b>黑棋先行，轮流落子</b><p>棋盘为 8 × 8 格。开局中央四子交错摆放，双方轮流下一枚棋子。</p></li><li><b>夹住对方，全部翻转</b><p>新棋子与己方棋子之间，若在横、竖或斜线方向连续夹住对方棋子，必须将这些棋子全部翻成己方颜色。一手可同时翻转多个方向。</p></li><li><b>每一手，必须有所翻转</b><p>不能下在已有棋子的格子，也不能下在无法翻转任何对手棋子的位置。小圆点标出了所有合法落点，悬停可预览将要翻转的棋子。</p></li><li><b>无处可下，自动停着</b><p>一方无合法落点时，需要停着，由对手继续。对局会先显示提示，点击“确定，继续”后进入下一回合。双方都无合法落点即终局，即使棋盘还没填满。</p></li><li><b>终局子多者胜</b><p>以盘面上实际棋子数量计分，子数相同则平局。中盘领先不代表胜利，角位和行动力尤其重要。</p></li></ol><div className="rules-tip"><Lightbulb size={18} /><p>人机模式的悔棋会退回到你上一次落子之前；点击落子记录即可回放。手机也可以直接点击棋盘操作。</p></div><button className="primary dialog-start" onClick={() => setModal(null)}>明白了，落子吧<ArrowRight size={16} /></button></Dialog>}
     {modal === 'pause' && <Dialog title="让思考歇一会儿" onClose={() => setModal(null)}><p className="dialog-copy">棋局已暂停，进度会自动保存在这个浏览器。</p>{save && save.mode !== 'local' && <><label className="field-label">当前对战引擎</label><div className="engine-options"><button disabled={!nativeReady} className={`choice ${save.engine === 'egaroucid' ? 'chosen' : ''}`} onClick={() => setSave({ ...save, engine: 'egaroucid' })}><b>Egaroucid</b><small>原生引擎 · 开局库已启用</small></button><button className={`choice ${save.engine !== 'egaroucid' ? 'chosen' : ''}`} onClick={() => setSave({ ...save, engine: 'builtin' })}><b>内置 AI</b><small>浏览器离线运行</small></button></div><p className="field-help">切换引擎会保留当前棋谱。</p>{!nativeReady && <button className="native-reconnect" onClick={() => setNativeCheck(n => n + 1)}>重新连接本机引擎</button>}</>}<div className="pause-actions"><button className="primary" onClick={() => setModal(null)}><Play size={17} />继续对局</button><button className="secondary" onClick={() => save && downloadSave(save)}><Download size={17} />导出棋谱</button><button className="secondary" onClick={() => file.current?.click()}><Upload size={17} />导入棋谱</button><button className="secondary" onClick={() => setModal('new')}><RotateCcw size={17} />开启新局</button><button className="text-btn" onClick={() => { setModal(null); setScreen('menu'); }}><Home size={16} />返回首页</button></div></Dialog>}
     {modal === 'result' && <Dialog title="一局终了，余味悠长" onClose={() => setModal(null)}><div className="result"><span className="eyebrow">WELL PLAYED</span><h2>{score(finalPosition).black === score(finalPosition).white ? '平分秋色' : `${score(finalPosition).black > score(finalPosition).white ? '黑棋' : '白棋'}获胜`}</h2><div className="result-score"><span><i className="score-disc black" />{score(finalPosition).black}</span><small>:</small><span><i className="score-disc white" />{score(finalPosition).white}</span></div><p>共 {entries.length} 手。每一次翻转，都是新的可能。</p></div><div className="result-actions"><button className="secondary" onClick={() => { setModal(null); enterReplay(0); }}>回看棋谱</button><button className="primary" onClick={() => setModal('new')}>再来一局<ArrowRight size={16} /></button></div></Dialog>}
   </div>;
