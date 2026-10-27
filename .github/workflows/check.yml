@@ -1,0 +1,32 @@
+name: Check
+on: [push, pull_request]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: cmake -S . -B .build/native -DCMAKE_BUILD_TYPE=Release
+      - run: cmake --build .build/native -j 2
+      - run: ctest --test-dir .build/native --output-on-failure
+      - run: python3 scripts/data-assets.py verify
+      - run: python3 scripts/verify-baseline.py
+      - run: python3 tests/training_test.py
+      - run: npm run test:native
+      - run: npm test
+      - run: npm run build
+  egaroucid:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run setup:egaroucid
+      - run: npm run test:egaroucid

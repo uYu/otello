@@ -1,0 +1,360 @@
+{
+  "fetchedAt": "2026-10-27T05:50:52.003864+00:00",
+  "sources": [
+    "https://www.ffothello.org/informatique/la-base-wthor/",
+    "https://skatgame.net/mburo/log.html"
+  ],
+  "files": [
+    {
+      "file": "WTH_1977.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_1977.wtb",
+      "bytes": 832,
+      "games": 12,
+      "sha256": "9c44b6bf9dca9c9226252a99678d298cec7ae26a39368fdfff207e61ab3cef94"
+    },
+    {
+      "file": "WTH_1978.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_1978.wtb",
+      "bytes": 560,
+      "games": 8,
+      "sha256": "46e1ecef62dc7e7e5d6dd315aa6de9d9e4147b19cc94bf4a45ef10e8dc22499d"
+    },
+    {
+      "file": "WTH_1979.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_1979.wtb",
+      "bytes": 764,
+      "games": 11,
+      "sha256": "b210e8334d49b8c29cd5e6671efa3283c03f320019df1bd07db7c915b8e40546"
+    },
+    {
+      "file": "WTH_1980.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_1980.wtb",
+      "bytes": 10896,
+      "games": 160,
+      "sha256": "38a6f4a121883621e11ac5ea9943c5342bc18bbf9c7ea3ef72fb2a9717343331"
+    },
+    {
+      "file": "WTH_1981.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_1981.wtb",
+      "bytes": 10420,
+      "games": 153,
+      "sha256": "ed654368797faf50e005e07b3c457d34ba6a06833fd52a1f186aa07bf74f82c9"
+    },
+    {
+      "file": "WTH_1982.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_1982.wtb",
+      "bytes": 7496,
+      "games": 110,
+      "sha256": "a9f113b77034584184f103ead32030097739eb30600a6c6bf1d4cbc040429e29"
+    },
+    {
+      "file": "WTH_1983.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_1983.wtb",
+      "bytes": 13548,
+      "games": 199,
+      "sha256": "a962233829c420d78a133aecfab466ad2da456b87db98c8a62087446540d16a6"
+    },
+    {
+      "file": "WTH_1984.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_1984.wtb",
+      "bytes": 39932,
+      "games": 587,
+      "sha256": "c4f848c5a5e99e6a80be0e29af541958914a25e0515f51184d48ade9aa03546d"
+    },
+    {
+      "file": "WTH_1985.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_1985.wtb",
+      "bytes": 64888,
+      "games": 954,
+      "sha256": "cff42294d01eec1784a194dbb5af250b302bf6a725f0158f4d99282fc58f4722"
+    },
+    {
+      "file": "WTH_1986.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_1986.wtb",
+      "bytes": 97936,
+      "games": 1440,
+      "sha256": "ccaff79b4e6f86dc6f4b917178b0ef01784aba4c39500143f87b0c70af0ac299"
+    },
+    {
+      "file": "WTH_1987.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_1987.wtb",
+      "bytes": 94264,
+      "games": 1386,
+      "sha256": "9410c7a166248de66649ae80f9da67f4ef2cbc520956d3117d56848747813156"
+    },
+    {
+      "file": "WTH_1988.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_1988.wtb",
+      "bytes": 123980,
+      "games": 1823,
+      "sha256": "8e70a6f6c2e79ed60af3c593505d5b87e8b81d16f87f0788e9ddcab755430b15"
+    },
+    {
+      "file": "WTH_1989.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_1989.wtb",
+      "bytes": 148664,
+      "games": 2186,
+      "sha256": "459d9c22674ee5033f38249c20260eba9b4773e4ac9caaeab4fbd2f974729539"
+    },
+    {
+      "file": "WTH_1990.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_1990.wtb",
+      "bytes": 203064,
+      "games": 2986,
+      "sha256": "8100ff898e9c1c13d44dd6cfbfd78d8753cda731e1dc4db05cb31add10f8e209"
+    },
+    {
+      "file": "WTH_1991.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_1991.wtb",
+      "bytes": 214352,
+      "games": 3152,
+      "sha256": "246cb916d0af1d229e541ccb2cafff7e64d5d0174f191b4d3ace564642260206"
+    },
+    {
+      "file": "WTH_1992.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_1992.wtb",
+      "bytes": 227612,
+      "games": 3347,
+      "sha256": "44f9c95612fdbe75a285a51e66dbb83712f7f1b5822910fb41b5b5a6434d3872"
+    },
+    {
+      "file": "WTH_1993.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_1993.wtb",
+      "bytes": 236928,
+      "games": 3484,
+      "sha256": "2fdba7cbc3d771b6d23be3889445c7580c36c05745916d9f9049c33ea65f023b"
+    },
+    {
+      "file": "WTH_1994.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_1994.wtb",
+      "bytes": 295340,
+      "games": 4343,
+      "sha256": "5bdb8b6c394ff0f85952256d88015b3dfcda59939e2be48af05d6889f42dedb2"
+    },
+    {
+      "file": "WTH_1995.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_1995.wtb",
+      "bytes": 337840,
+      "games": 4968,
+      "sha256": "77102226943bd869233b9a9c58e70f83b3308170a9c2d10abece64a68a64a9d7"
+    },
+    {
+      "file": "WTH_1996.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_1996.wtb",
+      "bytes": 397952,
+      "games": 5852,
+      "sha256": "cf10aae185db77c6e1089a56351d6ce7436f4e5fc910b5e71f03c712859258b7"
+    },
+    {
+      "file": "WTH_1997.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_1997.wtb",
+      "bytes": 522324,
+      "games": 7681,
+      "sha256": "4b0b9f403e2a1bb1c9ba0ed02c1c39cea0127db056fcdfc6c4c6ce74baf5eb50"
+    },
+    {
+      "file": "WTH_1998.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_1998.wtb",
+      "bytes": 549252,
+      "games": 8077,
+      "sha256": "a5d39409c5e3a84519fa0c2a84f368cb97ce63be4964ef1321be9381976aae5a"
+    },
+    {
+      "file": "WTH_1999.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_1999.wtb",
+      "bytes": 522596,
+      "games": 7685,
+      "sha256": "e78208e66ff6b2dca9c37754c1a840cd177c53d8691926d35e75b6cce5b37a4f"
+    },
+    {
+      "file": "WTH_2000.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_2000.wtb",
+      "bytes": 289220,
+      "games": 4253,
+      "sha256": "f70faa94377a6f8b67792da6ac0e905593712352d8b26ac064da54506dd53944"
+    },
+    {
+      "file": "WTH_2001.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_2001.wtb",
+      "bytes": 379116,
+      "games": 5575,
+      "sha256": "21920f4776d810126ee1b68c99541f8ac389cf98055c19cb5fa815ed95b846dd"
+    },
+    {
+      "file": "WTH_2002.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_2002.wtb",
+      "bytes": 368780,
+      "games": 5423,
+      "sha256": "fe36942863354622a6cc307e73307202348c262c5e49a99371d4743284218852"
+    },
+    {
+      "file": "WTH_2003.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_2003.wtb",
+      "bytes": 262360,
+      "games": 3858,
+      "sha256": "57bcab596cc10e7668c898642094219213c0d3293d7e2180852e0c4ac9c6a95c"
+    },
+    {
+      "file": "WTH_2004.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_2004.wtb",
+      "bytes": 619700,
+      "games": 9113,
+      "sha256": "90e5dc4f4cd37a5e02f3833e9b82128a330534f8afd22e780011748f1683cc97"
+    },
+    {
+      "file": "WTH_2005.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_2005.wtb",
+      "bytes": 285548,
+      "games": 4199,
+      "sha256": "a2793df2b806f2933a16c8c615de7192f0d778f8c8ed9683a1a8790f417013dc"
+    },
+    {
+      "file": "WTH_2006.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_2006.wtb",
+      "bytes": 200072,
+      "games": 2942,
+      "sha256": "596504fe8435acd73d479bf570ae3fb8d033796db5b3f2ef3c61bde9492b1955"
+    },
+    {
+      "file": "WTH_2007.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_2007.wtb",
+      "bytes": 168520,
+      "games": 2478,
+      "sha256": "a29e8a1d26913bc704ddb7d7a8a0ee01a8b9def101428cd661411cd1da39e4fc"
+    },
+    {
+      "file": "WTH_2008.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_2008.wtb",
+      "bytes": 151792,
+      "games": 2232,
+      "sha256": "9e4b4501a8c48e464148409d7f3583220ed1426f75f50a0420333fe471056701"
+    },
+    {
+      "file": "WTH_2009.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_2009.wtb",
+      "bytes": 295680,
+      "games": 4348,
+      "sha256": "a25036acbbe03ccaa0236445d5176174040d57f7b9941d21979013bd616a6112"
+    },
+    {
+      "file": "WTH_2010.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_2010.wtb",
+      "bytes": 147712,
+      "games": 2172,
+      "sha256": "b7fdbcb1d64c08cc012792404fe297b07f9e0eac8cd73d2afab48303d4d92a91"
+    },
+    {
+      "file": "WTH_2011.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_2011.wtb",
+      "bytes": 128604,
+      "games": 1891,
+      "sha256": "ebea481ed09095247b107abf8e348b79bb398ced5c0854166027a6abeeff2030"
+    },
+    {
+      "file": "WTH_2012.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_2012.wtb",
+      "bytes": 150160,
+      "games": 2208,
+      "sha256": "a92d7b251986dabde2aa6774456a6dcb3785e9e0db7a2b11094aa49bf903e611"
+    },
+    {
+      "file": "WTH_2013.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_2013.wtb",
+      "bytes": 162944,
+      "games": 2396,
+      "sha256": "f71f1981b6519b7bcc768f832f6c25e3bb9d2b896dc5375a6b681fc1ddad8f2d"
+    },
+    {
+      "file": "WTH_2014.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_2014.wtb",
+      "bytes": 123572,
+      "games": 1817,
+      "sha256": "45728d4de4f2b1a40a83bdd46fcffe48e21c85aa4e786f2c6aec6fe6db8bd230"
+    },
+    {
+      "file": "WTH_2015.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_2015.wtb",
+      "bytes": 130984,
+      "games": 1926,
+      "sha256": "7fac0f0a4fb2734a7ac6d98f85a9d6969e02250b8a61f46bbebcfe11cacff59e"
+    },
+    {
+      "file": "WTH_2016.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_2016.wtb",
+      "bytes": 136900,
+      "games": 2013,
+      "sha256": "afaccc1ab00502da45416010621566d808ca8d00de09232b196dc3e3451af446"
+    },
+    {
+      "file": "WTH_2017.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_2017.wtb",
+      "bytes": 166548,
+      "games": 2449,
+      "sha256": "854ce8189596c87846d78ee151776ef74dcdc8972bf02eac6f4d8e60f5308c18"
+    },
+    {
+      "file": "WTH_2018.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_2018.wtb",
+      "bytes": 165188,
+      "games": 2429,
+      "sha256": "db9e475aa33cbbd68f9a1231421656b6c9f4939cccec386f1761e2d19661edf4"
+    },
+    {
+      "file": "WTH_2019.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_2019.wtb",
+      "bytes": 134860,
+      "games": 1983,
+      "sha256": "5907d39469ef7a67846c59e50f4368fcd0458bb4bf9802a7d6050dca2c71bf1f"
+    },
+    {
+      "file": "WTH_2020.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_2020.wtb",
+      "bytes": 60944,
+      "games": 896,
+      "sha256": "2987c5a149ff88a6087c863a065d54d0c0d586255b41cfd06976495a173ac573"
+    },
+    {
+      "file": "WTH_2021.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_2021.wtb",
+      "bytes": 46256,
+      "games": 680,
+      "sha256": "f7c2672aaae2badeb1c21bccfc7e4936a11277c68fcb9775f6c7375872f22208"
+    },
+    {
+      "file": "WTH_2022.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_2022.wtb",
+      "bytes": 93448,
+      "games": 1374,
+      "sha256": "f48859be434a916be20e7dacc5a403acaaf6ba9ee0c2ca6129446e001d84f72a"
+    },
+    {
+      "file": "WTH_2023.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_2023.wtb",
+      "bytes": 168520,
+      "games": 2478,
+      "sha256": "eb4988e1f34d44c1d8ae82aea620422d7b9762a51eb12fd07ad79fb23b0a54ea"
+    },
+    {
+      "file": "WTH_2024.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_2024.wtb",
+      "bytes": 196604,
+      "games": 2891,
+      "sha256": "cfb0a86eac305d3de8399a600de99241bd0f0ddceb9431381c70a471281494fb"
+    },
+    {
+      "file": "WTH_2025.wtb",
+      "url": "https://www.ffothello.org/wthor/base/WTH_2025.wtb",
+      "bytes": 198576,
+      "games": 2920,
+      "sha256": "dfdb85456431e59122336a03fe384b037436ac5f3f0c3b6e5462870635c9483d"
+    },
+    {
+      "file": "logbook.gam.gz",
+      "url": "https://skatgame.net/mburo/logbook.gam.gz",
+      "bytes": 3268866,
+      "games": 121123,
+      "sha256": "c676f3febe491333b93f4a91b04579ea9b5c78917d4f4dcc7e8ab7bcf47b02d8"
+    }
+  ],
+  "usage": "Both source pages invite evaluation training; no independent MIT/CC data license found. Keep attribution; raw data stays local."
+}

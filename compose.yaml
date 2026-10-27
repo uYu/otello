@@ -1,0 +1,6 @@
+services:
+  otello:
+    build: .
+    ports:
+      - "${OTELLO_PORT:-8206}:80"
+    restart: unless-stopped

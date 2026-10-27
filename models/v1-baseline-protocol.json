@@ -1,0 +1,64 @@
+{
+  "version": "v1",
+  "model": "models/nnue256-v1.otnnue",
+  "modelSha256": "76065bb73de03b83fff6f805f32c5efeaa91a152f4b2a109c485819465eb1961",
+  "dataset": {
+    "seed": 20261027,
+    "inputSha256": "6332fd01b27c11a81f3fbd344e52aaf8f70e60c644780fb453cc7ef64ae359ac",
+    "games": {
+      "logistello:test": 300,
+      "wthor:test": 300,
+      "wthor:validation": 300,
+      "logistello:validation": 300,
+      "logistello:train": 60775,
+      "wthor:train": 80561
+    },
+    "positions": {
+      "test": 6000,
+      "validation": 6000,
+      "train": 1000000
+    },
+    "filters": "complete games; placements 8..56, stride 3; 8-symmetry/color-relative position dedup; test/validation ownership before train",
+    "split": "native converter canonical first 8 moves; no move-wise split",
+    "target": "recorded final black disc difference / 64, from side-to-move view",
+    "maxGames": 6000,
+    "maxPositions": 60000,
+    "allTrainingGames": true,
+    "trainPositions": 1000000,
+    "frozenHoldout": {
+      "path": ".build/training/positions.npz",
+      "sha256": "ac3941a55613abc92944062b49c6b9c71883a93ce02973cf3dc8fc2be670ef4c"
+    },
+    "cacheSha256": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6"
+  },
+  "checkpointSelection": "minimum validation MSE; frozen before matches",
+  "nativeLibrarySha256": "8a7efbe7d595e184316089475d38e83258ceae5d78b12c1a73726838fcf6ecfd",
+  "comparisonScriptSha256": "1ec6c0df248ac65e0fe8527e6adef690970c690912baf65b59216aebb06372e2",
+  "platform": "macOS-15.1-arm64-arm-64bit",
+  "settings": {
+    "version": "v1",
+    "millisecondsPerMove": 50,
+    "start": "standard initial position",
+    "experiments": [
+      {
+        "name": "\u5b9e\u9a8c\u4e00\uff1a\u7eaf\u641c\u7d22 vs \u6a21\u578b\u641c\u7d22",
+        "focus": "\u6a21\u578b\u641c\u7d22",
+        "experiment": "heuristic",
+        "games": 100,
+        "report": "models/v1-search-vs-model.json"
+      },
+      {
+        "name": "\u5b9e\u9a8c\u4e8c\uff1a\u6a21\u578b\u641c\u7d22 vs \u6a21\u578b\u641c\u7d22\uff0b\u5f00\u5c40\u5e93",
+        "focus": "\u6a21\u578b\u641c\u7d22\uff0b\u5f00\u5c40\u5e93",
+        "experiment": "book",
+        "games": 100,
+        "report": "models/v1-model-vs-book.json"
+      }
+    ]
+  },
+  "maxDepth": 64,
+  "seed": 20261027,
+  "bookVariety": 1,
+  "bookFallback": "same NNUE search; zero Egaroucid search calls",
+  "limits": "Repeated standard initial position, alternating colors; no independent opening-sample claim."
+}

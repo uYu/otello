@@ -1,0 +1,122 @@
+{
+  "architecture": "128->256->1, shared black/white transform and head; clipped ReLU; tanh",
+  "parameters": 33280,
+  "bytes": 67096,
+  "sha256": "701729fe38650567dc7d38c033a3a841f73736f3b36e4177630cacbfd3ab7362",
+  "seed": 20261027,
+  "dataset": {
+    "seed": 20261027,
+    "inputSha256": "6332fd01b27c11a81f3fbd344e52aaf8f70e60c644780fb453cc7ef64ae359ac",
+    "games": {
+      "logistello:test": 300,
+      "wthor:test": 300,
+      "wthor:validation": 300,
+      "logistello:validation": 300,
+      "wthor:train": 2400,
+      "logistello:train": 2400
+    },
+    "positions": {
+      "test": 6000,
+      "validation": 6000,
+      "train": 48000
+    },
+    "filters": "complete games; placements 8..56, stride 3; 8-symmetry/color-relative position dedup; test/validation ownership before train",
+    "split": "native converter canonical first 8 moves; no move-wise split",
+    "target": "recorded final black disc difference / 64, from side-to-move view",
+    "maxGames": 6000,
+    "maxPositions": 60000
+  },
+  "epochs": 10,
+  "batchSize": 256,
+  "learningRate": 0.001,
+  "seconds": 1.4460874581709504,
+  "history": [
+    {
+      "epoch": 1,
+      "mse": 0.06882496923208237,
+      "maeDiscs": 12.534375190734863
+    },
+    {
+      "epoch": 2,
+      "mse": 0.06535974144935608,
+      "maeDiscs": 12.113288879394531
+    },
+    {
+      "epoch": 3,
+      "mse": 0.06371691823005676,
+      "maeDiscs": 11.993640899658203
+    },
+    {
+      "epoch": 4,
+      "mse": 0.06330109387636185,
+      "maeDiscs": 11.951898574829102
+    },
+    {
+      "epoch": 5,
+      "mse": 0.06267095357179642,
+      "maeDiscs": 11.825541496276855
+    },
+    {
+      "epoch": 6,
+      "mse": 0.061465006321668625,
+      "maeDiscs": 11.704907417297363
+    },
+    {
+      "epoch": 7,
+      "mse": 0.06125124171376228,
+      "maeDiscs": 11.74708366394043
+    },
+    {
+      "epoch": 8,
+      "mse": 0.06149616464972496,
+      "maeDiscs": 11.77759075164795
+    },
+    {
+      "epoch": 9,
+      "mse": 0.06127011030912399,
+      "maeDiscs": 11.70816421508789
+    },
+    {
+      "epoch": 10,
+      "mse": 0.0616215243935585,
+      "maeDiscs": 11.751279830932617
+    }
+  ],
+  "metrics": {
+    "validation": {
+      "float": {
+        "mse": 0.06125124171376228,
+        "maeDiscs": 11.74708366394043
+      },
+      "quantized": {
+        "mse": 0.061225061000472654,
+        "maeDiscs": 11.742925178888312
+      },
+      "zeroBaseline": {
+        "mse": 0.08625097572803497,
+        "maeDiscs": 12.726333618164062
+      },
+      "maxQuantizationError": 0.01339590868174989
+    },
+    "test": {
+      "float": {
+        "mse": 0.0587446503341198,
+        "maeDiscs": 11.251713752746582
+      },
+      "quantized": {
+        "mse": 0.05869128207077267,
+        "maeDiscs": 11.239591465736646
+      },
+      "zeroBaseline": {
+        "mse": 0.07845816761255264,
+        "maeDiscs": 11.89133358001709
+      },
+      "maxQuantizationError": 0.014507042286343676
+    }
+  },
+  "cppParityPositions": 64,
+  "cppMaxRoundingError": 0.49806279999616976,
+  "bestEpoch": 7,
+  "torchVersion": "2.10.0",
+  "numpyVersion": "1.26.4"
+}

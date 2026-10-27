@@ -1,0 +1,46 @@
+{
+  "name": "otello",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "data:pack": "python3 scripts/data-assets.py pack",
+    "data:restore": "python3 scripts/data-assets.py restore",
+    "data:verify": "python3 scripts/data-assets.py verify",
+    "test:baseline": "python3 scripts/verify-baseline.py",
+    "training:fetch": "python3 scripts/fetch-training-data.py",
+    "training:prepare": "python3 scripts/prepare-training-data.py",
+    "training:rebuild": "python3 scripts/rebuild-training-data.py",
+    "training:run": "python3 scripts/train-nnue.py --hidden 256 --all-training-games --train-positions 1000000 --holdout-cache .build/training/positions.npz --cache .build/training/v1/positions.npz --output .build/training/v1/nnue256-v1.otnnue --epochs 30 --batch-size 1024 --parity-positions 1024",
+    "training:compare": "python3 scripts/compare-evaluators.py --model models/nnue256-v1.otnnue",
+    "training:baseline": "python3 scripts/run-v1-experiments.py",
+    "training:watch": "python3 scripts/watch-matches.py",
+    "test:training": "python3 -m unittest discover -s tests -p '*training_test.py'",
+    "setup:egaroucid": "sh scripts/setup-egaroucid.sh",
+    "test:egaroucid": "node --experimental-strip-types --test tests/integration/*.test.ts",
+    "native:serve": "node scripts/native-api.mjs",
+    "dev:native": "node scripts/dev-native.mjs",
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "build:wasm": "sh scripts/build-wasm.sh",
+    "test:native": "sh scripts/test-native.sh"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "lucide-react": "^0.468.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "^4.4.1",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  }
+}

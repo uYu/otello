@@ -1,0 +1,3 @@
+# Recorded v1 training environment. Native inference needs neither package.
+numpy==1.26.4
+torch==2.10.0

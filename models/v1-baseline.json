@@ -1,0 +1,142 @@
+{
+  "version": "v1",
+  "status": "frozen",
+  "date": "2026-10-27",
+  "model": "models/nnue256-v1.otnnue",
+  "modelSha256": "76065bb73de03b83fff6f805f32c5efeaa91a152f4b2a109c485819465eb1961",
+  "architecture": "128->256->1, shared black/white transform and head; clipped ReLU; tanh",
+  "parameters": 33280,
+  "bytes": 67096,
+  "dataset": {
+    "seed": 20261027,
+    "inputSha256": "6332fd01b27c11a81f3fbd344e52aaf8f70e60c644780fb453cc7ef64ae359ac",
+    "games": {
+      "logistello:test": 300,
+      "wthor:test": 300,
+      "wthor:validation": 300,
+      "logistello:validation": 300,
+      "logistello:train": 60775,
+      "wthor:train": 80561
+    },
+    "positions": {
+      "test": 6000,
+      "validation": 6000,
+      "train": 1000000
+    },
+    "filters": "complete games; placements 8..56, stride 3; 8-symmetry/color-relative position dedup; test/validation ownership before train",
+    "split": "native converter canonical first 8 moves; no move-wise split",
+    "target": "recorded final black disc difference / 64, from side-to-move view",
+    "maxGames": 6000,
+    "maxPositions": 60000,
+    "allTrainingGames": true,
+    "trainPositions": 1000000,
+    "frozenHoldout": {
+      "path": ".build/training/positions.npz",
+      "sha256": "ac3941a55613abc92944062b49c6b9c71883a93ce02973cf3dc8fc2be670ef4c"
+    },
+    "cacheSha256": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6"
+  },
+  "epochs": 30,
+  "bestEpoch": 30,
+  "metrics": {
+    "validation": {
+      "float": {
+        "mse": 0.05488723888993263,
+        "maeDiscs": 11.040838241577148
+      },
+      "quantized": {
+        "mse": 0.05497838337828847,
+        "maeDiscs": 11.050614637696608
+      },
+      "zeroBaseline": {
+        "mse": 0.08625097572803497,
+        "maeDiscs": 12.726333618164062
+      },
+      "maxQuantizationError": 0.01734141439285411
+    },
+    "test": {
+      "float": {
+        "mse": 0.052517108619213104,
+        "maeDiscs": 10.576167106628418
+      },
+      "quantized": {
+        "mse": 0.05254530079409332,
+        "maeDiscs": 10.578651056557591
+      },
+      "zeroBaseline": {
+        "mse": 0.07845816761255264,
+        "maeDiscs": 11.89133358001709
+      },
+      "maxQuantizationError": 0.01753547529489846
+    }
+  },
+  "protocol": "models/v1-baseline-protocol.json",
+  "protocolSha256": "5823c790d9c2bb29b808a649c67c2905a98046708652042fae0491b0b9a57f9d",
+  "librarySha256": "8a7efbe7d595e184316089475d38e83258ceae5d78b12c1a73726838fcf6ecfd",
+  "sourceSha256": {
+    "cpp/api.cpp": "51fa3cd7142a4a0eedc3b5abc5d0205ae7c7b34d7882651cd235d1aef2a9455d",
+    "cpp/api.h": "bdafce7dabcab08996009101f93bde336cb63eed3033391e5e3a417bdf411b42",
+    "cpp/dataset.cpp": "12cce8ca17a751433503e983b824de87e8fddc21de7a1dfba047f8201356354b",
+    "cpp/egaroucid.cpp": "ac750510b136c21e271f1195dee5716b47362e7883af509be8ed2e3beb65ce29",
+    "cpp/egaroucid.hpp": "6e93deb32736a10a3edb2fd030e1e1586c6a929889d17663c09dd44d0ea6b07e",
+    "cpp/egaroucid_api.h": "efa6dd4fdb3cefebb2400ca3b98823ac78de83572268a93f57f960f0d1c2f640",
+    "cpp/egaroucid_bridge.cpp": "a12e52246f0fa14f69403eb2212f52a1ed4a6940749b16bf027ea50bd3a1f230",
+    "cpp/main.cpp": "2146c730e4ede06c8dbc65f646b6a8e7c97c5accde1d80aee83c8dd1f1db059e",
+    "cpp/nnue.cpp": "b8ce51ba1a2a45d007c99d3d406d16b9b0ab9b20b3862e5152973af0bb67680f",
+    "cpp/nnue.hpp": "d2dab5be3591f111431abc5df032e6ef523d841d794c6d4037ad1b4b75d6e045",
+    "cpp/othello.hpp": "13d39bacba6df7cfbe1d33f88063d5c5bf376fafa4689006f85bf19aa71f6860",
+    "cpp/search.cpp": "98588ea5c1a81f07169e04bd0f1e995b7e132715a16906f900294cfb411f536b"
+  },
+  "cmakeSha256": "06c361a35d14b7fdb244ed26712e0589647113ce2465750186a7b80a58d84631",
+  "compiler": "Apple clang version 16.0.0 (clang-1600.0.26.6)",
+  "experiments": [
+    {
+      "name": "\u5b9e\u9a8c\u4e00\uff1a\u7eaf\u641c\u7d22 vs \u6a21\u578b\u641c\u7d22",
+      "focus": "\u6a21\u578b\u641c\u7d22",
+      "games": 100,
+      "results": {
+        "win": 100,
+        "draw": 0,
+        "loss": 0,
+        "discDifference": 4092
+      },
+      "scoreRate": 1.0,
+      "meanDiscDifference": 40.92,
+      "bookHits": 0,
+      "bookMisses": 0,
+      "report": "models/v1-search-vs-model.json",
+      "reportSha256": "78ddd7cbbf8e40ad604d1733bccc82021a987adbfb8a52542823c813e7a793b5",
+      "runtimeReportSha256": "1e8bd6906290ac7220d7d8b3f0ead5a27f7719e4cfc2ff12dcefb981c48c553d"
+    },
+    {
+      "name": "\u5b9e\u9a8c\u4e8c\uff1a\u6a21\u578b\u641c\u7d22 vs \u6a21\u578b\u641c\u7d22\uff0b\u5f00\u5c40\u5e93",
+      "focus": "\u6a21\u578b\u641c\u7d22\uff0b\u5f00\u5c40\u5e93",
+      "games": 100,
+      "results": {
+        "win": 62,
+        "draw": 4,
+        "loss": 34,
+        "discDifference": 135
+      },
+      "scoreRate": 0.64,
+      "meanDiscDifference": 1.35,
+      "bookHits": 893,
+      "bookMisses": 2107,
+      "report": "models/v1-model-vs-book.json",
+      "reportSha256": "7c06324b88e1aba98afb6e85c500a89426c6b6911349b62e712993eed17d9e94",
+      "runtimeReportSha256": "8f6152a0f157cffc36ffc5c2dfa7fda4319d4cb53753aafc5b77b0100dc92307"
+    }
+  ],
+  "checks": {
+    "replayedGames": 200,
+    "replayedActions": 12581,
+    "legal": true,
+    "outcomesRecomputed": true,
+    "providerIsolation": true,
+    "bookMissFallback": "nnue only",
+    "cppParityPositions": 1024
+  },
+  "publication": {
+    "normalization": "Model paths changed to repository-relative paths only; moves, outcomes, timings and source hashes are unchanged."
+  }
+}

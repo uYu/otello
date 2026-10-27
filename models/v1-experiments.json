@@ -1,0 +1,21 @@
+{
+  "version": "v1",
+  "millisecondsPerMove": 50,
+  "start": "standard initial position",
+  "experiments": [
+    {
+      "name": "实验一：纯搜索 vs 模型搜索",
+      "focus": "模型搜索",
+      "experiment": "heuristic",
+      "games": 100,
+      "report": "models/v1-search-vs-model.json"
+    },
+    {
+      "name": "实验二：模型搜索 vs 模型搜索＋开局库",
+      "focus": "模型搜索＋开局库",
+      "experiment": "book",
+      "games": 100,
+      "report": "models/v1-model-vs-book.json"
+    }
+  ]
+}

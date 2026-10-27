@@ -1,0 +1,5 @@
+* text=auto eol=lf
+*.otnnue binary
+*.pt binary
+*.tar.gz binary
+src/game/wasm/othello.mjs linguist-generated=true

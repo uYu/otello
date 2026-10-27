@@ -1,0 +1,29 @@
+{
+  "seed": 20261027,
+  "inputSha256": "6332fd01b27c11a81f3fbd344e52aaf8f70e60c644780fb453cc7ef64ae359ac",
+  "games": {
+    "logistello:test": 300,
+    "wthor:test": 300,
+    "wthor:validation": 300,
+    "logistello:validation": 300,
+    "logistello:train": 60775,
+    "wthor:train": 80561
+  },
+  "positions": {
+    "test": 6000,
+    "validation": 6000,
+    "train": 1000000
+  },
+  "filters": "complete games; placements 8..56, stride 3; 8-symmetry/color-relative position dedup; test/validation ownership before train",
+  "split": "native converter canonical first 8 moves; no move-wise split",
+  "target": "recorded final black disc difference / 64, from side-to-move view",
+  "maxGames": 6000,
+  "maxPositions": 60000,
+  "allTrainingGames": true,
+  "trainPositions": 1000000,
+  "frozenHoldout": {
+    "path": ".build/training/positions.npz",
+    "sha256": "ac3941a55613abc92944062b49c6b9c71883a93ce02973cf3dc8fc2be670ef4c"
+  },
+  "cacheSha256": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6"
+}
