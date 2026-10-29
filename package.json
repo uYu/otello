@@ -43,7 +43,12 @@
     "training:watch:v1.6": "python3 scripts/watch-matches.py --config models/v1.6-experiments.json",
     "training:baseline:nnue-search": "python3 scripts/compare-nnue-search.py",
     "training:watch:nnue-search": "python3 scripts/watch-matches.py --config models/v1.6-100ms-experiments.json",
-    "model:check": "python3 scripts/embed-default-model.py --check"
+    "model:check": "python3 scripts/embed-default-model.py --check",
+    "training:run:pattern": "python3 scripts/train-pattern.py",
+    "training:baseline:v1.8": "python3 scripts/compare-pattern.py",
+    "training:benchmark:pattern": "python3 scripts/benchmark-pattern.py",
+    "test:pattern": "python3 -m unittest discover -s tests -p pattern_training_test.py",
+    "test:baseline:v1.8": "python3 scripts/verify-pattern.py"
   },
   "dependencies": {
     "react": "^19.1.0",

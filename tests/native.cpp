@@ -1,6 +1,7 @@
 #include "../cpp/othello.hpp"
 #include "../cpp/api.h"
 #include "../cpp/nnue.hpp"
+#include "../cpp/pattern.hpp"
 #include "../cpp/cnn.hpp"
 #include "../cpp/resnet.hpp"
 #include "../cpp/mcts.hpp"
@@ -70,6 +71,45 @@ void checkSearch(const Position& p,int depth,const nnue::Network* net=nullptr){
     auto r=search(p,{0,depth,2,1,net});
     check(r.score==referenceValue(p,depth,net),"persistent TT preserves fixed-depth minimax");
     for(auto c:r.candidates)check(c.score==-referenceValue(play(p,c.move),depth-1,net),"persistent TT preserves every candidate score");
+}
+void patternChecks(){
+    auto weights=std::make_shared<nnue::Pattern>();weights->embedding.resize(nnue::Pattern::Rows*nnue::Pattern::Dim);
+    std::mt19937 rng(1832);
+    for(auto& x:weights->embedding)x=int(rng()%257)-128;
+    for(auto& x:weights->trunk)x=int(rng()%129)-64;
+    for(auto& x:weights->head)x=int(rng()%129)-64;
+    nnue::Network net;net.architecture=nnue::Architecture::Pattern;net.hidden=0;net.pattern=weights;
+    for(int game=0;game<8;++game){
+        Position p;auto acc=net.refresh(p);
+        while(!over(p)){
+            Bits moves=legal(p);int m=-1;
+            if(moves){int skip=rng()%count(moves);while(skip--)moves&=moves-1;m=first(moves);}
+            auto after=play(p,m);auto updated=net.update(acc,p,after),fresh=net.refresh(after);
+            check(updated.black==fresh.black&&updated.white==fresh.white,"pattern incremental sums match refresh after every flip/pass");
+            check(net.evaluate(updated,after.turn)==net.evaluate(after),"pattern incremental score matches refresh");
+            auto swapped=after;std::swap(swapped.black,swapped.white);swapped.turn=-after.turn;
+            check(net.evaluate(after)==net.evaluate(swapped),"pattern color-relative value invariance");
+            auto policy=weights->policy(after),other=weights->policy(swapped);
+            for(int i=0;i<64;++i)check(std::isfinite(policy[i])&&policy[i]==other[i],"pattern policy is finite and color-relative");
+            acc=updated;p=after;
+        }
+    }
+    Position p;clearSearchCache();checkSearch(p,2,&net);
+    clearMctsCache();auto firstRun=mcts(p,{0,128,1832,&net});
+    clearMctsCache();auto second=mcts(p,{0,128,1832,&net});
+    check(firstRun.visits==second.visits&&firstRun.analysis.move==second.analysis.move,"pattern policy MCTS reproducible");
+    auto warm=mcts(play(p,second.analysis.move),{0,128,1832,&net});
+    check(warm.reusedNodes>0&&flips(play(p,second.analysis.move),warm.analysis.move),"pattern policy priors survive subtree compaction");
+    auto uniform=mcts(p,{0,128,1832,&net,1.5,2097152,false});
+    check(uniform.reusedNodes==0&&flips(p,uniform.analysis.move),"pattern policy ablation invalidates MCTS tree");
+    auto copy=net.snapshot();weights->embedding[0]++;
+    check(!net.sameParameters(*copy),"pattern cache snapshot detects mutated embedding");
+    weights->head.fill(0);weights->headBias.fill(0);weights->headBias[36]=4*65536;
+    p=Position{};
+    while(!over(p)&&(!(legal(p)&corners)||!(legal(p)&~corners))){Bits moves=legal(p);p=play(p,moves?first(moves):-1);}
+    check(!over(p),"policy-prior fixture reaches a corner choice");
+    clearMctsCache();auto prioritized=mcts(p,{0,2,1832,&net});
+    check((Bits(1)<<prioritized.analysis.move)&corners,"learned policy actually prioritizes high-prior legal moves");
 }
 void mctsChecks(){
     Position p;clearMctsCache();
@@ -204,7 +244,7 @@ void cacheChecks(nnue::Network& model){
     ot_search_clear_cache();model=originalModel;
 }
 int main() {
-    cnnChecks();residualChecks();mctsChecks();
+    cnnChecks();residualChecks();mctsChecks();patternChecks();
     policyChecks();
     Position p;
     check(legal(p)==((1ULL<<19)|(1ULL<<26)|(1ULL<<37)|(1ULL<<44)),"initial legal squares");

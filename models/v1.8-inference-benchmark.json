@@ -1,0 +1,116 @@
+{
+  "positions": 64,
+  "rounds": 7,
+  "evaluationsPerRound": 4096,
+  "librarySha256": "56bfd54ebf80a1d4a271b96e416ed66a43361884248571133b7ba457dae4c551",
+  "scriptSha256": "7d6e7c98d4c5248864d27756febe8990ab29c3bfc060cd355c5614709a943f04",
+  "modelSha256": {
+    "nnue256-v1.2.otnnue": "8805ce125579869cdca99c9efe85aeaa9ec92a0b1d0cbd7ddcf438fad1d20159",
+    "pattern32-v1.8.otpat": "2af8ef6656de4763e27c318bd3469b4772d58452cce80e8486499ba60f1fbf63"
+  },
+  "limits": "Includes Python/C ABI overhead and full refresh. Search may use incremental evaluation. No concurrent training or matches during measurement.",
+  "results": [
+    {
+      "name": "NNUE value full refresh",
+      "medianMicroseconds": 1.650065185546875,
+      "samples": [
+        {
+          "microseconds": 1.75768017578125,
+          "checksum": 119232
+        },
+        {
+          "microseconds": 1.650065185546875,
+          "checksum": 119232
+        },
+        {
+          "microseconds": 1.63336181640625,
+          "checksum": 119232
+        },
+        {
+          "microseconds": 1.630818603515625,
+          "checksum": 119232
+        },
+        {
+          "microseconds": 1.635101318359375,
+          "checksum": 119232
+        },
+        {
+          "microseconds": 1.69000244140625,
+          "checksum": 119232
+        },
+        {
+          "microseconds": 1.812286376953125,
+          "checksum": 119232
+        }
+      ]
+    },
+    {
+      "name": "Pattern value full refresh",
+      "medianMicroseconds": 1.882466796875,
+      "samples": [
+        {
+          "microseconds": 1.985768798828125,
+          "checksum": 122304
+        },
+        {
+          "microseconds": 1.897552490234375,
+          "checksum": 122304
+        },
+        {
+          "microseconds": 1.880177978515625,
+          "checksum": 122304
+        },
+        {
+          "microseconds": 1.882466796875,
+          "checksum": 122304
+        },
+        {
+          "microseconds": 1.873087646484375,
+          "checksum": 122304
+        },
+        {
+          "microseconds": 2.088104248046875,
+          "checksum": 122304
+        },
+        {
+          "microseconds": 1.825531005859375,
+          "checksum": 122304
+        }
+      ]
+    },
+    {
+      "name": "Pattern value and policy",
+      "medianMicroseconds": 2.656901123046875,
+      "samples": [
+        {
+          "microseconds": 2.6944580078125,
+          "checksum": 122.2277531151165
+        },
+        {
+          "microseconds": 2.675313232421875,
+          "checksum": 122.2277531151165
+        },
+        {
+          "microseconds": 2.651173828125,
+          "checksum": 122.2277531151165
+        },
+        {
+          "microseconds": 2.613688232421875,
+          "checksum": 122.2277531151165
+        },
+        {
+          "microseconds": 2.656901123046875,
+          "checksum": 122.2277531151165
+        },
+        {
+          "microseconds": 2.612457275390625,
+          "checksum": 122.2277531151165
+        },
+        {
+          "microseconds": 2.8194580078125,
+          "checksum": 122.2277531151165
+        }
+      ]
+    }
+  ]
+}

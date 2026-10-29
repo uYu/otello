@@ -5,5 +5,5 @@ mkdir -p .build
 if [ "$(uname -s)" = Darwin ]; then
   set -- -isystem "$(xcrun --show-sdk-path)/usr/include/c++/v1"
 else set --; fi
-${CXX:-clang++} "$@" -std=c++17 -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer tests/native.cpp cpp/search.cpp cpp/move_policy.cpp cpp/nnue.cpp cpp/cnn.cpp cpp/resnet.cpp cpp/mcts.cpp cpp/default_engine.cpp cpp/api.cpp -o .build/test-native
+${CXX:-clang++} "$@" -std=c++17 -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer tests/native.cpp cpp/search.cpp cpp/move_policy.cpp cpp/nnue.cpp cpp/pattern.cpp cpp/cnn.cpp cpp/resnet.cpp cpp/mcts.cpp cpp/default_engine.cpp cpp/api.cpp -o .build/test-native
 .build/test-native

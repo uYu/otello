@@ -5,9 +5,10 @@
 
 namespace othello::nnue {
 constexpr int Features=128, Hidden=32, MaxHidden=256, Scale=256;
-enum class Architecture { Legacy=1, Turn=2, Cnn=3, Residual=4 };
+enum class Architecture { Legacy=1, Turn=2, Cnn=3, Residual=4, Pattern=5 };
 struct Cnn;
 struct ResNet;
+struct Pattern;
 struct Accumulator { std::array<std::int32_t,MaxHidden> black{},white{}; Bits blackBoard=0,whiteBoard=0; };
 // Othello-specific quantized network, not a Stockfish .nnue file.
 // Color perspectives share a feature transformer. V1 subtracts perspectives;
@@ -22,6 +23,7 @@ struct Network {
     std::int32_t outputBias=0; // v2 output bias, scaled by Scale * Scale
     std::shared_ptr<const Cnn> cnn;
     std::shared_ptr<const ResNet> residual;
+    std::shared_ptr<const Pattern> pattern;
     bool spatial() const{return architecture==Architecture::Cnn||architecture==Architecture::Residual;}
     bool sameParameters(const Network& other) const;
     std::unique_ptr<Network> snapshot() const;

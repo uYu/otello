@@ -13,6 +13,7 @@
 using namespace othello;
 namespace {
 const char* evaluator(const nnue::Network* network){
+    if(network&&network->architecture==nnue::Architecture::Pattern)return "othello-pattern32-v1.8";
     if(network&&network->architecture==nnue::Architecture::Residual)return "othello-resnet32-v1";
     if(network&&network->architecture==nnue::Architecture::Cnn)return "othello-cnn8x8-v1";
     return !network?"heuristic":network->architecture==nnue::Architecture::Turn?"othello-nnue-v2":"othello-nnue-v1";

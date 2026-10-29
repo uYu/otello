@@ -1,5 +1,6 @@
 #include "mcts.hpp"
 #include "nnue.hpp"
+#include "pattern.hpp"
 #include <cmath>
 #include <limits>
 #include <memory>
@@ -18,16 +19,19 @@ bool samePosition(const Position& a,const Position& b){return a.hash==b.hash&&a.
 struct Cache {
     std::vector<Node> tree;
     std::vector<Edge> edges;
+    std::vector<double> priors; // allocated only for the pattern-policy experiment
     std::unique_ptr<nnue::Network> evaluator;
-    void reset(const Position& p){tree.clear();edges.clear();Node n;n.position=p;tree.push_back(n);}
-    std::size_t prepare(const Position& p,const nnue::Network* network){
-        const bool same=network&&evaluator?network->sameParameters(*evaluator):!network&&!evaluator;
-        if(!same){tree.clear();edges.clear();evaluator=network?network->snapshot():nullptr;}
+    bool policy=false;
+    void reset(const Position& p){tree.clear();edges.clear();priors.clear();Node n;n.position=p;tree.push_back(n);}
+    std::size_t prepare(const Position& p,const nnue::Network* network,bool usePolicy){
+        const bool same=policy==usePolicy&&(network&&evaluator?network->sameParameters(*evaluator):!network&&!evaluator);
+        if(!same){tree.clear();edges.clear();priors.clear();evaluator=network?network->snapshot():nullptr;}
+        policy=usePolicy;
         if(!tree.empty()&&samePosition(tree[0].position,p))return tree.size();
         int root=-1;
         for(std::size_t i=0;i<tree.size();++i)if(samePosition(tree[i].position,p)){root=int(i);break;}
         if(root<0){reset(p);return 0;}
-        std::vector<Node> kept;std::vector<Edge> keptEdges;
+        std::vector<Node> kept;std::vector<Edge> keptEdges;std::vector<double> keptPriors;
         kept.reserve(tree.size());keptEdges.reserve(edges.size());kept.push_back(tree[root]);
         for(std::size_t i=0;i<kept.size();++i){
             int old=kept[i].firstChild,n=kept[i].children;
@@ -35,10 +39,11 @@ struct Cache {
                 for(int j=0;j<n;++j){Edge edge=edges[old+j];
                     if(edge.child>=0){int child=edge.child;edge.child=int(kept.size());kept.push_back(tree[child]);}
                     keptEdges.push_back(edge);
+                    if(policy)keptPriors.push_back(priors[old+j]);
                 }
             }
         }
-        tree.swap(kept);edges.swap(keptEdges);return tree.size();
+        tree.swap(kept);edges.swap(keptEdges);priors.swap(keptPriors);return tree.size();
     }
 };
 Cache& cache(){thread_local Cache instance;return instance;}
@@ -56,13 +61,14 @@ void solve(int index,Cache& shared){
     n.solved=true;n.value=best;
 }
 }
-void clearMctsCache(){auto& c=cache();c.tree.clear();c.edges.clear();c.evaluator.reset();}
+void clearMctsCache(){auto& c=cache();c.tree.clear();c.edges.clear();c.priors.clear();c.evaluator.reset();}
 MctsResult mcts(const Position& position,MctsOptions options){
     if(options.milliseconds<0||options.milliseconds>60000||(!options.milliseconds&&!options.simulations)
        ||!std::isfinite(options.exploration)||options.exploration<=0||options.maxNodes<65||options.maxNodes>2097152)
         throw std::invalid_argument("Invalid MCTS budget/exploration/node limit");
     const auto start=std::chrono::steady_clock::now();const auto deadline=start+std::chrono::milliseconds(options.milliseconds);
-    MctsResult result;auto& shared=cache();result.reusedNodes=shared.prepare(position,options.network);
+    const bool learnedPolicy=options.usePolicy&&options.network&&options.network->pattern;
+    MctsResult result;auto& shared=cache();result.reusedNodes=shared.prepare(position,options.network,learnedPolicy);
     auto& tree=shared.tree;auto& edges=shared.edges;
     if(tree.size()>options.maxNodes){shared.reset(position);result.reusedNodes=0;}
     auto& analysis=result.analysis;double totalDepth=0;
@@ -75,7 +81,12 @@ MctsResult mcts(const Position& position,MctsOptions options){
             for(int j=0;j<parent.children;++j){
                 int index=parent.firstChild+j;const Edge& edge=edges[index];
                 std::uint64_t visits=edge.child<0?0:tree[edge.child].visits;
-                double utility=visits?-mean(tree[edge.child])+prior/(1+visits):std::numeric_limits<double>::infinity();
+                double utility;
+                if(learnedPolicy){
+                    // A finite first-play value lets priors prioritize expansion.
+                    const double q=visits?-mean(tree[edge.child]):mean(parent)-0.15;
+                    utility=q+options.exploration*shared.priors[index]*std::sqrt(double(std::max<std::uint64_t>(1,parent.visits)))/(1+visits);
+                }else utility=visits?-mean(tree[edge.child])+prior/(1+visits):std::numeric_limits<double>::infinity();
                 if(chosen<0||utility>best||(utility==best&&tie(parent.position,edge.move,options.seed)>tie(parent.position,edges[chosen].move,options.seed))){best=utility;chosen=index;}
             }
             if(length>=int(path.size()))throw std::runtime_error("MCTS path exceeds game length");
@@ -93,10 +104,20 @@ MctsResult mcts(const Position& position,MctsOptions options){
             const Position p=tree[current].position;Bits moves=legal(p);bool terminal=!moves&&!legal(p.opponent(),p.own());
             if(terminal){value=double(count(p.own())-count(p.opponent()))/64;tree[current].solved=true;tree[current].value=value;}
             else{
+                std::array<int,nnue::Pattern::Outputs> patternOutput{};
+                if(learnedPolicy){const auto& model=*options.network->pattern;patternOutput=model.outputs(model.refresh(p),p.turn);}
                 tree[current].firstChild=int(edges.size());tree[current].children=moves?count(moves):1;
                 if(!moves)edges.push_back({-1,-1});
                 else while(moves){int move=first(moves);moves&=moves-1;edges.push_back({-1,move});}
-                value=std::clamp(double(options.network?options.network->evaluate(p):evaluate(p))/1000,-1.0,1.0);++analysis.evaluations;
+                if(learnedPolicy){
+                    shared.priors.resize(edges.size());
+                    auto logits=options.network->pattern->policy(p,patternOutput);int begin=tree[current].firstChild,n=tree[current].children;double maximum=-1e30,total=0;
+                    for(int j=0;j<n;++j)maximum=std::max(maximum,edges[begin+j].move<0?0:logits[edges[begin+j].move]);
+                    for(int j=0;j<n;++j){const auto& e=edges[begin+j];auto& prior=shared.priors[begin+j];prior=std::exp((e.move<0?0:logits[e.move])-maximum);total+=prior;}
+                    for(int j=0;j<n;++j)shared.priors[begin+j]/=total;
+                }
+                value=learnedPolicy?std::round(1000*std::tanh(double(patternOutput[0])/256))/1000:
+                    std::clamp(double(options.network?options.network->evaluate(p):evaluate(p))/1000,-1.0,1.0);++analysis.evaluations;
             }
         }
         for(int i=length-1;i>=0;--i){auto& n=tree[path[i]];n.total+=value;++n.visits;solve(path[i],shared);value=-value;}

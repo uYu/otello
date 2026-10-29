@@ -9,6 +9,7 @@ struct MctsOptions {
     const nnue::Network* network=nullptr;
     double exploration=1.5;
     std::size_t maxNodes=2097152;
+    bool usePolicy=true; // learned priors/FPU only for Pattern models; other models retain v1.6 behavior
 };
 struct MctsResult {
     SearchResult analysis;
@@ -18,8 +19,9 @@ struct MctsResult {
     double meanDepth=0;
     bool memoryLimited=false;
 };
-// Uniform-prior PUCT with a value-only evaluator. Values are expected disc
-// difference / 64, not win probabilities. No rollouts or alpha-beta fallback.
+// PUCT, uniform for value-only models or learned priors for Pattern models. Values are expected disc
+// difference / 64, not win probabilities. Pattern WDL is auxiliary and is not
+// used by search. No rollouts or alpha-beta fallback.
 MctsResult mcts(const Position& position,MctsOptions options={});
 void clearMctsCache();
 }

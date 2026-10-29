@@ -122,6 +122,8 @@ npm run training:watch:v1.2  # v1.2 对 v1.1 的 NNUE 对战进度
 npm run training:watch:v1.3  # 开局随机选步对原版 v1.1 的对战进度
 ```
 
+新增的 **补充棋形 NNUE 实验（本地标识 v1.8）**将边线、内部线与角部三值棋形映射为 32 维向量，结合局面阶段，同时学习子差、胜负和及落子策略。原生加载支持独立的 `OTPAT1` 文件，MCTS 可使用策略先验；现有默认模型保留。训练、推理一致性、速度及三组等时限对战见 [v1.8 实验报告](models/v1.8-comparison.md)。
+
 ## 公开 AI 接口调研
 
 已找到在线 REST 示例，以及可离线接入的 Edax、Egaroucid 和带 REST 的 MCTS 开源项目。优先考虑 **Egaroucid C ABI 或 Edax 原生进程**，更贴合离线调用需求；网页以后可通过本地 HTTP 桥接。来源、协议差异和验证边界见 [AI 接入调研](docs/AI_INTEGRATION.md)。

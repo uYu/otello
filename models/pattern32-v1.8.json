@@ -1,0 +1,281 @@
+{
+  "version": "v1.8-pattern-experiment",
+  "architecture": "38 ternary line/corner lookups -> 32D embeddings; edge/interior/corner mean pools + empty/60 -> 97->32 clipped ReLU -> disc/WDL/global-conditioned per-square policy",
+  "formatMagic": "OTPAT1",
+  "features": 38,
+  "embeddingRows": 55728,
+  "embeddingDimension": 32,
+  "parameters": 1787950,
+  "bytes": 3576088,
+  "sha256": "2af8ef6656de4763e27c318bd3469b4772d58452cce80e8486499ba60f1fbf63",
+  "precision": "int16 weights and embeddings, int32 biases/accumulators, scale 256, straight-through quantization training",
+  "seed": 20261029,
+  "epochs": 15,
+  "trainPositions": 1000000,
+  "batchSize": 2048,
+  "threads": 2,
+  "learningRate": 0.001,
+  "weightDecay": 0.0001,
+  "loss": "disc MSE + 0.1 WDL CE + 0.1 legal-masked policy CE",
+  "checkpointSelection": "minimum frozen validation disc MSE",
+  "bestEpoch": 13,
+  "torchVersion": "2.10.0",
+  "numpyVersion": "1.26.4",
+  "device": "cpu",
+  "seconds": 291.37502516712993,
+  "dataset": {
+    "seed": 20261027,
+    "inputSha256": "6332fd01b27c11a81f3fbd344e52aaf8f70e60c644780fb453cc7ef64ae359ac",
+    "games": {
+      "logistello:test": 300,
+      "wthor:test": 300,
+      "wthor:validation": 300,
+      "logistello:validation": 300,
+      "logistello:train": 60775,
+      "wthor:train": 80561
+    },
+    "positions": {
+      "test": 6000,
+      "validation": 6000,
+      "train": 1000000
+    },
+    "filters": "complete games; placements 8..56, stride 3; 8-symmetry/color-relative position dedup; test/validation ownership before train",
+    "split": "native converter canonical first 8 moves; no move-wise split",
+    "target": "recorded final black disc difference / 64, from side-to-move view",
+    "maxGames": 6000,
+    "maxPositions": 60000,
+    "allTrainingGames": true,
+    "trainPositions": 1000000,
+    "frozenHoldout": {
+      "path": ".build/training/positions.npz",
+      "sha256": "ac3941a55613abc92944062b49c6b9c71883a93ce02973cf3dc8fc2be670ef4c"
+    },
+    "cacheSha256": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6"
+  },
+  "policyDataset": {
+    "cacheSha256": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6",
+    "gamesSha256": "6332fd01b27c11a81f3fbd344e52aaf8f70e60c644780fb453cc7ef64ae359ac",
+    "policySha256": "d5712464ea92f34019de2ca9427d95cfa9aa985ff9d854801c9eb7362a7b587a",
+    "labels": {
+      "train": 1000000,
+      "validation": 6000,
+      "test": 6000
+    },
+    "seconds": 41.55052012484521,
+    "rule": "First matching next placement with identical relative board, final result and original game split. No relabeling of frozen disc targets."
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "seconds": 16.764582625124604,
+      "loss": 0.3395605655901271,
+      "mse": 0.05554558336734772,
+      "maeDiscs": 11.054577827453613,
+      "wdlAccuracy": 0.5543333333333333,
+      "wdlCrossEntropy": 0.9227243065834045,
+      "policyTop1": 0.37216666666666665,
+      "policyCrossEntropy": 1.6910648345947266,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    {
+      "epoch": 2,
+      "seconds": 33.18919637519866,
+      "loss": 0.30474209876879593,
+      "mse": 0.055003225803375244,
+      "maeDiscs": 10.943431854248047,
+      "wdlAccuracy": 0.562,
+      "wdlCrossEntropy": 0.9211191534996033,
+      "policyTop1": 0.39316666666666666,
+      "policyCrossEntropy": 1.639247179031372,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    {
+      "epoch": 3,
+      "seconds": 54.08234062511474,
+      "loss": 0.29996645115392095,
+      "mse": 0.054804615676403046,
+      "maeDiscs": 10.884562492370605,
+      "wdlAccuracy": 0.5603333333333333,
+      "wdlCrossEntropy": 0.918838381767273,
+      "policyTop1": 0.4028333333333333,
+      "policyCrossEntropy": 1.6164581775665283,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    {
+      "epoch": 4,
+      "seconds": 77.44221908319741,
+      "loss": 0.2971481229264312,
+      "mse": 0.05435952916741371,
+      "maeDiscs": 10.827177047729492,
+      "wdlAccuracy": 0.5613333333333334,
+      "wdlCrossEntropy": 0.915540874004364,
+      "policyTop1": 0.4091666666666667,
+      "policyCrossEntropy": 1.6014461517333984,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    {
+      "epoch": 5,
+      "seconds": 94.97973100002855,
+      "loss": 0.29519969426049775,
+      "mse": 0.05387087166309357,
+      "maeDiscs": 10.707887649536133,
+      "wdlAccuracy": 0.5655,
+      "wdlCrossEntropy": 0.9114696979522705,
+      "policyTop1": 0.4151666666666667,
+      "policyCrossEntropy": 1.5904247760772705,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    {
+      "epoch": 6,
+      "seconds": 112.1177252503112,
+      "loss": 0.29371555640166036,
+      "mse": 0.05342264845967293,
+      "maeDiscs": 10.673995971679688,
+      "wdlAccuracy": 0.5625,
+      "wdlCrossEntropy": 0.9110749363899231,
+      "policyTop1": 0.41733333333333333,
+      "policyCrossEntropy": 1.5830981731414795,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    {
+      "epoch": 7,
+      "seconds": 133.70075950026512,
+      "loss": 0.2923219764647065,
+      "mse": 0.053225789219141006,
+      "maeDiscs": 10.609441757202148,
+      "wdlAccuracy": 0.5616666666666666,
+      "wdlCrossEntropy": 0.9058263301849365,
+      "policyTop1": 0.42133333333333334,
+      "policyCrossEntropy": 1.57472562789917,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    {
+      "epoch": 8,
+      "seconds": 152.62718279194087,
+      "loss": 0.29111586721396887,
+      "mse": 0.052974313497543335,
+      "maeDiscs": 10.600146293640137,
+      "wdlAccuracy": 0.567,
+      "wdlCrossEntropy": 0.9049913883209229,
+      "policyTop1": 0.4186666666666667,
+      "policyCrossEntropy": 1.5704898834228516,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    {
+      "epoch": 9,
+      "seconds": 173.0008492921479,
+      "loss": 0.2899124915492559,
+      "mse": 0.053011707961559296,
+      "maeDiscs": 10.586536407470703,
+      "wdlAccuracy": 0.5648333333333333,
+      "wdlCrossEntropy": 0.9058343172073364,
+      "policyTop1": 0.419,
+      "policyCrossEntropy": 1.564409852027893,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    {
+      "epoch": 10,
+      "seconds": 194.72352320794016,
+      "loss": 0.2888446423417464,
+      "mse": 0.05331597849726677,
+      "maeDiscs": 10.630670547485352,
+      "wdlAccuracy": 0.5685,
+      "wdlCrossEntropy": 0.9055634140968323,
+      "policyTop1": 0.4236666666666667,
+      "policyCrossEntropy": 1.5589544773101807,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    {
+      "epoch": 11,
+      "seconds": 215.24090945813805,
+      "loss": 0.287801583668937,
+      "mse": 0.05271066352725029,
+      "maeDiscs": 10.541574478149414,
+      "wdlAccuracy": 0.5666666666666667,
+      "wdlCrossEntropy": 0.9032509922981262,
+      "policyTop1": 0.42333333333333334,
+      "policyCrossEntropy": 1.5534895658493042,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    {
+      "epoch": 12,
+      "seconds": 234.01949812518433,
+      "loss": 0.2867860923271725,
+      "mse": 0.05217646434903145,
+      "maeDiscs": 10.485115051269531,
+      "wdlAccuracy": 0.5648333333333333,
+      "wdlCrossEntropy": 0.8989408612251282,
+      "policyTop1": 0.4256666666666667,
+      "policyCrossEntropy": 1.548823595046997,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    {
+      "epoch": 13,
+      "seconds": 252.49125379230827,
+      "loss": 0.28587550290523134,
+      "mse": 0.05193749815225601,
+      "maeDiscs": 10.450701713562012,
+      "wdlAccuracy": 0.5656666666666667,
+      "wdlCrossEntropy": 0.8964185118675232,
+      "policyTop1": 0.42983333333333335,
+      "policyCrossEntropy": 1.5440062284469604,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    {
+      "epoch": 14,
+      "seconds": 272.3697205418721,
+      "loss": 0.28503176301778704,
+      "mse": 0.05200256407260895,
+      "maeDiscs": 10.428045272827148,
+      "wdlAccuracy": 0.5635,
+      "wdlCrossEntropy": 0.8985608816146851,
+      "policyTop1": 0.43016666666666664,
+      "policyCrossEntropy": 1.541008472442627,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    {
+      "epoch": 15,
+      "seconds": 291.3215460833162,
+      "loss": 0.28415904186498414,
+      "mse": 0.05264750495553017,
+      "maeDiscs": 10.535765647888184,
+      "wdlAccuracy": 0.5685,
+      "wdlCrossEntropy": 0.897092342376709,
+      "policyTop1": 0.43033333333333335,
+      "policyCrossEntropy": 1.5381288528442383,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    }
+  ],
+  "metrics": {
+    "validation": {
+      "mse": 0.05193749815225601,
+      "maeDiscs": 10.450701713562012,
+      "wdlAccuracy": 0.5656666666666667,
+      "wdlCrossEntropy": 0.8964185118675232,
+      "policyTop1": 0.42983333333333335,
+      "policyCrossEntropy": 1.5440062284469604,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    "test": {
+      "mse": 0.047767430543899536,
+      "maeDiscs": 9.827352523803711,
+      "wdlAccuracy": 0.5878333333333333,
+      "wdlCrossEntropy": 0.8917145729064941,
+      "policyTop1": 0.4251666666666667,
+      "policyCrossEntropy": 1.5600016117095947,
+      "uniformPolicyCrossEntropy": 2.1044416287103247
+    }
+  },
+  "scriptSha256": {
+    "train-pattern.py": "f85ddaed63329214222f672f81778f50dbd072f3e7b68ef467835705b948bdd3",
+    "pattern_model.py": "34719dc9c15c45e8d418c81857b98e792fc3fbb2e5364db27430fbc7b3af9063"
+  },
+  "sourceAttribution": "WTHOR/Logistello; original attribution and usage constraints remain in data/README.md and manifests. Independently implemented Othello architecture inspired by Rapfi.",
+  "cppParity": {
+    "positions": 6000,
+    "maxDiscError": 2.9672224455268292e-08,
+    "maxWdlError": 1.326180671945565e-07,
+    "maxPolicyLogitError": 6.226538431519657e-07,
+    "maxScoreRoundingError": 0.49725341796875
+  }
+}

@@ -22,6 +22,9 @@ typedef struct ot_nnue ot_nnue;
 ot_nnue* ot_nnue_load(const char* path); // null on error
 void ot_nnue_destroy(ot_nnue* model);
 int ot_nnue_evaluate(const ot_nnue* model, const int* cells, int turn, int* score);
+// Pattern experiment diagnostics: output[68] = normalized disc estimate,
+// win/loss/draw probabilities, then 64 raw policy logits (illegal moves unmasked).
+int ot_pattern_predict(const ot_nnue* model,const int* cells,int turn,double* output);
 int ot_nnue_search(const ot_nnue* model, const int* cells, int turn, int milliseconds,
                    int max_depth, int level, unsigned seed, int* output);
 // NNUE gameplay with a decaying opening policy. Analysis API above remains best-move search.
@@ -32,7 +35,8 @@ int ot_nnue_play(const ot_nnue* model, const int* cells, int turn, int milliseco
                  int max_depth, int level, unsigned seed, int opening_plies,
                  int temperature, int max_loss, int* output, int* policy_output);
 const char* ot_nnue_error(void); // per-thread message, valid until the next NNUE call
-// Value-only uniform-prior PUCT. Same output[136] layout; depth is maximum
+// PUCT with uniform priors for value-only models and learned priors for Pattern.
+// Same output[136] layout; depth is maximum
 // visited path length, not a completed alpha-beta horizon. visits[64] align
 // with output candidates. stats[72]: first 8 are new simulations, evaluations, mean depth
 // *1000, retained nodes, tree nodes, elapsed ms, exact, memory limit hit;
@@ -42,6 +46,11 @@ int ot_nnue_mcts_play(const ot_nnue* model, const int* cells, int turn,
                      int opening_plies, int temperature, int max_loss,
                      int* output, int* policy_output, int* visits, double* stats);
 void ot_mcts_clear_cache(void);
+// Same as ot_nnue_mcts_play, with explicit learned-policy ablation (0/1).
+int ot_nnue_mcts_play_ex(const ot_nnue* model,const int* cells,int turn,
+                        int milliseconds,unsigned simulations,unsigned seed,
+                        int opening_plies,int temperature,int max_loss,int use_policy,
+                        int* output,int* policy_output,int* visits,double* stats);
 // Offline default: embedded v1.3 NNUE + MCTS + the v1.3 opening policy.
 // Same output[136] layout; depth is maximum visited path, output[135]=0.
 int ot_default_search(const int* cells,int turn,int milliseconds,unsigned seed,int* output);
