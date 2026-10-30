@@ -1,0 +1,10 @@
+{
+  "archive": "models/archive/v1.37-candidate-era-verification.tar.gz",
+  "sha256": "df955bf6b33ea4057f90acd99d7912827065bc9d6c3cb5dfb5f861f65c037085",
+  "files": {
+    "models/default-model.json": "889482dc3ae9acd42d4be9d14085c286f4f226a7aeac3d692476be5953eac719",
+    "src/game/wasm/othello.mjs": "9a266e596d71da87a025eaac6479445ec119cc47cc675222b7c4bbc9583997c2",
+    "scripts/finalize-pattern-structure.py": "21e834b23e0dc583805da86c1628cf48d7e0cc654a74b85a8fcc3597c571f730"
+  },
+  "sourceArchiveManifest": "models/archive/v1.37-pattern-structure-sources.json"
+}

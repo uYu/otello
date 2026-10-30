@@ -1,0 +1,232 @@
+{
+  "version": "v1.42-pattern-wthor",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "name": "symmetry-wthor",
+  "model": "models/pattern32-symmetry-wthor-v1.42.otpat",
+  "modelSha256": "16fcbd0fd6e1b807b84269a717a1227e7c80d2f81313377d9048573d10831d45",
+  "formatMagic": "OTPAT4",
+  "parameters": 916750,
+  "bytes": 1833692,
+  "initialEmbeddingSha256": "a2e1c59ae16ac86d1f290ee01ff03a2b46c9141c55ffda1cf48db382377d4e76",
+  "dataOrderAndAugmentationSha256": "530e464fe19433e8101179148e9d5d415e750982cc430adc9a14a67810887fae",
+  "history": [
+    {
+      "epoch": 1,
+      "loss": 0.9083666900986607,
+      "mse": 0.7376675009727478,
+      "outcomeMae": 0.7342787981033325,
+      "nonDrawSignAccuracy": 0.6519400691509797,
+      "wdlAccuracy": 0.5676666666666667,
+      "wdlCrossEntropy": 0.9465610980987549,
+      "policyTop1": 0.3268333333333333,
+      "policyCrossEntropy": 1.8070546388626099,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    {
+      "epoch": 2,
+      "loss": 0.8336009332277242,
+      "mse": 0.7359861135482788,
+      "outcomeMae": 0.7312063574790955,
+      "nonDrawSignAccuracy": 0.6494429504417979,
+      "wdlAccuracy": 0.5636666666666666,
+      "wdlCrossEntropy": 0.9410144686698914,
+      "policyTop1": 0.35383333333333333,
+      "policyCrossEntropy": 1.7335573434829712,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    {
+      "epoch": 3,
+      "loss": 0.8239045894261703,
+      "mse": 0.7362809181213379,
+      "outcomeMae": 0.7301434874534607,
+      "nonDrawSignAccuracy": 0.6473300038417211,
+      "wdlAccuracy": 0.563,
+      "wdlCrossEntropy": 0.9393510818481445,
+      "policyTop1": 0.37383333333333335,
+      "policyCrossEntropy": 1.69588041305542,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    {
+      "epoch": 4,
+      "loss": 0.8187257536406656,
+      "mse": 0.7338505983352661,
+      "outcomeMae": 0.727178156375885,
+      "nonDrawSignAccuracy": 0.6496350364963503,
+      "wdlAccuracy": 0.5651666666666667,
+      "wdlCrossEntropy": 0.9416741728782654,
+      "policyTop1": 0.38266666666666665,
+      "policyCrossEntropy": 1.6723823547363281,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    {
+      "epoch": 5,
+      "loss": 0.8156065823962387,
+      "mse": 0.7351445555686951,
+      "outcomeMae": 0.727750301361084,
+      "nonDrawSignAccuracy": 0.6502112946600077,
+      "wdlAccuracy": 0.5638333333333333,
+      "wdlCrossEntropy": 0.9344613552093506,
+      "policyTop1": 0.3875,
+      "policyCrossEntropy": 1.6565276384353638,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    {
+      "epoch": 6,
+      "loss": 0.8128263284859149,
+      "mse": 0.7358500957489014,
+      "outcomeMae": 0.7265742421150208,
+      "nonDrawSignAccuracy": 0.6532846715328468,
+      "wdlAccuracy": 0.568,
+      "wdlCrossEntropy": 0.9374668002128601,
+      "policyTop1": 0.39466666666666667,
+      "policyCrossEntropy": 1.643182396888733,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    {
+      "epoch": 7,
+      "loss": 0.8103774979276565,
+      "mse": 0.7341710329055786,
+      "outcomeMae": 0.7260152697563171,
+      "nonDrawSignAccuracy": 0.6532846715328468,
+      "wdlAccuracy": 0.5693333333333334,
+      "wdlCrossEntropy": 0.9345346689224243,
+      "policyTop1": 0.3998333333333333,
+      "policyCrossEntropy": 1.6327515840530396,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    {
+      "epoch": 8,
+      "loss": 0.807933166073364,
+      "mse": 0.7352931499481201,
+      "outcomeMae": 0.7258937358856201,
+      "nonDrawSignAccuracy": 0.6519400691509797,
+      "wdlAccuracy": 0.5671666666666667,
+      "wdlCrossEntropy": 0.9389091730117798,
+      "policyTop1": 0.402,
+      "policyCrossEntropy": 1.6230026483535767,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    {
+      "epoch": 9,
+      "loss": 0.8054332958841787,
+      "mse": 0.7346796989440918,
+      "outcomeMae": 0.7251337170600891,
+      "nonDrawSignAccuracy": 0.6550134460238187,
+      "wdlAccuracy": 0.5703333333333334,
+      "wdlCrossEntropy": 0.9336375594139099,
+      "policyTop1": 0.4065,
+      "policyCrossEntropy": 1.6158740520477295,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    {
+      "epoch": 10,
+      "loss": 0.803031802061692,
+      "mse": 0.7350997924804688,
+      "outcomeMae": 0.724844217300415,
+      "nonDrawSignAccuracy": 0.6519400691509797,
+      "wdlAccuracy": 0.5686666666666667,
+      "wdlCrossEntropy": 0.9358783960342407,
+      "policyTop1": 0.408,
+      "policyCrossEntropy": 1.6094218492507935,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    {
+      "epoch": 11,
+      "loss": 0.800488789799144,
+      "mse": 0.7334830164909363,
+      "outcomeMae": 0.7238038182258606,
+      "nonDrawSignAccuracy": 0.6527084133691894,
+      "wdlAccuracy": 0.5681666666666667,
+      "wdlCrossEntropy": 0.9342345595359802,
+      "policyTop1": 0.41133333333333333,
+      "policyCrossEntropy": 1.6045315265655518,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    {
+      "epoch": 12,
+      "loss": 0.7982268142468721,
+      "mse": 0.7327476143836975,
+      "outcomeMae": 0.7221604585647583,
+      "nonDrawSignAccuracy": 0.6525163273146369,
+      "wdlAccuracy": 0.5685,
+      "wdlCrossEntropy": 0.9326450228691101,
+      "policyTop1": 0.41283333333333333,
+      "policyCrossEntropy": 1.5991371870040894,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    {
+      "epoch": 13,
+      "loss": 0.7962312104632554,
+      "mse": 0.7331243753433228,
+      "outcomeMae": 0.7246575355529785,
+      "nonDrawSignAccuracy": 0.6515558970418748,
+      "wdlAccuracy": 0.5671666666666667,
+      "wdlCrossEntropy": 0.9342212080955505,
+      "policyTop1": 0.41183333333333333,
+      "policyCrossEntropy": 1.5949091911315918,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    {
+      "epoch": 14,
+      "loss": 0.7944465188146795,
+      "mse": 0.7343971133232117,
+      "outcomeMae": 0.7232860326766968,
+      "nonDrawSignAccuracy": 0.6519400691509797,
+      "wdlAccuracy": 0.5655,
+      "wdlCrossEntropy": 0.934420108795166,
+      "policyTop1": 0.41333333333333333,
+      "policyCrossEntropy": 1.5905029773712158,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    {
+      "epoch": 15,
+      "loss": 0.7925724454296446,
+      "mse": 0.7333571910858154,
+      "outcomeMae": 0.7214723229408264,
+      "nonDrawSignAccuracy": 0.6548213599692663,
+      "wdlAccuracy": 0.5691666666666667,
+      "wdlCrossEntropy": 0.9356074929237366,
+      "policyTop1": 0.4131666666666667,
+      "policyCrossEntropy": 1.5864284038543701,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    }
+  ],
+  "bestEpoch": 12,
+  "metrics": {
+    "validation": {
+      "mse": 0.7327476143836975,
+      "outcomeMae": 0.7221604585647583,
+      "nonDrawSignAccuracy": 0.6525163273146369,
+      "wdlAccuracy": 0.5685,
+      "wdlCrossEntropy": 0.9326450228691101,
+      "policyTop1": 0.41283333333333333,
+      "policyCrossEntropy": 1.5991371870040894,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    "test": {
+      "mse": 0.7000425457954407,
+      "outcomeMae": 0.7084800601005554,
+      "nonDrawSignAccuracy": 0.673728813559322,
+      "wdlAccuracy": 0.5841666666666666,
+      "wdlCrossEntropy": 0.9265615344047546,
+      "policyTop1": 0.4058333333333333,
+      "policyCrossEntropy": 1.6177997589111328,
+      "uniformPolicyCrossEntropy": 2.1044416287103247
+    }
+  },
+  "validationParity": {
+    "positions": 6000,
+    "maxWdlError": 1.3289762634816071e-07,
+    "maxPolicyLogitError": 5.334502048981449e-07,
+    "maxScoreRoundingError": 0.49896240234375,
+    "maxOutcomeError": 2.9840748871912126e-08
+  },
+  "testParity": {
+    "positions": 6000,
+    "maxWdlError": 1.2373529656439786e-07,
+    "maxPolicyLogitError": 5.263501616781241e-07,
+    "maxScoreRoundingError": 0.49896240234375,
+    "maxOutcomeError": 2.9840748871912126e-08
+  }
+}

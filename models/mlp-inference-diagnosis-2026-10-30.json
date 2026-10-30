@@ -1,0 +1,140 @@
+{
+  "date": "2026-10-30",
+  "complete": true,
+  "defaultPromoted": false,
+  "conclusion": "推理效率确实是成本瓶颈，宽 MLP 尤其明显；现有证据不足以证明它是实战未提升的唯一或主要原因。优先优化小策略头，再做等模拟数/等时间的配对棋力对照。",
+  "facts": [
+    "MLP8 的 200ms/20 局是 9胜10平1负；2s/20 局是4胜11平5负。不能把两个预算合并，后者还与宽度训练并行。MLP16/32 尚无棋力对战。",
+    "冻结 v1.39 同局面记录显示：100ms 新叶评估吞吐分别只剩基线的82.4%、74.4%、62.3%；2s分别为86.4%、77.3%、68.4%。模拟次数包含重复遍历，不能当成新叶覆盖量。",
+    "基线先对38个棋形投影，再分摊到落点；MLP为每个合法落点累加/归一化32维特征，再执行共享74→H→1。参数数量接近不等于执行工作量接近。",
+    "新中局分段计时中，逐落点归一化与MLP约占MLP8/16/32推理的32%/45%/59%，局部特征累加另外约占21%/17%/12%。固定全局项仅约占3%。分段时钟本身有开销。",
+    "小型无损四行SIMD原型在固定131072次模拟对照中测得约2.0%/4.5%/8.0%加速。基线控制组波动约0.4%；小幅结果应复测。整数归一化与舍入原型未测得稳定搜索收益，组合原型也未改善。",
+    "测试集上MLP8走法命中率41.03%→44.08%，胜负MSE仅0.690203→0.685687，非和棋符号准确率均为68.05%。MLP32策略命中率45.40%，但MSE为0.687189，符号准确率67.47%。增宽并未同步增强价值判断。",
+    "测试集平均合法策略熵从基线1.644下降为MLP8/16/32的1.484/1.441/1.421。更集中已测得，但是否造成搜索不足仍是待检验假设，不能由熵直接判定。"
+  ],
+  "recommendations": [
+    "优先MLP8和精确SIMD工程优化；保留INT16权重、舍入语义和现有默认；不优先继续扩大策略隐藏宽度。",
+    "下一轮棋力验证分开进行等模拟次数和等墙钟预算对照，采用固定开局、成对换色、独立CPU时间、同一搜索设置和实时监控。等模拟次数用于观察质量收益能否出现；等时间用于观察净实战收益。跨模型即使等模拟数也会改变新叶数量与路径，必须同时报告评估数。",
+    "若等模拟数有收益、等时间没有，则效率解释获得更强支持；若两者均无收益，再研究棋谱模仿目标、价值头和先验温度/PUCT探索参数，逐项消融。",
+    "不把吞吐提升等同棋力提升。本轮没有重训、没有新棋力比赛，也没有提升默认。"
+  ],
+  "measurements": [
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "historical100msEvaluationRatio": 1.0,
+      "historical2sEvaluationRatio": 1.0,
+      "exploratoryMidgameLegalNanoseconds": 535.419464111,
+      "exploratoryPerSquarePolicyTimeShare": null,
+      "dot4FixedWorkSpeedup": 1.0043245049565475,
+      "combinedFixedWorkSpeedup": 0.9742708075319266
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "historical100msEvaluationRatio": 0.8241522660135543,
+      "historical2sEvaluationRatio": 0.8635534785472045,
+      "exploratoryMidgameLegalNanoseconds": 967.433929443,
+      "exploratoryPerSquarePolicyTimeShare": 0.3228739900442583,
+      "dot4FixedWorkSpeedup": 1.019992923617539,
+      "combinedFixedWorkSpeedup": 0.9678968256742667
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "historical100msEvaluationRatio": 0.7440882151729903,
+      "historical2sEvaluationRatio": 0.7735351414167289,
+      "exploratoryMidgameLegalNanoseconds": 1616.76153564,
+      "exploratoryPerSquarePolicyTimeShare": 0.45366427338125015,
+      "dot4FixedWorkSpeedup": 1.045456999047882,
+      "combinedFixedWorkSpeedup": 0.9450985815878042
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "historical100msEvaluationRatio": 0.6226885096980922,
+      "historical2sEvaluationRatio": 0.6835210364769053,
+      "exploratoryMidgameLegalNanoseconds": 1859.16137695,
+      "exploratoryPerSquarePolicyTimeShare": 0.5929738698282521,
+      "dot4FixedWorkSpeedup": 1.079972644249246,
+      "combinedFixedWorkSpeedup": 0.9546432524765419
+    }
+  ],
+  "verification": {
+    "outputParity": [
+      {
+        "model": "pattern32-symmetry-v1.37",
+        "positions": 12000,
+        "all68OutputSha256": "37013a2a5a82f723c8df8b0ffe1886370f4842bda90ba5f506a43fbdb0806f5c",
+        "exact": true,
+        "fixedSimulationRoots": 16,
+        "simulations": 2048
+      },
+      {
+        "model": "pattern32-direct-mlp8-v1.38",
+        "positions": 12000,
+        "all68OutputSha256": "5ca9078f4e05c2d5e74f8e28baab03894a546c380c907bf57a8a9e6522144c80",
+        "exact": true,
+        "fixedSimulationRoots": 16,
+        "simulations": 2048
+      },
+      {
+        "model": "pattern32-direct-mlp16-v1.39",
+        "positions": 12000,
+        "all68OutputSha256": "91febbae368fe30dd4a0d469ac7d7a1b0b13a843f29f01a260dfa7154a3b5043",
+        "exact": true,
+        "fixedSimulationRoots": 16,
+        "simulations": 2048
+      },
+      {
+        "model": "pattern32-direct-mlp32-v1.39",
+        "positions": 12000,
+        "all68OutputSha256": "b85e5434e4078e56ec4e05bfa072f0094ab80636eb6a5c8f3d802a084b12a0f3",
+        "exact": true,
+        "fixedSimulationRoots": 16,
+        "simulations": 2048
+      }
+    ],
+    "localRoundingCheck": {
+      "numeratorBounds": [
+        -196608,
+        196608
+      ],
+      "divisors": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "exact": true
+    },
+    "fixedWorkPairsEachKernel": 96,
+    "simulationsPerSearch": 131072,
+    "allFixedWorkResultsExactlyEqual": true,
+    "preservedSha256": {
+      "models/default-model.json": "6582f442dc890e847a393cbd31fb54a63f00d8dca62cede1315187137a9c2de4",
+      "models/v1.37-default.json": "27ce5cd4be6cf824b629c5c08151a766b748608c96c9970e58ed8d4c2ca1d0f5",
+      "src/game/wasm/othello.mjs": "825ef6e4e84e7e60ce0cb262a2a5cb0d25c2a3bb2e6663750688492a79942303",
+      "models/pattern32-symmetry-v1.37.otpat": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+      "models/pattern32-direct-mlp8-v1.38.otpat": "3ab3da122a74c2214da52692947733f7e38b6ed0a171cb7828cee9e968ff0adc",
+      "models/pattern32-direct-mlp16-v1.39.otpat": "cb668713251dd94b72e3574ee62ce6d723c6cc2a3806aef17e36f9b5b4868fc5",
+      "models/pattern32-direct-mlp32-v1.39.otpat": "c22e16e530a1ec803b9385af297913292eb4adc1eb03b10ba3ab2eb8f6c7ca3e"
+    }
+  },
+  "evidence": {
+    "models/mlp-inference-study-2026-10-30.json": "eedbab2e2a83d8c4e4b890042225ca336dd5af142a993b033e37a8adbe75f0f2",
+    "models/mlp-search-cost-2026-10-30.json": "1203d5efbd81c7b7084dfdc2166c67ffacebc8c78fac7dc03362ded5909ae9f8",
+    "models/mlp-dot4-search-cost-2026-10-30.json": "b0b528915fd437acdfa97bec7f8f4c89f3efa28bfcafc71b12c4b85f468b327e"
+  },
+  "sourceArchiveManifest": "models/archive/mlp-inference-study-2026-10-30-sources.json",
+  "sourceArchiveManifestSha256": "4f6e61a21aa4a836a211072eaa60ddb0a635752d0267fa0d9266f6699c0e7890",
+  "caveats": [
+    "新计时与阶段价值头实验共用主机，不是独占CPU的发布基准；原始样本及现有冻结吞吐报告均保留。",
+    "完整64格的Python/C ABI延迟不等同合法着搜索延迟；新原生计时排除了Python/C ABI。",
+    "dot4原始补充报告的summary.combinedSeconds沿用了首轮字段名，实际是dot4耗时；以candidateVariant和逐次variant字段为准。",
+    "工作区其他任务在采样期间修改了正式源码，研究使用同一份事先捕获的源码快照，原型没有回写正式cpp文件。"
+  ],
+  "reproducedBy": [
+    "python3 scripts/investigate-mlp-inference.py",
+    "python3 scripts/analyze-mlp-search-cost.py",
+    "dot4补充运行器完整源码嵌入其JSON的scriptSource字段，并收录在源码归档research/analyze-dot4.py；其导入路径需指向本地investigate-mlp-inference.py。"
+  ],
+  "monitor": "sh scripts/watch-match.sh"
+}

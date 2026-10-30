@@ -1,0 +1,207 @@
+{
+  "complete": true,
+  "version": "v1.40-training-consensus-elo",
+  "status": "data-candidate",
+  "modelTrained": false,
+  "defaultPromoted": false,
+  "seconds": 33.09409683384001,
+  "elo": {
+    "initial": 1500.0,
+    "k": 32.0,
+    "scale": 400.0,
+    "knownNamesInitialized": 4447,
+    "observedKnownPlayers": 4222,
+    "ratedCompleteGames": 136100,
+    "unratedOrIncompleteGames": 1407,
+    "trainOnlyRatedGames": 79955,
+    "fullCorpusRatingQuantiles": {
+      "minimum": 1041.6005439528503,
+      "p25": 1457.1470246557828,
+      "median": 1485.4678861856473,
+      "p75": 1517.7607064137337,
+      "maximum": 2201.558771897365
+    },
+    "provisionalObservedPlayers": 2901,
+    "components": [
+      4196,
+      3,
+      3,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ],
+    "withinYearReverseOrderRmsFor20PlusGames": 30.390893262367012,
+    "preGameOutcomeSquaredError": 0.18558231816298343,
+    "neutralPredictionSquaredError": 0.23595701689933873,
+    "top100Games": [
+      {
+        "playerIndex": 1200,
+        "name": "Hannibal (piotte/g)",
+        "fullCorpusElo": 2201.558771897365,
+        "fullCorpusRatedGames": 392,
+        "trainOnlyElo": 2070.7436004543615,
+        "trainOnlyRatedGames": 182,
+        "provisional": false
+      },
+      {
+        "playerIndex": 16,
+        "name": "Logistello (buro)",
+        "fullCorpusElo": 2191.5267826668933,
+        "fullCorpusRatedGames": 831,
+        "trainOnlyElo": 2083.5629230143386,
+        "trainOnlyRatedGames": 376,
+        "provisional": false
+      },
+      {
+        "playerIndex": 8,
+        "name": "Thor (quin/becquet)",
+        "fullCorpusElo": 2097.716791253429,
+        "fullCorpusRatedGames": 2119,
+        "trainOnlyElo": 2075.5975973681952,
+        "trainOnlyRatedGames": 983,
+        "provisional": false
+      },
+      {
+        "playerIndex": 55,
+        "name": "Suekuni Makoto",
+        "fullCorpusElo": 2075.9723915969826,
+        "fullCorpusRatedGames": 1177,
+        "trainOnlyElo": 2056.8596567441464,
+        "trainOnlyRatedGames": 568,
+        "provisional": false
+      },
+      {
+        "playerIndex": 2018,
+        "name": "Cruel+ (sasaki)",
+        "fullCorpusElo": 2071.7871447276884,
+        "fullCorpusRatedGames": 545,
+        "trainOnlyElo": 1995.0239058142329,
+        "trainOnlyRatedGames": 325,
+        "provisional": false
+      },
+      {
+        "playerIndex": 2668,
+        "name": "Kurita Seiya",
+        "fullCorpusElo": 2064.3668229357436,
+        "fullCorpusRatedGames": 144,
+        "trainOnlyElo": 1930.8558870080383,
+        "trainOnlyRatedGames": 84,
+        "provisional": false
+      },
+      {
+        "playerIndex": 1795,
+        "name": "Yohoho (hughston)",
+        "fullCorpusElo": 2054.343107429832,
+        "fullCorpusRatedGames": 1444,
+        "trainOnlyElo": 1976.105273114708,
+        "trainOnlyRatedGames": 803,
+        "provisional": false
+      },
+      {
+        "playerIndex": 1550,
+        "name": "Seeley Ben",
+        "fullCorpusElo": 2017.3603756987116,
+        "fullCorpusRatedGames": 2233,
+        "trainOnlyElo": 2007.7674276960483,
+        "trainOnlyRatedGames": 1624,
+        "provisional": false
+      },
+      {
+        "playerIndex": 1374,
+        "name": "Piglet (buro)",
+        "fullCorpusElo": 2013.5618175134878,
+        "fullCorpusRatedGames": 1293,
+        "trainOnlyElo": 2070.3864295336175,
+        "trainOnlyRatedGames": 453,
+        "provisional": false
+      },
+      {
+        "playerIndex": 2744,
+        "name": "Juigner Arthur",
+        "fullCorpusElo": 2002.918915698297,
+        "fullCorpusRatedGames": 604,
+        "trainOnlyElo": 1968.4408043199417,
+        "trainOnlyRatedGames": 342,
+        "provisional": false
+      }
+    ]
+  },
+  "data": {
+    "replayedTrainGames": 141336,
+    "replayedActions": 8593796,
+    "candidateOccurrencesBeforeHoldoutExclusion": 2259884,
+    "removedHoldoutOccurrences": 199576,
+    "retainedOccurrences": 2060308,
+    "uniquePositions": 1255303,
+    "matchedFrozenTrainPositions": 1000000,
+    "sparseActionEntries": 1290131,
+    "multiActionPositionsIncludingStabilizerSymmetry": 24896,
+    "multipleOutcomePositions": 34038,
+    "bothWinAndLossPositions": 25327,
+    "crossHoldoutOverlap": 0,
+    "illegalSparseActions": 0,
+    "qualityQuantiles": [
+      0.07458178327386089,
+      0.48312644097004553,
+      0.5,
+      0.5,
+      0.6531068121375556,
+      0.8229377064134422,
+      0.968798446531661
+    ],
+    "neutralQualityOccurrences": 987131,
+    "positionsWithPriorKnownElo": 1282008,
+    "neutralBeforeHoldoutExclusion": 1155977
+  },
+  "schema": {
+    "wdlOrder": [
+      "win",
+      "loss",
+      "draw"
+    ],
+    "sources": [
+      "wthor",
+      "logistello"
+    ],
+    "policy": "CSR: offsets/action/mass; mass normalized by occurrence_count gives empirical policy; quality_mass normalized by quality_total gives optional internal-Elo policy",
+    "value": "value_mean=P(win)-P(loss); WDL probabilities=wdl_count/occurrence_count; do not apply sign() to soft value targets",
+    "orientation": "D4 canonical relative board, own=+1, opponent=-1, turn=+1. Stabilizer-equivalent actions share observation mass equally.",
+    "views": "All unique positions and matched_train_group for the exact original million rows. Frozen validation/test caches remain separate and unchanged."
+  },
+  "protocolSha256": "19bc912954aab0cfdc7cc3ed38d33d8de91e88cbeccbb82cbf76dc1adee1e592",
+  "scriptSha256": {
+    "scripts/prepare-consensus-elo-data.py": "8da8acbeee6e33f73a4b22b626c11093bd2a748b919756074df28e5c7a9b2aea",
+    "scripts/training_consensus.py": "2969614f441622106e232aa7bffd4b8a471aa2b7b0cd135632016b126c7ff0e6",
+    "scripts/pattern_model.py": "4bd0fbf1360ad2d9c385ac16ec4a9aa7748fd6787f507317d85d320080bf30d5"
+  },
+  "nativeLibrarySha256": "e8eea82419065f5af3c6ddcd257c5497f971d2ba17ae94782b490a10a637a024",
+  "preservedSha256": {
+    ".build/training/v1/positions.npz": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6",
+    ".build/training/v1.8/policy.npz": "d5712464ea92f34019de2ca9427d95cfa9aa985ff9d854801c9eb7362a7b587a",
+    ".build/training/games.jsonl": "6332fd01b27c11a81f3fbd344e52aaf8f70e60c644780fb453cc7ef64ae359ac",
+    "models/default-model.json": "6582f442dc890e847a393cbd31fb54a63f00d8dca62cede1315187137a9c2de4",
+    "models/v1.37-default.json": "27ce5cd4be6cf824b629c5c08151a766b748608c96c9970e58ed8d4c2ca1d0f5",
+    "models/pattern32-symmetry-v1.37.otpat": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+    "src/game/wasm/othello.mjs": "825ef6e4e84e7e60ce0cb262a2a5cb0d25c2a3bb2e6663750688492a79942303",
+    "models/training-data-audit-2026-10-30.json": "6e5f3da422ed9d2b557a3bc509ad1d85ded4eaebe9e62b002d849021704322a5",
+    "models/v1.39-policy-width-experiment.json": "f1fb77f893f2c0cde032905d9a812d742ba41b2a11c3913b167f4269e3cd5cee",
+    "models/v1.38-direct-policy-2s-20-experiment.json": "14ba42f0d1e45a66ff4f2c9ee4984a5caa8818875c54edfccb4a02d5903dce8e",
+    ".build/training/data-audit-20261030/game-player-metadata.jsonl": "afba1888ac33076616034ad8cda6523bb2a28fc7adabf4dbd2bc52b31bde2343",
+    ".build/training/data-audit-20261030/metadata/WTHOR.JOU": "3db81a3850ab4bb1ff4523f2d326fccbc4168ae68865ec4fcc45b884bdde56c9"
+  },
+  "artifactSha256": {
+    ".build/training/consensus-elo-v1.40/consensus.npz": "e25f71c793bb53b6fe5e71cec7d02b0f77ddbb273127100fdd49022afbee69a9",
+    ".build/training/consensus-elo-v1.40/occurrences.npz": "3b7817d6a0ae603575578c14527017ea782593f33a64359abcae34a1f426b58c",
+    ".build/training/consensus-elo-v1.40/game-elo.jsonl": "f1715bf61d8b28b795661df1694762e8ada9711e658c973144d2e815849f7595",
+    ".build/training/consensus-elo-v1.40/players.json": "55f46f53fcfbe1d8ba0695db0e0323799639e40bf18dc9702dc8e5b58ba66381",
+    ".build/training/consensus-elo-v1.40/game-index.jsonl": "beacaf7a661920acafcdbd9d1540cf752c5c4f4c42fb7309cf6329af53755106"
+  },
+  "limits": "Internal logistic Elo with fixed K, not official WOF/FIDE ratings. Only year/file order is available; within-year real chronology unknown. Full-corpus ratings are descriptive only. Training weights use prior-year train-only ratings and support counts; no held-out outcome or own-game outcome enters. Unknown ID 0 is not one person and is never updated. Logistello has no player ID and gets neutral policy weight. Soft targets are empirical continuation statistics, not minimax values. No training, match, or low-Elo deletion performed."
+}

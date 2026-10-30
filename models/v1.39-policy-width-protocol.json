@@ -1,0 +1,34 @@
+{
+  "version": "v1.39-policy-width",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "baseline": "models/v1.37-default.json",
+  "architecture": "Same direct shared MLP as v1.38; independently train 74->16->1 and 74->32->1; keep 38 D4-tied patterns, embedding32, value trunk97->32->4 unchanged",
+  "seed": 20261029,
+  "dataSeed": 20261030,
+  "epochs": 15,
+  "batchSize": 2048,
+  "learningRate": 0.001,
+  "weightDecay": 0.0001,
+  "threads": 2,
+  "loss": "outcome MSE +0.1 WDL CE +0.1 masked policy CE",
+  "initialization": "random; matched table/trunk/value initialization, same data/augmentation order as approved symmetry run",
+  "selection": "Each width uses minimum validation outcome MSE, same as v1.38; freeze both models before either test evaluation; no test-driven retraining",
+  "preservedSha256": {
+    "models/default-model.json": "6582f442dc890e847a393cbd31fb54a63f00d8dca62cede1315187137a9c2de4",
+    "models/v1.37-default.json": "27ce5cd4be6cf824b629c5c08151a766b748608c96c9970e58ed8d4c2ca1d0f5",
+    "models/pattern32-symmetry-v1.37.otpat": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+    "src/game/wasm/othello.mjs": "825ef6e4e84e7e60ce0cb262a2a5cb0d25c2a3bb2e6663750688492a79942303"
+  },
+  "matches": "not part of this offline training run",
+  "createdAt": "2026-10-30T03:20:39.234415+00:00",
+  "userRequest": "按mlp有效果的方向先训模型",
+  "referenceCandidate": "models/pattern32-direct-mlp8-v1.38.otpat",
+  "referenceCandidateSha256": "3ab3da122a74c2214da52692947733f7e38b6ed0a171cb7828cee9e968ff0adc",
+  "widths": [
+    16,
+    32
+  ],
+  "trainingConcurrency": "CPU threads=2; overlaps frozen v1.38 vs v1.37 2s/20 match on same host; no CPU isolation; report match as measured",
+  "changes": "Policy hidden width only; no warm start, extra patterns, deeper head, value changes, data changes or loss changes"
+}

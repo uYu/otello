@@ -40,8 +40,8 @@ Network Network::load(const std::string& path){
 Network Network::load(std::istream& in){
     char magic[8]{};in.read(magic,8);
     const auto format=std::string(magic,8);
-    if(in&&(format==std::string("OTPAT1\0\0",8)||format==std::string("OTPAT2\0\0",8)||format==std::string("OTPAT3\0\0",8))){
-        Network net;net.architecture=Architecture::Pattern;net.hidden=0;net.pattern=Pattern::load(in,format==std::string("OTPAT3\0\0",8));
+    if(in&&(format==std::string("OTPAT1\0\0",8)||format==std::string("OTPAT2\0\0",8)||format==std::string("OTPAT3\0\0",8)||format==std::string("OTPAT4\0\0",8)||format==std::string("OTPAT5\0\0",8)||format==std::string("OTPAT6\0\0",8)||format==std::string("OTPAT7\0\0",8)||format==std::string("OTPAT9\0\0",8))){
+        Network net;net.architecture=Architecture::Pattern;net.hidden=0;net.pattern=Pattern::load(in,format==std::string("OTPAT3\0\0",8),format==std::string("OTPAT4\0\0",8)||format==std::string("OTPAT6\0\0",8)||format==std::string("OTPAT7\0\0",8)||format==std::string("OTPAT9\0\0",8),format==std::string("OTPAT5\0\0",8),format==std::string("OTPAT6\0\0",8),format==std::string("OTPAT7\0\0",8),format==std::string("OTPAT9\0\0",8));
         if(format!=std::string("OTPAT1\0\0",8))net.valueTarget=ValueTarget::Outcome;
         return net;
     }

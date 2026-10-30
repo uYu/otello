@@ -15,7 +15,7 @@ RUN npm ci
 COPY index.html tsconfig.json vite.config.ts ./
 COPY src/ ./src/
 COPY public/ ./public/
-COPY models/default-model.json models/v1.36-default.json models/pattern32-outcome-v1.25.json models/pattern32-outcome-v1.25.otpat models/training-data-manifest.json ./models/
+COPY models/default-model.json models/v2-default.json models/pattern32-global-policy-v2.json models/pattern32-global-policy-v2.otpat models/training-data-manifest.json ./models/
 COPY data/README.md ./data/README.md
 COPY data/manifest.json ./data/manifest.json
 COPY data/opening-book/egaroucid-2a65c87860be.tar.gz ./data/opening-book/egaroucid-2a65c87860be.tar.gz

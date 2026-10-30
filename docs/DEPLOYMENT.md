@@ -1,8 +1,8 @@
-# v1.36 Docker 部署
+# v2 Docker 部署
 
 目标服务器：`root@162.14.123.217`。应用位于 `/root/app/otello`，与其他桌游项目同级；对外端口 8207，Homepage 位于 80 端口的“桌游”分类。
 
-此部署使用冻结的 v1.36 浏览器 Wasm 和 `pattern32-outcome-v1.25.otpat`，模型 SHA-256 为 `ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0`。开局库固定默认启用，不提供关闭选项；每步先查库，命中直接走库，未命中继续 v1.36 搜索。AI 在客户端 Web Worker 中运行；容器提供静态页面和按需查询的开局库分片，正常／高级档搜索仍为 100ms／1 秒。
+此部署使用冻结的 v2 全局策略浏览器 Wasm 和 `pattern32-global-policy-v2.otpat`，模型 SHA-256 为 `df11f7b9eed358fff33a426e2f0cb1a290083d2bc8e0781a2fbd1efdaf4270c3`。开局库固定默认启用，不提供关闭选项；每步先查库，命中直接走库，未命中继续 v2 搜索。AI 在客户端 Web Worker 中运行；容器提供静态页面和按需查询的开局库分片，正常／高级档搜索仍为 100ms／1 秒。
 
 ## 构建和运行
 
@@ -41,9 +41,9 @@ docker compose -f compose.yaml -f compose.prebuilt.yaml up -d --build
     - 黑白棋:
         icon: mdi-circle-half-full
         href: http://{{HOMEPAGE_VAR_HOST}}:8207
-        description: Othello · v1.36 + 开局库
+        description: Othello · v2 + 开局库
         server: local-docker
         container: otello-otello-1
 ```
 
-镜像名为 `otello:v1.36`，Compose 项目名为 `otello`，服务为 `otello`。使用 `docker compose ps` 查看运行及健康状态，`docker compose logs --tail 50` 查看日志。
+镜像名为 `otello:v2`，Compose 项目名为 `otello`，服务为 `otello`。使用 `docker compose ps` 查看运行及健康状态，`docker compose logs --tail 50` 查看日志。

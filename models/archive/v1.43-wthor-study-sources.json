@@ -1,0 +1,9 @@
+{
+  "archive": "models/archive/v1.43-wthor-study-sources.tar.gz",
+  "sha256": "d9ff08bafd1d01a4b6e78dd622ac86a5bb2ef541132f80ff596a2dfde09e7208",
+  "files": {
+    "scripts/finalize-wthor-suite.py": "677a109f33025282ae556e175147e884f4373066bbe2e0d2dae34fc30961a46c",
+    "scripts/finalize-pattern-wthor-stopped.py": "01ad69c5dc0638866ded47ba1d1de74852549e878c30bea54fae4b9514071785",
+    "models/v1.43-pattern-wthor1600-queue-amendment.json": "7cb18b25c1df2431419147fa5015dcbd27faf2f7eadaced0362c3f4f3af6bd7f"
+  }
+}

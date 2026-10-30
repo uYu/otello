@@ -74,6 +74,7 @@ int ot_nnue_mcts_play_budget(const ot_nnue* model,const int* cells,int turn,
 // Same output[136] layout; depth is maximum visited path, output[135]=0.
 int ot_default_search(const int* cells,int turn,int milliseconds,unsigned seed,int* output);
 int ot_default_evaluate(const int* cells,int turn,int* score);
+int ot_default_infer(const int* cells,int turn,int* score,double* probabilities);
 const char* ot_default_model_sha256(void);
 #ifdef __cplusplus
 }

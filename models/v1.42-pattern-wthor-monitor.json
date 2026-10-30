@@ -1,0 +1,20 @@
+{
+  "experiment": "pattern-structure-training",
+  "variant": "symmetry-wthor",
+  "stage": "训练与冻结验证/测试完成",
+  "epoch": 15,
+  "epochs": 15,
+  "seconds": 193.11223162477836,
+  "variants": [],
+  "complete": true,
+  "validation": {
+    "mse": 0.7327476143836975,
+    "outcomeMae": 0.7221604585647583,
+    "nonDrawSignAccuracy": 0.6525163273146369,
+    "wdlAccuracy": 0.5685,
+    "wdlCrossEntropy": 0.9326450228691101,
+    "policyTop1": 0.41283333333333333,
+    "policyCrossEntropy": 1.5991371870040894,
+    "uniformPolicyCrossEntropy": 2.0921316559038803
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "version": "v1.39-policy-width",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "matchesRun": false,
+  "artifactSha256": {
+    "models/v1.39-pattern-policy-width.json": "bd749d84c18b16522f04b1812bbcefe6fa3b610bd712a675740fabf05d5af2a1",
+    "models/v1.39-policy-width-benchmark.json": "5923faa7ee2ba4a5d0bb0b6fd0fba702bb014a6d3b1ffb68f2f0f6651234cc3a",
+    "models/v1.39-policy-width-protocol.json": "edb70f9fcdd578c9ed387a9164e2ee66d562eaf07cc47745ed5e7c7d68ddec83",
+    "models/archive/v1.39-policy-width-sources.json": "4e6f93387f254786fa2033004c4340e2fdaf82f5fadf76a91891872b2eeb788e",
+    "models/v1.39-policy-width-validation.json": "4367227c31a8d51d4d9e5feac2df6def1eb4c069cf72d32707ac05cbc143832c",
+    "models/v1.39-policy-width-comparison.md": "f0ae7768a3386596f4277232c0109ad34120ecfc01df5941d4691fc5662b0b1e",
+    "models/pattern32-direct-mlp16-v1.39.otpat": "cb668713251dd94b72e3574ee62ce6d723c6cc2a3806aef17e36f9b5b4868fc5",
+    "models/pattern32-direct-mlp16-v1.39.pt": "e7c33799ead37958b06aa2f89e88c9ad0169e57aa5d0bec0bd978896b67db3ba",
+    "models/pattern32-direct-mlp16-v1.39.json": "5259238105fad68ab60b71dd83f8048f060fafef7059665edee63a8fb6b91249",
+    "models/pattern32-direct-mlp32-v1.39.otpat": "c22e16e530a1ec803b9385af297913292eb4adc1eb03b10ba3ab2eb8f6c7ca3e",
+    "models/pattern32-direct-mlp32-v1.39.pt": "0d38d8b8d3bb19590c5805820ccce99e55cdbe6f4779f52da0669c1fb3e982b1",
+    "models/pattern32-direct-mlp32-v1.39.json": "65c9f23ee41d491018facce9f52576688a4dd295050ec8fc9d0089f4b3d9e50c"
+  },
+  "preservedSha256": {
+    "models/default-model.json": "6582f442dc890e847a393cbd31fb54a63f00d8dca62cede1315187137a9c2de4",
+    "models/v1.37-default.json": "27ce5cd4be6cf824b629c5c08151a766b748608c96c9970e58ed8d4c2ca1d0f5",
+    "models/pattern32-symmetry-v1.37.otpat": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+    "src/game/wasm/othello.mjs": "825ef6e4e84e7e60ce0cb262a2a5cb0d25c2a3bb2e6663750688492a79942303"
+  }
+}

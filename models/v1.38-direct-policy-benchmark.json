@@ -1,0 +1,1026 @@
+{
+  "version": "v1.38-direct-policy",
+  "complete": true,
+  "status": "candidate",
+  "defaultPromoted": false,
+  "baseline": "models/v1.37-default.json",
+  "results": [
+    {
+      "name": "v1.37 symmetry baseline",
+      "medianJointMicroseconds": 1.1126708984375,
+      "latencySamples": [
+        1.13792919921875,
+        1.1273599853515626,
+        1.121526123046875,
+        1.1126708984375,
+        1.098749755859375,
+        1.095586181640625,
+        1.111572265625,
+        1.116455078125,
+        1.1096090087890624
+      ],
+      "budgets": {
+        "100": {
+          "commonRoots": [
+            0,
+            1,
+            3,
+            5,
+            4,
+            6,
+            8,
+            10
+          ],
+          "samples": 24,
+          "simulationsPerSecond": 749619.6638467719,
+          "evaluationsPerSecond": 741581.9455397866
+        },
+        "1000": {
+          "commonRoots": [
+            0,
+            1,
+            3,
+            5,
+            4,
+            6,
+            8,
+            10
+          ],
+          "samples": 16,
+          "simulationsPerSecond": 722447.4554227181,
+          "evaluationsPerSecond": 696931.2061467723
+        }
+      },
+      "searchSamples": [
+        {
+          "root": 0,
+          "round": 0,
+          "budgetMs": 100,
+          "simulations": 64708,
+          "evaluations": 64605,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100014334
+        },
+        {
+          "root": 1,
+          "round": 0,
+          "budgetMs": 100,
+          "simulations": 72824,
+          "evaluations": 72824,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100013291
+        },
+        {
+          "root": 3,
+          "round": 0,
+          "budgetMs": 100,
+          "simulations": 76913,
+          "evaluations": 76913,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100018834
+        },
+        {
+          "root": 5,
+          "round": 0,
+          "budgetMs": 100,
+          "simulations": 76903,
+          "evaluations": 76900,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.10001475
+        },
+        {
+          "root": 4,
+          "round": 0,
+          "budgetMs": 100,
+          "simulations": 85860,
+          "evaluations": 85584,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100019542
+        },
+        {
+          "root": 6,
+          "round": 0,
+          "budgetMs": 100,
+          "simulations": 54880,
+          "evaluations": 54710,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 103,
+          "wallSeconds": 0.10319225
+        },
+        {
+          "root": 8,
+          "round": 0,
+          "budgetMs": 100,
+          "simulations": 76650,
+          "evaluations": 75402,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100056333
+        },
+        {
+          "root": 10,
+          "round": 0,
+          "budgetMs": 100,
+          "simulations": 93429,
+          "evaluations": 89625,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100019334
+        },
+        {
+          "root": 0,
+          "round": 1,
+          "budgetMs": 100,
+          "simulations": 64259,
+          "evaluations": 64156,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100026166
+        },
+        {
+          "root": 1,
+          "round": 1,
+          "budgetMs": 100,
+          "simulations": 69766,
+          "evaluations": 69766,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100018875
+        },
+        {
+          "root": 3,
+          "round": 1,
+          "budgetMs": 100,
+          "simulations": 69474,
+          "evaluations": 69474,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100020583
+        },
+        {
+          "root": 5,
+          "round": 1,
+          "budgetMs": 100,
+          "simulations": 70648,
+          "evaluations": 70648,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100205625
+        },
+        {
+          "root": 4,
+          "round": 1,
+          "budgetMs": 100,
+          "simulations": 29463,
+          "evaluations": 29463,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100089042
+        },
+        {
+          "root": 6,
+          "round": 1,
+          "budgetMs": 100,
+          "simulations": 76461,
+          "evaluations": 75466,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100021791
+        },
+        {
+          "root": 8,
+          "round": 1,
+          "budgetMs": 100,
+          "simulations": 81763,
+          "evaluations": 80474,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100036542
+        },
+        {
+          "root": 10,
+          "round": 1,
+          "budgetMs": 100,
+          "simulations": 97548,
+          "evaluations": 93319,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100024833
+        },
+        {
+          "root": 0,
+          "round": 2,
+          "budgetMs": 100,
+          "simulations": 66347,
+          "evaluations": 66243,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100018833
+        },
+        {
+          "root": 1,
+          "round": 2,
+          "budgetMs": 100,
+          "simulations": 69006,
+          "evaluations": 69006,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.10010975
+        },
+        {
+          "root": 3,
+          "round": 2,
+          "budgetMs": 100,
+          "simulations": 76315,
+          "evaluations": 76315,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100019709
+        },
+        {
+          "root": 5,
+          "round": 2,
+          "budgetMs": 100,
+          "simulations": 76344,
+          "evaluations": 76341,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100025833
+        },
+        {
+          "root": 4,
+          "round": 2,
+          "budgetMs": 100,
+          "simulations": 83841,
+          "evaluations": 83568,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100018459
+        },
+        {
+          "root": 6,
+          "round": 2,
+          "budgetMs": 100,
+          "simulations": 80196,
+          "evaluations": 79184,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100021916
+        },
+        {
+          "root": 8,
+          "round": 2,
+          "budgetMs": 100,
+          "simulations": 89926,
+          "evaluations": 88526,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100017708
+        },
+        {
+          "root": 10,
+          "round": 2,
+          "budgetMs": 100,
+          "simulations": 98592,
+          "evaluations": 94281,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100016125
+        },
+        {
+          "root": 0,
+          "round": 0,
+          "budgetMs": 1000,
+          "simulations": 587750,
+          "evaluations": 587496,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000016333
+        },
+        {
+          "root": 1,
+          "round": 0,
+          "budgetMs": 1000,
+          "simulations": 640565,
+          "evaluations": 640552,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000020916
+        },
+        {
+          "root": 3,
+          "round": 0,
+          "budgetMs": 1000,
+          "simulations": 689891,
+          "evaluations": 644677,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000019458
+        },
+        {
+          "root": 5,
+          "round": 0,
+          "budgetMs": 1000,
+          "simulations": 695595,
+          "evaluations": 668907,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000020291
+        },
+        {
+          "root": 4,
+          "round": 0,
+          "budgetMs": 1000,
+          "simulations": 852431,
+          "evaluations": 778048,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000020209
+        },
+        {
+          "root": 6,
+          "round": 0,
+          "budgetMs": 1000,
+          "simulations": 740814,
+          "evaluations": 718756,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000026583
+        },
+        {
+          "root": 8,
+          "round": 0,
+          "budgetMs": 1000,
+          "simulations": 689158,
+          "evaluations": 676966,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000094542
+        },
+        {
+          "root": 10,
+          "round": 0,
+          "budgetMs": 1000,
+          "simulations": 787406,
+          "evaluations": 769160,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000057375
+        },
+        {
+          "root": 0,
+          "round": 1,
+          "budgetMs": 1000,
+          "simulations": 635040,
+          "evaluations": 634786,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.00002025
+        },
+        {
+          "root": 1,
+          "round": 1,
+          "budgetMs": 1000,
+          "simulations": 642813,
+          "evaluations": 642610,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000035208
+        },
+        {
+          "root": 3,
+          "round": 1,
+          "budgetMs": 1000,
+          "simulations": 698913,
+          "evaluations": 646124,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000025542
+        },
+        {
+          "root": 5,
+          "round": 1,
+          "budgetMs": 1000,
+          "simulations": 694482,
+          "evaluations": 667802,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000027792
+        },
+        {
+          "root": 4,
+          "round": 1,
+          "budgetMs": 1000,
+          "simulations": 864028,
+          "evaluations": 789257,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000049333
+        },
+        {
+          "root": 6,
+          "round": 1,
+          "budgetMs": 1000,
+          "simulations": 742664,
+          "evaluations": 720606,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000045792
+        },
+        {
+          "root": 8,
+          "round": 1,
+          "budgetMs": 1000,
+          "simulations": 770822,
+          "evaluations": 757069,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000040916
+        },
+        {
+          "root": 10,
+          "round": 1,
+          "budgetMs": 1000,
+          "simulations": 827184,
+          "evaluations": 808466,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000028584
+        }
+      ]
+    },
+    {
+      "name": "v1.38 direct MLP8",
+      "medianJointMicroseconds": 2.6798909912109377,
+      "latencySamples": [
+        2.740132568359375,
+        2.6830291748046875,
+        2.67816162109375,
+        2.68430078125,
+        2.6713359375,
+        2.659423828125,
+        2.6671041259765627,
+        2.6798909912109377,
+        2.6801605224609375
+      ],
+      "budgets": {
+        "100": {
+          "commonRoots": [
+            0,
+            1,
+            3,
+            5,
+            4,
+            6,
+            8,
+            10
+          ],
+          "samples": 24,
+          "simulationsPerSecond": 648968.3321111854,
+          "evaluationsPerSecond": 632503.5658056941,
+          "simulationsPerSecondRatio": 0.8657301341068336,
+          "evaluationsPerSecondRatio": 0.852911225266284
+        },
+        "1000": {
+          "commonRoots": [
+            0,
+            1,
+            3,
+            5,
+            4,
+            6,
+            8,
+            10
+          ],
+          "samples": 16,
+          "simulationsPerSecond": 646755.4827220198,
+          "evaluationsPerSecond": 579209.5220505344,
+          "simulationsPerSecondRatio": 0.8952284043184712,
+          "evaluationsPerSecondRatio": 0.8310856465344645
+        }
+      },
+      "searchSamples": [
+        {
+          "root": 0,
+          "round": 0,
+          "budgetMs": 100,
+          "simulations": 56613,
+          "evaluations": 56613,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100638542
+        },
+        {
+          "root": 1,
+          "round": 0,
+          "budgetMs": 100,
+          "simulations": 58713,
+          "evaluations": 58713,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100015125
+        },
+        {
+          "root": 3,
+          "round": 0,
+          "budgetMs": 100,
+          "simulations": 62023,
+          "evaluations": 61936,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100019334
+        },
+        {
+          "root": 5,
+          "round": 0,
+          "budgetMs": 100,
+          "simulations": 63666,
+          "evaluations": 63666,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100015917
+        },
+        {
+          "root": 4,
+          "round": 0,
+          "budgetMs": 100,
+          "simulations": 69949,
+          "evaluations": 69828,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.1000175
+        },
+        {
+          "root": 6,
+          "round": 0,
+          "budgetMs": 100,
+          "simulations": 65295,
+          "evaluations": 65295,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100025083
+        },
+        {
+          "root": 8,
+          "round": 0,
+          "budgetMs": 100,
+          "simulations": 54154,
+          "evaluations": 53700,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100022292
+        },
+        {
+          "root": 10,
+          "round": 0,
+          "budgetMs": 100,
+          "simulations": 84500,
+          "evaluations": 73153,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100018833
+        },
+        {
+          "root": 0,
+          "round": 1,
+          "budgetMs": 100,
+          "simulations": 56000,
+          "evaluations": 56000,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100025875
+        },
+        {
+          "root": 1,
+          "round": 1,
+          "budgetMs": 100,
+          "simulations": 53006,
+          "evaluations": 53006,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.1000235
+        },
+        {
+          "root": 3,
+          "round": 1,
+          "budgetMs": 100,
+          "simulations": 59945,
+          "evaluations": 59867,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100019708
+        },
+        {
+          "root": 5,
+          "round": 1,
+          "budgetMs": 100,
+          "simulations": 63650,
+          "evaluations": 63650,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100020959
+        },
+        {
+          "root": 4,
+          "round": 1,
+          "budgetMs": 100,
+          "simulations": 40898,
+          "evaluations": 40898,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100070125
+        },
+        {
+          "root": 6,
+          "round": 1,
+          "budgetMs": 100,
+          "simulations": 64101,
+          "evaluations": 64101,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100024458
+        },
+        {
+          "root": 8,
+          "round": 1,
+          "budgetMs": 100,
+          "simulations": 70037,
+          "evaluations": 69251,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100024208
+        },
+        {
+          "root": 10,
+          "round": 1,
+          "budgetMs": 100,
+          "simulations": 90366,
+          "evaluations": 77859,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100021292
+        },
+        {
+          "root": 0,
+          "round": 2,
+          "budgetMs": 100,
+          "simulations": 59049,
+          "evaluations": 59049,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100020417
+        },
+        {
+          "root": 1,
+          "round": 2,
+          "budgetMs": 100,
+          "simulations": 58061,
+          "evaluations": 58061,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.10003625
+        },
+        {
+          "root": 3,
+          "round": 2,
+          "budgetMs": 100,
+          "simulations": 59971,
+          "evaluations": 59892,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100033041
+        },
+        {
+          "root": 5,
+          "round": 2,
+          "budgetMs": 100,
+          "simulations": 62969,
+          "evaluations": 62969,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100018042
+        },
+        {
+          "root": 4,
+          "round": 2,
+          "budgetMs": 100,
+          "simulations": 71609,
+          "evaluations": 71166,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100016292
+        },
+        {
+          "root": 6,
+          "round": 2,
+          "budgetMs": 100,
+          "simulations": 67471,
+          "evaluations": 67471,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.10001875
+        },
+        {
+          "root": 8,
+          "round": 2,
+          "budgetMs": 100,
+          "simulations": 74547,
+          "evaluations": 73657,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100019584
+        },
+        {
+          "root": 10,
+          "round": 2,
+          "budgetMs": 100,
+          "simulations": 91702,
+          "evaluations": 78959,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 100,
+          "wallSeconds": 0.100022917
+        },
+        {
+          "root": 0,
+          "round": 0,
+          "budgetMs": 1000,
+          "simulations": 495656,
+          "evaluations": 492311,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000019541
+        },
+        {
+          "root": 1,
+          "round": 0,
+          "budgetMs": 1000,
+          "simulations": 506992,
+          "evaluations": 502366,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.00001825
+        },
+        {
+          "root": 3,
+          "round": 0,
+          "budgetMs": 1000,
+          "simulations": 598964,
+          "evaluations": 573345,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000020542
+        },
+        {
+          "root": 5,
+          "round": 0,
+          "budgetMs": 1000,
+          "simulations": 621805,
+          "evaluations": 565144,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000032375
+        },
+        {
+          "root": 4,
+          "round": 0,
+          "budgetMs": 1000,
+          "simulations": 748245,
+          "evaluations": 678601,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000019167
+        },
+        {
+          "root": 6,
+          "round": 0,
+          "budgetMs": 1000,
+          "simulations": 717393,
+          "evaluations": 589837,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000021792
+        },
+        {
+          "root": 8,
+          "round": 0,
+          "budgetMs": 1000,
+          "simulations": 624393,
+          "evaluations": 601057,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.00005375
+        },
+        {
+          "root": 10,
+          "round": 0,
+          "budgetMs": 1000,
+          "simulations": 856503,
+          "evaluations": 619109,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000029417
+        },
+        {
+          "root": 0,
+          "round": 1,
+          "budgetMs": 1000,
+          "simulations": 516075,
+          "evaluations": 512730,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000056125
+        },
+        {
+          "root": 1,
+          "round": 1,
+          "budgetMs": 1000,
+          "simulations": 501311,
+          "evaluations": 496685,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000030375
+        },
+        {
+          "root": 3,
+          "round": 1,
+          "budgetMs": 1000,
+          "simulations": 601456,
+          "evaluations": 575807,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000020916
+        },
+        {
+          "root": 5,
+          "round": 1,
+          "budgetMs": 1000,
+          "simulations": 616639,
+          "evaluations": 559987,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000046416
+        },
+        {
+          "root": 4,
+          "round": 1,
+          "budgetMs": 1000,
+          "simulations": 744123,
+          "evaluations": 674538,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000021833
+        },
+        {
+          "root": 6,
+          "round": 1,
+          "budgetMs": 1000,
+          "simulations": 707583,
+          "evaluations": 588298,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000020209
+        },
+        {
+          "root": 8,
+          "round": 1,
+          "budgetMs": 1000,
+          "simulations": 657372,
+          "evaluations": 633233,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000018375
+        },
+        {
+          "root": 10,
+          "round": 1,
+          "budgetMs": 1000,
+          "simulations": 833871,
+          "evaluations": 604567,
+          "exact": false,
+          "memoryLimited": false,
+          "elapsedMs": 1000,
+          "wallSeconds": 1.000024375
+        }
+      ]
+    }
+  ],
+  "symmetry": {
+    "positions": 6000,
+    "meanValueSpan": 0.0,
+    "maximumValueSpan": 0.0,
+    "maximumAlignedPolicyLogitDifference": 0.0
+  },
+  "parity": {
+    "baselineRegressionPositions": 12000,
+    "directScalarSimdPositions": 12000,
+    "all68OutputsExactlyEqual": true,
+    "fixedSimulationRoots": 16,
+    "simulationsPerRoot": 1024
+  },
+  "libraries": {
+    ".build/native-pattern-direct-policy-v1.38/libothello.dylib": "6908ce20ea0f61b3828847b8ed1b7cfbb8448f9d9a41b15103fbb04500a1715a",
+    ".build/native-pattern-direct-policy-portable-v1.38/libothello.dylib": "77e03a605f994d3dc832a1769d291534cd441aae2b6bf7d9e92b1c4e7d6b5a91",
+    ".build/native-v1.37-reference/libothello.dylib": "e8eea82419065f5af3c6ddcd257c5497f971d2ba17ae94782b490a10a637a024"
+  },
+  "models": {
+    "models/pattern32-symmetry-v1.37.otpat": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+    "models/pattern32-direct-mlp8-v1.38.otpat": "3ab3da122a74c2214da52692947733f7e38b6ed0a171cb7828cee9e968ff0adc"
+  },
+  "preservedSha256": {
+    "models/default-model.json": "6582f442dc890e847a393cbd31fb54a63f00d8dca62cede1315187137a9c2de4",
+    "models/v1.37-default.json": "27ce5cd4be6cf824b629c5c08151a766b748608c96c9970e58ed8d4c2ca1d0f5",
+    "models/pattern32-symmetry-v1.37.otpat": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+    "src/game/wasm/othello.mjs": "825ef6e4e84e7e60ce0cb262a2a5cb0d25c2a3bb2e6663750688492a79942303"
+  },
+  "protocolSha256": "55ad7777625623c1ae583d05f1bb13608df627a3e22aa1f6ffb1f4505c93d482",
+  "trainingReportSha256": "ab5dfbb3efbb1b129f3332aa13920051bd2fc671286c0a642f6a24469d9c9366",
+  "sourceArchiveManifestSha256": "0b02a220e2433e70064a656da1ee855b5dfb06bc382e6755c41f47b51d16bdcd",
+  "scriptSha256": "3f19aacf2d1bc223bdef985d538ba66777911bb593e8226a90353acd8e21dd19",
+  "platform": "macOS-15.1-arm64-arm-64bit",
+  "seconds": 39.00638687470928,
+  "limits": "Offline candidate. No strength matches or Elo claim. Same-position wall-clock throughput only; common roots exclude proof/cap/short searches in either model/round. Native macOS ARM64 timing; Linux and browser performance unmeasured."
+}

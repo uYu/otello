@@ -1,0 +1,50 @@
+{
+  "version": "v1.47-phase-policy",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "userRequest": "期望就是中盘好，开局有开局库，后盘有暴力搜。看看策略头呢",
+  "architecture": "v1.37 tied D4 table, original three pools and 97->32 trunk, original single value/WLD readout and conditional policy; phase candidate adds opening 32->42 gates/position-bias readout, +1386 parameters. Single-policy matched control also retrained.",
+  "phase": {
+    "lowEmpty": 36,
+    "highEmpty": 48,
+    "openingFull": "placements <=12",
+    "midLateFull": "placements >=24",
+    "transition": "exact integer-empty linear interpolation, quantized expert gates/biases then quantized blend before original local projection",
+    "value": "Single original scalar outcome and W/L/D readout; not combined with v1.46"
+  },
+  "data": "Exact frozen million WTHOR + Logistello hard-label positions; no Elo filtering, weighting or aggregation; original 6000 validation and 6000 test unchanged",
+  "initialization": "Same seed and identical original shared parameters; copy original 42-row policy readout into opening head, initial predictions identical",
+  "seed": 20261029,
+  "dataSeed": 20261030,
+  "epochs": 15,
+  "batchSize": 2048,
+  "threads": 2,
+  "learningRate": 0.001,
+  "weightDecay": 0.0001,
+  "loss": "Original outcome MSE+0.1 WLD CE+0.1 legal policy CE; all original rows once per epoch, no stage weighting",
+  "selection": "Both matched control and phase candidate: minimum legal policy cross entropy on unchanged validation placements 21..36 (2463 positions); thresholds fixed before training; freeze both selected weights before any test evaluation. Frozen v1.37 is additional reference under its historical overall-MSE selection. Control original global-MSE checkpoint and all epoch metrics must exactly reproduce v1.37.",
+  "matchesPlanned": false,
+  "sourceArchiveManifest": "models/archive/v1.47-phase-policy-sources.json",
+  "sourceArchiveManifestSha256": "03e65812a60883c4d88622faca2ced7f735aa7e3bd71bca80e17e7a534d2dd88",
+  "preservedSha256": {
+    ".build/training/v1/positions.npz": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6",
+    ".build/training/v1.8/policy.npz": "d5712464ea92f34019de2ca9427d95cfa9aa985ff9d854801c9eb7362a7b587a",
+    "models/default-model.json": "6582f442dc890e847a393cbd31fb54a63f00d8dca62cede1315187137a9c2de4",
+    "models/v1.37-default.json": "27ce5cd4be6cf824b629c5c08151a766b748608c96c9970e58ed8d4c2ca1d0f5",
+    "models/pattern32-symmetry-v1.37.otpat": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+    "models/pattern32-symmetry-v1.37.pt": "8f6052eadfd2cef1367c14fe121c910bb2e1635cafcda083d9e8fdbbd8a73d52",
+    "models/pattern32-symmetry-v1.37.json": "66b73d6ab022b7a8eaee3b3fb8bdc232c3bcc99f932f5fbe96dc2c45cab52a8b",
+    "src/game/wasm/othello.mjs": "825ef6e4e84e7e60ce0cb262a2a5cb0d25c2a3bb2e6663750688492a79942303",
+    ".build/native-v1.37-reference/libothello.dylib": "e8eea82419065f5af3c6ddcd257c5497f971d2ba17ae94782b490a10a637a024",
+    "models/v1.46-pattern-phase-value.json": "f3842ba7267229822275e7ee4c62ad77a74bc451180c39f816042d759679f521",
+    "models/pattern32-symmetry-phase-value-v1.46.otpat": "b0b3d8437ec90d81810efc1757a8afc77f2e235283dab905ee92a4b5d97928e5",
+    "models/v1.46-phase-value-experiment.json": "5dfa10b70d1229144f982c0542680d382dd29fdc0416c3b490a6b9f20e33623d",
+    ".build/native-pattern-phase-value-v1.46/libothello.dylib": "a869896ec3a29d6be13ccd357b4045ead3cad63492934ef4eb7f8dcd0aba8604",
+    ".build/native-pattern-phase-policy-v1.47/libothello.dylib": "df67ef801a67aafc5df4e94ad166a6899001fe4133e3a8cdd5caa580141697dc"
+  },
+  "checksBeforeTraining": [
+    "Isolated Release and portable CTest passed",
+    "Both builds pass two Python phase-policy tests with 512-position native parity, all phase boundaries, initial equality, value isolation, gradients, D4/color symmetry"
+  ],
+  "limits": "One seed offline independent phase-policy ablation; no strength conclusion or default promotion. Phase thresholds inherited from v1.46, not chosen on middle test metrics."
+}

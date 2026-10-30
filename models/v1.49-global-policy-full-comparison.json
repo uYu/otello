@@ -1,0 +1,80 @@
+{
+  "version": "v1.49-global-policy-full",
+  "complete": true,
+  "status": "candidate",
+  "defaultPromoted": false,
+  "training": "All916987 parameters trained from random initialization; original common initialization/data order/augmentation; additional237 D4 policy coefficients",
+  "architecture": "Ordered38 shared conditional pattern projections -> shared38->16->64 residual logits -> all8x8 move scores",
+  "selection": {
+    "metric": "validation legal-policy cross entropy",
+    "bestEpoch": 15
+  },
+  "metrics": {
+    "validation": {
+      "mse": 0.7247886657714844,
+      "outcomeMae": 0.7241963744163513,
+      "nonDrawSignAccuracy": 0.6609681137149443,
+      "wdlAccuracy": 0.574,
+      "wdlCrossEntropy": 0.9027577042579651,
+      "policyTop1": 0.44333333333333336,
+      "policyCrossEntropy": 1.518559455871582,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    "test": {
+      "mse": 0.6864131689071655,
+      "outcomeMae": 0.7070835828781128,
+      "nonDrawSignAccuracy": 0.6806625577812019,
+      "wdlAccuracy": 0.5908333333333333,
+      "wdlCrossEntropy": 0.8924307227134705,
+      "policyTop1": 0.42783333333333334,
+      "policyCrossEntropy": 1.546290636062622,
+      "uniformPolicyCrossEntropy": 2.1044416287103247
+    }
+  },
+  "baselineMetrics": {
+    "validation": {
+      "mse": 0.7221555709838867,
+      "outcomeMae": 0.7253084182739258,
+      "nonDrawSignAccuracy": 0.6590472531694199,
+      "wdlAccuracy": 0.5728333333333333,
+      "wdlCrossEntropy": 0.9051163792610168,
+      "policyTop1": 0.4175,
+      "policyCrossEntropy": 1.5936541557312012,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    "test": {
+      "mse": 0.6902028918266296,
+      "outcomeMae": 0.7105870842933655,
+      "nonDrawSignAccuracy": 0.6804699537750385,
+      "wdlAccuracy": 0.5891666666666666,
+      "wdlCrossEntropy": 0.8990699052810669,
+      "policyTop1": 0.4103333333333333,
+      "policyCrossEntropy": 1.6118096113204956,
+      "uniformPolicyCrossEntropy": 2.1044416287103247
+    }
+  },
+  "differences": {
+    "validation": {
+      "policyCrossEntropy": -0.07509469985961914,
+      "policyTop1": 0.025833333333333375,
+      "mse": 0.0026330947875976562
+    },
+    "test": {
+      "policyCrossEntropy": -0.06551897525787354,
+      "policyTop1": 0.017500000000000016,
+      "mse": -0.0037897229194641113
+    }
+  },
+  "nativePerformance": "Not measured; no integrated native global policy kernel yet",
+  "matchesRun": false,
+  "artifacts": {
+    "models/v1.49-pattern-global-policy-full.json": "13e2bf466c980679e26b5218408dddab0888a9911c37bc00277b46f605c8531c",
+    "models/v1.49-global-policy-full-validation.json": "4f889afcc8a9c5e0b2bb8d8b981cb720ab506bb1889c918f411d713b97dfe55c",
+    "models/pattern32-global-policy16-full-v1.49.pt": "2192c35eebfddad63c807912434757d35b34458c050f86e009f8357bb673987e",
+    "models/pattern32-global-policy16-full-v1.49.base.otpat": "5c013a78de939715944c9c59423603bef05fc4819a4d5e4c2947d05303cd5b6c",
+    "models/pattern32-global-policy16-full-v1.49.head.json": "37c9aa779d82b6ebf3575c28552c5cb0bd4694c93b08e49400a6227bd3aa5490",
+    "models/archive/v1.49-global-policy-full-sources.json": "b2f6262114171465d257415b0718fecad4dfb8b7dde62185cd24569f33bea9dd",
+    "models/archive/v1.49-global-policy-full-sources.tar.gz": "bc4189e4baeefadcd0ca8986fb7b1d46fe0ac3bd087bc3815be25a1c6d05ffd4"
+  },
+  "interpretation": "Offline policy metrics and value metrics are reported separately. A single run and different validation selection from v1.37 do not establish strength or isolate architecture alone. The exported base component is not the complete policy model."
+}

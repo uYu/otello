@@ -1,0 +1,9 @@
+{
+  "experiment": "pattern-suite-sampling",
+  "stage": "数据候选构建完成",
+  "completed": 1,
+  "total": 1,
+  "summary": "1,255,303 个局面；保留走法/结果分布；内部 Elo 已完成",
+  "complete": true,
+  "seconds": 33.33402158366516
+}

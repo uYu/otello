@@ -1,0 +1,591 @@
+{
+  "complete": true,
+  "version": "v1.41-wthor-elo-filter",
+  "status": "data-candidate-no-training",
+  "modelTrained": false,
+  "defaultPromoted": false,
+  "eloWeighting": false,
+  "originalTrainGames": 141336,
+  "excludedLogistelloGames": 60775,
+  "sourceOnlyWthor": {
+    "threshold": null,
+    "trainGames": 80561,
+    "removedWthorGames": 0,
+    "gameRetentionVsWthor": 1.0,
+    "retainedOccurrences": 1252363,
+    "uniquePositions": 1054132,
+    "uniqueRetentionVsWthor": 1.0,
+    "multiActionOrbitPositions": 18328,
+    "multipleOutcomePositions": 20706,
+    "bothWinAndLossPositions": 17749,
+    "unknownRatingGamesRetained": 605,
+    "bothPlayers20PriorGames": 40756,
+    "theoryComparableGames": 80561,
+    "recordedVs24EmptyWdlDisagreementGames": 18469,
+    "recordedVs24EmptyWdlDisagreementRate": 0.22925485036183763,
+    "stages": [
+      {
+        "placements": [
+          9,
+          18
+        ],
+        "uniquePositions": 120735
+      },
+      {
+        "placements": [
+          21,
+          36
+        ],
+        "uniquePositions": 452068
+      },
+      {
+        "placements": [
+          39,
+          54
+        ],
+        "uniquePositions": 481329
+      }
+    ]
+  },
+  "sweep": [
+    {
+      "threshold": 1300,
+      "trainGames": 80501,
+      "removedWthorGames": 60,
+      "gameRetentionVsWthor": 0.9992552227504624,
+      "retainedOccurrences": 1251410,
+      "uniquePositions": 1053248,
+      "uniqueRetentionVsWthor": 0.9991613953470723,
+      "multiActionOrbitPositions": 18318,
+      "multipleOutcomePositions": 20698,
+      "bothWinAndLossPositions": 17740,
+      "unknownRatingGamesRetained": 605,
+      "bothPlayers20PriorGames": 40696,
+      "theoryComparableGames": 80501,
+      "recordedVs24EmptyWdlDisagreementGames": 18449,
+      "recordedVs24EmptyWdlDisagreementRate": 0.2291772773009031,
+      "stages": [
+        {
+          "placements": [
+            9,
+            18
+          ],
+          "uniquePositions": 120567
+        },
+        {
+          "placements": [
+            21,
+            36
+          ],
+          "uniquePositions": 451708
+        },
+        {
+          "placements": [
+            39,
+            54
+          ],
+          "uniquePositions": 480973
+        }
+      ]
+    },
+    {
+      "threshold": 1400,
+      "trainGames": 80068,
+      "removedWthorGames": 493,
+      "gameRetentionVsWthor": 0.9938804135996325,
+      "retainedOccurrences": 1244540,
+      "uniquePositions": 1047195,
+      "uniqueRetentionVsWthor": 0.9934192302292313,
+      "multiActionOrbitPositions": 18226,
+      "multipleOutcomePositions": 20596,
+      "bothWinAndLossPositions": 17649,
+      "unknownRatingGamesRetained": 605,
+      "bothPlayers20PriorGames": 40347,
+      "theoryComparableGames": 80068,
+      "recordedVs24EmptyWdlDisagreementGames": 18328,
+      "recordedVs24EmptyWdlDisagreementRate": 0.22890543038417346,
+      "stages": [
+        {
+          "placements": [
+            9,
+            18
+          ],
+          "uniquePositions": 119661
+        },
+        {
+          "placements": [
+            21,
+            36
+          ],
+          "uniquePositions": 449147
+        },
+        {
+          "placements": [
+            39,
+            54
+          ],
+          "uniquePositions": 478387
+        }
+      ]
+    },
+    {
+      "threshold": 1450,
+      "trainGames": 78919,
+      "removedWthorGames": 1642,
+      "gameRetentionVsWthor": 0.9796179292709872,
+      "retainedOccurrences": 1226305,
+      "uniquePositions": 1031058,
+      "uniqueRetentionVsWthor": 0.9781109007221107,
+      "multiActionOrbitPositions": 17990,
+      "multipleOutcomePositions": 20350,
+      "bothWinAndLossPositions": 17409,
+      "unknownRatingGamesRetained": 605,
+      "bothPlayers20PriorGames": 39828,
+      "theoryComparableGames": 78919,
+      "recordedVs24EmptyWdlDisagreementGames": 18028,
+      "recordedVs24EmptyWdlDisagreementRate": 0.22843675160607713,
+      "stages": [
+        {
+          "placements": [
+            9,
+            18
+          ],
+          "uniquePositions": 117250
+        },
+        {
+          "placements": [
+            21,
+            36
+          ],
+          "uniquePositions": 442303
+        },
+        {
+          "placements": [
+            39,
+            54
+          ],
+          "uniquePositions": 471505
+        }
+      ]
+    },
+    {
+      "threshold": 1500,
+      "trainGames": 75121,
+      "removedWthorGames": 5440,
+      "gameRetentionVsWthor": 0.9324735293752561,
+      "retainedOccurrences": 1166321,
+      "uniquePositions": 978847,
+      "uniqueRetentionVsWthor": 0.9285810505705168,
+      "multiActionOrbitPositions": 17211,
+      "multipleOutcomePositions": 19559,
+      "bothWinAndLossPositions": 16679,
+      "unknownRatingGamesRetained": 605,
+      "bothPlayers20PriorGames": 38712,
+      "theoryComparableGames": 75121,
+      "recordedVs24EmptyWdlDisagreementGames": 17049,
+      "recordedVs24EmptyWdlDisagreementRate": 0.22695384779222855,
+      "stages": [
+        {
+          "placements": [
+            9,
+            18
+          ],
+          "uniquePositions": 110073
+        },
+        {
+          "placements": [
+            21,
+            36
+          ],
+          "uniquePositions": 419981
+        },
+        {
+          "placements": [
+            39,
+            54
+          ],
+          "uniquePositions": 448793
+        }
+      ]
+    },
+    {
+      "threshold": 1550,
+      "trainGames": 58794,
+      "removedWthorGames": 21767,
+      "gameRetentionVsWthor": 0.7298072268219113,
+      "retainedOccurrences": 910252,
+      "uniquePositions": 756417,
+      "uniqueRetentionVsWthor": 0.7175733209882633,
+      "multiActionOrbitPositions": 13682,
+      "multipleOutcomePositions": 16054,
+      "bothWinAndLossPositions": 13489,
+      "unknownRatingGamesRetained": 605,
+      "bothPlayers20PriorGames": 36771,
+      "theoryComparableGames": 58794,
+      "recordedVs24EmptyWdlDisagreementGames": 13135,
+      "recordedVs24EmptyWdlDisagreementRate": 0.22340715038949552,
+      "stages": [
+        {
+          "placements": [
+            9,
+            18
+          ],
+          "uniquePositions": 79671
+        },
+        {
+          "placements": [
+            21,
+            36
+          ],
+          "uniquePositions": 325467
+        },
+        {
+          "placements": [
+            39,
+            54
+          ],
+          "uniquePositions": 351279
+        }
+      ]
+    },
+    {
+      "threshold": 1600,
+      "trainGames": 51854,
+      "removedWthorGames": 28707,
+      "gameRetentionVsWthor": 0.643661324958727,
+      "retainedOccurrences": 801612,
+      "uniquePositions": 664495,
+      "uniqueRetentionVsWthor": 0.6303717181529448,
+      "multiActionOrbitPositions": 12135,
+      "multipleOutcomePositions": 14512,
+      "bothWinAndLossPositions": 12077,
+      "unknownRatingGamesRetained": 605,
+      "bothPlayers20PriorGames": 34138,
+      "theoryComparableGames": 51854,
+      "recordedVs24EmptyWdlDisagreementGames": 11430,
+      "recordedVs24EmptyWdlDisagreementRate": 0.22042658232730358,
+      "stages": [
+        {
+          "placements": [
+            9,
+            18
+          ],
+          "uniquePositions": 69120
+        },
+        {
+          "placements": [
+            21,
+            36
+          ],
+          "uniquePositions": 285564
+        },
+        {
+          "placements": [
+            39,
+            54
+          ],
+          "uniquePositions": 309811
+        }
+      ]
+    },
+    {
+      "threshold": 1650,
+      "trainGames": 43810,
+      "removedWthorGames": 36751,
+      "gameRetentionVsWthor": 0.5438115217040503,
+      "retainedOccurrences": 676355,
+      "uniquePositions": 559324,
+      "uniqueRetentionVsWthor": 0.5306014806494822,
+      "multiActionOrbitPositions": 10294,
+      "multipleOutcomePositions": 12484,
+      "bothWinAndLossPositions": 10308,
+      "unknownRatingGamesRetained": 605,
+      "bothPlayers20PriorGames": 29909,
+      "theoryComparableGames": 43810,
+      "recordedVs24EmptyWdlDisagreementGames": 9606,
+      "recordedVs24EmptyWdlDisagreementRate": 0.2192650079890436,
+      "stages": [
+        {
+          "placements": [
+            9,
+            18
+          ],
+          "uniquePositions": 57679
+        },
+        {
+          "placements": [
+            21,
+            36
+          ],
+          "uniquePositions": 239922
+        },
+        {
+          "placements": [
+            39,
+            54
+          ],
+          "uniquePositions": 261723
+        }
+      ]
+    },
+    {
+      "threshold": 1700,
+      "trainGames": 36556,
+      "removedWthorGames": 44005,
+      "gameRetentionVsWthor": 0.4537679522349524,
+      "retainedOccurrences": 563343,
+      "uniquePositions": 465044,
+      "uniqueRetentionVsWthor": 0.4411629663078248,
+      "multiActionOrbitPositions": 8641,
+      "multipleOutcomePositions": 10721,
+      "bothWinAndLossPositions": 8754,
+      "unknownRatingGamesRetained": 605,
+      "bothPlayers20PriorGames": 25593,
+      "theoryComparableGames": 36556,
+      "recordedVs24EmptyWdlDisagreementGames": 7876,
+      "recordedVs24EmptyWdlDisagreementRate": 0.21545026808184703,
+      "stages": [
+        {
+          "placements": [
+            9,
+            18
+          ],
+          "uniquePositions": 47627
+        },
+        {
+          "placements": [
+            21,
+            36
+          ],
+          "uniquePositions": 199073
+        },
+        {
+          "placements": [
+            39,
+            54
+          ],
+          "uniquePositions": 218344
+        }
+      ]
+    },
+    {
+      "threshold": 1750,
+      "trainGames": 27230,
+      "removedWthorGames": 53331,
+      "gameRetentionVsWthor": 0.3380047417484887,
+      "retainedOccurrences": 419213,
+      "uniquePositions": 347372,
+      "uniqueRetentionVsWthor": 0.32953368268869554,
+      "multiActionOrbitPositions": 6397,
+      "multipleOutcomePositions": 8126,
+      "bothWinAndLossPositions": 6472,
+      "unknownRatingGamesRetained": 605,
+      "bothPlayers20PriorGames": 19739,
+      "theoryComparableGames": 27230,
+      "recordedVs24EmptyWdlDisagreementGames": 5791,
+      "recordedVs24EmptyWdlDisagreementRate": 0.21266984943077488,
+      "stages": [
+        {
+          "placements": [
+            9,
+            18
+          ],
+          "uniquePositions": 36506
+        },
+        {
+          "placements": [
+            21,
+            36
+          ],
+          "uniquePositions": 148244
+        },
+        {
+          "placements": [
+            39,
+            54
+          ],
+          "uniquePositions": 162622
+        }
+      ]
+    },
+    {
+      "threshold": 1800,
+      "trainGames": 19998,
+      "removedWthorGames": 60563,
+      "gameRetentionVsWthor": 0.2482342572708879,
+      "retainedOccurrences": 308180,
+      "uniquePositions": 255395,
+      "uniqueRetentionVsWthor": 0.24227990422451837,
+      "multiActionOrbitPositions": 4709,
+      "multipleOutcomePositions": 6075,
+      "bothWinAndLossPositions": 4689,
+      "unknownRatingGamesRetained": 605,
+      "bothPlayers20PriorGames": 14632,
+      "theoryComparableGames": 19998,
+      "recordedVs24EmptyWdlDisagreementGames": 4109,
+      "recordedVs24EmptyWdlDisagreementRate": 0.20547054705470547,
+      "stages": [
+        {
+          "placements": [
+            9,
+            18
+          ],
+          "uniquePositions": 27643
+        },
+        {
+          "placements": [
+            21,
+            36
+          ],
+          "uniquePositions": 108388
+        },
+        {
+          "placements": [
+            39,
+            54
+          ],
+          "uniquePositions": 119364
+        }
+      ]
+    }
+  ],
+  "selected": {
+    "threshold": 1600,
+    "trainGames": 51854,
+    "removedWthorGames": 28707,
+    "gameRetentionVsWthor": 0.643661324958727,
+    "retainedOccurrences": 801612,
+    "uniquePositions": 664495,
+    "uniqueRetentionVsWthor": 0.6303717181529448,
+    "multiActionOrbitPositions": 12135,
+    "multipleOutcomePositions": 14512,
+    "bothWinAndLossPositions": 12077,
+    "unknownRatingGamesRetained": 605,
+    "bothPlayers20PriorGames": 34138,
+    "theoryComparableGames": 51854,
+    "recordedVs24EmptyWdlDisagreementGames": 11430,
+    "recordedVs24EmptyWdlDisagreementRate": 0.22042658232730358,
+    "stages": [
+      {
+        "placements": [
+          9,
+          18
+        ],
+        "uniquePositions": 69120
+      },
+      {
+        "placements": [
+          21,
+          36
+        ],
+        "uniquePositions": 285564
+      },
+      {
+        "placements": [
+          39,
+          54
+        ],
+        "uniquePositions": 309811
+      }
+    ]
+  },
+  "matchedFrozenMillionRetained": 529583,
+  "matchedFrozenMillionMissing": 470417,
+  "crossHoldoutOverlap": 0,
+  "illegalSparseActions": 0,
+  "frozenHoldouts": {
+    "validation": {
+      "board": {
+        "shape": [
+          6000,
+          64
+        ],
+        "dtype": "|i1",
+        "sha256": "a10fdf4c30ed9fbdd20ec0d606dc9aa85709765cbe1cebe7cceccd9d030a870d"
+      },
+      "turn": {
+        "shape": [
+          6000
+        ],
+        "dtype": "<f4",
+        "sha256": "32961c9dc9f4931b17eaf7d425de2df762dc831538dee2923770a17e25d4c537"
+      },
+      "target": {
+        "shape": [
+          6000
+        ],
+        "dtype": "<f4",
+        "sha256": "1488f32181e8aa393dc90a1ddd723efd42b7cab74f30439f73934751f0c99602"
+      },
+      "policy": {
+        "shape": [
+          6000
+        ],
+        "dtype": "|i1",
+        "sha256": "edd49d2bfee3721687cc6a8119489669974119053c77e5d5076d25b8a1222b5d"
+      }
+    },
+    "test": {
+      "board": {
+        "shape": [
+          6000,
+          64
+        ],
+        "dtype": "|i1",
+        "sha256": "98d36663507a156c0e63b9b2007c5fe33e37bad807e130396342495eed03eff9"
+      },
+      "turn": {
+        "shape": [
+          6000
+        ],
+        "dtype": "<f4",
+        "sha256": "7fd9fd1c638a0223d64e37fe4d7a13b1b6b50acf3c1feffc1aa5361ac8ff2617"
+      },
+      "target": {
+        "shape": [
+          6000
+        ],
+        "dtype": "<f4",
+        "sha256": "b95dfa707caf15bc89a39adcf6edaaef3e5b249a6583d982b73cbcc39aaf36f8"
+      },
+      "policy": {
+        "shape": [
+          6000
+        ],
+        "dtype": "|i1",
+        "sha256": "9739b09c5357c2acaa5f976381157fa88a6891d16764380bef323a720b7c5fec"
+      }
+    }
+  },
+  "protocolSha256": "dd8acd5c211613da442e15e0966ff32ca7f96bac95fa4debdb7793c54e61df75",
+  "preservedSha256": {
+    ".build/training/v1/positions.npz": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6",
+    ".build/training/v1.8/policy.npz": "d5712464ea92f34019de2ca9427d95cfa9aa985ff9d854801c9eb7362a7b587a",
+    ".build/training/games.jsonl": "6332fd01b27c11a81f3fbd344e52aaf8f70e60c644780fb453cc7ef64ae359ac",
+    "models/default-model.json": "6582f442dc890e847a393cbd31fb54a63f00d8dca62cede1315187137a9c2de4",
+    "models/v1.37-default.json": "27ce5cd4be6cf824b629c5c08151a766b748608c96c9970e58ed8d4c2ca1d0f5",
+    "models/pattern32-symmetry-v1.37.otpat": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+    "src/game/wasm/othello.mjs": "825ef6e4e84e7e60ce0cb262a2a5cb0d25c2a3bb2e6663750688492a79942303",
+    "models/training-data-audit-2026-10-30.json": "6e5f3da422ed9d2b557a3bc509ad1d85ded4eaebe9e62b002d849021704322a5",
+    "models/v1.39-policy-width-experiment.json": "f1fb77f893f2c0cde032905d9a812d742ba41b2a11c3913b167f4269e3cd5cee",
+    "models/v1.38-direct-policy-2s-20-experiment.json": "14ba42f0d1e45a66ff4f2c9ee4984a5caa8818875c54edfccb4a02d5903dce8e",
+    ".build/training/data-audit-20261030/game-player-metadata.jsonl": "afba1888ac33076616034ad8cda6523bb2a28fc7adabf4dbd2bc52b31bde2343",
+    ".build/training/data-audit-20261030/metadata/WTHOR.JOU": "3db81a3850ab4bb1ff4523f2d326fccbc4168ae68865ec4fcc45b884bdde56c9",
+    "models/v1.40-training-consensus-elo.json": "49e778288098123401542c898a7178c64baa2dc9882fee0175b9f812e6619a0a",
+    "models/v1.40-training-consensus-elo-experiment.json": "64406bc70bae6b111a6ac0594eeaba9385421d0387d7999b8df33f3080c40a92",
+    "models/v1.40-training-consensus-elo-validation.json": "ab6aca29a2d7bb51b01d69a2bb1f11775ddc36077bc1296b6d57da668f7cbcb5"
+  },
+  "artifactSha256": {
+    ".build/training/wthor-elo-v1.41/consensus.npz": "3c45f17573aa0ff8a1fd8adf5926f3f3a8aea8b5f00ddd71449cda6211032865",
+    ".build/training/wthor-elo-v1.41/occurrences.npz": "137602346001d3a61e8ec2c89df3614a50ba78e90e8d55fad269b91e0dc49ce1",
+    ".build/training/wthor-elo-v1.41/game-filter.jsonl": "f9d0959637310c232bd06037ff87afc548900e01b1c3e79835639e9735c1d655"
+  },
+  "scriptSha256": {
+    "scripts/prepare-wthor-elo-sweep.py": "4821c5173ef2a81750ca05a879406779407a7d6c55202703bd5d64b51f90aa18",
+    "scripts/wthor_elo_filter.py": "6ddb4f8640b7f7941d2d50cf5d2d3e92f1aaf00cc12e225196b223f5186f9628",
+    "scripts/training_consensus.py": "2969614f441622106e232aa7bffd4b8a471aa2b7b0cd135632016b126c7ff0e6"
+  },
+  "seconds": 8.647053957916796,
+  "schema": "Train-only relative D4 canonical boards; unweighted empirical policy/WLD counts and probabilities. policy_loss_weight is exactly 1. matched_train_group has -1 for removed original-million rows; matched_train_row/matched_retained_group provide the safe paired subset. Frozen validation/test remain in original cache.",
+  "limits": "Selection uses training-data retention and a training-only ending consistency proxy, not validation/test model scores or match results. Recorded outcomes and exact results at one 24-empty position can differ due to later play; disagreement is not a per-move blunder rate. Unknown Elo retained separately. AND filter allows weak-player moves against strong opponents. WTHOR contains human and program participants; not a certified professional-only corpus. No Elo recomputation after filtering; no training."
+}

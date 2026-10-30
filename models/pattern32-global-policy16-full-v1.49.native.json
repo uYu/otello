@@ -1,0 +1,27 @@
+{
+  "version": "v1.49-global-policy-native",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "formatMagic": "OTPAT9",
+  "model": "models/pattern32-global-policy16-full-v1.49.otpat",
+  "sha256": "df11f7b9eed358fff33a426e2f0cb1a290083d2bc8e0781a2fbd1efdaf4270c3",
+  "bytes": 1837288,
+  "uniqueTrainedParameters": 916987,
+  "globalPolicyIndependentParameters": 237,
+  "architecture": "D4 ordered38 projections ->16 hidden ->all64 correction logits; complete selected full model",
+  "trainingReport": "models/v1.49-pattern-global-policy-full.json",
+  "nativeValidation": "models/v1.49-global-policy-native-validation.json",
+  "nativeLibrary": ".build/native-pattern-global-policy-v1.49/libothello.dylib",
+  "nativeLibrarySha256": "9e1c7f0a0e3c247272e048a336a6de2fb18e938145bd66f4118576f502e91bc2",
+  "frozenBaseline": "models/v1.37-default.json",
+  "measuredMatch": "models/v1.49-global-policy-vs-v1.37-2s-20.json",
+  "candidateWDL": {
+    "win": 10,
+    "draw": 6,
+    "loss": 4
+  },
+  "millisecondsPerMove": 2000,
+  "games": 20,
+  "scoreRate": 0.65,
+  "limits": "Candidate only. Full native model supported by the isolated OTPAT9 library; training/component metadata remains unchanged. Browser/default native engine not modified. Twenty-game screening result is not a significance claim."
+}

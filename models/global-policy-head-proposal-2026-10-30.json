@@ -1,0 +1,44 @@
+{
+  "status": "untrained-prototype",
+  "defaultPromoted": false,
+  "baseline": "models/v1.37-default.json",
+  "objective": "Improve legal move policy quality without degrading the frozen value readout",
+  "architecture": "Frozen v1.37 ordered38 conditional pattern projections -> quantize/clamp -> D4 tied38→16C→64 clipped-ReLU MLP -> residual correction to original64 policy logits -> legal mask/softmax",
+  "featureReuse": "Reuse the38 pattern projections already computed by the baseline; preserve their spatial order instead of pooling them away. Encoder/table/trunk/value/gates and original policy are frozen. The global correction head executes once per board.",
+  "spatialSymmetry": "The three pooled groups/global32 vector are D4-invariant and cannot alone encode which board coordinates rotate. Ordered38 pattern features permute under D4; both MLP matrices are tied under simultaneous input/hidden/output transformations, with hidden4x4 maps.",
+  "variants": [
+    {
+      "hidden": 16,
+      "hiddenMaps4x4": 1,
+      "addedTrainableParameters": 237,
+      "denseMultiplyAdds": 1632
+    },
+    {
+      "hidden": 32,
+      "hiddenMaps4x4": 2,
+      "addedTrainableParameters": 464,
+      "denseMultiplyAdds": 3264
+    }
+  ],
+  "initialization": "Frozen approved v1.37 weights; zero output correction starts exactly at baseline full predictions",
+  "selection": "Proposed next experiment: validation legal-policy cross-entropy; report top1 alongside CE. Keep value unchanged; candidate test only after selection. Native speed gate required before full training/strength matches.",
+  "verification": {
+    "torchTestsPassed": 2,
+    "positions": 512,
+    "identityAgainstApprovedWeights": true,
+    "allEightD4Transforms": true,
+    "valueAndWDLUnchangedWithNonzeroPolicyHead": true,
+    "encoderGradientsAbsent": true,
+    "policyHeadGradientsPresent": true
+  },
+  "caveats": [
+    "This is a PyTorch structure prototype, with no trained candidate, native kernel, measured throughput or strength result.",
+    "Tied weights reduce trainable parameter count; the dense multiply-add estimate still counts every expanded matrix operation.",
+    "Global scalar projections contain less local detail than full32-dimensional per-square embeddings; whether the new interactions improve policy must be tested."
+  ],
+  "sourceSha256": {
+    "scripts/pattern_global_policy.py": "128c7f6b7d17faf066c568474ee4193cad8d2ffe540e4b36dfbfd1c733d76112",
+    "tests/pattern_global_policy_test.py": "88360a3ef1fe3ae9aa6164e3f3860dcd04f8613f28da1e1a92bc3530fed2b571"
+  },
+  "rejectedPriorCandidateDecision": "models/v1.48-shared-residual-decision.json"
+}

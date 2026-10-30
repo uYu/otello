@@ -1,0 +1,31 @@
+{
+  "version": "v2",
+  "status": "frozen",
+  "defaultPromoted": true,
+  "formatMagic": "OTPAT9",
+  "model": "models/pattern32-global-policy-v2.otpat",
+  "sha256": "df11f7b9eed358fff33a426e2f0cb1a290083d2bc8e0781a2fbd1efdaf4270c3",
+  "bytes": 1837288,
+  "uniqueTrainedParameters": 916987,
+  "globalPolicyIndependentParameters": 237,
+  "architecture": "D4 ordered38 projections ->16 hidden ->all64 correction logits; complete selected full model",
+  "trainingReport": "models/v1.49-pattern-global-policy-full.json",
+  "nativeValidation": "models/v2-default-validation.json",
+  "nativeLibrary": ".build/native-v2-reference/libothello.dylib",
+  "nativeLibrarySha256": "32ba029271c078c699060c598bdae15527d81e483472c6186499ef6c2224fb7b",
+  "frozenBaseline": "models/v2-default.json",
+  "measuredMatch": "models/v1.49-global-policy-vs-v1.37-2s-20.json",
+  "candidateWDL": {
+    "win": 10,
+    "draw": 6,
+    "loss": 4
+  },
+  "millisecondsPerMove": 2000,
+  "games": 20,
+  "scoreRate": 0.65,
+  "limits": "Exact user-approved v1.49 full-trained model, renamed v2; no retraining. See frozen baseline for separate evaluation budgets and provenance.",
+  "promotedFrom": "models/pattern32-global-policy16-full-v1.49.otpat",
+  "approval": "感觉可以作为v2了",
+  "baselineManifest": "models/v2-default.json",
+  "previousBaseline": "models/v1.37-default.json"
+}

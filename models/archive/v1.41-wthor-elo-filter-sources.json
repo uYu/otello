@@ -1,0 +1,12 @@
+{
+  "archive": "models/archive/v1.41-wthor-elo-filter-sources.tar.gz",
+  "sha256": "1ac5ad720f8399ce21a8c18cbde0a524b85cfef165dabcb76fe86f8ee47bf08d",
+  "files": {
+    "scripts/prepare-wthor-elo-sweep.py": "4821c5173ef2a81750ca05a879406779407a7d6c55202703bd5d64b51f90aa18",
+    "scripts/verify-wthor-elo-filter.py": "0b377c29b50b612ba19916d96f1ff02fca3df71a7babd94057cdfb9eb7efaf95",
+    "scripts/wthor_elo_filter.py": "6ddb4f8640b7f7941d2d50cf5d2d3e92f1aaf00cc12e225196b223f5186f9628",
+    "scripts/training_consensus.py": "2969614f441622106e232aa7bffd4b8a471aa2b7b0cd135632016b126c7ff0e6",
+    "tests/wthor_elo_filter_test.py": "d62b4e92cc3650b33fbc7b0b27b4b3e53a0f9a666c1d5401e9fc7bdabccb8dcd",
+    "models/v1.41-wthor-elo-filter-protocol.json": "dd8acd5c211613da442e15e0966ff32ca7f96bac95fa4debdb7793c54e61df75"
+  }
+}

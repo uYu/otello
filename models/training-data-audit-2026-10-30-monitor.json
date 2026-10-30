@@ -1,0 +1,9 @@
+{
+  "experiment": "pattern-suite-sampling",
+  "stage": "审计完成",
+  "completed": 1,
+  "total": 1,
+  "summary": "完整性、棋手溯源及训练标签多样性审计完成；原始数据未改",
+  "complete": true,
+  "seconds": 25.213739541824907
+}

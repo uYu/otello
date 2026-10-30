@@ -44,10 +44,10 @@ def compare(args):
     baseline = json.loads(args.baseline_manifest.read_text())
     magic=args.model.read_bytes()[:8]
     baseline_magic=(ROOT/baseline['defaultModel']).read_bytes()[:8]
-    learned=magic in (b'OTNNUE3\0',b'OTNNUE4\0',b'OTNNUE5\0',b'OTCNN2\0\0',b'OTPAT1\0\0',b'OTPAT2\0\0',b'OTPAT3\0\0')
-    baseline_learned=baseline_magic in (b'OTNNUE3\0',b'OTNNUE4\0',b'OTNNUE5\0',b'OTCNN2\0\0',b'OTPAT1\0\0',b'OTPAT2\0\0',b'OTPAT3\0\0')
-    configs = [dict(id='baseline', name=baseline['version'], search='mcts', model=baseline['defaultModel'],prior='learned' if baseline_learned else 'uniform',valueTarget='outcome' if baseline_magic in (b'OTNNUE4\0',b'OTNNUE5\0',b'OTCNN2\0\0',b'OTPAT2\0\0',b'OTPAT3\0\0') else 'discDifference'),
-               dict(id='candidate', name=args.label, search='mcts', model=str(args.model.resolve()),prior='learned' if learned else 'uniform',valueTarget='outcome' if magic in (b'OTNNUE4\0',b'OTNNUE5\0',b'OTCNN2\0\0',b'OTPAT2\0\0',b'OTPAT3\0\0') else 'discDifference')]
+    learned=magic in (b'OTNNUE3\0',b'OTNNUE4\0',b'OTNNUE5\0',b'OTCNN2\0\0',b'OTPAT1\0\0',b'OTPAT2\0\0',b'OTPAT3\0\0',b'OTPAT4\0\0',b'OTPAT5\0\0',b'OTPAT6\0\0',b'OTPAT7\0\0',b'OTPAT9\0\0')
+    baseline_learned=baseline_magic in (b'OTNNUE3\0',b'OTNNUE4\0',b'OTNNUE5\0',b'OTCNN2\0\0',b'OTPAT1\0\0',b'OTPAT2\0\0',b'OTPAT3\0\0',b'OTPAT4\0\0',b'OTPAT5\0\0',b'OTPAT6\0\0',b'OTPAT7\0\0',b'OTPAT9\0\0')
+    configs = [dict(id='baseline', name=baseline['version'], search='mcts', model=baseline['defaultModel'],prior='learned' if baseline_learned else 'uniform',valueTarget='outcome' if baseline_magic in (b'OTNNUE4\0',b'OTNNUE5\0',b'OTCNN2\0\0',b'OTPAT2\0\0',b'OTPAT3\0\0',b'OTPAT4\0\0',b'OTPAT5\0\0',b'OTPAT6\0\0',b'OTPAT7\0\0',b'OTPAT9\0\0') else 'discDifference'),
+               dict(id='candidate', name=args.label, search='mcts', model=str(args.model.resolve()),prior='learned' if learned else 'uniform',valueTarget='outcome' if magic in (b'OTNNUE4\0',b'OTNNUE5\0',b'OTCNN2\0\0',b'OTPAT2\0\0',b'OTPAT3\0\0',b'OTPAT4\0\0',b'OTPAT5\0\0',b'OTPAT6\0\0',b'OTPAT7\0\0',b'OTPAT9\0\0') else 'discDifference')]
     assert match.sha(ROOT / configs[0]['model']) == baseline['modelSha256']
     match.CONFIGS = configs
     provenance = dict(version=args.label, experiment='candidate-vs-approved-baseline',

@@ -1,0 +1,44 @@
+{
+  "version": "v1.49-global-policy-full",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "userRequest": "训一版看看；不只更新新增237参数，改为全网从头训练",
+  "baseline": "models/v1.37-default.json",
+  "architecture": "D4-tied ordered38 pattern projections -> shared38->16->64 additive policy correction; original value and conditional policy branches",
+  "trainableParameters": 916987,
+  "additionalPolicyParameters": 237,
+  "freezeBaseline": false,
+  "pretrainedWeightsLoaded": false,
+  "epochs": 15,
+  "trainPositions": 1000000,
+  "batchSize": 2048,
+  "seed": 20261029,
+  "dataSeed": 20261030,
+  "threads": 2,
+  "optimizer": "AdamW",
+  "learningRate": 0.001,
+  "weightDecay": 0.0001,
+  "loss": "outcome MSE +0.1 WDL CE +0.1 legal-next-move CE; same coefficients as v1.37",
+  "selection": "Minimum original validation legal-policy CE among epochs1..15. Report top1 and value MSE; no test-based selection.",
+  "initialization": "Random full network; shared table/trunk/original head initial values identical to v1.37. Extra global down random, global up zero.",
+  "data": {
+    "sources": [
+      "WTHOR",
+      "Logistello"
+    ],
+    "labels": "Original hard next-move labels and outcome labels, no reweighting/relabeling",
+    "positionsSha256": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6",
+    "policySha256": "d5712464ea92f34019de2ca9427d95cfa9aa985ff9d854801c9eb7362a7b587a"
+  },
+  "augmentation": "Same row shuffle and uniform D4 board/label/mask transformations as v1.37",
+  "preservedSha256": {
+    "models/default-model.json": "6582f442dc890e847a393cbd31fb54a63f00d8dca62cede1315187137a9c2de4",
+    "models/v1.37-default.json": "27ce5cd4be6cf824b629c5c08151a766b748608c96c9970e58ed8d4c2ca1d0f5",
+    "models/pattern32-symmetry-v1.37.otpat": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+    "models/pattern32-symmetry-v1.37.pt": "8f6052eadfd2cef1367c14fe121c910bb2e1635cafcda083d9e8fdbbd8a73d52",
+    "src/game/wasm/othello.mjs": "825ef6e4e84e7e60ce0cb262a2a5cb0d25c2a3bb2e6663750688492a79942303"
+  },
+  "sourceArchiveManifest": "models/archive/v1.49-global-policy-full-sources.json",
+  "scope": "One offline full retraining run; no native deployment, throughput or strength match and no default promotion.",
+  "limits": "Single seed and historical held-out splits. Validation selection differs from original v1.37 value-MSE selection; results cannot isolate architecture alone."
+}

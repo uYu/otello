@@ -1,0 +1,53 @@
+{
+  "complete": true,
+  "defaultPromoted": false,
+  "allActionsReplayed": 1214,
+  "allDecisionsAudited": true,
+  "pairedColors": true,
+  "sharedPairSeeds": true,
+  "candidateWDL": {
+    "win": 10,
+    "draw": 6,
+    "loss": 4
+  },
+  "candidateScoreRate": 0.65,
+  "searchStatistics": {
+    "candidate": {
+      "moves": 606,
+      "meanWallMs": 1541.9454218894396,
+      "meanSimulations": 3163020.3547854787,
+      "meanNewLeafEvaluations": 493054.94554455444,
+      "memoryLimitedDecisions": 0,
+      "proofStoppedDecisions": 146,
+      "peakRssMiB": 1732.75
+    },
+    "baseline": {
+      "moves": 594,
+      "meanWallMs": 1528.1208576700324,
+      "meanSimulations": 2595137.117845118,
+      "meanNewLeafEvaluations": 592411.2306397307,
+      "memoryLimitedDecisions": 0,
+      "proofStoppedDecisions": 142,
+      "peakRssMiB": 1627.25
+    }
+  },
+  "preservedSha256": {
+    "models/default-model.json": "6582f442dc890e847a393cbd31fb54a63f00d8dca62cede1315187137a9c2de4",
+    "models/v1.37-default.json": "27ce5cd4be6cf824b629c5c08151a766b748608c96c9970e58ed8d4c2ca1d0f5",
+    "models/pattern32-symmetry-v1.37.otpat": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+    "models/pattern32-symmetry-v1.37.pt": "8f6052eadfd2cef1367c14fe121c910bb2e1635cafcda083d9e8fdbbd8a73d52",
+    "src/game/wasm/othello.mjs": "825ef6e4e84e7e60ce0cb262a2a5cb0d25c2a3bb2e6663750688492a79942303",
+    ".build/native-v1.37-reference/libothello.dylib": "e8eea82419065f5af3c6ddcd257c5497f971d2ba17ae94782b490a10a637a024"
+  },
+  "artifactSha256": {
+    "models/v1.49-global-policy-vs-v1.37-2s-20.json": "3c208f641c933c85911a33e54ad813e826240e62d44fc94a0c1a6171f2fad555",
+    "models/v1.49-global-policy-2s-20-comparison.json": "7560937f7caa9c153fd3ba1ed8138bc6c1d64c1150eece9ed41affcd45014e65",
+    "models/v1.49-global-policy-2s-20-protocol.json": "1e56c4be91dacf3e33b0b6e285200ba1ea758ee6a7093860e931224fc2aa0596",
+    "models/archive/v1.49-global-policy-native-sources.json": "c3e686160cf44eb7e08d7f9fda337e0aedcf9296a15d9f3785acc318324d5ac4",
+    "models/archive/v1.49-global-policy-native-sources.tar.gz": "fdb56a099bd0e45a74c7dbf99980637e33329366fba5cfc73382b209f3f6e27e",
+    "models/pattern32-global-policy16-full-v1.49.otpat": "df11f7b9eed358fff33a426e2f0cb1a290083d2bc8e0781a2fbd1efdaf4270c3",
+    "models/v1.49-global-policy-native-validation.json": "e2f39fb18f622ddf9259f43b48625c45aa7d85389990d0258daebfe26c272181",
+    "models/v1.49-pattern-global-policy-full.json": "13e2bf466c980679e26b5218408dddab0888a9911c37bc00277b46f605c8531c"
+  },
+  "auditorSha256": "bae62583542d72cfbe00c82280d104e8fe04f1b35b48ad3e30e8569804d36cc6"
+}

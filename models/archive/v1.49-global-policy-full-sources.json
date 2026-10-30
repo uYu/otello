@@ -1,0 +1,18 @@
+{
+  "archive": "models/archive/v1.49-global-policy-full-sources.tar.gz",
+  "sha256": "bc4189e4baeefadcd0ca8986fb7b1d46fe0ac3bd087bc3815be25a1c6d05ffd4",
+  "files": {
+    "scripts/train-pattern-global-policy-full.py": "0d0459ee3e331cba1de3105bb16012ea2c3f6e8dc3660aa304fc6031c0184909",
+    "scripts/train-pattern-global-policy.py": "426dee17f816a1290946b6d802ecd96ab836af832726ed55227d4c6aaeffeb62",
+    "scripts/pattern_global_policy.py": "a15da14082c035698af64e5a08365b071cd4775f5a96b0a1ed5fd2cb7c887e8d",
+    "scripts/pattern_model.py": "4bd0fbf1360ad2d9c385ac16ec4a9aa7748fd6787f507317d85d320080bf30d5",
+    "scripts/pattern_structure.py": "58673f74d802fe8432d9dd385c8c98dc250139d78516a126f2e20557f3dd31d3",
+    "scripts/train-pattern-outcome.py": "94d823a68e3ea8ac8a790e24e7b39d06fd52bdaa44cd50c04e0bb97dac870bfb",
+    "scripts/train-pattern.py": "f85ddaed63329214222f672f81778f50dbd072f3e7b68ef467835705b948bdd3",
+    "scripts/watch-match.sh": "ab16bc011439cf6cc489a821cc57c0129e01b52a2b08d203257ae49df8add78b",
+    "scripts/watch-matches.py": "922cdf982605302b82e9fd6207d576c9e6c169adbbcb5bd7889808755c50a406",
+    "tests/pattern_global_policy_test.py": "e8d3403d9c9accccb71d1c3ade6fffb6541df093b4ca1a1e6bda4917d923a3c0",
+    "tests/global_policy_monitor_test.py": "b6cd58443c3a83ecbc2829ccff6f8688c15fab4693fc05ae1aa3fe672ac10f7c",
+    "models/v1.49-global-policy-full-protocol.json": "2dda3d1561e5a3c73cf01503885fa5ae03dcd5da0004cd63998a5fed7c139eee"
+  }
+}

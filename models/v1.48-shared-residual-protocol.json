@@ -1,0 +1,82 @@
+{
+  "version": "v1.48-shared-residual",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "startedUnix": 1793347310.162244,
+  "userRequest": "开整：先做比基线稍大的共享计算模型",
+  "baseline": "models/v1.37-default.json",
+  "architecture": {
+    "table": "D4 tied 28503x32 INT16",
+    "patterns": 38,
+    "pools": 3,
+    "trunk": [
+      97,
+      32
+    ],
+    "residual": [
+      32,
+      "R",
+      32
+    ],
+    "residualWidths": [
+      16,
+      8
+    ],
+    "residualEquation": "z=Q(clamp(Wd*h+bd,0,1)); d=Q(clamp(Wu*z+bu,-1,1)); h=Q(clamp(h+d,0,1))",
+    "policy": "Original 32 gates + 10 D4 positional biases; one projection per pattern reused by legal squares",
+    "parametersAdded": {
+      "16": 1072,
+      "8": 552
+    },
+    "format": "OTPAT8"
+  },
+  "speedGate": {
+    "identityProbe": "Frozen v1.37 table/trunk/head plus zero residual output, identical complete predictions and trees",
+    "minimumEvaluationThroughputRatio": 0.9,
+    "maximumLegalLatencyRatio": 1.25,
+    "selection": "Prefer width16 if passes, otherwise width8 if passes; do not train if neither passes",
+    "comparison": "Interleaved same-root 131072-simulation cold searches, 8 roots x 3 rounds; actual legal policy kernel, 128 validation boards per phase x 9 rounds"
+  },
+  "training": {
+    "positions": 1000000,
+    "epochs": 15,
+    "batchSize": 2048,
+    "seed": 20261029,
+    "dataSeed": 20261030,
+    "threads": 2,
+    "optimizer": "AdamW",
+    "learningRate": 0.001,
+    "weightDecay": 0.0001,
+    "loss": "outcome MSE + 0.1 WDL CE + 0.1 legal-next-move CE",
+    "initialization": "Random shared parameters identical to original v1.37 initialization; residual down random; up weights/bias zero. No trained baseline warm start",
+    "selection": "Minimum original validation outcome MSE; candidate test only after model selected and frozen",
+    "sources": [
+      "WTHOR",
+      "Logistello"
+    ],
+    "targets": "Original hard labels",
+    "preserveDataOrderAndAugmentation": true
+  },
+  "matches": {
+    "plan": "After training and export correctness, one 100ms/20 paired-color screening comparison against frozen v1.37; no book; no automatic promotion",
+    "milliseconds": 100,
+    "games": 20,
+    "seed": 20261029,
+    "maxNodes": 4194304,
+    "subtreeReuse": true,
+    "policy": "learned PUCT 1.5; finite FPU parent mean minus0.15; v1.3 openings",
+    "outcomeTerminal": true
+  },
+  "preservedSha256": {
+    "models/default-model.json": "6582f442dc890e847a393cbd31fb54a63f00d8dca62cede1315187137a9c2de4",
+    "models/v1.37-default.json": "27ce5cd4be6cf824b629c5c08151a766b748608c96c9970e58ed8d4c2ca1d0f5",
+    "models/pattern32-symmetry-v1.37.otpat": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+    ".build/native-v1.37-reference/libothello.dylib": "e8eea82419065f5af3c6ddcd257c5497f971d2ba17ae94782b490a10a637a024",
+    "src/game/wasm/othello.mjs": "825ef6e4e84e7e60ce0cb262a2a5cb0d25c2a3bb2e6663750688492a79942303"
+  },
+  "datasetSha256": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6",
+  "policySha256": "d5712464ea92f34019de2ca9427d95cfa9aa985ff9d854801c9eb7362a7b587a",
+  "sourceArchiveManifest": "models/archive/v1.48-shared-residual-sources.json",
+  "isolation": "All candidate C++ format/kernel support is built from an isolated .build source snapshot; default cpp, selector, model and browser assets are not rewritten",
+  "limits": "Single training seed and a small paired screening match; offline/throughput results are not strength claims; native platform timing only"
+}

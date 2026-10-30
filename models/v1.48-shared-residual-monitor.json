@@ -1,0 +1,9 @@
+{
+  "experiment": "pattern-suite-sampling",
+  "stage": "候选已留档：策略退步，不推进对战",
+  "completed": 15,
+  "total": 15,
+  "summary": "已留档，不推进对战：选第8轮；测试策略39.35%，基线41.03%",
+  "complete": true,
+  "seconds": 362.36527585983276
+}

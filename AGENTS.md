@@ -2,11 +2,11 @@
 
 ## Active baseline and promotion policy
 
-- Continue model/search optimization from user-approved v1.36: the Pattern
-  policy/outcome model `models/pattern32-outcome-v1.25.otpat` (OTPAT2), v1.3
-  opening variety, and learned-prior PUCT MCTS with finite FPU (parent mean
-  minus 0.15). `models/default-model.json` selects the active model and
-  `models/v1.36-default.json` records the frozen default baseline.
+- Continue model/search optimization from user-approved v2: the complete Pattern
+  global policy/outcome model `models/pattern32-global-policy-v2.otpat` (OTPAT9,
+  D4 tied), v1.3 opening variety and learned-prior PUCT MCTS with finite FPU
+  (parent mean minus 0.15). `models/default-model.json` selects the active model
+  and `models/v2-default.json` records the frozen baseline.
 - Train and evaluate candidates against the latest user-approved default. Keep
   candidate artifacts/reports separate; better validation or match results alone
   do not authorize changing the default.
@@ -39,7 +39,7 @@
   Update after each move, and retain the final board after completion.
 - Web deployment defaults to the verified Egaroucid opening book, always enabled
   with no user-facing off switch. Query it before built-in AI on every move;
-  a verified miss continues with the approved v1.25 Pattern search. Loading failure is an
+  a verified miss continues with the approved v2 global-policy Pattern search. Loading failure is an
   error/retry, not a silent bypass. Keep source hashes, GPL notices and original
   book data with the derived browser assets. Model-only evaluation protocols
   remain separate from this deployed book-assisted flow.
@@ -115,8 +115,7 @@ archives contain original sources only; rebuild all derived JSONL/caches locally
 
 ## User-approved v1.36 engineering baseline (2026-10-30)
 
-The active baseline is `models/v1.36-default.json`, selected by
-`models/default-model.json`. It retains the exact v1.25 INT16 Pattern outcome
+The previous engineering baseline is frozen as `models/v1.36-default.json`. It retains the exact v1.25 INT16 Pattern outcome
 weights and enables fused current-side inference, NEON/SSE2 with portable fallback,
 packed shape encoding, four-row reuse and legal-only policy projection. The default
 node budget is 4,194,304; incremental cache and integer rounding remain disabled.
@@ -131,3 +130,51 @@ Native kernels select AArch64 NEON or x86-64 SSE2; actual Linux throughput remai
 unmeasured. Browser budgets stay 100ms/1s and the verified opening book stays enabled.
 See `models/v1.36-pattern-capacity-comparison.md` and
 `models/v1.35-pattern-speed-suite-comparison.md` for separate measured results.
+
+
+## User-approved v1.37 symmetry baseline (2026-10-30)
+
+The active default is `models/v1.37-default.json`, selected by `models/default-model.json`.
+User approval: “把这个作为基线：对称共享”. The exact measured weights are
+`models/pattern32-symmetry-v1.37.otpat` (OTPAT4 variant 1), SHA-256
+`762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235`.
+It ties reversed lines and transposed corners: 28,503 × 32 INT16 table entries,
+916,750 parameters and 1,833,692 bytes. Keep the 38 pattern instances, three
+mean pools, 97→32 trunk and original conditional policy head.
+
+Against frozen v1.36, preserve separate measured results: 100ms/20 games
+9W/5D/6L (57.5%); 2s/20 games 10W/7D/3L (67.5%). These are screening
+samples, not a statistically significant strength claim. No retraining or new
+strength match is required for this user-approved promotion.
+
+Retain v1.36 search settings: 4,194,304 nodes, learned-prior PUCT, finite FPU
+(parent mean minus 0.15), subtree reuse and outcome terminal/proof semantics.
+The verified Egaroucid book stays mandatory; browser budgets remain 100ms/1s.
+Ten-pool and direct-policy MLP candidates are excluded. Keep candidate-era
+reports and all previous baselines immutable. Future comparisons use v1.37.
+
+## User-approved v2 global policy baseline (2026-10-30)
+
+The active default is `models/v2-default.json`, selected by `models/default-model.json`.
+User approval: “感觉可以作为v2了”. The complete measured v1.49 model is preserved
+byte for byte as `models/pattern32-global-policy-v2.otpat` (OTPAT9), SHA-256
+`df11f7b9eed358fff33a426e2f0cb1a290083d2bc8e0781a2fbd1efdaf4270c3`.
+All 916,987 independent parameters were trained together from random initialization;
+237 are the additional D4-tied global policy coefficients. The 38→16→64 head runs
+once per board and adds all-square corrections to the original conditional policy.
+The native engine and browser Wasm embed the same complete model.
+
+Preserve the separate measured candidate-era results: against frozen v1.37,
+2s/20 games gave 10W/6D/4L (65%, mean discs +7.5); against frozen v1.9,
+200ms/50 games gave 48W/1D/1L (97%, mean discs +24.56).
+These use model-only search without the opening book. They are different opponents
+and budgets; no Elo or statistical significance claim follows from these samples.
+No retraining or new strength match was required for this user-approved promotion.
+
+Retain the v1.37 search settings: 4,194,304 nodes, learned-prior PUCT,
+finite FPU (parent mean minus 0.15), subtree reuse and outcome terminal/proof semantics.
+The verified Egaroucid opening book stays mandatory, followed by v2 on a verified
+miss; browser budgets stay 100ms/1s. Earlier baselines and candidate-era records
+remain immutable. Future comparisons use v2. Historical preservation verification:
+`python3 scripts/verify-v2-history.py`; current default verification:
+`python3 scripts/verify-v2-default.py` and `npm run test:baseline`.

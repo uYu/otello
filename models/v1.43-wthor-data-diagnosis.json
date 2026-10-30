@@ -1,0 +1,21 @@
+{
+  "status": "diagnostic-complete-no-extra-training",
+  "baselineUniquePositions": 1000000,
+  "wthorUniquePositions": 1054132,
+  "baselinePositionsStillCovered": 840119,
+  "baselinePositionsNoLongerCovered": 159881,
+  "newWthorPositionsNotInOriginalMillion": 214013,
+  "multiRecordedOutcomePositions": 20706,
+  "multiRecordedOutcomeFraction": 0.019642701293576138,
+  "multiRecordedActionOrbitPositions": 18328,
+  "multiRecordedActionOrbitFraction": 0.01738681683128868,
+  "filteredUniquePositions": 664495,
+  "interpretation": "Absolute unique-position count increased for WTHOR-only, while corpus coverage changed. The WTHOR-only experiment also changes empirical multi-label targets, so source/coverage vs aggregation cannot be disentangled. Most WTHOR positions have one recorded target; aggregation changes a minority of labels but can affect shared parameters globally. 1600 filtering changes subset and number of optimizer updates per 15 epochs, so its regression does not isolate quantity either.",
+  "nextControlledAblation": "Hold exact WTHOR positions, same initial model, RNG/sample order, 15 epochs and frozen holdouts fixed; compare first-record hard labels with empirical aggregated targets. If aggregation is responsible, split policy-softening vs value-softening next. To isolate quantity, add a seeded random subset matched to 1600 candidate size, with optimizer-update budget controlled.",
+  "extraModelsTrained": false,
+  "sourceSha256": {
+    ".build/training/consensus-elo-v1.40/consensus.npz": "e25f71c793bb53b6fe5e71cec7d02b0f77ddbb273127100fdd49022afbee69a9",
+    ".build/training/pattern-wthor-v1.42/training-data.npz": "c76f694dbe69dc5664ef8245aebbcb05286be7b3eae6781eb1330d923008e69f",
+    ".build/training/pattern-wthor1600-v1.43/training-data.npz": "f4a5731b05130ede99246a36f371b2d610ea3a7effe16a403480017004127805"
+  }
+}

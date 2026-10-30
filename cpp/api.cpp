@@ -92,6 +92,12 @@ int ot_default_evaluate(const int* cells,int turn,int* score){
         *score=othello::defaultNetwork().evaluate(decode(cells,turn));return 1;
     }catch(const std::exception& e){nnueError=e.what();return -1;}catch(...){nnueError="Default evaluation failed";return -1;}
 }
+int ot_default_infer(const int* cells,int turn,int* score,double* probabilities){
+    try{nnueError.clear();if(!score||!probabilities)throw std::invalid_argument("Null default inference output");
+        auto result=othello::defaultNetwork().infer(decode(cells,turn));*score=result.score;
+        std::copy(result.probabilities.begin(),result.probabilities.end(),probabilities);return 1;
+    }catch(const std::exception& e){nnueError=e.what();return -1;}catch(...){nnueError="Default inference failed";return -1;}
+}
 int ot_default_search(const int* cells,int turn,int ms,unsigned seed,int* output){
     try{nnueError.clear();if(!output)throw std::invalid_argument("Null default output");
         auto p=decode(cells,turn);auto r=othello::mcts(p,{ms,0,seed,&othello::defaultNetwork()});

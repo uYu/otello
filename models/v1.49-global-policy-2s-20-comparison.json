@@ -1,0 +1,76 @@
+{
+  "version": "v1.49-global-policy-2s-20",
+  "complete": true,
+  "status": "candidate",
+  "defaultPromoted": false,
+  "candidate": "v1.49 full-retrained global38->16->64 policy",
+  "baseline": "frozen approved v1.37 symmetry",
+  "millisecondsPerMove": 2000,
+  "games": 20,
+  "candidateWDL": {
+    "win": 10,
+    "draw": 6,
+    "loss": 4
+  },
+  "candidateScoreRate": 0.65,
+  "candidateMeanDiscDifference": 7.5,
+  "candidateWDLByColor": {
+    "black": {
+      "win": 9,
+      "draw": 1,
+      "loss": 0
+    },
+    "white": {
+      "win": 1,
+      "draw": 5,
+      "loss": 4
+    }
+  },
+  "searchStatistics": {
+    "candidate": {
+      "moves": 606,
+      "meanWallMs": 1541.9454218894396,
+      "meanSimulations": 3163020.3547854787,
+      "meanNewLeafEvaluations": 493054.94554455444,
+      "memoryLimitedDecisions": 0,
+      "proofStoppedDecisions": 146,
+      "peakRssMiB": 1732.75
+    },
+    "baseline": {
+      "moves": 594,
+      "meanWallMs": 1528.1208576700324,
+      "meanSimulations": 2595137.117845118,
+      "meanNewLeafEvaluations": 592411.2306397307,
+      "memoryLimitedDecisions": 0,
+      "proofStoppedDecisions": 142,
+      "peakRssMiB": 1627.25
+    }
+  },
+  "trainingSelectedEpoch": 15,
+  "trainingTestMetrics": {
+    "mse": 0.6864131689071655,
+    "outcomeMae": 0.7070835828781128,
+    "nonDrawSignAccuracy": 0.6806625577812019,
+    "wdlAccuracy": 0.5908333333333333,
+    "wdlCrossEntropy": 0.8924307227134705,
+    "policyTop1": 0.42783333333333334,
+    "policyCrossEntropy": 1.546290636062622,
+    "uniformPolicyCrossEntropy": 2.1044416287103247
+  },
+  "baselineTestMetrics": {
+    "mse": 0.6902028918266296,
+    "outcomeMae": 0.7105870842933655,
+    "nonDrawSignAccuracy": 0.6804699537750385,
+    "wdlAccuracy": 0.5891666666666666,
+    "wdlCrossEntropy": 0.8990699052810669,
+    "policyTop1": 0.4103333333333333,
+    "policyCrossEntropy": 1.6118096113204956,
+    "uniformPolicyCrossEntropy": 2.1044416287103247
+  },
+  "replayedActions": 1214,
+  "allDecisionsAudited": true,
+  "sourceArchiveManifest": "models/archive/v1.49-global-policy-native-sources.json",
+  "limits": "20-game paired screening sample, no Elo or significance inference. Separate2s budget; initial-board no-book model-only flow. Per-engine runtime statistics describe different reached positions and are not same-position kernel speed ratios.",
+  "report": "models/v1.49-global-policy-vs-v1.37-2s-20.json",
+  "reportSha256": "3c208f641c933c85911a33e54ad813e826240e62d44fc94a0c1a6171f2fad555"
+}

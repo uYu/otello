@@ -1,0 +1,12 @@
+{
+  "version": "v1.37",
+  "protocolSha256": "8f998b2df8316ab1f946804b5e513f35bb26f262f378b587aaa8f5c64859a1f1",
+  "timingBenchmark": "Completed before user-requested figure authoring.",
+  "hostActivity": "User-requested model diagram creation and PDF/PNG rendering overlapped the late symmetry-2000ms and early pool10-2000ms matches on the same host. Exclusive CPU scheduling was not enforced. All measured games and raw per-decision timings are retained; no affected game was discarded or replaced.",
+  "monitor": "Queued monitor entries initially lacked the required focus field. The current experiment configuration was corrected to focus=candidate; search, models and match implementation were unchanged.",
+  "figure": {
+    "pdf": "output/pdf/pattern-symmetry-v1.37.pdf",
+    "svg": "output/pdf/pattern-symmetry-v1.37.svg",
+    "png": "output/pdf/pattern-symmetry-v1.37.png"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "complete": true,
+  "defaultPromoted": false,
+  "simdPortableOutputPositions": 12000,
+  "all68OutputsExactlyEqual": true,
+  "fixedSimulationRoots": 16,
+  "simulationsPerRoot": 2048,
+  "fixedSearchExactlyEqual": true,
+  "nativeCTestPassed": true,
+  "portableCTestPassed": true,
+  "pythonResidualTestsEachBuild": 3,
+  "monitorRegressionTests": 1,
+  "modelSha256": "3c8e50251ae31f275b9fa53c3f7512eaf0ebded41407c5362362550e398deaff",
+  "librarySha256": {
+    ".build/native-pattern-shared-residual-v1.48/libothello.dylib": "b0a23f887c4f6ebbdbbe9ee871ca8c9688027c1417096ef5a66261e8879a247e",
+    ".build/native-pattern-shared-residual-portable-v1.48/libothello.dylib": "c84c51c18374dbb57623ff391418205d59c29c357b459293f88e018cde23766a"
+  },
+  "preservedSha256": {
+    "models/default-model.json": "6582f442dc890e847a393cbd31fb54a63f00d8dca62cede1315187137a9c2de4",
+    "models/v1.37-default.json": "27ce5cd4be6cf824b629c5c08151a766b748608c96c9970e58ed8d4c2ca1d0f5",
+    "models/pattern32-symmetry-v1.37.otpat": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+    ".build/native-v1.37-reference/libothello.dylib": "e8eea82419065f5af3c6ddcd257c5497f971d2ba17ae94782b490a10a637a024",
+    "src/game/wasm/othello.mjs": "825ef6e4e84e7e60ce0cb262a2a5cb0d25c2a3bb2e6663750688492a79942303"
+  },
+  "monitorFix": "Keep completed epoch validation and best metrics across the next epoch; live run metrics recovered from recorded per-epoch output; original measured training sources are preserved in the training source archive"
+}

@@ -1,0 +1,12 @@
+{
+  "archive": "models/archive/v1.40-training-consensus-elo-sources.tar.gz",
+  "sha256": "f256d7ebb548056ae9d4b135a29dc55f76f6fe9cc867f0cf5f2d1010af598cae",
+  "files": {
+    "scripts/training_consensus.py": "2969614f441622106e232aa7bffd4b8a471aa2b7b0cd135632016b126c7ff0e6",
+    "scripts/prepare-consensus-elo-data.py": "8da8acbeee6e33f73a4b22b626c11093bd2a748b919756074df28e5c7a9b2aea",
+    "scripts/verify-consensus-elo-data.py": "f049d4ed6f09479fb706c2fe0c4ae101392e4992d5dd354dfd80c12bed0d18a5",
+    "scripts/consensus_training_targets.py": "5069c19abd580464459edbead5f52168717ae25a493c08922021ac4c984443cd",
+    "tests/training_consensus_test.py": "a54163f3aa22da258befc7bd0da93359c4b5a120a0b33ee859cf07a191794607",
+    "models/v1.40-training-consensus-elo-protocol.json": "19bc912954aab0cfdc7cc3ed38d33d8de91e88cbeccbb82cbf76dc1adee1e592"
+  }
+}

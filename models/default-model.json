@@ -1,6 +1,6 @@
 {
-  "version": "v1.36",
-  "baselineManifest": "models/v1.36-default.json",
-  "defaultModel": "models/pattern32-outcome-v1.25.otpat",
-  "modelSha256": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0"
+  "version": "v2",
+  "baselineManifest": "models/v2-default.json",
+  "defaultModel": "models/pattern32-global-policy-v2.otpat",
+  "modelSha256": "df11f7b9eed358fff33a426e2f0cb1a290083d2bc8e0781a2fbd1efdaf4270c3"
 }

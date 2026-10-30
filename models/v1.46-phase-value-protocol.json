@@ -1,0 +1,51 @@
+{
+  "version": "v1.46-phase-value",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "userRequest": "先分阶段价值头，策略头不动，各阶段仍预测同一种胜平负价值。先训练一版",
+  "architecture": "v1.37 tied D4 table 28503x32, original three pools and 97->32 trunk, original 46-row head retained; add opening 32->4 value/WLD readout. Total +132 parameters.",
+  "phase": {
+    "lowEmpty": 36,
+    "highEmpty": 48,
+    "openingFull": "placements <=12",
+    "midLateFull": "placements >=24",
+    "transition": "linear by exact integer empties, placements 12..24; quantize expert logits then blend and quantize before tanh/WLD CE",
+    "targets": "Same side-to-move outcome +1/0/-1 scalar and win/loss/draw classes for both readouts; terminal search unchanged"
+  },
+  "policy": "Original conditional projection/gates/position bias and loss; jointly trained, no policy structure change and no frozen policy weights",
+  "data": "Original fixed million WTHOR + Logistello hard-label positions; no Elo filtering or weighting, no aggregation; original validation/test unchanged",
+  "initialization": "Same seed initializes identical original shared parameters; opening head copies original first four readout rows, giving identical initial predictions",
+  "seed": 20261029,
+  "dataSeed": 20261030,
+  "epochs": 15,
+  "batchSize": 2048,
+  "threads": 2,
+  "learningRate": 0.001,
+  "weightDecay": 0.0001,
+  "loss": "outcome MSE + 0.1 WLD CE + 0.1 legal policy CE",
+  "selection": "Minimum original validation MSE over 15 epochs; test candidate only after selected weights frozen",
+  "matchesPlanned": false,
+  "trainingAfterSoftMatchStopped": true,
+  "sourceArchiveManifest": "models/archive/v1.46-phase-value-sources.json",
+  "sourceArchiveManifestSha256": "da85ad504eb0cfbcb329486a912e86fcd6588775dcb6aa4de8f6acaf88a2a448",
+  "preservedSha256": {
+    ".build/training/v1/positions.npz": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6",
+    ".build/training/v1.8/policy.npz": "d5712464ea92f34019de2ca9427d95cfa9aa985ff9d854801c9eb7362a7b587a",
+    "models/default-model.json": "6582f442dc890e847a393cbd31fb54a63f00d8dca62cede1315187137a9c2de4",
+    "models/v1.37-default.json": "27ce5cd4be6cf824b629c5c08151a766b748608c96c9970e58ed8d4c2ca1d0f5",
+    "models/pattern32-symmetry-v1.37.otpat": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+    "models/pattern32-symmetry-v1.37.pt": "8f6052eadfd2cef1367c14fe121c910bb2e1635cafcda083d9e8fdbbd8a73d52",
+    "models/pattern32-symmetry-v1.37.json": "66b73d6ab022b7a8eaee3b3fb8bdc232c3bcc99f932f5fbe96dc2c45cab52a8b",
+    "src/game/wasm/othello.mjs": "825ef6e4e84e7e60ce0cb262a2a5cb0d25c2a3bb2e6663750688492a79942303",
+    ".build/native-v1.37-reference/libothello.dylib": "e8eea82419065f5af3c6ddcd257c5497f971d2ba17ae94782b490a10a637a024",
+    "models/v1.45-mixed-label-ablation.json": "0cbf2ba2fc1e4edf2324c7c4d23bc351159548127006465bf087a66cf58900cc",
+    "models/v1.45-soft-label-2s-stopped-experiment.json": "6750121828a76ca7dc1239a1e7a05489ae2b88af5229849a0f9f4c91a9524336",
+    "models/v1.45-phase-validation-profile.json": "ce875e50d073151e117561a5b83492724f04673ddd4ec78fbd09925d4870bd6c",
+    ".build/native-pattern-phase-value-v1.46/libothello.dylib": "a869896ec3a29d6be13ccd357b4045ead3cad63492934ef4eb7f8dcd0aba8604"
+  },
+  "checksBeforeTraining": [
+    "New isolated Release build and CTest passed",
+    "Python phase interpolation, baseline initial identity, gradients, policy isolation, D4/color equivariance and 512-position native parity passed"
+  ],
+  "limits": "One seed, offline candidate; no strength conclusion or default promotion."
+}

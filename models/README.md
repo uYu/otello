@@ -156,3 +156,330 @@ Native kernels select AArch64 NEON or x86-64 SSE2; actual Linux throughput remai
 unmeasured. Browser budgets stay 100ms/1s and the verified opening book stays enabled.
 See `models/v1.36-pattern-capacity-comparison.md` and
 `models/v1.35-pattern-speed-suite-comparison.md` for separate measured results.
+
+
+## v1.37：两个独立 Pattern 结构候选
+
+在批准的 v1.36 上分别评估对称表项共享和十组几何池化，另有同期重训原结构对照；
+三组使用相同百万局面、采样与 D4 增强顺序、15 轮及原胜负/策略监督。
+两项结构改动不组合，不自动替换默认。协议见 `models/v1.37-pattern-structure-protocol.json`，
+最终离线、吞吐与分预算对战结果见 `models/v1.37-pattern-structure-comparison.md`。
+
+候选使用 OTPAT4：32 字节头后接 uint32 标记（1=对称共享、2=十组池化），
+维度分别为 28,503×32 表/97→32 主干和 55,728×32 表/321→32 主干。
+文件和原生内存均保留压缩对称表；321 维点积按最多 128 项分段汇总到 INT64，
+遵守原 SIMD 内核的范围约束。原结构输出与冻结 v1.36 独立参考库逐项核验。
+
+复现脚本依次为 `scripts/train-pattern-structure.py`、
+`scripts/benchmark-pattern-structure.py`、`scripts/run-pattern-structure.py`；
+审计为 `python3 scripts/finalize-pattern-structure.py`。已存在的模型和报告拒绝覆盖。
+监控入口仍为 `sh scripts/watch-match.sh`，显示候选视角胜平负、当前棋盘并保留终盘。
+
+本轮实测（候选视角，预算不合并）：对称共享 100ms 为 9W/5D/6L，2s 为 10W/7D/3L；
+十组池化 100ms 为 7W/1D/12L，2s 为 9W/5D/6L。80 局共 4,865 个行动已独立回放。
+结果来自单训练种子及每组 20 局，不作统计显著性结论。运行期间的用户请求制图活动、
+监控配置修正记录在 `models/v1.37-pattern-structure-runtime-notes.json`；吞吐基准在制图前完成。
+
+当前共享版的结构图为 `output/pdf/pattern-symmetry-v1.37.pdf`（另有 SVG/PNG）。
+`scripts/pattern_policy_mlp.py` 是随后讨论的直连共享策略头原型：
+每个落点的局部 32 维、全局 32 维及 D4 位置桶 one-hot 10 维直接拼接，
+使用同一个 74→8→1 MLP。它通过梯度、换色及 D4 等变测试，现已作为 v1.38 独立候选训练并导出原生模型，
+随后已完成独立的 200ms/20 和 2s/20 对照，没有混入上述 v1.37 结果。示意图为 `output/pdf/policy-head-direct-mlp8-proposal.pdf`。
+
+
+## User-approved v1.37 symmetry baseline (2026-10-30)
+
+The active default is `models/v1.37-default.json`, selected by `models/default-model.json`.
+User approval: “把这个作为基线：对称共享”. The exact measured weights are
+`models/pattern32-symmetry-v1.37.otpat` (OTPAT4 variant 1), SHA-256
+`762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235`.
+It ties reversed lines and transposed corners: 28,503 × 32 INT16 table entries,
+916,750 parameters and 1,833,692 bytes. Keep the 38 pattern instances, three
+mean pools, 97→32 trunk and original conditional policy head.
+
+Against frozen v1.36, preserve separate measured results: 100ms/20 games
+9W/5D/6L (57.5%); 2s/20 games 10W/7D/3L (67.5%). These are screening
+samples, not a statistically significant strength claim. No retraining or new
+strength match is required for this user-approved promotion.
+
+Retain v1.36 search settings: 4,194,304 nodes, learned-prior PUCT, finite FPU
+(parent mean minus 0.15), subtree reuse and outcome terminal/proof semantics.
+The verified Egaroucid book stays mandatory; browser budgets remain 100ms/1s.
+Ten-pool and direct-policy MLP candidates are excluded. Keep candidate-era
+reports and all previous baselines immutable. Future comparisons use v1.37.
+
+
+## v1.38：直连共享策略头候选
+
+已按用户请求训练固定共享 74→8→1 MLP 策略头，独立于已批准 v1.37 基线。
+保持棋形、对称共享、三组池化和价值主干不变，局部 32 维、全局 32 维及
+D4 位置桶 one-hot 10 维直接拼接打分。与基线使用相同初始化的表/主干/价值输出，
+相同百万局面、样本/增强顺序和 15 轮配置，从随机参数联合重训；第 14 轮按验证价值 MSE 选中。
+
+测试胜负 MSE：v1.37 的 0.690203 → 0.685687；记录走法命中率 41.03% → 44.08%；
+策略 CE 1.611810 → 1.515972。原生 100ms/1s 模拟吞吐分别约为基线 0.866×/0.895×，
+网络评估吞吐为 0.853×/0.831×；只汇总同局面所有轮次用满预算且未证明、未触顶的共同样本。
+上述离线阶段只衡量质量与计算成本。随后独立对战结果见下文，不据此自动提升默认。
+
+模型为 `models/pattern32-direct-mlp8-v1.38.otpat`（OTPAT5，915,973 参数、1,832,076 字节），
+使用独立 `.build/native-pattern-direct-policy-v1.38/` 原生库。标量/SIMD 和 PyTorch/C++
+在验证/测试 12,000 局面通过输出一致性；固定模拟、D4、损坏文件与 ASan/UBSan 均检查。
+报告见 `models/v1.38-direct-policy-comparison.md`，历史离线审计为 `python3 scripts/verify-direct-policy-history.py`（使用冻结源码快照）。
+训练入口为 `python3 scripts/train-pattern-direct-policy.py`（已存在模型时拒绝覆盖）；
+监控仍为 `sh scripts/watch-match.sh`。默认、内嵌模型和浏览器 Wasm 保持冻结 v1.37。
+
+
+## v1.38 实战与 v1.39 策略宽度候选
+
+MLP8 对冻结 v1.37 的候选视角实测保持分预算记录：200ms/20 局为 9W/10D/1L，
+2s/20 局为 4W/11D/5L（47.5%）。后者共 1,216 个行动均已独立回放；同机并行进行
+用户要求的 MLP 加宽训练与候选代码构建，没有 CPU 隔离。结果按实际测量保留，
+不能从短预算优势推出长预算优势。默认仍是 v1.37，没有提升 MLP。
+分别见 `models/v1.38-direct-policy-200ms-20-comparison.md` 和
+`models/v1.38-direct-policy-2s-20-comparison.md`。
+
+v1.39 只将直连共享策略头 74→8→1 的隐藏宽度分别扩为 16、32，其他棋形、
+价值主干、初始化、数据/增强顺序、损失与 15 轮训练条件保持一致；全网随机重训，
+两个模型均按验证胜负 MSE 选中第 14 轮后统一评估测试集。
+
+| 直连策略头 | 测试胜负 MSE | 测试走法命中率 | 策略 CE | 2s 评估吞吐 / MLP8 |
+|---|---:|---:|---:|---:|
+| MLP8 | 0.685687 | 44.08% | 1.515972 | 1.000× |
+| MLP16 | 0.686852 | 44.80% | 1.485150 | 0.896× |
+| MLP32 | 0.687189 | 45.40% | 1.470035 | 0.792× |
+
+加宽改善了走法拟合，但价值 MSE 略差且新叶评估变慢。模拟吞吐受搜索路径影响，
+2s 相对 MLP8 分别为 1.012× / 0.832×，不要与网络评估吞吐混用。
+计时在训练与对局结束后进行。MLP16/32 尚未做棋力对战，均作为候选保存。
+新宽度各通过 12,000 个局面的 Torch/C++、SIMD/portable 输出对照；独立标量参考、
+固定模拟搜索、D4 与 ASan/UBSan 检查通过，原 MLP8 的二进制重新导出逐字节一致。
+
+模型为 `models/pattern32-direct-mlp16-v1.39.otpat` 与
+`models/pattern32-direct-mlp32-v1.39.otpat`；训练入口是
+`python3 scripts/train-pattern-policy-width.py`，报告与审计分别为
+`models/v1.39-policy-width-comparison.md`、`python3 scripts/finalize-policy-width.py`。
+监控继续使用 `sh scripts/watch-match.sh`。默认权重和浏览器 Wasm 的哈希保持不变。
+
+
+## 训练数据：棋手 ID 与走法质量审计（2026-10-30）
+
+原始 WTHOR 有双方棋手索引，但旧转换器未保留；已给全部 137,507 盘转换后 WTHOR
+生成独立棋手溯源 sidecar。4,225 个出现过的索引包含未知编号 0；名册不含 Elo，
+历史评级尚未可靠关联，未应用棋力阈值或改写冻结训练数据。
+百万缓存没有跨集合对称重复或非法策略标签，但 19,829 个位置有多走法记录，
+27,154 个有多种实战终局胜平负。应先恢复逐条落子者信息，区分策略模仿质量与价值标签，
+再单独比较评级权重、引擎解着和残局理论值；不按赢家身份判断招法优劣。
+完整统计与建议见 `models/training-data-audit-2026-10-30.md`；复核脚本
+`scripts/audit-training-data.py`。原始数据归档、默认模型和浏览器 Wasm 保持不变。
+
+
+## v1.40：多标签数据与内部 Elo（未训练）
+
+已给已知参与者统一 1500 初值，按 K=32、400 尺度的 logistic Elo 更新，完整语料
+重放 136,100 盘；另算 train-only 池，避免使用 holdout 赛果。1/0.5/0 是实际得分 S，
+真实更新为 K*(S-E)，不是直接加分。
+多标签候选保留 2,060,308 次出现、1,255,303 个局面的走法与结果分布，提供原百万行
+匹配视图。全部冻结数据和默认模型未变。
+用户要求先讨论 Elo 用法；未启动新模型训练，附带权重只作试算，不是选定的训练方案。
+细节见 `models/v1.40-training-consensus-elo.md`。
+
+
+## WTHOR-only 数据与同结构训练（v1.41–v1.43）
+
+训练来源限定 WTHOR，独立 Logistello 语料排除；聚合按原始出现次数等权，验证/测试
+各 6,000 个局面及标签保持原值。阈值比较推荐 1600（双方都低于才剔除）：
+51,854 盘、664,495 个局面；不筛 Elo 则为 80,561 盘、1,054,132 个局面。
+阈值只是数据候选判断，详见 `models/v1.41-wthor-elo-filter.md`。
+
+v1.42 使用对称共享基线原结构、WTHOR 全量和等权经验软标签重新随机训练，
+15 轮后按冻结验证 MSE 选中第 12 轮；测试 MSE 0.700043、策略命中率 40.58%。
+训练后独立与冻结 v1.37 做 2s/20 对照，双方使用同一冻结原生库；1600 过滤版
+v1.43 按用户要求随后训练，结构与训练配置相同，不使用 MLP8。默认保持 v1.37。
+训练记录与协议见 `models/v1.42-pattern-wthor*.json`、
+`models/v1.43-pattern-wthor1600*.json`；v1.42 离线报告为
+`models/v1.42-pattern-wthor-comparison.md`。监控为 `sh scripts/watch-match.sh`。
+
+
+### v1.42 用户停止对局；v1.43 训练完成
+
+用户要求停止 2s 对照。v1.42 实际完成 12/20 局：2W/4D/6L（33.3%），
+第 13 局未完成部分不计入结果；已完成 729 个行动独立回放。停止记录保留
+`complete=false`、`userStopped=true`，没有写成完成 20 局。原生进程退出后才训练
+v1.43，没有并行训练干扰已完成的对局。
+
+v1.43 的 1600 版按验证 MSE 选中第 8 轮，冻结测试 MSE 0.709274、走法命中率
+39.30%、策略 CE 1.658965；没有安排新对局。当前两版离线指标均未优于 v1.37，
+默认保持原基线。完整对照见 `models/v1.43-wthor-data-comparison.md`，停止审计为
+`python3 scripts/finalize-pattern-wthor-stopped.py`。
+
+WTHOR 全量有 1,054,132 个唯一局面，数量比旧百万缓存略多；来源覆盖与软标签
+聚合同时变化，不能单独归因。下一步宜固定同一 WTHOR 局面集，对比首条硬标签
+与聚合软标签；本轮未额外启动该消融。训练数据覆盖诊断见
+`models/v1.43-wthor-data-diagnosis.json`。验证/测试及默认权重保持冻结。
+
+
+## v1.44–v1.45：固定局面的硬/软标签对照
+
+用户明确主对照要保留 WTHOR + Logistello。v1.45 固定原始百万训练棋盘、行棋方和
+行顺序，硬标签直接使用冻结 v1.37 的结果和走法，软标签汇总两库原始 train 分区
+中的同局面记录，再把规范化策略分布反向映射至原棋盘坐标。没有 Elo 筛选或权重，
+验证/测试各 6,000 个局面与标签保持不变。
+
+原硬标签版已逐字节复现 v1.37，15 轮全部损失与验证指标也精确相同。两版的完整
+初值、样本/增强序列和输入哈希相同，各自选第 14 轮后才统一评估测试集：
+硬标签 MSE 0.690203、走法命中率 41.03%、策略 CE 1.611810；
+软标签 MSE 0.690274、走法命中率 40.97%、策略 CE 1.611682。离线差异很小。
+每版通过验证/测试合计 12,000 个局面的 Torch/冻结原生库导出对照；还核验了
+768 个局面的标量坐标映射，原硬标签在软分布中均有支持。
+
+完整主对照：`models/v1.45-mixed-label-ablation-comparison.md`。随后用户授权 soft
+与基线对战，单独沿用 2s/步、20 局；协议与现场监控为
+`models/v1.45-soft-label-2s-20-protocol.json`、`sh scripts/watch-match.sh`。
+默认保持 v1.37，离线分数和候选对局都不自动授权提升。
+
+v1.44 是先前完成的 WTHOR-only 旁证，不作为这次混合语料主对照。其硬/软结果
+分别为测试 MSE 0.700929 / 0.700043、走法命中率 40.67% / 40.58%；
+软标签版逐字节复现 v1.42。另见 `models/v1.44-wthor-label-ablation-comparison.md`。
+
+
+## v1.45 soft 对局停止；v1.46 分阶段价值头
+
+用户停止 soft 2s/20 局对照，实际完成 17 局：soft 4 胜 / 8 平 / 5 负，
+得分率 47.1%，平均子差 −2.0；第 18 局未完成，不计入统计。已独立回放
+1,036 个完整行动，稳定监控保留第 17 局终盘。原始运行快照与开赛协议不改写。
+详见 `models/v1.45-soft-label-2s-20-comparison.md`。
+
+用户授权的 v1.46 在该对局停止、工作进程退出后训练。共享对称棋形表、原三组池化、
+97→32 主干及条件策略结构不变，只增加 32→4 开局价值/WLD 读出，与原四行中后盘
+读出按空格数平滑混合：已落子 ≤12 手使用开局头，≥24 手使用中后盘头，过渡区
+线性混合量化 logits。两阶段都预测相同行棋方胜/平/负结果；策略权重仍联合训练。
+
+原百万 WTHOR + Logistello 硬标签，验证/测试各 6,000 局面不变；没有 Elo 筛选、
+加权或聚合。原共享初值、初始预测及样本/增强序列与 v1.37 一致。15 轮选第
+14 轮：验证 MSE 0.726839（基线 0.722156），
+测试 MSE 0.691479（基线 0.690203），策略命中率
+41.02%（基线 41.03%）。这版离线总体未改善；中盘价值
+MSE 略降，开局和后盘略升。单种子结果不能推断棋力。
+
+候选 `models/pattern32-symmetry-phase-value-v1.46.otpat` 使用新 OTPAT6 格式：
+916,882 参数、1,833,972 字节，分别增加 132 和 280。支持新格式的原生库在隔离
+构建目录生成，默认库和浏览器嵌入权重不变。Release/关闭 SIMD 两组 CTest、
+两组各 2 项 Python 测试、候选 12,000 局面导出对照和旧基线 12,000 局面回归对照通过。
+
+未启动候选棋力对战，默认仍为 v1.37。完整报告、协议与复核入口：
+`models/v1.46-phase-value-comparison.md`、`models/v1.46-phase-value-protocol.json`、
+`python3 scripts/finalize-phase-value.py`。训练入口 `python3 scripts/train-pattern-phase-value.py`
+拒绝覆盖已完成实验，复训应使用新的版本和输出路径。
+
+
+## 分阶段头方向停止（用户决定）
+
+用户判断“指标差不多那就不需要做这么花哨的操作了”，因此停止 v1.46 分阶段价值头、
+v1.47 分阶段策略头的后续迭代，不做组合、不启动额外棋力对局，也不提升默认。
+主线保留用户已批准的 v1.37 对称共享、单价值/WLD 读出和单条件策略读出。
+候选权重、训练报告与源码快照保留追溯，监控条目移入历史。
+
+v1.47 单头和分阶段策略两组各训练 15 轮，均按固定中盘验证策略 CE 选择第 15 轮。
+中盘测试 CE 为 1.813585 / 1.815451（分阶段略差），命中率为 35.23% / 35.35%；
+未呈现稳定的策略收益。完整结果保留在 models/v1.47-phase-policy-comparison.md，
+用户决策及冻结默认哈希为 models/v1.47-phase-head-decision.json。
+
+## v1.49：全局 8×8 策略头，全网重训候选
+
+保留 38 个棋形投影的空间顺序，以 D4 共享的 `38→16→64` 网络一次输出
+64 个策略修正分数，叠加原条件策略。新增 237 个独立策略参数；本次实际从随机
+初始化训练全部 916,987 个参数，未冻结编码器或价值分支，未加载已训练权重。
+原共享参数初值、百万硬标签局面、15 轮配置和样本/D4 顺序保持一致；联合损失
+权重沿用 v1.37，选模改为最低验证合法策略 CE，选中第 15 轮。
+
+测试策略 CE 为 1.546291（v1.37：1.611810），命中率 42.78%（41.03%），
+胜负 MSE 为 0.686413（0.690203）。验证胜负 MSE 则为 0.724789，略高于
+基线 0.722156。离线结果、单种子与不同选模标准不构成棋力提升证据。
+
+完整训练权重为 `pattern32-global-policy16-full-v1.49.pt`；配套 `.base.otpat`
+只是棋形/主干/原读出组件，必须结合 `.head.json` 才是完整策略模型，不能单独
+当作完整候选引擎。12,000 局面的全局头整数参考及基础组件 Torch/C++ 导出核验
+通过；D4、全网梯度和实时指标检查通过。尚未接入完整原生策略推理、测速或对战，
+默认仍为冻结 v1.37，浏览器权重未改。
+
+结果：`v1.49-pattern-global-policy-full.json`；比较：
+`v1.49-global-policy-full-comparison.json`；协议与源码归档分别为
+`v1.49-global-policy-full-protocol.json`、`archive/v1.49-global-policy-full-sources.json`。
+训练入口 `python3 scripts/train-pattern-global-policy-full.py` 拒绝覆盖已有实验；
+核验入口 `python3 scripts/finalize-global-policy-full.py`。
+
+### v1.49 完整原生模型与 2s/20 局对照
+
+后续按用户要求接入完整原生全局策略头，并与冻结 v1.37 比较。完整候选为
+`pattern32-global-policy16-full-v1.49.otpat`（OTPAT9，1,837,288 字节），包含
+选中权重的基础组件及完整 38→16→64 策略修正，不是只加载 `.base.otpat`。
+部署元数据单独记录为 `.native.json`；此前训练/组件报告不改写。
+
+双方各自独立进程，每步 2 秒、4,194,304 节点、相同 PUCT/FPU、子树复用、
+v1.3 开局多样性及胜负终局证明。从初始棋盘开始，无开局库，10 对种子交换执黑白。
+候选 **10 胜 / 6 平 / 4 负，得分率 65%，平均子差 +7.5**；执黑 9/1/0，
+执白 1/5/4。20 局筛选样本不作 Elo 或显著优势推断，默认仍为 v1.37。
+
+1,214 个行动已回放、逐决策选着已审计，双方均无节点容量触顶。候选/基线
+平均新叶评估数为 493,055 / 592,411，峰值 RSS 为 1,732.75 / 1,627.25 MiB；
+两者实际遇到的局面不同，这些是对战描述统计，不能解释为纯内核速度倍率。
+
+完整模型的 Torch/C++ 验证/测试共 12,000 局面对照、标量/SIMD 全部 68 项输出
+及固定搜索对照通过；旧基线回归、零修正等价、合法策略、D4、状态接口、坏文件
+拒绝及权重变更后的缓存失效均通过。原生源码和库均独立留档，未重训、未更新
+浏览器或默认权重。稳定监控 `sh scripts/watch-match.sh` 保留第 20 局终盘。
+
+原始对战：`v1.49-global-policy-vs-v1.37-2s-20.json`；汇总：
+`v1.49-global-policy-2s-20-comparison.json`；审计：
+`python3 scripts/finalize-global-policy-match-2s.py`；源码归档：
+`archive/v1.49-global-policy-native-sources.json`。
+
+### v1.49 对冻结 v1.9：200ms/步、50 局
+
+用户另行要求历史版本对照。v1.9 权重仍为
+`nnue256-outcome-v1.9.otnnue`，哈希与冻结清单一致；参考引擎从校验通过的
+`archive/v1.9-default-sources.tar.gz` 原样恢复，重建出的库哈希也与当年冻结库
+`6f593a25a0d52f1846e29db35b10fa5423505fd820eb124d4a474489f412c188` 完全一致。
+最新候选使用上一轮的同一完整 v1.49 权重和原生库，没有重训或改权重。
+
+从初始棋盘开始，无开局库，每步 200ms，25 对种子交换执黑白。候选
+**48 胜 / 1 平 / 1 负，得分率 97%，平均子差 +24.56**；执黑 24/1/0，
+执白 24/0/1。3,052 个行动和全部决策均通过回放审计，双方均未触及节点容量。
+稳定监控保留第 50 局终盘。该预算/对手与此前 2s/20 记录分开，不改默认 v1.37。
+
+这是保留各版本整体设置的比较：v1.9 用原 NNUE 策略、未访问分支逐一试探及
+2M 节点上限；v1.49 用 Pattern/全局策略头、有限 FPU 及 4M 上限。结果不能
+单独归因于新策略头，也不是只更换权重的结构消融。实战平均模拟/步为
+139,169 / 24,713，新叶评估/步为 87,309 / 17,635（候选/旧版）；实际遇到
+的局面不同，不能视为纯内核速度倍率。
+
+原始记录：`v1.49-global-policy-vs-v1.9-200ms-50.json`；汇总：
+`v1.49-v1.9-200ms-50-comparison.json`；审计：
+`python3 scripts/finalize-global-policy-vs-v1.9.py`；协议和源码：
+`v1.49-v1.9-200ms-50-protocol.json`、`archive/v1.49-v1.9-200ms-50-sources.json`。
+
+## User-approved v2 global policy baseline (2026-10-30)
+
+The active default is `models/v2-default.json`, selected by `models/default-model.json`.
+User approval: “感觉可以作为v2了”. The complete measured v1.49 model is preserved
+byte for byte as `models/pattern32-global-policy-v2.otpat` (OTPAT9), SHA-256
+`df11f7b9eed358fff33a426e2f0cb1a290083d2bc8e0781a2fbd1efdaf4270c3`.
+All 916,987 independent parameters were trained together from random initialization;
+237 are the additional D4-tied global policy coefficients. The 38→16→64 head runs
+once per board and adds all-square corrections to the original conditional policy.
+The native engine and browser Wasm embed the same complete model.
+
+Preserve the separate measured candidate-era results: against frozen v1.37,
+2s/20 games gave 10W/6D/4L (65%, mean discs +7.5); against frozen v1.9,
+200ms/50 games gave 48W/1D/1L (97%, mean discs +24.56).
+These use model-only search without the opening book. They are different opponents
+and budgets; no Elo or statistical significance claim follows from these samples.
+No retraining or new strength match was required for this user-approved promotion.
+
+Retain the v1.37 search settings: 4,194,304 nodes, learned-prior PUCT,
+finite FPU (parent mean minus 0.15), subtree reuse and outcome terminal/proof semantics.
+The verified Egaroucid opening book stays mandatory, followed by v2 on a verified
+miss; browser budgets stay 100ms/1s. Earlier baselines and candidate-era records
+remain immutable. Future comparisons use v2. Historical preservation verification:
+`python3 scripts/verify-v2-history.py`; current default verification:
+`python3 scripts/verify-v2-default.py` and `npm run test:baseline`.

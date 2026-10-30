@@ -16,6 +16,11 @@ def verify():
     for name,data in frozen.items():
         assert hashlib.sha256(data).hexdigest()==manifest['files'][name],name
     mutable={'models/default-model.json','src/game/wasm/othello.mjs'}
+    previous=json.loads((ROOT/'models/archive/v1.36-default-sources.json').read_text())
+    assert hashlib.sha256((ROOT/previous['archive']).read_bytes()).hexdigest()==previous['sha256']
+    with tarfile.open(ROOT/previous['archive'],'r:gz') as stream:
+        monitor=stream.extractfile('scripts/watch-matches.py').read()
+    assert hashlib.sha256(monitor).hexdigest()==previous['files']['scripts/watch-matches.py']
     def historical_sha(path):
         path=Path(path).resolve()
         # Recorded candidate model paths may be absolute on the measurement host.
@@ -25,6 +30,7 @@ def verify():
             assert separator and '..' not in Path(suffix).parts,path
             path=ROOT/'models'/suffix
         name=str(path.relative_to(ROOT))
+        if name=='scripts/watch-matches.py':return hashlib.sha256(monitor).hexdigest()
         return hashlib.sha256(frozen[name] if name in mutable else path.read_bytes()).hexdigest()
     for name in ['scripts/finalize-pattern-speed-suite.py','scripts/finalize-pattern-capacity.py']:
         assert (ROOT/name).read_bytes()==frozen[name],name

@@ -1,0 +1,85 @@
+{
+  "complete": true,
+  "date": "2026-10-30",
+  "defaultPromoted": false,
+  "conclusion": "MLP的多个合法落点可以合成一次矩阵计算，已实现并验证；完整64格的MLP32推理得到约1.72倍加速，但实际每盘约11个合法点的小batch没有得到显著搜索加速。预打包与融合也已分别测量，不能据此否定更大的跨棋盘batch或专用量化内核。",
+  "clarification": [
+    "逐落点存在独立的输入行，不意味着必须逐点调用整个模型或必须串行。实现已将全部合法落点一起做一次N×32乘32×H的GEMM，全局主干仍只计算一次。",
+    "固定模拟次数是测速控制变量。各实现相同权重、相同根局面和相同搜索输出，比较完成131072次模拟所需时间；它不规定batch如何形成，也不是正式棋力对战协议。",
+    "用户提到的一次扩展生成的所有子棋盘批量运行完整网络，是跨棋盘batch。本轮实测对象为同一棋盘的合法落点策略batch；跨棋盘层级尚未实测。",
+    "基线与MLP8分别916750和915973参数，均约1.8MB，并非明显尺寸差距。基线使用可复用的线性棋形投影，MLP则需要每行的非线性隐藏激活。Batch可以并行这些行，但不自动减少计算总量。"
+  ],
+  "results": [
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "originalLegalMidgameMicroseconds": 0.455460876465,
+      "preparedLegalMidgameMicroseconds": 0.45440036010699997,
+      "fusedLegalMidgameMicroseconds": 0.457782745361,
+      "originalFull64MidgameMicroseconds": 0.5710017089839999,
+      "fusedFull64MidgameMicroseconds": 0.568728118896,
+      "preparedFixedWorkSpeedup": 1.0092883968588908,
+      "fusedFixedWorkSpeedup": 1.0044472352990357
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "originalLegalMidgameMicroseconds": 0.78209942627,
+      "preparedLegalMidgameMicroseconds": 0.794696807861,
+      "fusedLegalMidgameMicroseconds": 0.8408699035639999,
+      "originalFull64MidgameMicroseconds": 2.16937890625,
+      "fusedFull64MidgameMicroseconds": 2.27181878662,
+      "preparedFixedWorkSpeedup": 0.9949431427018774,
+      "fusedFixedWorkSpeedup": 0.9506196371748412
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "originalLegalMidgameMicroseconds": 0.959439605713,
+      "preparedLegalMidgameMicroseconds": 1.08136495972,
+      "fusedLegalMidgameMicroseconds": 1.22116598511,
+      "originalFull64MidgameMicroseconds": 3.2109057006799997,
+      "fusedFull64MidgameMicroseconds": 2.85250473022,
+      "preparedFixedWorkSpeedup": 0.9776467835276295,
+      "fusedFixedWorkSpeedup": 0.9035331171019909
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "originalLegalMidgameMicroseconds": 1.35734176636,
+      "preparedLegalMidgameMicroseconds": 1.37490206909,
+      "fusedLegalMidgameMicroseconds": 1.68532943726,
+      "originalFull64MidgameMicroseconds": 5.43216833496,
+      "fusedFull64MidgameMicroseconds": 3.16645303345,
+      "preparedFixedWorkSpeedup": 1.022948158028431,
+      "fusedFixedWorkSpeedup": 0.8825118115926578
+    }
+  ],
+  "verified": {
+    "fullOutputPositionsPerModelAndVariant": 12000,
+    "all68OutputsExact": true,
+    "fixedWorkSearchGroupsPerStudy": 96,
+    "simulationsPerSearch": 131072,
+    "completeSearchOutputsExact": true,
+    "fp32LocalAndFusedBoundsBelow2To24": true,
+    "normalizationNumeratorsExhaustivelyChecked": [
+      -196608,
+      196608
+    ],
+    "weightPreparation": "GEMM prepared/fused只在每次搜索开始和原生计时开始前打包一次；不同模型不会复用错误的权重。默认预测入口未设置预打包上下文时使用临时准备对象。",
+    "command": "VECLIB_MAXIMUM_THREADS=1 python3 scripts/investigate-mlp-move-batch.py --prepared"
+  },
+  "interpretation": [
+    "本轮预打包GEMM的MLP8搜索倍率0.995，MLP16为0.978，MLP32为1.023；没有足以支持部署的收益。融合在64格MLP32上有效，在真实合法点小batch上更慢。",
+    "计时排除Python/C ABI。每阶段128个固定验证局面，7轮交错测量；搜索对照8个根局面、3轮。当前主机未独占，保留基线控制与全部原始样本，小幅差异不作显著性结论。",
+    "FP32是在已有INT16整数参数上做有范围证明的矩阵运算，不是重新训练浮点模型；后续INT8量化需要重新测量误差、速度与棋力。",
+    "没有新训练或新棋力对战，默认v1.37与浏览器Wasm的哈希仍保持原值。"
+  ],
+  "nextOptions": [
+    "先考虑专门面向N约5..12的小矩阵量化内核，而非继续调用通用BLAS或继续增宽。",
+    "如果要把batch增大，可试跨棋盘/搜索叶子合批；需要同时评估回传延迟、预计算未用子节点的浪费、同时间预算内的新叶覆盖和棋力。"
+  ],
+  "evidence": {
+    "models/mlp-move-batch-study-2026-10-30.json": "050f82f8cfe79ce24b16dc82cd63ef241a31b733fc36c7963db4897a3a91887d",
+    "models/mlp-move-gemm-study-2026-10-30.json": "03cf33193316301f3ce1a49592dc669c3cecea017f9fce7f2690267b3931f3bc",
+    "models/mlp-move-prepared-study-2026-10-30.json": "d5f8b2da90fe6f7c823a69226fdb1876df3702948d948e71b6897e4b1401e25e"
+  },
+  "sourceArchiveManifest": "models/archive/mlp-move-batch-study-2026-10-30-sources.json",
+  "sourceArchiveManifestSha256": "25202521d521a016325970a7b8878cd82423d88be4d352f368a12eee9c5871d3"
+}

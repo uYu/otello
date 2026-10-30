@@ -1,0 +1,59 @@
+{
+  "version": "v1.49-vs-frozen-v1.9-200ms-50",
+  "complete": true,
+  "status": "candidate",
+  "defaultPromoted": false,
+  "candidate": "complete global policy v1.49",
+  "baseline": "exact frozen v1.9 model and library",
+  "millisecondsPerMove": 200,
+  "games": 50,
+  "candidateWDL": {
+    "win": 48,
+    "draw": 1,
+    "loss": 1
+  },
+  "candidateScoreRate": 0.97,
+  "candidateMeanDiscDifference": 24.56,
+  "candidateWDLByColor": {
+    "black": {
+      "win": 24,
+      "draw": 1,
+      "loss": 0
+    },
+    "white": {
+      "win": 24,
+      "draw": 0,
+      "loss": 1
+    }
+  },
+  "searchStatistics": {
+    "candidate": {
+      "moves": 1519,
+      "meanWallMs": 152.60584663726118,
+      "meanSimulations": 139168.6655694536,
+      "meanNewLeafEvaluations": 87309.31731402238,
+      "peakRssMiB": 728.421875,
+      "memoryLimitedDecisions": 0,
+      "proofStoppedDecisions": 369
+    },
+    "baseline": {
+      "moves": 1481,
+      "meanWallMs": 162.86778967589458,
+      "meanSimulations": 24713.487508440245,
+      "meanNewLeafEvaluations": 17634.659689399054,
+      "peakRssMiB": 240.59375,
+      "memoryLimitedDecisions": 0,
+      "proofStoppedDecisions": 296
+    }
+  },
+  "maxNodesByEngine": {
+    "baseline": 2097152,
+    "candidate": 4194304
+  },
+  "v1_9BinaryMatchesOriginalFrozenHash": true,
+  "replayedActions": 3052,
+  "allDecisionsAudited": true,
+  "report": "models/v1.49-global-policy-vs-v1.9-200ms-50.json",
+  "reportSha256": "3ef3c82c2f1ca9c04e52bf0a6d2fe1c06f435da320ad08bc895f8eb2d2b4e9ad",
+  "limits": "Historical-version comparison with preserved per-version searches: NNUE v1.9 samples every unvisited child,2M cap; Pattern v1.49 finite FPU,4M cap. Equal200ms budget,25 paired colors, no opening book. Keep separate from2s and other opponents. No automatic default promotion or Elo inference. Different reached positions make runtime stats descriptive, not pure kernel speed ratios."
+}

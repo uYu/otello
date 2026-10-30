@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "originalTrainRows": 1000000,
+  "allSoftWdlAndValueTargetsVerified": true,
+  "allOriginalHardTargetsSupported": true,
+  "scalarPolicyOrientationChecks": 768,
+  "bothCorporaPresent": true,
+  "sourceOccurrenceCounts": {
+    "wthor": 996340,
+    "logistello": 648520
+  },
+  "frozenValidationRows": 6000,
+  "frozenTestRows": 6000,
+  "holdoutArrayAndPolicyHashesVerified": true,
+  "alignedSoftLabelsSha256": "e94c1b1ad63b023140871179283ed9847df031342f912fd060b76f834f14505e",
+  "scriptSha256": "521371c8a4b191fa82145c86b59bc029b570bfd69d2227fece3cf4b48e4744e4"
+}

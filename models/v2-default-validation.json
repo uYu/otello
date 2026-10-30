@@ -1,0 +1,49 @@
+{
+  "version": "v2",
+  "complete": true,
+  "date": "2026-10-30",
+  "native": {
+    "nativeEmbeddedModelSha256": "df11f7b9eed358fff33a426e2f0cb1a290083d2bc8e0781a2fbd1efdaf4270c3",
+    "nativeExplicitEmbeddedPositions": 12000,
+    "all68OutputsExactlyMatchMeasuredCandidate": true,
+    "all65EmbeddedPolicyProbabilitiesExactlyMatchExplicit": true,
+    "fixedSimulationRoots": 32,
+    "simulationsPerRoot": 2048
+  },
+  "wasm": {
+    "wasmEmbeddedModelSha256": "df11f7b9eed358fff33a426e2f0cb1a290083d2bc8e0781a2fbd1efdaf4270c3",
+    "wasmNativeExactlyEqualValuePositions": 6000,
+    "wasmNativePolicyPositions": 6000,
+    "policyProbabilitiesPerPosition": 65,
+    "maximumPolicyError": 0
+  },
+  "nativeCTest": {
+    "passed": 2,
+    "failed": 0
+  },
+  "webTests": {
+    "passed": 19,
+    "failed": 0
+  },
+  "globalPolicyTrainingTests": {
+    "passed": 4,
+    "failed": 0
+  },
+  "trainingMonitorTests": {
+    "passed": 2,
+    "failed": 0
+  },
+  "candidateHistory": {
+    "games": 70,
+    "replayedActions": 4266,
+    "allDecisionsAudited": true
+  },
+  "dataSnapshotsVerified": true,
+  "embeddedBytesVerified": true,
+  "productionBuildPassed": true,
+  "mandatoryOpeningBookVerified": true,
+  "notes": [
+    "No new strength matches or retraining; exact previously measured candidate promoted on user approval.",
+    "Browser build includes usual large-asset and Node module externalization warnings; build succeeded."
+  ]
+}

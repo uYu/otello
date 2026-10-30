@@ -1,0 +1,36 @@
+{
+  "version": "v1.38-direct-policy",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "sourceManifest": "models/archive/v1.38-direct-policy-sources.json",
+  "artifactSha256": {
+    "models/v1.38-direct-policy-protocol.json": "55ad7777625623c1ae583d05f1bb13608df627a3e22aa1f6ffb1f4505c93d482",
+    "models/v1.38-pattern-direct-policy.json": "ab5dfbb3efbb1b129f3332aa13920051bd2fc671286c0a642f6a24469d9c9366",
+    "models/v1.38-direct-policy-benchmark.json": "be4c0050e6aa72d174157f7f685c963aa01221c951b58eafe58f49b28bba11dd",
+    "models/v1.38-direct-policy-comparison.md": "bc9ca45ed3acd427344a1ef78203da2e723f08261f641f9823924cd0041c4eeb",
+    "models/v1.38-direct-policy-monitor.json": "fd22de18319a4ae8154b6d8d57fcc20687973ea8dd0bf3c0405a2d3e6a3aabb6",
+    "models/archive/v1.38-direct-policy-sources.json": "0b02a220e2433e70064a656da1ee855b5dfb06bc382e6755c41f47b51d16bdcd",
+    "scripts/benchmark-direct-policy.py": "3f19aacf2d1bc223bdef985d538ba66777911bb593e8226a90353acd8e21dd19",
+    "scripts/finalize-direct-policy.py": "589e2098234b7f8496f0890aa94baa55daac273ada713d6f16b0fd6fa693dcd5",
+    "models/pattern32-direct-mlp8-v1.38.otpat": "3ab3da122a74c2214da52692947733f7e38b6ed0a171cb7828cee9e968ff0adc",
+    "models/pattern32-direct-mlp8-v1.38.pt": "b7bf5bdfea1c0e08fd5846a5181ccfbe2a162f88be008694436340ae5681208d",
+    "models/pattern32-direct-mlp8-v1.38.json": "3a1af99d6fe0afbf930ce4e1705bb75992ddcc7db5641e39b2bb5b7d48c0b21d"
+  },
+  "preservedSha256": {
+    "models/default-model.json": "6582f442dc890e847a393cbd31fb54a63f00d8dca62cede1315187137a9c2de4",
+    "models/v1.37-default.json": "27ce5cd4be6cf824b629c5c08151a766b748608c96c9970e58ed8d4c2ca1d0f5",
+    "models/pattern32-symmetry-v1.37.otpat": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+    "src/game/wasm/othello.mjs": "825ef6e4e84e7e60ce0cb262a2a5cb0d25c2a3bb2e6663750688492a79942303"
+  },
+  "checks": {
+    "epochs": 15,
+    "bestEpoch": 14,
+    "trainPositions": 1000000,
+    "validationPositions": 6000,
+    "testPositions": 6000,
+    "exportParity": true,
+    "scalarSimdParity": true,
+    "sanitizers": true,
+    "matchesRun": false
+  }
+}

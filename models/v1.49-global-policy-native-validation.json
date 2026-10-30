@@ -1,0 +1,90 @@
+{
+  "version": "v1.49-global-policy-native",
+  "complete": true,
+  "defaultPromoted": false,
+  "format": "OTPAT9",
+  "model": "models/pattern32-global-policy16-full-v1.49.otpat",
+  "modelSha256": "df11f7b9eed358fff33a426e2f0cb1a290083d2bc8e0781a2fbd1efdaf4270c3",
+  "bytes": 1837288,
+  "trainingReportSha256": "13e2bf466c980679e26b5218408dddab0888a9911c37bc00277b46f605c8531c",
+  "torchNative": {
+    "validation": {
+      "positions": 6000,
+      "maxWdlError": 1.2425820328232362e-07,
+      "maxPolicyLogitError": 6.539121937265691e-07,
+      "maxScoreRoundingError": 0.49896240234375,
+      "maxOutcomeError": 2.9840748871912126e-08
+    },
+    "test": {
+      "positions": 6000,
+      "maxWdlError": 1.3049636804485232e-07,
+      "maxPolicyLogitError": 4.366285271117931e-07,
+      "maxScoreRoundingError": 0.49896240234375,
+      "maxOutcomeError": 2.9840748871912126e-08
+    }
+  },
+  "scalarSimd": {
+    "positions": 12000,
+    "all68OutputsExactlyEqual": true,
+    "fixedSearchRoots": 16,
+    "simulations": 2048
+  },
+  "legacyRegression": {
+    "positions": 12000,
+    "all68OutputsExactlyEqual": true,
+    "fixedSearchRoots": 16,
+    "simulations": 2048
+  },
+  "zeroCorrection": {
+    "positions": 12000,
+    "all68OutputsExactlyEqual": true,
+    "fixedSearchRoots": 8
+  },
+  "malformedModelsRejected": 3,
+  "residualParameterCacheInvalidationPassed": true,
+  "nativeCTestBuilds": [
+    "SIMD",
+    "portable"
+  ],
+  "legalProjectionCheck": {
+    "groups": [
+      {
+        "stage": 0,
+        "nanoseconds": 930.827,
+        "meanActivePatterns": 20.7514,
+        "meanLegalMoves": 7.28177,
+        "logitChecksum": 821.257
+      },
+      {
+        "stage": 1,
+        "nanoseconds": 1055.58,
+        "meanActivePatterns": 27.745,
+        "meanLegalMoves": 11.1,
+        "logitChecksum": 205.865
+      },
+      {
+        "stage": 2,
+        "nanoseconds": 967.163,
+        "meanActivePatterns": 16.1527,
+        "meanLegalMoves": 5.49618,
+        "logitChecksum": -509.112
+      }
+    ],
+    "checksum": 132515804
+  },
+  "libraries": {
+    ".build/native-pattern-global-policy-v1.49/libothello.dylib": "9e1c7f0a0e3c247272e048a336a6de2fb18e938145bd66f4118576f502e91bc2",
+    ".build/native-pattern-global-policy-portable-v1.49/libothello.dylib": "0e32cb69926c6a0804bca4d28b9b161c5c882e58f943d397927a63ccb6c85947",
+    ".build/native-v1.37-reference/libothello.dylib": "e8eea82419065f5af3c6ddcd257c5497f971d2ba17ae94782b490a10a637a024"
+  },
+  "protocolSha256": "4d553e1e53de5381b01a8b8dfefbb787cb1e0724e50ce02da8524880dbf92116",
+  "preservedSha256": {
+    "models/default-model.json": "6582f442dc890e847a393cbd31fb54a63f00d8dca62cede1315187137a9c2de4",
+    "models/v1.37-default.json": "27ce5cd4be6cf824b629c5c08151a766b748608c96c9970e58ed8d4c2ca1d0f5",
+    "models/pattern32-symmetry-v1.37.otpat": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+    "models/pattern32-symmetry-v1.37.pt": "8f6052eadfd2cef1367c14fe121c910bb2e1635cafcda083d9e8fdbbd8a73d52",
+    "src/game/wasm/othello.mjs": "825ef6e4e84e7e60ce0cb262a2a5cb0d25c2a3bb2e6663750688492a79942303",
+    ".build/native-v1.37-reference/libothello.dylib": "e8eea82419065f5af3c6ddcd257c5497f971d2ba17ae94782b490a10a637a024"
+  },
+  "limits": "Frozen selected weights, no retraining. Native macOS ARM64 correctness; no strength result in this record."
+}

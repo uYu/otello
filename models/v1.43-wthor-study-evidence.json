@@ -1,0 +1,40 @@
+{
+  "status": "completed-training-and-user-stopped-match",
+  "modelsTrained": [
+    "v1.42",
+    "v1.43"
+  ],
+  "matchStoppedByUser": true,
+  "completedMatchGames": 12,
+  "extraAblationTrainingStarted": false,
+  "defaultPromoted": false,
+  "artifactSha256": {
+    "models/archive/v1.43-wthor-study-sources.json": "2a3a5e0cdcb835ba5dde1adfa7512b4c59dbdf3ac7e8edbc6583370b1140ecac",
+    "models/v1.43-wthor-data-comparison.md": "181645afbaf8d4c5db0ef8bdfcd14736f4d8cd037698deff2a9a7d3e035658b9",
+    "models/v1.43-wthor-data-suite.json": "3ccbd2c8a2666a0bcbbe684991f1cdb37971f78587ebedb854362d2c6e719635",
+    "models/v1.43-wthor-data-diagnosis.json": "d18e0b20f182a3a1b333b78b7d8169c633631a5eef72eb079a272dda04ded490",
+    "models/v1.43-wthor-data-diagnosis.md": "bb5d2c19c1b50e1495283b4ab6bc5e1f7e600ec53fdc73e5806c6a129d33768d",
+    "models/v1.43-pattern-wthor1600-queue-amendment.json": "7cb18b25c1df2431419147fa5015dcbd27faf2f7eadaced0362c3f4f3af6bd7f",
+    "models/v1.42-pattern-wthor-2s-stopped-experiment.json": "0c8e4b06a7112aa897da4594056b40b9996f8f3add959740f2b434786ca7a76e",
+    "models/v1.42-pattern-wthor-experiment.json": "0faf1ddbc286e2877c98fa3f501beb10e30e9a5b14f4312004f579b2cd31ed96",
+    "models/v1.43-pattern-wthor1600-experiment.json": "d15d1333754fbd41ad31a5c5ffbcd3860667452de0ddb6ff42b9652f76f5e493",
+    "models/v1.41-wthor-elo-filter-experiment.json": "ac70f4db33cef17ff8945243cff51d121fcca86c4a1b5ff43043f44af3d306b9"
+  },
+  "preservedSha256": {
+    ".build/training/v1/positions.npz": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6",
+    ".build/training/v1.8/policy.npz": "d5712464ea92f34019de2ca9427d95cfa9aa985ff9d854801c9eb7362a7b587a",
+    ".build/training/games.jsonl": "6332fd01b27c11a81f3fbd344e52aaf8f70e60c644780fb453cc7ef64ae359ac",
+    "models/default-model.json": "6582f442dc890e847a393cbd31fb54a63f00d8dca62cede1315187137a9c2de4",
+    "models/v1.37-default.json": "27ce5cd4be6cf824b629c5c08151a766b748608c96c9970e58ed8d4c2ca1d0f5",
+    "models/pattern32-symmetry-v1.37.otpat": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+    "src/game/wasm/othello.mjs": "825ef6e4e84e7e60ce0cb262a2a5cb0d25c2a3bb2e6663750688492a79942303",
+    "models/training-data-audit-2026-10-30.json": "6e5f3da422ed9d2b557a3bc509ad1d85ded4eaebe9e62b002d849021704322a5",
+    "models/v1.39-policy-width-experiment.json": "f1fb77f893f2c0cde032905d9a812d742ba41b2a11c3913b167f4269e3cd5cee",
+    "models/v1.38-direct-policy-2s-20-experiment.json": "14ba42f0d1e45a66ff4f2c9ee4984a5caa8818875c54edfccb4a02d5903dce8e",
+    ".build/training/data-audit-20261030/game-player-metadata.jsonl": "afba1888ac33076616034ad8cda6523bb2a28fc7adabf4dbd2bc52b31bde2343",
+    ".build/training/data-audit-20261030/metadata/WTHOR.JOU": "3db81a3850ab4bb1ff4523f2d326fccbc4168ae68865ec4fcc45b884bdde56c9",
+    "models/v1.40-training-consensus-elo.json": "49e778288098123401542c898a7178c64baa2dc9882fee0175b9f812e6619a0a",
+    "models/v1.41-wthor-elo-filter.json": "f5d16ef8d61a15922f32782f20a5c2f56a7c1b4f1f689262494e16f5d10563b5",
+    ".build/training/consensus-elo-v1.40/occurrences.npz": "3b7817d6a0ae603575578c14527017ea782593f33a64359abcae34a1f426b58c"
+  }
+}

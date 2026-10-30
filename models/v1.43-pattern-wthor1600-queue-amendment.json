@@ -1,0 +1,26 @@
+{
+  "userInstruction": "2s预测停了吧，不太行",
+  "action": "User stopped v1.42 match early; native processes confirmed exited. Start previously authorized v1.43 training now; no overlap with active match.",
+  "originalProtocolSha256": "c46062198531bc77e1690a76523be24106e86935a2466337036aba3a06f3dade",
+  "stoppedMatchSha256": "ec0306e222c193cf42d769bb398c5a28a2adcfff41be80c110031a7825628a0b",
+  "completedGames": 12,
+  "results": {
+    "games": 12,
+    "win": 2,
+    "draw": 4,
+    "loss": 6,
+    "discDifference": -71,
+    "scoreRate": 0.3333333333333333,
+    "meanDiscDifference": -5.916666666666667,
+    "moves": 362,
+    "meanWallMs": 1516.8623869447513,
+    "meanSearchUnits": 2996423.491712707,
+    "searchUnit": "simulations",
+    "meanNonExactDepth": 41.043956043956044,
+    "depthKind": "maximumVisited",
+    "meanSimulationDepth": 14.224646068477231,
+    "memoryLimitedSearches": 0,
+    "reusedMctsSearches": 349,
+    "exactMoves": 89
+  }
+}

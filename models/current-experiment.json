@@ -1,6 +1,293 @@
 {
-  "version": "v1.36 Pattern 节点扩容",
+  "version": "v1.49 vs v1.9 · 200ms/50局",
   "experiments": [
+    {
+      "name": "最新v1.49 vs 冻结v1.9 · 200ms/步 · 50局",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "全局策略 v1.49",
+        "baseline": "冻结 v1.9"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 50,
+      "runtimeReport": ".build/training/global-policy-vs-v1.9-200ms-50/match.json",
+      "report": "models/v1.49-global-policy-vs-v1.9-200ms-50.json"
+    }
+  ],
+  "archivedExperiments": [
+    {
+      "name": "v1.9冻结参考引擎准备",
+      "games": 0,
+      "runtimeReport": ".build/training/global-policy-vs-v1.9-200ms-50/preparation.json",
+      "report": "models/v1.49-v1.9-200ms-50-preflight.json"
+    },
+    {
+      "name": "全局8×8策略 v1.49 vs v1.37 · 2秒/步 · 20局",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "全局8×8策略 v1.49",
+        "baseline": "v1.37 对称共享"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/pattern-global-policy-native-v1.49/match-2s-20.json",
+      "report": "models/v1.49-global-policy-vs-v1.37-2s-20.json"
+    },
+    {
+      "name": "全局策略完整原生模型：构建与核验",
+      "games": 0,
+      "runtimeReport": ".build/training/pattern-global-policy-native-v1.49/progress.json",
+      "report": "models/v1.49-global-policy-native-validation.json"
+    },
+    {
+      "name": "全局38→16→64 · 全网91.7万参数重训",
+      "focus": "global-policy-full",
+      "games": 0,
+      "runtimeReport": ".build/training/pattern-global-policy-full-v1.49/progress.json",
+      "report": "models/v1.49-global-policy-full-monitor.json"
+    },
+    {
+      "name": "v1.48训练结束：策略退步，候选留档",
+      "focus": "shared-residual",
+      "games": 0,
+      "runtimeReport": ".build/training/pattern-shared-residual-v1.48/progress.json",
+      "report": "models/v1.48-shared-residual-monitor.json",
+      "metricsReport": ".build/training/pattern-shared-residual-v1.48/epoch-metrics.json",
+      "status": "archived-not-adopted",
+      "decision": "models/v1.48-shared-residual-decision.json"
+    },
+    {
+      "name": "混合语料 soft v1.45 vs v1.37 · 2s · 用户已停止",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "混合语料 soft",
+        "baseline": "v1.37 对称共享"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/mixed-soft-match-v1.45/match-2s-stopped.json",
+      "report": "models/v1.45-soft-vs-v1.37-2s-stopped.json",
+      "status": "stopped"
+    },
+    {
+      "name": "MLP8/16/32：合法着推理、分段计时与精确优化原型",
+      "games": 0,
+      "report": "models/mlp-inference-study-2026-10-30.json",
+      "runtimeReport": ".build/mlp-inference-study-20261030/progress.json"
+    },
+    {
+      "name": "MLP：同一棋盘合法着 batch / SIMD 归一化",
+      "games": 0,
+      "report": "models/mlp-move-batch-study-2026-10-30.json",
+      "runtimeReport": ".build/mlp-move-batch-study-20261030/progress.json"
+    },
+    {
+      "name": "MLP：全部合法着一次 GEMM",
+      "games": 0,
+      "report": "models/mlp-move-gemm-study-2026-10-30.json",
+      "runtimeReport": ".build/mlp-move-gemm-study-20261030/progress.json"
+    },
+    {
+      "name": "MLP：一次打包权重 + 融合 batch",
+      "games": 0,
+      "report": "models/mlp-move-prepared-study-2026-10-30.json",
+      "runtimeReport": ".build/mlp-move-prepared-study-20261030/progress.json"
+    },
+    {
+      "name": "单头 / 分阶段策略头 · 按相同中盘验证 CE 选模",
+      "focus": "phase-policy",
+      "games": 0,
+      "runtimeReport": ".build/training/pattern-phase-policy-v1.47/progress.json",
+      "report": "models/v1.47-phase-policy-monitor.json",
+      "status": "archived-not-adopted",
+      "decision": "models/v1.47-phase-head-decision.json"
+    },
+    {
+      "name": "分阶段价值头 · 策略结构沿用 v1.37",
+      "focus": "phase-value",
+      "games": 0,
+      "runtimeReport": ".build/training/pattern-phase-value-v1.46/progress.json",
+      "report": "models/v1.46-phase-value-monitor.json",
+      "status": "archived-not-adopted",
+      "decision": "models/v1.47-phase-head-decision.json"
+    },
+    {
+      "name": "WTHOR + Logistello 原百万局面：硬/软对照",
+      "focus": "mixed-label-ablation",
+      "games": 0,
+      "runtimeReport": ".build/training/mixed-label-ablation-v1.45/progress.json",
+      "report": "models/v1.45-mixed-label-ablation-monitor.json"
+    },
+    {
+      "name": "相同 WTHOR 局面：首条硬标签 / 聚合软标签",
+      "focus": "wthor-label-ablation",
+      "games": 0,
+      "runtimeReport": ".build/training/wthor-label-ablation-v1.44/progress.json",
+      "report": "models/v1.44-wthor-label-ablation-monitor.json"
+    },
+    {
+      "name": "WTHOR 1600 过滤版 · 相同基线结构（排队）",
+      "focus": "symmetry-wthor1600",
+      "games": 0,
+      "runtimeReport": ".build/training/pattern-wthor1600-v1.43/progress.json",
+      "report": "models/v1.43-pattern-wthor1600-monitor.json"
+    },
+    {
+      "name": "WTHOR 全量 v1.42 vs v1.37 · 2s · 用户已停止",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "WTHOR 全量",
+        "baseline": "v1.37 对称共享"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/pattern-wthor-v1.42/match-2s-stopped.json",
+      "report": "models/v1.42-wthor-vs-v1.37-2s-stopped.json",
+      "status": "stopped"
+    },
+    {
+      "name": "WTHOR 全量 · 对称共享原结构训练",
+      "focus": "symmetry-wthor",
+      "games": 0,
+      "runtimeReport": ".build/training/pattern-wthor-v1.42/progress.json",
+      "report": "models/v1.42-pattern-wthor-monitor.json"
+    },
+    {
+      "name": "WTHOR：Elo 阈值与不加权聚合",
+      "focus": "wthor-elo-filter",
+      "games": 0,
+      "runtimeReport": ".build/training/wthor-elo-v1.41/progress.json",
+      "report": "models/v1.41-wthor-elo-filter-monitor.json"
+    },
+    {
+      "name": "v1.40 数据候选：Elo 重放 + 多走法/多结果",
+      "focus": "consensus-elo",
+      "games": 0,
+      "runtimeReport": ".build/training/consensus-elo-v1.40/progress.json",
+      "report": "models/v1.40-training-consensus-elo-monitor.json"
+    },
+    {
+      "name": "训练数据：完整性、棋手溯源与多标签审计",
+      "focus": "data-audit",
+      "games": 0,
+      "runtimeReport": ".build/training/data-audit-20261030/progress.json",
+      "report": "models/training-data-audit-2026-10-30-monitor.json"
+    },
+    {
+      "name": "MLP16 / MLP32：导出与相同局面吞吐核验",
+      "focus": "policy-width",
+      "games": 0,
+      "runtimeReport": ".build/training/pattern-policy-width-v1.39/benchmark-progress.json",
+      "report": "models/v1.39-policy-width-monitor.json"
+    },
+    {
+      "name": "直连 MLP v1.38 vs 对称共享 v1.37 · 2s/步 · 20局",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "直连 MLP",
+        "baseline": "v1.37 对称共享"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/direct-policy-match-v1.38/match-2s-20.json",
+      "report": "models/v1.38-direct-mlp8-vs-v1.37-2s-20.json"
+    },
+    {
+      "name": "直连 MLP v1.38 vs 对称共享 v1.37 · 200ms/步 · 20局",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "直连 MLP",
+        "baseline": "v1.37 对称共享"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/direct-policy-match-v1.38/match-200ms-20.json",
+      "report": "models/v1.38-direct-mlp8-vs-v1.37-200ms-20.json"
+    },
+    {
+      "name": "直连 MLP · 离线训练与验证完成",
+      "focus": "direct-mlp8",
+      "games": 0,
+      "report": "models/v1.38-direct-policy-monitor.json"
+    },
+    {
+      "name": "对称共享 vs v1.36 · 100ms/步 · 20局",
+      "displayNames": {
+        "candidate": "对称共享",
+        "baseline": "v1.36"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/pattern-structure-v1.37/symmetry-100ms-20.json",
+      "report": "models/v1.37-symmetry-vs-v1.36-100ms-20.json",
+      "focus": "candidate"
+    },
+    {
+      "name": "十组池化 vs v1.36 · 100ms/步 · 20局",
+      "displayNames": {
+        "candidate": "十组池化",
+        "baseline": "v1.36"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/pattern-structure-v1.37/pool10-100ms-20.json",
+      "report": "models/v1.37-pool10-vs-v1.36-100ms-20.json",
+      "focus": "candidate"
+    },
+    {
+      "name": "对称共享 vs v1.36 · 2000ms/步 · 20局",
+      "displayNames": {
+        "candidate": "对称共享",
+        "baseline": "v1.36"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/pattern-structure-v1.37/symmetry-2000ms-20.json",
+      "report": "models/v1.37-symmetry-vs-v1.36-2000ms-20.json",
+      "focus": "candidate"
+    },
+    {
+      "name": "十组池化 vs v1.36 · 2000ms/步 · 20局",
+      "displayNames": {
+        "candidate": "十组池化",
+        "baseline": "v1.36"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/pattern-structure-v1.37/pool10-2000ms-20.json",
+      "report": "models/v1.37-pool10-vs-v1.36-2000ms-20.json",
+      "focus": "candidate"
+    },
     {
       "name": "策略集 4M 节点 vs v1.25 · 2秒/步 · 20局",
       "shortName": "策略集 4M 节点 vs v1.25 · 2秒/步 · 20局",
@@ -15,9 +302,7 @@
       "games": 20,
       "runtimeReport": ".build/training/pattern-capacity-v1.36/match-2s-20.json",
       "report": "models/v1.36-capacity-vs-v1.25-2s-20.json"
-    }
-  ],
-  "archivedExperiments": [
+    },
     {
       "name": "策略集 INT16 vs v1.25 · 2秒/步 · 20局",
       "shortName": "策略集 INT16 vs v1.25 · 2秒/步 · 20局",

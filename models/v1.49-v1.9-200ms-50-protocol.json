@@ -1,0 +1,56 @@
+{
+  "version": "v1.49-vs-frozen-v1.9-200ms-50",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "userRequest": "v1.9还在吗，在的话，最新模型和他打50局200ms",
+  "candidate": "models/pattern32-global-policy16-full-v1.49.otpat",
+  "candidateModelSha256": "df11f7b9eed358fff33a426e2f0cb1a290083d2bc8e0781a2fbd1efdaf4270c3",
+  "baseline": "models/v1.9-default.json",
+  "baselineModelSha256": "72294450ce5eb180703e05048df6e7ce7078f031c4e94464198192432d618bb0",
+  "millisecondsPerMove": 200,
+  "games": 50,
+  "seed": 20261029,
+  "start": "initial",
+  "pairedColors": true,
+  "sharedPairSeeds": true,
+  "useBook": false,
+  "openingPolicy": {
+    "plies": 12,
+    "temperature": 32,
+    "max_loss": 64
+  },
+  "maxNodesByEngine": {
+    "baseline": 2097152,
+    "candidate": 4194304
+  },
+  "exploration": 1.5,
+  "subtreeReuse": true,
+  "terminal": "outcome +1/0/-1",
+  "searchDetails": {
+    "candidate": "Current Pattern learned-prior PUCT with finite FPU(parent mean-0.15);4M cap",
+    "baseline": "Exact frozen v1.9 NNUE learned-prior search; sample each unvisited child once in learned-prior order;2M cap"
+  },
+  "baselineSourceManifest": "models/archive/v1.9-default-sources.json",
+  "baselineBuildProvenanceSha256": "07799ba4655167551b6d8bd088bf145c13468790618509b025fc15c49018a186",
+  "baselineOriginalRecordedLibrarySha256": "6f593a25a0d52f1846e29db35b10fa5423505fd820eb124d4a474489f412c188",
+  "libraries": {
+    ".build/native-v1.9-reference/libothello.dylib": "6f593a25a0d52f1846e29db35b10fa5423505fd820eb124d4a474489f412c188",
+    ".build/native-pattern-global-policy-v1.49/libothello.dylib": "9e1c7f0a0e3c247272e048a336a6de2fb18e938145bd66f4118576f502e91bc2"
+  },
+  "preflightSha256": "c2e22a0c7e0f1bb16bf63463414f312cc2858e7f2a5fa6a9bb26055f73cce7f5",
+  "preservedSha256": {
+    "models/default-model.json": "6582f442dc890e847a393cbd31fb54a63f00d8dca62cede1315187137a9c2de4",
+    "models/v1.37-default.json": "27ce5cd4be6cf824b629c5c08151a766b748608c96c9970e58ed8d4c2ca1d0f5",
+    "models/pattern32-symmetry-v1.37.otpat": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+    "models/pattern32-symmetry-v1.37.pt": "8f6052eadfd2cef1367c14fe121c910bb2e1635cafcda083d9e8fdbbd8a73d52",
+    "src/game/wasm/othello.mjs": "825ef6e4e84e7e60ce0cb262a2a5cb0d25c2a3bb2e6663750688492a79942303",
+    ".build/native-v1.37-reference/libothello.dylib": "e8eea82419065f5af3c6ddcd257c5497f971d2ba17ae94782b490a10a637a024",
+    "models/v1.9-default.json": "3bc0188f583263d1abaf5b7337ee28a849eac91a5a3707e50da6a32c2e854b5d",
+    "models/nnue256-outcome-v1.9.otnnue": "72294450ce5eb180703e05048df6e7ce7078f031c4e94464198192432d618bb0",
+    "models/pattern32-global-policy16-full-v1.49.otpat": "df11f7b9eed358fff33a426e2f0cb1a290083d2bc8e0781a2fbd1efdaf4270c3",
+    ".build/native-v1.9-reference/libothello.dylib": "6f593a25a0d52f1846e29db35b10fa5423505fd820eb124d4a474489f412c188",
+    ".build/native-pattern-global-policy-v1.49/libothello.dylib": "9e1c7f0a0e3c247272e048a336a6de2fb18e938145bd66f4118576f502e91bc2"
+  },
+  "sourceArchiveManifest": "models/archive/v1.49-v1.9-200ms-50-sources.json",
+  "limits": "Historical-version comparison: each model uses its own preserved search implementation/settings; equal200ms wall budget,25 paired-color seeds. No retraining, no opening book, no default promotion. Rebuilt v1.9 library has exact archived sources, not necessarily original binary hash."
+}

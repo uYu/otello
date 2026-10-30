@@ -1,0 +1,65 @@
+{
+  "version": "v1.37 Pattern 独立结构对战",
+  "experiments": [
+    {
+      "name": "对称共享 vs v1.36 · 100ms/步 · 20局",
+      "displayNames": {
+        "candidate": "对称共享",
+        "baseline": "v1.36"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/pattern-structure-v1.37/symmetry-100ms-20.json",
+      "report": "models/v1.37-symmetry-vs-v1.36-100ms-20.json",
+      "focus": "candidate"
+    },
+    {
+      "name": "十组池化 vs v1.36 · 100ms/步 · 20局",
+      "displayNames": {
+        "candidate": "十组池化",
+        "baseline": "v1.36"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/pattern-structure-v1.37/pool10-100ms-20.json",
+      "report": "models/v1.37-pool10-vs-v1.36-100ms-20.json",
+      "focus": "candidate"
+    },
+    {
+      "name": "对称共享 vs v1.36 · 2000ms/步 · 20局",
+      "displayNames": {
+        "candidate": "对称共享",
+        "baseline": "v1.36"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/pattern-structure-v1.37/symmetry-2000ms-20.json",
+      "report": "models/v1.37-symmetry-vs-v1.36-2000ms-20.json",
+      "focus": "candidate"
+    },
+    {
+      "name": "十组池化 vs v1.36 · 2000ms/步 · 20局",
+      "displayNames": {
+        "candidate": "十组池化",
+        "baseline": "v1.36"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/pattern-structure-v1.37/pool10-2000ms-20.json",
+      "report": "models/v1.37-pool10-vs-v1.36-2000ms-20.json",
+      "focus": "candidate"
+    }
+  ]
+}

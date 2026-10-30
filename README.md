@@ -84,7 +84,7 @@ npm run build:wasm        # 修改 C++ 后重新编译网页适配层
 
 ## AI 与哈希
 
-默认对弈为 **v1.36 Pattern 策略／胜负价值模型＋MCTS**，权重直接嵌入原生库和浏览器 Wasm，无需额外模型文件或下载。MCTS 使用学习到的合法落点先验与神经网络胜负估值，并复用实际走到的子树。当前模型与冻结基线由 `models/default-model.json` 和 `models/v1.36-default.json` 记录。仍可用 `--search ab` 选择原 PVS/α–β、aspiration window、迭代加深和 NNUE 增量评估；`--network heuristic` 显式使用较弱的启发式。
+默认对弈为 **v2 Pattern 策略／胜负价值模型＋MCTS**，权重直接嵌入原生库和浏览器 Wasm，无需额外模型文件或下载。MCTS 使用学习到的合法落点先验与神经网络胜负估值，并复用实际走到的子树。当前模型与冻结基线由 `models/default-model.json` 和 `models/v2-default.json` 记录。仍可用 `--search ab` 选择原 PVS/α–β、aspiration window、迭代加深和 NNUE 增量评估；`--network heuristic` 显式使用较弱的启发式。
 
 **Zobrist 哈希**包含棋子颜色、格子和行棋方，落子/翻子/停着时增量异或更新。固定 SplitMix64 种子保证跨进程、原生和 Wasm 结果稳定。v1.1 的 262,144 项置换表分为四项一桶，在同一线程内跨请求复用，按深度、准确性和代数替换；命中后比较完整双方位棋盘，切换评估器或修改模型参数时自动清表。递归搜索使用固定数组排序，NNUE 累加器延迟到需要评分时更新。[v1.1 性能记录](models/v1.1-search.md)包含对比结果和复现命令。
 
@@ -112,7 +112,7 @@ v1.5 的 32 通道、2 个残差块模型将测试集误差降到 9.83 子，但
 
 v1.2 新增考虑行棋方的 NNUE 模型，使用同一百万局面缓存重新训练，保留 v1.1 的搜索优化。共享特征层是 128→256，当前行棋方与对方的特征按顺序拼接后输出评分，参数为 33,537，模型约 67.6KB。[v1.2 对战结果](models/v1.2-comparison.md)记录原最高分选步对 v1.1 的 100 局测试；双方从标准初始棋盘自行走棋，不使用开局库，每步各 50ms，交替执黑白。
 
-v1.1 的工程优化与原模型保持冻结，见 [v1.1 对战结果](models/v1.1-comparison.md)及[性能记录](models/v1.1-search.md)。新旧模型使用独立文件，原生 CLI 可通过 `--network models/nnue256-v1.2.otnnue` 选择新模型；浏览器内置对手默认使用 v1.36 Pattern 策略／胜负价值模型＋MCTS，入门档保留较弱启发式，可选原生 Egaroucid。
+v1.1 的工程优化与原模型保持冻结，见 [v1.1 对战结果](models/v1.1-comparison.md)及[性能记录](models/v1.1-search.md)。新旧模型使用独立文件，原生 CLI 可通过 `--network models/nnue256-v1.2.otnnue` 选择新模型；浏览器内置对手默认使用 v2 Pattern 策略／胜负价值模型＋MCTS，入门档保留较弱启发式，可选原生 Egaroucid。
 
 ```sh
 npm run training:baseline    # 仅供原始 v1 源码；当前 v1.1 会拒绝覆盖冻结报告
@@ -139,7 +139,7 @@ docker compose up --build
 # http://localhost:8207
 ```
 
-默认端口为 8207，可用 `OTELLO_PORT` 覆盖。开局库默认固定启用，每步先查库，出库后继续 v1.36 Pattern＋MCTS，不提供关闭选项。Docker 构建会验证已批准的 v1.36 基线、冻结 Wasm 和开局库；部署版本可由 `/release.json` 核对，健康检查为 `/healthz`。已有本地构建可使用 `docker compose -f compose.yaml -f compose.prebuilt.yaml up -d --build`，先运行 `npm run build` 即会自动准备并校验发布资产。服务器部署说明见 [部署记录](docs/DEPLOYMENT.md)。
+默认端口为 8207，可用 `OTELLO_PORT` 覆盖。开局库默认固定启用，每步先查库，出库后继续 v2 Pattern＋MCTS，不提供关闭选项。Docker 构建会验证已批准的 v2 基线、冻结 Wasm 和开局库；部署版本可由 `/release.json` 核对，健康检查为 `/healthz`。已有本地构建可使用 `docker compose -f compose.yaml -f compose.prebuilt.yaml up -d --build`，先运行 `npm run build` 即会自动准备并校验发布资产。服务器部署说明见 [部署记录](docs/DEPLOYMENT.md)。
 
 或者将 `dist/` 放到静态服务器；Vite 使用相对路径，支持子目录。Docker 只构建网页并提供内置 AI。Egaroucid 原生对战可用 `npm run build && npm run native:serve`，由同一个本机服务提供网页与原生接口。
 
@@ -196,8 +196,7 @@ v1.9 及所有候选时期记录继续保留，后续候选默认对照 v1.25。
 
 ## User-approved v1.36 engineering baseline (2026-10-30)
 
-The active baseline is `models/v1.36-default.json`, selected by
-`models/default-model.json`. It retains the exact v1.25 INT16 Pattern outcome
+The previous engineering baseline is frozen as `models/v1.36-default.json`. It retains the exact v1.25 INT16 Pattern outcome
 weights and enables fused current-side inference, NEON/SSE2 with portable fallback,
 packed shape encoding, four-row reuse and legal-only policy projection. The default
 node budget is 4,194,304; incremental cache and integer rounding remain disabled.
@@ -212,3 +211,51 @@ Native kernels select AArch64 NEON or x86-64 SSE2; actual Linux throughput remai
 unmeasured. Browser budgets stay 100ms/1s and the verified opening book stays enabled.
 See `models/v1.36-pattern-capacity-comparison.md` and
 `models/v1.35-pattern-speed-suite-comparison.md` for separate measured results.
+
+
+## User-approved v1.37 symmetry baseline (2026-10-30)
+
+The active default is `models/v1.37-default.json`, selected by `models/default-model.json`.
+User approval: “把这个作为基线：对称共享”. The exact measured weights are
+`models/pattern32-symmetry-v1.37.otpat` (OTPAT4 variant 1), SHA-256
+`762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235`.
+It ties reversed lines and transposed corners: 28,503 × 32 INT16 table entries,
+916,750 parameters and 1,833,692 bytes. Keep the 38 pattern instances, three
+mean pools, 97→32 trunk and original conditional policy head.
+
+Against frozen v1.36, preserve separate measured results: 100ms/20 games
+9W/5D/6L (57.5%); 2s/20 games 10W/7D/3L (67.5%). These are screening
+samples, not a statistically significant strength claim. No retraining or new
+strength match is required for this user-approved promotion.
+
+Retain v1.36 search settings: 4,194,304 nodes, learned-prior PUCT, finite FPU
+(parent mean minus 0.15), subtree reuse and outcome terminal/proof semantics.
+The verified Egaroucid book stays mandatory; browser budgets remain 100ms/1s.
+Ten-pool and direct-policy MLP candidates are excluded. Keep candidate-era
+reports and all previous baselines immutable. Future comparisons use v1.37.
+
+## User-approved v2 global policy baseline (2026-10-30)
+
+The active default is `models/v2-default.json`, selected by `models/default-model.json`.
+User approval: “感觉可以作为v2了”. The complete measured v1.49 model is preserved
+byte for byte as `models/pattern32-global-policy-v2.otpat` (OTPAT9), SHA-256
+`df11f7b9eed358fff33a426e2f0cb1a290083d2bc8e0781a2fbd1efdaf4270c3`.
+All 916,987 independent parameters were trained together from random initialization;
+237 are the additional D4-tied global policy coefficients. The 38→16→64 head runs
+once per board and adds all-square corrections to the original conditional policy.
+The native engine and browser Wasm embed the same complete model.
+
+Preserve the separate measured candidate-era results: against frozen v1.37,
+2s/20 games gave 10W/6D/4L (65%, mean discs +7.5); against frozen v1.9,
+200ms/50 games gave 48W/1D/1L (97%, mean discs +24.56).
+These use model-only search without the opening book. They are different opponents
+and budgets; no Elo or statistical significance claim follows from these samples.
+No retraining or new strength match was required for this user-approved promotion.
+
+Retain the v1.37 search settings: 4,194,304 nodes, learned-prior PUCT,
+finite FPU (parent mean minus 0.15), subtree reuse and outcome terminal/proof semantics.
+The verified Egaroucid opening book stays mandatory, followed by v2 on a verified
+miss; browser budgets stay 100ms/1s. Earlier baselines and candidate-era records
+remain immutable. Future comparisons use v2. Historical preservation verification:
+`python3 scripts/verify-v2-history.py`; current default verification:
+`python3 scripts/verify-v2-default.py` and `npm run test:baseline`.

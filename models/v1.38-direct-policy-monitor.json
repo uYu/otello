@@ -1,0 +1,9 @@
+{
+  "experiment": "pattern-suite-sampling",
+  "complete": true,
+  "stage": "离线训练、导出与吞吐验证完成",
+  "completed": 15,
+  "total": 15,
+  "seconds": 548.4779033749364,
+  "summary": "直连 MLP：测试 MSE 0.685687；走法命中率 44.08%；100ms/1s 模拟吞吐 0.866×/0.895×；未对战，默认保留 v1.37"
+}

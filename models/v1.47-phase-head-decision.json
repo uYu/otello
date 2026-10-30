@@ -1,0 +1,40 @@
+{
+  "status": "archived-not-adopted",
+  "userDecision": "指标差不多那就不需要做这么花哨的操作了",
+  "scope": "Stop phase-value and phase-policy head iteration; no combined phase-head experiment; retain frozen v1.37 symmetry single-value/single-policy default",
+  "defaultVersion": "v1.37",
+  "defaultSelectorSha256": "6582f442dc890e847a393cbd31fb54a63f00d8dca62cede1315187137a9c2de4",
+  "defaultManifestSha256": "27ce5cd4be6cf824b629c5c08151a766b748608c96c9970e58ed8d4c2ca1d0f5",
+  "defaultModelSha256": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+  "trainingComplete": true,
+  "plannedAdditionalTraining": false,
+  "plannedStrengthMatch": false,
+  "phasePolicyMiddleTest": {
+    "control": {
+      "mse": 0.7569482922554016,
+      "outcomeMae": 0.7738930583000183,
+      "nonDrawSignAccuracy": 0.6297309621523027,
+      "wdlAccuracy": 0.5469917420369642,
+      "wdlCrossEntropy": 0.9685706496238708,
+      "policyTop1": 0.3523397561934723,
+      "policyCrossEntropy": 1.8135846853256226,
+      "uniformPolicyCrossEntropy": 2.4013168095824726
+    },
+    "candidate": {
+      "mse": 0.7538348436355591,
+      "outcomeMae": 0.7724428176879883,
+      "nonDrawSignAccuracy": 0.6301869585043319,
+      "wdlAccuracy": 0.5450255603617774,
+      "wdlCrossEntropy": 0.9631319046020508,
+      "policyTop1": 0.35351946519858435,
+      "policyCrossEntropy": 1.815450668334961,
+      "uniformPolicyCrossEntropy": 2.4013168095824726
+    }
+  },
+  "preservedExperiments": {
+    "models/v1.46-pattern-phase-value.json": "f3842ba7267229822275e7ee4c62ad77a74bc451180c39f816042d759679f521",
+    "models/v1.46-phase-value-experiment.json": "5dfa10b70d1229144f982c0542680d382dd29fdc0416c3b490a6b9f20e33623d",
+    "models/v1.47-pattern-phase-policy.json": "8b0d129a96170f5118a1dbe46394599d41e731a0afd7fc4f68a66e192b830646",
+    "models/v1.47-phase-policy-experiment.json": "3b9c059212470457967f4ac70d57f9358b978d11cec5f661e4aad2d425666733"
+  }
+}

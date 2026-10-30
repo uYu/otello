@@ -1,0 +1,24 @@
+{
+  "version": "v1.38-direct-policy",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "baseline": "models/v1.37-default.json",
+  "architecture": "38 D4-tied patterns -> shared 32D embeddings; three region means + phase ->97->32 value trunk; local square mean32 +global32 +D4 position onehot10 -> fixed shared 74->8->1 policy MLP",
+  "seed": 20261029,
+  "dataSeed": 20261030,
+  "epochs": 15,
+  "batchSize": 2048,
+  "learningRate": 0.001,
+  "weightDecay": 0.0001,
+  "threads": 2,
+  "loss": "outcome MSE +0.1 WDL CE +0.1 masked policy CE",
+  "initialization": "random; matched table/trunk/value initialization, same data/augmentation order as approved symmetry run",
+  "selection": "minimum original-label validation outcome MSE; test once after selection",
+  "preservedSha256": {
+    "models/default-model.json": "6582f442dc890e847a393cbd31fb54a63f00d8dca62cede1315187137a9c2de4",
+    "models/v1.37-default.json": "27ce5cd4be6cf824b629c5c08151a766b748608c96c9970e58ed8d4c2ca1d0f5",
+    "models/pattern32-symmetry-v1.37.otpat": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+    "src/game/wasm/othello.mjs": "825ef6e4e84e7e60ce0cb262a2a5cb0d25c2a3bb2e6663750688492a79942303"
+  },
+  "matches": "not part of this offline training run"
+}

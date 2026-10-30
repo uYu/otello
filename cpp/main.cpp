@@ -1,5 +1,6 @@
 #include "othello.hpp"
 #include "nnue.hpp"
+#include "pattern.hpp"
 #include "mcts.hpp"
 #include "default_engine.hpp"
 #include <memory>
@@ -13,6 +14,11 @@
 using namespace othello;
 namespace {
 const char* evaluator(const nnue::Network* network){
+    if(network&&network->pattern&&network->pattern->variant==6)return "othello-pattern32-global-policy-outcome-v9";
+    if(network&&network->pattern&&network->pattern->variant==5)return "othello-pattern32-phase-policy-outcome-v7";
+    if(network&&network->pattern&&network->pattern->variant==4)return "othello-pattern32-phase-value-outcome-v6";
+    if(network&&network->pattern&&network->pattern->variant==3)return "othello-pattern32-direct-policy-outcome-v5";
+    if(network&&network->pattern&&network->pattern->variant==1)return "othello-pattern32-symmetry-outcome-v4";
     if(network&&network->architecture==nnue::Architecture::Pattern)return network->valueTarget==nnue::ValueTarget::Outcome?"othello-pattern32-outcome-v2":"othello-pattern32-v1.8";
     if(network&&network->cnnPolicy)return "othello-cnn-policy-outcome-v2";
     if(network&&network->trunkBlock)return "othello-nnue-deep-outcome-v5";

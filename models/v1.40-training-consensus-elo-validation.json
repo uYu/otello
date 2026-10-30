@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "independentTrainOnlyEloReplayGames": 79955,
+  "allPreYearRatingsAndSupportVerified": true,
+  "zeroSumVerified": true,
+  "occurrencePolicyWeightsVerified": 2060308,
+  "actorProvenanceWithPassesVerified": true,
+  "eligibleMultiActionOrbits": 24857,
+  "rawWdlAndPolicyMassesVerified": true,
+  "matchedMillionMultiActionOrbits": 19829,
+  "provenanceArtifact": ".build/training/consensus-elo-v1.40/occurrence-players.npz",
+  "provenanceArtifactSha256": "d8425cb9d34fd4b7e40e8e231c8136a560854024666d1680c61e637ff05fae78",
+  "scriptSha256": "f049d4ed6f09479fb706c2fe0c4ae101392e4992d5dd354dfd80c12bed0d18a5",
+  "reportSha256": "49e778288098123401542c898a7178c64baa2dc9882fee0175b9f812e6619a0a",
+  "knownActorOccurrences": 1246973,
+  "unknownOrNoIdOccurrences": 813335
+}

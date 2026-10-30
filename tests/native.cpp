@@ -140,6 +140,117 @@ void patternInt8Checks(){
         rejects(binary.substr(0,binary.size()-1));rejects(binary+"x");binary[32]=3;rejects(binary);
     }
 }
+// Independent scalar reference for the new file geometry and long dense rows.
+void patternStructureChecks(){
+    std::mt19937 rng(37137);
+    for(int scenario:{1,2,3,4,5,6,7}){
+        int variant=scenario==7?5:scenario==6?4:std::min(scenario,3),policyWidth=scenario==4?16:scenario==5?32:8;
+        int rows=variant==2?55728:28503,inputs=variant==2?321:97,headCount=variant==3?4:46;
+        std::string bytes(variant==5?"OTPAT7\0\0":variant==4?"OTPAT6\0\0":variant==3?"OTPAT5\0\0":"OTPAT4\0\0",8);
+        auto append=[&](std::uint32_t v,int n){for(int i=0;i<n;++i)bytes.push_back(char(v>>(8*i)));};
+        for(int v:{rows,32,32,inputs,headCount,256})append(v,4);
+        if(variant==3){append(74,4);append(policyWidth,4);}else append(variant>=4?1:variant,4);
+        if(variant>=4){append(36,4);append(48,4);}
+        for(int i=0;i<rows*32+32*inputs;++i)append(std::uint32_t(int(rng()%513)-256),2);
+        for(int i=0;i<32;++i)append(std::uint32_t(int(rng()%10001)-5000),4);
+        for(int i=0;i<headCount*32;++i)append(std::uint32_t(int(rng()%513)-256),2);
+        for(int i=0;i<headCount;++i)append(std::uint32_t(int(rng()%10001)-5000),4);
+        if(variant==3){
+            for(int i=0;i<policyWidth*74;++i)append(std::uint32_t(int(rng()%513)-256),2);
+            for(int i=0;i<policyWidth;++i)append(std::uint32_t(int(rng()%10001)-5000),4);
+            for(int i=0;i<policyWidth;++i)append(std::uint32_t(int(rng()%513)-256),2);
+            append(std::uint32_t(int(rng()%10001)-5000),4);
+        }
+        if(variant==4){for(int i=0;i<4*32;++i)append(std::uint32_t(int(rng()%513)-256),2);for(int i=0;i<4;++i)append(std::uint32_t(int(rng()%10001)-5000),4);}
+        if(variant==5){for(int i=0;i<42*32;++i)append(std::uint32_t(int(rng()%513)-256),2);for(int i=0;i<42;++i)append(std::uint32_t(int(rng()%10001)-5000),4);}
+        std::istringstream stream(bytes);auto net=nnue::Network::load(stream);const auto& q=*net.pattern;
+        check(net.valueTarget==nnue::ValueTarget::Outcome&&q.variant==variant&&(variant!=3||q.policyWidth==policyWidth),"OTPAT4 retains outcome and independent variant");
+        check(q.embedding.size()==std::size_t(rows*32),"OTPAT4 retains compact table in memory");
+        auto reference=[&](const Position& p){
+            nnue::Pattern::Prediction result;std::array<std::int64_t,320> sums{};
+            std::array<std::array<int,32>,38> entries{};std::array<int,10> sizes{};
+            for(int i=0;i<38;++i){const auto& shape=q.shapes()[i];int group=variant==2?(i<16?shape.offset/6561:i<34?shape.length:9):shape.group;
+                ++sizes[group];int raw=q.code(shape,p.own(),p.opponent());
+                // Derive symmetry representatives separately from the loader's map.
+                if(variant!=2){int value=raw-shape.offset,digits[9]{},other=0,power=1;
+                    for(int k=0;k<shape.length;++k){digits[k]=value%3;value/=3;}
+                    for(int k=0;k<shape.length;++k){int j=shape.length==9?(k%3)*3+k/3:shape.length-1-k;other+=digits[j]*power;power*=3;}
+                    check(q.canonical[raw]==q.canonical[shape.offset+other],"D4 orbit rows are tied");}
+                int offset=q.embeddingOffset(raw);
+                for(int j=0;j<32;++j){entries[i][j]=q.embedding[offset+j];sums[group*32+j]+=entries[i][j];}
+            }
+            std::array<int,321> x{};int groups=variant==2?10:3;
+            for(int g=0;g<groups;++g)for(int j=0;j<32;++j)x[g*32+j]=std::clamp(int(std::round(double(sums[g*32+j])/sizes[g])),-1024,1024);
+            x[inputs-1]=int(std::round(double(p.empty())*256/60));std::array<int,32> hidden{};
+            for(int j=0;j<32;++j){std::int64_t total=q.trunkBias[j];for(int k=0;k<inputs;++k)total+=std::int64_t(q.trunk[j*inputs+k])*x[k];hidden[j]=std::clamp(int(std::round(double(total)/256)),0,256);}
+            for(int j=0;j<46;++j){std::int64_t total=q.headBias[j];for(int k=0;k<32;++k)total+=std::int64_t(q.head[j*32+k])*hidden[k];result.values[j]=std::clamp(int(std::round(double(total)/256)),-1024,1024);}
+            if(variant==4){
+                int numerator=std::clamp(p.empty()-36,0,12);
+                for(int j=0;j<4;++j){std::int64_t total=q.earlyValueBias[j];for(int k=0;k<32;++k)total+=std::int64_t(q.earlyValue[j*32+k])*hidden[k];
+                    int early=std::clamp(int(std::round(double(total)/256)),-1024,1024);
+                    result.values[j]=int(std::round(double(numerator*early+(12-numerator)*result.values[j])/12));}
+            }
+            if(variant==5){
+                int numerator=std::clamp(p.empty()-36,0,12);
+                for(int j=0;j<42;++j){std::int64_t total=q.earlyPolicyBias[j];for(int k=0;k<32;++k)total+=std::int64_t(q.earlyPolicy[j*32+k])*hidden[k];
+                    int early=std::clamp(int(std::round(double(total)/256)),-1024,1024);
+                    result.values[4+j]=int(std::round(double(numerator*early+(12-numerator)*result.values[4+j])/12));}
+            }
+            if(variant==3){
+                for(int square=0;square<64;++square){std::array<int,74> input{};int n=0;
+                    for(int i=0;i<38;++i){const auto& shape=q.shapes()[i];bool contains=false;for(int k=0;k<shape.length;++k)contains|=shape.squares[k]==square;
+                        if(contains){++n;for(int j=0;j<32;++j)input[j]+=entries[i][j];}}
+                    for(int j=0;j<32;++j){input[j]=std::clamp(int(std::round(double(input[j])/n)),-1024,1024);input[32+j]=hidden[j];}
+                    int x=std::min(square%8,7-square%8),y=std::min(square/8,7-square/8);if(x>y)std::swap(x,y);int bucket=x*4-x*(x-1)/2+y-x;input[64+bucket]=256;
+                    std::array<int,32> ph{};
+                    for(int k=0;k<policyWidth;++k){std::int64_t total=q.policyHiddenBias[k];for(int j=0;j<74;++j)total+=std::int64_t(q.policyHidden[k*74+j])*input[j];ph[k]=std::clamp(int(std::round(double(total)/256)),0,256);}
+                    std::int64_t total=q.policyOutputBias[0];for(int k=0;k<policyWidth;++k)total+=std::int64_t(q.policyOutput[k])*ph[k];
+                    result.logits[square]=double(std::clamp(int(std::round(double(total)/256)),-1024,1024))/256;
+                }
+                return result;
+            }
+            std::array<int,64> counts{};
+            for(int i=0;i<38;++i){std::int64_t total=0;for(int j=0;j<32;++j)total+=std::int64_t(entries[i][j])*result.values[4+j];
+                double projected=double(total)/(65536*std::sqrt(32.0));const auto& shape=q.shapes()[i];for(int k=0;k<shape.length;++k){int square=shape.squares[k];++counts[square];result.logits[square]+=projected;}}
+            for(int square=0;square<64;++square){int x=std::min(square%8,7-square%8),y=std::min(square/8,7-square/8);if(x>y)std::swap(x,y);int bucket=x*4-x*(x-1)/2+y-x;
+                result.logits[square]=result.logits[square]/counts[square]+double(result.values[36+bucket])/256;}
+            return result;
+        };
+        Position p;auto state=q.refreshState(p);auto acc=q.refresh(p);
+        for(int ply=0;ply<62&&!over(p);++ply){auto wanted=reference(p),actual=q.predict(p),cached=q.predict(state,p.turn);
+            check(actual.values==wanted.values&&actual.logits==wanted.logits,"structural SIMD inference equals independent scalar arithmetic");
+            check(cached.values==actual.values&&cached.logits==actual.logits,"structural cached state refresh fallback is exact");
+            check(q.outputs(acc,p.turn)==actual.values&&net.evaluate(acc,p.turn)==net.evaluate(p),"structural generic accumulator evaluation is exact");
+            check(q.policy(p,actual.values)==actual.logits,"structural separate policy preserves supplied gates");
+            for(Bits mask:{legal(p),Bits(0),~Bits(0),Bits(1)<<63}){auto masked=q.predictLegal(p,mask),fromState=q.predictLegal(state,p.turn,mask);
+                check(masked.values==actual.values&&fromState.values==actual.values,"structural legal policy preserves value");
+                for(int k=0;k<64;++k){double expected=mask&(Bits(1)<<k)?actual.logits[k]:0;check(masked.logits[k]==expected&&fromState.logits[k]==expected,"structural legal and state projections match full prediction");}}
+            if(variant!=2)for(int symmetry=0;symmetry<8;++symmetry){Position transformed{0,0,p.turn};std::array<int,64> to{};
+                for(int square=0;square<64;++square){int x=square%8,y=square/8;if(symmetry&4)x=7-x;for(int j=0;j<(symmetry&3);++j){int old=x;x=7-y;y=old;}to[square]=y*8+x;
+                    if(p.black&(Bits(1)<<square))transformed.black|=Bits(1)<<to[square];if(p.white&(Bits(1)<<square))transformed.white|=Bits(1)<<to[square];}
+                auto other=q.predict(transformed);check(other.values==actual.values,"tied value and global gates are exactly D4 invariant");
+                for(int k=0;k<64;++k)check(std::abs(other.logits[to[k]]-actual.logits[k])<2e-12,"tied policy is D4 equivariant");}
+            Bits moves=legal(p);int move=-1;if(moves){int skip=rng()%count(moves);while(skip--)moves&=moves-1;move=first(moves);}auto next=play(p,move);
+            state=q.updateState(state,next);acc=q.update(acc,p,next);p=next;
+        }
+        if(variant==2){auto mutableModel=std::const_pointer_cast<nnue::Pattern>(net.pattern);
+            std::fill(mutableModel->embedding.begin(),mutableModel->embedding.end(),32767);
+            std::fill(mutableModel->trunk.begin(),mutableModel->trunk.end(),-32768);
+            auto wanted=reference(Position{}),actual=q.predict(Position{});
+            check(actual.values==wanted.values&&actual.logits==wanted.logits,"321-wide extreme INT16 rows reduce bounded chunks to INT64 without SIMD overflow");}
+        if(variant==3){auto snapshot=net.snapshot();auto mutableModel=std::const_pointer_cast<nnue::Pattern>(net.pattern);++mutableModel->policyOutput[0];
+            check(!net.sameParameters(*snapshot),"direct policy parameter changes invalidate the cached model snapshot");}
+        if(variant==4){auto snapshot=net.snapshot();auto mutableModel=std::const_pointer_cast<nnue::Pattern>(net.pattern);++mutableModel->earlyValue[0];
+            check(!net.sameParameters(*snapshot),"phase value changes invalidate the cached model snapshot");}
+        if(variant==5){auto snapshot=net.snapshot();auto mutableModel=std::const_pointer_cast<nnue::Pattern>(net.pattern);++mutableModel->earlyPolicy[0];
+            check(!net.sameParameters(*snapshot),"phase policy changes invalidate the cached model snapshot");}
+        auto rejects=[&](std::string bad){bool rejected=false;try{std::istringstream input(bad);nnue::Network::load(input);}catch(...){rejected=true;}check(rejected,"OTPAT4 rejects malformed geometry and data");};
+        rejects(bytes.substr(0,bytes.size()-1));rejects(bytes+"x");
+        if(variant==3){auto bad=bytes;bad[36]=9;rejects(bad);}
+        if(variant>=4){for(int offset:{36,40}){auto bad=bytes;bad[offset]=char(127);rejects(bad);}auto bad=bytes;bad[40]=36;rejects(bad);}
+        for(int offset:{8,12,16,20,24,28,32}){auto bad=bytes;bad[offset]=char(127);rejects(bad);}
+    }
+}
 void patternChecks(){
     auto weights=std::make_shared<nnue::Pattern>();weights->embedding.resize(nnue::Pattern::Rows*nnue::Pattern::Dim);
     std::mt19937 rng(1832);
@@ -446,7 +557,7 @@ void cacheChecks(nnue::Network& model){
     ot_search_clear_cache();model=originalModel;
 }
 int main() {
-    cnnChecks();cnnPolicyChecks();residualChecks();mctsChecks();patternChecks();patternInt8Checks();
+    cnnChecks();cnnPolicyChecks();residualChecks();mctsChecks();patternChecks();patternInt8Checks();patternStructureChecks();
     policyChecks();
     Position p;
     check(legal(p)==((1ULL<<19)|(1ULL<<26)|(1ULL<<37)|(1ULL<<44)),"initial legal squares");

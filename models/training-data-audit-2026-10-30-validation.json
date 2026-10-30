@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "d4AndColorCanonicalizationPositions": 1024,
+  "d4Transforms": 8,
+  "stabilizerActionOrbits": true,
+  "sidecarUniqueGames": 137507,
+  "allEvidenceAndPreservedHashesVerified": true,
+  "trainingAndBenchmarkLibraryHashesAgree": true,
+  "auditScriptSha256": "32490c16e6870a616bb424d5a5ca0c3a6a851c8bd4122f696b35895449906d9e"
+}

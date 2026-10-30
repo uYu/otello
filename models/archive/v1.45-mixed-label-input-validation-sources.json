@@ -1,0 +1,9 @@
+{
+  "archive": "models/archive/v1.45-mixed-label-input-validation-sources.tar.gz",
+  "sha256": "0118e3067efe27cc0ab32e69c2d6935c501993b7eef58ebd57751a3fdda515f7",
+  "files": {
+    "scripts/verify-mixed-label-inputs.py": "521371c8a4b191fa82145c86b59bc029b570bfd69d2227fece3cf4b48e4744e4",
+    "scripts/mixed_label_targets.py": "09930b1c037a59b12c7d68e04a7004fe0e715df4b879b7f4ddcb0f7fd1fa7040",
+    "tests/mixed_label_targets_test.py": "905bee69adb3cadadf5a2b602d2f8c7a671a97524fb4fa00ce78e029204c235f"
+  }
+}

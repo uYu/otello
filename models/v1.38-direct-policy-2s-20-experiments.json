@@ -1,0 +1,20 @@
+{
+  "version": "v1.38 直连 MLP · 2s 棋力预检",
+  "experiments": [
+    {
+      "name": "直连 MLP v1.38 vs 对称共享 v1.37 · 2s/步 · 20局",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "直连 MLP",
+        "baseline": "v1.37 对称共享"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/direct-policy-match-v1.38/match-2s-20.json",
+      "report": "models/v1.38-direct-mlp8-vs-v1.37-2s-20.json"
+    }
+  ]
+}

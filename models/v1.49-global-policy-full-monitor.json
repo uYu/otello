@@ -1,0 +1,43 @@
+{
+  "experiment": "global-policy-training",
+  "stage": "全网训练完成：按验证策略CE选定",
+  "epoch": 15,
+  "epochs": 15,
+  "summary": "选第15轮 · 测试策略 CE 1.546291 · 命中率 42.78%",
+  "complete": true,
+  "freezeBaseline": false,
+  "seconds": 187.02457524975762,
+  "validation": {
+    "mse": 0.7247886657714844,
+    "outcomeMae": 0.7241963744163513,
+    "nonDrawSignAccuracy": 0.6609681137149443,
+    "wdlAccuracy": 0.574,
+    "wdlCrossEntropy": 0.9027577042579651,
+    "policyTop1": 0.44333333333333336,
+    "policyCrossEntropy": 1.518559455871582,
+    "uniformPolicyCrossEntropy": 2.0921316559038803,
+    "epoch": 15
+  },
+  "bestValidation": {
+    "mse": 0.7247886657714844,
+    "outcomeMae": 0.7241963744163513,
+    "nonDrawSignAccuracy": 0.6609681137149443,
+    "wdlAccuracy": 0.574,
+    "wdlCrossEntropy": 0.9027577042579651,
+    "policyTop1": 0.44333333333333336,
+    "policyCrossEntropy": 1.518559455871582,
+    "uniformPolicyCrossEntropy": 2.0921316559038803,
+    "epoch": 15
+  },
+  "baselineValidation": {
+    "mse": 0.7221555709838867,
+    "outcomeMae": 0.7253084182739258,
+    "nonDrawSignAccuracy": 0.6590472531694199,
+    "wdlAccuracy": 0.5728333333333333,
+    "wdlCrossEntropy": 0.9051163792610168,
+    "policyTop1": 0.4175,
+    "policyCrossEntropy": 1.5936541557312012,
+    "uniformPolicyCrossEntropy": 2.0921316559038803
+  },
+  "selectionMetric": "validation policyCrossEntropy"
+}

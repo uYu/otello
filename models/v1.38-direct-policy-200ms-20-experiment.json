@@ -1,0 +1,37 @@
+{
+  "version": "v1.38-direct-policy-200ms-pilot",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "candidateResults": {
+    "games": 20,
+    "win": 9,
+    "draw": 10,
+    "loss": 1,
+    "discDifference": 166,
+    "scoreRate": 0.7,
+    "meanDiscDifference": 8.3,
+    "moves": 603,
+    "meanWallMs": 166.12256701160868,
+    "meanSearchUnits": 346297.05804311775,
+    "searchUnit": "simulations",
+    "meanNonExactDepth": 34.411764705882355,
+    "depthKind": "maximumVisited",
+    "meanSimulationDepth": 8.98088651023767,
+    "memoryLimitedSearches": 0,
+    "reusedMctsSearches": 582,
+    "exactMoves": 110
+  },
+  "replayedActions": 1211,
+  "artifactSha256": {
+    "models/v1.38-direct-mlp8-vs-v1.37-200ms-20.json": "de81259a31afb6d11a0558bf72e827b0a412dda6b3a8b3c30dd9e74adebc2205",
+    "models/v1.38-direct-policy-200ms-20-comparison.md": "b18def0934e64b7759c3f6b6206c192be96c9c0a390b3e77c755c3f8aa1cd36d",
+    "models/v1.38-direct-policy-200ms-20-protocol.json": "ccf9ee9dd4408e2a45b3cb9003c88341ece3317219f96c49173b1f2419224056",
+    "models/archive/v1.38-direct-policy-200ms-20-sources.json": "e5a0ea20e20e42683941a76c4bf05303d3f0c0a8ef39dfacd72bcce63a6feeae"
+  },
+  "preservedSha256": {
+    "models/default-model.json": "6582f442dc890e847a393cbd31fb54a63f00d8dca62cede1315187137a9c2de4",
+    "models/v1.37-default.json": "27ce5cd4be6cf824b629c5c08151a766b748608c96c9970e58ed8d4c2ca1d0f5",
+    "models/pattern32-symmetry-v1.37.otpat": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+    "src/game/wasm/othello.mjs": "825ef6e4e84e7e60ce0cb262a2a5cb0d25c2a3bb2e6663750688492a79942303"
+  }
+}

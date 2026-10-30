@@ -1,0 +1,26 @@
+{
+  "complete": true,
+  "sourceDataSha256": "6332fd01b27c11a81f3fbd344e52aaf8f70e60c644780fb453cc7ef64ae359ac",
+  "theoreticalDepthHistogram": {
+    "24": 137548
+  },
+  "byOriginalGameSplit": {
+    "test": {
+      "games": 31904,
+      "discResultDiffers": 26756,
+      "wdlResultDiffers": 7740
+    },
+    "validation": {
+      "games": 24629,
+      "discResultDiffers": 21812,
+      "wdlResultDiffers": 6233
+    },
+    "train": {
+      "games": 80561,
+      "discResultDiffers": 71300,
+      "wdlResultDiffers": 18469
+    }
+  },
+  "semantics": "All local WTHOR headers have P3=24. Official specification defines theoretical score at that particular 24-empty position with perfect continuation. This is not a replacement label for all positions in that game; later recorded moves may change the minimax result.",
+  "sourceSpecification": "https://www.ffothello.org/wthor/Format_WThor.pdf"
+}

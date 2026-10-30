@@ -36,7 +36,7 @@ def verify():
         assert all(sha(ROOT/r['path'])==r['sha256'] for r in release['referenceExperiments'])
         print(f"{release['version']} active default verified: user-approved model, frozen sources and current Wasm artifact")
     # Previous defaults retain their own archived Wasm and sources after promotion.
-    for previous_version in ('v1.8','v1.9','v1.25'):
+    for previous_version in ('v1.8','v1.9','v1.25','v1.36','v1.37'):
         previous_manifest=ROOT/f'models/archive/{previous_version}-default-sources.json'
         if not previous_manifest.exists() or (active_path.exists() and active['version']==previous_version):
             continue

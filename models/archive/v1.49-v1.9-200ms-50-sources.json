@@ -1,0 +1,25 @@
+{
+  "archive": "models/archive/v1.49-v1.9-200ms-50-sources.tar.gz",
+  "sha256": "d53502cb40bd7c81555b1bb825fdcb29dd151bbd49a6283d7499d41623173534",
+  "files": {
+    "AGENTS.md": "9e847f7f189b3daafdd3013140f0331427c6cf4da525e452552d79791f0fc027",
+    "scripts/run-global-policy-vs-v1.9.py": "e8d13fa0c0d186410fea9e0c41b34220f011bc282d9fdc8954ee3a7bc70c7a88",
+    "scripts/build-frozen-v1.9-reference.py": "e589663899200fb1f1b049fb5bbef1242cd4f901ad087d349f63df7434beeecc",
+    "scripts/run-global-policy-match-2s.py": "ad2bfd15c0e3447d63e08990c901ab4e2c318b98a6958f338ae638e0b7ec0422",
+    "scripts/global_policy_native_experiment.py": "5dbca9a32a2137b21fadeb3222e72afc4fe934dc0033634ee72c6b7484003098",
+    "scripts/compare-nnue-candidate.py": "b285a17e8112c8fb7d55213beb6f3f3970b1e31aaa391551dd56d3ffadd83c44",
+    "scripts/compare-nnue-search.py": "e6ad01d3d7192d62856e6c647f33d5c9fbfae5fddbc4d96f39f2a8bb6e5f6b31",
+    "scripts/compare-resnet.py": "f3e794feb32a09d7c3629d969ae6d5c5b394d823764065b120da8e72fea723e7",
+    "scripts/opening_policy.py": "da5adf2fa2ff17cc54081ac26ca984f9f6aaf2a0f40d302d8bc0ee400d54453a",
+    "scripts/watch-match.sh": "ab16bc011439cf6cc489a821cc57c0129e01b52a2b08d203257ae49df8add78b",
+    "scripts/watch-matches.py": "5f1c726d3b4dff1d179a514a4b8999c346eff2c0bac60b9fbb0a401687bf5b7d",
+    "models/v1.9-default.json": "3bc0188f583263d1abaf5b7337ee28a849eac91a5a3707e50da6a32c2e854b5d",
+    "models/v1.49-v1.9-200ms-50-protocol.json": "afcab183b347c1f4af98faa1c24f504c4c0c41b0c991a4cb3ad1dcf14c1f1e3a",
+    "models/v1.49-v1.9-200ms-50-preflight.json": "c2e22a0c7e0f1bb16bf63463414f312cc2858e7f2a5fa6a9bb26055f73cce7f5",
+    ".build/training/pattern-global-policy-native-v1.49/compare-global-policy-candidate.py": "e8224b98f0657f5776ab0064a3948a143f6c09905abcb76c8cbed4d8f4a5c560"
+  },
+  "engineSourceManifests": {
+    "models/archive/v1.9-default-sources.json": "157081ae51d042bd29c81215fbd5f8fd3fb37d3adf571c829c32580e8a3076d5",
+    "models/archive/v1.49-global-policy-native-sources.json": "c3e686160cf44eb7e08d7f9fda337e0aedcf9296a15d9f3785acc318324d5ac4"
+  }
+}

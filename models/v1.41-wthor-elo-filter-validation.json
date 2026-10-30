@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "selectedThreshold": 1600,
+  "keptTrainGames": 51854,
+  "excludedLogistelloGames": 60775,
+  "excludedBothBelowThresholdGames": 28707,
+  "filteredOccurrencesExactlyVerified": 801612,
+  "equalPolicyMassReferenceGroups": 200,
+  "allWdlCountsVerified": true,
+  "allPolicySampleWeightsOne": true,
+  "allEloQualityFieldsAbsent": true,
+  "unchangedValidationPositions": 6000,
+  "unchangedTestPositions": 6000,
+  "holdoutArrayAndPolicyHashesVerified": true,
+  "matchedMillionRetained": 529583,
+  "reportSha256": "f5d16ef8d61a15922f32782f20a5c2f56a7c1b4f1f689262494e16f5d10563b5",
+  "scriptSha256": "0b377c29b50b612ba19916d96f1ff02fca3df71a7babd94057cdfb9eb7efaf95"
+}

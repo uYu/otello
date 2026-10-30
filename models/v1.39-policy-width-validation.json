@@ -1,0 +1,26 @@
+{
+  "version": "v1.39-policy-width",
+  "status": "passed",
+  "nativeScalarOracle": {
+    "widths": [
+      8,
+      16,
+      32
+    ],
+    "standardCtest": true,
+    "portableCtest": true,
+    "asanUbsanCtest": true,
+    "asanSeconds": 54.99
+  },
+  "pythonDirectPolicyTests": 5,
+  "mlp8Reexport": "byte-for-byte equal to frozen v1.38 binary",
+  "d4": "Exact Torch and native invariant values/equivariant policies; all three widths",
+  "initialization": "Exact shared embedding/trunk/value initial rows; widths change only policy head",
+  "sourceArchiveManifestSha256": "4e6f93387f254786fa2033004c4340e2fdaf82f5fadf76a91891872b2eeb788e",
+  "libraries": {
+    ".build/native-pattern-policy-width-v1.39/libothello.dylib": "81b7a97d4dcb72eecfe87e75d9dcdb0b2f0b62205127fc0904cfe07406ffce92",
+    ".build/native-pattern-policy-width-portable-v1.39/libothello.dylib": "e0c6187aec3cc8373795848d8da478b83886514b6ebddab4d1de463eb92e8e99",
+    ".build/native-pattern-policy-width-asan-v1.39/libothello.dylib": "cd5eaef332001b53148b78d36f8c85e6e84ff90b0a02c775839b804842e3a29c"
+  },
+  "limits": "Native tests include scalar-reference integer inference, legal-only projection, state refresh, D4, malformed inputs and model-cache invalidation. Trained-model 12000-position and portable/SIMD checks are reported separately by benchmark script."
+}

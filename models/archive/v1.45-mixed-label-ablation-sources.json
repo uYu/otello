@@ -1,0 +1,19 @@
+{
+  "archive": "models/archive/v1.45-mixed-label-ablation-sources.tar.gz",
+  "sha256": "a43dfdb23689cd67b08881dc0ed644133667e5677c7598f10fdb689ad7eea2eb",
+  "files": {
+    "scripts/finalize-label-ablations.py": "f717aa9c70336469ebf74a0c7e35c514812f26693f5e70ee786fb8d7eeaa4605",
+    "scripts/wthor_label_ablation.py": "dcbdeb69b2c8903054bc52789f2dd645a3d26dac841385232f52018430cb2fce",
+    "scripts/pattern_model.py": "4bd0fbf1360ad2d9c385ac16ec4a9aa7748fd6787f507317d85d320080bf30d5",
+    "scripts/pattern_structure.py": "58673f74d802fe8432d9dd385c8c98dc250139d78516a126f2e20557f3dd31d3",
+    "scripts/training_consensus.py": "2969614f441622106e232aa7bffd4b8a471aa2b7b0cd135632016b126c7ff0e6",
+    "scripts/train-pattern-outcome.py": "94d823a68e3ea8ac8a790e24e7b39d06fd52bdaa44cd50c04e0bb97dac870bfb",
+    "scripts/train-pattern.py": "f85ddaed63329214222f672f81778f50dbd072f3e7b68ef467835705b948bdd3",
+    "models/archive/v1.37-default-sources.json": "ca5ebefcd9bbd69774e355ba2729b1de0c47211e34ffe8173eadef862f603cd3",
+    "scripts/train-mixed-label-ablation.py": "0be219c31f401be40f3391c4d96395c49117d120aa00a71062b94383bfc29e81",
+    "scripts/mixed_label_targets.py": "09930b1c037a59b12c7d68e04a7004fe0e715df4b879b7f4ddcb0f7fd1fa7040",
+    "tests/mixed_label_targets_test.py": "905bee69adb3cadadf5a2b602d2f8c7a671a97524fb4fa00ce78e029204c235f",
+    "models/v1.45-mixed-label-ablation-protocol.json": "d90134646ff4cba864be07676ffd93c175b971c39b6e173ae06bf7fc21f0feb2"
+  },
+  "nativeCppSourceManifestSha256": "ca5ebefcd9bbd69774e355ba2729b1de0c47211e34ffe8173eadef862f603cd3"
+}

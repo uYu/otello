@@ -1,0 +1,628 @@
+{
+  "version": "v1.45-mixed-label-ablation",
+  "status": "candidate",
+  "complete": true,
+  "defaultPromoted": false,
+  "matchesRun": false,
+  "architecture": "Approved v1.37 symmetry original conditional-policy architecture",
+  "baselineManifest": "models/v1.37-default.json",
+  "baselineMetrics": {
+    "validation": {
+      "mse": 0.7221555709838867,
+      "outcomeMae": 0.7253084182739258,
+      "nonDrawSignAccuracy": 0.6590472531694199,
+      "wdlAccuracy": 0.5728333333333333,
+      "wdlCrossEntropy": 0.9051163792610168,
+      "policyTop1": 0.4175,
+      "policyCrossEntropy": 1.5936541557312012,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    "test": {
+      "mse": 0.6902028918266296,
+      "outcomeMae": 0.7105870842933655,
+      "nonDrawSignAccuracy": 0.6804699537750385,
+      "wdlAccuracy": 0.5891666666666666,
+      "wdlCrossEntropy": 0.8990699052810669,
+      "policyTop1": 0.4103333333333333,
+      "policyCrossEntropy": 1.6118096113204956,
+      "uniformPolicyCrossEntropy": 2.1044416287103247
+    }
+  },
+  "controlledInputs": {
+    "positions": 1000000,
+    "board": "f1ff20b78caefb357e1334dfde812255a5c1ef8034b2803418bc19a39950f770",
+    "turn": "01bf73016c6eaef878f12aecacedf31fb1b1d6580784884b64efedab139371a6",
+    "phase": "0f87c9aa5e3ff20247887d1732ebc1c863a7fba46fb6cc88914700a8a4e49e19",
+    "legalMask": "1eef57b8ce00fa419a7ae85a9a05194d0a9cf5578c744fd93b96800cf88424fe",
+    "canonicalKeys": "303e0b50977227f0ab5ab041a9c498cd9d39806f79266966eead6c5cee8f2d8a",
+    "rowOrder": "Unmodified frozen v1 training rows"
+  },
+  "dataset": {
+    "sources": [
+      "wthor",
+      "logistello"
+    ],
+    "positions": 1000000,
+    "eloFiltering": false,
+    "eloWeighting": false,
+    "allPositionWeights": 1,
+    "alignedSoftLabelsSha256": "e94c1b1ad63b023140871179283ed9847df031342f912fd060b76f834f14505e",
+    "hardLabels": "Exact original frozen baseline labels; no first-record reconstruction",
+    "softLabels": "Unweighted counts from both complete original-train corpora, restricted and aligned to exact original million rows"
+  },
+  "labelChanges": {
+    "valueRows": 26658,
+    "wdlRows": 27154,
+    "policyRows": 19864,
+    "selectedOccurrenceCount": 1644860,
+    "sourceOccurrenceCounts": [
+      996340,
+      648520
+    ]
+  },
+  "variants": [
+    {
+      "name": "hard",
+      "model": "models/pattern32-symmetry-mixed-hard-v1.45.otpat",
+      "modelSha256": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+      "formatMagic": "OTPAT4",
+      "parameters": 916750,
+      "bytes": 1833692,
+      "initialParametersSha256": "fbf401d0a85d53aff7849b5fa921230b7b3e4a94aea5fb517bc03a7c879d5fa7",
+      "initialEmbeddingSha256": "a2e1c59ae16ac86d1f290ee01ff03a2b46c9141c55ffda1cf48db382377d4e76",
+      "dataOrderAndAugmentationSha256": "255e1f2021b1e255a18b40729f639a8421d4d5cb3f5ff83a12a14dc5910edd2a",
+      "inputFingerprints": {
+        "positions": 1000000,
+        "board": "f1ff20b78caefb357e1334dfde812255a5c1ef8034b2803418bc19a39950f770",
+        "turn": "01bf73016c6eaef878f12aecacedf31fb1b1d6580784884b64efedab139371a6",
+        "phase": "0f87c9aa5e3ff20247887d1732ebc1c863a7fba46fb6cc88914700a8a4e49e19",
+        "legalMask": "1eef57b8ce00fa419a7ae85a9a05194d0a9cf5578c744fd93b96800cf88424fe",
+        "canonicalKeys": "303e0b50977227f0ab5ab041a9c498cd9d39806f79266966eead6c5cee8f2d8a",
+        "rowOrder": "Unmodified frozen v1 training rows"
+      },
+      "targetFingerprints": {
+        "value": "f4d298e01f39265ad5e619b984de7173c639dcbb0632cdf53b31353cfe9bcf64",
+        "wdl": "606a11a7def26a2fc8853e0baa9dfd59c789ba0c042361244417d1b8bf260a7a",
+        "policy": "c517a9010630a090bd7983078cc2cf7cc40c16abfe67ad7d3d993b9f93d39dec"
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "loss": 0.9508247502254806,
+          "mse": 0.7314628958702087,
+          "outcomeMae": 0.73787921667099,
+          "nonDrawSignAccuracy": 0.6492508643872454,
+          "wdlAccuracy": 0.5646666666666667,
+          "wdlCrossEntropy": 0.9183037281036377,
+          "policyTop1": 0.32366666666666666,
+          "policyCrossEntropy": 1.812970757484436,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 2,
+          "loss": 0.8792471030007111,
+          "mse": 0.7331238389015198,
+          "outcomeMae": 0.7342231273651123,
+          "nonDrawSignAccuracy": 0.644640799077987,
+          "wdlAccuracy": 0.5621666666666667,
+          "wdlCrossEntropy": 0.915442705154419,
+          "policyTop1": 0.3581666666666667,
+          "policyCrossEntropy": 1.733933925628662,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 3,
+          "loss": 0.8691458052408964,
+          "mse": 0.7313205003738403,
+          "outcomeMae": 0.7332179546356201,
+          "nonDrawSignAccuracy": 0.650787552823665,
+          "wdlAccuracy": 0.567,
+          "wdlCrossEntropy": 0.9131641983985901,
+          "policyTop1": 0.37166666666666665,
+          "policyCrossEntropy": 1.6952064037322998,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 4,
+          "loss": 0.8638347294676767,
+          "mse": 0.7296630144119263,
+          "outcomeMae": 0.7320783138275146,
+          "nonDrawSignAccuracy": 0.6515558970418748,
+          "wdlAccuracy": 0.568,
+          "wdlCrossEntropy": 0.9113457202911377,
+          "policyTop1": 0.38083333333333336,
+          "policyCrossEntropy": 1.6727561950683594,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 5,
+          "loss": 0.8605671532314979,
+          "mse": 0.7283818125724792,
+          "outcomeMae": 0.7304190397262573,
+          "nonDrawSignAccuracy": 0.6553976181329235,
+          "wdlAccuracy": 0.5711666666666667,
+          "wdlCrossEntropy": 0.9139566421508789,
+          "policyTop1": 0.38816666666666666,
+          "policyCrossEntropy": 1.6525229215621948,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 6,
+          "loss": 0.8579973663776687,
+          "mse": 0.7282993197441101,
+          "outcomeMae": 0.7302760481834412,
+          "nonDrawSignAccuracy": 0.6523242412600845,
+          "wdlAccuracy": 0.5685,
+          "wdlCrossEntropy": 0.9118821620941162,
+          "policyTop1": 0.397,
+          "policyCrossEntropy": 1.63970947265625,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 7,
+          "loss": 0.8556381260446732,
+          "mse": 0.7294095158576965,
+          "outcomeMae": 0.7292114496231079,
+          "nonDrawSignAccuracy": 0.6565501344602381,
+          "wdlAccuracy": 0.5706666666666667,
+          "wdlCrossEntropy": 0.9135891795158386,
+          "policyTop1": 0.40016666666666667,
+          "policyCrossEntropy": 1.6301758289337158,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 8,
+          "loss": 0.8540561439313284,
+          "mse": 0.7285236716270447,
+          "outcomeMae": 0.7282601594924927,
+          "nonDrawSignAccuracy": 0.6527084133691894,
+          "wdlAccuracy": 0.566,
+          "wdlCrossEntropy": 0.9108385443687439,
+          "policyTop1": 0.4018333333333333,
+          "policyCrossEntropy": 1.6226097345352173,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 9,
+          "loss": 0.852365125663929,
+          "mse": 0.7286312580108643,
+          "outcomeMae": 0.7292148470878601,
+          "nonDrawSignAccuracy": 0.6534767575873992,
+          "wdlAccuracy": 0.5673333333333334,
+          "wdlCrossEntropy": 0.9125317335128784,
+          "policyTop1": 0.4038333333333333,
+          "policyCrossEntropy": 1.6142470836639404,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 10,
+          "loss": 0.8506627207153414,
+          "mse": 0.7278857231140137,
+          "outcomeMae": 0.7279829382896423,
+          "nonDrawSignAccuracy": 0.6530925854782943,
+          "wdlAccuracy": 0.5665,
+          "wdlCrossEntropy": 0.9114894866943359,
+          "policyTop1": 0.4063333333333333,
+          "policyCrossEntropy": 1.6086078882217407,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 11,
+          "loss": 0.8489547759477346,
+          "mse": 0.7292377352714539,
+          "outcomeMae": 0.7283321022987366,
+          "nonDrawSignAccuracy": 0.6517479830964272,
+          "wdlAccuracy": 0.5666666666666667,
+          "wdlCrossEntropy": 0.911713719367981,
+          "policyTop1": 0.409,
+          "policyCrossEntropy": 1.604124665260315,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 12,
+          "loss": 0.8471631016467978,
+          "mse": 0.7251039743423462,
+          "outcomeMae": 0.7271998524665833,
+          "nonDrawSignAccuracy": 0.653860929696504,
+          "wdlAccuracy": 0.5688333333333333,
+          "wdlCrossEntropy": 0.9096290469169617,
+          "policyTop1": 0.41233333333333333,
+          "policyCrossEntropy": 1.600862979888916,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 13,
+          "loss": 0.8452841260438073,
+          "mse": 0.7245615124702454,
+          "outcomeMae": 0.7254389524459839,
+          "nonDrawSignAccuracy": 0.6578947368421053,
+          "wdlAccuracy": 0.571,
+          "wdlCrossEntropy": 0.9090692400932312,
+          "policyTop1": 0.4146666666666667,
+          "policyCrossEntropy": 1.5978140830993652,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 14,
+          "loss": 0.8431290194300786,
+          "mse": 0.7221555709838867,
+          "outcomeMae": 0.7253084182739258,
+          "nonDrawSignAccuracy": 0.6590472531694199,
+          "wdlAccuracy": 0.5728333333333333,
+          "wdlCrossEntropy": 0.9051163792610168,
+          "policyTop1": 0.4175,
+          "policyCrossEntropy": 1.5936541557312012,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 15,
+          "loss": 0.841313752294318,
+          "mse": 0.7239230871200562,
+          "outcomeMae": 0.7248151302337646,
+          "nonDrawSignAccuracy": 0.662120630042259,
+          "wdlAccuracy": 0.5753333333333334,
+          "wdlCrossEntropy": 0.9062516093254089,
+          "policyTop1": 0.42033333333333334,
+          "policyCrossEntropy": 1.5907396078109741,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        }
+      ],
+      "bestEpoch": 14,
+      "epoch15Validation": {
+        "mse": 0.7239230871200562,
+        "outcomeMae": 0.7248151302337646,
+        "nonDrawSignAccuracy": 0.662120630042259,
+        "wdlAccuracy": 0.5753333333333334,
+        "wdlCrossEntropy": 0.9062516093254089,
+        "policyTop1": 0.42033333333333334,
+        "policyCrossEntropy": 1.5907396078109741,
+        "uniformPolicyCrossEntropy": 2.0921316559038803
+      },
+      "metrics": {
+        "validation": {
+          "mse": 0.7221555709838867,
+          "outcomeMae": 0.7253084182739258,
+          "nonDrawSignAccuracy": 0.6590472531694199,
+          "wdlAccuracy": 0.5728333333333333,
+          "wdlCrossEntropy": 0.9051163792610168,
+          "policyTop1": 0.4175,
+          "policyCrossEntropy": 1.5936541557312012,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        "test": {
+          "mse": 0.6902028918266296,
+          "outcomeMae": 0.7105870842933655,
+          "nonDrawSignAccuracy": 0.6804699537750385,
+          "wdlAccuracy": 0.5891666666666666,
+          "wdlCrossEntropy": 0.8990699052810669,
+          "policyTop1": 0.4103333333333333,
+          "policyCrossEntropy": 1.6118096113204956,
+          "uniformPolicyCrossEntropy": 2.1044416287103247
+        }
+      },
+      "validationParity": {
+        "positions": 6000,
+        "maxWdlError": 1.2035158403200796e-07,
+        "maxPolicyLogitError": 5.744698334808618e-07,
+        "maxScoreRoundingError": 0.49896240234375,
+        "maxOutcomeError": 2.9840748871912126e-08
+      },
+      "testParity": {
+        "positions": 6000,
+        "maxWdlError": 1.2843336216761259e-07,
+        "maxPolicyLogitError": 5.640344333812664e-07,
+        "maxScoreRoundingError": 0.49725341796875,
+        "maxOutcomeError": 2.9840748871912126e-08
+      }
+    },
+    {
+      "name": "soft",
+      "model": "models/pattern32-symmetry-mixed-soft-v1.45.otpat",
+      "modelSha256": "1dccd46ba58c8a495b01f6d76f4a507e0243c880db9eec2a08b2e51ba8d16aa9",
+      "formatMagic": "OTPAT4",
+      "parameters": 916750,
+      "bytes": 1833692,
+      "initialParametersSha256": "fbf401d0a85d53aff7849b5fa921230b7b3e4a94aea5fb517bc03a7c879d5fa7",
+      "initialEmbeddingSha256": "a2e1c59ae16ac86d1f290ee01ff03a2b46c9141c55ffda1cf48db382377d4e76",
+      "dataOrderAndAugmentationSha256": "255e1f2021b1e255a18b40729f639a8421d4d5cb3f5ff83a12a14dc5910edd2a",
+      "inputFingerprints": {
+        "positions": 1000000,
+        "board": "f1ff20b78caefb357e1334dfde812255a5c1ef8034b2803418bc19a39950f770",
+        "turn": "01bf73016c6eaef878f12aecacedf31fb1b1d6580784884b64efedab139371a6",
+        "phase": "0f87c9aa5e3ff20247887d1732ebc1c863a7fba46fb6cc88914700a8a4e49e19",
+        "legalMask": "1eef57b8ce00fa419a7ae85a9a05194d0a9cf5578c744fd93b96800cf88424fe",
+        "canonicalKeys": "303e0b50977227f0ab5ab041a9c498cd9d39806f79266966eead6c5cee8f2d8a",
+        "rowOrder": "Unmodified frozen v1 training rows"
+      },
+      "targetFingerprints": {
+        "value": "c3e04d92a3438f9c83326e771252f628542807d91d8ce0f337a2e82090b06db9",
+        "wdl": "b7e7312d25caa1fd480ec1e532160cc7e1259374084acacd7ca04201a2461291",
+        "policy": "1036ddaa138b3c0a2e47fa3f3c7bfd2c4fc8add3c6464921b66ad73e96413a3b"
+      },
+      "history": [
+        {
+          "epoch": 1,
+          "loss": 0.9325824170268631,
+          "mse": 0.731349766254425,
+          "outcomeMae": 0.7378215193748474,
+          "nonDrawSignAccuracy": 0.650787552823665,
+          "wdlAccuracy": 0.5671666666666667,
+          "wdlCrossEntropy": 0.918343722820282,
+          "policyTop1": 0.3235,
+          "policyCrossEntropy": 1.8112714290618896,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 2,
+          "loss": 0.8610907745507598,
+          "mse": 0.732728898525238,
+          "outcomeMae": 0.7340880632400513,
+          "nonDrawSignAccuracy": 0.6456012293507492,
+          "wdlAccuracy": 0.563,
+          "wdlCrossEntropy": 0.9155092835426331,
+          "policyTop1": 0.3571666666666667,
+          "policyCrossEntropy": 1.733096718788147,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 3,
+          "loss": 0.8511823362124235,
+          "mse": 0.7313963174819946,
+          "outcomeMae": 0.733440101146698,
+          "nonDrawSignAccuracy": 0.652132155205532,
+          "wdlAccuracy": 0.5675,
+          "wdlCrossEntropy": 0.9139248728752136,
+          "policyTop1": 0.37116666666666664,
+          "policyCrossEntropy": 1.6949902772903442,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 4,
+          "loss": 0.8459780769601678,
+          "mse": 0.729891300201416,
+          "outcomeMae": 0.7321426868438721,
+          "nonDrawSignAccuracy": 0.653860929696504,
+          "wdlAccuracy": 0.5695,
+          "wdlCrossEntropy": 0.9119857549667358,
+          "policyTop1": 0.38116666666666665,
+          "policyCrossEntropy": 1.6733027696609497,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 5,
+          "loss": 0.8425795438343274,
+          "mse": 0.7287962436676025,
+          "outcomeMae": 0.7305734157562256,
+          "nonDrawSignAccuracy": 0.6529004994237418,
+          "wdlAccuracy": 0.5681666666666667,
+          "wdlCrossEntropy": 0.913730800151825,
+          "policyTop1": 0.389,
+          "policyCrossEntropy": 1.652227520942688,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 6,
+          "loss": 0.8401353990617217,
+          "mse": 0.7281634211540222,
+          "outcomeMae": 0.7301838994026184,
+          "nonDrawSignAccuracy": 0.652132155205532,
+          "wdlAccuracy": 0.5681666666666667,
+          "wdlCrossEntropy": 0.9107005000114441,
+          "policyTop1": 0.39816666666666667,
+          "policyCrossEntropy": 1.6391934156417847,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 7,
+          "loss": 0.8378288760507033,
+          "mse": 0.7296324968338013,
+          "outcomeMae": 0.7291620969772339,
+          "nonDrawSignAccuracy": 0.653860929696504,
+          "wdlAccuracy": 0.5685,
+          "wdlCrossEntropy": 0.9131386876106262,
+          "policyTop1": 0.40066666666666667,
+          "policyCrossEntropy": 1.6288305521011353,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 8,
+          "loss": 0.8362304592668889,
+          "mse": 0.7289020419120789,
+          "outcomeMae": 0.7286062836647034,
+          "nonDrawSignAccuracy": 0.6515558970418748,
+          "wdlAccuracy": 0.567,
+          "wdlCrossEntropy": 0.9112167954444885,
+          "policyTop1": 0.4043333333333333,
+          "policyCrossEntropy": 1.620568037033081,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 9,
+          "loss": 0.8346288701507942,
+          "mse": 0.728319525718689,
+          "outcomeMae": 0.7293195128440857,
+          "nonDrawSignAccuracy": 0.6540530157510565,
+          "wdlAccuracy": 0.569,
+          "wdlCrossEntropy": 0.9120058417320251,
+          "policyTop1": 0.4076666666666667,
+          "policyCrossEntropy": 1.6125688552856445,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 10,
+          "loss": 0.8330400595879506,
+          "mse": 0.7282482981681824,
+          "outcomeMae": 0.7284120917320251,
+          "nonDrawSignAccuracy": 0.653860929696504,
+          "wdlAccuracy": 0.567,
+          "wdlCrossEntropy": 0.912298321723938,
+          "policyTop1": 0.408,
+          "policyCrossEntropy": 1.6067293882369995,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 11,
+          "loss": 0.8314047843400686,
+          "mse": 0.7303468585014343,
+          "outcomeMae": 0.7287083268165588,
+          "nonDrawSignAccuracy": 0.653860929696504,
+          "wdlAccuracy": 0.5668333333333333,
+          "wdlCrossEntropy": 0.912626326084137,
+          "policyTop1": 0.41183333333333333,
+          "policyCrossEntropy": 1.6024999618530273,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 12,
+          "loss": 0.8295625378749122,
+          "mse": 0.7246790528297424,
+          "outcomeMae": 0.7270498871803284,
+          "nonDrawSignAccuracy": 0.6534767575873992,
+          "wdlAccuracy": 0.5701666666666667,
+          "wdlCrossEntropy": 0.9068492650985718,
+          "policyTop1": 0.41333333333333333,
+          "policyCrossEntropy": 1.5992913246154785,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 13,
+          "loss": 0.8273571489534982,
+          "mse": 0.7245903611183167,
+          "outcomeMae": 0.7254208326339722,
+          "nonDrawSignAccuracy": 0.6565501344602381,
+          "wdlAccuracy": 0.571,
+          "wdlCrossEntropy": 0.9068151116371155,
+          "policyTop1": 0.4181666666666667,
+          "policyCrossEntropy": 1.596365213394165,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 14,
+          "loss": 0.8249526994116223,
+          "mse": 0.7218137979507446,
+          "outcomeMae": 0.7247684597969055,
+          "nonDrawSignAccuracy": 0.6588551671148675,
+          "wdlAccuracy": 0.5738333333333333,
+          "wdlCrossEntropy": 0.9019777178764343,
+          "policyTop1": 0.4191666666666667,
+          "policyCrossEntropy": 1.592340111732483,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 15,
+          "loss": 0.8225443541150396,
+          "mse": 0.7224377989768982,
+          "outcomeMae": 0.723311185836792,
+          "nonDrawSignAccuracy": 0.6588551671148675,
+          "wdlAccuracy": 0.5711666666666667,
+          "wdlCrossEntropy": 0.9040356278419495,
+          "policyTop1": 0.42,
+          "policyCrossEntropy": 1.589819312095642,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        }
+      ],
+      "bestEpoch": 14,
+      "epoch15Validation": {
+        "mse": 0.7224377989768982,
+        "outcomeMae": 0.723311185836792,
+        "nonDrawSignAccuracy": 0.6588551671148675,
+        "wdlAccuracy": 0.5711666666666667,
+        "wdlCrossEntropy": 0.9040356278419495,
+        "policyTop1": 0.42,
+        "policyCrossEntropy": 1.589819312095642,
+        "uniformPolicyCrossEntropy": 2.0921316559038803
+      },
+      "metrics": {
+        "validation": {
+          "mse": 0.7218137979507446,
+          "outcomeMae": 0.7247684597969055,
+          "nonDrawSignAccuracy": 0.6588551671148675,
+          "wdlAccuracy": 0.5738333333333333,
+          "wdlCrossEntropy": 0.9019777178764343,
+          "policyTop1": 0.4191666666666667,
+          "policyCrossEntropy": 1.592340111732483,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        "test": {
+          "mse": 0.6902740597724915,
+          "outcomeMae": 0.7106211185455322,
+          "nonDrawSignAccuracy": 0.6795069337442219,
+          "wdlAccuracy": 0.5886666666666667,
+          "wdlCrossEntropy": 0.8977669477462769,
+          "policyTop1": 0.4096666666666667,
+          "policyCrossEntropy": 1.6116819381713867,
+          "uniformPolicyCrossEntropy": 2.1044416287103247
+        }
+      },
+      "validationParity": {
+        "positions": 6000,
+        "maxWdlError": 1.2539944227452082e-07,
+        "maxPolicyLogitError": 5.486071925631109e-07,
+        "maxScoreRoundingError": 0.49725341796875,
+        "maxOutcomeError": 2.9840748871912126e-08
+      },
+      "testParity": {
+        "positions": 6000,
+        "maxWdlError": 1.2707784757814977e-07,
+        "maxPolicyLogitError": 5.206999675877455e-07,
+        "maxScoreRoundingError": 0.49896240234375,
+        "maxOutcomeError": 2.9840748871912126e-08
+      }
+    }
+  ],
+  "hardBaselineReplay": {
+    "referenceModel": "models/pattern32-symmetry-v1.37.otpat",
+    "referenceSha256": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+    "modelBytesIdentical": true,
+    "allEpochMetricsIdentical": true,
+    "maxHistoryMseDifference": 0.0
+  },
+  "epochs": 15,
+  "batchSize": 2048,
+  "seed": 20261029,
+  "dataSeed": 20261030,
+  "threads": 2,
+  "learningRate": 0.001,
+  "weightDecay": 0.0001,
+  "loss": "Same mathematical objective: value MSE+0.1 W/L/D CE+0.1 legal policy CE. Hard mode uses original integer-class CE API for exact baseline replay; soft mode uses probability-target CE.",
+  "selection": "Each minimum original frozen validation MSE; freeze both selected models before test evaluation; retain epoch15 validation for equal-update comparison",
+  "protocolSha256": "d90134646ff4cba864be07676ffd93c175b971c39b6e173ae06bf7fc21f0feb2",
+  "librarySha256": "e8eea82419065f5af3c6ddcd257c5497f971d2ba17ae94782b490a10a637a024",
+  "preservedSha256": {
+    ".build/training/v1/positions.npz": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6",
+    ".build/training/v1.8/policy.npz": "d5712464ea92f34019de2ca9427d95cfa9aa985ff9d854801c9eb7362a7b587a",
+    ".build/training/games.jsonl": "6332fd01b27c11a81f3fbd344e52aaf8f70e60c644780fb453cc7ef64ae359ac",
+    "models/default-model.json": "6582f442dc890e847a393cbd31fb54a63f00d8dca62cede1315187137a9c2de4",
+    "models/v1.37-default.json": "27ce5cd4be6cf824b629c5c08151a766b748608c96c9970e58ed8d4c2ca1d0f5",
+    "models/pattern32-symmetry-v1.37.otpat": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+    "src/game/wasm/othello.mjs": "825ef6e4e84e7e60ce0cb262a2a5cb0d25c2a3bb2e6663750688492a79942303",
+    "models/training-data-audit-2026-10-30.json": "6e5f3da422ed9d2b557a3bc509ad1d85ded4eaebe9e62b002d849021704322a5",
+    "models/v1.39-policy-width-experiment.json": "f1fb77f893f2c0cde032905d9a812d742ba41b2a11c3913b167f4269e3cd5cee",
+    "models/v1.38-direct-policy-2s-20-experiment.json": "14ba42f0d1e45a66ff4f2c9ee4984a5caa8818875c54edfccb4a02d5903dce8e",
+    ".build/training/data-audit-20261030/game-player-metadata.jsonl": "afba1888ac33076616034ad8cda6523bb2a28fc7adabf4dbd2bc52b31bde2343",
+    ".build/training/data-audit-20261030/metadata/WTHOR.JOU": "3db81a3850ab4bb1ff4523f2d326fccbc4168ae68865ec4fcc45b884bdde56c9",
+    "models/v1.40-training-consensus-elo.json": "49e778288098123401542c898a7178c64baa2dc9882fee0175b9f812e6619a0a",
+    "models/v1.41-wthor-elo-filter.json": "f5d16ef8d61a15922f32782f20a5c2f56a7c1b4f1f689262494e16f5d10563b5",
+    ".build/training/consensus-elo-v1.40/occurrences.npz": "3b7817d6a0ae603575578c14527017ea782593f33a64359abcae34a1f426b58c",
+    "models/v1.42-pattern-wthor.json": "12a70e80dce1b9111d6bc418bd68deb3dfc6fdb8f3b96fbe60774898a2f952d0",
+    "models/pattern32-symmetry-wthor-v1.42.otpat": "16fcbd0fd6e1b807b84269a717a1227e7c80d2f81313377d9048573d10831d45",
+    ".build/training/pattern-wthor-v1.42/training-data.npz": "c76f694dbe69dc5664ef8245aebbcb05286be7b3eae6781eb1330d923008e69f",
+    "models/v1.43-wthor-data-suite.json": "3ccbd2c8a2666a0bcbbe684991f1cdb37971f78587ebedb854362d2c6e719635",
+    "models/v1.42-pattern-wthor-2s-stopped-experiment.json": "0c8e4b06a7112aa897da4594056b40b9996f8f3add959740f2b434786ca7a76e",
+    ".build/training/consensus-elo-v1.40/consensus.npz": "e25f71c793bb53b6fe5e71cec7d02b0f77ddbb273127100fdd49022afbee69a9",
+    "models/pattern32-symmetry-v1.37.json": "66b73d6ab022b7a8eaee3b3fb8bdc232c3bcc99f932f5fbe96dc2c45cab52a8b",
+    "models/v1.44-wthor-label-ablation.json": "fcb82e95399e57bc30089a2bc7f3b4f87bd59730763c9cb596bedab5a39d9b58"
+  },
+  "scriptSha256": {
+    "scripts/train-mixed-label-ablation.py": "0be219c31f401be40f3391c4d96395c49117d120aa00a71062b94383bfc29e81",
+    "scripts/mixed_label_targets.py": "09930b1c037a59b12c7d68e04a7004fe0e715df4b879b7f4ddcb0f7fd1fa7040",
+    "scripts/wthor_label_ablation.py": "dcbdeb69b2c8903054bc52789f2dd645a3d26dac841385232f52018430cb2fce",
+    "scripts/pattern_model.py": "4bd0fbf1360ad2d9c385ac16ec4a9aa7748fd6787f507317d85d320080bf30d5",
+    "scripts/pattern_structure.py": "58673f74d802fe8432d9dd385c8c98dc250139d78516a126f2e20557f3dd31d3",
+    "scripts/training_consensus.py": "2969614f441622106e232aa7bffd4b8a471aa2b7b0cd135632016b126c7ff0e6",
+    "scripts/train-pattern-outcome.py": "94d823a68e3ea8ac8a790e24e7b39d06fd52bdaa44cd50c04e0bb97dac870bfb",
+    "scripts/train-pattern.py": "f85ddaed63329214222f672f81778f50dbd072f3e7b68ef467835705b948bdd3"
+  },
+  "seconds": 438.5644284589216,
+  "limits": "One seed, fixed original million mixed-source positions. Switch all value/WLD/policy targets jointly; does not separate policy vs value aggregation. No strength match, no default promotion. v1.44 WTHOR-only is a separate exploratory result, not this requested primary comparison."
+}

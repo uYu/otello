@@ -1,0 +1,54 @@
+{
+  "version": "v1.48-shared-residual",
+  "status": "archived-not-adopted",
+  "defaultPromoted": false,
+  "matchesRun": false,
+  "reason": "User objective is stronger policy. The value-MSE-selected candidate reduced test policy top1 and worsened policy CE. Do not advance this candidate to matches or default; retain original measured training and speed reports.",
+  "baseline": {
+    "validation": {
+      "mse": 0.7221555709838867,
+      "outcomeMae": 0.7253084182739258,
+      "nonDrawSignAccuracy": 0.6590472531694199,
+      "wdlAccuracy": 0.5728333333333333,
+      "wdlCrossEntropy": 0.9051163792610168,
+      "policyTop1": 0.4175,
+      "policyCrossEntropy": 1.5936541557312012,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    "test": {
+      "mse": 0.6902028918266296,
+      "outcomeMae": 0.7105870842933655,
+      "nonDrawSignAccuracy": 0.6804699537750385,
+      "wdlAccuracy": 0.5891666666666666,
+      "wdlCrossEntropy": 0.8990699052810669,
+      "policyTop1": 0.4103333333333333,
+      "policyCrossEntropy": 1.6118096113204956,
+      "uniformPolicyCrossEntropy": 2.1044416287103247
+    }
+  },
+  "candidate": {
+    "validation": {
+      "mse": 0.7219493985176086,
+      "outcomeMae": 0.7220197916030884,
+      "nonDrawSignAccuracy": 0.6553976181329235,
+      "wdlAccuracy": 0.5726666666666667,
+      "wdlCrossEntropy": 0.8996896147727966,
+      "policyTop1": 0.3933333333333333,
+      "policyCrossEntropy": 1.6407346725463867,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    "test": {
+      "mse": 0.6885525584220886,
+      "outcomeMae": 0.7073841094970703,
+      "nonDrawSignAccuracy": 0.6798921417565486,
+      "wdlAccuracy": 0.591,
+      "wdlCrossEntropy": 0.8926912546157837,
+      "policyTop1": 0.3935,
+      "policyCrossEntropy": 1.6597206592559814,
+      "uniformPolicyCrossEntropy": 2.1044416287103247
+    }
+  },
+  "bestEpoch": 8,
+  "trainingReportSha256": "fe4695ca2fda03d29c5791395012ba36004eb8bb414230a3092ef8fa010749c8",
+  "nextResearch": "Ordered spatial pattern projections -> D4-tied global MLP -> all64 logits; freeze value path, select on validation legal-policy CE"
+}

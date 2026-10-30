@@ -1,0 +1,39 @@
+{
+  "complete": true,
+  "defaultPromoted": false,
+  "allActionsReplayed": 3052,
+  "allDecisionsAudited": true,
+  "pairedColors": true,
+  "sharedPairSeeds": true,
+  "candidateWDL": {
+    "win": 48,
+    "draw": 1,
+    "loss": 1
+  },
+  "candidateScoreRate": 0.97,
+  "preservedSha256": {
+    "models/default-model.json": "6582f442dc890e847a393cbd31fb54a63f00d8dca62cede1315187137a9c2de4",
+    "models/v1.37-default.json": "27ce5cd4be6cf824b629c5c08151a766b748608c96c9970e58ed8d4c2ca1d0f5",
+    "models/pattern32-symmetry-v1.37.otpat": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+    "models/pattern32-symmetry-v1.37.pt": "8f6052eadfd2cef1367c14fe121c910bb2e1635cafcda083d9e8fdbbd8a73d52",
+    "src/game/wasm/othello.mjs": "825ef6e4e84e7e60ce0cb262a2a5cb0d25c2a3bb2e6663750688492a79942303",
+    ".build/native-v1.37-reference/libothello.dylib": "e8eea82419065f5af3c6ddcd257c5497f971d2ba17ae94782b490a10a637a024",
+    "models/v1.9-default.json": "3bc0188f583263d1abaf5b7337ee28a849eac91a5a3707e50da6a32c2e854b5d",
+    "models/nnue256-outcome-v1.9.otnnue": "72294450ce5eb180703e05048df6e7ce7078f031c4e94464198192432d618bb0",
+    "models/pattern32-global-policy16-full-v1.49.otpat": "df11f7b9eed358fff33a426e2f0cb1a290083d2bc8e0781a2fbd1efdaf4270c3",
+    ".build/native-v1.9-reference/libothello.dylib": "6f593a25a0d52f1846e29db35b10fa5423505fd820eb124d4a474489f412c188",
+    ".build/native-pattern-global-policy-v1.49/libothello.dylib": "9e1c7f0a0e3c247272e048a336a6de2fb18e938145bd66f4118576f502e91bc2"
+  },
+  "artifactSha256": {
+    "models/v1.49-global-policy-vs-v1.9-200ms-50.json": "3ef3c82c2f1ca9c04e52bf0a6d2fe1c06f435da320ad08bc895f8eb2d2b4e9ad",
+    "models/v1.49-v1.9-200ms-50-comparison.json": "c6f62bca6577c588faa06c3ef5ef0d4945615734335784255ef0f787100b9a0f",
+    "models/v1.49-v1.9-200ms-50-protocol.json": "afcab183b347c1f4af98faa1c24f504c4c0c41b0c991a4cb3ad1dcf14c1f1e3a",
+    "models/archive/v1.49-v1.9-200ms-50-sources.json": "08a3520000ecae63bc8424237f8d3af65912f468e577fea92f1e82a87ddff067",
+    "models/archive/v1.49-v1.9-200ms-50-sources.tar.gz": "d53502cb40bd7c81555b1bb825fdcb29dd151bbd49a6283d7499d41623173534",
+    "models/pattern32-global-policy16-full-v1.49.otpat": "df11f7b9eed358fff33a426e2f0cb1a290083d2bc8e0781a2fbd1efdaf4270c3",
+    "models/nnue256-outcome-v1.9.otnnue": "72294450ce5eb180703e05048df6e7ce7078f031c4e94464198192432d618bb0",
+    "models/v1.9-default.json": "3bc0188f583263d1abaf5b7337ee28a849eac91a5a3707e50da6a32c2e854b5d",
+    ".build/native-v1.9-reference/frozen-build-provenance.json": "07799ba4655167551b6d8bd088bf145c13468790618509b025fc15c49018a186"
+  },
+  "auditorSha256": "e742a1c08e73c4a6dc790fb25f44fa601b050bf80a3e3bd8d73e2d27e9ca6f5c"
+}

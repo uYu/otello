@@ -1,6 +1,6 @@
 services:
   otello:
-    image: otello:v1.36
+    image: otello:v2
     build:
       context: .
       target: production

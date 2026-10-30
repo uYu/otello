@@ -36,12 +36,36 @@ def display(config,details=False):
             result = read(path.with_suffix('.live.json')) or read(path) or {}
             if result:
                 break
+        if result.get('experiment') == 'global-policy-training':
+            lines.extend([item['name'],result.get('stage','训练中')+
+                f" · 已完成 {result.get('epoch',0)}/{result.get('epochs',15)} 轮 · {result.get('seconds',0):.0f} 秒"])
+            if result.get('summary'):lines.append(result['summary'])
+            score=result.get('validation');best=result.get('bestValidation');baseline=result.get('baselineValidation')
+            if score:
+                lines.append(f"最近完成第 {score['epoch']} 轮：验证策略 CE {score['policyCrossEntropy']:.6f} · 策略命中率 {score['policyTop1']:.2%}")
+            if best:lines.append(f"当前最佳：第 {best['epoch']} 轮 · 策略 CE {best['policyCrossEntropy']:.6f} · 命中率 {best['policyTop1']:.2%}")
+            if baseline:lines.append(f"v1.37 基线：策略 CE {baseline['policyCrossEntropy']:.6f} · 命中率 {baseline['policyTop1']:.2%}")
+            if score and not result.get('freezeBaseline',True) and 'mse' in score:
+                lines.append(f"验证胜负 MSE {score['mse']:.6f}"+
+                    (f" · v1.37 {baseline['mse']:.6f}" if baseline and 'mse' in baseline else ''))
+            lines.append('价值分支冻结；编码器与原策略权重冻结' if result.get('freezeBaseline',True)
+                else '全网从头训练：编码器、价值头与策略头联合更新')
+            lines.append('');continue
         if result.get('experiment') in ('pattern-incremental-benchmark', 'pattern-int8-benchmark', 'pattern-hotpath-benchmark', 'pattern-legal-benchmark', 'pattern-suite-sampling'):
             lines.extend([item['name'], ('已完成' if result.get('complete') else result.get('stage','测量中'))+
                 f" · {result.get('completed',0)}/{result.get('total',0)} · {result.get('seconds',0):.0f} 秒"])
             if result.get('summary'):lines.append(result['summary'])
+            metrics=read(ROOT/item['metricsReport']) if item.get('metricsReport') else {}
+            score=result.get('validation') or metrics.get('latest')
+            if score:
+                epoch=score.get('epoch',result.get('validationEpoch',0))
+                lines.append(f"最近完成第 {epoch} 轮：验证胜负 MSE {score['mse']:.6f} · 策略命中率 {score['policyTop1']:.2%}")
+                lines.append(f"策略 CE {score['policyCrossEntropy']:.6f}"+
+                    (f" · WDL CE {score['wdlCrossEntropy']:.6f}" if 'wdlCrossEntropy' in score else ''))
+                best=metrics.get('best') or result.get('bestValidation')
+                if best:lines.append(f"当前最佳：第 {best['epoch']} 轮 · 验证 MSE {best['mse']:.6f}")
             lines.append('');continue
-        if result.get('experiment') in ('pattern-width-training', 'checkpoint-average-training'):
+        if result.get('experiment') in ('pattern-width-training', 'checkpoint-average-training', 'pattern-structure-training'):
             lines.extend([item['name'], ('已完成' if result['complete'] else result.get('stage','训练中'))+
                 f" · {result.get('variant','')} · 第 {result.get('epoch',0)}/{result.get('epochs',15)} 轮 · {result.get('seconds',0):.0f} 秒"])
             if result.get('validation'):

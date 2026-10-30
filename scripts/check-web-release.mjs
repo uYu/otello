@@ -9,15 +9,15 @@ const read=name=>readFileSync(resolve(root,name));
 const json=name=>JSON.parse(read(name));
 const sha=name=>createHash('sha256').update(read(name)).digest('hex');
 const active=json('models/default-model.json'),baseline=json(active.baselineManifest);
-assert.equal(active.version,'v1.36','This deployment is pinned to the approved v1.36 baseline');
-assert.equal(active.baselineManifest,'models/v1.36-default.json');
+assert.equal(active.version,'v2','This deployment is pinned to the approved v2 baseline');
+assert.equal(active.baselineManifest,'models/v2-default.json');
 assert.equal(active.defaultModel,baseline.defaultModel);
 assert.ok(baseline.userApproved&&baseline.status==='frozen');
 assert.equal(sha(active.defaultModel),active.modelSha256);
 assert.equal(active.modelSha256,baseline.modelSha256);
 assert.equal(json(active.defaultModel.replace(/\.[^.]+$/,'.json')).sha256,baseline.modelSha256);
 const wasm='src/game/wasm/othello.mjs';
-assert.equal(sha(wasm),baseline.artifactSha256[wasm],'Use the exact frozen v1.36 browser engine');
+assert.equal(sha(wasm),baseline.artifactSha256[wasm],'Use the exact frozen v2 browser engine');
 const {default:createModule}=await import('../src/game/wasm/othello.mjs');
 const module=await createModule();
 const pointer=module._ot_default_model_sha256();
@@ -33,7 +33,7 @@ assert.equal(book.sourceSha256,'0dd454d84aa656a64329930bad796c4a48a4322b7693d50b
 assert.equal(book.sourceRecords,1302322);
 const checks=json(bookBase+'checksums.json');
 for(const [name,digest] of Object.entries(checks))assert.equal(sha(bookBase+name),digest,`Opening-book asset mismatch: ${name}`);
-const release={version:active.version,modelSha256:baseline.modelSha256,modelFormat:baseline.modelFormat,wasmSha256:sha(wasm),baselineManifestSha256:sha(active.baselineManifest),engine:'Opening book, then v1.36 Pattern outcome + learned-prior PUCT MCTS',execution:'browser Web Worker',normalMilliseconds:100,hardMilliseconds:1000,openingBook:{enabled:true,version:book.version,sourceSha256:book.sourceSha256,sourceRecords:book.sourceRecords,playablePositions:book.entries,shards:book.shards}};
+const release={version:active.version,modelSha256:baseline.modelSha256,modelFormat:baseline.modelFormat,wasmSha256:sha(wasm),baselineManifestSha256:sha(active.baselineManifest),engine:'Opening book, then v2 Pattern outcome + learned-prior PUCT MCTS',execution:'browser Web Worker',normalMilliseconds:100,hardMilliseconds:1000,openingBook:{enabled:true,version:book.version,sourceSha256:book.sourceSha256,sourceRecords:book.sourceRecords,playablePositions:book.entries,shards:book.shards}};
 if(process.argv.includes('--write')){
  writeFileSync(resolve(root,'public/release.json'),JSON.stringify(release,null,2)+'\n');
  copyFileSync(resolve(root,'data/README.md'),resolve(root,'public/model-data-notices.md'));

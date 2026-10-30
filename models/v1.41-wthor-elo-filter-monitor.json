@@ -1,0 +1,9 @@
+{
+  "experiment": "pattern-suite-sampling",
+  "stage": "WTHOR 阈值比较与等权聚合完成",
+  "completed": 1,
+  "total": 1,
+  "summary": "候选 1600: 51,854 盘 / 664,495 局面；未训练",
+  "complete": true,
+  "seconds": 8.730684041976929
+}

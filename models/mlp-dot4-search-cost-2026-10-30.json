@@ -1,0 +1,3197 @@
+{
+  "complete": true,
+  "defaultPromoted": false,
+  "baseReportSha256": "eedbab2e2a83d8c4e4b890042225ca336dd5af142a993b033e37a8adbe75f0f2",
+  "scriptSha256": "637bc28e4a2741c93ed097bb19f1f765b4b1d2d9a16a57c3c434b78ab9727f6b",
+  "scriptSource": "#!/usr/bin/env python3\n\"\"\"Supplement the MLP study with equal-work timing and phase-wise offline metrics.\"\"\"\nimport ctypes\nimport hashlib\nimport importlib.util\nimport json\nimport random\nimport time\nfrom pathlib import Path\nimport numpy as np\n\nspec=importlib.util.spec_from_file_location('mlp_study','/Users/franzyu/Documents/code/otello/scripts/investigate-mlp-inference.py')\ns=importlib.util.module_from_spec(spec);spec.loader.exec_module(s)\nREPORT=s.ROOT/'models/mlp-dot4-search-cost-2026-10-30.json'\nptr=ctypes.POINTER(ctypes.c_int)\n\n\ndef main():\n    assert not REPORT.exists(), 'Reports are immutable'\n    base=json.loads(s.REPORT.read_text());assert base['complete']\n    data=np.load(s.ROOT/'.build/training/v1/positions.npz')\n    labels=np.load(s.ROOT/'.build/training/v1.8/policy.npz')\n    started=time.perf_counter();handles={};metrics=[];samples=[];parity=[]\n    # Every possible local sum for up to six arbitrary INT16 entries, including\n    # negative half ties. Integer normalization precedes the unchanged clamp.\n    values=np.arange(-6*32768,6*32768+1,dtype=np.int64)\n    for divisor in range(2,7):\n        exact=np.sign(values)*((np.abs(values)+divisor//2)//divisor)\n        floating=np.sign(values)*np.floor(np.abs(values/divisor)+.5)\n        assert np.array_equal(exact,floating)\n    def progress(stage,n=0,total=1,complete=False):\n        s.write(s.PROGRESS,dict(experiment='pattern-suite-sampling',stage=stage,completed=n,total=total,complete=complete,seconds=time.perf_counter()-started))\n    def load(v,m):\n        lib=ctypes.CDLL(str(s.WORK/v/f'libstudy.{s.SUFFIX}'))\n        lib.ot_nnue_load.argtypes=[ctypes.c_char_p];lib.ot_nnue_load.restype=ctypes.c_void_p\n        lib.ot_nnue_destroy.argtypes=[ctypes.c_void_p]\n        lib.ot_pattern_predict.argtypes=[ctypes.c_void_p,ptr,ctypes.c_int,ctypes.POINTER(ctypes.c_double)]\n        lib.ot_legal.argtypes=[ptr,ctypes.c_int,ptr]\n        lib.ot_nnue_mcts_play_budget.argtypes=[ctypes.c_void_p,ptr,ctypes.c_int,ctypes.c_int,ctypes.c_uint,ctypes.c_uint]+[ctypes.c_int]*4+[ctypes.c_uint]*2+[ptr,ptr,ptr,ctypes.POINTER(ctypes.c_double),ctypes.POINTER(ctypes.c_double)]\n        handle=lib.ot_nnue_load(str(s.ROOT/f'models/{s.MODELS[m]}.otpat').encode());assert handle\n        handles[v,m]=(lib,handle)\n    try:\n        for m in range(4):\n            for v in ['original','dot4']:load(v,m)\n            lib,handle=handles['original',m]\n            for split in ['validation','test']:\n                progress('补充：按阶段核验离线收益',m,4)\n                boards,turns=data[split+'_board'],data[split+'_turn']\n                prediction=[];masks=[];out=(ctypes.c_double*68)();moves=(ctypes.c_int*64)()\n                for board,turn in zip(boards,turns):\n                    cells=(ctypes.c_int*64)(*map(int,board))\n                    assert lib.ot_pattern_predict(handle,cells,int(turn),out)==1\n                    prediction.append(list(out));mask=np.zeros(64,bool)\n                    n=lib.ot_legal(cells,int(turn),moves);assert n>=0\n                    mask[list(moves)[:n]]=True;masks.append(mask)\n                prediction=np.asarray(prediction);masks=np.asarray(masks);target=np.sign(data[split+'_target'])\n                placed=np.count_nonzero(boards,axis=1)-4\n                logits=np.where(masks,prediction[:,4:],-1e9);logp=logits-logits.max(1,keepdims=True);logp-=np.log(np.exp(logp).sum(1,keepdims=True))\n                for lo,hi in [(0,20),(20,44),(44,61),(0,61)]:\n                    selected=(placed>=lo)&(placed<hi);non_draw=selected&(target!=0)\n                    metrics.append(dict(model=s.MODELS[m],split=split,placements=[lo,hi-1],positions=int(selected.sum()),\n                        mse=float(np.mean((prediction[selected,0]-target[selected])**2)),\n                        nonDrawSignAccuracy=float(np.mean(np.sign(prediction[non_draw,0])==target[non_draw])),\n                        policyTop1=float(np.mean(logits[selected].argmax(1)==labels[split][selected])),\n                        policyCrossEntropy=float(-logp[np.arange(len(boards)),labels[split]][selected].mean()),\n                        policyEntropy=float(-np.sum(np.exp(logp[selected])*logp[selected],axis=1).mean())))\n        placed=np.count_nonzero(data['validation_board'],axis=1)-4;roots=[]\n        for lo,hi in [(8,16),(17,24),(25,32),(33,40)]:roots.extend(np.flatnonzero((placed>=lo)&(placed<=hi))[:2].tolist())\n        rng=random.Random(20261031)\n        for round_ in range(3):\n            for i in roots:\n                for m in rng.sample(range(4),4):\n                    results=[]\n                    for v in rng.sample(['original','dot4'],2):\n                        progress('补充：相同模拟次数搜索成本',len(samples),3*len(roots)*8)\n                        lib,handle=handles[v,m];lib.ot_mcts_clear_cache()\n                        cells=(ctypes.c_int*64)(*map(int,data['validation_board'][i]))\n                        out,sel,visits,stats=(ctypes.c_int*136)(),(ctypes.c_int*6)(),(ctypes.c_int*64)(),(ctypes.c_double*72)()\n                        tick=time.perf_counter_ns()\n                        assert lib.ot_nnue_mcts_play_budget(handle,cells,int(data['validation_turn'][i]),0,131072,1832,12,32,64,1,0,4194304,out,sel,visits,stats,None)==1\n                        wall=(time.perf_counter_ns()-tick)/1e9\n                        samples.append(dict(model=s.MODELS[m],variant=v,root=i,round=round_,wallSeconds=wall,simulations=int(stats[0]),evaluations=int(stats[1]),exact=bool(out[5]),memoryLimited=bool(stats[7])))\n                        out[3]=0;stats[5]=0\n                        results.append([list(out),list(sel),list(visits),list(stats)])\n                    assert results[0]==results[1],(m,i,round_)\n                    parity.append(dict(model=s.MODELS[m],root=i,round=round_,exact=True))\n        summary=[]\n        for m in s.MODELS:\n            a=[r for r in samples if r['model']==m and r['variant']=='original'];b=[r for r in samples if r['model']==m and r['variant']=='dot4']\n            summary.append(dict(model=m,searchesPerVariant=len(a),originalSeconds=sum(r['wallSeconds'] for r in a),combinedSeconds=sum(r['wallSeconds'] for r in b),speedup=sum(r['wallSeconds'] for r in a)/sum(r['wallSeconds'] for r in b)))\n        s.write(REPORT,dict(complete=True,defaultPromoted=False,baseReportSha256=s.sha(s.REPORT),scriptSha256=s.sha(Path(__file__)),scriptSource=Path(__file__).read_text(),candidateVariant='dot4',\n            policyLabelsSha256=s.sha(s.ROOT/'.build/training/v1.8/policy.npz'),localRoundingCheck=dict(numeratorBounds=[-6*32768,6*32768],divisors=[2,3,4,5,6],exact=True),metrics=metrics,fixedWorkSamples=samples,fixedWorkParity=parity,summary=summary,seconds=time.perf_counter()-started,\n            limits='Exploratory native macOS measurements; background experiments may still be running. Equal-weight pairs use identical complete search results, evaluation counts and simulation counts; timings are interleaved. Phase offline metrics describe the existing held-out splits, not independent strength evidence. No additional training or matches.'))\n        progress('推理效率研究及补充核验完成',1,1,True)\n        print(json.dumps(summary,ensure_ascii=False))\n    finally:\n        for lib,handle in handles.values():lib.ot_nnue_destroy(handle)\n\n\nif __name__=='__main__':main()\n",
+  "candidateVariant": "dot4",
+  "policyLabelsSha256": "d5712464ea92f34019de2ca9427d95cfa9aa985ff9d854801c9eb7362a7b587a",
+  "localRoundingCheck": {
+    "numeratorBounds": [
+      -196608,
+      196608
+    ],
+    "divisors": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "exact": true
+  },
+  "metrics": [
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "split": "validation",
+      "placements": [
+        0,
+        19
+      ],
+      "positions": 593,
+      "mse": 0.8885284868045182,
+      "nonDrawSignAccuracy": 0.5555555555555556,
+      "policyTop1": 0.38785834738617203,
+      "policyCrossEntropy": 1.79048670550986,
+      "policyEntropy": 1.9029368303397847
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "split": "validation",
+      "placements": [
+        20,
+        43
+      ],
+      "positions": 3443,
+      "mse": 0.7771209006849393,
+      "nonDrawSignAccuracy": 0.6193505189152997,
+      "policyTop1": 0.36334591925646237,
+      "policyCrossEntropy": 1.7722796096757323,
+      "policyEntropy": 1.8145172276818409
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "split": "validation",
+      "placements": [
+        44,
+        60
+      ],
+      "positions": 1964,
+      "mse": 0.5755645135237777,
+      "nonDrawSignAccuracy": 0.7640718562874251,
+      "policyTop1": 0.5213849287169042,
+      "policyCrossEntropy": 1.2210834145902354,
+      "policyEntropy": 1.2025735686651213
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "split": "validation",
+      "placements": [
+        0,
+        60
+      ],
+      "positions": 6000,
+      "mse": 0.7221555597156706,
+      "nonDrawSignAccuracy": 0.6590472531694199,
+      "policyTop1": 0.4175,
+      "policyCrossEntropy": 1.5936541897893524,
+      "policyEntropy": 1.622946474026395
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "split": "test",
+      "placements": [
+        0,
+        19
+      ],
+      "positions": 631,
+      "mse": 0.8607163952494273,
+      "nonDrawSignAccuracy": 0.5674255691768827,
+      "policyTop1": 0.3185419968304279,
+      "policyCrossEntropy": 1.8898281450492145,
+      "policyEntropy": 1.9434159703605214
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "split": "test",
+      "placements": [
+        20,
+        43
+      ],
+      "positions": 3464,
+      "mse": 0.7330909824803742,
+      "nonDrawSignAccuracy": 0.655045256453235,
+      "policyTop1": 0.36200923787528866,
+      "policyCrossEntropy": 1.776051929215262,
+      "policyEntropy": 1.8244209807691318
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "split": "test",
+      "placements": [
+        44,
+        60
+      ],
+      "positions": 1905,
+      "mse": 0.5557366240584128,
+      "nonDrawSignAccuracy": 0.7661782661782662,
+      "policyTop1": 0.5286089238845144,
+      "policyCrossEntropy": 1.2210663167632136,
+      "policyEntropy": 1.2158696414164096
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "split": "test",
+      "placements": [
+        0,
+        60
+      ],
+      "positions": 6000,
+      "mse": 0.6902029129242803,
+      "nonDrawSignAccuracy": 0.6804699537750385,
+      "policyTop1": 0.4103333333333333,
+      "policyCrossEntropy": 1.6118094626269406,
+      "policyEntropy": 1.6437202369300037
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "split": "validation",
+      "placements": [
+        0,
+        19
+      ],
+      "positions": 593,
+      "mse": 0.8911515818598374,
+      "nonDrawSignAccuracy": 0.5646630236794171,
+      "policyTop1": 0.3962900505902192,
+      "policyCrossEntropy": 1.717208739537339,
+      "policyEntropy": 1.7702269598734413
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "split": "validation",
+      "placements": [
+        20,
+        43
+      ],
+      "positions": 3443,
+      "mse": 0.7729602854407943,
+      "nonDrawSignAccuracy": 0.6280549045865417,
+      "policyTop1": 0.3842579146093523,
+      "policyCrossEntropy": 1.6638398198315716,
+      "policyEntropy": 1.6493474874528087
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "split": "validation",
+      "placements": [
+        44,
+        60
+      ],
+      "positions": 1964,
+      "mse": 0.575484820525657,
+      "nonDrawSignAccuracy": 0.7580838323353294,
+      "policyTop1": 0.5636456211812627,
+      "policyCrossEntropy": 1.110731500785098,
+      "policyEntropy": 1.0682703095303607
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "split": "validation",
+      "placements": [
+        0,
+        60
+      ],
+      "positions": 6000,
+      "mse": 0.7200012230546547,
+      "nonDrawSignAccuracy": 0.6630810603150211,
+      "policyTop1": 0.44416666666666665,
+      "policyCrossEntropy": 1.4880636582946127,
+      "policyEntropy": 1.471088479070433
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "split": "test",
+      "placements": [
+        0,
+        19
+      ],
+      "positions": 631,
+      "mse": 0.8527190390757453,
+      "nonDrawSignAccuracy": 0.5674255691768827,
+      "policyTop1": 0.33914421553090335,
+      "policyCrossEntropy": 1.825800103879524,
+      "policyEntropy": 1.8055677839866118
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "split": "test",
+      "placements": [
+        20,
+        43
+      ],
+      "positions": 3464,
+      "mse": 0.7275097828327889,
+      "nonDrawSignAccuracy": 0.6570566543747904,
+      "policyTop1": 0.39174364896073904,
+      "policyCrossEntropy": 1.6663178787697375,
+      "policyEntropy": 1.6555516620575539
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "split": "test",
+      "placements": [
+        44,
+        60
+      ],
+      "positions": 1905,
+      "mse": 0.5543121115028874,
+      "nonDrawSignAccuracy": 0.7625152625152625,
+      "policyTop1": 0.5637795275590551,
+      "policyCrossEntropy": 1.13996285144147,
+      "policyEntropy": 1.0658975254688707
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "split": "test",
+      "placements": [
+        0,
+        60
+      ],
+      "positions": 6000,
+      "mse": 0.6856873623004294,
+      "nonDrawSignAccuracy": 0.6804699537750385,
+      "policyTop1": 0.44083333333333335,
+      "policyCrossEntropy": 1.5159723716003919,
+      "policyEntropy": 1.4841131691801863
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "split": "validation",
+      "placements": [
+        0,
+        19
+      ],
+      "positions": 593,
+      "mse": 0.892877595609991,
+      "nonDrawSignAccuracy": 0.546448087431694,
+      "policyTop1": 0.4148397976391231,
+      "policyCrossEntropy": 1.680002733044243,
+      "policyEntropy": 1.7039594645405636
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "split": "validation",
+      "placements": [
+        20,
+        43
+      ],
+      "positions": 3443,
+      "mse": 0.7780178527059187,
+      "nonDrawSignAccuracy": 0.6250418480080349,
+      "policyTop1": 0.3950043566656985,
+      "policyCrossEntropy": 1.6245486620550447,
+      "policyEntropy": 1.5933627321431445
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "split": "validation",
+      "placements": [
+        44,
+        60
+      ],
+      "positions": 1964,
+      "mse": 0.5774408068073109,
+      "nonDrawSignAccuracy": 0.7520958083832335,
+      "policyTop1": 0.564663951120163,
+      "policyCrossEntropy": 1.094330311493925,
+      "policyEntropy": 1.0530820331704653
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "split": "validation",
+      "placements": [
+        0,
+        60
+      ],
+      "positions": 6000,
+      "mse": 0.7237142709387936,
+      "nonDrawSignAccuracy": 0.6575105647330004,
+      "policyTop1": 0.4525,
+      "policyCrossEntropy": 1.4564712326541374,
+      "policyEntropy": 1.427441493731366
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "split": "test",
+      "placements": [
+        0,
+        19
+      ],
+      "positions": 631,
+      "mse": 0.8557416554512693,
+      "nonDrawSignAccuracy": 0.5604203152364273,
+      "policyTop1": 0.347068145800317,
+      "policyCrossEntropy": 1.7913325910647115,
+      "policyEntropy": 1.7473161673057316
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "split": "test",
+      "placements": [
+        20,
+        43
+      ],
+      "positions": 3464,
+      "mse": 0.727536504565922,
+      "nonDrawSignAccuracy": 0.6580623533355682,
+      "policyTop1": 0.4004041570438799,
+      "policyCrossEntropy": 1.63555374789369,
+      "policyEntropy": 1.6004313673611423
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "split": "test",
+      "placements": [
+        44,
+        60
+      ],
+      "positions": 1905,
+      "mse": 0.5569299379773985,
+      "nonDrawSignAccuracy": 0.7612942612942613,
+      "policyTop1": 0.5679790026246719,
+      "policyCrossEntropy": 1.1102413980792663,
+      "policyEntropy": 1.049134142547771
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "split": "test",
+      "placements": [
+        0,
+        60
+      ],
+      "positions": 6000,
+      "mse": 0.6868518280421749,
+      "nonDrawSignAccuracy": 0.6798921417565486,
+      "policyTop1": 0.448,
+      "policyCrossEntropy": 1.4851498185010963,
+      "policyEntropy": 1.4408418832770695
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "split": "validation",
+      "placements": [
+        0,
+        19
+      ],
+      "positions": 593,
+      "mse": 0.8919194071186288,
+      "nonDrawSignAccuracy": 0.5482695810564663,
+      "policyTop1": 0.3912310286677909,
+      "policyCrossEntropy": 1.671419520820537,
+      "policyEntropy": 1.6943270312524588
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "split": "validation",
+      "placements": [
+        20,
+        43
+      ],
+      "positions": 3443,
+      "mse": 0.7780021055550983,
+      "nonDrawSignAccuracy": 0.613993973886843,
+      "policyTop1": 0.4086552425210572,
+      "policyCrossEntropy": 1.6019682115564995,
+      "policyEntropy": 1.5630887519857697
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "split": "validation",
+      "placements": [
+        44,
+        60
+      ],
+      "positions": 1964,
+      "mse": 0.5696162935136297,
+      "nonDrawSignAccuracy": 0.7628742514970059,
+      "policyTop1": 0.5667006109979633,
+      "policyCrossEntropy": 1.0879607272111538,
+      "policyEntropy": 1.0368227325346078
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "split": "validation",
+      "placements": [
+        0,
+        60
+      ],
+      "positions": 6000,
+      "mse": 0.7210493097180531,
+      "nonDrawSignAccuracy": 0.6548213599692663,
+      "policyTop1": 0.45866666666666667,
+      "policyCrossEntropy": 1.4405805327463852,
+      "policyEntropy": 1.403795058219614
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "split": "test",
+      "placements": [
+        0,
+        19
+      ],
+      "positions": 631,
+      "mse": 0.8633841641158044,
+      "nonDrawSignAccuracy": 0.5481611208406305,
+      "policyTop1": 0.3518225039619651,
+      "policyCrossEntropy": 1.7607087514630482,
+      "policyEntropy": 1.7468296233729075
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "split": "test",
+      "placements": [
+        20,
+        43
+      ],
+      "positions": 3464,
+      "mse": 0.7307479224508928,
+      "nonDrawSignAccuracy": 0.6526986255447536,
+      "policyTop1": 0.40704387990762125,
+      "policyCrossEntropy": 1.620393742758261,
+      "policyEntropy": 1.5722866078330173
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "split": "test",
+      "placements": [
+        44,
+        60
+      ],
+      "positions": 1905,
+      "mse": 0.5496214749418451,
+      "nonDrawSignAccuracy": 0.7588522588522588,
+      "policyTop1": 0.573228346456693,
+      "policyCrossEntropy": 1.100346681550796,
+      "policyEntropy": 1.0387788208223157
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "split": "test",
+      "placements": [
+        0,
+        60
+      ],
+      "positions": 6000,
+      "mse": 0.6871891867818634,
+      "nonDrawSignAccuracy": 0.6746918335901386,
+      "policyTop1": 0.454,
+      "policyCrossEntropy": 1.4700352625736777,
+      "policyEntropy": 1.4212539925913978
+    }
+  ],
+  "fixedWorkSamples": [
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "original",
+      "root": 0,
+      "round": 0,
+      "wallSeconds": 0.369456791,
+      "simulations": 131072,
+      "evaluations": 129427,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "dot4",
+      "root": 0,
+      "round": 0,
+      "wallSeconds": 0.310635,
+      "simulations": 131072,
+      "evaluations": 129427,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "original",
+      "root": 0,
+      "round": 0,
+      "wallSeconds": 0.239589166,
+      "simulations": 131072,
+      "evaluations": 130965,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "dot4",
+      "root": 0,
+      "round": 0,
+      "wallSeconds": 0.234432458,
+      "simulations": 131072,
+      "evaluations": 130965,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "original",
+      "root": 0,
+      "round": 0,
+      "wallSeconds": 0.448315125,
+      "simulations": 131072,
+      "evaluations": 130084,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "dot4",
+      "root": 0,
+      "round": 0,
+      "wallSeconds": 0.54419825,
+      "simulations": 131072,
+      "evaluations": 130084,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "original",
+      "root": 0,
+      "round": 0,
+      "wallSeconds": 0.385845291,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "dot4",
+      "root": 0,
+      "round": 0,
+      "wallSeconds": 0.340735667,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "dot4",
+      "root": 1,
+      "round": 0,
+      "wallSeconds": 0.297172584,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "original",
+      "root": 1,
+      "round": 0,
+      "wallSeconds": 0.304959375,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "dot4",
+      "root": 1,
+      "round": 0,
+      "wallSeconds": 0.210743542,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "original",
+      "root": 1,
+      "round": 0,
+      "wallSeconds": 0.210877208,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "original",
+      "root": 1,
+      "round": 0,
+      "wallSeconds": 0.369635,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "dot4",
+      "root": 1,
+      "round": 0,
+      "wallSeconds": 0.332049041,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "original",
+      "root": 1,
+      "round": 0,
+      "wallSeconds": 0.260932583,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "dot4",
+      "root": 1,
+      "round": 0,
+      "wallSeconds": 0.261508709,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "dot4",
+      "root": 3,
+      "round": 0,
+      "wallSeconds": 0.242282583,
+      "simulations": 131072,
+      "evaluations": 130763,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "original",
+      "root": 3,
+      "round": 0,
+      "wallSeconds": 0.256258292,
+      "simulations": 131072,
+      "evaluations": 130763,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "dot4",
+      "root": 3,
+      "round": 0,
+      "wallSeconds": 0.255371333,
+      "simulations": 131072,
+      "evaluations": 131037,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "original",
+      "root": 3,
+      "round": 0,
+      "wallSeconds": 0.287954916,
+      "simulations": 131072,
+      "evaluations": 131037,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "dot4",
+      "root": 3,
+      "round": 0,
+      "wallSeconds": 0.310281458,
+      "simulations": 131072,
+      "evaluations": 131029,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "original",
+      "root": 3,
+      "round": 0,
+      "wallSeconds": 0.3755815,
+      "simulations": 131072,
+      "evaluations": 131029,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "dot4",
+      "root": 3,
+      "round": 0,
+      "wallSeconds": 0.227208,
+      "simulations": 131072,
+      "evaluations": 131049,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "original",
+      "root": 3,
+      "round": 0,
+      "wallSeconds": 0.231576792,
+      "simulations": 131072,
+      "evaluations": 131049,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "original",
+      "root": 5,
+      "round": 0,
+      "wallSeconds": 0.323807208,
+      "simulations": 131072,
+      "evaluations": 130898,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "dot4",
+      "root": 5,
+      "round": 0,
+      "wallSeconds": 0.250800875,
+      "simulations": 131072,
+      "evaluations": 130898,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "dot4",
+      "root": 5,
+      "round": 0,
+      "wallSeconds": 0.201029584,
+      "simulations": 131072,
+      "evaluations": 130567,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "original",
+      "root": 5,
+      "round": 0,
+      "wallSeconds": 0.202178334,
+      "simulations": 131072,
+      "evaluations": 130567,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "original",
+      "root": 5,
+      "round": 0,
+      "wallSeconds": 0.330079917,
+      "simulations": 131072,
+      "evaluations": 130963,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "dot4",
+      "root": 5,
+      "round": 0,
+      "wallSeconds": 0.285167458,
+      "simulations": 131072,
+      "evaluations": 130963,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "original",
+      "root": 5,
+      "round": 0,
+      "wallSeconds": 0.240664833,
+      "simulations": 131072,
+      "evaluations": 130181,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "dot4",
+      "root": 5,
+      "round": 0,
+      "wallSeconds": 0.241516083,
+      "simulations": 131072,
+      "evaluations": 130181,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "original",
+      "root": 4,
+      "round": 0,
+      "wallSeconds": 0.192817458,
+      "simulations": 131072,
+      "evaluations": 114603,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "dot4",
+      "root": 4,
+      "round": 0,
+      "wallSeconds": 0.195222417,
+      "simulations": 131072,
+      "evaluations": 114603,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "original",
+      "root": 4,
+      "round": 0,
+      "wallSeconds": 0.182509292,
+      "simulations": 131072,
+      "evaluations": 130680,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "dot4",
+      "root": 4,
+      "round": 0,
+      "wallSeconds": 0.188874041,
+      "simulations": 131072,
+      "evaluations": 130680,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "dot4",
+      "root": 4,
+      "round": 0,
+      "wallSeconds": 0.279442167,
+      "simulations": 131072,
+      "evaluations": 130545,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "original",
+      "root": 4,
+      "round": 0,
+      "wallSeconds": 0.245986292,
+      "simulations": 131072,
+      "evaluations": 130545,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "original",
+      "root": 4,
+      "round": 0,
+      "wallSeconds": 0.272704333,
+      "simulations": 131072,
+      "evaluations": 126589,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "dot4",
+      "root": 4,
+      "round": 0,
+      "wallSeconds": 0.242862875,
+      "simulations": 131072,
+      "evaluations": 126589,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "original",
+      "root": 6,
+      "round": 0,
+      "wallSeconds": 0.238555375,
+      "simulations": 131072,
+      "evaluations": 130854,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "dot4",
+      "root": 6,
+      "round": 0,
+      "wallSeconds": 0.233517333,
+      "simulations": 131072,
+      "evaluations": 130854,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "dot4",
+      "root": 6,
+      "round": 0,
+      "wallSeconds": 0.19668325,
+      "simulations": 131072,
+      "evaluations": 130031,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "original",
+      "root": 6,
+      "round": 0,
+      "wallSeconds": 0.199643208,
+      "simulations": 131072,
+      "evaluations": 130031,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "original",
+      "root": 6,
+      "round": 0,
+      "wallSeconds": 0.30602975,
+      "simulations": 131072,
+      "evaluations": 129943,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "dot4",
+      "root": 6,
+      "round": 0,
+      "wallSeconds": 0.27691775,
+      "simulations": 131072,
+      "evaluations": 129943,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "original",
+      "root": 6,
+      "round": 0,
+      "wallSeconds": 0.269336916,
+      "simulations": 131072,
+      "evaluations": 130734,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "dot4",
+      "root": 6,
+      "round": 0,
+      "wallSeconds": 0.264207333,
+      "simulations": 131072,
+      "evaluations": 130734,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "original",
+      "root": 8,
+      "round": 0,
+      "wallSeconds": 0.181001125,
+      "simulations": 131072,
+      "evaluations": 128801,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "dot4",
+      "root": 8,
+      "round": 0,
+      "wallSeconds": 0.184000833,
+      "simulations": 131072,
+      "evaluations": 128801,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "original",
+      "root": 8,
+      "round": 0,
+      "wallSeconds": 0.269285292,
+      "simulations": 131072,
+      "evaluations": 128397,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "dot4",
+      "root": 8,
+      "round": 0,
+      "wallSeconds": 0.249326291,
+      "simulations": 131072,
+      "evaluations": 128397,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "dot4",
+      "root": 8,
+      "round": 0,
+      "wallSeconds": 0.204565542,
+      "simulations": 131072,
+      "evaluations": 119383,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "original",
+      "root": 8,
+      "round": 0,
+      "wallSeconds": 0.207234833,
+      "simulations": 131072,
+      "evaluations": 119383,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "dot4",
+      "root": 8,
+      "round": 0,
+      "wallSeconds": 0.219385625,
+      "simulations": 131072,
+      "evaluations": 128978,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "original",
+      "root": 8,
+      "round": 0,
+      "wallSeconds": 0.221743583,
+      "simulations": 131072,
+      "evaluations": 128978,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "dot4",
+      "root": 10,
+      "round": 0,
+      "wallSeconds": 0.1824835,
+      "simulations": 131072,
+      "evaluations": 105296,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "original",
+      "root": 10,
+      "round": 0,
+      "wallSeconds": 0.186905625,
+      "simulations": 131072,
+      "evaluations": 105296,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "original",
+      "root": 10,
+      "round": 0,
+      "wallSeconds": 0.200421916,
+      "simulations": 131072,
+      "evaluations": 100268,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "dot4",
+      "root": 10,
+      "round": 0,
+      "wallSeconds": 0.181536209,
+      "simulations": 131072,
+      "evaluations": 100268,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "original",
+      "root": 10,
+      "round": 0,
+      "wallSeconds": 0.164706292,
+      "simulations": 131072,
+      "evaluations": 103011,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "dot4",
+      "root": 10,
+      "round": 0,
+      "wallSeconds": 0.167430125,
+      "simulations": 131072,
+      "evaluations": 103011,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "dot4",
+      "root": 10,
+      "round": 0,
+      "wallSeconds": 0.156287916,
+      "simulations": 131072,
+      "evaluations": 124473,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "original",
+      "root": 10,
+      "round": 0,
+      "wallSeconds": 0.163551209,
+      "simulations": 131072,
+      "evaluations": 124473,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "original",
+      "root": 0,
+      "round": 1,
+      "wallSeconds": 0.234715125,
+      "simulations": 131072,
+      "evaluations": 130965,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "dot4",
+      "root": 0,
+      "round": 1,
+      "wallSeconds": 0.226134041,
+      "simulations": 131072,
+      "evaluations": 130965,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "dot4",
+      "root": 0,
+      "round": 1,
+      "wallSeconds": 0.342225041,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "original",
+      "root": 0,
+      "round": 1,
+      "wallSeconds": 0.3843115,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "dot4",
+      "root": 0,
+      "round": 1,
+      "wallSeconds": 0.300595416,
+      "simulations": 131072,
+      "evaluations": 129427,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "original",
+      "root": 0,
+      "round": 1,
+      "wallSeconds": 0.320989167,
+      "simulations": 131072,
+      "evaluations": 129427,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "original",
+      "root": 0,
+      "round": 1,
+      "wallSeconds": 0.286011917,
+      "simulations": 131072,
+      "evaluations": 130084,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "dot4",
+      "root": 0,
+      "round": 1,
+      "wallSeconds": 0.279142042,
+      "simulations": 131072,
+      "evaluations": 130084,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "dot4",
+      "root": 1,
+      "round": 1,
+      "wallSeconds": 0.271666875,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "original",
+      "root": 1,
+      "round": 1,
+      "wallSeconds": 0.26860175,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "dot4",
+      "root": 1,
+      "round": 1,
+      "wallSeconds": 0.334533583,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "original",
+      "root": 1,
+      "round": 1,
+      "wallSeconds": 0.373178125,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "dot4",
+      "root": 1,
+      "round": 1,
+      "wallSeconds": 0.216521125,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "original",
+      "root": 1,
+      "round": 1,
+      "wallSeconds": 0.220562542,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "dot4",
+      "root": 1,
+      "round": 1,
+      "wallSeconds": 0.294036375,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "original",
+      "root": 1,
+      "round": 1,
+      "wallSeconds": 0.307417292,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "original",
+      "root": 3,
+      "round": 1,
+      "wallSeconds": 0.274035458,
+      "simulations": 131072,
+      "evaluations": 131037,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "dot4",
+      "root": 3,
+      "round": 1,
+      "wallSeconds": 0.265268042,
+      "simulations": 131072,
+      "evaluations": 131037,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "original",
+      "root": 3,
+      "round": 1,
+      "wallSeconds": 0.33366125,
+      "simulations": 131072,
+      "evaluations": 131029,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "dot4",
+      "root": 3,
+      "round": 1,
+      "wallSeconds": 0.303909042,
+      "simulations": 131072,
+      "evaluations": 131029,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "dot4",
+      "root": 3,
+      "round": 1,
+      "wallSeconds": 0.260797084,
+      "simulations": 131072,
+      "evaluations": 130763,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "original",
+      "root": 3,
+      "round": 1,
+      "wallSeconds": 0.260645417,
+      "simulations": 131072,
+      "evaluations": 130763,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "original",
+      "root": 3,
+      "round": 1,
+      "wallSeconds": 0.213280958,
+      "simulations": 131072,
+      "evaluations": 131049,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "dot4",
+      "root": 3,
+      "round": 1,
+      "wallSeconds": 0.204513167,
+      "simulations": 131072,
+      "evaluations": 131049,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "original",
+      "root": 5,
+      "round": 1,
+      "wallSeconds": 0.276642792,
+      "simulations": 131072,
+      "evaluations": 130898,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "dot4",
+      "root": 5,
+      "round": 1,
+      "wallSeconds": 0.257858875,
+      "simulations": 131072,
+      "evaluations": 130898,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "original",
+      "root": 5,
+      "round": 1,
+      "wallSeconds": 0.202468292,
+      "simulations": 131072,
+      "evaluations": 130567,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "dot4",
+      "root": 5,
+      "round": 1,
+      "wallSeconds": 0.205827959,
+      "simulations": 131072,
+      "evaluations": 130567,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "original",
+      "root": 5,
+      "round": 1,
+      "wallSeconds": 0.244727417,
+      "simulations": 131072,
+      "evaluations": 130181,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "dot4",
+      "root": 5,
+      "round": 1,
+      "wallSeconds": 0.245011834,
+      "simulations": 131072,
+      "evaluations": 130181,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "original",
+      "root": 5,
+      "round": 1,
+      "wallSeconds": 0.329494,
+      "simulations": 131072,
+      "evaluations": 130963,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "dot4",
+      "root": 5,
+      "round": 1,
+      "wallSeconds": 0.397198917,
+      "simulations": 131072,
+      "evaluations": 130963,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "dot4",
+      "root": 4,
+      "round": 1,
+      "wallSeconds": 0.210013291,
+      "simulations": 131072,
+      "evaluations": 130680,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "original",
+      "root": 4,
+      "round": 1,
+      "wallSeconds": 0.194282125,
+      "simulations": 131072,
+      "evaluations": 130680,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "original",
+      "root": 4,
+      "round": 1,
+      "wallSeconds": 0.253326917,
+      "simulations": 131072,
+      "evaluations": 130545,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "dot4",
+      "root": 4,
+      "round": 1,
+      "wallSeconds": 0.300293708,
+      "simulations": 131072,
+      "evaluations": 130545,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "original",
+      "root": 4,
+      "round": 1,
+      "wallSeconds": 0.411922958,
+      "simulations": 131072,
+      "evaluations": 114603,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "dot4",
+      "root": 4,
+      "round": 1,
+      "wallSeconds": 0.216233833,
+      "simulations": 131072,
+      "evaluations": 114603,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "dot4",
+      "root": 4,
+      "round": 1,
+      "wallSeconds": 0.296212708,
+      "simulations": 131072,
+      "evaluations": 126589,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "original",
+      "root": 4,
+      "round": 1,
+      "wallSeconds": 0.295910542,
+      "simulations": 131072,
+      "evaluations": 126589,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "dot4",
+      "root": 6,
+      "round": 1,
+      "wallSeconds": 0.305344166,
+      "simulations": 131072,
+      "evaluations": 129943,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "original",
+      "root": 6,
+      "round": 1,
+      "wallSeconds": 0.313261167,
+      "simulations": 131072,
+      "evaluations": 129943,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "original",
+      "root": 6,
+      "round": 1,
+      "wallSeconds": 0.241529958,
+      "simulations": 131072,
+      "evaluations": 130854,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "dot4",
+      "root": 6,
+      "round": 1,
+      "wallSeconds": 0.241862083,
+      "simulations": 131072,
+      "evaluations": 130854,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "dot4",
+      "root": 6,
+      "round": 1,
+      "wallSeconds": 0.214629541,
+      "simulations": 131072,
+      "evaluations": 130031,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "original",
+      "root": 6,
+      "round": 1,
+      "wallSeconds": 0.203023667,
+      "simulations": 131072,
+      "evaluations": 130031,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "original",
+      "root": 6,
+      "round": 1,
+      "wallSeconds": 0.261417125,
+      "simulations": 131072,
+      "evaluations": 130734,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "dot4",
+      "root": 6,
+      "round": 1,
+      "wallSeconds": 0.302587417,
+      "simulations": 131072,
+      "evaluations": 130734,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "dot4",
+      "root": 8,
+      "round": 1,
+      "wallSeconds": 0.332186792,
+      "simulations": 131072,
+      "evaluations": 128397,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "original",
+      "root": 8,
+      "round": 1,
+      "wallSeconds": 0.270769625,
+      "simulations": 131072,
+      "evaluations": 128397,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "dot4",
+      "root": 8,
+      "round": 1,
+      "wallSeconds": 0.196420167,
+      "simulations": 131072,
+      "evaluations": 119383,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "original",
+      "root": 8,
+      "round": 1,
+      "wallSeconds": 0.20346075,
+      "simulations": 131072,
+      "evaluations": 119383,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "original",
+      "root": 8,
+      "round": 1,
+      "wallSeconds": 0.176122958,
+      "simulations": 131072,
+      "evaluations": 128801,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "dot4",
+      "root": 8,
+      "round": 1,
+      "wallSeconds": 0.178125209,
+      "simulations": 131072,
+      "evaluations": 128801,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "dot4",
+      "root": 8,
+      "round": 1,
+      "wallSeconds": 0.210711167,
+      "simulations": 131072,
+      "evaluations": 128978,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "original",
+      "root": 8,
+      "round": 1,
+      "wallSeconds": 0.235307625,
+      "simulations": 131072,
+      "evaluations": 128978,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "original",
+      "root": 10,
+      "round": 1,
+      "wallSeconds": 0.207961125,
+      "simulations": 131072,
+      "evaluations": 100268,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "dot4",
+      "root": 10,
+      "round": 1,
+      "wallSeconds": 0.19166,
+      "simulations": 131072,
+      "evaluations": 100268,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "original",
+      "root": 10,
+      "round": 1,
+      "wallSeconds": 0.169696125,
+      "simulations": 131072,
+      "evaluations": 124473,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "dot4",
+      "root": 10,
+      "round": 1,
+      "wallSeconds": 0.163249667,
+      "simulations": 131072,
+      "evaluations": 124473,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "original",
+      "root": 10,
+      "round": 1,
+      "wallSeconds": 0.183534417,
+      "simulations": 131072,
+      "evaluations": 105296,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "dot4",
+      "root": 10,
+      "round": 1,
+      "wallSeconds": 0.173741292,
+      "simulations": 131072,
+      "evaluations": 105296,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "dot4",
+      "root": 10,
+      "round": 1,
+      "wallSeconds": 0.162843458,
+      "simulations": 131072,
+      "evaluations": 103011,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "original",
+      "root": 10,
+      "round": 1,
+      "wallSeconds": 0.166426084,
+      "simulations": 131072,
+      "evaluations": 103011,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "dot4",
+      "root": 0,
+      "round": 2,
+      "wallSeconds": 0.302971792,
+      "simulations": 131072,
+      "evaluations": 129427,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "original",
+      "root": 0,
+      "round": 2,
+      "wallSeconds": 0.318764583,
+      "simulations": 131072,
+      "evaluations": 129427,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "dot4",
+      "root": 0,
+      "round": 2,
+      "wallSeconds": 0.337821208,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "original",
+      "root": 0,
+      "round": 2,
+      "wallSeconds": 0.386233334,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "dot4",
+      "root": 0,
+      "round": 2,
+      "wallSeconds": 0.277063,
+      "simulations": 131072,
+      "evaluations": 130084,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "original",
+      "root": 0,
+      "round": 2,
+      "wallSeconds": 0.278301458,
+      "simulations": 131072,
+      "evaluations": 130084,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "dot4",
+      "root": 0,
+      "round": 2,
+      "wallSeconds": 0.234536458,
+      "simulations": 131072,
+      "evaluations": 130965,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "original",
+      "root": 0,
+      "round": 2,
+      "wallSeconds": 0.237939375,
+      "simulations": 131072,
+      "evaluations": 130965,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "original",
+      "root": 1,
+      "round": 2,
+      "wallSeconds": 0.3121855,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "dot4",
+      "root": 1,
+      "round": 2,
+      "wallSeconds": 0.294414709,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "original",
+      "root": 1,
+      "round": 2,
+      "wallSeconds": 0.2711825,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "dot4",
+      "root": 1,
+      "round": 2,
+      "wallSeconds": 0.268196208,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "dot4",
+      "root": 1,
+      "round": 2,
+      "wallSeconds": 0.216339459,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "original",
+      "root": 1,
+      "round": 2,
+      "wallSeconds": 0.242563208,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "dot4",
+      "root": 1,
+      "round": 2,
+      "wallSeconds": 0.408362583,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "original",
+      "root": 1,
+      "round": 2,
+      "wallSeconds": 0.683226,
+      "simulations": 131072,
+      "evaluations": 131072,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "original",
+      "root": 3,
+      "round": 2,
+      "wallSeconds": 0.332696041,
+      "simulations": 131072,
+      "evaluations": 131037,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "dot4",
+      "root": 3,
+      "round": 2,
+      "wallSeconds": 0.324635541,
+      "simulations": 131072,
+      "evaluations": 131037,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "original",
+      "root": 3,
+      "round": 2,
+      "wallSeconds": 0.426311917,
+      "simulations": 131072,
+      "evaluations": 131029,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "dot4",
+      "root": 3,
+      "round": 2,
+      "wallSeconds": 0.384707833,
+      "simulations": 131072,
+      "evaluations": 131029,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "dot4",
+      "root": 3,
+      "round": 2,
+      "wallSeconds": 0.317680708,
+      "simulations": 131072,
+      "evaluations": 130763,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "original",
+      "root": 3,
+      "round": 2,
+      "wallSeconds": 0.291600042,
+      "simulations": 131072,
+      "evaluations": 130763,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "original",
+      "root": 3,
+      "round": 2,
+      "wallSeconds": 0.235566958,
+      "simulations": 131072,
+      "evaluations": 131049,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "dot4",
+      "root": 3,
+      "round": 2,
+      "wallSeconds": 0.2507035,
+      "simulations": 131072,
+      "evaluations": 131049,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "dot4",
+      "root": 5,
+      "round": 2,
+      "wallSeconds": 0.313995667,
+      "simulations": 131072,
+      "evaluations": 130898,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "original",
+      "root": 5,
+      "round": 2,
+      "wallSeconds": 0.315232792,
+      "simulations": 131072,
+      "evaluations": 130898,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "dot4",
+      "root": 5,
+      "round": 2,
+      "wallSeconds": 0.33841925,
+      "simulations": 131072,
+      "evaluations": 130963,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "original",
+      "root": 5,
+      "round": 2,
+      "wallSeconds": 0.355625416,
+      "simulations": 131072,
+      "evaluations": 130963,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "original",
+      "root": 5,
+      "round": 2,
+      "wallSeconds": 0.235242083,
+      "simulations": 131072,
+      "evaluations": 130567,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "dot4",
+      "root": 5,
+      "round": 2,
+      "wallSeconds": 0.2650845,
+      "simulations": 131072,
+      "evaluations": 130567,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "dot4",
+      "root": 5,
+      "round": 2,
+      "wallSeconds": 0.293854916,
+      "simulations": 131072,
+      "evaluations": 130181,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "original",
+      "root": 5,
+      "round": 2,
+      "wallSeconds": 0.264617416,
+      "simulations": 131072,
+      "evaluations": 130181,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "original",
+      "root": 4,
+      "round": 2,
+      "wallSeconds": 0.223115,
+      "simulations": 131072,
+      "evaluations": 130680,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "dot4",
+      "root": 4,
+      "round": 2,
+      "wallSeconds": 0.222746291,
+      "simulations": 131072,
+      "evaluations": 130680,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "original",
+      "root": 4,
+      "round": 2,
+      "wallSeconds": 0.232098291,
+      "simulations": 131072,
+      "evaluations": 114603,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "dot4",
+      "root": 4,
+      "round": 2,
+      "wallSeconds": 0.238468542,
+      "simulations": 131072,
+      "evaluations": 114603,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "dot4",
+      "root": 4,
+      "round": 2,
+      "wallSeconds": 0.303782458,
+      "simulations": 131072,
+      "evaluations": 126589,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "original",
+      "root": 4,
+      "round": 2,
+      "wallSeconds": 0.298121917,
+      "simulations": 131072,
+      "evaluations": 126589,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "original",
+      "root": 4,
+      "round": 2,
+      "wallSeconds": 0.2441055,
+      "simulations": 131072,
+      "evaluations": 130545,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "dot4",
+      "root": 4,
+      "round": 2,
+      "wallSeconds": 0.227230959,
+      "simulations": 131072,
+      "evaluations": 130545,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "dot4",
+      "root": 6,
+      "round": 2,
+      "wallSeconds": 0.233516834,
+      "simulations": 131072,
+      "evaluations": 130854,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "original",
+      "root": 6,
+      "round": 2,
+      "wallSeconds": 0.259929917,
+      "simulations": 131072,
+      "evaluations": 130854,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "original",
+      "root": 6,
+      "round": 2,
+      "wallSeconds": 0.219658209,
+      "simulations": 131072,
+      "evaluations": 130031,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "dot4",
+      "root": 6,
+      "round": 2,
+      "wallSeconds": 0.190773583,
+      "simulations": 131072,
+      "evaluations": 130031,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "dot4",
+      "root": 6,
+      "round": 2,
+      "wallSeconds": 0.261095333,
+      "simulations": 131072,
+      "evaluations": 130734,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "original",
+      "root": 6,
+      "round": 2,
+      "wallSeconds": 0.312590875,
+      "simulations": 131072,
+      "evaluations": 130734,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "dot4",
+      "root": 6,
+      "round": 2,
+      "wallSeconds": 0.485713958,
+      "simulations": 131072,
+      "evaluations": 129943,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "original",
+      "root": 6,
+      "round": 2,
+      "wallSeconds": 0.376797208,
+      "simulations": 131072,
+      "evaluations": 129943,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "original",
+      "root": 8,
+      "round": 2,
+      "wallSeconds": 0.233386334,
+      "simulations": 131072,
+      "evaluations": 119383,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "dot4",
+      "root": 8,
+      "round": 2,
+      "wallSeconds": 0.213457542,
+      "simulations": 131072,
+      "evaluations": 119383,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "dot4",
+      "root": 8,
+      "round": 2,
+      "wallSeconds": 0.251268125,
+      "simulations": 131072,
+      "evaluations": 128397,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "original",
+      "root": 8,
+      "round": 2,
+      "wallSeconds": 0.256518333,
+      "simulations": 131072,
+      "evaluations": 128397,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "original",
+      "root": 8,
+      "round": 2,
+      "wallSeconds": 0.174983791,
+      "simulations": 131072,
+      "evaluations": 128801,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "dot4",
+      "root": 8,
+      "round": 2,
+      "wallSeconds": 0.177081625,
+      "simulations": 131072,
+      "evaluations": 128801,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "dot4",
+      "root": 8,
+      "round": 2,
+      "wallSeconds": 0.207840459,
+      "simulations": 131072,
+      "evaluations": 128978,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "original",
+      "root": 8,
+      "round": 2,
+      "wallSeconds": 0.213055791,
+      "simulations": 131072,
+      "evaluations": 128978,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "original",
+      "root": 10,
+      "round": 2,
+      "wallSeconds": 0.159414542,
+      "simulations": 131072,
+      "evaluations": 124473,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "variant": "dot4",
+      "root": 10,
+      "round": 2,
+      "wallSeconds": 0.156692791,
+      "simulations": 131072,
+      "evaluations": 124473,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "original",
+      "root": 10,
+      "round": 2,
+      "wallSeconds": 0.162159208,
+      "simulations": 131072,
+      "evaluations": 103011,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "variant": "dot4",
+      "root": 10,
+      "round": 2,
+      "wallSeconds": 0.162357375,
+      "simulations": 131072,
+      "evaluations": 103011,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "original",
+      "root": 10,
+      "round": 2,
+      "wallSeconds": 0.186081833,
+      "simulations": 131072,
+      "evaluations": 105296,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "variant": "dot4",
+      "root": 10,
+      "round": 2,
+      "wallSeconds": 0.174234834,
+      "simulations": 131072,
+      "evaluations": 105296,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "original",
+      "root": 10,
+      "round": 2,
+      "wallSeconds": 0.207749167,
+      "simulations": 131072,
+      "evaluations": 100268,
+      "exact": false,
+      "memoryLimited": false
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "variant": "dot4",
+      "root": 10,
+      "round": 2,
+      "wallSeconds": 0.183441,
+      "simulations": 131072,
+      "evaluations": 100268,
+      "exact": false,
+      "memoryLimited": false
+    }
+  ],
+  "fixedWorkParity": [
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "root": 0,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "root": 0,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "root": 0,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "root": 0,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "root": 1,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "root": 1,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "root": 1,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "root": 1,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "root": 3,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "root": 3,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "root": 3,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "root": 3,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "root": 5,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "root": 5,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "root": 5,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "root": 5,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "root": 4,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "root": 4,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "root": 4,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "root": 4,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "root": 6,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "root": 6,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "root": 6,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "root": 6,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "root": 8,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "root": 8,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "root": 8,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "root": 8,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "root": 10,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "root": 10,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "root": 10,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "root": 10,
+      "round": 0,
+      "exact": true
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "root": 0,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "root": 0,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "root": 0,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "root": 0,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "root": 1,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "root": 1,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "root": 1,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "root": 1,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "root": 3,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "root": 3,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "root": 3,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "root": 3,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "root": 5,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "root": 5,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "root": 5,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "root": 5,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "root": 4,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "root": 4,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "root": 4,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "root": 4,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "root": 6,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "root": 6,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "root": 6,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "root": 6,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "root": 8,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "root": 8,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "root": 8,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "root": 8,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "root": 10,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "root": 10,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "root": 10,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "root": 10,
+      "round": 1,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "root": 0,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "root": 0,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "root": 0,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "root": 0,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "root": 1,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "root": 1,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "root": 1,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "root": 1,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "root": 3,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "root": 3,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "root": 3,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "root": 3,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "root": 5,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "root": 5,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "root": 5,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "root": 5,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "root": 4,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "root": 4,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "root": 4,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "root": 4,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "root": 6,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "root": 6,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "root": 6,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "root": 6,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "root": 8,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "root": 8,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "root": 8,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "root": 8,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "root": 10,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "root": 10,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "root": 10,
+      "round": 2,
+      "exact": true
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "root": 10,
+      "round": 2,
+      "exact": true
+    }
+  ],
+  "summary": [
+    {
+      "model": "pattern32-symmetry-v1.37",
+      "searchesPerVariant": 24,
+      "originalSeconds": 4.953561292000001,
+      "combinedSeconds": 4.932231831,
+      "speedup": 1.0043245049565475
+    },
+    {
+      "model": "pattern32-direct-mlp8-v1.38",
+      "searchesPerVariant": 24,
+      "originalSeconds": 6.1121112900000005,
+      "combinedSeconds": 5.992307543,
+      "speedup": 1.019992923617539
+    },
+    {
+      "model": "pattern32-direct-mlp16-v1.39",
+      "searchesPerVariant": 24,
+      "originalSeconds": 6.531509332,
+      "combinedSeconds": 6.247516003000001,
+      "speedup": 1.045456999047882
+    },
+    {
+      "model": "pattern32-direct-mlp32-v1.39",
+      "searchesPerVariant": 24,
+      "originalSeconds": 8.008713624999999,
+      "combinedSeconds": 7.415663412999999,
+      "speedup": 1.079972644249246
+    }
+  ],
+  "seconds": 51.576452374923974,
+  "limits": "Exploratory native macOS measurements; background experiments may still be running. Equal-weight pairs use identical complete search results, evaluation counts and simulation counts; timings are interleaved. Phase offline metrics describe the existing held-out splits, not independent strength evidence. No additional training or matches."
+}

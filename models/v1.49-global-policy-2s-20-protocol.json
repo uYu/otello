@@ -1,0 +1,48 @@
+{
+  "version": "v1.49-global-policy-2s-20",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "userRequest": "和基线2s 20局",
+  "candidate": "models/pattern32-global-policy16-full-v1.49.otpat",
+  "candidateModelSha256": "df11f7b9eed358fff33a426e2f0cb1a290083d2bc8e0781a2fbd1efdaf4270c3",
+  "baseline": "models/v1.37-default.json",
+  "baselineModelSha256": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+  "trainingReportSha256": "13e2bf466c980679e26b5218408dddab0888a9911c37bc00277b46f605c8531c",
+  "nativeValidationSha256": "e2f39fb18f622ddf9259f43b48625c45aa7d85389990d0258daebfe26c272181",
+  "millisecondsPerMove": 2000,
+  "games": 20,
+  "seed": 20261029,
+  "start": "initial",
+  "pairedColors": true,
+  "sharedPairSeeds": true,
+  "useBook": false,
+  "mcts": {
+    "maxNodes": 4194304,
+    "patternCacheEntries": 0,
+    "exploration": 1.5,
+    "finiteFpuReduction": 0.15,
+    "subtreeReuse": true,
+    "terminal": "outcome +1/0/-1"
+  },
+  "openingPolicy": {
+    "plies": 12,
+    "temperature": 32,
+    "max_loss": 64
+  },
+  "libraries": {
+    ".build/native-pattern-global-policy-v1.49/libothello.dylib": "9e1c7f0a0e3c247272e048a336a6de2fb18e938145bd66f4118576f502e91bc2",
+    ".build/native-pattern-global-policy-portable-v1.49/libothello.dylib": "0e32cb69926c6a0804bca4d28b9b161c5c882e58f943d397927a63ccb6c85947",
+    ".build/native-v1.37-reference/libothello.dylib": "e8eea82419065f5af3c6ddcd257c5497f971d2ba17ae94782b490a10a637a024"
+  },
+  "preservedSha256": {
+    "models/default-model.json": "6582f442dc890e847a393cbd31fb54a63f00d8dca62cede1315187137a9c2de4",
+    "models/v1.37-default.json": "27ce5cd4be6cf824b629c5c08151a766b748608c96c9970e58ed8d4c2ca1d0f5",
+    "models/pattern32-symmetry-v1.37.otpat": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+    "models/pattern32-symmetry-v1.37.pt": "8f6052eadfd2cef1367c14fe121c910bb2e1635cafcda083d9e8fdbbd8a73d52",
+    "src/game/wasm/othello.mjs": "825ef6e4e84e7e60ce0cb262a2a5cb0d25c2a3bb2e6663750688492a79942303",
+    ".build/native-v1.37-reference/libothello.dylib": "e8eea82419065f5af3c6ddcd257c5497f971d2ba17ae94782b490a10a637a024"
+  },
+  "nativeProtocolSha256": "4d553e1e53de5381b01a8b8dfefbb787cb1e0724e50ce02da8524880dbf92116",
+  "sourceArchiveManifest": "models/archive/v1.49-global-policy-native-sources.json",
+  "limits": "20-game paired screening sample. No retraining, no automatic promotion, no Elo/significance claim. Training/build/validation finished before match; external system CPU activity not controlled."
+}

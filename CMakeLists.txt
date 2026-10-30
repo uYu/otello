@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
-project(otello VERSION 1.36.0 LANGUAGES CXX)
+project(otello VERSION 2.0.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 if(APPLE)
@@ -74,3 +74,7 @@ install(FILES cpp/api.h cpp/othello.hpp cpp/nnue.hpp cpp/pattern.hpp cpp/cnn.hpp
 if(OTELLO_WITH_EGAROUCID)
   install(FILES cpp/egaroucid.hpp cpp/egaroucid_api.h DESTINATION include/otello)
 endif()
+
+add_executable(otello_global_policy_tests tests/global_policy_native.cpp)
+target_link_libraries(otello_global_policy_tests PRIVATE othello)
+add_test(NAME global_policy_native COMMAND otello_global_policy_tests "${CMAKE_CURRENT_SOURCE_DIR}/models/pattern32-global-policy-v2.otpat")

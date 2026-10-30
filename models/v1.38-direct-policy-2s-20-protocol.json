@@ -1,0 +1,45 @@
+{
+  "version": "v1.38-direct-policy-2s-pilot",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "userRequest": "2s打20把吧",
+  "baselineManifest": "models/v1.37-default.json",
+  "baselineManifestSha256": "27ce5cd4be6cf824b629c5c08151a766b748608c96c9970e58ed8d4c2ca1d0f5",
+  "candidate": "models/pattern32-direct-mlp8-v1.38.otpat",
+  "candidateModelSha256": "3ab3da122a74c2214da52692947733f7e38b6ed0a171cb7828cee9e968ff0adc",
+  "baselineModel": "models/pattern32-symmetry-v1.37.otpat",
+  "baselineModelSha256": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+  "games": 20,
+  "millisecondsPerMove": 2000,
+  "seed": 20261029,
+  "start": "initial",
+  "pairedColors": true,
+  "sharedPairSeeds": true,
+  "useBook": false,
+  "mcts": {
+    "maxNodes": 4194304,
+    "patternCacheEntries": 0,
+    "exploration": 1.5,
+    "finiteFpuReduction": 0.15,
+    "subtreeReuse": true,
+    "terminal": "outcome +1/0/-1"
+  },
+  "openingPolicy": {
+    "plies": 12,
+    "temperature": 32,
+    "max_loss": 64
+  },
+  "librarySha256": {
+    ".build/native-pattern-direct-policy-v1.38/libothello.dylib": "6908ce20ea0f61b3828847b8ed1b7cfbb8448f9d9a41b15103fbb04500a1715a",
+    ".build/native-v1.37-reference/libothello.dylib": "e8eea82419065f5af3c6ddcd257c5497f971d2ba17ae94782b490a10a637a024"
+  },
+  "preservedSha256": {
+    "models/default-model.json": "6582f442dc890e847a393cbd31fb54a63f00d8dca62cede1315187137a9c2de4",
+    "models/v1.37-default.json": "27ce5cd4be6cf824b629c5c08151a766b748608c96c9970e58ed8d4c2ca1d0f5",
+    "models/pattern32-symmetry-v1.37.otpat": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+    "src/game/wasm/othello.mjs": "825ef6e4e84e7e60ce0cb262a2a5cb0d25c2a3bb2e6663750688492a79942303"
+  },
+  "offlineExperimentSha256": "e908b2de24072d64c0b5c67cc56e63f0a638a7f59e8d8cec97cf0acf9f900c67",
+  "concurrentTraining": "User requested simultaneous MLP-width training on this host; no exclusive CPU scheduling. All per-decision wall times retained.",
+  "limits": "20-game paired-color screening sample; budgets separate; no Elo/statistical significance claim; no automatic default promotion."
+}

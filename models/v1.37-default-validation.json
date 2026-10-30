@@ -1,0 +1,21 @@
+{
+  "native": true,
+  "sanitizers": true,
+  "patternTests": 7,
+  "webTests": 19,
+  "frontendBuild": true,
+  "wasmRebuilt": true,
+  "embeddedModelParity": true,
+  "historicalReportsPreserved": true,
+  "nativeParity": {
+    "nativeEmbeddedModelSha256": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+    "nativeExplicitEmbeddedPositions": 12000,
+    "all68OutputsExactlyMatchCandidate": true,
+    "fixedSimulationRoots": 32,
+    "simulationsPerRoot": 1024
+  },
+  "wasmParity": {
+    "wasmEmbeddedModelSha256": "762b51297726ac0618ffe41485ad097f13dfe7a809361c052ac795c61bc61235",
+    "wasmNativeExactlyEqualPositions": 6000
+  }
+}

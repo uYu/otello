@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="680" viewBox="0 0 1600 680">
+<rect width="1600" height="680" fill="#FFFFFF"/>
+<text x="55" y="69" text-anchor="start" font-family="Heiti SC, PingFang SC, sans-serif" font-size="43" fill="#182C45">直连共享策略头</text>
+<text x="55" y="109" text-anchor="start" font-family="Heiti SC, PingFang SC, sans-serif" font-size="23" fill="#617083">结构候选 / 原型已实现，尚未训练及对战</text>
+<rect x="1160" y="34" width="370" height="84" rx="13" fill="#F0EAF8" stroke="#D6C8E9" stroke-width="1.5"/>
+<text x="1345" y="69" text-anchor="middle" font-family="Heiti SC, PingFang SC, sans-serif" font-size="29" fill="#7954B7">固定权重 · 单一路径</text>
+<text x="1345" y="102" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#617083">local + global + position → score</text>
+<polygon points="65,284 77,272 182,272 170,284" fill="#D4EAE4" stroke="#13857E" stroke-width="1"/>
+<polygon points="170,389 182,377 182,272 170,284" fill="#D4EAE4" stroke="#13857E" stroke-width="1"/>
+<rect x="65" y="284" width="105" height="105" rx="0" fill="#FFFFFF" stroke="#13857E" stroke-width="1.4"/>
+<rect x="65.0" y="374.6" width="20.4" height="14.4" rx="0" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="86.0" y="374.6" width="20.4" height="14.4" rx="0" fill="#D4EAE4" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="107.0" y="374.6" width="20.4" height="14.4" rx="0" fill="#D4EAE4" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="128.0" y="374.6" width="20.4" height="14.4" rx="0" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="149.0" y="374.6" width="20.4" height="14.4" rx="0" fill="#D4EAE4" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="65.0" y="359.6" width="20.4" height="14.4" rx="0" fill="#D4EAE4" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="86.0" y="359.6" width="20.4" height="14.4" rx="0" fill="#D4EAE4" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="107.0" y="359.6" width="20.4" height="14.4" rx="0" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="128.0" y="359.6" width="20.4" height="14.4" rx="0" fill="#D4EAE4" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="149.0" y="359.6" width="20.4" height="14.4" rx="0" fill="#D4EAE4" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="65.0" y="344.6" width="20.4" height="14.4" rx="0" fill="#D4EAE4" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="86.0" y="344.6" width="20.4" height="14.4" rx="0" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="107.0" y="344.6" width="20.4" height="14.4" rx="0" fill="#D4EAE4" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="128.0" y="344.6" width="20.4" height="14.4" rx="0" fill="#D4EAE4" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="149.0" y="344.6" width="20.4" height="14.4" rx="0" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="65.0" y="329.6" width="20.4" height="14.4" rx="0" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="86.0" y="329.6" width="20.4" height="14.4" rx="0" fill="#D4EAE4" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="107.0" y="329.6" width="20.4" height="14.4" rx="0" fill="#D4EAE4" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="128.0" y="329.6" width="20.4" height="14.4" rx="0" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="149.0" y="329.6" width="20.4" height="14.4" rx="0" fill="#D4EAE4" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="65.0" y="314.6" width="20.4" height="14.4" rx="0" fill="#D4EAE4" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="86.0" y="314.6" width="20.4" height="14.4" rx="0" fill="#D4EAE4" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="107.0" y="314.6" width="20.4" height="14.4" rx="0" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="128.0" y="314.6" width="20.4" height="14.4" rx="0" fill="#D4EAE4" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="149.0" y="314.6" width="20.4" height="14.4" rx="0" fill="#D4EAE4" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="65.0" y="299.6" width="20.4" height="14.4" rx="0" fill="#D4EAE4" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="86.0" y="299.6" width="20.4" height="14.4" rx="0" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="107.0" y="299.6" width="20.4" height="14.4" rx="0" fill="#D4EAE4" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="128.0" y="299.6" width="20.4" height="14.4" rx="0" fill="#D4EAE4" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="149.0" y="299.6" width="20.4" height="14.4" rx="0" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="65.0" y="284.6" width="20.4" height="14.4" rx="0" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="86.0" y="284.6" width="20.4" height="14.4" rx="0" fill="#D4EAE4" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="107.0" y="284.6" width="20.4" height="14.4" rx="0" fill="#D4EAE4" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="128.0" y="284.6" width="20.4" height="14.4" rx="0" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="0.5"/>
+<rect x="149.0" y="284.6" width="20.4" height="14.4" rx="0" fill="#D4EAE4" stroke="#FFFFFF" stroke-width="0.5"/>
+<text x="118" y="250" text-anchor="middle" font-family="Heiti SC, PingFang SC, sans-serif" font-size="26" fill="#13857E">棋形查表 E</text>
+<text x="118" y="428" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="23" fill="#13857E">38 × 32</text>
+<polyline points="182,334 230,334" fill="none" stroke="#13857E" stroke-width="2.8"/>
+<polygon points="230,334 220.0,338.8 220.0,329.2" fill="#13857E" stroke="#13857E" stroke-width="1"/>
+<rect x="230" y="278" width="180" height="112" rx="11" fill="#EDF6F3" stroke="#C5DFD7" stroke-width="1.5"/>
+<text x="320" y="315" text-anchor="middle" font-family="Heiti SC, PingFang SC, sans-serif" font-size="26" fill="#13857E">落点特征 f_a</text>
+<text x="320" y="354" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="25" fill="#13857E" font-weight="bold">64 × 32</text>
+<text x="320" y="426" text-anchor="middle" font-family="Heiti SC, PingFang SC, sans-serif" font-size="19" fill="#617083">覆盖该格点的棋形取均值</text>
+<polyline points="410,334 485,334" fill="none" stroke="#13857E" stroke-width="2.8"/>
+<polygon points="485,334 475.0,338.8 475.0,329.2" fill="#13857E" stroke="#13857E" stroke-width="1"/>
+<rect x="485" y="278" width="185" height="112" rx="11" fill="#F2F4FA" stroke="#CDD7EA" stroke-width="1.5"/>
+<text x="577" y="315" text-anchor="middle" font-family="Heiti SC, PingFang SC, sans-serif" font-size="27" fill="#416AB5">直接拼接</text>
+<text x="577" y="354" text-anchor="middle" font-family="Times New Roman, serif" font-size="23" fill="#416AB5" font-style="italic">[ f_a, h, pos ]</text>
+<text x="577" y="380" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#617083">32 + 32 + 10 = 74</text>
+<rect x="485" y="141" width="185" height="72" rx="10" fill="#EDF2FA" stroke="#C6D4E9" stroke-width="1.5"/>
+<text x="577" y="170" text-anchor="middle" font-family="Heiti SC, PingFang SC, sans-serif" font-size="25" fill="#416AB5">全局 h[32]</text>
+<text x="577" y="198" text-anchor="middle" font-family="Heiti SC, PingFang SC, sans-serif" font-size="19" fill="#617083">来自共享主干</text>
+<polyline points="577,213 577,278" fill="none" stroke="#416AB5" stroke-width="2.4"/>
+<polygon points="577,278 572.2,268.0 581.8,268.0" fill="#416AB5" stroke="#416AB5" stroke-width="1"/>
+<rect x="485" y="491" width="185" height="72" rx="10" fill="#FAF2E8" stroke="#E7D5BB" stroke-width="1.5"/>
+<text x="577" y="520" text-anchor="middle" font-family="Heiti SC, PingFang SC, sans-serif" font-size="23" fill="#9C6A32">位置编码 [10]</text>
+<text x="577" y="548" text-anchor="middle" font-family="Heiti SC, PingFang SC, sans-serif" font-size="18" fill="#617083">D4 不变的 one-hot</text>
+<polyline points="577,491 577,390" fill="none" stroke="#B9894D" stroke-width="2.4"/>
+<polygon points="577,390 581.8,400.0 572.2,400.0" fill="#B9894D" stroke="#B9894D" stroke-width="1"/>
+<polyline points="670,334 750,334" fill="none" stroke="#416AB5" stroke-width="2.8"/>
+<polygon points="750,334 740.0,338.8 740.0,329.2" fill="#416AB5" stroke="#416AB5" stroke-width="1"/>
+<rect x="750" y="257" width="310" height="156" rx="13" fill="#F3EDF9" stroke="#D3C3E7" stroke-width="1.5"/>
+<text x="905" y="291" text-anchor="middle" font-family="Heiti SC, PingFang SC, sans-serif" font-size="30" fill="#7954B7">共享 MLP</text>
+<polyline points="810,372 907,371" fill="none" stroke="#D8C9EC" stroke-width="1"/>
+<polyline points="810,372 907,349" fill="none" stroke="#D8C9EC" stroke-width="1"/>
+<polyline points="810,372 907,327" fill="none" stroke="#D8C9EC" stroke-width="1"/>
+<polyline points="810,350 907,371" fill="none" stroke="#D8C9EC" stroke-width="1"/>
+<polyline points="810,350 907,349" fill="none" stroke="#D8C9EC" stroke-width="1"/>
+<polyline points="810,350 907,327" fill="none" stroke="#D8C9EC" stroke-width="1"/>
+<polyline points="810,328 907,371" fill="none" stroke="#D8C9EC" stroke-width="1"/>
+<polyline points="810,328 907,349" fill="none" stroke="#D8C9EC" stroke-width="1"/>
+<polyline points="810,328 907,327" fill="none" stroke="#D8C9EC" stroke-width="1"/>
+<circle cx="810" cy="372" r="5.5" fill="#FFFFFF" stroke="#7954B7" stroke-width="1.6"/>
+<circle cx="810" cy="350" r="5.5" fill="#FFFFFF" stroke="#7954B7" stroke-width="1.6"/>
+<circle cx="810" cy="328" r="5.5" fill="#FFFFFF" stroke="#7954B7" stroke-width="1.6"/>
+<circle cx="907" cy="371" r="7" fill="#7954B7" stroke="#7954B7" stroke-width="1.5"/>
+<circle cx="907" cy="349" r="7" fill="#7954B7" stroke="#7954B7" stroke-width="1.5"/>
+<circle cx="907" cy="327" r="7" fill="#7954B7" stroke="#7954B7" stroke-width="1.5"/>
+<polyline points="914,371 993,349" fill="none" stroke="#B99BD9" stroke-width="1.3"/>
+<polyline points="914,349 993,349" fill="none" stroke="#B99BD9" stroke-width="1.3"/>
+<polyline points="914,327 993,349" fill="none" stroke="#B99BD9" stroke-width="1.3"/>
+<circle cx="1001" cy="349" r="7" fill="#7954B7" stroke="#7954B7" stroke-width="1.5"/>
+<text x="905" y="398" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="24" fill="#7954B7" font-weight="bold">74 → 8 → 1</text>
+<text x="905" y="450" text-anchor="middle" font-family="Heiti SC, PingFang SC, sans-serif" font-size="20" fill="#617083">中间层：clipped ReLU</text>
+<polyline points="1060,334 1110,334" fill="none" stroke="#7954B7" stroke-width="2.8"/>
+<polygon points="1110,334 1100.0,338.8 1100.0,329.2" fill="#7954B7" stroke="#7954B7" stroke-width="1"/>
+<rect x="1110" y="278" width="150" height="112" rx="11" fill="#F4EFF9" stroke="#D6C7E8" stroke-width="1.5"/>
+<text x="1185" y="315" text-anchor="middle" font-family="Heiti SC, PingFang SC, sans-serif" font-size="25" fill="#7954B7">64 格分数</text>
+<text x="1185" y="353" text-anchor="middle" font-family="Times New Roman, serif" font-size="25" fill="#7954B7" font-style="italic">logits</text>
+<polyline points="1260,334 1310,334" fill="none" stroke="#7954B7" stroke-width="2.8"/>
+<polygon points="1310,334 1300.0,338.8 1300.0,329.2" fill="#7954B7" stroke="#7954B7" stroke-width="1"/>
+<rect x="1310" y="278" width="220" height="112" rx="11" fill="#ECF1FA" stroke="#C1D0E8" stroke-width="1.5"/>
+<text x="1420" y="314" text-anchor="middle" font-family="Heiti SC, PingFang SC, sans-serif" font-size="23" fill="#416AB5">合法掩码 + softmax</text>
+<text x="1420" y="355" text-anchor="middle" font-family="Heiti SC, PingFang SC, sans-serif" font-size="28" fill="#416AB5">π(a | s)</text>
+<text x="1420" y="428" text-anchor="middle" font-family="Heiti SC, PingFang SC, sans-serif" font-size="22" fill="#416AB5">PUCT 搜索先验</text>
+<polyline points="55,597 1530,597" fill="none" stroke="#CCD7E3" stroke-width="1"/>
+<text x="55" y="628" text-anchor="start" font-family="Heiti SC, PingFang SC, sans-serif" font-size="21" fill="#617083">每个落点直接使用局部、全局与位置特征，通过同一个固定 MLP 评分。没有门控乘法，也没有独立偏置分支。</text>
+<text x="55" y="659" text-anchor="start" font-family="Heiti SC, PingFang SC, sans-serif" font-size="20" fill="#617083">设计保持 D4 等变；这是需要重训验证的新头，当前 v1.37 模型与正在进行的对战保持冻结。</text>
+</svg>

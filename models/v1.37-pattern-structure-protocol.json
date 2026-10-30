@@ -1,0 +1,45 @@
+{
+  "version": "v1.37",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "baseline": "models/v1.36-default.json",
+  "variants": [
+    "control",
+    "symmetry",
+    "pool10"
+  ],
+  "training": {
+    "epochs": 15,
+    "positions": 1000000,
+    "seed": 20261029,
+    "dataSeed": 20261030,
+    "batchSize": 2048,
+    "threads": 2,
+    "learningRate": 0.001,
+    "weightDecay": 0.0001,
+    "selection": "minimum validation outcome MSE independently per variant; all models frozen before test"
+  },
+  "matches": {
+    "variants": [
+      "symmetry",
+      "pool10"
+    ],
+    "budgetsMs": [
+      100,
+      2000
+    ],
+    "gamesPerVariantPerBudget": 20,
+    "seed": 20261029,
+    "maxNodes": 4194304,
+    "useBook": false,
+    "selection": "Evaluate both independent candidates, no match-based selection; no combination in this experiment"
+  },
+  "preservedSha256": {
+    "models/default-model.json": "889482dc3ae9acd42d4be9d14085c286f4f226a7aeac3d692476be5953eac719",
+    "models/v1.36-default.json": "15eb5f40472a04f4d0a4224987e54fed5b3420121cc57241fd285b16d4a2c2ea",
+    "models/pattern32-outcome-v1.25.otpat": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0",
+    "src/game/wasm/othello.mjs": "9a266e596d71da87a025eaac6479445ec119cc47cc675222b7c4bbc9583997c2"
+  },
+  "baselineLibrary": ".build/native-v1.36-reference/libothello.dylib",
+  "baselineLibrarySha256": "6962e58ccac7fdac5529fedcba4254c40f70b4ab472e588b6d40e460d16c5ee2"
+}
