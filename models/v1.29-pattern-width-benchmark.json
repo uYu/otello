@@ -1,0 +1,140 @@
+{
+  "library": ".build/native-pattern-h64-v1.29/libothello.dylib",
+  "librarySha256": "8aa42d6a73c26392bf7e545b34c3ef6cc00895a98d7553f0b4d4c5eb6395e442",
+  "scriptSha256": "8f762d3c123105bc3f31e841cf5cc99d92295f86425b4976123d58b0f6e299f6",
+  "positions": 64,
+  "rounds": 9,
+  "callsPerRound": 8192,
+  "results": [
+    {
+      "model": "models/pattern32-outcome-v1.25.otpat",
+      "modelSha256": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0",
+      "medianMicroseconds": 2.15631103515625,
+      "samples": [
+        {
+          "microseconds": 3.7309520263671874,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.2510478515625,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.16204833984375,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.1350250244140625,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.130879638671875,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.1457265625,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.1593677978515626,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.15631103515625,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.1393330078125,
+          "checksum": 910.5753404100938
+        }
+      ]
+    },
+    {
+      "model": "models/pattern32-h32-v1.29.otpat",
+      "modelSha256": "81c4e4954f1a581b48c2a5220bb626c6b84642e827d42599bed9cfe6c5ed488e",
+      "medianMicroseconds": 2.121195556640625,
+      "samples": [
+        {
+          "microseconds": 4.460174560546875,
+          "checksum": 567.9347493054928
+        },
+        {
+          "microseconds": 2.238576171875,
+          "checksum": 567.9347493054928
+        },
+        {
+          "microseconds": 2.1169840087890623,
+          "checksum": 567.9347493054928
+        },
+        {
+          "microseconds": 2.1141712646484376,
+          "checksum": 567.9347493054928
+        },
+        {
+          "microseconds": 2.1275379638671876,
+          "checksum": 567.9347493054928
+        },
+        {
+          "microseconds": 2.121195556640625,
+          "checksum": 567.9347493054928
+        },
+        {
+          "microseconds": 2.1176248779296873,
+          "checksum": 567.9347493054928
+        },
+        {
+          "microseconds": 2.107269287109375,
+          "checksum": 567.9347493054928
+        },
+        {
+          "microseconds": 2.122711181640625,
+          "checksum": 567.9347493054928
+        }
+      ]
+    },
+    {
+      "model": "models/pattern32-h64-v1.29.otpat",
+      "modelSha256": "ef1945f4c3f06636626ae1925d3fbcf7e7646024fabdbe3c0e6c5ed813f2e11c",
+      "medianMicroseconds": 3.01587939453125,
+      "samples": [
+        {
+          "microseconds": 5.81705224609375,
+          "checksum": 525.2329342384426
+        },
+        {
+          "microseconds": 3.09222412109375,
+          "checksum": 525.2329342384426
+        },
+        {
+          "microseconds": 3.1209971923828124,
+          "checksum": 525.2329342384426
+        },
+        {
+          "microseconds": 3.01587939453125,
+          "checksum": 525.2329342384426
+        },
+        {
+          "microseconds": 3.01751708984375,
+          "checksum": 525.2329342384426
+        },
+        {
+          "microseconds": 3.009953857421875,
+          "checksum": 525.2329342384426
+        },
+        {
+          "microseconds": 3.0117645263671875,
+          "checksum": 525.2329342384426
+        },
+        {
+          "microseconds": 3.00656640625,
+          "checksum": 525.2329342384426
+        },
+        {
+          "microseconds": 3.0064189453125,
+          "checksum": 525.2329342384426
+        }
+      ]
+    }
+  ],
+  "limits": "Interleaved full-joint C ABI inference including Python overhead; same fused native implementation for all three models; no playing-strength claim"
+}

@@ -1,0 +1,28 @@
+{
+  "version": "v1.36-pattern-capacity",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "sourceManifest": "models/archive/v1.36-pattern-capacity-sources.json",
+  "sourceManifestSha256": "4a763d27b336695eb623207d2d3cd4453bac9d8ed862fb90b7ebbe1925d2347e",
+  "artifactSha256": {
+    "models/v1.36-pattern-capacity.json": "d07039305799d94f7b9a27fe4ba65adbac816a40a20b36e2ee6cdaec0a6a64e3",
+    "models/v1.36-pattern-capacity-pilot.json": "72c02172a80b5fdd97c343440709af223e799759f99d5ac8cacf61e190d7a89a",
+    "models/v1.36-pattern-capacity-experiments.json": "59d297bcb3fc36eec7e22e3b4b65b3bf451dcf7644b3103d284351128aba5955",
+    "models/v1.36-capacity-vs-v1.25-2s-20.json": "e19961769c7f6953b8ef3f0ae171275c5471e01b0c52b03309a5ef384f216505",
+    "models/v1.36-pattern-capacity-comparison.md": "98b7044233f7afd32ebf8f25f8da1ceefea1f79ea1eaf5bcf855247aadd8e5e1",
+    "scripts/finalize-pattern-capacity.py": "2e12830fad71c616d3da7f30095675d857f60226cb9b00ca6b49f880224d4459"
+  },
+  "preservedSha256": {
+    "models/default-model.json": "8b82bf89b2afeebdcd1b2c056dee7ce21789aea9291cae11b0a480862ad37b01",
+    "models/v1.25-default.json": "730b4a83b9e0495e7f1a4beaa6da8b2a31c8d72ceb9b39e54a9218cbb381c14f",
+    "src/game/wasm/othello.mjs": "a1584f0244858efcf19d807dee2dd79e628cda2ee509371162cbc64c94c949e0",
+    "models/pattern32-outcome-v1.25.otpat": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0"
+  },
+  "checks": {
+    "games": 20,
+    "replayedActions": 1213,
+    "pairedColors": true,
+    "budgetMs": 2000,
+    "perDecisionCapacityAndRss": true
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "version": "v1.29-pattern-width",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "baselineManifest": "models/v1.25-default.json",
+  "baselineManifestSha256": "730b4a83b9e0495e7f1a4beaa6da8b2a31c8d72ceb9b39e54a9218cbb381c14f",
+  "sourceManifest": "models/archive/v1.29-pattern-width-sources.json",
+  "artifactSha256": {
+    "models/v1.29-pattern-width.json": "aeb34e91044596b588ac9a78c65325dc6cb297d9733ac994f868e9deadecb4bb",
+    "models/v1.29-pattern-inference-benchmark.json": "b6836d097b6a2e4e93666e153ecd64e88faeae8909188a818ba661b96fc827cc",
+    "models/v1.29-pattern-width-benchmark.json": "66a728e0dc6d76471ab67a0888327a009b36490f58fac0fb7b660cc3689d8d5a",
+    "models/v1.29-pattern-width-comparison.md": "da3aad9f28950b1c2a773b20e7b89e7ec4e110407f07ecccbed292541f8e0d62",
+    "models/v1.29-pattern-width-experiments.json": "1cd119e199360a415ab521b828c15f48cdf890c4cabb9c756e5b61a8571b8d2b",
+    "models/pattern32-h32-v1.29.otpat": "81c4e4954f1a581b48c2a5220bb626c6b84642e827d42599bed9cfe6c5ed488e",
+    "models/pattern32-h32-v1.29.json": "3b797aaa0ec472fc44217bfe01839e91fee35fc997eaf3662e3108c2eead8422",
+    "models/pattern32-h32-v1.29.pt": "0b058240872a0a44cbf792288f5c2e2d3a97121b7a11a3ba4cee89f11dc1ee9a",
+    "models/pattern32-h64-v1.29.otpat": "ef1945f4c3f06636626ae1925d3fbcf7e7646024fabdbe3c0e6c5ed813f2e11c",
+    "models/pattern32-h64-v1.29.json": "82914fed0841f4e0c7f753eed0a4a3e6394ed5f21ac63d148b91867085acb8c1",
+    "models/pattern32-h64-v1.29.pt": "fd5a56f099b2d6876c2ca6c880dd7112a48e79179899726f841ffe5d1c4660a6"
+  },
+  "preservedSha256": {
+    "models/default-model.json": "8b82bf89b2afeebdcd1b2c056dee7ce21789aea9291cae11b0a480862ad37b01",
+    "models/v1.25-default.json": "730b4a83b9e0495e7f1a4beaa6da8b2a31c8d72ceb9b39e54a9218cbb381c14f",
+    "models/pattern32-outcome-v1.25.otpat": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0",
+    "src/game/wasm/othello.mjs": "a1584f0244858efcf19d807dee2dd79e628cda2ee509371162cbc64c94c949e0"
+  },
+  "checks": {
+    "native": true,
+    "sanitizers": true,
+    "patternTests": 4,
+    "fullJointParity": true,
+    "fixedSimulationParity": true
+  }
+}

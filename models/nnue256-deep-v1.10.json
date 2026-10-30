@@ -1,0 +1,682 @@
+{
+  "version": "v1.10-deep-candidate",
+  "status": "candidate",
+  "modelFormat": "OTNNUE5",
+  "valueTarget": "side-to-move win +1, draw 0, loss -1",
+  "architecture": "frozen 128->256; shared 256->32 clipped ReLU->256 residual clipped ReLU; ordered 512 features to value and frozen policy",
+  "parameters": 68770,
+  "trainableParameters": 17185,
+  "bytes": 138864,
+  "sha256": "235bed6b569b87313fd1382a9bb34d9cf7134254fa9754aa86939f075a068dc6",
+  "parent": "models/nnue256-outcome-v1.9.otnnue",
+  "parentSha256": "72294450ce5eb180703e05048df6e7ce7078f031c4e94464198192432d618bb0",
+  "baselineVersion": "v1.9",
+  "featuresUnchanged": true,
+  "policyBytesUnchanged": true,
+  "loss": "outcome MSE + legal-mask recorded-move cross entropy; coefficient 1 each",
+  "epochs": 30,
+  "seed": 20261027,
+  "batchSize": 1024,
+  "learningRate": 0.001,
+  "weightDecay": 0.001,
+  "initialResidual": "zero up projection: identity at epoch 0",
+  "bestEpoch": 23,
+  "history": [
+    {
+      "epoch": 0,
+      "value": {
+        "outcomeMse": 0.7302832007408142,
+        "expectedScoreMse": 0.18257080018520355,
+        "nonDrawSignAccuracy": 0.6567422205147906,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.6851637363433838,
+        "top1": 0.37933333333333336,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.415446937084198
+    },
+    {
+      "epoch": 1,
+      "value": {
+        "outcomeMse": 0.7331571578979492,
+        "expectedScoreMse": 0.1832892894744873,
+        "nonDrawSignAccuracy": 0.652132155205532,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.6821998357772827,
+        "top1": 0.37633333333333335,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.415356993675232
+    },
+    {
+      "epoch": 2,
+      "value": {
+        "outcomeMse": 0.7307627201080322,
+        "expectedScoreMse": 0.18269068002700806,
+        "nonDrawSignAccuracy": 0.6532846715328468,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.679236650466919,
+        "top1": 0.38083333333333336,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.409999370574951
+    },
+    {
+      "epoch": 3,
+      "value": {
+        "outcomeMse": 0.7313125729560852,
+        "expectedScoreMse": 0.1828281432390213,
+        "nonDrawSignAccuracy": 0.6527084133691894,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.678249716758728,
+        "top1": 0.38,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.4095622897148132
+    },
+    {
+      "epoch": 4,
+      "value": {
+        "outcomeMse": 0.7304245829582214,
+        "expectedScoreMse": 0.18260614573955536,
+        "nonDrawSignAccuracy": 0.6525163273146369,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.674760103225708,
+        "top1": 0.38416666666666666,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.4051846861839294
+    },
+    {
+      "epoch": 5,
+      "value": {
+        "outcomeMse": 0.7313265204429626,
+        "expectedScoreMse": 0.18283163011074066,
+        "nonDrawSignAccuracy": 0.6590472531694199,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.673526406288147,
+        "top1": 0.38466666666666666,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.4048529267311096
+    },
+    {
+      "epoch": 6,
+      "value": {
+        "outcomeMse": 0.728386402130127,
+        "expectedScoreMse": 0.18209660053253174,
+        "nonDrawSignAccuracy": 0.656934306569343,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.6710139513015747,
+        "top1": 0.38166666666666665,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.3994003534317017
+    },
+    {
+      "epoch": 7,
+      "value": {
+        "outcomeMse": 0.7271900773048401,
+        "expectedScoreMse": 0.18179751932621002,
+        "nonDrawSignAccuracy": 0.6598155973876296,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.6712771654129028,
+        "top1": 0.38233333333333336,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.398467242717743
+    },
+    {
+      "epoch": 8,
+      "value": {
+        "outcomeMse": 0.7288051843643188,
+        "expectedScoreMse": 0.1822012960910797,
+        "nonDrawSignAccuracy": 0.6542451018056089,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.6691721677780151,
+        "top1": 0.38566666666666666,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.397977352142334
+    },
+    {
+      "epoch": 9,
+      "value": {
+        "outcomeMse": 0.7292283773422241,
+        "expectedScoreMse": 0.18230709433555603,
+        "nonDrawSignAccuracy": 0.655589704187476,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.6673052310943604,
+        "top1": 0.384,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.3965336084365845
+    },
+    {
+      "epoch": 10,
+      "value": {
+        "outcomeMse": 0.7306937575340271,
+        "expectedScoreMse": 0.18267343938350677,
+        "nonDrawSignAccuracy": 0.655589704187476,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.668399453163147,
+        "top1": 0.38533333333333336,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.399093210697174
+    },
+    {
+      "epoch": 11,
+      "value": {
+        "outcomeMse": 0.7319037914276123,
+        "expectedScoreMse": 0.18297594785690308,
+        "nonDrawSignAccuracy": 0.6575105647330004,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.6687335968017578,
+        "top1": 0.3825,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.40063738822937
+    },
+    {
+      "epoch": 12,
+      "value": {
+        "outcomeMse": 0.7303571701049805,
+        "expectedScoreMse": 0.18258929252624512,
+        "nonDrawSignAccuracy": 0.6607760276603919,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.6668059825897217,
+        "top1": 0.38416666666666666,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.397163152694702
+    },
+    {
+      "epoch": 13,
+      "value": {
+        "outcomeMse": 0.7275647521018982,
+        "expectedScoreMse": 0.18189118802547455,
+        "nonDrawSignAccuracy": 0.6584709950057626,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.6667184829711914,
+        "top1": 0.3868333333333333,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.3942832350730896
+    },
+    {
+      "epoch": 14,
+      "value": {
+        "outcomeMse": 0.7276279330253601,
+        "expectedScoreMse": 0.18190698325634003,
+        "nonDrawSignAccuracy": 0.6578947368421053,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.666410207748413,
+        "top1": 0.3883333333333333,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.394038140773773
+    },
+    {
+      "epoch": 15,
+      "value": {
+        "outcomeMse": 0.7310340404510498,
+        "expectedScoreMse": 0.18275851011276245,
+        "nonDrawSignAccuracy": 0.6594314252785248,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.666014313697815,
+        "top1": 0.38533333333333336,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.3970483541488647
+    },
+    {
+      "epoch": 16,
+      "value": {
+        "outcomeMse": 0.7293021082878113,
+        "expectedScoreMse": 0.18232552707195282,
+        "nonDrawSignAccuracy": 0.6592393392239724,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.6662945747375488,
+        "top1": 0.38533333333333336,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.39559668302536
+    },
+    {
+      "epoch": 17,
+      "value": {
+        "outcomeMse": 0.7280179858207703,
+        "expectedScoreMse": 0.18200449645519257,
+        "nonDrawSignAccuracy": 0.6580868228966577,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.6655941009521484,
+        "top1": 0.386,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.3936120867729187
+    },
+    {
+      "epoch": 18,
+      "value": {
+        "outcomeMse": 0.7284026741981506,
+        "expectedScoreMse": 0.18210066854953766,
+        "nonDrawSignAccuracy": 0.653860929696504,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.666535496711731,
+        "top1": 0.38666666666666666,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.3949381709098816
+    },
+    {
+      "epoch": 19,
+      "value": {
+        "outcomeMse": 0.7303928136825562,
+        "expectedScoreMse": 0.18259820342063904,
+        "nonDrawSignAccuracy": 0.656934306569343,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.6654778718948364,
+        "top1": 0.3845,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.3958706855773926
+    },
+    {
+      "epoch": 20,
+      "value": {
+        "outcomeMse": 0.7309601902961731,
+        "expectedScoreMse": 0.18274004757404327,
+        "nonDrawSignAccuracy": 0.6559738762965809,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.6659411191940308,
+        "top1": 0.3835,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.396901309490204
+    },
+    {
+      "epoch": 21,
+      "value": {
+        "outcomeMse": 0.7270015478134155,
+        "expectedScoreMse": 0.18175038695335388,
+        "nonDrawSignAccuracy": 0.6553976181329235,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.6657851934432983,
+        "top1": 0.38433333333333336,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.392786741256714
+    },
+    {
+      "epoch": 22,
+      "value": {
+        "outcomeMse": 0.7303792834281921,
+        "expectedScoreMse": 0.18259482085704803,
+        "nonDrawSignAccuracy": 0.6559738762965809,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.6643362045288086,
+        "top1": 0.3858333333333333,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.3947154879570007
+    },
+    {
+      "epoch": 23,
+      "value": {
+        "outcomeMse": 0.7255600690841675,
+        "expectedScoreMse": 0.18139001727104187,
+        "nonDrawSignAccuracy": 0.6536688436419515,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.6627532243728638,
+        "top1": 0.38466666666666666,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.3883132934570312
+    },
+    {
+      "epoch": 24,
+      "value": {
+        "outcomeMse": 0.7307654023170471,
+        "expectedScoreMse": 0.18269135057926178,
+        "nonDrawSignAccuracy": 0.6592393392239724,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.6663824319839478,
+        "top1": 0.3835,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.397147834300995
+    },
+    {
+      "epoch": 25,
+      "value": {
+        "outcomeMse": 0.7325475811958313,
+        "expectedScoreMse": 0.18313689529895782,
+        "nonDrawSignAccuracy": 0.6553976181329235,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.6656298637390137,
+        "top1": 0.38466666666666666,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.398177444934845
+    },
+    {
+      "epoch": 26,
+      "value": {
+        "outcomeMse": 0.732210099697113,
+        "expectedScoreMse": 0.18305252492427826,
+        "nonDrawSignAccuracy": 0.6580868228966577,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.6642374992370605,
+        "top1": 0.38966666666666666,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.3964475989341736
+    },
+    {
+      "epoch": 27,
+      "value": {
+        "outcomeMse": 0.7295810580253601,
+        "expectedScoreMse": 0.18239526450634003,
+        "nonDrawSignAccuracy": 0.653860929696504,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.6648283004760742,
+        "top1": 0.38666666666666666,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.3944093585014343
+    },
+    {
+      "epoch": 28,
+      "value": {
+        "outcomeMse": 0.7288784384727478,
+        "expectedScoreMse": 0.18221960961818695,
+        "nonDrawSignAccuracy": 0.6582789089512101,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.6655267477035522,
+        "top1": 0.3863333333333333,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.3944051861763
+    },
+    {
+      "epoch": 29,
+      "value": {
+        "outcomeMse": 0.7281072735786438,
+        "expectedScoreMse": 0.18202681839466095,
+        "nonDrawSignAccuracy": 0.6580868228966577,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.6640472412109375,
+        "top1": 0.38483333333333336,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.3921545147895813
+    },
+    {
+      "epoch": 30,
+      "value": {
+        "outcomeMse": 0.7338466644287109,
+        "expectedScoreMse": 0.18346166610717773,
+        "nonDrawSignAccuracy": 0.6492508643872454,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "policy": {
+        "crossEntropy": 1.666163444519043,
+        "top1": 0.38533333333333336,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "loss": 2.400010108947754
+    }
+  ],
+  "seconds": 163.84291262493934,
+  "dataset": {
+    "seed": 20261027,
+    "inputSha256": "6332fd01b27c11a81f3fbd344e52aaf8f70e60c644780fb453cc7ef64ae359ac",
+    "games": {
+      "logistello:test": 300,
+      "wthor:test": 300,
+      "wthor:validation": 300,
+      "logistello:validation": 300,
+      "logistello:train": 60775,
+      "wthor:train": 80561
+    },
+    "positions": {
+      "test": 6000,
+      "validation": 6000,
+      "train": 1000000
+    },
+    "filters": "complete games; placements 8..56, stride 3; 8-symmetry/color-relative position dedup; test/validation ownership before train",
+    "split": "native converter canonical first 8 moves; no move-wise split",
+    "target": "recorded final black disc difference / 64, from side-to-move view",
+    "maxGames": 6000,
+    "maxPositions": 60000,
+    "allTrainingGames": true,
+    "trainPositions": 1000000,
+    "frozenHoldout": {
+      "path": "/Users/franzyu/Documents/script/otello/.build/training/positions.npz",
+      "sha256": "ac3941a55613abc92944062b49c6b9c71883a93ce02973cf3dc8fc2be670ef4c"
+    },
+    "cacheSha256": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6"
+  },
+  "labels": {
+    "cacheSha256": "be557c1bcec0cc39d5baec462d50d84aeb4942c4759611dcba2bdcd04f042dc2",
+    "positionsSha256": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6",
+    "gamesSha256": "6332fd01b27c11a81f3fbd344e52aaf8f70e60c644780fb453cc7ef64ae359ac",
+    "positions": {
+      "train": 1000000,
+      "validation": 6000,
+      "test": 6000
+    },
+    "label": "first same-split, same-board/turn and same-outcome recorded next move",
+    "split": "unchanged frozen opening-group splits and symmetry-deduplicated positions",
+    "passPolicy": "existing cache excludes pass targets; forced pass is deterministic at inference",
+    "scriptSha256": "5f31023df9cbbed2c6b9ff1818b48047edc1d63a5c487d49a53507d004ca1705"
+  },
+  "trainingScriptSha256": "5a1d8ae4ee62be04657aeb2d2c0cbd95b6d66414c20d1cec2a5e6ddd57fff62e",
+  "helperSha256": {
+    "scripts/train-outcome.py": "bbcffe7e07a161068f832b97d03309bb3319c3cd527d8120bbd7337b3a009aee",
+    "scripts/train-policy.py": "2a0550a6b8d06edb2b09773cbb8d3abbf108bc2a61bbb2a14a5cf6339295c9a4",
+    "scripts/train-nnue.py": "f4977077cb890f4bb8d714532f762398268e89999fc329a65f6fd8dfb5074313"
+  },
+  "torchVersion": "2.10.0",
+  "numpyVersion": "1.26.4",
+  "metrics": {
+    "validation": {
+      "float": {
+        "value": {
+          "outcomeMse": 0.7255600690841675,
+          "expectedScoreMse": 0.18139001727104187,
+          "nonDrawSignAccuracy": 0.6536688436419515,
+          "draws": 794,
+          "zeroOutcomeMse": 0.8676666617393494
+        },
+        "policy": {
+          "crossEntropy": 1.6627532243728638,
+          "top1": 0.38466666666666666,
+          "uniformCrossEntropy": 2.0921316559038803,
+          "uniformTop1": 0.14703605201200015
+        },
+        "loss": 2.3883132934570312
+      },
+      "quantized": {
+        "value": {
+          "outcomeMse": 0.7253206296900516,
+          "expectedScoreMse": 0.1813301574225129,
+          "nonDrawSignAccuracy": 0.6544371878601614,
+          "draws": 794,
+          "zeroOutcomeMse": 0.8676666617393494
+        },
+        "policy": {
+          "crossEntropy": 1.6628661276458758,
+          "top1": 0.3855,
+          "uniformCrossEntropy": 2.0921316559038803,
+          "uniformTop1": 0.14703605201200015
+        },
+        "loss": 2.3881867573359274
+      },
+      "maxValueQuantizationError": 0.020555625008964074,
+      "maxPolicyQuantizationError": 0.008363670877509888
+    },
+    "test": {
+      "float": {
+        "value": {
+          "outcomeMse": 0.7025046944618225,
+          "expectedScoreMse": 0.17562617361545563,
+          "nonDrawSignAccuracy": 0.6712249614791987,
+          "draws": 808,
+          "zeroOutcomeMse": 0.8653333187103271
+        },
+        "policy": {
+          "crossEntropy": 1.685336947441101,
+          "top1": 0.36983333333333335,
+          "uniformCrossEntropy": 2.1044416287103247,
+          "uniformTop1": 0.14458325754053308
+        },
+        "loss": 2.3878416419029236
+      },
+      "quantized": {
+        "value": {
+          "outcomeMse": 0.7025352897895639,
+          "expectedScoreMse": 0.17563382244739098,
+          "nonDrawSignAccuracy": 0.673728813559322,
+          "draws": 808,
+          "zeroOutcomeMse": 0.8653333187103271
+        },
+        "policy": {
+          "crossEntropy": 1.6853883081512022,
+          "top1": 0.37083333333333335,
+          "uniformCrossEntropy": 2.1044416287103247,
+          "uniformTop1": 0.14458325754053308
+        },
+        "loss": 2.387923597940766
+      },
+      "maxValueQuantizationError": 0.022306841629233798,
+      "maxPolicyQuantizationError": 0.008900891589838866
+    }
+  },
+  "cppParityPositions": 1024,
+  "cppMaxRoundingError": 0.4993368036168704,
+  "cppMaxPolicyError": 1.6653345369377348e-16
+}

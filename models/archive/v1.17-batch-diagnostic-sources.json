@@ -1,0 +1,14 @@
+{
+  "archive": "models/archive/v1.17-batch-diagnostic-sources.tar.gz",
+  "sha256": "a150bb0c90ab235459c466a57c44e64a70cac787608b8df7a73fdb8ccbc33db7",
+  "files": {
+    "experiments/cnn-native-batch-v1.17/CMakeLists.txt": "1d4b0b82be72f4c0ad8be7da5d826d431b175f83c57da666cfdb92a997e47f3a",
+    "experiments/cnn-native-batch-v1.17/native_batch.hpp": "c5d71e66e735bd53c5d941a6520b463918344b8778f703b010923d233b3d8622",
+    "experiments/cnn-native-batch-v1.17/mcts.cpp": "2bce7e238133fc9331b32030bf87e1c9eef70ab4a93b43c960aed2266e0b40f4",
+    "experiments/cnn-native-batch-v1.17/native_batch.cpp": "c6e2cd4606e7c7a5845a8799b862facb8a2c16f34e18ecf53e6b1ed487502494",
+    "scripts/benchmark-cnn-native-batch.py": "b893805a51f6660a66beb9007ab70f2327518f5d87a9ef7015c355b9078c234f"
+  },
+  "report": "v1.17-cnn-native-batch-diagnostic.json",
+  "reportSha256": "416902229d869e2b15dd07f7d3fe293ee913720955f1dcad67bfe97c1f28df81",
+  "note": "v1.17 preserves the exact measured CMake plus the later additional test target separately; algorithm sources unchanged"
+}

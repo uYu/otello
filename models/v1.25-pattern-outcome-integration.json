@@ -1,0 +1,10 @@
+{
+  "positions": 64,
+  "simulations": 128,
+  "seed": 1832,
+  "allOutputsEqualExceptElapsed": true,
+  "libraries": {
+    ".build/native/libothello.dylib": "3a5e31ef282f2050f2fddf7a80aade80bc6217773503551cd8c935ec0b1bbafa",
+    ".build/native-v1.9-reference/libothello.dylib": "6f593a25a0d52f1846e29db35b10fa5423505fd820eb124d4a474489f412c188"
+  }
+}

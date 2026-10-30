@@ -1,0 +1,18 @@
+{
+  "archive": "models/archive/v1.36-candidate-era-verification.tar.gz",
+  "sha256": "5bc415bc0e8f5b9a96358cb0f95c67ce672f43b10032705412f318e438951469",
+  "files": {
+    "models/default-model.json": "8b82bf89b2afeebdcd1b2c056dee7ce21789aea9291cae11b0a480862ad37b01",
+    "src/game/wasm/othello.mjs": "a1584f0244858efcf19d807dee2dd79e628cda2ee509371162cbc64c94c949e0",
+    "scripts/finalize-pattern-speed-suite.py": "bb33e5d1558daaef187ef1ce9e5f6fd01eeb8dca5e5394a80f28d2ec0339a92e",
+    "scripts/finalize-pattern-hotpath.py": "4b60df241b06ccc316dd5c2c93ffe9bb915664390fb24c4bd276ae021703651b",
+    "scripts/finalize-pattern-int8.py": "13e68319a996b05ae175fa4444679b56d0354d7b516996cd3b1bd247baad82c3",
+    "scripts/finalize-pattern-legal.py": "b9e22bfaf1d53a35e0626ecd8a20899084f678ff4b6ded345234d03c59be1592",
+    "scripts/finalize-pattern-outcome-2s.py": "08ddaf5774019540e4878b1f4cf665955f237fb73a9a23fa02b5a1da2a44a636",
+    "scripts/finalize-pattern-outcome.py": "c32e42d18ffb1353023396fc94280e9eded82170c5c230898a6f35a8f7ac13f1",
+    "scripts/finalize-pattern-distill100.py": "cf3512cc08400fe825faa3c828c21bfdb5a8372649d00e463649752583656c4d",
+    "scripts/finalize-pattern-width.py": "4bc50b1aa50ede0cb082664492894a0d67953f4eb4942fc10dfd18008964a6ae",
+    "scripts/finalize-pattern-capacity.py": "2e12830fad71c616d3da7f30095675d857f60226cb9b00ca6b49f880224d4459",
+    "scripts/finalize-pattern-incremental.py": "c1b67bed6c4b82d3f9ac06f8bf65f002e07940897b155d884832c417158b1ccf"
+  }
+}

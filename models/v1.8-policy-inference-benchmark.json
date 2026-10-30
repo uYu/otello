@@ -1,0 +1,39 @@
+{
+  "legacyMctsFixedSimulationParityPositions": 30,
+  "simulations": 512,
+  "measurements": {
+    "baseline": {
+      "medianMicroseconds": 1.4845165999999999,
+      "runs": [
+        1.4970916,
+        1.4960168,
+        1.4845165999999999,
+        1.4634166,
+        1.47215
+      ]
+    },
+    "candidate_value": {
+      "medianMicroseconds": 1.5496918,
+      "runs": [
+        1.5496918,
+        1.546725,
+        1.5299918,
+        1.5596333999999998,
+        1.5575
+      ]
+    },
+    "candidate_value_and_policy": {
+      "medianMicroseconds": 9.124958399999999,
+      "runs": [
+        9.2512084,
+        9.0945834,
+        9.09565,
+        9.124958399999999,
+        9.164475
+      ]
+    }
+  },
+  "baselineLibrarySha256": "0981df85e75a605a46961e309cb3c3c285ee3caec8430b261e13969b59b7931d",
+  "candidateLibrarySha256": "05ad4196d1d51b9722b73761744eded9f9af3ccf56d0b376fca483779aeb18b5",
+  "note": "Python/C ABI overhead included; complete accumulator refresh; separate value/policy calls reproduce current MCTS expansion cost"
+}

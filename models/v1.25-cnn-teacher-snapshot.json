@@ -1,0 +1,24 @@
+{
+  "version": "v1.25-cnn-teacher-cache",
+  "teacherModel": "models/cnn-c256-r8-h256-joint-e11-v1.25.pt",
+  "teacherSha256": "97398c59a09692ac6ff6ccee250c9463184347091141c40cd1c9e71a68a78669",
+  "teacherEpoch": 11,
+  "cache": ".build/training/teacher-cache/big-cnn-v1.24-joint-snapshot1",
+  "archive": "models/archive/v1.25-cnn-teacher-cache-sources.tar.gz",
+  "archiveSha256": "de438182710e81bc42f2234db6d3c425bd15c736333d7e8437b5f0e4feb00c20",
+  "sourceSha256": {
+    "scripts/cnn-teacher-cache.py": "b09cbb9e2946d8bee133847475567a9da7860570bf1bd5a4d0b9b4269d01acf7",
+    "scripts/verify-cnn-teacher-cache.py": "a13e42fb9981e10804d076c3318105ea4c62a1c9d567c40b257f8c1424bd28a4",
+    "scripts/teacher-targets.py": "52c0190f9488961c80e5fc5355cbda0a331940aff6c03edf0a443416bf8dd7f7",
+    "scripts/train-big-cnn.py": "c385b0727d527e81a051590cb4db83c8cb32570cedcfc736e10f78d0935cb321",
+    "scripts/benchmark-big-cnn.py": "56fb84c109559f5ad656c56cd47117bc39c27aee62d94b38fe5e8d4989169830",
+    "scripts/verify-big-cnn.py": "4983a688d678ead371d3de8612229229b195a6ff91168b92f4f074e8a9ca5fa2",
+    "scripts/train-cnn-policy-suite.py": "54bf56c90446adb15204433f0a2c2ac47f4223539880ee6c7793ef94d77bdb3b",
+    "scripts/train-mixed-5m.py": "85c4de72ffa1fd196136ef0381953167946b1386e5bb7422ff60de1ddb1e7b5b",
+    "scripts/train-deep.py": "5a1d8ae4ee62be04657aeb2d2c0cbd95b6d66414c20d1cec2a5e6ddd57fff62e",
+    "scripts/train-outcome.py": "bbcffe7e07a161068f832b97d03309bb3319c3cd527d8120bbd7337b3a009aee",
+    "scripts/train-policy.py": "2a0550a6b8d06edb2b09773cbb8d3abbf108bc2a61bbb2a14a5cf6339295c9a4",
+    "scripts/train-nnue.py": "f4977077cb890f4bb8d714532f762398268e89999fc329a65f6fd8dfb5074313"
+  },
+  "defaultPromoted": false
+}

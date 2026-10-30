@@ -152,6 +152,78 @@ class TrainingIsolation(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'checksum mismatch'):
             trainer.train(args)
 
+    def test_candidate_match_uses_same_mcts_and_replays(self):
+        output = self.folder / 'candidate-match.json'
+        model = ROOT / 'models/nnue256-v1.2.otnnue'
+        subprocess.run([sys.executable, str(ROOT / 'scripts/compare-nnue-candidate.py'),
+                        '--model', str(model), '--baseline-manifest', str(ROOT/'models/v1.7-default.json'), '--library', str(LIBRARY), '--games', '2',
+                        '--milliseconds', '2', '--output', str(output)],
+                       capture_output=True, text=True, check=True, timeout=30)
+        report = json.loads(output.read_text())
+        self.assertTrue(report['complete'])
+        self.assertEqual(report['games'], 2)
+        self.assertEqual({c['search'] for c in report['configs']}, {'mcts'})
+        self.assertEqual(len({c['modelSha256'] for c in report['configs']}), 1)
+        self.assertEqual(report['records'][0]['seed'], report['records'][1]['seed'])
+        self.assertNotEqual(report['records'][0]['black'], report['records'][1]['black'])
+        # Resume only a completed-game checkpoint, never the partial live board.
+        first=report['records'][0]
+        report.update(complete=False,games=1,records=[first])
+        output.write_text(json.dumps(report))
+        checkpoint=output.read_bytes()
+        common=[sys.executable,str(ROOT/'scripts/compare-nnue-candidate.py'),
+                '--model',str(model),'--baseline-manifest',str(ROOT/'models/v1.7-default.json'),'--library',str(LIBRARY),'--games','2',
+                '--output',str(output),'--resume']
+        rejected=subprocess.run([*common,'--milliseconds','3'],capture_output=True,text=True,timeout=30)
+        self.assertNotEqual(rejected.returncode,0)
+        self.assertIn('provenance mismatch',rejected.stderr)
+        self.assertEqual(output.read_bytes(),checkpoint)
+        subprocess.run([*common,'--milliseconds','2'],capture_output=True,text=True,check=True,timeout=30)
+        resumed=json.loads(output.read_text())
+        self.assertTrue(resumed['complete'])
+        self.assertEqual(resumed['games'],2)
+        self.assertEqual(resumed['records'][0],first)
+        self.assertEqual(resumed['runnerSegments'][-1]['firstGame'],2)
+        self.assertEqual(resumed['runnerSegments'][-1]['lastGame'],2)
+        self.assertEqual(resumed['resumeHistory'][0]['previousReportSha256'],hashlib.sha256(checkpoint).hexdigest())
+        self.assertIsNone(resumed['currentGame'])
+
+    def test_policy_labels_training_export_and_cpp_parity(self):
+        args = self.arguments('positions.npz')
+        self.prepare(args)
+        labels = self.folder / 'labels.npz'
+        subprocess.run([sys.executable, str(ROOT/'scripts/prepare-policy-data.py'),
+                        '--cache', str(args.cache), '--games', str(self.games),
+                        '--library', str(LIBRARY), '--output', str(labels)],
+                       check=True,capture_output=True,text=True,timeout=30)
+        data=dict(np.load(args.cache));policy=dict(np.load(labels))
+        for split in ('train','validation','test'):
+            for board,turn,move,mask in zip(data[split+'_board'],data[split+'_turn'],policy[split+'_move'],policy[split+'_legal']):
+                cells=self.cells_type(*map(int,board));out=self.out_type()
+                n=self.lib.ot_legal(cells,int(turn),out)
+                self.assertEqual(set(np.flatnonzero(mask)),set(out[:n]))
+                self.assertIn(int(move),out[:n])
+                for permutation in trainer.symmetries():
+                    new_move=int(np.argsort(permutation)[move])
+                    transformed=self.cells_type(*map(int,board[permutation]))
+                    n=self.lib.ot_legal(transformed,int(turn),out)
+                    self.assertIn(new_move,out[:n])
+        output=self.folder/'policy.otnnue'
+        subprocess.run([sys.executable,str(ROOT/'scripts/train-policy.py'),
+                        '--cache',str(args.cache),'--labels',str(labels),'--output',str(output),
+                        '--library',str(LIBRARY),'--epochs','1','--batch-size','16'],
+                       check=True,capture_output=True,text=True,timeout=30)
+        report=json.loads(output.with_suffix('.json').read_text())
+        self.assertTrue(report['valueBytesUnchanged'] and report['valueParity'])
+        self.assertLess(report['cppMaxProbabilityError'],1e-10)
+        self.assertEqual(report['cppParityPositions'],6)
+        self.lib.ot_nnue_load.argtypes=[ctypes.c_char_p];self.lib.ot_nnue_load.restype=ctypes.c_void_p
+        binary=output.read_bytes()
+        bad_dims=bytearray(binary);struct.pack_into('<I',bad_dims,67612,31)
+        for invalid in (binary[:-1],binary+b'x',bad_dims):
+            output.write_bytes(invalid)
+            self.assertFalse(self.lib.ot_nnue_load(str(output).encode()))
+
     def test_comparison_reuses_openings_and_preserves_replayable_records(self):
         bank = self.folder / 'openings.json'
         model = ROOT / 'models/nnue256-v1.otnnue'

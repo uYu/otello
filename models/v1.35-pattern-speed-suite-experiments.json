@@ -1,0 +1,20 @@
+{
+  "version": "v1.35 Pattern 提速策略集",
+  "experiments": [
+    {
+      "name": "策略集 INT16 vs v1.25 · 2秒/步 · 20局",
+      "shortName": "策略集 INT16 vs v1.25 · 2秒/步 · 20局",
+      "displayNames": {
+        "candidate": "策略集 INT16",
+        "baseline": "v1.25"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/pattern-speed-suite-v1.35/match-2s-20.json",
+      "report": "models/v1.35-speed-suite-vs-v1.25-2s-20.json"
+    }
+  ]
+}

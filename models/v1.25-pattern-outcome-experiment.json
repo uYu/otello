@@ -1,0 +1,25 @@
+{
+  "version": "v1.25-pattern-outcome",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "sourceManifest": "models/archive/v1.25-pattern-outcome-sources.json",
+  "librarySha256": "3a5e31ef282f2050f2fddf7a80aade80bc6217773503551cd8c935ec0b1bbafa",
+  "artifactSha256": {
+    "models/v1.25-pattern-outcome-integration.json": "23dd726fba9eed2f3a2bdcff402d5c13f08517cf0042acf65cf40a1c2c661d71",
+    "models/pattern32-outcome-v1.25.otpat": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0",
+    "models/pattern32-outcome-v1.25.pt": "2c15863696bf1e29efc727effa0863ee5c827bcace67b20b3dd566d90069179e",
+    "models/pattern32-outcome-v1.25.json": "1878f5d7947e1eb7b227a4bb74a4275421b79d3410a47443ed97d439941d5e80",
+    "models/v1.25-pattern-outcome-vs-v1.9-100ms-20.json": "4c482881c33243913393b62e5c3d57ce90f6be00d339b574b993c0fa8e23555d",
+    "models/v1.25-pattern-outcome-offline.json": "69197dc5e7511fa7b65598d3085eacc42be913776d483f3ed45b4a91846aa48a",
+    "models/v1.25-pattern-outcome-comparison.md": "26cba3197655d4252f616b00d574bf4eb95203bb2b692ff0b0263e6c30059a13"
+  },
+  "preservedSha256": {
+    "models/default-model.json": "abf3afce523b6457f180fcc9d6801187974d747f694ace6c4722e63a7ba0b467",
+    "models/v1.9-default.json": "3bc0188f583263d1abaf5b7337ee28a849eac91a5a3707e50da6a32c2e854b5d",
+    "models/nnue256-outcome-v1.9.otnnue": "72294450ce5eb180703e05048df6e7ce7078f031c4e94464198192432d618bb0",
+    "src/game/wasm/othello.mjs": "67392be6478213a04d55889124301a7f4a6a9858f4f3bc1d2b43c166324851a1",
+    "models/v1.8-baseline.json": "243c510508963a1458bab014a19f9eeede40fefac32daa3967d766c4077a08e7",
+    "models/pattern32-v1.8.otpat": "2af8ef6656de4763e27c318bd3469b4772d58452cce80e8486499ba60f1fbf63",
+    "models/v1.8-pattern-matches.json": "1b1409b5c9f1a843df84dd6220f9b5afde8389c160b5b522b8bd7833fe907220"
+  }
+}

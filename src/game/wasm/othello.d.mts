@@ -5,6 +5,7 @@ interface Module {
   _ot_output(): number;
   _ot_legal(input: number, turn: number, output: number): number;
   _ot_play(input: number, turn: number, move: number, output: number): number;
+  _ot_play_with_flips?(input: number, turn: number, move: number, output: number, flippedSquares: number): number;
   _ot_search(input: number, turn: number, ms: number, depth: number, level: number, seed: number, output: number): number;
   _ot_search_clear_cache(): void;
   _ot_mcts_clear_cache(): void;

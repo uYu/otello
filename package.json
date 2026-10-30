@@ -1,6 +1,6 @@
 {
   "name": "otello",
-  "version": "1.7.0",
+  "version": "1.36.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -48,7 +48,13 @@
     "training:baseline:v1.8": "python3 scripts/compare-pattern.py",
     "training:benchmark:pattern": "python3 scripts/benchmark-pattern.py",
     "test:pattern": "python3 -m unittest discover -s tests -p pattern_training_test.py",
-    "test:baseline:v1.8": "python3 scripts/verify-pattern.py"
+    "test:baseline:v1.8": "python3 scripts/verify-pattern.py",
+    "book:prepare": "python3 scripts/prepare-web-book.py",
+    "prebuild": "node scripts/prepare-web-release.mjs",
+    "predev": "python3 scripts/prepare-web-book.py",
+    "test:pattern:outcome": "python3 scripts/finalize-pattern-outcome.py --verify",
+    "training:run:pattern:outcome": "python3 scripts/train-pattern-outcome.py",
+    "training:baseline:pattern:outcome": "python3 scripts/compare-nnue-candidate.py --model models/pattern32-outcome-v1.25.otpat --label v1.25-pattern-outcome --baseline-manifest models/v1.9-default.json --baseline-library .build/native-v1.9-reference/libothello.dylib --games 20 --milliseconds 100 --seed 20261029 --output .build/training/pattern-outcome-v1.25/match.json"
   },
   "dependencies": {
     "react": "^19.1.0",

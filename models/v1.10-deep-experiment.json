@@ -1,0 +1,80 @@
+{
+  "version": "v1.10-deep-candidate",
+  "status": "candidate",
+  "stopped": true,
+  "defaultPromoted": false,
+  "protocol": {
+    "games": 20,
+    "completedGames": 9,
+    "millisecondsPerMove": 1000
+  },
+  "baselineManifest": "models/v1.9-default.json",
+  "model": "models/nnue256-deep-v1.10.otnnue",
+  "trainingReport": "models/nnue256-deep-v1.10.json",
+  "matchReport": "models/v1.10-deep-vs-v1.9-1s.json",
+  "sourceManifest": "models/archive/v1.10-deep-sources.json",
+  "legacyParity": "models/v1.10-deep-legacy-parity.json",
+  "artifactSha256": {
+    "models/nnue256-deep-v1.10.otnnue": "235bed6b569b87313fd1382a9bb34d9cf7134254fa9754aa86939f075a068dc6",
+    "models/nnue256-deep-v1.10.pt": "22f7f9877ecee6d8acfeb1fb675c834798c04d64850f83d6d8c5f4313cec8bb7",
+    "models/nnue256-deep-v1.10.json": "6b2813fbb7050517fcb5de41258258235fdfbb89527714b1297ce74888f3e84d",
+    "models/v1.10-deep-vs-v1.9-1s.json": "079db4511bc99ccf0ef5c10778b73f54e75f555e0d63fe88d795b30f30282251",
+    "models/v1.10-deep-comparison.md": "6ba7cf79ab3457979cb228a4fd3a47c8898afb9de971d2a691b6f345b212d240",
+    "models/v1.10-deep-legacy-parity.json": "18e79a5d92efd791d7d02f1f6dde4ced79ac10cbcbbf0143e1a758e85c27bf1e",
+    "models/v1.10-deep-inference-benchmark.json": "ecdd24617016ae9ce3a0ecdf716817a97243bd6d2378a996e8b25be7a7060185",
+    "models/archive/v1.10-deep-sources.json": "1d13ab60f9e5ba66097acd087f0269eed22c41f22c90a768c90fc1671ffb2c53",
+    "models/archive/v1.10-deep-sources.tar.gz": "603c6edfce918fb5fab828ddfc4075e09223a0f02c2651555c236462d2764468"
+  },
+  "results": {
+    "baseline": {
+      "games": 9,
+      "win": 5,
+      "draw": 4,
+      "loss": 0,
+      "discDifference": 105,
+      "scoreRate": 0.7777777777777778,
+      "meanDiscDifference": 11.666666666666666,
+      "moves": 273,
+      "meanWallMs": 778.9522812893775,
+      "meanSearchUnits": 875940.1025641026,
+      "searchUnit": "simulations",
+      "meanNonExactDepth": 34.660377358490564,
+      "depthKind": "maximumVisited",
+      "meanSimulationDepth": 5.86372713828326,
+      "memoryLimitedSearches": 0,
+      "reusedMctsSearches": 264,
+      "exactMoves": 61
+    },
+    "candidate": {
+      "games": 9,
+      "win": 0,
+      "draw": 4,
+      "loss": 5,
+      "discDifference": -105,
+      "scoreRate": 0.2222222222222222,
+      "meanDiscDifference": -11.666666666666666,
+      "moves": 266,
+      "meanWallMs": 827.125305763158,
+      "meanSearchUnits": 758653.484962406,
+      "searchUnit": "simulations",
+      "meanNonExactDepth": 27.129032258064516,
+      "depthKind": "maximumVisited",
+      "meanSimulationDepth": 2.8945804737436793,
+      "memoryLimitedSearches": 0,
+      "reusedMctsSearches": 257,
+      "exactMoves": 49
+    }
+  },
+  "replayedActions": 545,
+  "runtimeReportSha256": "b49a4f1366b7dd79ca6642f9d84bbb3453a4ebda404dd5ccc3b7eebd17ac71fb",
+  "checks": {
+    "replayed": true,
+    "featuresFrozen": true,
+    "policyWeightsFrozen": true,
+    "legacyParityPositions": 24,
+    "deepTrainingTests": 2,
+    "nativeTests": true,
+    "sanitizers": true
+  },
+  "conclusion": "Stopped at user request after 9 completed games: 0W/4D/5L. v1.9 remains default."
+}

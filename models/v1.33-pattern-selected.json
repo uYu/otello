@@ -1,0 +1,1496 @@
+{
+  "version": "v1.33-pattern-selected",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "selectedFlags": {
+    "SIMD": true,
+    "FAST_CODES": true,
+    "BLOCK4": true,
+    "INTEGER_ROUNDING": false
+  },
+  "results": [
+    {
+      "precision": "INT16",
+      "name": "v1.32 SIMD",
+      "library": ".build/native-pattern-simd-v1.32/libothello.dylib",
+      "librarySha256": "fd9b5be4daa480400593287fb265e918f9364c60a94cc314d926578ba10d43d3",
+      "model": "models/pattern32-outcome-v1.25.otpat",
+      "jointMicroseconds": 1.70013427734375,
+      "fixedSearchMilliseconds": 61.368291,
+      "samples": [
+        {
+          "jointMicroseconds": 1.4188868408203126,
+          "fixedSearchMilliseconds": 54.403042
+        },
+        {
+          "jointMicroseconds": 2.140909851074219,
+          "fixedSearchMilliseconds": 58.381167
+        },
+        {
+          "jointMicroseconds": 1.6951217651367188,
+          "fixedSearchMilliseconds": 54.478875
+        },
+        {
+          "jointMicroseconds": 1.944391845703125,
+          "fixedSearchMilliseconds": 57.68025
+        },
+        {
+          "jointMicroseconds": 2.4857101440429688,
+          "fixedSearchMilliseconds": 54.997208
+        },
+        {
+          "jointMicroseconds": 1.4661178588867188,
+          "fixedSearchMilliseconds": 66.739833
+        },
+        {
+          "jointMicroseconds": 1.6276143188476562,
+          "fixedSearchMilliseconds": 63.716833
+        },
+        {
+          "jointMicroseconds": 2.008544921875,
+          "fixedSearchMilliseconds": 68.068291
+        },
+        {
+          "jointMicroseconds": 2.0046640625,
+          "fixedSearchMilliseconds": 61.368291
+        },
+        {
+          "jointMicroseconds": 1.659576416015625,
+          "fixedSearchMilliseconds": 62.972334
+        },
+        {
+          "jointMicroseconds": 2.8253961791992186,
+          "fixedSearchMilliseconds": 68.093541
+        },
+        {
+          "jointMicroseconds": 1.70013427734375,
+          "fixedSearchMilliseconds": 52.071375
+        },
+        {
+          "jointMicroseconds": 1.6160202026367188,
+          "fixedSearchMilliseconds": 58.718167
+        },
+        {
+          "jointMicroseconds": 1.8010889892578126,
+          "fixedSearchMilliseconds": 63.8965
+        },
+        {
+          "jointMicroseconds": 1.5248768920898437,
+          "fixedSearchMilliseconds": 70.5845
+        }
+      ],
+      "nativeSamples": [],
+      "timed100msSamples": [
+        48205,
+        48740,
+        41376,
+        48188,
+        45731,
+        50740,
+        38626,
+        47878,
+        41220,
+        50018,
+        39813,
+        53424,
+        38379,
+        49246,
+        43359,
+        47215,
+        42895,
+        40771,
+        40417,
+        43991,
+        45560,
+        43030,
+        44447,
+        46327,
+        39427,
+        45311,
+        46226,
+        50019
+      ],
+      "timed100msTotalSimulations": 1260579,
+      "jointThroughputVsV132": 1.0,
+      "fixedSearchThroughputVsV132": 1.0,
+      "timedSimulationRatioVsV132": 1.0,
+      "timedSimulationRatioVsControl": 0.9850351245965946
+    },
+    {
+      "precision": "INT16",
+      "name": "v1.33 control",
+      "library": ".build/native-pattern-control-v1.33/libothello.dylib",
+      "librarySha256": "2a7ea4be0a24488d1123e302ca6e8cb0d3d135208b2b01183c2ed7c4303d4fa0",
+      "model": "models/pattern32-outcome-v1.25.otpat",
+      "jointMicroseconds": 1.8366622924804688,
+      "fixedSearchMilliseconds": 57.586583,
+      "samples": [
+        {
+          "jointMicroseconds": 1.7133077392578124,
+          "fixedSearchMilliseconds": 47.765958
+        },
+        {
+          "jointMicroseconds": 1.6921539306640625,
+          "fixedSearchMilliseconds": 58.652708
+        },
+        {
+          "jointMicroseconds": 1.5654119262695312,
+          "fixedSearchMilliseconds": 68.600958
+        },
+        {
+          "jointMicroseconds": 1.8625895385742188,
+          "fixedSearchMilliseconds": 44.970375
+        },
+        {
+          "jointMicroseconds": 2.474733947753906,
+          "fixedSearchMilliseconds": 54.392958
+        },
+        {
+          "jointMicroseconds": 1.8718185424804688,
+          "fixedSearchMilliseconds": 54.483833
+        },
+        {
+          "jointMicroseconds": 2.0659713745117188,
+          "fixedSearchMilliseconds": 61.945958
+        },
+        {
+          "jointMicroseconds": 1.8366622924804688,
+          "fixedSearchMilliseconds": 57.586583
+        },
+        {
+          "jointMicroseconds": 2.258115173339844,
+          "fixedSearchMilliseconds": 59.095834
+        },
+        {
+          "jointMicroseconds": 1.8812179565429688,
+          "fixedSearchMilliseconds": 58.143875
+        },
+        {
+          "jointMicroseconds": 1.3365529174804687,
+          "fixedSearchMilliseconds": 51.576916
+        },
+        {
+          "jointMicroseconds": 2.0282109375,
+          "fixedSearchMilliseconds": 53.267208
+        },
+        {
+          "jointMicroseconds": 1.4271138305664062,
+          "fixedSearchMilliseconds": 57.320666
+        },
+        {
+          "jointMicroseconds": 1.3698145751953126,
+          "fixedSearchMilliseconds": 63.880417
+        },
+        {
+          "jointMicroseconds": 1.5148696899414062,
+          "fixedSearchMilliseconds": 60.751958
+        }
+      ],
+      "nativeSamples": [
+        {
+          "encodingNs": 239.911,
+          "denseNs": 360.637,
+          "jointNs": 894.867,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 241.814,
+          "denseNs": 335.566,
+          "jointNs": 876.428,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 214.286,
+          "denseNs": 463.585,
+          "jointNs": 898.756,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 250.549,
+          "denseNs": 358.241,
+          "jointNs": 965.61,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 184.15,
+          "denseNs": 341.75,
+          "jointNs": 956.289,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 206.806,
+          "denseNs": 373.143,
+          "jointNs": 904.35,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 184.539,
+          "denseNs": 428.545,
+          "jointNs": 958.256,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 205.866,
+          "denseNs": 323.37,
+          "jointNs": 1029.96,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 196.507,
+          "denseNs": 337.221,
+          "jointNs": 882.511,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 189.238,
+          "denseNs": 378.209,
+          "jointNs": 944.085,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 250.349,
+          "denseNs": 334.646,
+          "jointNs": 932.539,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 213.898,
+          "denseNs": 373.29,
+          "jointNs": 1032.61,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 269.963,
+          "denseNs": 332.67,
+          "jointNs": 1094.24,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 252.534,
+          "denseNs": 489.89,
+          "jointNs": 994.394,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 208.773,
+          "denseNs": 444.411,
+          "jointNs": 971.897,
+          "checksum": 172314507775
+        }
+      ],
+      "timed100msSamples": [
+        42023,
+        43146,
+        49491,
+        52217,
+        40364,
+        47626,
+        44371,
+        45632,
+        39687,
+        49737,
+        51113,
+        50802,
+        48326,
+        54563,
+        48922,
+        42986,
+        45917,
+        51752,
+        44787,
+        57501,
+        49440,
+        43879,
+        48542,
+        50353,
+        46363,
+        46940,
+        1611,
+        41639
+      ],
+      "timed100msTotalSimulations": 1279730,
+      "nativeMedianNanoseconds": {
+        "encodingNs": 213.898,
+        "denseNs": 360.637,
+        "jointNs": 956.289
+      },
+      "jointThroughputVsV132": 0.9256651504766652,
+      "fixedSearchThroughputVsV132": 1.065669949543629,
+      "timedSimulationRatioVsV132": 1.0151922251600256,
+      "timedSimulationRatioVsControl": 1.0
+    },
+    {
+      "precision": "INT16",
+      "name": "four-row SIMD only",
+      "library": ".build/native-pattern-block4-v1.33/libothello.dylib",
+      "librarySha256": "4eb7e98ca431f308e3138401007104a365e106161dd12badc2b95027b721631e",
+      "model": "models/pattern32-outcome-v1.25.otpat",
+      "jointMicroseconds": 1.9108836059570313,
+      "fixedSearchMilliseconds": 55.322583,
+      "samples": [
+        {
+          "jointMicroseconds": 1.667119384765625,
+          "fixedSearchMilliseconds": 64.257542
+        },
+        {
+          "jointMicroseconds": 1.755536376953125,
+          "fixedSearchMilliseconds": 64.3405
+        },
+        {
+          "jointMicroseconds": 2.2631378173828125,
+          "fixedSearchMilliseconds": 57.042834
+        },
+        {
+          "jointMicroseconds": 1.586285888671875,
+          "fixedSearchMilliseconds": 49.021833
+        },
+        {
+          "jointMicroseconds": 1.7495524291992188,
+          "fixedSearchMilliseconds": 61.3375
+        },
+        {
+          "jointMicroseconds": 1.6034571533203126,
+          "fixedSearchMilliseconds": 46.158292
+        },
+        {
+          "jointMicroseconds": 1.2941996459960938,
+          "fixedSearchMilliseconds": 59.605625
+        },
+        {
+          "jointMicroseconds": 1.6041285400390626,
+          "fixedSearchMilliseconds": 50.023625
+        },
+        {
+          "jointMicroseconds": 2.435406982421875,
+          "fixedSearchMilliseconds": 53.114375
+        },
+        {
+          "jointMicroseconds": 1.9599380493164062,
+          "fixedSearchMilliseconds": 51.747666
+        },
+        {
+          "jointMicroseconds": 2.1904983520507812,
+          "fixedSearchMilliseconds": 63.63225
+        },
+        {
+          "jointMicroseconds": 2.04049169921875,
+          "fixedSearchMilliseconds": 55.322583
+        },
+        {
+          "jointMicroseconds": 1.9108836059570313,
+          "fixedSearchMilliseconds": 59.439334
+        },
+        {
+          "jointMicroseconds": 2.192698181152344,
+          "fixedSearchMilliseconds": 46.0445
+        },
+        {
+          "jointMicroseconds": 2.088144958496094,
+          "fixedSearchMilliseconds": 47.504083
+        }
+      ],
+      "nativeSamples": [
+        {
+          "encodingNs": 260.122,
+          "denseNs": 216.174,
+          "jointNs": 879.825,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 237.058,
+          "denseNs": 215.698,
+          "jointNs": 765.789,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 187.232,
+          "denseNs": 223.482,
+          "jointNs": 824.321,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 222.843,
+          "denseNs": 240.086,
+          "jointNs": 673.183,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 222.252,
+          "denseNs": 206.618,
+          "jointNs": 866.472,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 219.578,
+          "denseNs": 262.699,
+          "jointNs": 806.018,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 276.573,
+          "denseNs": 243.078,
+          "jointNs": 834.299,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 200.494,
+          "denseNs": 231.198,
+          "jointNs": 857.474,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 212.988,
+          "denseNs": 283.293,
+          "jointNs": 848.826,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 189.903,
+          "denseNs": 218.108,
+          "jointNs": 869.952,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 184.863,
+          "denseNs": 217.397,
+          "jointNs": 847.389,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 225.282,
+          "denseNs": 219.238,
+          "jointNs": 842.752,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 219.639,
+          "denseNs": 300.49,
+          "jointNs": 795.533,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 211.823,
+          "denseNs": 256.717,
+          "jointNs": 728.003,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 190.305,
+          "denseNs": 207.002,
+          "jointNs": 737.499,
+          "checksum": 172314507775
+        }
+      ],
+      "timed100msSamples": [
+        45470,
+        57485,
+        42843,
+        50677,
+        52201,
+        43847,
+        40604,
+        35694,
+        53945,
+        56180,
+        48748,
+        49200,
+        43754,
+        50710,
+        43127,
+        49449,
+        45186,
+        52117,
+        47047,
+        51907,
+        44306,
+        49864,
+        53166,
+        55900,
+        46638,
+        50777,
+        53284,
+        55734
+      ],
+      "timed100msTotalSimulations": 1369860,
+      "nativeMedianNanoseconds": {
+        "encodingNs": 219.578,
+        "denseNs": 223.482,
+        "jointNs": 834.299
+      },
+      "jointThroughputVsV132": 0.8897110593464266,
+      "fixedSearchThroughputVsV132": 1.1092810145903707,
+      "timedSimulationRatioVsV132": 1.0866911157491914,
+      "timedSimulationRatioVsControl": 1.070428918600017
+    },
+    {
+      "precision": "INT16",
+      "name": "packed encoding + four-row SIMD",
+      "library": ".build/native-pattern-selected-v1.33/libothello.dylib",
+      "librarySha256": "265538ad91135664dba9e4f4a3df9fdf31393a8900992c3d17666c0085a8bf30",
+      "model": "models/pattern32-outcome-v1.25.otpat",
+      "jointMicroseconds": 1.760228515625,
+      "fixedSearchMilliseconds": 55.646625,
+      "samples": [
+        {
+          "jointMicroseconds": 1.61758935546875,
+          "fixedSearchMilliseconds": 55.588708
+        },
+        {
+          "jointMicroseconds": 1.235137939453125,
+          "fixedSearchMilliseconds": 55.065291
+        },
+        {
+          "jointMicroseconds": 2.2579981689453126,
+          "fixedSearchMilliseconds": 66.158459
+        },
+        {
+          "jointMicroseconds": 1.8542276611328126,
+          "fixedSearchMilliseconds": 56.508083
+        },
+        {
+          "jointMicroseconds": 2.005462646484375,
+          "fixedSearchMilliseconds": 53.697541
+        },
+        {
+          "jointMicroseconds": 1.894994140625,
+          "fixedSearchMilliseconds": 56.3705
+        },
+        {
+          "jointMicroseconds": 1.760228515625,
+          "fixedSearchMilliseconds": 64.839625
+        },
+        {
+          "jointMicroseconds": 1.6841710205078124,
+          "fixedSearchMilliseconds": 50.724291
+        },
+        {
+          "jointMicroseconds": 1.6338399047851562,
+          "fixedSearchMilliseconds": 59.098875
+        },
+        {
+          "jointMicroseconds": 1.7055435180664062,
+          "fixedSearchMilliseconds": 59.476917
+        },
+        {
+          "jointMicroseconds": 1.9165852661132812,
+          "fixedSearchMilliseconds": 54.810958
+        },
+        {
+          "jointMicroseconds": 2.6285120849609376,
+          "fixedSearchMilliseconds": 62.499083
+        },
+        {
+          "jointMicroseconds": 1.4459762573242188,
+          "fixedSearchMilliseconds": 55.646625
+        },
+        {
+          "jointMicroseconds": 1.511138916015625,
+          "fixedSearchMilliseconds": 50.923833
+        },
+        {
+          "jointMicroseconds": 1.9864425659179688,
+          "fixedSearchMilliseconds": 52.058792
+        }
+      ],
+      "nativeSamples": [
+        {
+          "encodingNs": 29.7565,
+          "denseNs": 270.751,
+          "jointNs": 752.898,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 28.7083,
+          "denseNs": 251.534,
+          "jointNs": 765.673,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 60.1046,
+          "denseNs": 227.974,
+          "jointNs": 727.298,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 55.1185,
+          "denseNs": 234.723,
+          "jointNs": 759.987,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 46.8883,
+          "denseNs": 236.484,
+          "jointNs": 798.002,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 44.1013,
+          "denseNs": 224.847,
+          "jointNs": 670.715,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 33.6806,
+          "denseNs": 234.967,
+          "jointNs": 737.633,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 42.5448,
+          "denseNs": 224.304,
+          "jointNs": 797.2,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 38.2515,
+          "denseNs": 226.201,
+          "jointNs": 767.649,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 45.5842,
+          "denseNs": 258.836,
+          "jointNs": 697.725,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 53.3663,
+          "denseNs": 270.448,
+          "jointNs": 784.94,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 36.9754,
+          "denseNs": 223.811,
+          "jointNs": 784.572,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 29.2662,
+          "denseNs": 256.581,
+          "jointNs": 799.333,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 35.5667,
+          "denseNs": 222.437,
+          "jointNs": 786.166,
+          "checksum": 172314507775
+        },
+        {
+          "encodingNs": 40.0833,
+          "denseNs": 234.464,
+          "jointNs": 809.547,
+          "checksum": 172314507775
+        }
+      ],
+      "timed100msSamples": [
+        51174,
+        53462,
+        49217,
+        59298,
+        49682,
+        47787,
+        53737,
+        48988,
+        47181,
+        53645,
+        44970,
+        50700,
+        44747,
+        48558,
+        46101,
+        58506,
+        54509,
+        53508,
+        46757,
+        53414,
+        46908,
+        50575,
+        45576,
+        57699,
+        47077,
+        56146,
+        48056,
+        52412
+      ],
+      "timed100msTotalSimulations": 1420390,
+      "nativeMedianNanoseconds": {
+        "encodingNs": 40.0833,
+        "denseNs": 234.723,
+        "jointNs": 767.649
+      },
+      "jointThroughputVsV132": 0.9658599791175906,
+      "fixedSearchThroughputVsV132": 1.1028214379578276,
+      "timedSimulationRatioVsV132": 1.1267758704531807,
+      "timedSimulationRatioVsControl": 1.1099138099442851
+    },
+    {
+      "precision": "INT8",
+      "name": "v1.32 SIMD",
+      "library": ".build/native-pattern-simd-v1.32/libothello.dylib",
+      "librarySha256": "fd9b5be4daa480400593287fb265e918f9364c60a94cc314d926578ba10d43d3",
+      "model": "models/pattern32-int8-step1-v1.32.otpat",
+      "jointMicroseconds": 2.023935974121094,
+      "fixedSearchMilliseconds": 57.788125,
+      "samples": [
+        {
+          "jointMicroseconds": 2.023935974121094,
+          "fixedSearchMilliseconds": 47.104166
+        },
+        {
+          "jointMicroseconds": 1.6710433959960938,
+          "fixedSearchMilliseconds": 59.92975
+        },
+        {
+          "jointMicroseconds": 2.5069351196289062,
+          "fixedSearchMilliseconds": 57.641541
+        },
+        {
+          "jointMicroseconds": 1.6314494018554688,
+          "fixedSearchMilliseconds": 58.19625
+        },
+        {
+          "jointMicroseconds": 2.126706481933594,
+          "fixedSearchMilliseconds": 56.644917
+        },
+        {
+          "jointMicroseconds": 1.6338093872070312,
+          "fixedSearchMilliseconds": 58.507292
+        },
+        {
+          "jointMicroseconds": 1.5956980590820313,
+          "fixedSearchMilliseconds": 58.850958
+        },
+        {
+          "jointMicroseconds": 1.9041366577148438,
+          "fixedSearchMilliseconds": 57.788125
+        },
+        {
+          "jointMicroseconds": 1.92735546875,
+          "fixedSearchMilliseconds": 71.608167
+        },
+        {
+          "jointMicroseconds": 2.4820785522460938,
+          "fixedSearchMilliseconds": 53.679334
+        },
+        {
+          "jointMicroseconds": 2.156717956542969,
+          "fixedSearchMilliseconds": 51.137375
+        },
+        {
+          "jointMicroseconds": 2.1049118041992188,
+          "fixedSearchMilliseconds": 45.608292
+        },
+        {
+          "jointMicroseconds": 2.3145650634765627,
+          "fixedSearchMilliseconds": 50.521083
+        },
+        {
+          "jointMicroseconds": 2.329923034667969,
+          "fixedSearchMilliseconds": 60.125083
+        },
+        {
+          "jointMicroseconds": 1.7816848754882812,
+          "fixedSearchMilliseconds": 58.464417
+        }
+      ],
+      "nativeSamples": [],
+      "timed100msSamples": [
+        36954,
+        46566,
+        46925,
+        43185,
+        41680,
+        44199,
+        41250,
+        46787,
+        41447,
+        43167,
+        48528,
+        52056,
+        40598,
+        53593,
+        43371,
+        47672,
+        41379,
+        38796,
+        41813,
+        45372,
+        55756,
+        47382,
+        48128,
+        45920,
+        45194,
+        44990,
+        44688,
+        40701
+      ],
+      "timed100msTotalSimulations": 1258097,
+      "jointThroughputVsV132": 1.0,
+      "fixedSearchThroughputVsV132": 1.0,
+      "timedSimulationRatioVsV132": 1.0,
+      "timedSimulationRatioVsControl": 0.948866237522579
+    },
+    {
+      "precision": "INT8",
+      "name": "v1.33 control",
+      "library": ".build/native-pattern-control-v1.33/libothello.dylib",
+      "librarySha256": "2a7ea4be0a24488d1123e302ca6e8cb0d3d135208b2b01183c2ed7c4303d4fa0",
+      "model": "models/pattern32-int8-step1-v1.32.otpat",
+      "jointMicroseconds": 1.8845265502929687,
+      "fixedSearchMilliseconds": 51.837916,
+      "samples": [
+        {
+          "jointMicroseconds": 2.3219528198242188,
+          "fixedSearchMilliseconds": 56.580708
+        },
+        {
+          "jointMicroseconds": 1.5923487548828126,
+          "fixedSearchMilliseconds": 60.0215
+        },
+        {
+          "jointMicroseconds": 1.61614990234375,
+          "fixedSearchMilliseconds": 45.038292
+        },
+        {
+          "jointMicroseconds": 1.9073257446289062,
+          "fixedSearchMilliseconds": 43.236875
+        },
+        {
+          "jointMicroseconds": 2.112660705566406,
+          "fixedSearchMilliseconds": 51.864958
+        },
+        {
+          "jointMicroseconds": 2.3690440063476563,
+          "fixedSearchMilliseconds": 46.027
+        },
+        {
+          "jointMicroseconds": 1.9496968383789062,
+          "fixedSearchMilliseconds": 49.697875
+        },
+        {
+          "jointMicroseconds": 1.2979761962890626,
+          "fixedSearchMilliseconds": 47.894792
+        },
+        {
+          "jointMicroseconds": 1.7998402709960937,
+          "fixedSearchMilliseconds": 66.282875
+        },
+        {
+          "jointMicroseconds": 2.3923416137695312,
+          "fixedSearchMilliseconds": 51.194917
+        },
+        {
+          "jointMicroseconds": 1.842425048828125,
+          "fixedSearchMilliseconds": 57.90275
+        },
+        {
+          "jointMicroseconds": 1.8845265502929687,
+          "fixedSearchMilliseconds": 51.837916
+        },
+        {
+          "jointMicroseconds": 1.4795048828125,
+          "fixedSearchMilliseconds": 46.508084
+        },
+        {
+          "jointMicroseconds": 1.8713328247070313,
+          "fixedSearchMilliseconds": 56.757416
+        },
+        {
+          "jointMicroseconds": 2.12506103515625,
+          "fixedSearchMilliseconds": 53.601125
+        }
+      ],
+      "nativeSamples": [
+        {
+          "encodingNs": 184.251,
+          "denseNs": 391.257,
+          "jointNs": 875.955,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 194.058,
+          "denseNs": 410.745,
+          "jointNs": 955.64,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 210.03,
+          "denseNs": 382.865,
+          "jointNs": 982.455,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 247.436,
+          "denseNs": 344.825,
+          "jointNs": 925.903,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 164.414,
+          "denseNs": 379.022,
+          "jointNs": 923.106,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 215.959,
+          "denseNs": 360.386,
+          "jointNs": 987.885,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 251.492,
+          "denseNs": 468.7,
+          "jointNs": 888.638,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 210.784,
+          "denseNs": 484.515,
+          "jointNs": 963.305,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 204.499,
+          "denseNs": 436.824,
+          "jointNs": 940.376,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 186.761,
+          "denseNs": 350.555,
+          "jointNs": 902.49,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 194.88,
+          "denseNs": 338.085,
+          "jointNs": 1044.56,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 179.448,
+          "denseNs": 356.864,
+          "jointNs": 967.277,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 207.324,
+          "denseNs": 358.554,
+          "jointNs": 920.891,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 169.765,
+          "denseNs": 331.375,
+          "jointNs": 864.233,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 208.762,
+          "denseNs": 378.798,
+          "jointNs": 994.074,
+          "checksum": 172314253363
+        }
+      ],
+      "timed100msSamples": [
+        46230,
+        46727,
+        44353,
+        47191,
+        40425,
+        51973,
+        50054,
+        50715,
+        42823,
+        54103,
+        49903,
+        56769,
+        47561,
+        47670,
+        46999,
+        47769,
+        41781,
+        43862,
+        45973,
+        48552,
+        45541,
+        39012,
+        45898,
+        51112,
+        46786,
+        46147,
+        45607,
+        54359
+      ],
+      "timed100msTotalSimulations": 1325895,
+      "nativeMedianNanoseconds": {
+        "encodingNs": 204.499,
+        "denseNs": 378.798,
+        "jointNs": 940.376
+      },
+      "jointThroughputVsV132": 1.0739758343051482,
+      "fixedSearchThroughputVsV132": 1.1147848806267597,
+      "timedSimulationRatioVsV132": 1.0538893264986722,
+      "timedSimulationRatioVsControl": 1.0
+    },
+    {
+      "precision": "INT8",
+      "name": "four-row SIMD only",
+      "library": ".build/native-pattern-block4-v1.33/libothello.dylib",
+      "librarySha256": "4eb7e98ca431f308e3138401007104a365e106161dd12badc2b95027b721631e",
+      "model": "models/pattern32-int8-step1-v1.32.otpat",
+      "jointMicroseconds": 1.77685546875,
+      "fixedSearchMilliseconds": 50.541917,
+      "samples": [
+        {
+          "jointMicroseconds": 1.77685546875,
+          "fixedSearchMilliseconds": 48.462667
+        },
+        {
+          "jointMicroseconds": 1.4610087280273438,
+          "fixedSearchMilliseconds": 43.484667
+        },
+        {
+          "jointMicroseconds": 1.5979894409179687,
+          "fixedSearchMilliseconds": 52.676125
+        },
+        {
+          "jointMicroseconds": 1.977203369140625,
+          "fixedSearchMilliseconds": 60.192166
+        },
+        {
+          "jointMicroseconds": 1.9381205444335938,
+          "fixedSearchMilliseconds": 41.988917
+        },
+        {
+          "jointMicroseconds": 1.9084803466796876,
+          "fixedSearchMilliseconds": 52.640875
+        },
+        {
+          "jointMicroseconds": 1.4665908813476562,
+          "fixedSearchMilliseconds": 53.225417
+        },
+        {
+          "jointMicroseconds": 1.6711578369140625,
+          "fixedSearchMilliseconds": 49.59625
+        },
+        {
+          "jointMicroseconds": 2.4120126953125,
+          "fixedSearchMilliseconds": 56.932083
+        },
+        {
+          "jointMicroseconds": 1.5500767822265624,
+          "fixedSearchMilliseconds": 44.322083
+        },
+        {
+          "jointMicroseconds": 1.7053960571289062,
+          "fixedSearchMilliseconds": 50.541917
+        },
+        {
+          "jointMicroseconds": 1.5251719360351563,
+          "fixedSearchMilliseconds": 55.655292
+        },
+        {
+          "jointMicroseconds": 1.78741455078125,
+          "fixedSearchMilliseconds": 46.24925
+        },
+        {
+          "jointMicroseconds": 2.0147857666015625,
+          "fixedSearchMilliseconds": 55.598041
+        },
+        {
+          "jointMicroseconds": 1.81962841796875,
+          "fixedSearchMilliseconds": 47.083292
+        }
+      ],
+      "nativeSamples": [
+        {
+          "encodingNs": 188.211,
+          "denseNs": 242.519,
+          "jointNs": 826.474,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 181.874,
+          "denseNs": 269.723,
+          "jointNs": 828.526,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 216.075,
+          "denseNs": 282.321,
+          "jointNs": 740.858,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 212.075,
+          "denseNs": 283.228,
+          "jointNs": 804.624,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 179.237,
+          "denseNs": 275.442,
+          "jointNs": 762.559,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 216.629,
+          "denseNs": 204.271,
+          "jointNs": 848.284,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 177.759,
+          "denseNs": 228.643,
+          "jointNs": 869.168,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 193.231,
+          "denseNs": 259.616,
+          "jointNs": 824.787,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 217.448,
+          "denseNs": 217.447,
+          "jointNs": 879.505,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 209.856,
+          "denseNs": 213.266,
+          "jointNs": 811.786,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 204.285,
+          "denseNs": 230.846,
+          "jointNs": 701.612,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 193.302,
+          "denseNs": 235.954,
+          "jointNs": 771.72,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 192.552,
+          "denseNs": 270.992,
+          "jointNs": 848.754,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 236.07,
+          "denseNs": 208.716,
+          "jointNs": 883.834,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 222.962,
+          "denseNs": 232.128,
+          "jointNs": 847.544,
+          "checksum": 172314253363
+        }
+      ],
+      "timed100msSamples": [
+        44672,
+        50054,
+        54394,
+        57260,
+        48558,
+        53110,
+        52153,
+        57852,
+        48511,
+        43799,
+        57008,
+        51604,
+        44803,
+        47577,
+        52825,
+        49209,
+        43381,
+        50400,
+        53700,
+        57790,
+        47804,
+        50634,
+        51333,
+        49191,
+        49176,
+        55270,
+        52542,
+        50781
+      ],
+      "timed100msTotalSimulations": 1425391,
+      "nativeMedianNanoseconds": {
+        "encodingNs": 204.285,
+        "denseNs": 235.954,
+        "jointNs": 826.474
+      },
+      "jointThroughputVsV132": 1.1390549258037923,
+      "fixedSearchThroughputVsV132": 1.143370264329309,
+      "timedSimulationRatioVsV132": 1.1329738485983196,
+      "timedSimulationRatioVsControl": 1.0750406329309636
+    },
+    {
+      "precision": "INT8",
+      "name": "packed encoding + four-row SIMD",
+      "library": ".build/native-pattern-selected-v1.33/libothello.dylib",
+      "librarySha256": "265538ad91135664dba9e4f4a3df9fdf31393a8900992c3d17666c0085a8bf30",
+      "model": "models/pattern32-int8-step1-v1.32.otpat",
+      "jointMicroseconds": 1.7036209106445312,
+      "fixedSearchMilliseconds": 45.5185,
+      "samples": [
+        {
+          "jointMicroseconds": 1.7888946533203125,
+          "fixedSearchMilliseconds": 43.8625
+        },
+        {
+          "jointMicroseconds": 2.383516906738281,
+          "fixedSearchMilliseconds": 48.779875
+        },
+        {
+          "jointMicroseconds": 1.4396820068359375,
+          "fixedSearchMilliseconds": 52.059
+        },
+        {
+          "jointMicroseconds": 1.6093902587890625,
+          "fixedSearchMilliseconds": 46.213209
+        },
+        {
+          "jointMicroseconds": 1.89791357421875,
+          "fixedSearchMilliseconds": 45.837208
+        },
+        {
+          "jointMicroseconds": 1.7458750610351563,
+          "fixedSearchMilliseconds": 48.792166
+        },
+        {
+          "jointMicroseconds": 1.3338088989257812,
+          "fixedSearchMilliseconds": 56.188125
+        },
+        {
+          "jointMicroseconds": 1.4736837158203124,
+          "fixedSearchMilliseconds": 40.432875
+        },
+        {
+          "jointMicroseconds": 1.8414129028320312,
+          "fixedSearchMilliseconds": 52.69475
+        },
+        {
+          "jointMicroseconds": 1.992914794921875,
+          "fixedSearchMilliseconds": 45.5185
+        },
+        {
+          "jointMicroseconds": 1.55355322265625,
+          "fixedSearchMilliseconds": 43.568792
+        },
+        {
+          "jointMicroseconds": 1.7036209106445312,
+          "fixedSearchMilliseconds": 44.142042
+        },
+        {
+          "jointMicroseconds": 1.4001210327148437,
+          "fixedSearchMilliseconds": 39.863208
+        },
+        {
+          "jointMicroseconds": 1.585283935546875,
+          "fixedSearchMilliseconds": 45.349375
+        },
+        {
+          "jointMicroseconds": 1.74907177734375,
+          "fixedSearchMilliseconds": 44.99625
+        }
+      ],
+      "nativeSamples": [
+        {
+          "encodingNs": 30.7154,
+          "denseNs": 219.019,
+          "jointNs": 731.877,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 38.9565,
+          "denseNs": 229.898,
+          "jointNs": 751.118,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 28.836,
+          "denseNs": 209.893,
+          "jointNs": 761.093,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 30.3242,
+          "denseNs": 239.757,
+          "jointNs": 777.998,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 41.5804,
+          "denseNs": 236.594,
+          "jointNs": 779.169,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 30.4185,
+          "denseNs": 294.165,
+          "jointNs": 802.657,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 30.4044,
+          "denseNs": 241.498,
+          "jointNs": 819.249,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 29.7829,
+          "denseNs": 266.131,
+          "jointNs": 756.463,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 30.7575,
+          "denseNs": 248.234,
+          "jointNs": 727.158,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 62.1029,
+          "denseNs": 239.122,
+          "jointNs": 757.181,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 55.7333,
+          "denseNs": 226.019,
+          "jointNs": 799.408,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 58.4227,
+          "denseNs": 217.527,
+          "jointNs": 786.965,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 93.4338,
+          "denseNs": 263.197,
+          "jointNs": 703.933,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 35.5148,
+          "denseNs": 296.77,
+          "jointNs": 820.808,
+          "checksum": 172314253363
+        },
+        {
+          "encodingNs": 28.8981,
+          "denseNs": 250.025,
+          "jointNs": 758.35,
+          "checksum": 172314253363
+        }
+      ],
+      "timed100msSamples": [
+        50291,
+        49336,
+        53529,
+        53197,
+        54299,
+        51891,
+        41920,
+        50956,
+        49644,
+        52858,
+        57573,
+        51577,
+        44554,
+        45160,
+        56736,
+        57213,
+        41227,
+        56411,
+        51135,
+        44600,
+        43604,
+        49056,
+        56922,
+        58657,
+        50241,
+        54599,
+        56031,
+        53952
+      ],
+      "timed100msTotalSimulations": 1437169,
+      "nativeMedianNanoseconds": {
+        "encodingNs": 30.7575,
+        "denseNs": 239.757,
+        "jointNs": 761.093
+      },
+      "jointThroughputVsV132": 1.1880201525322778,
+      "fixedSearchThroughputVsV132": 1.2695524896470665,
+      "timedSimulationRatioVsV132": 1.14233560687292,
+      "timedSimulationRatioVsControl": 1.0839236892815796
+    }
+  ],
+  "parity": {
+    "all68JointOutputsExactlyEqual": true,
+    "validationPositions": 6000,
+    "testPositions": 6000,
+    "precisions": 2,
+    "fixedSimulationSearchExactlyEqual": true,
+    "reusedSubtreeSearchExactlyEqual": true,
+    "coldRoots": 32,
+    "warmRoots": 16,
+    "simulationsPerRoot": 1024
+  },
+  "crossArchitectureChecks": [
+    {
+      "target": "-portable",
+      "model": "models/pattern32-outcome-v1.25.otpat",
+      "checksum": 172314507775
+    },
+    {
+      "target": "-portable",
+      "model": "models/pattern32-int8-step1-v1.32.otpat",
+      "checksum": 172314253363
+    },
+    {
+      "target": "-x86",
+      "model": "models/pattern32-outcome-v1.25.otpat",
+      "checksum": 172314507775
+    },
+    {
+      "target": "-x86",
+      "model": "models/pattern32-int8-step1-v1.32.otpat",
+      "checksum": 172314253363
+    }
+  ],
+  "timing": {
+    "rounds": 15,
+    "cAbiCallsPerRound": 16384,
+    "nativeCallsPerPhase": 200000,
+    "timedBudgetMs": 100,
+    "timedRounds": 7,
+    "timedRoots": 4
+  },
+  "preservedSha256": {
+    "models/default-model.json": "8b82bf89b2afeebdcd1b2c056dee7ce21789aea9291cae11b0a480862ad37b01",
+    "models/v1.25-default.json": "730b4a83b9e0495e7f1a4beaa6da8b2a31c8d72ceb9b39e54a9218cbb381c14f",
+    "src/game/wasm/othello.mjs": "a1584f0244858efcf19d807dee2dd79e628cda2ee509371162cbc64c94c949e0",
+    "models/pattern32-outcome-v1.25.otpat": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0",
+    "models/pattern32-int8-step1-v1.32.otpat": "da33b0237d0b99a5bcecb0f57c9aa18f51ea7537adfd683e8d8364d553b68f91"
+  },
+  "scriptSha256": "5527ceac458e869c9fe9fd9314459cfe2884c8663d7e26799d5e3ae582242230",
+  "seconds": 63.870185625040904,
+  "limits": "Confirmatory measurement after first-round runtime ablation; no accuracy/model selection or strength claim. Apple Silicon timings, x86-64 correctness under Rosetta; Linux timing unavailable. Slower integer-rounding path retained opt-in and excluded from selected flags."
+}

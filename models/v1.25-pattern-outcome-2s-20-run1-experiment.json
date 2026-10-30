@@ -1,0 +1,15 @@
+{
+  "version": "v1.25-pattern-outcome-2s-20-run1",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "previousExperiment": "models/v1.25-pattern-outcome-experiment.json",
+  "previousExperimentSha256": "076fda25fd34106f7604924cfb9fba2a58cb4feea5fe992f034ae00cd118a33f",
+  "sourceManifest": "models/archive/v1.25-pattern-outcome-sources.json",
+  "sourceManifestSha256": "b761ec73f521b6e1eadc4c14397ead7da3732c1f396493bdfba81854a20a3aa8",
+  "artifactSha256": {
+    "models/v1.25-pattern-outcome-vs-v1.9-2s-20-run1.json": "789b29d63af60b119825d70e9d05feb7ec73ad1be263d22efa7e721714e47234",
+    "models/v1.25-pattern-outcome-2s-20-run1-comparison.md": "2995c288da4f4be63fbe37db8505bbcfb53984376bc76baab86616963560fded",
+    "models/v1.25-pattern-outcome-2s-20-run1-experiments.json": "041d7e74305c65c3638dd970157a2e3105184ab287cc7737e06147abde664824",
+    "scripts/finalize-pattern-outcome-2s.py": "d32398f69efd8cfaa0d92f9940eef710597b8cce1ce99a96fc83178e2c685c40"
+  }
+}

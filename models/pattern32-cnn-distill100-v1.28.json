@@ -1,0 +1,47 @@
+{
+  "name": "cnn-distill100",
+  "alpha": 1.0,
+  "epoch": 8,
+  "model": "models/pattern32-cnn-distill100-v1.28.otpat",
+  "sha256": "0b8ba2c646594ddde06c61cef6cab405a55bf241e261fa43d694fef8ae8fc682",
+  "parameters": 1787950,
+  "bytes": 3576088,
+  "metrics": {
+    "validation": {
+      "mse": 0.7173277139663696,
+      "outcomeMae": 0.727406919002533,
+      "nonDrawSignAccuracy": 0.6613522858240491,
+      "wdlAccuracy": 0.575,
+      "wdlCrossEntropy": 0.8983758091926575,
+      "policyTop1": 0.4116666666666667,
+      "policyCrossEntropy": 1.5874648094177246,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    "test": {
+      "mse": 0.6809347867965698,
+      "outcomeMae": 0.7122567296028137,
+      "nonDrawSignAccuracy": 0.6812403697996918,
+      "wdlAccuracy": 0.5916666666666667,
+      "wdlCrossEntropy": 0.8854187726974487,
+      "policyTop1": 0.4081666666666667,
+      "policyCrossEntropy": 1.6083940267562866,
+      "uniformPolicyCrossEntropy": 2.1044416287103247
+    }
+  },
+  "cppParity": {
+    "validation": {
+      "positions": 6000,
+      "maxWdlError": 1.1783496256523307e-07,
+      "maxPolicyLogitError": 6.137751356050103e-07,
+      "maxScoreRoundingError": 0.49896240234375,
+      "maxOutcomeError": 2.9840748871912126e-08
+    },
+    "test": {
+      "positions": 6000,
+      "maxWdlError": 1.3476766058673206e-07,
+      "maxPolicyLogitError": 6.137751356050103e-07,
+      "maxScoreRoundingError": 0.49725341796875,
+      "maxOutcomeError": 2.9840748871912126e-08
+    }
+  }
+}

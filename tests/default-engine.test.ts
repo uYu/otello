@@ -15,7 +15,8 @@ test('default NNUE is embedded, matches the measured model, and works offline', 
     module=await createModule();
   } finally {globalThis.fetch=original;}
   const sha=new TextDecoder().decode(module.HEAPU8.slice(module._ot_default_model_sha256(),module._ot_default_model_sha256()+64));
-  assert.equal(sha,JSON.parse(readFileSync('models/nnue256-v1.2.json','utf8')).sha256);
+  const active=JSON.parse(readFileSync('models/default-model.json','utf8'));
+  assert.equal(sha,active.modelSha256);
   await initEngine();
   let p=initial();
   for(let i=0;i<10;i++){
@@ -26,7 +27,7 @@ test('default NNUE is embedded, matches the measured model, and works offline', 
     assert.equal(module._ot_default_evaluate(input,-p.turn,out),1);
     assert.equal(module.HEAP32[out/4],value);
     if(existsSync('.build/native/otello')){
-      const native=JSON.parse(execFileSync(resolve('.build/native/otello'),['evaluate','--network',resolve('models/nnue256-v1.2.otnnue'),
+      const native=JSON.parse(execFileSync(resolve('.build/native/otello'),['evaluate','--network',resolve(active.defaultModel),
         '--board',p.cells.map(x=>x===1?'B':x===-1?'W':'.').join(''),'--turn',String(p.turn)],{encoding:'utf8'}));
       assert.equal(value,native.score);
     }
@@ -37,14 +38,19 @@ test('default NNUE is embedded, matches the measured model, and works offline', 
   assert.ok(legal(initial()).includes(module.HEAP32[out/4]));
   module.HEAP32.fill(1,input/4,input/4+64);
   assert.equal(module._ot_default_search(input,-1,5,1701,out),1);
-  assert.equal(module.HEAP32[out/4],-1);assert.equal(module.HEAP32[out/4+1],-106400);assert.equal(module.HEAP32[out/4+5],1);
+  assert.equal(module.HEAP32[out/4],-1);assert.equal(module.HEAP32[out/4+1],-100000);assert.equal(module.HEAP32[out/4+5],1);
+  module.HEAP32.fill(1,input/4,input/4+32);module.HEAP32.fill(-1,input/4+32,input/4+64);
+  assert.equal(module._ot_default_search(input,1,5,1701,out),1);
+  assert.equal(module.HEAP32[out/4+1],0);assert.equal(module.HEAP32[out/4+5],1);
 });
 
 test('native CLI defaults to NNUE/MCTS without a model file in its working directory', {skip:!existsSync('.build/native/otello')}, () => {
   const directory=mkdtempSync(join(tmpdir(),'otello-default-'));
   try {
     const result=JSON.parse(execFileSync(resolve('.build/native/otello'),['analyze','--time','10','--seed','1701'],{cwd:directory,encoding:'utf8'}));
-    assert.equal(result.search,'mcts');assert.equal(result.evaluator,'othello-nnue-v2');
+    assert.equal(result.search,'mcts');const active=JSON.parse(readFileSync('models/default-model.json','utf8'));
+    const baseline=JSON.parse(readFileSync(active.baselineManifest,'utf8'));
+    assert.equal(result.evaluator,baseline.native.evaluator);
     assert.equal(result.depthKind,'maximumVisited');
     const weak=JSON.parse(execFileSync(resolve('.build/native/otello'),['analyze','--network','heuristic','--time','10'],{cwd:directory,encoding:'utf8'}));
     assert.equal(weak.evaluator,'heuristic');assert.equal(weak.search,'ab');

@@ -1,0 +1,23 @@
+{
+  "version": "v1.31-pattern-incremental",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "sourceManifest": "models/archive/v1.31-pattern-incremental-sources.json",
+  "artifactSha256": {
+    "models/v1.31-pattern-incremental-benchmark.json": "a720743f22e541fa0f24f2b4afdaf6dc0d246a95f91f0bf5fed712e6dc9e4df9",
+    "models/v1.31-pattern-incremental-comparison.md": "15c9b358921f4b6f7d2d81a9a82185268718b31d87d8801a7212ff259efee53e",
+    "models/v1.31-pattern-incremental-experiments.json": "c48e9e6eef42c648d3de52f65e7bcbfcd203683d46395a0f58951be445024576"
+  },
+  "preservedSha256": {
+    "models/default-model.json": "8b82bf89b2afeebdcd1b2c056dee7ce21789aea9291cae11b0a480862ad37b01",
+    "models/v1.25-default.json": "730b4a83b9e0495e7f1a4beaa6da8b2a31c8d72ceb9b39e54a9218cbb381c14f",
+    "models/pattern32-outcome-v1.25.otpat": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0",
+    "src/game/wasm/othello.mjs": "a1584f0244858efcf19d807dee2dd79e628cda2ee509371162cbc64c94c949e0"
+  },
+  "checks": {
+    "native": true,
+    "sanitizers": true,
+    "patternTests": 4,
+    "fixedSimulationParity": true
+  }
+}

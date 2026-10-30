@@ -1,0 +1,13 @@
+{
+  "version": "v1.8 策略头候选 vs v1.7 · 1 秒",
+  "millisecondsPerMove": 1000,
+  "experiments": [
+    {
+      "name": "策略头候选 vs v1.7；每步各 1 秒，20 局交换黑白",
+      "focus": "策略头候选",
+      "games": 20,
+      "runtimeReport": ".build/training/policy/v1.8-policy-vs-v1.7-1s.json",
+      "report": "models/v1.8-policy-vs-v1.7-1s.json"
+    }
+  ]
+}

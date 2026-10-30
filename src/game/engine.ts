@@ -30,6 +30,13 @@ export function play(p: Position, move: number): Position {
   return next;
 }
 export function flips(p: Position, move: number): number[] {
+  if (module._ot_play_with_flips) {
+    if (p.over) return [];
+    const out=module._ot_output();
+    if (module._ot_play_with_flips(input(p),p.turn,move,out,out+67*4)!==1) return [];
+    const start=out/4;
+    return Array.from(module.HEAP32.subarray(start+67,start+67+module.HEAP32[start+66]));
+  }
   if (!legal(p).includes(move)) return [];
   const next = play(p, move);
   return p.cells.flatMap((c, i) => c !== 0 && c !== next.cells[i] ? [i] : []);

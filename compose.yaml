@@ -1,6 +1,9 @@
 services:
   otello:
-    build: .
+    image: otello:v1.36
+    build:
+      context: .
+      target: production
     ports:
-      - "${OTELLO_PORT:-8206}:80"
+      - "${OTELLO_PORT:-8207}:80"
     restart: unless-stopped

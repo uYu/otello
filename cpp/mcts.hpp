@@ -8,8 +8,9 @@ struct MctsOptions {
     std::uint32_t seed=1;
     const nnue::Network* network=nullptr;
     double exploration=1.5;
-    std::size_t maxNodes=2097152;
-    bool usePolicy=true; // learned priors/FPU only for Pattern models; other models retain v1.6 behavior
+    std::size_t maxNodes=4194304;
+    bool usePolicy=true; // enable learned priors; Pattern models also use finite first-play values
+    std::size_t patternCacheEntries=0; // 0: fused refresh; bounded incremental cache: power of two 64..16384
 };
 struct MctsResult {
     SearchResult analysis;
@@ -18,10 +19,14 @@ struct MctsResult {
     std::uint64_t reusedNodes=0,treeNodes=0;
     double meanDepth=0;
     bool memoryLimited=false;
+    std::uint64_t patternRefreshes=0,patternUpdates=0,patternCacheHits=0,patternChangedPatterns=0;
+    std::uint64_t patternCacheBytes=0,patternCacheLookups=0,patternAncestorDistance=0;
 };
-// PUCT, uniform for value-only models or learned priors for Pattern models. Values are expected disc
-// difference / 64, not win probabilities. Pattern WDL is auxiliary and is not
-// used by search. No rollouts or alpha-beta fallback.
+// Pattern experiments use learned priors with a finite first-play value; WDL is auxiliary.
+// PUCT uses learned legal priors when a policy head is present, uniform otherwise.
+// NNUE/CNN sample every unvisited child once (learned-prior order, seeded ties).
+// Values follow the model target: disc difference / 64 or win/draw/loss expectation.
+// No rollouts or alpha-beta fallback.
 MctsResult mcts(const Position& position,MctsOptions options={});
 void clearMctsCache();
 }

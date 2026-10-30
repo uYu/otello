@@ -1,0 +1,33 @@
+{
+  "status": "validated-engineering-experiment",
+  "modelBaseline": "models/v1.9-default.json",
+  "defaultPromoted": false,
+  "sourceManifest": "models/archive/engineering-rerun1-sources.json",
+  "optimizedLibrarySha256": "d6172ca74fc3fb17ab870b0f25f2c30e124cd6bd622688d251437253a3bae72e",
+  "optimizedWasmSha256": "5c5d84c91a7a42418d94ee4777dac24b1fa128e4cb0ef060083bfe6a6510cc70",
+  "parityReport": "models/engineering-rerun1-parity.json",
+  "searchBenchmark": "models/engineering-rerun1-search-benchmark.json",
+  "wasmParityReport": "models/engineering-rerun1-wasm-parity.json",
+  "artifactSha256": {
+    "models/archive/engineering-rerun1-sources.json": "3542f5ad0630c45dc7af3642a1776aeb82cd96f0ec399b186c03bf0b549e1bd8",
+    "models/archive/engineering-rerun1-sources.tar.gz": "030ccdec4b958065a2ac828b467afcae1e4cf307ff46ace9f800d450a60ef2e9",
+    "models/engineering-rerun1-parity.json": "9eec6a6461aaae5724e75eefcf8e416c6730a1a7f667e314d946c90ba493488b",
+    "models/engineering-rerun1-search-benchmark.json": "62f4f3d832e51b8572c7bbb47be57929ebf172cd3bdaecabda43d0258bc87cee",
+    "models/engineering-rerun1-wasm-parity.json": "fc8b53c1c91693a33a55ba025aa70e4baf67326b3eb2e3e27d9a3740cf28712a"
+  },
+  "changes": [
+    "shared dual-head feature and residual inference",
+    "reuse MCTS legal mask",
+    "prefix legal moves",
+    "ray-table flips",
+    "reuse flip mask for count and list"
+  ],
+  "checks": {
+    "fixedWorkParity": true,
+    "native": true,
+    "sanitizers": true,
+    "webTests": 14,
+    "frontendBuild": true,
+    "stagedWasm": true
+  }
+}

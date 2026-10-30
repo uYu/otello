@@ -1,0 +1,31 @@
+{
+  "results": [
+    {
+      "model": "v1.9",
+      "modelSha256": "72294450ce5eb180703e05048df6e7ce7078f031c4e94464198192432d618bb0",
+      "referenceLibrarySha256": "6f593a25a0d52f1846e29db35b10fa5423505fd820eb124d4a474489f412c188",
+      "optimizedLibrarySha256": "d6172ca74fc3fb17ab870b0f25f2c30e124cd6bd622688d251437253a3bae72e",
+      "inferencePositions": 1026,
+      "valueError": 0,
+      "policyError": 0,
+      "coldSearchPositions": 24,
+      "warmSearchPositions": 20,
+      "simulations": 512,
+      "identical": true
+    },
+    {
+      "model": "deep",
+      "modelSha256": "235bed6b569b87313fd1382a9bb34d9cf7134254fa9754aa86939f075a068dc6",
+      "referenceLibrarySha256": "c97a16cebc66a4432fe0e1f12d645aa9b122a0ed918609516072354f270fa9d2",
+      "optimizedLibrarySha256": "d6172ca74fc3fb17ab870b0f25f2c30e124cd6bd622688d251437253a3bae72e",
+      "inferencePositions": 1026,
+      "valueError": 0,
+      "policyError": 0,
+      "coldSearchPositions": 24,
+      "warmSearchPositions": 20,
+      "simulations": 512,
+      "identical": true
+    }
+  ],
+  "scope": "Exact value/probability parity and fixed-simulation moves, scores, candidates, root visits, selection, depth, reuse and tree statistics; elapsed excluded"
+}

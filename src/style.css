@@ -35,6 +35,6 @@ dialog{width:min(510px,calc(100vw - 32px));max-height:calc(100dvh - 48px);overfl
 
 .engine-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}.native-reconnect{font-size:10px;color:var(--teal);text-decoration:underline;text-underline-offset:3px;padding:5px 0}.pause-actions{margin-top:18px}
 
-.book-hit-indicator{font-size:10px;line-height:1;color:#a1a58f;cursor:help;opacity:.62;margin-left:-4px}
+.book-hit-indicator{font-size:11px;line-height:1;color:#71865a;cursor:help;margin-left:6px}
 
 .hero-game-source{display:inline-flex;align-items:center;gap:8px;color:inherit;text-decoration:none}.hero-game-source svg{color:#8a967d;flex-shrink:0}.hero-game-source:hover{color:var(--teal)}.hero-game-source:focus-visible{outline:2px solid var(--teal);outline-offset:5px;border-radius:2px}

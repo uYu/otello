@@ -1,0 +1,33 @@
+{
+  "complete": true,
+  "modelSha256": "97398c59a09692ac6ff6ccee250c9463184347091141c40cd1c9e71a68a78669",
+  "checks": [
+    {
+      "batch": 1,
+      "maxValueIntegerRoundingError": 0.3768119812011719,
+      "maxPolicyError": 7.748603820800781e-07
+    },
+    {
+      "batch": 8,
+      "maxValueIntegerRoundingError": 0.4934234619140625,
+      "maxPolicyError": 1.4603137969970703e-06
+    },
+    {
+      "batch": 16,
+      "maxValueIntegerRoundingError": 0.4934234619140625,
+      "maxPolicyError": 1.6093254089355469e-06
+    },
+    {
+      "batch": 32,
+      "maxValueIntegerRoundingError": 0.4934234619140625,
+      "maxPolicyError": 1.6391277313232422e-06
+    }
+  ],
+  "colorInversion": true,
+  "forcedPass": true,
+  "limits": "CPU FP32 vs MPS callback parity; existing native outcome MCTS batch/proof contracts were previously validated",
+  "sourceSha256": {
+    "scripts/big-cnn-evaluator.py": "9adc4318da82dd052dd3efc53e34567494e7cfdeaf86bb8bb5307cc36c71b758",
+    "scripts/verify-big-cnn-evaluator.py": "d9202247f788824a32832c40df7733bb32f0c8407a754165600f9fc7a5486040"
+  }
+}

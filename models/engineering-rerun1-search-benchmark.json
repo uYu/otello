@@ -1,0 +1,45 @@
+{
+  "scope": "Same model, same positions, same 512-simulation budget; 12 cold searches per round; one warmup then three measured rounds with alternating engine order. Includes one ctypes request per search on both sides. Not match strength or a guaranteed time-budget speedup.",
+  "positions": 12,
+  "simulations": 512,
+  "results": [
+    {
+      "model": "v1.9",
+      "modelSha256": "72294450ce5eb180703e05048df6e7ce7078f031c4e94464198192432d618bb0",
+      "referenceLibrarySha256": "6f593a25a0d52f1846e29db35b10fa5423505fd820eb124d4a474489f412c188",
+      "optimizedLibrarySha256": "d6172ca74fc3fb17ab870b0f25f2c30e124cd6bd622688d251437253a3bae72e",
+      "referenceSeconds": [
+        0.047772127087228,
+        0.047329124878160655,
+        0.0474182489560917
+      ],
+      "optimizedSeconds": [
+        0.04901787522248924,
+        0.04684975103009492,
+        0.04702575190458447
+      ],
+      "referenceMedianSeconds": 0.0474182489560917,
+      "optimizedMedianSeconds": 0.04702575190458447,
+      "speedup": 1.0083464279806438
+    },
+    {
+      "model": "deep",
+      "modelSha256": "235bed6b569b87313fd1382a9bb34d9cf7134254fa9754aa86939f075a068dc6",
+      "referenceLibrarySha256": "c97a16cebc66a4432fe0e1f12d645aa9b122a0ed918609516072354f270fa9d2",
+      "optimizedLibrarySha256": "d6172ca74fc3fb17ab870b0f25f2c30e124cd6bd622688d251437253a3bae72e",
+      "referenceSeconds": [
+        0.18114208616316319,
+        0.17481362691614777,
+        0.17492720705922693
+      ],
+      "optimizedSeconds": [
+        0.10938295908272266,
+        0.10927629307843745,
+        0.10960408323444426
+      ],
+      "referenceMedianSeconds": 0.17492720705922693,
+      "optimizedMedianSeconds": 0.10938295908272266,
+      "speedup": 1.5992180914299032
+    }
+  ]
+}

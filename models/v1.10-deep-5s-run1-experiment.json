@@ -1,0 +1,72 @@
+{
+  "version": "v1.10-deep-5s-run1",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "protocol": {
+    "games": 20,
+    "completedGames": 20,
+    "millisecondsPerMove": 5000
+  },
+  "baselineManifest": "models/v1.9-default.json",
+  "model": "models/nnue256-deep-v1.10.otnnue",
+  "trainingReport": "models/nnue256-deep-v1.10.json",
+  "matchReport": "models/v1.10-deep-vs-v1.9-5s-run1.json",
+  "sourceManifest": "models/archive/engineering-rerun1-sources.json",
+  "engineeringManifest": "models/engineering-rerun1.json",
+  "engineeringManifestSha256": "9b46a3e775d916feb05c3123f18f7bb687e27fda677a1b555e4f091c6043b1aa",
+  "legacyParity": "models/v1.10-deep-legacy-parity.json",
+  "artifactSha256": {
+    "models/nnue256-deep-v1.10.otnnue": "235bed6b569b87313fd1382a9bb34d9cf7134254fa9754aa86939f075a068dc6",
+    "models/nnue256-deep-v1.10.pt": "22f7f9877ecee6d8acfeb1fb675c834798c04d64850f83d6d8c5f4313cec8bb7",
+    "models/nnue256-deep-v1.10.json": "6b2813fbb7050517fcb5de41258258235fdfbb89527714b1297ce74888f3e84d",
+    "models/v1.10-deep-vs-v1.9-5s-run1.json": "c7ece35e7974c872ac71662f4739dd66519c83c7e1649c60e6f11d0ab89db150",
+    "models/v1.10-deep-5s-run1-comparison.md": "07dd2a018e0890471e39ee708764e907a043ec76b4672c2ddfa9fd7bacdbf818",
+    "models/v1.10-deep-legacy-parity.json": "18e79a5d92efd791d7d02f1f6dde4ced79ac10cbcbbf0143e1a758e85c27bf1e",
+    "models/archive/engineering-rerun1-sources.json": "3542f5ad0630c45dc7af3642a1776aeb82cd96f0ec399b186c03bf0b549e1bd8",
+    "models/archive/engineering-rerun1-sources.tar.gz": "030ccdec4b958065a2ac828b467afcae1e4cf307ff46ace9f800d450a60ef2e9",
+    "models/engineering-rerun1.json": "9b46a3e775d916feb05c3123f18f7bb687e27fda677a1b555e4f091c6043b1aa"
+  },
+  "results": {
+    "baseline": {
+      "games": 20,
+      "win": 8,
+      "draw": 5,
+      "loss": 7,
+      "discDifference": -20,
+      "scoreRate": 0.525,
+      "meanDiscDifference": -1.0,
+      "moves": 599,
+      "meanWallMs": 3720.891004956599,
+      "meanSearchUnits": 2714716.18196995,
+      "searchUnit": "simulations",
+      "meanNonExactDepth": 39.37199124726477,
+      "depthKind": "maximumVisited",
+      "meanSimulationDepth": 6.628297975480262,
+      "memoryLimitedSearches": 24,
+      "reusedMctsSearches": 579,
+      "exactMoves": 142
+    },
+    "candidate": {
+      "games": 20,
+      "win": 7,
+      "draw": 5,
+      "loss": 8,
+      "discDifference": 20,
+      "scoreRate": 0.475,
+      "meanDiscDifference": 1.0,
+      "moves": 601,
+      "meanWallMs": 3847.9039798302842,
+      "meanSearchUnits": 1652607.840266223,
+      "searchUnit": "simulations",
+      "meanNonExactDepth": 36.73144104803494,
+      "depthKind": "maximumVisited",
+      "meanSimulationDepth": 6.784566541063271,
+      "memoryLimitedSearches": 0,
+      "reusedMctsSearches": 581,
+      "exactMoves": 143
+    }
+  },
+  "replayedActions": 1212,
+  "runtimeReportSha256": "6bdb9d6833c436f5cb919439760032d33e3f5248b6072066fafab6e413b51223",
+  "separateFrom": "models/v1.10-deep-experiment.json"
+}

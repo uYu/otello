@@ -1,0 +1,70 @@
+{
+  "version": "v1.30",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "name": "avg-last-10",
+  "epochs": [
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "model": "models/pattern32-avg-last-10-v1.30.otpat",
+  "sha256": "f795755fc36770c99ef3e5d9964fb13fa9d82127018c6b755f1d82cc676242bb",
+  "checkpointSha256": [
+    "bb37977f2f312462256feedc53033b896af4cd284f963edcac280884c2fc0fc7",
+    "003764600ab6b9af9588206c48d05cde74e73e31233815cffb4eaeea71b3441b",
+    "54ca8ca5a55ba3eb4933e1294478ba4d1c81649c47d58fdf361c97a741fb4b00",
+    "14692b0a0cf76f27015da37d8a0474f6b236a7f13c740768076a33ba28132728",
+    "1ecaf21db049227d120b12ca0aeaadcd133ad65d1556a990b030c7ec01c1a058",
+    "5492ca9d60064475298d508ef8ca8b0e428d85e28c15369c25a3d1c26d8b36a8",
+    "90df0388ad820123840ec108dd9ac9bd0a41b135fff56554f5de4df13096f5f9",
+    "985fec5d8432c4bcb0213a51a3f9658a9747c8dbb5061ebe41621eecf712bfd1",
+    "357583385d36e371920842046bdb18a7fbc8410548d37dc14a39e9ac538d69dd",
+    "312e0dab1497ff47f6803759e155109add209cf9785ad4ef5009891454c995cb"
+  ],
+  "bytes": 3576088,
+  "parameters": 1787950,
+  "metrics": {
+    "validation": {
+      "mse": 0.7268015742301941,
+      "outcomeMae": 0.7305271625518799,
+      "nonDrawSignAccuracy": 0.6548213599692663,
+      "wdlAccuracy": 0.5696666666666667,
+      "wdlCrossEntropy": 0.9018491506576538,
+      "policyTop1": 0.4048333333333333,
+      "policyCrossEntropy": 1.6201069355010986,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    "test": {
+      "mse": 0.6903027296066284,
+      "outcomeMae": 0.7134944796562195,
+      "nonDrawSignAccuracy": 0.6739214175654854,
+      "wdlAccuracy": 0.5831666666666667,
+      "wdlCrossEntropy": 0.8917332291603088,
+      "policyTop1": 0.40016666666666667,
+      "policyCrossEntropy": 1.6384882926940918,
+      "uniformPolicyCrossEntropy": 2.1044416287103247
+    }
+  },
+  "validationParity": {
+    "positions": 6000,
+    "maxWdlError": 1.2734252563539883e-07,
+    "maxPolicyLogitError": 5.538248926129086e-07,
+    "maxScoreRoundingError": 0.49896240234375,
+    "maxOutcomeError": 2.9840748871912126e-08
+  },
+  "testParity": {
+    "positions": 6000,
+    "maxWdlError": 1.185109127499473e-07,
+    "maxPolicyLogitError": 5.737918336023995e-07,
+    "maxScoreRoundingError": 0.49896240234375,
+    "maxOutcomeError": 2.9840748871912126e-08
+  }
+}

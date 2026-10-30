@@ -1,0 +1,104 @@
+{
+  "version": "v1.33-pattern-selected",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "sourceManifest": "models/archive/v1.33-pattern-hotpath-sources.json",
+  "artifactSha256": {
+    "models/v1.33-pattern-hotpath.json": "b7f1575a6d6016b39973bfb62f1ba385c327dd623353795b492bf22ebf0ff2a0",
+    "models/v1.33-pattern-selected.json": "203e5b626f4cf403b27b69bc32f6ba816095f9806695114943420fbf664ee863",
+    "models/v1.33-pattern-hotpath-experiments.json": "11bf70b8616159e2c200d79db3cfb68fc4eb4a4ffbb3c8190e7fe9a13a3fb7bf",
+    "models/v1.33-pattern-hotpath-comparison.md": "f0d919187141e4451abe834c7c2f1557ab53027c2d75f8bd782e72af573a5f1e"
+  },
+  "preservedSha256": {
+    "models/default-model.json": "8b82bf89b2afeebdcd1b2c056dee7ce21789aea9291cae11b0a480862ad37b01",
+    "models/v1.25-default.json": "730b4a83b9e0495e7f1a4beaa6da8b2a31c8d72ceb9b39e54a9218cbb381c14f",
+    "src/game/wasm/othello.mjs": "a1584f0244858efcf19d807dee2dd79e628cda2ee509371162cbc64c94c949e0",
+    "models/pattern32-outcome-v1.25.otpat": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0",
+    "models/pattern32-int8-step1-v1.32.otpat": "da33b0237d0b99a5bcecb0f57c9aa18f51ea7537adfd683e8d8364d553b68f91"
+  },
+  "buildConfigurations": {
+    ".build/native-pattern-block4-v1.33": {
+      "CMAKE_OSX_ARCHITECTURES:STRING": "",
+      "OTELLO_PATTERN_BLOCK4:BOOL": "ON",
+      "OTELLO_PATTERN_FAST_CODES:BOOL": "OFF",
+      "OTELLO_PATTERN_INTEGER_ROUNDING:BOOL": "OFF",
+      "OTELLO_PATTERN_SIMD:BOOL": "ON"
+    },
+    ".build/native-pattern-codes-v1.33": {
+      "CMAKE_OSX_ARCHITECTURES:STRING": "",
+      "OTELLO_PATTERN_BLOCK4:BOOL": "OFF",
+      "OTELLO_PATTERN_FAST_CODES:BOOL": "ON",
+      "OTELLO_PATTERN_INTEGER_ROUNDING:BOOL": "OFF",
+      "OTELLO_PATTERN_SIMD:BOOL": "ON"
+    },
+    ".build/native-pattern-control-v1.33": {
+      "CMAKE_OSX_ARCHITECTURES:STRING": "",
+      "OTELLO_PATTERN_BLOCK4:BOOL": "OFF",
+      "OTELLO_PATTERN_FAST_CODES:BOOL": "OFF",
+      "OTELLO_PATTERN_INTEGER_ROUNDING:BOOL": "OFF",
+      "OTELLO_PATTERN_SIMD:BOOL": "ON"
+    },
+    ".build/native-pattern-fast-portable-v1.33": {
+      "CMAKE_OSX_ARCHITECTURES:STRING": "",
+      "OTELLO_PATTERN_BLOCK4:BOOL": "ON",
+      "OTELLO_PATTERN_FAST_CODES:BOOL": "ON",
+      "OTELLO_PATTERN_INTEGER_ROUNDING:BOOL": "ON",
+      "OTELLO_PATTERN_SIMD:BOOL": "OFF"
+    },
+    ".build/native-pattern-fast-v1.33": {
+      "CMAKE_OSX_ARCHITECTURES:STRING": "",
+      "OTELLO_PATTERN_BLOCK4:BOOL": "ON",
+      "OTELLO_PATTERN_FAST_CODES:BOOL": "ON",
+      "OTELLO_PATTERN_INTEGER_ROUNDING:BOOL": "ON",
+      "OTELLO_PATTERN_SIMD:BOOL": "ON"
+    },
+    ".build/native-pattern-fast-x86-v1.33": {
+      "CMAKE_OSX_ARCHITECTURES:STRING": "x86_64",
+      "OTELLO_PATTERN_BLOCK4:BOOL": "ON",
+      "OTELLO_PATTERN_FAST_CODES:BOOL": "ON",
+      "OTELLO_PATTERN_INTEGER_ROUNDING:BOOL": "ON",
+      "OTELLO_PATTERN_SIMD:BOOL": "ON"
+    },
+    ".build/native-pattern-rounding-v1.33": {
+      "CMAKE_OSX_ARCHITECTURES:STRING": "",
+      "OTELLO_PATTERN_BLOCK4:BOOL": "OFF",
+      "OTELLO_PATTERN_FAST_CODES:BOOL": "OFF",
+      "OTELLO_PATTERN_INTEGER_ROUNDING:BOOL": "ON",
+      "OTELLO_PATTERN_SIMD:BOOL": "ON"
+    },
+    ".build/native-pattern-selected-portable-v1.33": {
+      "CMAKE_OSX_ARCHITECTURES:STRING": "",
+      "OTELLO_PATTERN_BLOCK4:BOOL": "ON",
+      "OTELLO_PATTERN_FAST_CODES:BOOL": "ON",
+      "OTELLO_PATTERN_INTEGER_ROUNDING:BOOL": "OFF",
+      "OTELLO_PATTERN_SIMD:BOOL": "OFF"
+    },
+    ".build/native-pattern-selected-v1.33": {
+      "CMAKE_OSX_ARCHITECTURES:STRING": "",
+      "OTELLO_PATTERN_BLOCK4:BOOL": "ON",
+      "OTELLO_PATTERN_FAST_CODES:BOOL": "ON",
+      "OTELLO_PATTERN_INTEGER_ROUNDING:BOOL": "OFF",
+      "OTELLO_PATTERN_SIMD:BOOL": "ON"
+    },
+    ".build/native-pattern-selected-x86-v1.33": {
+      "CMAKE_OSX_ARCHITECTURES:STRING": "x86_64",
+      "OTELLO_PATTERN_BLOCK4:BOOL": "ON",
+      "OTELLO_PATTERN_FAST_CODES:BOOL": "ON",
+      "OTELLO_PATTERN_INTEGER_ROUNDING:BOOL": "OFF",
+      "OTELLO_PATTERN_SIMD:BOOL": "ON"
+    }
+  },
+  "localEvidenceSha256": {
+    ".build/pattern-hotpath-v1.33-sanitizers.log": "cc9afdc24b4aacbab3e5f461577ff2be8fa38af3db846dd2e84c6b566cf17287",
+    ".build/pattern-selected-v1.33-sanitizers.log": "cc9afdc24b4aacbab3e5f461577ff2be8fa38af3db846dd2e84c6b566cf17287",
+    ".build/pattern-selected-v1.33-python-tests.log": "537d72014d9ac51e07b9490abd2a54f2344639944cbeeeab4930ee9cd848e912"
+  },
+  "checks": {
+    "nativeNeon": true,
+    "translatedX86Sse2": true,
+    "portable": true,
+    "sanitizers": true,
+    "patternTests": 4,
+    "linuxCiAddedNotExecuted": true
+  }
+}

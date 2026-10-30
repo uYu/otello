@@ -1,0 +1,125 @@
+{
+  "version": "v1.11-mixed-5m-full-epoch-candidate",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "selection": "final weights after every eligible new and original training row; supplementary pre-specified comparison, no test tuning",
+  "sha256": "2586906b78c62da9d2a9c9a8b747db17a80dafc73382f4f4d83c2aee8efb7294",
+  "parentSha256": "72294450ce5eb180703e05048df6e7ce7078f031c4e94464198192432d618bb0",
+  "epoch": 1,
+  "newPositions": 104627926,
+  "oldPositions": 1000000,
+  "trainingReportSha256": "80f82ffb60cdeef033fe04ec56b5c79d2c87e31e15eaea8866ab62c4e18b9b95",
+  "evaluationScriptSha256": "83cd05f5877e5bc15361c0f31325c03b1b0b819c46841caa7b727d98240e6e59",
+  "metrics": {
+    "validation": {
+      "float": {
+        "value": {
+          "outcomeMse": 0.8253578543663025,
+          "expectedScoreMse": 0.20633946359157562,
+          "nonDrawSignAccuracy": 0.644640799077987,
+          "draws": 794,
+          "zeroOutcomeMse": 0.8676666617393494
+        },
+        "policy": {
+          "crossEntropy": 1.7152314186096191,
+          "top1": 0.3576666666666667,
+          "uniformCrossEntropy": 2.0921316559038803,
+          "uniformTop1": 0.14703605201200015
+        },
+        "selectionLoss": 2.5405892729759216
+      },
+      "candidateNative": {
+        "value": {
+          "outcomeMse": 0.825581245,
+          "expectedScoreMse": 0.20639531125,
+          "nonDrawSignAccuracy": 0.6444487130234345,
+          "draws": 794,
+          "zeroOutcomeMse": 0.8676666617393494
+        },
+        "policy": {
+          "crossEntropy": 1.7153346878928017,
+          "top1": 0.35683333333333334,
+          "uniformCrossEntropy": 2.0921316559038803,
+          "uniformTop1": 0.14703605201200015
+        },
+        "selectionLoss": 2.5409159328928017
+      },
+      "baselineNative": {
+        "value": {
+          "outcomeMse": 0.7302913298333333,
+          "expectedScoreMse": 0.18257283245833333,
+          "nonDrawSignAccuracy": 0.6563580484056858,
+          "draws": 794,
+          "zeroOutcomeMse": 0.8676666617393494
+        },
+        "policy": {
+          "crossEntropy": 1.6851637772283223,
+          "top1": 0.37933333333333336,
+          "uniformCrossEntropy": 2.0921316559038803,
+          "uniformTop1": 0.14703605201200015
+        },
+        "selectionLoss": 2.4154551070616557
+      },
+      "cppParityPositions": 6000,
+      "cppMaxValueError": 0.0004997906525888718,
+      "cppMaxPolicyError": 2.220446049250313e-16
+    },
+    "test": {
+      "float": {
+        "value": {
+          "outcomeMse": 0.7815048694610596,
+          "expectedScoreMse": 0.1953762173652649,
+          "nonDrawSignAccuracy": 0.6604391371340523,
+          "draws": 808,
+          "zeroOutcomeMse": 0.8653333187103271
+        },
+        "policy": {
+          "crossEntropy": 1.7360841035842896,
+          "top1": 0.3525,
+          "uniformCrossEntropy": 2.1044416287103247,
+          "uniformTop1": 0.14458325754053308
+        },
+        "selectionLoss": 2.517588973045349
+      },
+      "candidateNative": {
+        "value": {
+          "outcomeMse": 0.7817496478333332,
+          "expectedScoreMse": 0.1954374119583333,
+          "nonDrawSignAccuracy": 0.6612095531587057,
+          "draws": 808,
+          "zeroOutcomeMse": 0.8653333187103271
+        },
+        "policy": {
+          "crossEntropy": 1.7361677335186927,
+          "top1": 0.3521666666666667,
+          "uniformCrossEntropy": 2.1044416287103247,
+          "uniformTop1": 0.14458325754053308
+        },
+        "selectionLoss": 2.517917381352026
+      },
+      "baselineNative": {
+        "value": {
+          "outcomeMse": 0.7126994258333335,
+          "expectedScoreMse": 0.17817485645833336,
+          "nonDrawSignAccuracy": 0.6710323574730355,
+          "draws": 808,
+          "zeroOutcomeMse": 0.8653333187103271
+        },
+        "policy": {
+          "crossEntropy": 1.7125798947170472,
+          "top1": 0.3586666666666667,
+          "uniformCrossEntropy": 2.1044416287103247,
+          "uniformTop1": 0.14458325754053308
+        },
+        "selectionLoss": 2.4252793205503806
+      },
+      "cppParityPositions": 6000,
+      "cppMaxValueError": 0.0004999911239986776,
+      "cppMaxPolicyError": 2.220446049250313e-16
+    }
+  },
+  "predictionsSha256": "8e7ef67fc4d19002d3816731614f08ad2e7164806acb65cec8562ce440d42560",
+  "model": "models/nnue256-mixed-5m-full-v1.11.otnnue",
+  "trainingReport": ".build/training/mixed-5m-v1/report.json",
+  "publishedTrainingReport": "models/v1.11-mixed-5m.json"
+}

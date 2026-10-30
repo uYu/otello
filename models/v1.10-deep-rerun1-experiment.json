@@ -1,0 +1,73 @@
+{
+  "version": "v1.10-deep-rerun1",
+  "status": "candidate",
+  "stopped": true,
+  "defaultPromoted": false,
+  "protocol": {
+    "games": 20,
+    "completedGames": 7,
+    "millisecondsPerMove": 1000
+  },
+  "baselineManifest": "models/v1.9-default.json",
+  "model": "models/nnue256-deep-v1.10.otnnue",
+  "trainingReport": "models/nnue256-deep-v1.10.json",
+  "matchReport": "models/v1.10-deep-vs-v1.9-1s-rerun1.json",
+  "sourceManifest": "models/archive/engineering-rerun1-sources.json",
+  "engineeringManifest": "models/engineering-rerun1.json",
+  "engineeringManifestSha256": "9b46a3e775d916feb05c3123f18f7bb687e27fda677a1b555e4f091c6043b1aa",
+  "legacyParity": "models/v1.10-deep-legacy-parity.json",
+  "artifactSha256": {
+    "models/nnue256-deep-v1.10.otnnue": "235bed6b569b87313fd1382a9bb34d9cf7134254fa9754aa86939f075a068dc6",
+    "models/nnue256-deep-v1.10.pt": "22f7f9877ecee6d8acfeb1fb675c834798c04d64850f83d6d8c5f4313cec8bb7",
+    "models/nnue256-deep-v1.10.json": "6b2813fbb7050517fcb5de41258258235fdfbb89527714b1297ce74888f3e84d",
+    "models/v1.10-deep-vs-v1.9-1s-rerun1.json": "c6e9a326a3e8e0bf3371630ac5bdda722509119009a98ddb35c3f8590ad09730",
+    "models/v1.10-deep-rerun1-comparison.md": "907de52863b6872af5e401e9796a4a57bc7cca7f4a940b4559058615fe46ab25",
+    "models/v1.10-deep-legacy-parity.json": "18e79a5d92efd791d7d02f1f6dde4ced79ac10cbcbbf0143e1a758e85c27bf1e",
+    "models/archive/engineering-rerun1-sources.json": "3542f5ad0630c45dc7af3642a1776aeb82cd96f0ec399b186c03bf0b549e1bd8",
+    "models/archive/engineering-rerun1-sources.tar.gz": "030ccdec4b958065a2ac828b467afcae1e4cf307ff46ace9f800d450a60ef2e9",
+    "models/engineering-rerun1.json": "9b46a3e775d916feb05c3123f18f7bb687e27fda677a1b555e4f091c6043b1aa"
+  },
+  "results": {
+    "baseline": {
+      "games": 7,
+      "win": 6,
+      "draw": 0,
+      "loss": 1,
+      "discDifference": 89,
+      "scoreRate": 0.8571428571428571,
+      "meanDiscDifference": 12.714285714285714,
+      "moves": 212,
+      "meanWallMs": 748.1769989999995,
+      "meanSearchUnits": 60837.03301886792,
+      "searchUnit": "simulations",
+      "meanNonExactDepth": 32.5796178343949,
+      "depthKind": "maximumVisited",
+      "meanSimulationDepth": 16.894512644397718,
+      "memoryLimitedSearches": 0,
+      "reusedMctsSearches": 205,
+      "exactMoves": 55
+    },
+    "candidate": {
+      "games": 7,
+      "win": 1,
+      "draw": 0,
+      "loss": 6,
+      "discDifference": -89,
+      "scoreRate": 0.14285714285714285,
+      "meanDiscDifference": -12.714285714285714,
+      "moves": 207,
+      "meanWallMs": 799.2197630386473,
+      "meanSearchUnits": 68660.08695652174,
+      "searchUnit": "simulations",
+      "meanNonExactDepth": 28.539877300613497,
+      "depthKind": "maximumVisited",
+      "meanSimulationDepth": 10.007213439194047,
+      "memoryLimitedSearches": 0,
+      "reusedMctsSearches": 200,
+      "exactMoves": 44
+    }
+  },
+  "replayedActions": 428,
+  "runtimeReportSha256": "ac7e62dd60a05cf2959b8d686d47fa3412238eb3cdcf4f81f9bb591ebbb6bcf8",
+  "stopReason": "User requested switching to 5 seconds per move"
+}

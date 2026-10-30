@@ -1,0 +1,91 @@
+{
+  "records": [
+    {
+      "index": 85,
+      "requestedBatch": 0,
+      "wallSeconds": 2.000179582973942,
+      "move": 25,
+      "score": -923,
+      "exact": false,
+      "simulations": 47977,
+      "evaluations": 47977,
+      "maxDepth": 23,
+      "meanDepth": 8.230902307355608,
+      "actualBatchMean": 1
+    },
+    {
+      "index": 85,
+      "requestedBatch": 1,
+      "wallSeconds": 2.000789750018157,
+      "move": 22,
+      "score": -920,
+      "exact": false,
+      "simulations": 119107,
+      "evaluations": 119035,
+      "maxDepth": 26,
+      "meanDepth": 9.5462567271445,
+      "actualBatchMean": 1.0
+    },
+    {
+      "index": 85,
+      "requestedBatch": 32,
+      "wallSeconds": 2.0001602079719305,
+      "move": 22,
+      "score": -921,
+      "exact": false,
+      "simulations": 201473,
+      "evaluations": 200258,
+      "maxDepth": 26,
+      "meanDepth": 10.256848312180788,
+      "actualBatchMean": 31.646333754740834
+    },
+    {
+      "index": 624,
+      "requestedBatch": 32,
+      "wallSeconds": 2.000230834004469,
+      "move": 60,
+      "score": -301,
+      "exact": false,
+      "simulations": 196182,
+      "evaluations": 193883,
+      "maxDepth": 31,
+      "meanDepth": 14.619139370584458,
+      "actualBatchMean": 18.64618195806886
+    },
+    {
+      "index": 624,
+      "requestedBatch": 1,
+      "wallSeconds": 2.0001377500593662,
+      "move": 60,
+      "score": -323,
+      "exact": false,
+      "simulations": 119044,
+      "evaluations": 118049,
+      "maxDepth": 31,
+      "meanDepth": 13.797721850744262,
+      "actualBatchMean": 1.0
+    },
+    {
+      "index": 624,
+      "requestedBatch": 0,
+      "wallSeconds": 2.0001100830268115,
+      "move": 60,
+      "score": -312,
+      "exact": false,
+      "simulations": 51251,
+      "evaluations": 50647,
+      "maxDepth": 30,
+      "meanDepth": 13.18054281867671,
+      "actualBatchMean": 1
+    }
+  ],
+  "milliseconds": 2000,
+  "positions": [
+    85,
+    624
+  ],
+  "blasThreads": 1,
+  "sourceSha256": "f39a1b065000188d9e97639957034f2fbed09f5470fa0cb17dcc38e98a3b0e36",
+  "librarySha256": "ef28c93716cae2db4562ce922f542b1f6e74657791450ca4f2ce59983a914a60",
+  "limits": "Two fixed validation positions; concurrent formal matches; no win-rate or strength conclusion"
+}

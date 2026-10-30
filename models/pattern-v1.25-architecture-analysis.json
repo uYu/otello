@@ -1,0 +1,180 @@
+{
+  "scriptSha256": "53204db8ce6a6c65994334192abea83c775195d231faec52e08d7429bf3139cb",
+  "baselineManifestSha256": "730b4a83b9e0495e7f1a4beaa6da8b2a31c8d72ceb9b39e54a9218cbb381c14f",
+  "analysis": "Pattern v1.25 architecture diagnostics",
+  "baseline": "models/v1.25-default.json",
+  "modelSha256": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0",
+  "validationOnly": true,
+  "testSetUsed": false,
+  "parameters": {
+    "total": 1787950,
+    "embedding": 1783296,
+    "embeddingFraction": 0.9973970189322968,
+    "trunk": 3136,
+    "head": 1518,
+    "modelBytes": 3576088,
+    "hidden64Total": 1792558,
+    "hidden64Extra": 4608,
+    "canonicalModelBytes": 1833688
+  },
+  "symmetry": {
+    "valueSpanMean": 0.12833884358406067,
+    "valueSpanMax": 0.7876328825950623,
+    "valueSpanAbove01": 0.6058333333333333,
+    "meanTopMoveDisagreement": 0.05014285714285714,
+    "baselineValidation": {
+      "outcomeMse": 0.7249130606651306,
+      "nonDrawSignAccuracy": 0.6552055320783711,
+      "policyTop1": 0.414,
+      "policyCrossEntropy": 1.5960545539855957
+    },
+    "eightSymmetryAverageValidation": {
+      "outcomeMse": 0.7225246429443359,
+      "nonDrawSignAccuracy": 0.6544371878601614,
+      "policyTop1": 0.4155,
+      "policyCrossEntropy": 1.5955519676208496
+    },
+    "note": "Averaging is a diagnostic at 8x inference cost, not a deployed candidate or a strength result"
+  },
+  "activation": {
+    "zeroFraction": 0.2501510416666667,
+    "saturatedFraction": 0.006411458333333333,
+    "alwaysZeroNeurons": 5,
+    "perNeuronActiveFraction": [
+      0.9523333333333334,
+      0.9843333333333333,
+      0.8533333333333334,
+      0.984,
+      0.42933333333333334,
+      0.9821666666666666,
+      0.0,
+      0.9613333333333334,
+      0.9931666666666666,
+      0.9705,
+      0.9711666666666666,
+      0.968,
+      0.973,
+      0.3428333333333333,
+      0.9776666666666667,
+      0.0,
+      0.9531666666666667,
+      0.9718333333333333,
+      0.9726666666666667,
+      0.9606666666666667,
+      0.0,
+      0.9668333333333333,
+      0.9753333333333334,
+      0.698,
+      0.9611666666666666,
+      0.9613333333333334,
+      0.9603333333333334,
+      0.30633333333333335,
+      0.0,
+      0.977,
+      0.0,
+      0.9873333333333333
+    ]
+  },
+  "stages": [
+    {
+      "placed": [
+        8,
+        16
+      ],
+      "positions": 333,
+      "outcomeMse": 0.9176974892616272,
+      "policyTop1": 0.3993993993993994,
+      "policyCrossEntropy": 1.7287282943725586
+    },
+    {
+      "placed": [
+        17,
+        32
+      ],
+      "positions": 1820,
+      "outcomeMse": 0.8456218242645264,
+      "policyTop1": 0.3412087912087912,
+      "policyCrossEntropy": 1.8590959310531616
+    },
+    {
+      "placed": [
+        33,
+        48
+      ],
+      "positions": 2874,
+      "outcomeMse": 0.6894001364707947,
+      "policyTop1": 0.41092553931802367,
+      "policyCrossEntropy": 1.595426082611084
+    },
+    {
+      "placed": [
+        49,
+        56
+      ],
+      "positions": 973,
+      "outcomeMse": 0.5380451679229736,
+      "policyTop1": 0.5642343268242549,
+      "policyCrossEntropy": 1.0604846477508545
+    }
+  ],
+  "coverage": {
+    "rawRowsSeen": 31649,
+    "rawRowsUnder10": 35098,
+    "rawRowsUnder100": 45160,
+    "canonicalRows": 28503,
+    "canonicalRowsSeen": 17003,
+    "rawRowsCoveredByFullD4Closure": 33308,
+    "note": "Counts use frozen raw training boards; orbit coverage accounts for symmetry closure, actual random augmentation multiplicities are not reconstructed"
+  },
+  "canonicalTypes": [
+    {
+      "name": "line8",
+      "tables": 4,
+      "rowsEach": 6561,
+      "canonicalRowsEach": 3321
+    },
+    {
+      "name": "diagonal4",
+      "tables": 1,
+      "rowsEach": 81,
+      "canonicalRowsEach": 45
+    },
+    {
+      "name": "diagonal5",
+      "tables": 1,
+      "rowsEach": 243,
+      "canonicalRowsEach": 135
+    },
+    {
+      "name": "diagonal6",
+      "tables": 1,
+      "rowsEach": 729,
+      "canonicalRowsEach": 378
+    },
+    {
+      "name": "diagonal7",
+      "tables": 1,
+      "rowsEach": 2187,
+      "canonicalRowsEach": 1134
+    },
+    {
+      "name": "diagonal8",
+      "tables": 1,
+      "rowsEach": 6561,
+      "canonicalRowsEach": 3321
+    },
+    {
+      "name": "corner3x3",
+      "tables": 1,
+      "rowsEach": 19683,
+      "canonicalRowsEach": 10206
+    }
+  ],
+  "policy": {
+    "spatialBasisRank": 37,
+    "legalRankDeficitPositions": 0,
+    "validationPositions": 6000,
+    "note": "Fixed additive shape projection plus 10 position buckets; rank deficit counts are on legal moves only"
+  },
+  "seconds": 1.0584304579533637
+}

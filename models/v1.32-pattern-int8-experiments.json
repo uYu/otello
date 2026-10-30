@@ -1,0 +1,11 @@
+{
+  "version": "v1.32 Pattern INT8/SIMD",
+  "experiments": [
+    {
+      "name": "Pattern INT8 棋形表 + NEON/SSE2 内核 · v1.32",
+      "games": 0,
+      "runtimeReport": ".build/training/pattern-int8-v1.32/progress.json",
+      "report": "models/v1.32-pattern-int8.json"
+    }
+  ]
+}

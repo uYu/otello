@@ -1,0 +1,7869 @@
+{
+  "version": "v1.36-pattern-capacity",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "results": [
+    {
+      "maxNodes": 2097152,
+      "samples": [
+        {
+          "game": 8,
+          "ply": 0,
+          "originallyCapped": false,
+          "move": 44,
+          "score": 20,
+          "depth": 58,
+          "elapsedMs": 2000,
+          "nodes": 830517,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.067667,
+          "candidates": [
+            {
+              "move": 19,
+              "score": 22,
+              "visits": 253523,
+              "value": 0.021824477463582678
+            },
+            {
+              "move": 26,
+              "score": 22,
+              "visits": 409722,
+              "value": 0.022343706220316156
+            },
+            {
+              "move": 37,
+              "score": 18,
+              "visits": 63276,
+              "value": 0.017846845565459454
+            },
+            {
+              "move": 44,
+              "score": 20,
+              "visits": 103995,
+              "value": 0.01993838165296416
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 830517,
+            "evaluations": 830517,
+            "meanDepth": 22.50677589983107,
+            "reusedNodes": 0,
+            "treeNodes": 830517,
+            "memoryLimited": false,
+            "maxNodes": 2097152,
+            "peakRssBytes": 606011392
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 4,
+            "temperatureMilli": 32000,
+            "lossLimit": 64,
+            "bestScore": 22,
+            "scoreLoss": 2,
+            "sampled": true
+          }
+        },
+        {
+          "game": 8,
+          "ply": 2,
+          "originallyCapped": false,
+          "move": 19,
+          "score": 10,
+          "depth": 58,
+          "elapsedMs": 2000,
+          "nodes": 785324,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.03825,
+          "candidates": [
+            {
+              "move": 18,
+              "score": 13,
+              "visits": 415941,
+              "value": 0.013087659067030796
+            },
+            {
+              "move": 19,
+              "score": 10,
+              "visits": 454329,
+              "value": 0.010319288445156985
+            },
+            {
+              "move": 20,
+              "score": -20,
+              "visits": 15782,
+              "value": -0.01964674946141177
+            },
+            {
+              "move": 21,
+              "score": -196,
+              "visits": 1205,
+              "value": -0.19613443983402487
+            },
+            {
+              "move": 22,
+              "score": -337,
+              "visits": 379,
+              "value": -0.33706860158311347
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 785324,
+            "evaluations": 785232,
+            "meanDepth": 29.553430176589536,
+            "reusedNodes": 102313,
+            "treeNodes": 887568,
+            "memoryLimited": false,
+            "maxNodes": 2097152,
+            "peakRssBytes": 687849472
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 3,
+            "temperatureMilli": 26666,
+            "lossLimit": 53,
+            "bestScore": 13,
+            "scoreLoss": 3,
+            "sampled": true
+          }
+        },
+        {
+          "game": 8,
+          "ply": 4,
+          "originallyCapped": false,
+          "move": 26,
+          "score": -61,
+          "depth": 59,
+          "elapsedMs": 2000,
+          "nodes": 823915,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.040292,
+          "candidates": [
+            {
+              "move": 26,
+              "score": -61,
+              "visits": 459016,
+              "value": -0.061341879150181994
+            },
+            {
+              "move": 30,
+              "score": -225,
+              "visits": 1624,
+              "value": -0.22474445812807897
+            },
+            {
+              "move": 34,
+              "score": -62,
+              "visits": 376501,
+              "value": -0.062157882714786554
+            },
+            {
+              "move": 38,
+              "score": -322,
+              "visits": 1020,
+              "value": -0.32193235294117645
+            },
+            {
+              "move": 42,
+              "score": -262,
+              "visits": 1026,
+              "value": -0.26240935672514626
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 823915,
+            "evaluations": 805539,
+            "meanDepth": 25.81210683140858,
+            "reusedNodes": 15273,
+            "treeNodes": 821178,
+            "memoryLimited": false,
+            "maxNodes": 2097152,
+            "peakRssBytes": 691224576
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 2,
+            "temperatureMilli": 21333,
+            "lossLimit": 42,
+            "bestScore": -61,
+            "scoreLoss": 0,
+            "sampled": true
+          }
+        },
+        {
+          "game": 8,
+          "ply": 6,
+          "originallyCapped": false,
+          "move": 51,
+          "score": -90,
+          "depth": 56,
+          "elapsedMs": 2000,
+          "nodes": 713679,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.032542,
+          "candidates": [
+            {
+              "move": 30,
+              "score": -487,
+              "visits": 532,
+              "value": -0.4872368421052629
+            },
+            {
+              "move": 38,
+              "score": -563,
+              "visits": 476,
+              "value": -0.5631596638655462
+            },
+            {
+              "move": 41,
+              "score": -353,
+              "visits": 375,
+              "value": -0.35326933333333355
+            },
+            {
+              "move": 42,
+              "score": -335,
+              "visits": 1622,
+              "value": -0.33518742293464765
+            },
+            {
+              "move": 45,
+              "score": -486,
+              "visits": 984,
+              "value": -0.48617987804878016
+            },
+            {
+              "move": 51,
+              "score": -90,
+              "visits": 1066714,
+              "value": -0.09007229304198207
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 713679,
+            "evaluations": 712689,
+            "meanDepth": 29.852063742943255,
+            "reusedNodes": 357017,
+            "treeNodes": 1070129,
+            "memoryLimited": false,
+            "maxNodes": 2097152,
+            "peakRssBytes": 845938688
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 16000,
+            "lossLimit": 32,
+            "bestScore": -90,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 8,
+          "ply": 8,
+          "originallyCapped": false,
+          "move": 33,
+          "score": -59,
+          "depth": 55,
+          "elapsedMs": 2000,
+          "nodes": 791045,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.032375,
+          "candidates": [
+            {
+              "move": 30,
+              "score": -293,
+              "visits": 225,
+              "value": -0.29263555555555565
+            },
+            {
+              "move": 33,
+              "score": -59,
+              "visits": 1827758,
+              "value": -0.059311697719272694
+            },
+            {
+              "move": 37,
+              "score": -159,
+              "visits": 4464,
+              "value": -0.1590439068100359
+            },
+            {
+              "move": 38,
+              "score": -248,
+              "visits": 703,
+              "value": -0.24835135135135128
+            },
+            {
+              "move": 41,
+              "score": -119,
+              "visits": 3105,
+              "value": -0.1194367149758453
+            },
+            {
+              "move": 42,
+              "score": -153,
+              "visits": 5726,
+              "value": -0.1526966468739085
+            },
+            {
+              "move": 45,
+              "score": -401,
+              "visits": 1517,
+              "value": -0.4013731048121294
+            },
+            {
+              "move": 53,
+              "score": -640,
+              "visits": 156,
+              "value": -0.6395192307692311
+            },
+            {
+              "move": 60,
+              "score": -548,
+              "visits": 234,
+              "value": -0.5475470085470088
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 791045,
+            "evaluations": 399923,
+            "meanDepth": 40.20455726286115,
+            "reusedNodes": 1052269,
+            "treeNodes": 1454994,
+            "memoryLimited": false,
+            "maxNodes": 2097152,
+            "peakRssBytes": 1200668672
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 10666,
+            "lossLimit": 21,
+            "bestScore": -59,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 8,
+          "ply": 10,
+          "originallyCapped": true,
+          "move": 42,
+          "score": -66,
+          "depth": 52,
+          "elapsedMs": 1965,
+          "nodes": 687042,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 1965.255959,
+          "candidates": [
+            {
+              "move": 10,
+              "score": -431,
+              "visits": 268,
+              "value": -0.4305186567164181
+            },
+            {
+              "move": 11,
+              "score": -539,
+              "visits": 75,
+              "value": -0.5386666666666665
+            },
+            {
+              "move": 12,
+              "score": -614,
+              "visits": 65,
+              "value": -0.6143384615384615
+            },
+            {
+              "move": 18,
+              "score": -338,
+              "visits": 1348,
+              "value": -0.3378827893175073
+            },
+            {
+              "move": 30,
+              "score": -513,
+              "visits": 72,
+              "value": -0.5128749999999997
+            },
+            {
+              "move": 37,
+              "score": -148,
+              "visits": 1885,
+              "value": -0.14818143236074255
+            },
+            {
+              "move": 38,
+              "score": -429,
+              "visits": 171,
+              "value": -0.42892397660818726
+            },
+            {
+              "move": 42,
+              "score": -66,
+              "visits": 2495367,
+              "value": -0.06569253821182884
+            },
+            {
+              "move": 53,
+              "score": -689,
+              "visits": 114,
+              "value": -0.6893684210526317
+            },
+            {
+              "move": 60,
+              "score": -607,
+              "visits": 263,
+              "value": -0.6073346007604565
+            },
+            {
+              "move": 61,
+              "score": -549,
+              "visits": 171,
+              "value": -0.5493801169590643
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 687042,
+            "evaluations": 672521,
+            "meanDepth": 30.049983843782478,
+            "reusedNodes": 1423863,
+            "treeNodes": 2097152,
+            "memoryLimited": true,
+            "maxNodes": 2097152,
+            "peakRssBytes": 1453080576
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 5333,
+            "lossLimit": 10,
+            "bestScore": -66,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 8,
+          "ply": 12,
+          "originallyCapped": true,
+          "move": 18,
+          "score": -63,
+          "depth": 38,
+          "elapsedMs": 288,
+          "nodes": 12796,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 288.127042,
+          "candidates": [
+            {
+              "move": 11,
+              "score": -297,
+              "visits": 314,
+              "value": -0.2965573248407646
+            },
+            {
+              "move": 12,
+              "score": -141,
+              "visits": 900,
+              "value": -0.1411277777777778
+            },
+            {
+              "move": 18,
+              "score": -63,
+              "visits": 2297570,
+              "value": -0.06349835957120716
+            },
+            {
+              "move": 21,
+              "score": -145,
+              "visits": 2709,
+              "value": -0.14524031007751934
+            },
+            {
+              "move": 30,
+              "score": -774,
+              "visits": 80,
+              "value": -0.7741374999999999
+            },
+            {
+              "move": 38,
+              "score": -540,
+              "visits": 298,
+              "value": -0.5395838926174495
+            },
+            {
+              "move": 45,
+              "score": -101,
+              "visits": 193452,
+              "value": -0.10070319769245237
+            },
+            {
+              "move": 53,
+              "score": -728,
+              "visits": 311,
+              "value": -0.7278006430868165
+            },
+            {
+              "move": 60,
+              "score": -521,
+              "visits": 352,
+              "value": -0.5206392045454548
+            },
+            {
+              "move": 61,
+              "score": -143,
+              "visits": 3813,
+              "value": -0.14266824023078914
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 12796,
+            "evaluations": 12796,
+            "meanDepth": 19.108862144420133,
+            "reusedNodes": 2084356,
+            "treeNodes": 2097152,
+            "memoryLimited": true,
+            "maxNodes": 2097152,
+            "peakRssBytes": 2083160064
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -63,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 8,
+          "ply": 14,
+          "originallyCapped": true,
+          "move": 45,
+          "score": -71,
+          "depth": 47,
+          "elapsedMs": 766,
+          "nodes": 224595,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 766.72225,
+          "candidates": [
+            {
+              "move": 6,
+              "score": -524,
+              "visits": 35,
+              "value": -0.5235714285714284
+            },
+            {
+              "move": 21,
+              "score": -112,
+              "visits": 16039,
+              "value": -0.11179019889020442
+            },
+            {
+              "move": 30,
+              "score": -508,
+              "visits": 189,
+              "value": -0.5075185185185189
+            },
+            {
+              "move": 38,
+              "score": -372,
+              "visits": 1167,
+              "value": -0.37182347900599827
+            },
+            {
+              "move": 45,
+              "score": -71,
+              "visits": 2235580,
+              "value": -0.07119759301839003
+            },
+            {
+              "move": 46,
+              "score": -285,
+              "visits": 427,
+              "value": -0.28517564402810325
+            },
+            {
+              "move": 53,
+              "score": -623,
+              "visits": 680,
+              "value": -0.6229470588235299
+            },
+            {
+              "move": 61,
+              "score": -100,
+              "visits": 245682,
+              "value": -0.09986490259766767
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 224595,
+            "evaluations": 224589,
+            "meanDepth": 22.859524922638528,
+            "reusedNodes": 1872557,
+            "treeNodes": 2097152,
+            "memoryLimited": true,
+            "maxNodes": 2097152,
+            "peakRssBytes": 2083160064
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -71,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 8,
+          "ply": 16,
+          "originallyCapped": false,
+          "move": 21,
+          "score": -32,
+          "depth": 48,
+          "elapsedMs": 2000,
+          "nodes": 1105116,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.031542,
+          "candidates": [
+            {
+              "move": 6,
+              "score": -458,
+              "visits": 61,
+              "value": -0.45780327868852455
+            },
+            {
+              "move": 12,
+              "score": -184,
+              "visits": 1792,
+              "value": -0.18427455357142866
+            },
+            {
+              "move": 21,
+              "score": -32,
+              "visits": 2364374,
+              "value": -0.03172795970518737
+            },
+            {
+              "move": 22,
+              "score": -204,
+              "visits": 1697,
+              "value": -0.20359398939304638
+            },
+            {
+              "move": 30,
+              "score": -325,
+              "visits": 805,
+              "value": -0.3245925465838509
+            },
+            {
+              "move": 39,
+              "score": -401,
+              "visits": 171,
+              "value": -0.4014210526315787
+            },
+            {
+              "move": 46,
+              "score": -237,
+              "visits": 985,
+              "value": -0.23744162436548258
+            },
+            {
+              "move": 53,
+              "score": -333,
+              "visits": 893,
+              "value": -0.3326640537513994
+            },
+            {
+              "move": 54,
+              "score": -361,
+              "visits": 4,
+              "value": -0.36075
+            },
+            {
+              "move": 60,
+              "score": -295,
+              "visits": 556,
+              "value": -0.29540287769784185
+            },
+            {
+              "move": 61,
+              "score": -139,
+              "visits": 3371,
+              "value": -0.13884752299021058
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 1105116,
+            "evaluations": 337320,
+            "meanDepth": 36.528852174794324,
+            "reusedNodes": 880699,
+            "treeNodes": 1220770,
+            "memoryLimited": false,
+            "maxNodes": 2097152,
+            "peakRssBytes": 2083160064
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -32,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 8,
+          "ply": 18,
+          "originallyCapped": false,
+          "move": 30,
+          "score": -21,
+          "depth": 46,
+          "elapsedMs": 2000,
+          "nodes": 1158161,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.03575,
+          "candidates": [
+            {
+              "move": 5,
+              "score": -404,
+              "visits": 613,
+              "value": -0.40385807504078297
+            },
+            {
+              "move": 6,
+              "score": -445,
+              "visits": 62,
+              "value": -0.4450645161290322
+            },
+            {
+              "move": 22,
+              "score": -104,
+              "visits": 339326,
+              "value": -0.10394390055580616
+            },
+            {
+              "move": 30,
+              "score": -21,
+              "visits": 3165831,
+              "value": -0.021300266817779585
+            },
+            {
+              "move": 39,
+              "score": -427,
+              "visits": 368,
+              "value": -0.42749184782608685
+            },
+            {
+              "move": 46,
+              "score": -363,
+              "visits": 376,
+              "value": -0.3632313829787236
+            },
+            {
+              "move": 47,
+              "score": -310,
+              "visits": 324,
+              "value": -0.30952777777777796
+            },
+            {
+              "move": 53,
+              "score": -309,
+              "visits": 725,
+              "value": -0.3094565517241382
+            },
+            {
+              "move": 54,
+              "score": -421,
+              "visits": 16,
+              "value": -0.4211875
+            },
+            {
+              "move": 59,
+              "score": -239,
+              "visits": 1601,
+              "value": -0.23876264834478492
+            },
+            {
+              "move": 60,
+              "score": -544,
+              "visits": 328,
+              "value": -0.5442530487804875
+            },
+            {
+              "move": 61,
+              "score": -117,
+              "visits": 3246,
+              "value": -0.11676093653727668
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 1158161,
+            "evaluations": 201478,
+            "meanDepth": 34.558306660300254,
+            "reusedNodes": 1200716,
+            "treeNodes": 1403677,
+            "memoryLimited": false,
+            "maxNodes": 2097152,
+            "peakRssBytes": 2083160064
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -21,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 8,
+          "ply": 20,
+          "originallyCapped": false,
+          "move": 46,
+          "score": -70,
+          "depth": 44,
+          "elapsedMs": 2000,
+          "nodes": 744926,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.027084,
+          "candidates": [
+            {
+              "move": 5,
+              "score": -89,
+              "visits": 17520,
+              "value": -0.08867910958904103
+            },
+            {
+              "move": 6,
+              "score": -235,
+              "visits": 337,
+              "value": -0.23461424332344225
+            },
+            {
+              "move": 31,
+              "score": -144,
+              "visits": 10649,
+              "value": -0.14443994741290261
+            },
+            {
+              "move": 39,
+              "score": -440,
+              "visits": 617,
+              "value": -0.4395186385737442
+            },
+            {
+              "move": 46,
+              "score": -70,
+              "visits": 3805455,
+              "value": -0.06982220522910036
+            },
+            {
+              "move": 47,
+              "score": -152,
+              "visits": 2319,
+              "value": -0.1516300129366103
+            },
+            {
+              "move": 53,
+              "score": -109,
+              "visits": 34458,
+              "value": -0.10935872656567339
+            },
+            {
+              "move": 54,
+              "score": -374,
+              "visits": 95,
+              "value": -0.3742526315789474
+            },
+            {
+              "move": 59,
+              "score": -439,
+              "visits": 1256,
+              "value": -0.4389737261146495
+            },
+            {
+              "move": 60,
+              "score": -280,
+              "visits": 1087,
+              "value": -0.2803164673413067
+            },
+            {
+              "move": 61,
+              "score": -124,
+              "visits": 2558,
+              "value": -0.12370250195465209
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 744926,
+            "evaluations": 622391,
+            "meanDepth": 29.88038409184268,
+            "reusedNodes": 1022861,
+            "treeNodes": 1651780,
+            "memoryLimited": false,
+            "maxNodes": 2097152,
+            "peakRssBytes": 2083160064
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -70,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 8,
+          "ply": 22,
+          "originallyCapped": true,
+          "move": 39,
+          "score": -107,
+          "depth": 42,
+          "elapsedMs": 1623,
+          "nodes": 558033,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 1623.158042,
+          "candidates": [
+            {
+              "move": 6,
+              "score": -305,
+              "visits": 36,
+              "value": -0.30455555555555563
+            },
+            {
+              "move": 14,
+              "score": -184,
+              "visits": 60,
+              "value": -0.18393333333333334
+            },
+            {
+              "move": 22,
+              "score": -578,
+              "visits": 403,
+              "value": -0.5784937965260546
+            },
+            {
+              "move": 31,
+              "score": -85,
+              "visits": 93130,
+              "value": -0.08545772575968975
+            },
+            {
+              "move": 39,
+              "score": -107,
+              "visits": 4056746,
+              "value": -0.1071180480611722
+            },
+            {
+              "move": 47,
+              "score": -257,
+              "visits": 2370,
+              "value": -0.257305063291139
+            },
+            {
+              "move": 54,
+              "score": -370,
+              "visits": 42,
+              "value": -0.3698571428571428
+            },
+            {
+              "move": 59,
+              "score": -350,
+              "visits": 2154,
+              "value": -0.3504656453110495
+            },
+            {
+              "move": 60,
+              "score": -707,
+              "visits": 598,
+              "value": -0.7065652173913041
+            },
+            {
+              "move": 61,
+              "score": -110,
+              "visits": 193719,
+              "value": -0.10979977699657806
+            },
+            {
+              "move": 62,
+              "score": -494,
+              "visits": 30,
+              "value": -0.4938
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 558033,
+            "evaluations": 526230,
+            "meanDepth": 26.416855275584062,
+            "reusedNodes": 1566684,
+            "treeNodes": 2097152,
+            "memoryLimited": true,
+            "maxNodes": 2097152,
+            "peakRssBytes": 2083160064
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -107,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 8,
+          "ply": 24,
+          "originallyCapped": true,
+          "move": 15,
+          "score": -138,
+          "depth": 41,
+          "elapsedMs": 1079,
+          "nodes": 333943,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 1079.240875,
+          "candidates": [
+            {
+              "move": 5,
+              "score": -650,
+              "visits": 213,
+              "value": -0.6497276995305166
+            },
+            {
+              "move": 6,
+              "score": -567,
+              "visits": 85,
+              "value": -0.5667176470588238
+            },
+            {
+              "move": 12,
+              "score": -447,
+              "visits": 608,
+              "value": -0.44725000000000026
+            },
+            {
+              "move": 14,
+              "score": -356,
+              "visits": 27,
+              "value": -0.3558148148148148
+            },
+            {
+              "move": 15,
+              "score": -138,
+              "visits": 4342543,
+              "value": -0.13812087802008594
+            },
+            {
+              "move": 22,
+              "score": -453,
+              "visits": 338,
+              "value": -0.4533727810650886
+            },
+            {
+              "move": 47,
+              "score": -376,
+              "visits": 5557,
+              "value": -0.3762512146841804
+            },
+            {
+              "move": 54,
+              "score": -556,
+              "visits": 34,
+              "value": -0.5561470588235295
+            },
+            {
+              "move": 59,
+              "score": -442,
+              "visits": 966,
+              "value": -0.4418633540372669
+            },
+            {
+              "move": 60,
+              "score": -747,
+              "visits": 290,
+              "value": -0.7467137931034483
+            },
+            {
+              "move": 61,
+              "score": -699,
+              "visits": 240,
+              "value": -0.6989583333333332
+            },
+            {
+              "move": 62,
+              "score": -627,
+              "visits": 124,
+              "value": -0.6270241935483869
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 333943,
+            "evaluations": 318500,
+            "meanDepth": 26.1840823134487,
+            "reusedNodes": 1775324,
+            "treeNodes": 2097152,
+            "memoryLimited": true,
+            "maxNodes": 2097152,
+            "peakRssBytes": 2083160064
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -138,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 1,
+          "originallyCapped": false,
+          "move": 34,
+          "score": -9,
+          "depth": 64,
+          "elapsedMs": 2000,
+          "nodes": 801848,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.029083,
+          "candidates": [
+            {
+              "move": 18,
+              "score": -84,
+              "visits": 3015,
+              "value": -0.08416019900497484
+            },
+            {
+              "move": 20,
+              "score": -348,
+              "visits": 2266,
+              "value": -0.34776566637246265
+            },
+            {
+              "move": 34,
+              "score": -9,
+              "visits": 796566,
+              "value": -0.008565176018057312
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 801848,
+            "evaluations": 768582,
+            "meanDepth": 29.062444503197614,
+            "reusedNodes": 0,
+            "treeNodes": 769080,
+            "memoryLimited": false,
+            "maxNodes": 2097152,
+            "peakRssBytes": 2083160064
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 29333,
+            "lossLimit": 58,
+            "bestScore": -9,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 3,
+          "originallyCapped": false,
+          "move": 37,
+          "score": -23,
+          "depth": 60,
+          "elapsedMs": 2000,
+          "nodes": 696726,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.026334,
+          "candidates": [
+            {
+              "move": 11,
+              "score": -122,
+              "visits": 1009,
+              "value": -0.12246184340931628
+            },
+            {
+              "move": 20,
+              "score": -121,
+              "visits": 5731,
+              "value": -0.1213683475833187
+            },
+            {
+              "move": 21,
+              "score": -205,
+              "visits": 2228,
+              "value": -0.20541741472172348
+            },
+            {
+              "move": 37,
+              "score": -23,
+              "visits": 1169392,
+              "value": -0.023397421908137248
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 696726,
+            "evaluations": 676310,
+            "meanDepth": 34.132729365632976,
+            "reusedNodes": 448867,
+            "treeNodes": 1126243,
+            "memoryLimited": false,
+            "maxNodes": 2097152,
+            "peakRssBytes": 2083160064
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 24000,
+            "lossLimit": 48,
+            "bestScore": -23,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 5,
+          "originallyCapped": false,
+          "move": 20,
+          "score": -19,
+          "depth": 58,
+          "elapsedMs": 2000,
+          "nodes": 639397,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.026375,
+          "candidates": [
+            {
+              "move": 10,
+              "score": -485,
+              "visits": 302,
+              "value": -0.48450000000000054
+            },
+            {
+              "move": 11,
+              "score": -488,
+              "visits": 229,
+              "value": -0.4877379912663755
+            },
+            {
+              "move": 20,
+              "score": -19,
+              "visits": 1801853,
+              "value": -0.01898242919927348
+            },
+            {
+              "move": 21,
+              "score": -410,
+              "visits": 1939,
+              "value": -0.41023517276946825
+            },
+            {
+              "move": 51,
+              "score": -365,
+              "visits": 487,
+              "value": -0.364577002053388
+            },
+            {
+              "move": 53,
+              "score": -229,
+              "visits": 724,
+              "value": -0.22910359116022114
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 639397,
+            "evaluations": 555914,
+            "meanDepth": 36.163765235057404,
+            "reusedNodes": 1114020,
+            "treeNodes": 1671073,
+            "memoryLimited": false,
+            "maxNodes": 2097152,
+            "peakRssBytes": 2083160064
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 18666,
+            "lossLimit": 37,
+            "bestScore": -19,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 7,
+          "originallyCapped": true,
+          "move": 53,
+          "score": -18,
+          "depth": 56,
+          "elapsedMs": 1734,
+          "nodes": 580142,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 1734.236708,
+          "candidates": [
+            {
+              "move": 10,
+              "score": -439,
+              "visits": 641,
+              "value": -0.4386833073322937
+            },
+            {
+              "move": 18,
+              "score": -514,
+              "visits": 1715,
+              "value": -0.5143533527696798
+            },
+            {
+              "move": 51,
+              "score": -263,
+              "visits": 1733,
+              "value": -0.26254241200230816
+            },
+            {
+              "move": 52,
+              "score": -156,
+              "visits": 2911,
+              "value": -0.15621951219512198
+            },
+            {
+              "move": 53,
+              "score": -18,
+              "visits": 2355794,
+              "value": -0.018139906969792872
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 580142,
+            "evaluations": 448422,
+            "meanDepth": 35.656244505655515,
+            "reusedNodes": 1648191,
+            "treeNodes": 2097152,
+            "memoryLimited": true,
+            "maxNodes": 2097152,
+            "peakRssBytes": 2083160064
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 13333,
+            "lossLimit": 26,
+            "bestScore": -18,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 9,
+          "originallyCapped": true,
+          "move": 29,
+          "score": -18,
+          "depth": 53,
+          "elapsedMs": 358,
+          "nodes": 39815,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 359.017084,
+          "candidates": [
+            {
+              "move": 18,
+              "score": -85,
+              "visits": 9723,
+              "value": -0.08459045562069317
+            },
+            {
+              "move": 26,
+              "score": -97,
+              "visits": 7681,
+              "value": -0.09722471032417648
+            },
+            {
+              "move": 29,
+              "score": -18,
+              "visits": 2353556,
+              "value": -0.01775979114157285
+            },
+            {
+              "move": 38,
+              "score": -209,
+              "visits": 1846,
+              "value": -0.2093060671722644
+            },
+            {
+              "move": 39,
+              "score": -143,
+              "visits": 745,
+              "value": -0.14289798657718136
+            },
+            {
+              "move": 52,
+              "score": -43,
+              "visits": 11483,
+              "value": -0.04316119480971862
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 39815,
+            "evaluations": 17386,
+            "meanDepth": 41.216526434760766,
+            "reusedNodes": 2079577,
+            "treeNodes": 2097152,
+            "memoryLimited": true,
+            "maxNodes": 2097152,
+            "peakRssBytes": 2275393536
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 8000,
+            "lossLimit": 16,
+            "bestScore": -18,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 11,
+          "originallyCapped": true,
+          "move": 42,
+          "score": -17,
+          "depth": 51,
+          "elapsedMs": 341,
+          "nodes": 60542,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 341.498208,
+          "candidates": [
+            {
+              "move": 18,
+              "score": -262,
+              "visits": 994,
+              "value": -0.2620925553319918
+            },
+            {
+              "move": 26,
+              "score": -268,
+              "visits": 1825,
+              "value": -0.26785260273972583
+            },
+            {
+              "move": 31,
+              "score": -136,
+              "visits": 1505,
+              "value": -0.13587109634551495
+            },
+            {
+              "move": 39,
+              "score": -628,
+              "visits": 179,
+              "value": -0.6281675977653639
+            },
+            {
+              "move": 42,
+              "score": -17,
+              "visits": 2398169,
+              "value": -0.017047023791899513
+            },
+            {
+              "move": 47,
+              "score": -315,
+              "visits": 741,
+              "value": -0.3149122807017543
+            },
+            {
+              "move": 50,
+              "score": -212,
+              "visits": 1094,
+              "value": -0.2123427787934186
+            },
+            {
+              "move": 52,
+              "score": -125,
+              "visits": 4265,
+              "value": -0.12494372801875708
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 60542,
+            "evaluations": 36784,
+            "meanDepth": 34.18957087641637,
+            "reusedNodes": 2060348,
+            "treeNodes": 2097152,
+            "memoryLimited": true,
+            "maxNodes": 2097152,
+            "peakRssBytes": 2275393536
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 2666,
+            "lossLimit": 5,
+            "bestScore": -17,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 13,
+          "originallyCapped": true,
+          "move": 51,
+          "score": -17,
+          "depth": 49,
+          "elapsedMs": 374,
+          "nodes": 71862,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 374.32725,
+          "candidates": [
+            {
+              "move": 11,
+              "score": -547,
+              "visits": 171,
+              "value": -0.5467309941520471
+            },
+            {
+              "move": 18,
+              "score": -126,
+              "visits": 2127,
+              "value": -0.12582745651151844
+            },
+            {
+              "move": 21,
+              "score": -184,
+              "visits": 2060,
+              "value": -0.18362184466019416
+            },
+            {
+              "move": 26,
+              "score": -214,
+              "visits": 2252,
+              "value": -0.21382948490230888
+            },
+            {
+              "move": 39,
+              "score": -560,
+              "visits": 150,
+              "value": -0.5595866666666667
+            },
+            {
+              "move": 47,
+              "score": -500,
+              "visits": 296,
+              "value": -0.5004966216216216
+            },
+            {
+              "move": 51,
+              "score": -17,
+              "visits": 2424456,
+              "value": -0.01736394597385789
+            },
+            {
+              "move": 60,
+              "score": -110,
+              "visits": 1986,
+              "value": -0.10952769385699881
+            },
+            {
+              "move": 61,
+              "score": -79,
+              "visits": 6977,
+              "value": -0.07887903110219308
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 71862,
+            "evaluations": 40140,
+            "meanDepth": 30.81748351006095,
+            "reusedNodes": 2056993,
+            "treeNodes": 2097152,
+            "memoryLimited": true,
+            "maxNodes": 2097152,
+            "peakRssBytes": 2275393536
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -17,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 15,
+          "originallyCapped": true,
+          "move": 18,
+          "score": -36,
+          "depth": 47,
+          "elapsedMs": 1711,
+          "nodes": 609803,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 1711.86775,
+          "candidates": [
+            {
+              "move": 11,
+              "score": -562,
+              "visits": 142,
+              "value": -0.562119718309859
+            },
+            {
+              "move": 18,
+              "score": -36,
+              "visits": 2232175,
+              "value": -0.03616759528262194
+            },
+            {
+              "move": 21,
+              "score": -428,
+              "visits": 629,
+              "value": -0.42813831478537373
+            },
+            {
+              "move": 22,
+              "score": -299,
+              "visits": 1405,
+              "value": -0.29903985765124574
+            },
+            {
+              "move": 23,
+              "score": -261,
+              "visits": 583,
+              "value": -0.2606277873070326
+            },
+            {
+              "move": 26,
+              "score": -88,
+              "visits": 163029,
+              "value": -0.08849291230394767
+            },
+            {
+              "move": 31,
+              "score": -307,
+              "visits": 709,
+              "value": -0.30713963328631877
+            },
+            {
+              "move": 39,
+              "score": -698,
+              "visits": 276,
+              "value": -0.6979057971014493
+            },
+            {
+              "move": 47,
+              "score": -610,
+              "visits": 270,
+              "value": -0.6096629629629631
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 609803,
+            "evaluations": 600966,
+            "meanDepth": 26.53767692189117,
+            "reusedNodes": 1494962,
+            "treeNodes": 2097152,
+            "memoryLimited": true,
+            "maxNodes": 2097152,
+            "peakRssBytes": 2275393536
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -36,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 17,
+          "originallyCapped": false,
+          "move": 26,
+          "score": -18,
+          "depth": 47,
+          "elapsedMs": 2000,
+          "nodes": 836080,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.034083,
+          "candidates": [
+            {
+              "move": 6,
+              "score": -797,
+              "visits": 32,
+              "value": -0.79709375
+            },
+            {
+              "move": 12,
+              "score": -417,
+              "visits": 624,
+              "value": -0.4166650641025643
+            },
+            {
+              "move": 21,
+              "score": -502,
+              "visits": 302,
+              "value": -0.5020562913907282
+            },
+            {
+              "move": 22,
+              "score": -363,
+              "visits": 859,
+              "value": -0.36339464493597196
+            },
+            {
+              "move": 23,
+              "score": -291,
+              "visits": 208,
+              "value": -0.29108653846153854
+            },
+            {
+              "move": 26,
+              "score": -18,
+              "visits": 1887656,
+              "value": -0.01788586850569818
+            },
+            {
+              "move": 31,
+              "score": -497,
+              "visits": 268,
+              "value": -0.49660447761194043
+            },
+            {
+              "move": 39,
+              "score": -744,
+              "visits": 100,
+              "value": -0.7437200000000002
+            },
+            {
+              "move": 47,
+              "score": -159,
+              "visits": 1057,
+              "value": -0.15924787133396417
+            },
+            {
+              "move": 54,
+              "score": -511,
+              "visits": 24,
+              "value": -0.510875
+            },
+            {
+              "move": 55,
+              "score": -704,
+              "visits": 27,
+              "value": -0.7044074074074075
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 836080,
+            "evaluations": 631398,
+            "meanDepth": 28.285063630274614,
+            "reusedNodes": 911631,
+            "treeNodes": 1545935,
+            "memoryLimited": false,
+            "maxNodes": 2097152,
+            "peakRssBytes": 2275393536
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -18,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 19,
+          "originallyCapped": false,
+          "move": 58,
+          "score": -9,
+          "depth": 45,
+          "elapsedMs": 2000,
+          "nodes": 1069070,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.103667,
+          "candidates": [
+            {
+              "move": 6,
+              "score": -542,
+              "visits": 102,
+              "value": -0.5415686274509804
+            },
+            {
+              "move": 12,
+              "score": -244,
+              "visits": 3333,
+              "value": -0.2438337833783379
+            },
+            {
+              "move": 21,
+              "score": -171,
+              "visits": 2520,
+              "value": -0.17090595238095244
+            },
+            {
+              "move": 23,
+              "score": -229,
+              "visits": 807,
+              "value": -0.2285935563816604
+            },
+            {
+              "move": 31,
+              "score": -740,
+              "visits": 284,
+              "value": -0.7400352112676056
+            },
+            {
+              "move": 39,
+              "score": -474,
+              "visits": 397,
+              "value": -0.47355667506297217
+            },
+            {
+              "move": 47,
+              "score": -117,
+              "visits": 10673,
+              "value": -0.1170633373934226
+            },
+            {
+              "move": 49,
+              "score": -376,
+              "visits": 3,
+              "value": -0.37633333333333335
+            },
+            {
+              "move": 54,
+              "score": -213,
+              "visits": 77,
+              "value": -0.21297402597402604
+            },
+            {
+              "move": 55,
+              "score": -567,
+              "visits": 51,
+              "value": -0.5665098039215686
+            },
+            {
+              "move": 58,
+              "score": -9,
+              "visits": 2885463,
+              "value": -0.009145130608153154
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 1069070,
+            "evaluations": 194520,
+            "meanDepth": 34.09942941060922,
+            "reusedNodes": 1489418,
+            "treeNodes": 1685451,
+            "memoryLimited": false,
+            "maxNodes": 2097152,
+            "peakRssBytes": 2275393536
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -9,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 21,
+          "originallyCapped": true,
+          "move": 24,
+          "score": 40,
+          "depth": 43,
+          "elapsedMs": 2000,
+          "nodes": 697052,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.033416,
+          "candidates": [
+            {
+              "move": 12,
+              "score": -96,
+              "visits": 19927,
+              "value": -0.09628709790736126
+            },
+            {
+              "move": 21,
+              "score": -94,
+              "visits": 21618,
+              "value": -0.09395508372652427
+            },
+            {
+              "move": 22,
+              "score": -188,
+              "visits": 1943,
+              "value": -0.18773803396809113
+            },
+            {
+              "move": 23,
+              "score": -133,
+              "visits": 1481,
+              "value": -0.13290614449696164
+            },
+            {
+              "move": 24,
+              "score": 40,
+              "visits": 2271813,
+              "value": 0.0403341516225193
+            },
+            {
+              "move": 25,
+              "score": -89,
+              "visits": 622159,
+              "value": -0.08911579676577278
+            },
+            {
+              "move": 31,
+              "score": -638,
+              "visits": 206,
+              "value": -0.6380291262135925
+            },
+            {
+              "move": 39,
+              "score": -232,
+              "visits": 728,
+              "value": -0.23226648351648368
+            },
+            {
+              "move": 40,
+              "score": -113,
+              "visits": 7188,
+              "value": -0.11259307178631038
+            },
+            {
+              "move": 47,
+              "score": -149,
+              "visits": 2899,
+              "value": -0.1485288030355294
+            },
+            {
+              "move": 54,
+              "score": -162,
+              "visits": 73,
+              "value": -0.16197260273972602
+            },
+            {
+              "move": 55,
+              "score": -494,
+              "visits": 27,
+              "value": -0.49366666666666664
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 697052,
+            "evaluations": 620634,
+            "meanDepth": 26.84546059691386,
+            "reusedNodes": 1418258,
+            "treeNodes": 2043127,
+            "memoryLimited": false,
+            "maxNodes": 2097152,
+            "peakRssBytes": 2275393536
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 40,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        }
+      ],
+      "memoryGuardExceeded": false,
+      "capped": 10,
+      "nonProven": 24,
+      "fullBudget": 15,
+      "evaluations": 11040781,
+      "peakRssBytes": 2275393536
+    },
+    {
+      "maxNodes": 4194304,
+      "samples": [
+        {
+          "game": 8,
+          "ply": 0,
+          "originallyCapped": false,
+          "move": 44,
+          "score": 25,
+          "depth": 55,
+          "elapsedMs": 2000,
+          "nodes": 646948,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.059916,
+          "candidates": [
+            {
+              "move": 19,
+              "score": 29,
+              "visits": 172437,
+              "value": 0.02894099294234939
+            },
+            {
+              "move": 26,
+              "score": 30,
+              "visits": 385176,
+              "value": 0.0299181594907279
+            },
+            {
+              "move": 37,
+              "score": 22,
+              "visits": 33446,
+              "value": 0.021792262153919804
+            },
+            {
+              "move": 44,
+              "score": 25,
+              "visits": 55888,
+              "value": 0.02536922058402463
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 646948,
+            "evaluations": 646948,
+            "meanDepth": 22.20412923449798,
+            "reusedNodes": 0,
+            "treeNodes": 646948,
+            "memoryLimited": false,
+            "maxNodes": 4194304,
+            "peakRssBytes": 427556864
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 4,
+            "temperatureMilli": 32000,
+            "lossLimit": 64,
+            "bestScore": 30,
+            "scoreLoss": 5,
+            "sampled": true
+          }
+        },
+        {
+          "game": 8,
+          "ply": 2,
+          "originallyCapped": false,
+          "move": 19,
+          "score": 10,
+          "depth": 58,
+          "elapsedMs": 2000,
+          "nodes": 762946,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.0395,
+          "candidates": [
+            {
+              "move": 18,
+              "score": 35,
+              "visits": 347127,
+              "value": 0.03540305133279707
+            },
+            {
+              "move": 19,
+              "score": 10,
+              "visits": 454329,
+              "value": 0.010319288445156985
+            },
+            {
+              "move": 20,
+              "score": -16,
+              "visits": 14700,
+              "value": -0.01633619047619053
+            },
+            {
+              "move": 21,
+              "score": -195,
+              "visits": 1052,
+              "value": -0.1949762357414449
+            },
+            {
+              "move": 22,
+              "score": -333,
+              "visits": 346,
+              "value": -0.33324277456647394
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 762946,
+            "evaluations": 762889,
+            "meanDepth": 28.556669803629614,
+            "reusedNodes": 54609,
+            "treeNodes": 817513,
+            "memoryLimited": false,
+            "maxNodes": 4194304,
+            "peakRssBytes": 824786944
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 3,
+            "temperatureMilli": 26666,
+            "lossLimit": 53,
+            "bestScore": 35,
+            "scoreLoss": 25,
+            "sampled": true
+          }
+        },
+        {
+          "game": 8,
+          "ply": 4,
+          "originallyCapped": false,
+          "move": 26,
+          "score": -51,
+          "depth": 59,
+          "elapsedMs": 2000,
+          "nodes": 742891,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.038708,
+          "candidates": [
+            {
+              "move": 26,
+              "score": -51,
+              "visits": 415135,
+              "value": -0.05085679357317454
+            },
+            {
+              "move": 30,
+              "score": -218,
+              "visits": 1527,
+              "value": -0.21803077930582848
+            },
+            {
+              "move": 34,
+              "score": -58,
+              "visits": 338603,
+              "value": -0.057522254675830276
+            },
+            {
+              "move": 38,
+              "score": -334,
+              "visits": 894,
+              "value": -0.33361185682326616
+            },
+            {
+              "move": 42,
+              "score": -263,
+              "visits": 929,
+              "value": -0.2626889128094723
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 742891,
+            "evaluations": 724584,
+            "meanDepth": 25.771249079609255,
+            "reusedNodes": 14198,
+            "treeNodes": 739112,
+            "memoryLimited": false,
+            "maxNodes": 4194304,
+            "peakRssBytes": 830013440
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 2,
+            "temperatureMilli": 21333,
+            "lossLimit": 42,
+            "bestScore": -51,
+            "scoreLoss": 0,
+            "sampled": true
+          }
+        },
+        {
+          "game": 8,
+          "ply": 6,
+          "originallyCapped": false,
+          "move": 51,
+          "score": -96,
+          "depth": 56,
+          "elapsedMs": 2000,
+          "nodes": 658899,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.037583,
+          "candidates": [
+            {
+              "move": 30,
+              "score": -492,
+              "visits": 509,
+              "value": -0.4919135559921411
+            },
+            {
+              "move": 38,
+              "score": -564,
+              "visits": 459,
+              "value": -0.5636143790849674
+            },
+            {
+              "move": 41,
+              "score": -358,
+              "visits": 359,
+              "value": -0.3578495821727021
+            },
+            {
+              "move": 42,
+              "score": -333,
+              "visits": 1598,
+              "value": -0.33328035043804655
+            },
+            {
+              "move": 45,
+              "score": -490,
+              "visits": 944,
+              "value": -0.48973305084745733
+            },
+            {
+              "move": 51,
+              "score": -96,
+              "visits": 968185,
+              "value": -0.09615830342340193
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 658899,
+            "evaluations": 657908,
+            "meanDepth": 29.289554241241827,
+            "reusedNodes": 313149,
+            "treeNodes": 971480,
+            "memoryLimited": false,
+            "maxNodes": 4194304,
+            "peakRssBytes": 944357376
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 16000,
+            "lossLimit": 32,
+            "bestScore": -96,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 8,
+          "ply": 8,
+          "originallyCapped": false,
+          "move": 33,
+          "score": -64,
+          "depth": 55,
+          "elapsedMs": 2000,
+          "nodes": 734964,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.033709,
+          "candidates": [
+            {
+              "move": 30,
+              "score": -292,
+              "visits": 221,
+              "value": -0.29183257918552047
+            },
+            {
+              "move": 33,
+              "score": -64,
+              "visits": 1673485,
+              "value": -0.06448125140050964
+            },
+            {
+              "move": 37,
+              "score": -159,
+              "visits": 4464,
+              "value": -0.1590439068100359
+            },
+            {
+              "move": 38,
+              "score": -247,
+              "visits": 697,
+              "value": -0.24678048780487805
+            },
+            {
+              "move": 41,
+              "score": -119,
+              "visits": 3105,
+              "value": -0.1194367149758453
+            },
+            {
+              "move": 42,
+              "score": -153,
+              "visits": 5726,
+              "value": -0.1526966468739085
+            },
+            {
+              "move": 45,
+              "score": -406,
+              "visits": 1453,
+              "value": -0.40611080523055776
+            },
+            {
+              "move": 53,
+              "score": -642,
+              "visits": 150,
+              "value": -0.6417733333333336
+            },
+            {
+              "move": 60,
+              "score": -547,
+              "visits": 227,
+              "value": -0.5474845814977976
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 734964,
+            "evaluations": 454694,
+            "meanDepth": 38.58904109589041,
+            "reusedNodes": 953990,
+            "treeNodes": 1411302,
+            "memoryLimited": false,
+            "maxNodes": 4194304,
+            "peakRssBytes": 1210613760
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 10666,
+            "lossLimit": 21,
+            "bestScore": -64,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 8,
+          "ply": 10,
+          "originallyCapped": true,
+          "move": 42,
+          "score": -64,
+          "depth": 52,
+          "elapsedMs": 2000,
+          "nodes": 700387,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.030291,
+          "candidates": [
+            {
+              "move": 10,
+              "score": -427,
+              "visits": 261,
+              "value": -0.42736781609195423
+            },
+            {
+              "move": 11,
+              "score": -546,
+              "visits": 72,
+              "value": -0.5455138888888887
+            },
+            {
+              "move": 12,
+              "score": -612,
+              "visits": 63,
+              "value": -0.6118095238095238
+            },
+            {
+              "move": 18,
+              "score": -353,
+              "visits": 1233,
+              "value": -0.3527550689375505
+            },
+            {
+              "move": 30,
+              "score": -515,
+              "visits": 68,
+              "value": -0.5152352941176469
+            },
+            {
+              "move": 37,
+              "score": -146,
+              "visits": 1847,
+              "value": -0.14584515430427697
+            },
+            {
+              "move": 38,
+              "score": -431,
+              "visits": 165,
+              "value": -0.43096969696969695
+            },
+            {
+              "move": 42,
+              "score": -64,
+              "visits": 2355993,
+              "value": -0.06385860654085275
+            },
+            {
+              "move": 53,
+              "score": -694,
+              "visits": 110,
+              "value": -0.6940727272727274
+            },
+            {
+              "move": 60,
+              "score": -606,
+              "visits": 255,
+              "value": -0.6061058823529415
+            },
+            {
+              "move": 61,
+              "score": -551,
+              "visits": 165,
+              "value": -0.5506848484848487
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 700387,
+            "evaluations": 582978,
+            "meanDepth": 31.829562798852635,
+            "reusedNodes": 1381619,
+            "treeNodes": 1965269,
+            "memoryLimited": false,
+            "maxNodes": 4194304,
+            "peakRssBytes": 1446658048
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 5333,
+            "lossLimit": 10,
+            "bestScore": -64,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 8,
+          "ply": 12,
+          "originallyCapped": true,
+          "move": 18,
+          "score": -77,
+          "depth": 51,
+          "elapsedMs": 2000,
+          "nodes": 614696,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.030708,
+          "candidates": [
+            {
+              "move": 11,
+              "score": -298,
+              "visits": 358,
+              "value": -0.29764525139664827
+            },
+            {
+              "move": 12,
+              "score": -147,
+              "visits": 1001,
+              "value": -0.14737362637362655
+            },
+            {
+              "move": 18,
+              "score": -77,
+              "visits": 2758910,
+              "value": -0.07708929106066191
+            },
+            {
+              "move": 21,
+              "score": -147,
+              "visits": 3309,
+              "value": -0.14671169537624645
+            },
+            {
+              "move": 30,
+              "score": -776,
+              "visits": 89,
+              "value": -0.7758539325842698
+            },
+            {
+              "move": 38,
+              "score": -535,
+              "visits": 337,
+              "value": -0.5346379821958456
+            },
+            {
+              "move": 45,
+              "score": -101,
+              "visits": 193452,
+              "value": -0.10070319769245237
+            },
+            {
+              "move": 53,
+              "score": -729,
+              "visits": 345,
+              "value": -0.7286434782608693
+            },
+            {
+              "move": 60,
+              "score": -514,
+              "visits": 402,
+              "value": -0.5136194029850747
+            },
+            {
+              "move": 61,
+              "score": -149,
+              "visits": 4247,
+              "value": -0.14929149988226942
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 614696,
+            "evaluations": 604279,
+            "meanDepth": 26.27767384202923,
+            "reusedNodes": 1952791,
+            "treeNodes": 2557913,
+            "memoryLimited": false,
+            "maxNodes": 4194304,
+            "peakRssBytes": 2037825536
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -77,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 8,
+          "ply": 14,
+          "originallyCapped": true,
+          "move": 45,
+          "score": -99,
+          "depth": 49,
+          "elapsedMs": 2000,
+          "nodes": 596978,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.031208,
+          "candidates": [
+            {
+              "move": 6,
+              "score": -519,
+              "visits": 44,
+              "value": -0.5194999999999999
+            },
+            {
+              "move": 21,
+              "score": -124,
+              "visits": 18107,
+              "value": -0.1243421881040475
+            },
+            {
+              "move": 30,
+              "score": -508,
+              "visits": 233,
+              "value": -0.5077467811158805
+            },
+            {
+              "move": 38,
+              "score": -378,
+              "visits": 1452,
+              "value": -0.3784015151515158
+            },
+            {
+              "move": 45,
+              "score": -99,
+              "visits": 3061530,
+              "value": -0.09942768289062372
+            },
+            {
+              "move": 46,
+              "score": -294,
+              "visits": 539,
+              "value": -0.2943209647495363
+            },
+            {
+              "move": 53,
+              "score": -618,
+              "visits": 836,
+              "value": -0.6175729665071774
+            },
+            {
+              "move": 61,
+              "score": -102,
+              "visits": 250617,
+              "value": -0.10164089826308753
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 596978,
+            "evaluations": 583697,
+            "meanDepth": 28.264979613989127,
+            "reusedNodes": 2331843,
+            "treeNodes": 2917465,
+            "memoryLimited": false,
+            "maxNodes": 4194304,
+            "peakRssBytes": 2342240256
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -99,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 8,
+          "ply": 16,
+          "originallyCapped": false,
+          "move": 21,
+          "score": -32,
+          "depth": 48,
+          "elapsedMs": 2000,
+          "nodes": 1098280,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.034708,
+          "candidates": [
+            {
+              "move": 6,
+              "score": -458,
+              "visits": 61,
+              "value": -0.45780327868852455
+            },
+            {
+              "move": 12,
+              "score": -184,
+              "visits": 1792,
+              "value": -0.18427455357142866
+            },
+            {
+              "move": 21,
+              "score": -32,
+              "visits": 2357543,
+              "value": -0.03182720060673027
+            },
+            {
+              "move": 22,
+              "score": -203,
+              "visits": 1696,
+              "value": -0.20340507075471678
+            },
+            {
+              "move": 30,
+              "score": -325,
+              "visits": 805,
+              "value": -0.3245925465838509
+            },
+            {
+              "move": 39,
+              "score": -401,
+              "visits": 171,
+              "value": -0.4014210526315787
+            },
+            {
+              "move": 46,
+              "score": -237,
+              "visits": 984,
+              "value": -0.23698170731707352
+            },
+            {
+              "move": 53,
+              "score": -333,
+              "visits": 892,
+              "value": -0.33256165919282477
+            },
+            {
+              "move": 54,
+              "score": -361,
+              "visits": 4,
+              "value": -0.36075
+            },
+            {
+              "move": 60,
+              "score": -296,
+              "visits": 554,
+              "value": -0.29581949458483764
+            },
+            {
+              "move": 61,
+              "score": -139,
+              "visits": 3371,
+              "value": -0.13884752299021058
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 1098280,
+            "evaluations": 336880,
+            "meanDepth": 36.526142695851696,
+            "reusedNodes": 880699,
+            "treeNodes": 1220329,
+            "memoryLimited": false,
+            "maxNodes": 4194304,
+            "peakRssBytes": 2342240256
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -32,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 8,
+          "ply": 18,
+          "originallyCapped": false,
+          "move": 30,
+          "score": -25,
+          "depth": 46,
+          "elapsedMs": 2000,
+          "nodes": 1202640,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.035834,
+          "candidates": [
+            {
+              "move": 5,
+              "score": -404,
+              "visits": 622,
+              "value": -0.40384405144694524
+            },
+            {
+              "move": 6,
+              "score": -447,
+              "visits": 63,
+              "value": -0.447015873015873
+            },
+            {
+              "move": 22,
+              "score": -104,
+              "visits": 339326,
+              "value": -0.10394390055580616
+            },
+            {
+              "move": 30,
+              "score": -25,
+              "visits": 3203437,
+              "value": -0.024512346894912475
+            },
+            {
+              "move": 39,
+              "score": -426,
+              "visits": 374,
+              "value": -0.4263048128342245
+            },
+            {
+              "move": 46,
+              "score": -361,
+              "visits": 384,
+              "value": -0.36122395833333343
+            },
+            {
+              "move": 47,
+              "score": -312,
+              "visits": 327,
+              "value": -0.3115107033639146
+            },
+            {
+              "move": 53,
+              "score": -312,
+              "visits": 731,
+              "value": -0.3117318741450071
+            },
+            {
+              "move": 54,
+              "score": -421,
+              "visits": 16,
+              "value": -0.4211875
+            },
+            {
+              "move": 59,
+              "score": -240,
+              "visits": 1620,
+              "value": -0.24030679012345718
+            },
+            {
+              "move": 60,
+              "score": -545,
+              "visits": 332,
+              "value": -0.5446807228915659
+            },
+            {
+              "move": 61,
+              "score": -117,
+              "visits": 3246,
+              "value": -0.11676093653727668
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 1202640,
+            "evaluations": 238948,
+            "meanDepth": 34.4137056808355,
+            "reusedNodes": 1200294,
+            "treeNodes": 1440887,
+            "memoryLimited": false,
+            "maxNodes": 4194304,
+            "peakRssBytes": 2342240256
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -25,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 8,
+          "ply": 20,
+          "originallyCapped": false,
+          "move": 46,
+          "score": -77,
+          "depth": 44,
+          "elapsedMs": 2000,
+          "nodes": 798491,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.0315,
+          "candidates": [
+            {
+              "move": 5,
+              "score": -94,
+              "visits": 17951,
+              "value": -0.09381059550999934
+            },
+            {
+              "move": 6,
+              "score": -241,
+              "visits": 343,
+              "value": -0.24100874635568525
+            },
+            {
+              "move": 31,
+              "score": -145,
+              "visits": 11575,
+              "value": -0.1454809503239738
+            },
+            {
+              "move": 39,
+              "score": -443,
+              "visits": 631,
+              "value": -0.44264976228209213
+            },
+            {
+              "move": 46,
+              "score": -77,
+              "visits": 3894533,
+              "value": -0.07703850063668005
+            },
+            {
+              "move": 47,
+              "score": -143,
+              "visits": 2860,
+              "value": -0.1434076923076923
+            },
+            {
+              "move": 53,
+              "score": -109,
+              "visits": 34458,
+              "value": -0.10935872656567339
+            },
+            {
+              "move": 54,
+              "score": -372,
+              "visits": 98,
+              "value": -0.371530612244898
+            },
+            {
+              "move": 59,
+              "score": -443,
+              "visits": 1282,
+              "value": -0.4432082683307331
+            },
+            {
+              "move": 60,
+              "score": -280,
+              "visits": 1141,
+              "value": -0.28030324276950097
+            },
+            {
+              "move": 61,
+              "score": -128,
+              "visits": 2649,
+              "value": -0.1283590033975085
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 798491,
+            "evaluations": 670804,
+            "meanDepth": 30.094636007168525,
+            "reusedNodes": 1060014,
+            "treeNodes": 1738294,
+            "memoryLimited": false,
+            "maxNodes": 4194304,
+            "peakRssBytes": 2342240256
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -77,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 8,
+          "ply": 22,
+          "originallyCapped": true,
+          "move": 39,
+          "score": -107,
+          "depth": 42,
+          "elapsedMs": 2000,
+          "nodes": 848256,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.025625,
+          "candidates": [
+            {
+              "move": 6,
+              "score": -305,
+              "visits": 36,
+              "value": -0.30455555555555563
+            },
+            {
+              "move": 14,
+              "score": -184,
+              "visits": 60,
+              "value": -0.18393333333333334
+            },
+            {
+              "move": 22,
+              "score": -578,
+              "visits": 403,
+              "value": -0.5784937965260546
+            },
+            {
+              "move": 31,
+              "score": -18,
+              "visits": 472431,
+              "value": -0.017919205132600886
+            },
+            {
+              "move": 39,
+              "score": -107,
+              "visits": 4056746,
+              "value": -0.1071180480611722
+            },
+            {
+              "move": 47,
+              "score": -257,
+              "visits": 2370,
+              "value": -0.257305063291139
+            },
+            {
+              "move": 54,
+              "score": -370,
+              "visits": 42,
+              "value": -0.3698571428571428
+            },
+            {
+              "move": 59,
+              "score": -350,
+              "visits": 2154,
+              "value": -0.3504656453110495
+            },
+            {
+              "move": 60,
+              "score": -707,
+              "visits": 598,
+              "value": -0.7065652173913041
+            },
+            {
+              "move": 61,
+              "score": -110,
+              "visits": 193719,
+              "value": -0.10979977699657806
+            },
+            {
+              "move": 62,
+              "score": -494,
+              "visits": 30,
+              "value": -0.4938
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 848256,
+            "evaluations": 584859,
+            "meanDepth": 27.93825331032141,
+            "reusedNodes": 1651106,
+            "treeNodes": 2241070,
+            "memoryLimited": false,
+            "maxNodes": 4194304,
+            "peakRssBytes": 2342240256
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -107,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 8,
+          "ply": 24,
+          "originallyCapped": true,
+          "move": 15,
+          "score": -160,
+          "depth": 41,
+          "elapsedMs": 2000,
+          "nodes": 630812,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.029042,
+          "candidates": [
+            {
+              "move": 5,
+              "score": -654,
+              "visits": 229,
+              "value": -0.6538646288209607
+            },
+            {
+              "move": 6,
+              "score": -574,
+              "visits": 92,
+              "value": -0.5737826086956523
+            },
+            {
+              "move": 12,
+              "score": -445,
+              "visits": 683,
+              "value": -0.44507174231332386
+            },
+            {
+              "move": 14,
+              "score": -347,
+              "visits": 31,
+              "value": -0.3467741935483871
+            },
+            {
+              "move": 15,
+              "score": -160,
+              "visits": 4638354,
+              "value": -0.16048058643219523
+            },
+            {
+              "move": 22,
+              "score": -442,
+              "visits": 391,
+              "value": -0.44200511508951357
+            },
+            {
+              "move": 47,
+              "score": -379,
+              "visits": 6267,
+              "value": -0.378746928354872
+            },
+            {
+              "move": 54,
+              "score": -567,
+              "visits": 36,
+              "value": -0.5674166666666669
+            },
+            {
+              "move": 59,
+              "score": -434,
+              "visits": 1107,
+              "value": -0.43424119241192377
+            },
+            {
+              "move": 60,
+              "score": -739,
+              "visits": 315,
+              "value": -0.739047619047619
+            },
+            {
+              "move": 61,
+              "score": -701,
+              "visits": 257,
+              "value": -0.7010505836575875
+            },
+            {
+              "move": 62,
+              "score": -638,
+              "visits": 132,
+              "value": -0.637772727272727
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 630812,
+            "evaluations": 601500,
+            "meanDepth": 26.16762680481665,
+            "reusedNodes": 1775324,
+            "treeNodes": 2382908,
+            "memoryLimited": false,
+            "maxNodes": 4194304,
+            "peakRssBytes": 2342240256
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -160,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 1,
+          "originallyCapped": false,
+          "move": 34,
+          "score": -8,
+          "depth": 64,
+          "elapsedMs": 2000,
+          "nodes": 784658,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.04575,
+          "candidates": [
+            {
+              "move": 18,
+              "score": -84,
+              "visits": 3014,
+              "value": -0.0840348374253481
+            },
+            {
+              "move": 20,
+              "score": -348,
+              "visits": 2232,
+              "value": -0.3482594086021507
+            },
+            {
+              "move": 34,
+              "score": -8,
+              "visits": 779411,
+              "value": -0.0076121212043452815
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 784658,
+            "evaluations": 751392,
+            "meanDepth": 28.90922159717992,
+            "reusedNodes": 0,
+            "treeNodes": 751890,
+            "memoryLimited": false,
+            "maxNodes": 4194304,
+            "peakRssBytes": 2342240256
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 29333,
+            "lossLimit": 58,
+            "bestScore": -8,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 3,
+          "originallyCapped": false,
+          "move": 37,
+          "score": -23,
+          "depth": 60,
+          "elapsedMs": 2000,
+          "nodes": 676859,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.034708,
+          "candidates": [
+            {
+              "move": 11,
+              "score": -122,
+              "visits": 1008,
+              "value": -0.1218591269841271
+            },
+            {
+              "move": 20,
+              "score": -121,
+              "visits": 5692,
+              "value": -0.12086929023190437
+            },
+            {
+              "move": 21,
+              "score": -205,
+              "visits": 2201,
+              "value": -0.20542798727850975
+            },
+            {
+              "move": 37,
+              "score": -23,
+              "visits": 1149592,
+              "value": -0.022751851091517953
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 676859,
+            "evaluations": 656446,
+            "meanDepth": 34.09415107134573,
+            "reusedNodes": 448867,
+            "treeNodes": 1106378,
+            "memoryLimited": false,
+            "maxNodes": 4194304,
+            "peakRssBytes": 2342240256
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 24000,
+            "lossLimit": 48,
+            "bestScore": -23,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 5,
+          "originallyCapped": false,
+          "move": 20,
+          "score": -19,
+          "depth": 58,
+          "elapsedMs": 2000,
+          "nodes": 635454,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.029875,
+          "candidates": [
+            {
+              "move": 10,
+              "score": -484,
+              "visits": 300,
+              "value": -0.4838600000000005
+            },
+            {
+              "move": 11,
+              "score": -488,
+              "visits": 228,
+              "value": -0.487578947368421
+            },
+            {
+              "move": 20,
+              "score": -19,
+              "visits": 1778153,
+              "value": -0.01926353693973352
+            },
+            {
+              "move": 21,
+              "score": -411,
+              "visits": 1925,
+              "value": -0.410917402597402
+            },
+            {
+              "move": 51,
+              "score": -367,
+              "visits": 481,
+              "value": -0.36673388773388765
+            },
+            {
+              "move": 53,
+              "score": -228,
+              "visits": 720,
+              "value": -0.22842777777777787
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 635454,
+            "evaluations": 559488,
+            "meanDepth": 36.054098329698135,
+            "reusedNodes": 1094238,
+            "treeNodes": 1654773,
+            "memoryLimited": false,
+            "maxNodes": 4194304,
+            "peakRssBytes": 2342240256
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 18666,
+            "lossLimit": 37,
+            "bestScore": -19,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 7,
+          "originallyCapped": true,
+          "move": 53,
+          "score": -18,
+          "depth": 56,
+          "elapsedMs": 2000,
+          "nodes": 648614,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.031583,
+          "candidates": [
+            {
+              "move": 10,
+              "score": -439,
+              "visits": 645,
+              "value": -0.4391674418604655
+            },
+            {
+              "move": 18,
+              "score": -514,
+              "visits": 1731,
+              "value": -0.5136169844020804
+            },
+            {
+              "move": 51,
+              "score": -263,
+              "visits": 1741,
+              "value": -0.26305399195864443
+            },
+            {
+              "move": 52,
+              "score": -156,
+              "visits": 2922,
+              "value": -0.15639425051334702
+            },
+            {
+              "move": 53,
+              "score": -18,
+              "visits": 2400608,
+              "value": -0.01755441954704641
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 648614,
+            "evaluations": 486938,
+            "meanDepth": 36.053390768623565,
+            "reusedNodes": 1631999,
+            "treeNodes": 2119759,
+            "memoryLimited": false,
+            "maxNodes": 4194304,
+            "peakRssBytes": 2342240256
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 13333,
+            "lossLimit": 26,
+            "bestScore": -18,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 9,
+          "originallyCapped": true,
+          "move": 29,
+          "score": -24,
+          "depth": 53,
+          "elapsedMs": 2000,
+          "nodes": 582458,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.031833,
+          "candidates": [
+            {
+              "move": 18,
+              "score": -85,
+              "visits": 9723,
+              "value": -0.08459045562069317
+            },
+            {
+              "move": 26,
+              "score": -95,
+              "visits": 9507,
+              "value": -0.09545787314610306
+            },
+            {
+              "move": 29,
+              "score": -24,
+              "visits": 2937304,
+              "value": -0.024027318248294512
+            },
+            {
+              "move": 38,
+              "score": -192,
+              "visits": 2343,
+              "value": -0.19246649594536921
+            },
+            {
+              "move": 39,
+              "score": -143,
+              "visits": 875,
+              "value": -0.1431337142857145
+            },
+            {
+              "move": 52,
+              "score": -46,
+              "visits": 12541,
+              "value": -0.04637660473646427
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 582458,
+            "evaluations": 520252,
+            "meanDepth": 32.989132263613854,
+            "reusedNodes": 2101947,
+            "treeNodes": 2623065,
+            "memoryLimited": false,
+            "maxNodes": 4194304,
+            "peakRssBytes": 2342240256
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 8000,
+            "lossLimit": 16,
+            "bestScore": -24,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 11,
+          "originallyCapped": true,
+          "move": 42,
+          "score": -24,
+          "depth": 53,
+          "elapsedMs": 2000,
+          "nodes": 579335,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.03525,
+          "candidates": [
+            {
+              "move": 18,
+              "score": -255,
+              "visits": 1278,
+              "value": -0.25472300469483566
+            },
+            {
+              "move": 26,
+              "score": -263,
+              "visits": 2318,
+              "value": -0.2627088006902505
+            },
+            {
+              "move": 31,
+              "score": -137,
+              "visits": 1968,
+              "value": -0.13731656504065054
+            },
+            {
+              "move": 39,
+              "score": -626,
+              "visits": 219,
+              "value": -0.625867579908676
+            },
+            {
+              "move": 42,
+              "score": -24,
+              "visits": 3497166,
+              "value": -0.024383076754141555
+            },
+            {
+              "move": 47,
+              "score": -322,
+              "visits": 893,
+              "value": -0.3223001119820827
+            },
+            {
+              "move": 50,
+              "score": -192,
+              "visits": 1537,
+              "value": -0.19230709173715005
+            },
+            {
+              "move": 52,
+              "score": -131,
+              "visits": 5363,
+              "value": -0.13137814655976104
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 579335,
+            "evaluations": 573573,
+            "meanDepth": 29.0896217214565,
+            "reusedNodes": 2582179,
+            "treeNodes": 3156808,
+            "memoryLimited": false,
+            "maxNodes": 4194304,
+            "peakRssBytes": 2631942144
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 2666,
+            "lossLimit": 5,
+            "bestScore": -24,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 13,
+          "originallyCapped": true,
+          "move": 51,
+          "score": -18,
+          "depth": 51,
+          "elapsedMs": 2000,
+          "nodes": 649359,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.043,
+          "candidates": [
+            {
+              "move": 11,
+              "score": -555,
+              "visits": 218,
+              "value": -0.5550504587155967
+            },
+            {
+              "move": 18,
+              "score": -139,
+              "visits": 2460,
+              "value": -0.13947195121951222
+            },
+            {
+              "move": 21,
+              "score": -194,
+              "visits": 2522,
+              "value": -0.19376962727993657
+            },
+            {
+              "move": 26,
+              "score": -230,
+              "visits": 2708,
+              "value": -0.22979431314623305
+            },
+            {
+              "move": 39,
+              "score": -555,
+              "visits": 196,
+              "value": -0.5550204081632656
+            },
+            {
+              "move": 47,
+              "score": -495,
+              "visits": 391,
+              "value": -0.49482864450127895
+            },
+            {
+              "move": 51,
+              "score": -18,
+              "visits": 4091809,
+              "value": -0.0175310128111942
+            },
+            {
+              "move": 60,
+              "score": -110,
+              "visits": 2688,
+              "value": -0.11028497023809501
+            },
+            {
+              "move": 61,
+              "score": -71,
+              "visits": 12896,
+              "value": -0.07072883064516156
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 649359,
+            "evaluations": 399370,
+            "meanDepth": 34.4423439114573,
+            "reusedNodes": 3112595,
+            "treeNodes": 3514356,
+            "memoryLimited": false,
+            "maxNodes": 4194304,
+            "peakRssBytes": 2787033088
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -18,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 15,
+          "originallyCapped": true,
+          "move": 18,
+          "score": -28,
+          "depth": 47,
+          "elapsedMs": 2000,
+          "nodes": 624036,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.036666,
+          "candidates": [
+            {
+              "move": 11,
+              "score": -576,
+              "visits": 179,
+              "value": -0.575513966480447
+            },
+            {
+              "move": 18,
+              "score": -28,
+              "visits": 3909924,
+              "value": -0.02845198934811921
+            },
+            {
+              "move": 21,
+              "score": -390,
+              "visits": 890,
+              "value": -0.38980674157303363
+            },
+            {
+              "move": 22,
+              "score": -316,
+              "visits": 1677,
+              "value": -0.3155199761478836
+            },
+            {
+              "move": 23,
+              "score": -257,
+              "visits": 747,
+              "value": -0.25697991967871503
+            },
+            {
+              "move": 26,
+              "score": -88,
+              "visits": 163029,
+              "value": -0.08849291230394767
+            },
+            {
+              "move": 31,
+              "score": -318,
+              "visits": 865,
+              "value": -0.3182508670520229
+            },
+            {
+              "move": 39,
+              "score": -694,
+              "visits": 359,
+              "value": -0.6936629526462393
+            },
+            {
+              "move": 47,
+              "score": -622,
+              "visits": 339,
+              "value": -0.6221120943952798
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 624036,
+            "evaluations": 614210,
+            "meanDepth": 25.698020627015108,
+            "reusedNodes": 2901311,
+            "treeNodes": 3517035,
+            "memoryLimited": false,
+            "maxNodes": 4194304,
+            "peakRssBytes": 2787033088
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -28,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 17,
+          "originallyCapped": false,
+          "move": 26,
+          "score": -12,
+          "depth": 47,
+          "elapsedMs": 2000,
+          "nodes": 825557,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.034166,
+          "candidates": [
+            {
+              "move": 6,
+              "score": -797,
+              "visits": 38,
+              "value": -0.7966578947368422
+            },
+            {
+              "move": 12,
+              "score": -432,
+              "visits": 716,
+              "value": -0.4324818435754195
+            },
+            {
+              "move": 21,
+              "score": -508,
+              "visits": 358,
+              "value": -0.5079078212290496
+            },
+            {
+              "move": 22,
+              "score": -361,
+              "visits": 1028,
+              "value": -0.360983463035019
+            },
+            {
+              "move": 23,
+              "score": -288,
+              "visits": 248,
+              "value": -0.28840322580645184
+            },
+            {
+              "move": 26,
+              "score": -12,
+              "visits": 2768430,
+              "value": -0.011687986331600272
+            },
+            {
+              "move": 31,
+              "score": -504,
+              "visits": 315,
+              "value": -0.5044031746031745
+            },
+            {
+              "move": 39,
+              "score": -750,
+              "visits": 118,
+              "value": -0.7501610169491527
+            },
+            {
+              "move": 47,
+              "score": -156,
+              "visits": 1118,
+              "value": -0.1561466905187837
+            },
+            {
+              "move": 54,
+              "score": -543,
+              "visits": 27,
+              "value": -0.543037037037037
+            },
+            {
+              "move": 55,
+              "score": -723,
+              "visits": 32,
+              "value": -0.72334375
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 825557,
+            "evaluations": 108903,
+            "meanDepth": 36.375002574019724,
+            "reusedNodes": 1553567,
+            "treeNodes": 1663587,
+            "memoryLimited": false,
+            "maxNodes": 4194304,
+            "peakRssBytes": 2787033088
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -12,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 19,
+          "originallyCapped": false,
+          "move": 58,
+          "score": 7,
+          "depth": 45,
+          "elapsedMs": 2000,
+          "nodes": 942925,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.02625,
+          "candidates": [
+            {
+              "move": 6,
+              "score": -550,
+              "visits": 109,
+              "value": -0.5498165137614678
+            },
+            {
+              "move": 12,
+              "score": -250,
+              "visits": 3460,
+              "value": -0.24969971098265925
+            },
+            {
+              "move": 21,
+              "score": -172,
+              "visits": 2642,
+              "value": -0.17152573807721416
+            },
+            {
+              "move": 23,
+              "score": -232,
+              "visits": 841,
+              "value": -0.23230796670630185
+            },
+            {
+              "move": 31,
+              "score": -741,
+              "visits": 310,
+              "value": -0.7407999999999998
+            },
+            {
+              "move": 39,
+              "score": -477,
+              "visits": 427,
+              "value": -0.47703747072599517
+            },
+            {
+              "move": 47,
+              "score": -117,
+              "visits": 10673,
+              "value": -0.1170633373934226
+            },
+            {
+              "move": 49,
+              "score": -376,
+              "visits": 3,
+              "value": -0.37633333333333335
+            },
+            {
+              "move": 54,
+              "score": -209,
+              "visits": 84,
+              "value": -0.20873809523809528
+            },
+            {
+              "move": 55,
+              "score": -566,
+              "visits": 56,
+              "value": -0.5662499999999999
+            },
+            {
+              "move": 58,
+              "score": 7,
+              "visits": 3628905,
+              "value": 0.00729096710991539
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 942925,
+            "evaluations": 440990,
+            "meanDepth": 32.34932576822123,
+            "reusedNodes": 1595744,
+            "treeNodes": 2039743,
+            "memoryLimited": false,
+            "maxNodes": 4194304,
+            "peakRssBytes": 2787033088
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 7,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 21,
+          "originallyCapped": true,
+          "move": 24,
+          "score": 37,
+          "depth": 43,
+          "elapsedMs": 2000,
+          "nodes": 893886,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.028958,
+          "candidates": [
+            {
+              "move": 12,
+              "score": -96,
+              "visits": 19927,
+              "value": -0.09628709790736126
+            },
+            {
+              "move": 21,
+              "score": -94,
+              "visits": 21618,
+              "value": -0.09395508372652427
+            },
+            {
+              "move": 22,
+              "score": -188,
+              "visits": 1943,
+              "value": -0.18773803396809113
+            },
+            {
+              "move": 23,
+              "score": -133,
+              "visits": 1481,
+              "value": -0.13290614449696164
+            },
+            {
+              "move": 24,
+              "score": 37,
+              "visits": 2730786,
+              "value": 0.036892008747669076
+            },
+            {
+              "move": 25,
+              "score": -89,
+              "visits": 622159,
+              "value": -0.08911579676577278
+            },
+            {
+              "move": 31,
+              "score": -641,
+              "visits": 222,
+              "value": -0.641418918918919
+            },
+            {
+              "move": 39,
+              "score": -226,
+              "visits": 809,
+              "value": -0.22635846724351086
+            },
+            {
+              "move": 40,
+              "score": -113,
+              "visits": 7188,
+              "value": -0.11259307178631038
+            },
+            {
+              "move": 47,
+              "score": -149,
+              "visits": 2899,
+              "value": -0.1485288030355294
+            },
+            {
+              "move": 54,
+              "score": -162,
+              "visits": 73,
+              "value": -0.16197260273972602
+            },
+            {
+              "move": 55,
+              "score": -503,
+              "visits": 29,
+              "value": -0.5033793103448275
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 893886,
+            "evaluations": 525860,
+            "meanDepth": 28.439328952461498,
+            "reusedNodes": 1640632,
+            "treeNodes": 2170838,
+            "memoryLimited": false,
+            "maxNodes": 4194304,
+            "peakRssBytes": 2787033088
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 37,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        }
+      ],
+      "memoryGuardExceeded": false,
+      "capped": 0,
+      "nonProven": 24,
+      "fullBudget": 24,
+      "evaluations": 13088390,
+      "peakRssBytes": 2787033088
+    },
+    {
+      "maxNodes": 8388608,
+      "samples": [
+        {
+          "game": 8,
+          "ply": 0,
+          "originallyCapped": false,
+          "move": 44,
+          "score": 21,
+          "depth": 58,
+          "elapsedMs": 2000,
+          "nodes": 812098,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.040667,
+          "candidates": [
+            {
+              "move": 19,
+              "score": 26,
+              "visits": 241700,
+              "value": 0.026471377741000543
+            },
+            {
+              "move": 26,
+              "score": 24,
+              "visits": 405428,
+              "value": 0.023529319632586913
+            },
+            {
+              "move": 37,
+              "score": 19,
+              "visits": 62870,
+              "value": 0.019082551296325963
+            },
+            {
+              "move": 44,
+              "score": 21,
+              "visits": 102099,
+              "value": 0.021113056934935672
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 812098,
+            "evaluations": 812098,
+            "meanDepth": 22.378893926595065,
+            "reusedNodes": 0,
+            "treeNodes": 812098,
+            "memoryLimited": false,
+            "maxNodes": 8388608,
+            "peakRssBytes": 601145344
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 4,
+            "temperatureMilli": 32000,
+            "lossLimit": 64,
+            "bestScore": 26,
+            "scoreLoss": 5,
+            "sampled": true
+          }
+        },
+        {
+          "game": 8,
+          "ply": 2,
+          "originallyCapped": false,
+          "move": 19,
+          "score": 10,
+          "depth": 58,
+          "elapsedMs": 2000,
+          "nodes": 723382,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.031583,
+          "candidates": [
+            {
+              "move": 18,
+              "score": 34,
+              "visits": 353369,
+              "value": 0.034180485554759624
+            },
+            {
+              "move": 19,
+              "score": 10,
+              "visits": 454329,
+              "value": 0.010319288445156985
+            },
+            {
+              "move": 20,
+              "score": -16,
+              "visits": 14700,
+              "value": -0.01633619047619053
+            },
+            {
+              "move": 21,
+              "score": -196,
+              "visits": 1057,
+              "value": -0.1960018921475875
+            },
+            {
+              "move": 22,
+              "score": -334,
+              "visits": 347,
+              "value": -0.33425936599423633
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 723382,
+            "evaluations": 723324,
+            "meanDepth": 29.333540231855373,
+            "reusedNodes": 100421,
+            "treeNodes": 823761,
+            "memoryLimited": false,
+            "maxNodes": 8388608,
+            "peakRssBytes": 673562624
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 3,
+            "temperatureMilli": 26666,
+            "lossLimit": 53,
+            "bestScore": 34,
+            "scoreLoss": 24,
+            "sampled": true
+          }
+        },
+        {
+          "game": 8,
+          "ply": 4,
+          "originallyCapped": false,
+          "move": 26,
+          "score": -58,
+          "depth": 59,
+          "elapsedMs": 2000,
+          "nodes": 794834,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.048958,
+          "candidates": [
+            {
+              "move": 26,
+              "score": -58,
+              "visits": 443685,
+              "value": -0.058180810710300776
+            },
+            {
+              "move": 30,
+              "score": -223,
+              "visits": 1584,
+              "value": -0.22273863636363656
+            },
+            {
+              "move": 34,
+              "score": -59,
+              "visits": 361807,
+              "value": -0.05901740983452477
+            },
+            {
+              "move": 38,
+              "score": -328,
+              "visits": 966,
+              "value": -0.32826397515527944
+            },
+            {
+              "move": 42,
+              "score": -263,
+              "visits": 989,
+              "value": -0.2631809908998987
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 794834,
+            "evaluations": 776473,
+            "meanDepth": 25.763862643017283,
+            "reusedNodes": 14198,
+            "treeNodes": 791030,
+            "memoryLimited": false,
+            "maxNodes": 8388608,
+            "peakRssBytes": 679591936
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 2,
+            "temperatureMilli": 21333,
+            "lossLimit": 42,
+            "bestScore": -58,
+            "scoreLoss": 0,
+            "sampled": true
+          }
+        },
+        {
+          "game": 8,
+          "ply": 6,
+          "originallyCapped": false,
+          "move": 51,
+          "score": -95,
+          "depth": 56,
+          "elapsedMs": 2000,
+          "nodes": 659615,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.02925,
+          "candidates": [
+            {
+              "move": 30,
+              "score": -487,
+              "visits": 522,
+              "value": -0.48715708812260494
+            },
+            {
+              "move": 38,
+              "score": -565,
+              "visits": 465,
+              "value": -0.5645247311827958
+            },
+            {
+              "move": 41,
+              "score": -354,
+              "visits": 368,
+              "value": -0.35442934782608715
+            },
+            {
+              "move": 42,
+              "score": -334,
+              "visits": 1609,
+              "value": -0.3338955873213166
+            },
+            {
+              "move": 45,
+              "score": -488,
+              "visits": 960,
+              "value": -0.48796562499999985
+            },
+            {
+              "move": 51,
+              "score": -95,
+              "visits": 997391,
+              "value": -0.09506764348182901
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 659615,
+            "evaluations": 658624,
+            "meanDepth": 29.723255232218794,
+            "reusedNodes": 341694,
+            "treeNodes": 1000741,
+            "memoryLimited": false,
+            "maxNodes": 8388608,
+            "peakRssBytes": 822689792
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 16000,
+            "lossLimit": 32,
+            "bestScore": -95,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 8,
+          "ply": 8,
+          "originallyCapped": false,
+          "move": 33,
+          "score": -65,
+          "depth": 55,
+          "elapsedMs": 2000,
+          "nodes": 703136,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.03725,
+          "candidates": [
+            {
+              "move": 30,
+              "score": -292,
+              "visits": 221,
+              "value": -0.29183257918552047
+            },
+            {
+              "move": 33,
+              "score": -65,
+              "visits": 1670786,
+              "value": -0.06459697292171578
+            },
+            {
+              "move": 37,
+              "score": -159,
+              "visits": 4464,
+              "value": -0.1590439068100359
+            },
+            {
+              "move": 38,
+              "score": -247,
+              "visits": 697,
+              "value": -0.24678048780487805
+            },
+            {
+              "move": 41,
+              "score": -119,
+              "visits": 3105,
+              "value": -0.1194367149758453
+            },
+            {
+              "move": 42,
+              "score": -153,
+              "visits": 5726,
+              "value": -0.1526966468739085
+            },
+            {
+              "move": 45,
+              "score": -406,
+              "visits": 1451,
+              "value": -0.406425913163336
+            },
+            {
+              "move": 53,
+              "score": -642,
+              "visits": 150,
+              "value": -0.6417733333333336
+            },
+            {
+              "move": 60,
+              "score": -547,
+              "visits": 227,
+              "value": -0.5474845814977976
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 703136,
+            "evaluations": 425206,
+            "meanDepth": 38.96463130887908,
+            "reusedNodes": 983117,
+            "treeNodes": 1410941,
+            "memoryLimited": false,
+            "maxNodes": 8388608,
+            "peakRssBytes": 1076248576
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 10666,
+            "lossLimit": 21,
+            "bestScore": -65,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 8,
+          "ply": 10,
+          "originallyCapped": true,
+          "move": 42,
+          "score": -63,
+          "depth": 52,
+          "elapsedMs": 2000,
+          "nodes": 670547,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.032208,
+          "candidates": [
+            {
+              "move": 10,
+              "score": -427,
+              "visits": 260,
+              "value": -0.42676538461538477
+            },
+            {
+              "move": 11,
+              "score": -543,
+              "visits": 71,
+              "value": -0.5425915492957745
+            },
+            {
+              "move": 12,
+              "score": -612,
+              "visits": 62,
+              "value": -0.6121451612903225
+            },
+            {
+              "move": 18,
+              "score": -352,
+              "visits": 1227,
+              "value": -0.3517970660146698
+            },
+            {
+              "move": 30,
+              "score": -515,
+              "visits": 68,
+              "value": -0.5152352941176469
+            },
+            {
+              "move": 37,
+              "score": -145,
+              "visits": 1840,
+              "value": -0.14510163043478239
+            },
+            {
+              "move": 38,
+              "score": -434,
+              "visits": 162,
+              "value": -0.4337160493827161
+            },
+            {
+              "move": 42,
+              "score": -63,
+              "visits": 2323484,
+              "value": -0.06345511869244679
+            },
+            {
+              "move": 53,
+              "score": -693,
+              "visits": 109,
+              "value": -0.6926880733944956
+            },
+            {
+              "move": 60,
+              "score": -605,
+              "visits": 253,
+              "value": -0.6051739130434786
+            },
+            {
+              "move": 61,
+              "score": -551,
+              "visits": 164,
+              "value": -0.5510060975609757
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 670547,
+            "evaluations": 552363,
+            "meanDepth": 31.75564576383162,
+            "reusedNodes": 1381267,
+            "treeNodes": 1934229,
+            "memoryLimited": false,
+            "maxNodes": 8388608,
+            "peakRssBytes": 1318617088
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 5333,
+            "lossLimit": 10,
+            "bestScore": -63,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 8,
+          "ply": 12,
+          "originallyCapped": true,
+          "move": 18,
+          "score": -78,
+          "depth": 51,
+          "elapsedMs": 2000,
+          "nodes": 635618,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.044167,
+          "candidates": [
+            {
+              "move": 11,
+              "score": -298,
+              "visits": 358,
+              "value": -0.29764525139664827
+            },
+            {
+              "move": 12,
+              "score": -147,
+              "visits": 1001,
+              "value": -0.14737362637362655
+            },
+            {
+              "move": 18,
+              "score": -78,
+              "visits": 2747358,
+              "value": -0.07762621835238488
+            },
+            {
+              "move": 21,
+              "score": -147,
+              "visits": 3309,
+              "value": -0.14671169537624645
+            },
+            {
+              "move": 30,
+              "score": -776,
+              "visits": 89,
+              "value": -0.7758539325842698
+            },
+            {
+              "move": 38,
+              "score": -535,
+              "visits": 337,
+              "value": -0.5346379821958456
+            },
+            {
+              "move": 45,
+              "score": -101,
+              "visits": 193452,
+              "value": -0.10070319769245237
+            },
+            {
+              "move": 53,
+              "score": -728,
+              "visits": 344,
+              "value": -0.7284709302325578
+            },
+            {
+              "move": 60,
+              "score": -514,
+              "visits": 402,
+              "value": -0.5136194029850747
+            },
+            {
+              "move": 61,
+              "score": -149,
+              "visits": 4247,
+              "value": -0.14929149988226942
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 635618,
+            "evaluations": 623636,
+            "meanDepth": 26.54147931619306,
+            "reusedNodes": 1921808,
+            "treeNodes": 2546360,
+            "memoryLimited": false,
+            "maxNodes": 8388608,
+            "peakRssBytes": 1909964800
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -78,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 8,
+          "ply": 14,
+          "originallyCapped": true,
+          "move": 45,
+          "score": -99,
+          "depth": 49,
+          "elapsedMs": 2000,
+          "nodes": 623334,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.030458,
+          "candidates": [
+            {
+              "move": 6,
+              "score": -519,
+              "visits": 44,
+              "value": -0.5194999999999999
+            },
+            {
+              "move": 21,
+              "score": -124,
+              "visits": 18107,
+              "value": -0.1243421881040475
+            },
+            {
+              "move": 30,
+              "score": -507,
+              "visits": 234,
+              "value": -0.5068717948717955
+            },
+            {
+              "move": 38,
+              "score": -378,
+              "visits": 1455,
+              "value": -0.3784515463917532
+            },
+            {
+              "move": 45,
+              "score": -99,
+              "visits": 3076360,
+              "value": -0.09940523540812062
+            },
+            {
+              "move": 46,
+              "score": -295,
+              "visits": 540,
+              "value": -0.29512222222222234
+            },
+            {
+              "move": 53,
+              "score": -618,
+              "visits": 837,
+              "value": -0.6176415770609321
+            },
+            {
+              "move": 61,
+              "score": -102,
+              "visits": 250617,
+              "value": -0.10164089826308753
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 623334,
+            "evaluations": 610049,
+            "meanDepth": 28.195535619748,
+            "reusedNodes": 2320323,
+            "treeNodes": 2932301,
+            "memoryLimited": false,
+            "maxNodes": 8388608,
+            "peakRssBytes": 2216116224
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -99,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 8,
+          "ply": 16,
+          "originallyCapped": false,
+          "move": 21,
+          "score": -33,
+          "depth": 48,
+          "elapsedMs": 2000,
+          "nodes": 1048460,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.025583,
+          "candidates": [
+            {
+              "move": 6,
+              "score": -467,
+              "visits": 59,
+              "value": -0.4665423728813559
+            },
+            {
+              "move": 12,
+              "score": -184,
+              "visits": 1787,
+              "value": -0.1837918298824847
+            },
+            {
+              "move": 21,
+              "score": -33,
+              "visits": 2307756,
+              "value": -0.032535815744815615
+            },
+            {
+              "move": 22,
+              "score": -203,
+              "visits": 1690,
+              "value": -0.20289585798816548
+            },
+            {
+              "move": 30,
+              "score": -323,
+              "visits": 801,
+              "value": -0.3233395755305868
+            },
+            {
+              "move": 39,
+              "score": -400,
+              "visits": 170,
+              "value": -0.39984705882352917
+            },
+            {
+              "move": 46,
+              "score": -236,
+              "visits": 981,
+              "value": -0.23641896024464865
+            },
+            {
+              "move": 53,
+              "score": -332,
+              "visits": 887,
+              "value": -0.3318399098083424
+            },
+            {
+              "move": 54,
+              "score": -361,
+              "visits": 4,
+              "value": -0.36075
+            },
+            {
+              "move": 60,
+              "score": -298,
+              "visits": 547,
+              "value": -0.29761608775137127
+            },
+            {
+              "move": 61,
+              "score": -139,
+              "visits": 3371,
+              "value": -0.13884752299021058
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 1048460,
+            "evaluations": 333394,
+            "meanDepth": 36.50173778684928,
+            "reusedNodes": 880699,
+            "treeNodes": 1216806,
+            "memoryLimited": false,
+            "maxNodes": 8388608,
+            "peakRssBytes": 2216116224
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -33,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 8,
+          "ply": 18,
+          "originallyCapped": false,
+          "move": 30,
+          "score": -19,
+          "depth": 45,
+          "elapsedMs": 2000,
+          "nodes": 1181655,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.026042,
+          "candidates": [
+            {
+              "move": 5,
+              "score": -403,
+              "visits": 608,
+              "value": -0.40329769736842097
+            },
+            {
+              "move": 6,
+              "score": -445,
+              "visits": 61,
+              "value": -0.4449344262295082
+            },
+            {
+              "move": 22,
+              "score": -104,
+              "visits": 339326,
+              "value": -0.10394390055580616
+            },
+            {
+              "move": 30,
+              "score": -19,
+              "visits": 3132960,
+              "value": -0.01915087361472802
+            },
+            {
+              "move": 39,
+              "score": -429,
+              "visits": 363,
+              "value": -0.4287741046831954
+            },
+            {
+              "move": 46,
+              "score": -364,
+              "visits": 370,
+              "value": -0.36438648648648675
+            },
+            {
+              "move": 47,
+              "score": -308,
+              "visits": 322,
+              "value": -0.3077639751552797
+            },
+            {
+              "move": 53,
+              "score": -309,
+              "visits": 719,
+              "value": -0.3086467315716275
+            },
+            {
+              "move": 54,
+              "score": -421,
+              "visits": 16,
+              "value": -0.4211875
+            },
+            {
+              "move": 59,
+              "score": -238,
+              "visits": 1585,
+              "value": -0.2375785488958995
+            },
+            {
+              "move": 60,
+              "score": -545,
+              "visits": 324,
+              "value": -0.5453456790123453
+            },
+            {
+              "move": 61,
+              "score": -117,
+              "visits": 3246,
+              "value": -0.11676093653727668
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 1181655,
+            "evaluations": 177198,
+            "meanDepth": 34.66146040934114,
+            "reusedNodes": 1196998,
+            "treeNodes": 1375414,
+            "memoryLimited": false,
+            "maxNodes": 8388608,
+            "peakRssBytes": 2216116224
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -19,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 8,
+          "ply": 20,
+          "originallyCapped": false,
+          "move": 46,
+          "score": -69,
+          "depth": 44,
+          "elapsedMs": 2000,
+          "nodes": 747200,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.028375,
+          "candidates": [
+            {
+              "move": 5,
+              "score": -89,
+              "visits": 17520,
+              "value": -0.08867910958904103
+            },
+            {
+              "move": 6,
+              "score": -235,
+              "visits": 337,
+              "value": -0.23461424332344225
+            },
+            {
+              "move": 31,
+              "score": -144,
+              "visits": 10649,
+              "value": -0.14443994741290261
+            },
+            {
+              "move": 39,
+              "score": -441,
+              "visits": 611,
+              "value": -0.4408445171849429
+            },
+            {
+              "move": 46,
+              "score": -69,
+              "visits": 3774872,
+              "value": -0.06932588734137547
+            },
+            {
+              "move": 47,
+              "score": -152,
+              "visits": 2319,
+              "value": -0.1516300129366103
+            },
+            {
+              "move": 53,
+              "score": -109,
+              "visits": 34458,
+              "value": -0.10935872656567339
+            },
+            {
+              "move": 54,
+              "score": -369,
+              "visits": 94,
+              "value": -0.3693936170212766
+            },
+            {
+              "move": 59,
+              "score": -439,
+              "visits": 1251,
+              "value": -0.4387186250999199
+            },
+            {
+              "move": 60,
+              "score": -280,
+              "visits": 1085,
+              "value": -0.28004608294930916
+            },
+            {
+              "move": 61,
+              "score": -124,
+              "visits": 2558,
+              "value": -0.12370250195465209
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 747200,
+            "evaluations": 634971,
+            "meanDepth": 29.80127408993576,
+            "reusedNodes": 994643,
+            "treeNodes": 1636349,
+            "memoryLimited": false,
+            "maxNodes": 8388608,
+            "peakRssBytes": 2216116224
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -69,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 8,
+          "ply": 22,
+          "originallyCapped": true,
+          "move": 39,
+          "score": -107,
+          "depth": 42,
+          "elapsedMs": 2000,
+          "nodes": 779350,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.057,
+          "candidates": [
+            {
+              "move": 6,
+              "score": -305,
+              "visits": 36,
+              "value": -0.30455555555555563
+            },
+            {
+              "move": 14,
+              "score": -184,
+              "visits": 60,
+              "value": -0.18393333333333334
+            },
+            {
+              "move": 22,
+              "score": -578,
+              "visits": 403,
+              "value": -0.5784937965260546
+            },
+            {
+              "move": 31,
+              "score": -27,
+              "visits": 283864,
+              "value": -0.02743289744384642
+            },
+            {
+              "move": 39,
+              "score": -107,
+              "visits": 4056746,
+              "value": -0.1071180480611722
+            },
+            {
+              "move": 47,
+              "score": -257,
+              "visits": 2370,
+              "value": -0.257305063291139
+            },
+            {
+              "move": 54,
+              "score": -370,
+              "visits": 42,
+              "value": -0.3698571428571428
+            },
+            {
+              "move": 59,
+              "score": -350,
+              "visits": 2154,
+              "value": -0.3504656453110495
+            },
+            {
+              "move": 60,
+              "score": -707,
+              "visits": 598,
+              "value": -0.7065652173913041
+            },
+            {
+              "move": 61,
+              "score": -110,
+              "visits": 193719,
+              "value": -0.10979977699657806
+            },
+            {
+              "move": 62,
+              "score": -494,
+              "visits": 30,
+              "value": -0.4938
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 779350,
+            "evaluations": 600662,
+            "meanDepth": 27.645004170141785,
+            "reusedNodes": 1551267,
+            "treeNodes": 2157494,
+            "memoryLimited": false,
+            "maxNodes": 8388608,
+            "peakRssBytes": 2216116224
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -107,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 8,
+          "ply": 24,
+          "originallyCapped": true,
+          "move": 15,
+          "score": -161,
+          "depth": 41,
+          "elapsedMs": 2000,
+          "nodes": 639158,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.035041,
+          "candidates": [
+            {
+              "move": 5,
+              "score": -654,
+              "visits": 229,
+              "value": -0.6538646288209607
+            },
+            {
+              "move": 6,
+              "score": -574,
+              "visits": 92,
+              "value": -0.5737826086956523
+            },
+            {
+              "move": 12,
+              "score": -444,
+              "visits": 688,
+              "value": -0.4442020348837212
+            },
+            {
+              "move": 14,
+              "score": -347,
+              "visits": 31,
+              "value": -0.3467741935483871
+            },
+            {
+              "move": 15,
+              "score": -161,
+              "visits": 4646592,
+              "value": -0.1612549752593127
+            },
+            {
+              "move": 22,
+              "score": -437,
+              "visits": 400,
+              "value": -0.43691499999999955
+            },
+            {
+              "move": 47,
+              "score": -378,
+              "visits": 6327,
+              "value": -0.37759649122806765
+            },
+            {
+              "move": 54,
+              "score": -567,
+              "visits": 36,
+              "value": -0.5674166666666669
+            },
+            {
+              "move": 59,
+              "score": -428,
+              "visits": 1139,
+              "value": -0.42755399473222105
+            },
+            {
+              "move": 60,
+              "score": -738,
+              "visits": 316,
+              "value": -0.7382373417721518
+            },
+            {
+              "move": 61,
+              "score": -702,
+              "visits": 258,
+              "value": -0.7017558139534884
+            },
+            {
+              "move": 62,
+              "score": -638,
+              "visits": 132,
+              "value": -0.637772727272727
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 639158,
+            "evaluations": 609333,
+            "meanDepth": 26.17942355411338,
+            "reusedNodes": 1775324,
+            "treeNodes": 2390852,
+            "memoryLimited": false,
+            "maxNodes": 8388608,
+            "peakRssBytes": 2216116224
+          },
+          "selection": {
+            "seed": 2045300289,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -161,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 1,
+          "originallyCapped": false,
+          "move": 34,
+          "score": -8,
+          "depth": 64,
+          "elapsedMs": 2000,
+          "nodes": 798551,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.026583,
+          "candidates": [
+            {
+              "move": 18,
+              "score": -84,
+              "visits": 3014,
+              "value": -0.0840348374253481
+            },
+            {
+              "move": 20,
+              "score": -348,
+              "visits": 2259,
+              "value": -0.3475723771580347
+            },
+            {
+              "move": 34,
+              "score": -8,
+              "visits": 793277,
+              "value": -0.008150560270876211
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 798551,
+            "evaluations": 765285,
+            "meanDepth": 29.031202766009937,
+            "reusedNodes": 0,
+            "treeNodes": 765783,
+            "memoryLimited": false,
+            "maxNodes": 8388608,
+            "peakRssBytes": 2216116224
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 29333,
+            "lossLimit": 58,
+            "bestScore": -8,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 3,
+          "originallyCapped": false,
+          "move": 37,
+          "score": -23,
+          "depth": 60,
+          "elapsedMs": 2000,
+          "nodes": 657854,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.026667,
+          "candidates": [
+            {
+              "move": 11,
+              "score": -121,
+              "visits": 1003,
+              "value": -0.1209690927218346
+            },
+            {
+              "move": 20,
+              "score": -120,
+              "visits": 5671,
+              "value": -0.11992629165931926
+            },
+            {
+              "move": 21,
+              "score": -205,
+              "visits": 2192,
+              "value": -0.2046195255474452
+            },
+            {
+              "move": 37,
+              "score": -23,
+              "visits": 1130622,
+              "value": -0.022655503784642685
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 657854,
+            "evaluations": 637448,
+            "meanDepth": 34.00506799381018,
+            "reusedNodes": 448867,
+            "treeNodes": 1087376,
+            "memoryLimited": false,
+            "maxNodes": 8388608,
+            "peakRssBytes": 2216116224
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 24000,
+            "lossLimit": 48,
+            "bestScore": -23,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 5,
+          "originallyCapped": false,
+          "move": 20,
+          "score": -19,
+          "depth": 58,
+          "elapsedMs": 2000,
+          "nodes": 634841,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.024,
+          "candidates": [
+            {
+              "move": 10,
+              "score": -484,
+              "visits": 299,
+              "value": -0.48428093645485
+            },
+            {
+              "move": 11,
+              "score": -488,
+              "visits": 226,
+              "value": -0.48801327433628316
+            },
+            {
+              "move": 20,
+              "score": -19,
+              "visits": 1758612,
+              "value": -0.019029957716652623
+            },
+            {
+              "move": 21,
+              "score": -412,
+              "visits": 1906,
+              "value": -0.4122198321091285
+            },
+            {
+              "move": 51,
+              "score": -366,
+              "visits": 479,
+              "value": -0.3659958246346555
+            },
+            {
+              "move": 53,
+              "score": -229,
+              "visits": 717,
+              "value": -0.22861924686192475
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 634841,
+            "evaluations": 558889,
+            "meanDepth": 36.32352510313606,
+            "reusedNodes": 1075286,
+            "treeNodes": 1635214,
+            "memoryLimited": false,
+            "maxNodes": 8388608,
+            "peakRssBytes": 2216116224
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 18666,
+            "lossLimit": 37,
+            "bestScore": -19,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 7,
+          "originallyCapped": true,
+          "move": 53,
+          "score": -18,
+          "depth": 56,
+          "elapsedMs": 2000,
+          "nodes": 644905,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.0345,
+          "candidates": [
+            {
+              "move": 10,
+              "score": -438,
+              "visits": 644,
+              "value": -0.43848602484472093
+            },
+            {
+              "move": 18,
+              "score": -513,
+              "visits": 1725,
+              "value": -0.5133600000000006
+            },
+            {
+              "move": 51,
+              "score": -263,
+              "visits": 1738,
+              "value": -0.2628060989643268
+            },
+            {
+              "move": 52,
+              "score": -156,
+              "visits": 2917,
+              "value": -0.15629482344874873
+            },
+            {
+              "move": 53,
+              "score": -18,
+              "visits": 2377398,
+              "value": -0.0179331104846542
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 644905,
+            "evaluations": 495460,
+            "meanDepth": 35.54042378334793,
+            "reusedNodes": 1612492,
+            "treeNodes": 2108756,
+            "memoryLimited": false,
+            "maxNodes": 8388608,
+            "peakRssBytes": 2216116224
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 13333,
+            "lossLimit": 26,
+            "bestScore": -18,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 9,
+          "originallyCapped": true,
+          "move": 29,
+          "score": -24,
+          "depth": 53,
+          "elapsedMs": 2000,
+          "nodes": 608382,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.03325,
+          "candidates": [
+            {
+              "move": 18,
+              "score": -85,
+              "visits": 9723,
+              "value": -0.08459045562069317
+            },
+            {
+              "move": 26,
+              "score": -95,
+              "visits": 9507,
+              "value": -0.09545787314610306
+            },
+            {
+              "move": 29,
+              "score": -24,
+              "visits": 2940102,
+              "value": -0.02409026795668597
+            },
+            {
+              "move": 38,
+              "score": -192,
+              "visits": 2344,
+              "value": -0.19245520477815703
+            },
+            {
+              "move": 39,
+              "score": -143,
+              "visits": 875,
+              "value": -0.1431337142857145
+            },
+            {
+              "move": 52,
+              "score": -46,
+              "visits": 12541,
+              "value": -0.04637660473646427
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 608382,
+            "evaluations": 533889,
+            "meanDepth": 33.21736178913906,
+            "reusedNodes": 2091044,
+            "treeNodes": 2625829,
+            "memoryLimited": false,
+            "maxNodes": 8388608,
+            "peakRssBytes": 2216116224
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 8000,
+            "lossLimit": 16,
+            "bestScore": -24,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 11,
+          "originallyCapped": true,
+          "move": 42,
+          "score": -24,
+          "depth": 53,
+          "elapsedMs": 2000,
+          "nodes": 583403,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.039083,
+          "candidates": [
+            {
+              "move": 18,
+              "score": -255,
+              "visits": 1278,
+              "value": -0.25472300469483566
+            },
+            {
+              "move": 26,
+              "score": -263,
+              "visits": 2319,
+              "value": -0.2628663216903841
+            },
+            {
+              "move": 31,
+              "score": -137,
+              "visits": 1968,
+              "value": -0.13731656504065054
+            },
+            {
+              "move": 39,
+              "score": -626,
+              "visits": 220,
+              "value": -0.6260318181818184
+            },
+            {
+              "move": 42,
+              "score": -24,
+              "visits": 3504024,
+              "value": -0.024439892820361332
+            },
+            {
+              "move": 47,
+              "score": -322,
+              "visits": 895,
+              "value": -0.3222804469273741
+            },
+            {
+              "move": 50,
+              "score": -192,
+              "visits": 1537,
+              "value": -0.19230709173715005
+            },
+            {
+              "move": 52,
+              "score": -131,
+              "visits": 5363,
+              "value": -0.13137814655976104
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 583403,
+            "evaluations": 577675,
+            "meanDepth": 29.09260494032427,
+            "reusedNodes": 2584938,
+            "treeNodes": 3163670,
+            "memoryLimited": false,
+            "maxNodes": 8388608,
+            "peakRssBytes": 2489892864
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 2666,
+            "lossLimit": 5,
+            "bestScore": -24,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 13,
+          "originallyCapped": true,
+          "move": 51,
+          "score": -18,
+          "depth": 51,
+          "elapsedMs": 2000,
+          "nodes": 610001,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.043042,
+          "candidates": [
+            {
+              "move": 11,
+              "score": -555,
+              "visits": 217,
+              "value": -0.5552857142857146
+            },
+            {
+              "move": 18,
+              "score": -139,
+              "visits": 2459,
+              "value": -0.13926555510370073
+            },
+            {
+              "move": 21,
+              "score": -194,
+              "visits": 2519,
+              "value": -0.19359865025803893
+            },
+            {
+              "move": 26,
+              "score": -230,
+              "visits": 2703,
+              "value": -0.2295867554568994
+            },
+            {
+              "move": 39,
+              "score": -555,
+              "visits": 196,
+              "value": -0.5550204081632656
+            },
+            {
+              "move": 47,
+              "score": -495,
+              "visits": 388,
+              "value": -0.4946881443298971
+            },
+            {
+              "move": 51,
+              "score": -18,
+              "visits": 4059319,
+              "value": -0.01773281749967418
+            },
+            {
+              "move": 60,
+              "score": -110,
+              "visits": 2688,
+              "value": -0.11028497023809501
+            },
+            {
+              "move": 61,
+              "score": -71,
+              "visits": 12896,
+              "value": -0.07072883064516156
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 610001,
+            "evaluations": 360079,
+            "meanDepth": 34.74071190047229,
+            "reusedNodes": 3119450,
+            "treeNodes": 3481877,
+            "memoryLimited": false,
+            "maxNodes": 8388608,
+            "peakRssBytes": 2637791232
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -18,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 15,
+          "originallyCapped": true,
+          "move": 18,
+          "score": -29,
+          "depth": 47,
+          "elapsedMs": 2023,
+          "nodes": 621321,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2023.702,
+          "candidates": [
+            {
+              "move": 11,
+              "score": -574,
+              "visits": 178,
+              "value": -0.5737134831460675
+            },
+            {
+              "move": 18,
+              "score": -29,
+              "visits": 3874775,
+              "value": -0.029075616003498526
+            },
+            {
+              "move": 21,
+              "score": -390,
+              "visits": 888,
+              "value": -0.3895799549549549
+            },
+            {
+              "move": 22,
+              "score": -315,
+              "visits": 1675,
+              "value": -0.31529074626865716
+            },
+            {
+              "move": 23,
+              "score": -257,
+              "visits": 747,
+              "value": -0.25697991967871503
+            },
+            {
+              "move": 26,
+              "score": -88,
+              "visits": 163029,
+              "value": -0.08849291230394767
+            },
+            {
+              "move": 31,
+              "score": -318,
+              "visits": 864,
+              "value": -0.3179120370370368
+            },
+            {
+              "move": 39,
+              "score": -694,
+              "visits": 357,
+              "value": -0.6939607843137252
+            },
+            {
+              "move": 47,
+              "score": -622,
+              "visits": 339,
+              "value": -0.6221120943952798
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 621321,
+            "evaluations": 611429,
+            "meanDepth": 26.216559556171447,
+            "reusedNodes": 2868893,
+            "treeNodes": 3481878,
+            "memoryLimited": false,
+            "maxNodes": 8388608,
+            "peakRssBytes": 2637791232
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -29,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 17,
+          "originallyCapped": false,
+          "move": 26,
+          "score": -10,
+          "depth": 47,
+          "elapsedMs": 2000,
+          "nodes": 959211,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.030917,
+          "candidates": [
+            {
+              "move": 6,
+              "score": -782,
+              "visits": 40,
+              "value": -0.78195
+            },
+            {
+              "move": 12,
+              "score": -435,
+              "visits": 725,
+              "value": -0.43528689655172464
+            },
+            {
+              "move": 21,
+              "score": -510,
+              "visits": 364,
+              "value": -0.5102802197802191
+            },
+            {
+              "move": 22,
+              "score": -362,
+              "visits": 1044,
+              "value": -0.3624358237547888
+            },
+            {
+              "move": 23,
+              "score": -291,
+              "visits": 251,
+              "value": -0.2913904382470122
+            },
+            {
+              "move": 26,
+              "score": -10,
+              "visits": 2902015,
+              "value": -0.01029696056015981
+            },
+            {
+              "move": 31,
+              "score": -508,
+              "visits": 320,
+              "value": -0.5084375
+            },
+            {
+              "move": 39,
+              "score": -750,
+              "visits": 121,
+              "value": -0.7498264462809919
+            },
+            {
+              "move": 47,
+              "score": -155,
+              "visits": 1142,
+              "value": -0.15519614711033294
+            },
+            {
+              "move": 54,
+              "score": -554,
+              "visits": 28,
+              "value": -0.554142857142857
+            },
+            {
+              "move": 55,
+              "score": -723,
+              "visits": 32,
+              "value": -0.72334375
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 959211,
+            "evaluations": 183615,
+            "meanDepth": 35.79946122386003,
+            "reusedNodes": 1553567,
+            "treeNodes": 1738409,
+            "memoryLimited": false,
+            "maxNodes": 8388608,
+            "peakRssBytes": 2637791232
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -10,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 19,
+          "originallyCapped": false,
+          "move": 58,
+          "score": 3,
+          "depth": 45,
+          "elapsedMs": 2000,
+          "nodes": 715687,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.032917,
+          "candidates": [
+            {
+              "move": 6,
+              "score": -550,
+              "visits": 109,
+              "value": -0.5498165137614678
+            },
+            {
+              "move": 12,
+              "score": -250,
+              "visits": 3460,
+              "value": -0.24969971098265925
+            },
+            {
+              "move": 21,
+              "score": -172,
+              "visits": 2642,
+              "value": -0.17152573807721416
+            },
+            {
+              "move": 23,
+              "score": -232,
+              "visits": 841,
+              "value": -0.23230796670630185
+            },
+            {
+              "move": 31,
+              "score": -742,
+              "visits": 307,
+              "value": -0.7421856677524428
+            },
+            {
+              "move": 39,
+              "score": -476,
+              "visits": 426,
+              "value": -0.47634976525821576
+            },
+            {
+              "move": 47,
+              "score": -117,
+              "visits": 10673,
+              "value": -0.1170633373934226
+            },
+            {
+              "move": 49,
+              "score": -376,
+              "visits": 3,
+              "value": -0.37633333333333335
+            },
+            {
+              "move": 54,
+              "score": -209,
+              "visits": 84,
+              "value": -0.20873809523809528
+            },
+            {
+              "move": 55,
+              "score": -566,
+              "visits": 56,
+              "value": -0.5662499999999999
+            },
+            {
+              "move": 58,
+              "score": 3,
+              "visits": 3533153,
+              "value": 0.0031008790165631167
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 715687,
+            "evaluations": 280469,
+            "meanDepth": 33.085622625533226,
+            "reusedNodes": 1668394,
+            "treeNodes": 1951160,
+            "memoryLimited": false,
+            "maxNodes": 8388608,
+            "peakRssBytes": 2637791232
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 3,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "game": 17,
+          "ply": 21,
+          "originallyCapped": true,
+          "move": 24,
+          "score": 37,
+          "depth": 43,
+          "elapsedMs": 2000,
+          "nodes": 947244,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.034667,
+          "candidates": [
+            {
+              "move": 12,
+              "score": -96,
+              "visits": 19927,
+              "value": -0.09628709790736126
+            },
+            {
+              "move": 21,
+              "score": -94,
+              "visits": 21618,
+              "value": -0.09395508372652427
+            },
+            {
+              "move": 22,
+              "score": -188,
+              "visits": 1943,
+              "value": -0.18773803396809113
+            },
+            {
+              "move": 23,
+              "score": -133,
+              "visits": 1481,
+              "value": -0.13290614449696164
+            },
+            {
+              "move": 24,
+              "score": 37,
+              "visits": 2730212,
+              "value": 0.03690049563917097
+            },
+            {
+              "move": 25,
+              "score": -89,
+              "visits": 622159,
+              "value": -0.08911579676577278
+            },
+            {
+              "move": 31,
+              "score": -641,
+              "visits": 222,
+              "value": -0.641418918918919
+            },
+            {
+              "move": 39,
+              "score": -226,
+              "visits": 809,
+              "value": -0.22635846724351086
+            },
+            {
+              "move": 40,
+              "score": -113,
+              "visits": 7188,
+              "value": -0.11259307178631038
+            },
+            {
+              "move": 47,
+              "score": -149,
+              "visits": 2899,
+              "value": -0.1485288030355294
+            },
+            {
+              "move": 54,
+              "score": -162,
+              "visits": 73,
+              "value": -0.16197260273972602
+            },
+            {
+              "move": 55,
+              "score": -503,
+              "visits": 29,
+              "value": -0.5033793103448275
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 947244,
+            "evaluations": 573993,
+            "meanDepth": 28.493566599524517,
+            "reusedNodes": 1591999,
+            "treeNodes": 2170824,
+            "memoryLimited": false,
+            "maxNodes": 8388608,
+            "peakRssBytes": 2637791232
+          },
+          "selection": {
+            "seed": 247885604,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 37,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        }
+      ],
+      "memoryGuardExceeded": false,
+      "capped": 0,
+      "nonProven": 24,
+      "fullBudget": 24,
+      "evaluations": 13115562,
+      "peakRssBytes": 2637791232
+    }
+  ],
+  "selectedMaxNodes": 4194304,
+  "selectionRule": "Smallest safe larger limit with <=5% capped searches and >=95% non-proven searches using >=1900ms; otherwise safe limit minimizing capped fraction, then maximizing evaluations. RSS guard=min(4GiB, physical RAM/6).",
+  "memoryGuardBytes": 4294967296,
+  "sequences": [
+    {
+      "game": 8,
+      "seed": 2045300289,
+      "positions": [
+        {
+          "board": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "turn": 1,
+          "ply": 0,
+          "originallyCapped": false
+        },
+        {
+          "board": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "turn": 1,
+          "ply": 2,
+          "originallyCapped": false
+        },
+        {
+          "board": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "turn": 1,
+          "ply": 4,
+          "originallyCapped": false
+        },
+        {
+          "board": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "turn": 1,
+          "ply": 6,
+          "originallyCapped": false
+        },
+        {
+          "board": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "turn": 1,
+          "ply": 8,
+          "originallyCapped": false
+        },
+        {
+          "board": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            -1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            1,
+            1,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "turn": 1,
+          "ply": 10,
+          "originallyCapped": true
+        },
+        {
+          "board": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            -1,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "turn": 1,
+          "ply": 12,
+          "originallyCapped": true
+        },
+        {
+          "board": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            -1,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "turn": 1,
+          "ply": 14,
+          "originallyCapped": true
+        },
+        {
+          "board": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "turn": 1,
+          "ply": 16,
+          "originallyCapped": false
+        },
+        {
+          "board": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            1,
+            1,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "turn": 1,
+          "ply": 18,
+          "originallyCapped": false
+        },
+        {
+          "board": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            1,
+            1,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "turn": 1,
+          "ply": 20,
+          "originallyCapped": false
+        },
+        {
+          "board": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            -1,
+            0,
+            0,
+            1,
+            1,
+            1,
+            -1,
+            -1,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            -1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "turn": 1,
+          "ply": 22,
+          "originallyCapped": true
+        },
+        {
+          "board": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            -1,
+            0,
+            0,
+            1,
+            1,
+            1,
+            -1,
+            -1,
+            -1,
+            0,
+            1,
+            1,
+            1,
+            1,
+            1,
+            -1,
+            1,
+            0,
+            0,
+            1,
+            1,
+            1,
+            -1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "turn": 1,
+          "ply": 24,
+          "originallyCapped": true
+        }
+      ]
+    },
+    {
+      "game": 17,
+      "seed": 247885604,
+      "positions": [
+        {
+          "board": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "turn": -1,
+          "ply": 1,
+          "originallyCapped": false
+        },
+        {
+          "board": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            -1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "turn": -1,
+          "ply": 3,
+          "originallyCapped": false
+        },
+        {
+          "board": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            -1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "turn": -1,
+          "ply": 5,
+          "originallyCapped": false
+        },
+        {
+          "board": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "turn": -1,
+          "ply": 7,
+          "originallyCapped": true
+        },
+        {
+          "board": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "turn": -1,
+          "ply": 9,
+          "originallyCapped": true
+        },
+        {
+          "board": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            -1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "turn": -1,
+          "ply": 11,
+          "originallyCapped": true
+        },
+        {
+          "board": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            -1,
+            -1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "turn": -1,
+          "ply": 13,
+          "originallyCapped": true
+        },
+        {
+          "board": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            -1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            -1,
+            -1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "turn": -1,
+          "ply": 15,
+          "originallyCapped": true
+        },
+        {
+          "board": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            -1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            -1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            -1,
+            -1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "turn": -1,
+          "ply": 17,
+          "originallyCapped": false
+        },
+        {
+          "board": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            -1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            -1,
+            -1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            -1,
+            1,
+            -1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            1,
+            -1,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "turn": -1,
+          "ply": 19,
+          "originallyCapped": false
+        },
+        {
+          "board": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            -1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            1,
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            -1,
+            1,
+            -1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            -1,
+            -1,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "turn": -1,
+          "ply": 21,
+          "originallyCapped": true
+        }
+      ]
+    }
+  ],
+  "previousReportSha256": "124757834c25cbdcb3e8e3b2511adb3500e71e57b3e2758d3378f0a484bae4f3",
+  "librarySha256": "8ff9d53518fa8b1914dc19d93442095d30e500c40997a2d145a15678ddcfc51e",
+  "modelSha256": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0",
+  "fixedSimulationParity": true,
+  "scriptSha256": "66b0f88f4a7afac6c873146a20c4baffb58a9750952f2a53624852b21918f684",
+  "seconds": 135.008852875093
+}

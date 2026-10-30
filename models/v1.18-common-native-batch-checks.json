@@ -1,0 +1,19 @@
+{
+  "version": "v1.18-common-native-batch",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "releaseTestsPassed": 2,
+  "asanUbsanTestsPassed": 2,
+  "nnueBatch1SearchExact": true,
+  "nnueOutputExact": true,
+  "batchBounds": [
+    1,
+    128
+  ],
+  "backend": "same single-thread Accelerate and virtual-visit scheduler for CNN and NNUE",
+  "sourceManifest": "models/archive/v1.18-batch-diagnostic-sources.json",
+  "sourceManifestSha256": "48f7b8f2daa53e45890ba739e4b1ec2d45caf7fb97eeaabe56b8c45579be255e",
+  "diagnosticSha256": "ed9f10f8837dd74583ae6637451334fb9a307eb4f80dc9300d156f7584c4f218",
+  "formalMatchLibraryUnchanged": true,
+  "defaultManifestUnchanged": true
+}

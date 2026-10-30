@@ -1,0 +1,1 @@
+{"wasmParity":true,"games":20,"steps":1205,"passes":6,"checks":"legal masks, value scores, board transitions, pass handling and reused flip lists"}

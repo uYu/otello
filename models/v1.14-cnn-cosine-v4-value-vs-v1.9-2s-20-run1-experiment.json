@@ -1,0 +1,63 @@
+{
+  "status": "candidate",
+  "defaultPromoted": false,
+  "stopped": true,
+  "protocol": {
+    "games": 20,
+    "completedGames": 7,
+    "millisecondsPerMove": 2000
+  },
+  "stopReason": "User requested switching to a new 2s/20-game comparison with batch32 on both models; unfinished game excluded",
+  "sourceManifest": "models/archive/v1.14-cnn-policy-match-sources.json",
+  "model": "models/cnn2-c32-cosine-v4-value-v1.13.otcnn",
+  "baselineManifest": "models/v1.9-default.json",
+  "matchReport": "models/v1.14-cnn-cosine-v4-value-vs-v1.9-2s-20-run1.json",
+  "artifactSha256": {
+    "models/v1.14-cnn-cosine-v4-value-vs-v1.9-2s-20-run1.json": "7e368d185dcea9cfad901b3b123a5919cf550c9fa4bd4d4bad9cb910b026f7c3",
+    "models/v1.14-cnn-cosine-v4-value-vs-v1.9-2s-20-run1-comparison.md": "f218e0a26b8fd7cb75749a8c8ad8ca18f546157fae35b0d8bd8824d221e8a008",
+    "models/cnn2-c32-cosine-v4-value-v1.13.otcnn": "e7fddc6892fc86bb7c63e9af8e1c8fa0bbb1c92f39d6af50eaf3b0c467f1260e",
+    "models/archive/v1.14-cnn-policy-match-sources.json": "c87070039eeef9dc3b7a7cfabfd5db07d77368a7774bf87f8f540d8ba6ac8f9a",
+    "models/archive/v1.14-cnn-policy-match-sources.tar.gz": "627452b4b5ed7f748bc487a3eb2d4b65c961e41592b41d249bfb030186bac797"
+  },
+  "results": {
+    "baseline": {
+      "games": 7,
+      "win": 4,
+      "draw": 1,
+      "loss": 2,
+      "discDifference": 74,
+      "scoreRate": 0.6428571428571429,
+      "meanDiscDifference": 10.571428571428571,
+      "moves": 209,
+      "meanWallMs": 1508.1060081722494,
+      "meanSearchUnits": 874094.7607655502,
+      "searchUnit": "simulations",
+      "meanNonExactDepth": 36.47096774193548,
+      "depthKind": "maximumVisited",
+      "meanSimulationDepth": 6.405301085106202,
+      "memoryLimitedSearches": 0,
+      "reusedMctsSearches": 202,
+      "exactMoves": 54
+    },
+    "candidate": {
+      "games": 7,
+      "win": 2,
+      "draw": 1,
+      "loss": 4,
+      "discDifference": -74,
+      "scoreRate": 0.35714285714285715,
+      "meanDiscDifference": -10.571428571428571,
+      "moves": 211,
+      "meanWallMs": 1546.398251976303,
+      "meanSearchUnits": 484882.4123222749,
+      "searchUnit": "simulations",
+      "meanNonExactDepth": 29.043478260869566,
+      "depthKind": "maximumVisited",
+      "meanSimulationDepth": 5.688121815511454,
+      "memoryLimitedSearches": 0,
+      "reusedMctsSearches": 204,
+      "exactMoves": 50
+    }
+  },
+  "replayedActions": 426
+}

@@ -1,0 +1,12 @@
+{
+  "version": "v1.29 Pattern 简单结构与推理优化",
+  "experiments": [
+    {
+      "name": "Pattern：融合推理 + H32/H64 对照",
+      "focus": "Pattern H64",
+      "games": 0,
+      "runtimeReport": ".build/training/pattern-width-v1.29/progress.json",
+      "report": "models/v1.29-pattern-width.json"
+    }
+  ]
+}

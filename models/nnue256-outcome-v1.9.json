@@ -1,0 +1,348 @@
+{
+  "version": "v1.9-outcome-candidate",
+  "status": "candidate",
+  "modelFormat": "OTNNUE4",
+  "valueTarget": "side-to-move terminal outcome: win +1, draw 0, loss -1",
+  "architecture": "frozen v1.8 NNUE transform and policy; train only 512->1 tanh outcome value",
+  "parameters": 52098,
+  "trainableParameters": 513,
+  "bytes": 104936,
+  "sha256": "72294450ce5eb180703e05048df6e7ce7078f031c4e94464198192432d618bb0",
+  "parent": "models/nnue256-policy-v1.8.otnnue",
+  "parentSha256": "78c37b5b94c0a8cbd4c8b1225641784d6e7ae14755295245ec28f2e3888d4914",
+  "baselineVersion": "v1.8",
+  "featuresUnchanged": true,
+  "policyBytesUnchanged": true,
+  "dataset": {
+    "seed": 20261027,
+    "inputSha256": "6332fd01b27c11a81f3fbd344e52aaf8f70e60c644780fb453cc7ef64ae359ac",
+    "games": {
+      "logistello:test": 300,
+      "wthor:test": 300,
+      "wthor:validation": 300,
+      "logistello:validation": 300,
+      "logistello:train": 60775,
+      "wthor:train": 80561
+    },
+    "positions": {
+      "test": 6000,
+      "validation": 6000,
+      "train": 1000000
+    },
+    "filters": "complete games; placements 8..56, stride 3; 8-symmetry/color-relative position dedup; test/validation ownership before train",
+    "split": "native converter canonical first 8 moves; no move-wise split",
+    "target": "recorded final black disc difference / 64, from side-to-move view",
+    "maxGames": 6000,
+    "maxPositions": 60000,
+    "allTrainingGames": true,
+    "trainPositions": 1000000,
+    "frozenHoldout": {
+      "path": "/Users/franzyu/Documents/script/otello/.build/training/positions.npz",
+      "sha256": "ac3941a55613abc92944062b49c6b9c71883a93ce02973cf3dc8fc2be670ef4c"
+    },
+    "cacheSha256": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6"
+  },
+  "epochs": 30,
+  "seed": 20261027,
+  "batchSize": 1024,
+  "learningRate": 0.001,
+  "weightDecay": 0.001,
+  "bestEpoch": 3,
+  "history": [
+    {
+      "epoch": 0,
+      "outcomeMse": 0.7591089606285095,
+      "expectedScoreMse": 0.18977724015712738,
+      "nonDrawSignAccuracy": 0.6544371878601614,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 1,
+      "outcomeMse": 0.730391263961792,
+      "expectedScoreMse": 0.182597815990448,
+      "nonDrawSignAccuracy": 0.6580868228966577,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 2,
+      "outcomeMse": 0.7302629947662354,
+      "expectedScoreMse": 0.18256574869155884,
+      "nonDrawSignAccuracy": 0.656934306569343,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 3,
+      "outcomeMse": 0.7301604151725769,
+      "expectedScoreMse": 0.18254010379314423,
+      "nonDrawSignAccuracy": 0.6571263926238955,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 4,
+      "outcomeMse": 0.7322107553482056,
+      "expectedScoreMse": 0.1830526888370514,
+      "nonDrawSignAccuracy": 0.6534767575873992,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 5,
+      "outcomeMse": 0.7316138744354248,
+      "expectedScoreMse": 0.1829034686088562,
+      "nonDrawSignAccuracy": 0.6529004994237418,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 6,
+      "outcomeMse": 0.7326306700706482,
+      "expectedScoreMse": 0.18315766751766205,
+      "nonDrawSignAccuracy": 0.6529004994237418,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 7,
+      "outcomeMse": 0.7318148016929626,
+      "expectedScoreMse": 0.18295370042324066,
+      "nonDrawSignAccuracy": 0.6552055320783711,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 8,
+      "outcomeMse": 0.7322162985801697,
+      "expectedScoreMse": 0.18305407464504242,
+      "nonDrawSignAccuracy": 0.6571263926238955,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 9,
+      "outcomeMse": 0.7328177094459534,
+      "expectedScoreMse": 0.18320442736148834,
+      "nonDrawSignAccuracy": 0.6529004994237418,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 10,
+      "outcomeMse": 0.7320075035095215,
+      "expectedScoreMse": 0.18300187587738037,
+      "nonDrawSignAccuracy": 0.6517479830964272,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 11,
+      "outcomeMse": 0.7308968305587769,
+      "expectedScoreMse": 0.1827242076396942,
+      "nonDrawSignAccuracy": 0.6561659623511333,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 12,
+      "outcomeMse": 0.732183575630188,
+      "expectedScoreMse": 0.183045893907547,
+      "nonDrawSignAccuracy": 0.6553976181329235,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 13,
+      "outcomeMse": 0.7320429682731628,
+      "expectedScoreMse": 0.1830107420682907,
+      "nonDrawSignAccuracy": 0.6517479830964272,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 14,
+      "outcomeMse": 0.7314207553863525,
+      "expectedScoreMse": 0.18285518884658813,
+      "nonDrawSignAccuracy": 0.6548213599692663,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 15,
+      "outcomeMse": 0.7326517105102539,
+      "expectedScoreMse": 0.18316292762756348,
+      "nonDrawSignAccuracy": 0.6565501344602381,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 16,
+      "outcomeMse": 0.7325717806816101,
+      "expectedScoreMse": 0.18314294517040253,
+      "nonDrawSignAccuracy": 0.6527084133691894,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 17,
+      "outcomeMse": 0.7321969270706177,
+      "expectedScoreMse": 0.18304923176765442,
+      "nonDrawSignAccuracy": 0.653860929696504,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 18,
+      "outcomeMse": 0.7312067151069641,
+      "expectedScoreMse": 0.18280167877674103,
+      "nonDrawSignAccuracy": 0.653860929696504,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 19,
+      "outcomeMse": 0.7307596206665039,
+      "expectedScoreMse": 0.18268990516662598,
+      "nonDrawSignAccuracy": 0.655589704187476,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 20,
+      "outcomeMse": 0.7316603064537048,
+      "expectedScoreMse": 0.1829150766134262,
+      "nonDrawSignAccuracy": 0.6565501344602381,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 21,
+      "outcomeMse": 0.7311497330665588,
+      "expectedScoreMse": 0.1827874332666397,
+      "nonDrawSignAccuracy": 0.6561659623511333,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 22,
+      "outcomeMse": 0.7315161228179932,
+      "expectedScoreMse": 0.1828790307044983,
+      "nonDrawSignAccuracy": 0.6546292739147138,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 23,
+      "outcomeMse": 0.7320945858955383,
+      "expectedScoreMse": 0.18302364647388458,
+      "nonDrawSignAccuracy": 0.657318478678448,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 24,
+      "outcomeMse": 0.7324336171150208,
+      "expectedScoreMse": 0.1831084042787552,
+      "nonDrawSignAccuracy": 0.6534767575873992,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 25,
+      "outcomeMse": 0.7304533123970032,
+      "expectedScoreMse": 0.1826133280992508,
+      "nonDrawSignAccuracy": 0.6559738762965809,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 26,
+      "outcomeMse": 0.731562077999115,
+      "expectedScoreMse": 0.18289051949977875,
+      "nonDrawSignAccuracy": 0.6548213599692663,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 27,
+      "outcomeMse": 0.7325829863548279,
+      "expectedScoreMse": 0.18314574658870697,
+      "nonDrawSignAccuracy": 0.6529004994237418,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 28,
+      "outcomeMse": 0.7305942177772522,
+      "expectedScoreMse": 0.18264855444431305,
+      "nonDrawSignAccuracy": 0.6548213599692663,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 29,
+      "outcomeMse": 0.7317314743995667,
+      "expectedScoreMse": 0.18293286859989166,
+      "nonDrawSignAccuracy": 0.6550134460238187,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    },
+    {
+      "epoch": 30,
+      "outcomeMse": 0.7317420840263367,
+      "expectedScoreMse": 0.18293552100658417,
+      "nonDrawSignAccuracy": 0.6561659623511333,
+      "draws": 794,
+      "zeroOutcomeMse": 0.8676666617393494
+    }
+  ],
+  "seconds": 37.67616770800669,
+  "torchVersion": "2.10.0",
+  "numpyVersion": "1.26.4",
+  "trainingScriptSha256": "bbcffe7e07a161068f832b97d03309bb3319c3cd527d8120bbd7337b3a009aee",
+  "helperSha256": {
+    "scripts/train-policy.py": "2a0550a6b8d06edb2b09773cbb8d3abbf108bc2a61bbb2a14a5cf6339295c9a4",
+    "scripts/train-nnue.py": "f4977077cb890f4bb8d714532f762398268e89999fc329a65f6fd8dfb5074313"
+  },
+  "metrics": {
+    "validation": {
+      "float": {
+        "outcomeMse": 0.7301604151725769,
+        "expectedScoreMse": 0.18254010379314423,
+        "nonDrawSignAccuracy": 0.6571263926238955,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "quantized": {
+        "outcomeMse": 0.7302831730170398,
+        "expectedScoreMse": 0.18257079325425996,
+        "nonDrawSignAccuracy": 0.6567422205147906,
+        "draws": 794,
+        "zeroOutcomeMse": 0.8676666617393494
+      },
+      "maxQuantizationError": 0.01770686700549501
+    },
+    "test": {
+      "float": {
+        "outcomeMse": 0.7126684784889221,
+        "expectedScoreMse": 0.17816711962223053,
+        "nonDrawSignAccuracy": 0.6702619414483821,
+        "draws": 808,
+        "zeroOutcomeMse": 0.8653333187103271
+      },
+      "quantized": {
+        "outcomeMse": 0.7127024745514611,
+        "expectedScoreMse": 0.17817561863786527,
+        "nonDrawSignAccuracy": 0.6712249614791987,
+        "draws": 808,
+        "zeroOutcomeMse": 0.8653333187103271
+      },
+      "maxQuantizationError": 0.01662823387897422
+    }
+  },
+  "cppParityPositions": 1024,
+  "cppMaxRoundingError": 0.4994760256025472,
+  "cppPolicyMaxError": 0
+}

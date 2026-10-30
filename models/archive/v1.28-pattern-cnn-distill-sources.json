@@ -1,0 +1,44 @@
+{
+  "archive": "models/archive/v1.28-pattern-cnn-distill-sources.tar.gz",
+  "sha256": "9a5decc29cb0970a3337885a8e131b18362cb5d3e1fa90d40e8a25e5e13f4312",
+  "sources": {
+    "scripts/distill-pattern-outcome100.py": "18762c4adb701b8bf377a6da78c3acee81c8d6ff085f6ca58b66fd147f8265f5",
+    "scripts/verify-pattern-distill100.py": "804be874a2e0ee7695624596d6591ec8bd07c32c17564ec2bc7bdad105d11f15",
+    "scripts/teacher-targets.py": "52c0190f9488961c80e5fc5355cbda0a331940aff6c03edf0a443416bf8dd7f7",
+    "scripts/pattern_model.py": "2d7d57e7d178d467badb607115e6293864d683df5e1f563aec8b384290b6dc87",
+    "scripts/train-pattern-outcome.py": "94d823a68e3ea8ac8a790e24e7b39d06fd52bdaa44cd50c04e0bb97dac870bfb",
+    "scripts/train-pattern.py": "f85ddaed63329214222f672f81778f50dbd072f3e7b68ef467835705b948bdd3"
+  },
+  "finalizationSource": {
+    "path": "scripts/finalize-pattern-distill100.py",
+    "sha256": "cf3512cc08400fe825faa3c828c21bfdb5a8372649d00e463649752583656c4d"
+  },
+  "artifactSha256": {
+    "models/v1.28-pattern-cnn-distill.json": "2e4fec0b8cde5a7f26209a492519abfc8d4b10eb1a56d1aa062ad529d0106598",
+    "models/v1.28-pattern-cnn-distill-comparison.md": "8081b149def24cc2a6357d29f6d1270c17d314fdd3199415f645ff1d41602148",
+    "models/pattern32-cnn-distill100-v1.28.pt": "8271e4d35319447aab5ea7b0c35757657d8d8243f566a8b897614617479d7100",
+    "models/pattern32-cnn-distill100-v1.28.otpat": "0b8ba2c646594ddde06c61cef6cab405a55bf241e261fa43d694fef8ae8fc682",
+    "models/pattern32-cnn-distill100-v1.28.json": "b291a10b00ec43377923ccce9b8f85505a8a959b755d3f5e39838aa3c7d1da37"
+  },
+  "preservedSha256": {
+    "models/pattern32-outcome-v1.25.pt": "2c15863696bf1e29efc727effa0863ee5c827bcace67b20b3dd566d90069179e",
+    "models/pattern32-outcome-v1.25.otpat": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0",
+    "models/pattern32-outcome-v1.25.json": "1878f5d7947e1eb7b227a4bb74a4275421b79d3410a47443ed97d439941d5e80",
+    "models/default-model.json": "abf3afce523b6457f180fcc9d6801187974d747f694ace6c4722e63a7ba0b467",
+    "models/v1.9-default.json": "3bc0188f583263d1abaf5b7337ee28a849eac91a5a3707e50da6a32c2e854b5d",
+    "models/nnue256-outcome-v1.9.otnnue": "72294450ce5eb180703e05048df6e7ce7078f031c4e94464198192432d618bb0"
+  },
+  "concurrentExternalChanges": [
+    {
+      "path": "models/default-model.json",
+      "beforeSha256": "abf3afce523b6457f180fcc9d6801187974d747f694ace6c4722e63a7ba0b467",
+      "afterSha256": "8b82bf89b2afeebdcd1b2c056dee7ce21789aea9291cae11b0a480862ad37b01",
+      "currentContent": {
+        "version": "v1.25",
+        "baselineManifest": "models/v1.25-default.json",
+        "defaultModel": "models/pattern32-outcome-v1.25.otpat",
+        "modelSha256": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0"
+      }
+    }
+  ]
+}

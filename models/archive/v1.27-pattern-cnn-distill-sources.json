@@ -1,0 +1,33 @@
+{
+  "archive": "models/archive/v1.27-pattern-cnn-distill-sources.tar.gz",
+  "sha256": "39a8e27dd886fed49c059646004b08c3089d9a8ba2a246657f9bcc97204a7d48",
+  "sources": {
+    "scripts/distill-pattern-outcome.py": "59eb9acdd81abc5e3c5a4873fdab70f39ac7b07e7b794a3b5aab0161a78f4436",
+    "scripts/verify-pattern-distill.py": "0375f18324281794a2dc6673d502f86333fe71515bdc6363310f12951cb1f390",
+    "scripts/teacher-targets.py": "52c0190f9488961c80e5fc5355cbda0a331940aff6c03edf0a443416bf8dd7f7",
+    "scripts/pattern_model.py": "2d7d57e7d178d467badb607115e6293864d683df5e1f563aec8b384290b6dc87",
+    "scripts/train-pattern-outcome.py": "94d823a68e3ea8ac8a790e24e7b39d06fd52bdaa44cd50c04e0bb97dac870bfb",
+    "scripts/train-pattern.py": "f85ddaed63329214222f672f81778f50dbd072f3e7b68ef467835705b948bdd3"
+  },
+  "artifactSha256": {
+    "models/v1.27-pattern-cnn-distill.json": "21ee5495589e4197c4e5097426529c7bed8de2bef5b79756712ff9b5324545c6",
+    "models/v1.27-pattern-cnn-distill-comparison.md": "003780900aaf923fda3ed87d74d30ab67b8e35d0ce7afdd4ed4228be5ded1454",
+    "models/pattern32-finetune-control-v1.27.otpat": "1850d06d6508ae4f9c4ad02be620a3b11de3164404806ceea0b9931a5a092819",
+    "models/pattern32-finetune-control-v1.27.pt": "8c5d682ed058aac3d62ba2e27fe5413ae3690aab8edc9b3a40866b575008c803",
+    "models/pattern32-cnn-distill50-v1.27.json": "f7631566567e5218744773c93b73759ee6ecbc14d336af7f836f756b7860ab90",
+    "models/pattern32-cnn-distill50-v1.27.pt": "b8dba6ce5b02ae06888097b5ab3d02ac327cfcae1b8481fa9630ff6a388c9797",
+    "models/pattern32-cnn-distill50-v1.27.otpat": "5b8fdafce2690b4a66ae1ff04fef68e3e75cfc752ae29ba1a70d51d17439f6b4",
+    "models/pattern32-cnn-distill25-v1.27.json": "fe73d554746d79ad61a7fdd9a6995b9a160dfaa752c4e4a8eddca1bf0db24a1f",
+    "models/pattern32-cnn-distill25-v1.27.otpat": "efc0cf764de2fd7561e408b5904fa8b11310f553c95168c4095a55d0715588b6",
+    "models/pattern32-finetune-control-v1.27.json": "ff74c6f26ccc22e161d8dc371d8478e029c3a7d6c93c095ac23c368dd1fa9f66",
+    "models/pattern32-cnn-distill25-v1.27.pt": "cf1d5fb619b5f7508f09d48607cdffee9be86bd03ee1755a8d28874f2fa6ca5b"
+  },
+  "preservedSha256": {
+    "models/pattern32-outcome-v1.25.pt": "2c15863696bf1e29efc727effa0863ee5c827bcace67b20b3dd566d90069179e",
+    "models/pattern32-outcome-v1.25.otpat": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0",
+    "models/pattern32-outcome-v1.25.json": "1878f5d7947e1eb7b227a4bb74a4275421b79d3410a47443ed97d439941d5e80",
+    "models/default-model.json": "abf3afce523b6457f180fcc9d6801187974d747f694ace6c4722e63a7ba0b467",
+    "models/v1.9-default.json": "3bc0188f583263d1abaf5b7337ee28a849eac91a5a3707e50da6a32c2e854b5d",
+    "models/nnue256-outcome-v1.9.otnnue": "72294450ce5eb180703e05048df6e7ce7078f031c4e94464198192432d618bb0"
+  }
+}

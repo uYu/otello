@@ -1,0 +1,131 @@
+{
+  "verified": true,
+  "baselineFixedWorkParity": true,
+  "baselineColdPositions": 24,
+  "baselineWarmPositions": 16,
+  "simulations": 512,
+  "librarySha256": "92ba43bb978a5b491830cd4bbed1436e295973017ec717d7c264e092608fc4b9",
+  "previousLibrarySha256": "d6172ca74fc3fb17ab870b0f25f2c30e124cd6bd622688d251437253a3bae72e",
+  "candidates": [
+    {
+      "name": "cosine-joint",
+      "malformedRejected": 6,
+      "fusedAndColorPositions": 24,
+      "export": {
+        "model": "models/cnn2-c32-cosine-joint-v1.13.otcnn",
+        "sha256": "066591dfa83b8f7155a51ac66e7ea93876ceab5f9c12a7e0d16b3c222d470a31",
+        "checkpoint": "models/cnn2-c32-cosine-joint-v1.13.pt",
+        "checkpointSha256": "74e67d4df6d7f1967fc6fdfdda717ce5221bc3fcfc9f21207c09dc32020adc68",
+        "exportScriptSha256": "a94083d1b8f982d540d88237fef9d70263f4649ff3c74889911932da415e5239",
+        "librarySha256": "92ba43bb978a5b491830cd4bbed1436e295973017ec717d7c264e092608fc4b9",
+        "format": "OTCNN2",
+        "valueTarget": "side-to-move outcome +1/0/-1",
+        "channels": 32,
+        "metrics": {
+          "validation": {
+            "positions": 6000,
+            "maxValueError": 0.0005055640935897887,
+            "maxPolicyError": 6.936089735454232e-06,
+            "native": {
+              "value": {
+                "outcomeMse": 0.7382438400000001,
+                "expectedScoreMse": 0.18456096000000002,
+                "nonDrawSignAccuracy": 0.6505954667691125,
+                "draws": 794,
+                "zeroOutcomeMse": 0.8676666617393494
+              },
+              "policy": {
+                "crossEntropy": 1.4527300104730934,
+                "top1": 0.4585,
+                "uniformCrossEntropy": 2.0921316559038803,
+                "uniformTop1": 0.14703605201200015
+              },
+              "selectionLoss": 2.1909738504730933
+            }
+          },
+          "test": {
+            "positions": 6000,
+            "maxValueError": 0.00050288337469101,
+            "maxPolicyError": 6.12773632591157e-06,
+            "native": {
+              "value": {
+                "outcomeMse": 0.7138012135,
+                "expectedScoreMse": 0.178450303375,
+                "nonDrawSignAccuracy": 0.6644838212634823,
+                "draws": 808,
+                "zeroOutcomeMse": 0.8653333187103271
+              },
+              "policy": {
+                "crossEntropy": 1.486081546284239,
+                "top1": 0.44783333333333336,
+                "uniformCrossEntropy": 2.1044416287103247,
+                "uniformTop1": 0.14458325754053308
+              },
+              "selectionLoss": 2.1998827597842388
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "cosine-v4-value",
+      "malformedRejected": 6,
+      "fusedAndColorPositions": 24,
+      "export": {
+        "model": "models/cnn2-c32-cosine-v4-value-v1.13.otcnn",
+        "sha256": "e7fddc6892fc86bb7c63e9af8e1c8fa0bbb1c92f39d6af50eaf3b0c467f1260e",
+        "checkpoint": "models/cnn2-c32-cosine-v4-value-v1.13.pt",
+        "checkpointSha256": "842865863b698c693efd50c60bb2f6d292fcb972b484201dcce9743e6c4dad42",
+        "exportScriptSha256": "a94083d1b8f982d540d88237fef9d70263f4649ff3c74889911932da415e5239",
+        "librarySha256": "92ba43bb978a5b491830cd4bbed1436e295973017ec717d7c264e092608fc4b9",
+        "format": "OTCNN2",
+        "valueTarget": "side-to-move outcome +1/0/-1",
+        "channels": 32,
+        "metrics": {
+          "validation": {
+            "positions": 6000,
+            "maxValueError": 0.0005013395547866784,
+            "maxPolicyError": 5.84051458119017e-06,
+            "native": {
+              "value": {
+                "outcomeMse": 0.723576792,
+                "expectedScoreMse": 0.180894198,
+                "nonDrawSignAccuracy": 0.6615443718786016,
+                "draws": 794,
+                "zeroOutcomeMse": 0.8676666617393494
+              },
+              "policy": {
+                "crossEntropy": 1.51188966470092,
+                "top1": 0.4375,
+                "uniformCrossEntropy": 2.0921316559038803,
+                "uniformTop1": 0.14703605201200015
+              },
+              "selectionLoss": 2.23546645670092
+            }
+          },
+          "test": {
+            "positions": 6000,
+            "maxValueError": 0.0005019725561141997,
+            "maxPolicyError": 6.806936176578793e-06,
+            "native": {
+              "value": {
+                "outcomeMse": 0.6976048818333334,
+                "expectedScoreMse": 0.17440122045833334,
+                "nonDrawSignAccuracy": 0.6744992295839753,
+                "draws": 808,
+                "zeroOutcomeMse": 0.8653333187103271
+              },
+              "policy": {
+                "crossEntropy": 1.5257563140654637,
+                "top1": 0.43116666666666664,
+                "uniformCrossEntropy": 2.1044416287103247,
+                "uniformTop1": 0.14458325754053308
+              },
+              "selectionLoss": 2.2233611958987973
+            }
+          }
+        }
+      }
+    }
+  ]
+}

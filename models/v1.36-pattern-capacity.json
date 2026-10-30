@@ -1,0 +1,29 @@
+{
+  "version": "v1.36-pattern-capacity",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "maxNodes": 4194304,
+  "baselineMaxNodes": 2097152,
+  "pilotReport": "models/v1.36-pattern-capacity-pilot.json",
+  "pilotSha256": "72c02172a80b5fdd97c343440709af223e799759f99d5ac8cacf61e190d7a89a",
+  "library": ".build/native-pattern-capacity-v1.36/libothello.dylib",
+  "librarySha256": "8ff9d53518fa8b1914dc19d93442095d30e500c40997a2d145a15678ddcfc51e",
+  "model": "models/pattern32-outcome-v1.25.otpat",
+  "modelSha256": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0",
+  "preservedSha256": {
+    "models/default-model.json": "8b82bf89b2afeebdcd1b2c056dee7ce21789aea9291cae11b0a480862ad37b01",
+    "models/v1.25-default.json": "730b4a83b9e0495e7f1a4beaa6da8b2a31c8d72ceb9b39e54a9218cbb381c14f",
+    "src/game/wasm/othello.mjs": "a1584f0244858efcf19d807dee2dd79e628cda2ee509371162cbc64c94c949e0",
+    "models/pattern32-outcome-v1.25.otpat": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0"
+  },
+  "baselineLibrarySha256": "b45ae6effcda3fa364dbf41bfbf0f1d897de2b7918dd028b15350a90f5f4d2d1",
+  "previousSuite": "models/v1.35-pattern-speed-suite.json",
+  "match": {
+    "games": 20,
+    "millisecondsPerMove": 2000,
+    "seed": 20261029,
+    "useBook": false,
+    "runtimeReport": ".build/training/pattern-capacity-v1.36/match-2s-20.json",
+    "finalReport": "models/v1.36-capacity-vs-v1.25-2s-20.json"
+  }
+}

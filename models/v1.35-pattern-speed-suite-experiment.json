@@ -1,0 +1,31 @@
+{
+  "version": "v1.35-pattern-speed-suite",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "sourceManifest": "models/archive/v1.35-pattern-speed-suite-sources.json",
+  "sourceManifestSha256": "041b0d96e7ad7aecdf0b2f93806c3ea32ead4b86a911d13aecbfaf67eac25e7e",
+  "artifactSha256": {
+    "models/v1.35-pattern-speed-suite.json": "f3567e0efc29c165f1f01ad3e21e0e904eeb16e4ba1971fd76423b7fba3bb8d8",
+    "models/v1.35-pattern-speed-suite-sampling.json": "6c095c7650d32344617ad48f8982ea6b7879de6fe8e9321535f05ac94758ed8c",
+    "models/v1.35-pattern-speed-suite-experiments.json": "699754054c33fc77852eff5ce757f115e29176d4e84a55a27ebad616b1b1495f",
+    "models/v1.35-speed-suite-vs-v1.25-2s-20.json": "124757834c25cbdcb3e8e3b2511adb3500e71e57b3e2758d3378f0a484bae4f3",
+    "models/v1.35-pattern-speed-suite-comparison.md": "a03d96c3237b3fdf1a92d541d7c725b472022e81575aa6022c21102ed6164742",
+    "scripts/finalize-pattern-speed-suite.py": "bb33e5d1558daaef187ef1ce9e5f6fd01eeb8dca5e5394a80f28d2ec0339a92e",
+    "scripts/watch-matches.py": "286dbbef56969c9803c157de78d04e4d0737b71aa76f4957c66ce91d6defeab7"
+  },
+  "preservedSha256": {
+    "models/default-model.json": "8b82bf89b2afeebdcd1b2c056dee7ce21789aea9291cae11b0a480862ad37b01",
+    "models/v1.25-default.json": "730b4a83b9e0495e7f1a4beaa6da8b2a31c8d72ceb9b39e54a9218cbb381c14f",
+    "src/game/wasm/othello.mjs": "a1584f0244858efcf19d807dee2dd79e628cda2ee509371162cbc64c94c949e0",
+    "models/pattern32-outcome-v1.25.otpat": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0",
+    "models/pattern32-int8-step1-v1.32.otpat": "da33b0237d0b99a5bcecb0f57c9aa18f51ea7537adfd683e8d8364d553b68f91"
+  },
+  "checks": {
+    "games": 20,
+    "replayedActions": 1211,
+    "pairedColors": true,
+    "sharedSeeds": true,
+    "budgetMs": 2000,
+    "modelOnly": true
+  }
+}

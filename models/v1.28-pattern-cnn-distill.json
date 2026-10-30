@@ -1,0 +1,340 @@
+{
+  "version": "v1.28-pattern-cnn-distill",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "architecture": "38 ternary line/corner lookups -> 32D embeddings; edge/interior/corner mean pools + empty/60 -> 97->32 clipped ReLU -> disc/WDL/global-conditioned per-square policy",
+  "formatMagic": "OTPAT2",
+  "parameters": 1787950,
+  "parentModel": "models/pattern32-outcome-v1.25.otpat",
+  "parentSha256": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0",
+  "parentStateSha256": "2c15863696bf1e29efc727effa0863ee5c827bcace67b20b3dd566d90069179e",
+  "configs": [
+    {
+      "name": "cnn-distill100",
+      "alpha": 1.0
+    }
+  ],
+  "teacherCache": ".build/training/teacher-cache/big-cnn-v1.24-joint-snapshot1",
+  "teacherManifestSha256": "cfdf8bec4056104a7ab8dafbc19b3f8bf76d47ed9e971555e23dd530baefcbf4",
+  "teacher": {
+    "checkpoint": "teacher.pt",
+    "sha256": "97398c59a09692ac6ff6ccee250c9463184347091141c40cd1c9e71a68a78669",
+    "epoch": 11,
+    "criterion": "joint",
+    "channels": 256,
+    "blocks": 8,
+    "headWidth": 256,
+    "selection": "frozen checkpoint chosen by validation before preprocessing; independent of later training checkpoints"
+  },
+  "trainingSplitOnly": true,
+  "trainPositions": 1000000,
+  "epochs": 10,
+  "batchSize": 2048,
+  "seed": 20261029,
+  "dataSeed": 20261030,
+  "learningRate": 0.0003,
+  "cosineEtaMin": 3e-06,
+  "weightDecay": 0.0001,
+  "gradientClip": 5.0,
+  "temperature": 2.0,
+  "valueLoss": "(1-alpha)*MSE(recordedOutcome)+alpha*MSE(CNNoutcome)",
+  "policyLoss": "0.1*((1-alpha)*recordedMoveCE+alpha*T^2*CE(CNNsoftmax(logits/T),studentSoftmax(logits/T)))",
+  "wdlLoss": "0.1*recordedWdlCE; CNN has no WDL distribution, no fabricated WDL soft targets",
+  "initialization": "all variants warm-start from identical frozen v1.25 outcome Pattern; all parameters jointly fine-tuned with existing STE quantization",
+  "augmentation": "identical seeded sample order and D4 sequence; cached policy targets permuted with board; original-orientation CNN supervision is augmented, not rerun",
+  "selection": "minimum original hard-label validation outcome MSE, including epoch0 parent; test all students only after all freeze",
+  "datasetSha256": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6",
+  "recordedPolicySource": {
+    "cacheSha256": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6",
+    "gamesSha256": "6332fd01b27c11a81f3fbd344e52aaf8f70e60c644780fb453cc7ef64ae359ac",
+    "policySha256": "d5712464ea92f34019de2ca9427d95cfa9aa985ff9d854801c9eb7362a7b587a",
+    "labels": {
+      "train": 1000000,
+      "validation": 6000,
+      "test": 6000
+    },
+    "seconds": 35.21884141699411,
+    "rule": "First matching next placement with identical relative board, final result and original game split. No relabeling of frozen disc targets."
+  },
+  "teacherRecordedMoveDifferences": 0,
+  "library": ".build/training/pattern-cnn-distill-v1.28-run1/libothello-pattern-frozen.dylib",
+  "librarySha256": "3a5e31ef282f2050f2fddf7a80aade80bc6217773503551cd8c935ec0b1bbafa",
+  "parentSourceManifestSha256": "b761ec73f521b6e1eadc4c14397ead7da3732c1f396493bdfba81854a20a3aa8",
+  "sources": {
+    "scripts/distill-pattern-outcome100.py": "18762c4adb701b8bf377a6da78c3acee81c8d6ff085f6ca58b66fd147f8265f5",
+    "scripts/verify-pattern-distill100.py": "804be874a2e0ee7695624596d6591ec8bd07c32c17564ec2bc7bdad105d11f15",
+    "scripts/teacher-targets.py": "52c0190f9488961c80e5fc5355cbda0a331940aff6c03edf0a443416bf8dd7f7",
+    "scripts/pattern_model.py": "2d7d57e7d178d467badb607115e6293864d683df5e1f563aec8b384290b6dc87",
+    "scripts/train-pattern-outcome.py": "94d823a68e3ea8ac8a790e24e7b39d06fd52bdaa44cd50c04e0bb97dac870bfb",
+    "scripts/train-pattern.py": "f85ddaed63329214222f672f81778f50dbd072f3e7b68ef467835705b948bdd3"
+  },
+  "preservedSha256": {
+    "models/pattern32-outcome-v1.25.pt": "2c15863696bf1e29efc727effa0863ee5c827bcace67b20b3dd566d90069179e",
+    "models/pattern32-outcome-v1.25.otpat": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0",
+    "models/pattern32-outcome-v1.25.json": "1878f5d7947e1eb7b227a4bb74a4275421b79d3410a47443ed97d439941d5e80",
+    "models/default-model.json": "abf3afce523b6457f180fcc9d6801187974d747f694ace6c4722e63a7ba0b467",
+    "models/v1.9-default.json": "3bc0188f583263d1abaf5b7337ee28a849eac91a5a3707e50da6a32c2e854b5d",
+    "models/nnue256-outcome-v1.9.otnnue": "72294450ce5eb180703e05048df6e7ce7078f031c4e94464198192432d618bb0"
+  },
+  "verification": {
+    "complete": true,
+    "parentExactBinaryRoundtrip": true,
+    "realTrainingRows": 64,
+    "d4Symmetries": 8,
+    "alphaZeroEqualsSupervisedLoss": true,
+    "pureTeacherValueAndPolicyFormula": true,
+    "finiteGradients": true,
+    "optimizerChangesParameters": true,
+    "losses": {
+      "1.0": 0.8910472989082336
+    },
+    "cppParity": {
+      "positions": 64,
+      "maxWdlError": 8.056629108299518e-08,
+      "maxPolicyLogitError": 3.4868248022235093e-07,
+      "maxScoreRoundingError": 0.49725341796875,
+      "maxOutcomeError": 2.9390424427511164e-08
+    },
+    "parentSha256": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0",
+    "teacherManifestSha256": "cfdf8bec4056104a7ab8dafbc19b3f8bf76d47ed9e971555e23dd530baefcbf4"
+  },
+  "torchVersion": "2.10.0",
+  "numpyVersion": "1.26.4",
+  "device": "cpu",
+  "threads": 2,
+  "complete": true,
+  "experiment": "cnn-offline-training",
+  "candidates": [
+    {
+      "name": "cnn-distill100",
+      "alpha": 1.0,
+      "epoch": 8,
+      "model": "models/pattern32-cnn-distill100-v1.28.otpat",
+      "sha256": "0b8ba2c646594ddde06c61cef6cab405a55bf241e261fa43d694fef8ae8fc682",
+      "parameters": 1787950,
+      "bytes": 3576088,
+      "metrics": {
+        "validation": {
+          "mse": 0.7173277139663696,
+          "outcomeMae": 0.727406919002533,
+          "nonDrawSignAccuracy": 0.6613522858240491,
+          "wdlAccuracy": 0.575,
+          "wdlCrossEntropy": 0.8983758091926575,
+          "policyTop1": 0.4116666666666667,
+          "policyCrossEntropy": 1.5874648094177246,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        "test": {
+          "mse": 0.6809347867965698,
+          "outcomeMae": 0.7122567296028137,
+          "nonDrawSignAccuracy": 0.6812403697996918,
+          "wdlAccuracy": 0.5916666666666667,
+          "wdlCrossEntropy": 0.8854187726974487,
+          "policyTop1": 0.4081666666666667,
+          "policyCrossEntropy": 1.6083940267562866,
+          "uniformPolicyCrossEntropy": 2.1044416287103247
+        }
+      },
+      "cppParity": {
+        "validation": {
+          "positions": 6000,
+          "maxWdlError": 1.1783496256523307e-07,
+          "maxPolicyLogitError": 6.137751356050103e-07,
+          "maxScoreRoundingError": 0.49896240234375,
+          "maxOutcomeError": 2.9840748871912126e-08
+        },
+        "test": {
+          "positions": 6000,
+          "maxWdlError": 1.3476766058673206e-07,
+          "maxPolicyLogitError": 6.137751356050103e-07,
+          "maxScoreRoundingError": 0.49725341796875,
+          "maxOutcomeError": 2.9840748871912126e-08
+        }
+      }
+    }
+  ],
+  "trainingReports": [
+    {
+      "name": "cnn-distill100",
+      "alpha": 1.0,
+      "bestEpoch": 8,
+      "bestValidationMse": 0.7173277139663696,
+      "history": [
+        {
+          "epoch": 0,
+          "mse": 0.7249130606651306,
+          "outcomeMae": 0.726279616355896,
+          "nonDrawSignAccuracy": 0.6552055320783711,
+          "wdlAccuracy": 0.5685,
+          "wdlCrossEntropy": 0.9000649452209473,
+          "policyTop1": 0.414,
+          "policyCrossEntropy": 1.5960545539855957,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 1,
+          "mse": 0.7188959717750549,
+          "outcomeMae": 0.7290990352630615,
+          "nonDrawSignAccuracy": 0.6571263926238955,
+          "wdlAccuracy": 0.574,
+          "wdlCrossEntropy": 0.9010474681854248,
+          "policyTop1": 0.4091666666666667,
+          "policyCrossEntropy": 1.5985851287841797,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 2,
+          "mse": 0.7199388146400452,
+          "outcomeMae": 0.7292158007621765,
+          "nonDrawSignAccuracy": 0.6578947368421053,
+          "wdlAccuracy": 0.5686666666666667,
+          "wdlCrossEntropy": 0.900968611240387,
+          "policyTop1": 0.4111666666666667,
+          "policyCrossEntropy": 1.5960546731948853,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 3,
+          "mse": 0.7195835113525391,
+          "outcomeMae": 0.7288832068443298,
+          "nonDrawSignAccuracy": 0.6565501344602381,
+          "wdlAccuracy": 0.572,
+          "wdlCrossEntropy": 0.9001562595367432,
+          "policyTop1": 0.4125,
+          "policyCrossEntropy": 1.5934534072875977,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 4,
+          "mse": 0.7177923917770386,
+          "outcomeMae": 0.7280397415161133,
+          "nonDrawSignAccuracy": 0.6577026507875529,
+          "wdlAccuracy": 0.5725,
+          "wdlCrossEntropy": 0.8983278274536133,
+          "policyTop1": 0.4125,
+          "policyCrossEntropy": 1.5912690162658691,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 5,
+          "mse": 0.717873215675354,
+          "outcomeMae": 0.7278399467468262,
+          "nonDrawSignAccuracy": 0.6600076834421821,
+          "wdlAccuracy": 0.574,
+          "wdlCrossEntropy": 0.8996881246566772,
+          "policyTop1": 0.4126666666666667,
+          "policyCrossEntropy": 1.5899685621261597,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 6,
+          "mse": 0.7175694704055786,
+          "outcomeMae": 0.7278684973716736,
+          "nonDrawSignAccuracy": 0.6594314252785248,
+          "wdlAccuracy": 0.5761666666666667,
+          "wdlCrossEntropy": 0.8979109525680542,
+          "policyTop1": 0.4126666666666667,
+          "policyCrossEntropy": 1.5886043310165405,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 7,
+          "mse": 0.7176131010055542,
+          "outcomeMae": 0.7278368473052979,
+          "nonDrawSignAccuracy": 0.6600076834421821,
+          "wdlAccuracy": 0.5753333333333334,
+          "wdlCrossEntropy": 0.8988515734672546,
+          "policyTop1": 0.41283333333333333,
+          "policyCrossEntropy": 1.587986707687378,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 8,
+          "mse": 0.7173277139663696,
+          "outcomeMae": 0.727406919002533,
+          "nonDrawSignAccuracy": 0.6613522858240491,
+          "wdlAccuracy": 0.575,
+          "wdlCrossEntropy": 0.8983758091926575,
+          "policyTop1": 0.4116666666666667,
+          "policyCrossEntropy": 1.5874648094177246,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 9,
+          "mse": 0.7175341844558716,
+          "outcomeMae": 0.7273207306861877,
+          "nonDrawSignAccuracy": 0.6605839416058394,
+          "wdlAccuracy": 0.5751666666666667,
+          "wdlCrossEntropy": 0.8987764716148376,
+          "policyTop1": 0.412,
+          "policyCrossEntropy": 1.5868606567382812,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        },
+        {
+          "epoch": 10,
+          "mse": 0.7175571918487549,
+          "outcomeMae": 0.7272686958312988,
+          "nonDrawSignAccuracy": 0.6605839416058394,
+          "wdlAccuracy": 0.5743333333333334,
+          "wdlCrossEntropy": 0.8986518383026123,
+          "policyTop1": 0.4125,
+          "policyCrossEntropy": 1.5868154764175415,
+          "uniformPolicyCrossEntropy": 2.0921316559038803
+        }
+      ]
+    }
+  ],
+  "parentMetrics": {
+    "validation": {
+      "mse": 0.7249130606651306,
+      "outcomeMae": 0.726279616355896,
+      "nonDrawSignAccuracy": 0.6552055320783711,
+      "wdlAccuracy": 0.5685,
+      "wdlCrossEntropy": 0.9000649452209473,
+      "policyTop1": 0.414,
+      "policyCrossEntropy": 1.5960545539855957,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    "test": {
+      "mse": 0.6878209114074707,
+      "outcomeMae": 0.7095891833305359,
+      "nonDrawSignAccuracy": 0.6770030816640986,
+      "wdlAccuracy": 0.5871666666666666,
+      "wdlCrossEntropy": 0.8900972604751587,
+      "policyTop1": 0.4056666666666667,
+      "policyCrossEntropy": 1.6159687042236328,
+      "uniformPolicyCrossEntropy": 2.1044416287103247
+    }
+  },
+  "baselineMetrics": {
+    "validation": {
+      "positions": 6000,
+      "outcomeMse": 0.7302913298333333,
+      "nonDrawSignAccuracy": 0.6563580484056858,
+      "policyTop1": 0.37933333333333336,
+      "policyCrossEntropy": 1.6851637772283223
+    },
+    "test": {
+      "positions": 6000,
+      "outcomeMse": 0.7126994258333335,
+      "nonDrawSignAccuracy": 0.6710323574730355,
+      "policyTop1": 0.3586666666666667,
+      "policyCrossEntropy": 1.7125798947170472
+    }
+  },
+  "seconds": 150.79,
+  "concurrentExternalChanges": [
+    {
+      "path": "models/default-model.json",
+      "beforeSha256": "abf3afce523b6457f180fcc9d6801187974d747f694ace6c4722e63a7ba0b467",
+      "afterSha256": "8b82bf89b2afeebdcd1b2c056dee7ce21789aea9291cae11b0a480862ad37b01",
+      "currentContent": {
+        "version": "v1.25",
+        "baselineManifest": "models/v1.25-default.json",
+        "defaultModel": "models/pattern32-outcome-v1.25.otpat",
+        "modelSha256": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0"
+      }
+    }
+  ],
+  "finalizationSourceSha256": "cf3512cc08400fe825faa3c828c21bfdb5a8372649d00e463649752583656c4d"
+}

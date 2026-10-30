@@ -1,0 +1,47 @@
+{
+  "positions": 512,
+  "rounds": 4,
+  "warmupRounds": 1,
+  "order": "alternating models per round",
+  "scope": "Native inference on identical frozen test positions, no MCTS; includes identical Python/ctypes call overhead",
+  "results": {
+    "v1.9": {
+      "modelSha256": "72294450ce5eb180703e05048df6e7ce7078f031c4e94464198192432d618bb0",
+      "librarySha256": "6f593a25a0d52f1846e29db35b10fa5423505fd820eb124d4a474489f412c188",
+      "valueMicroseconds": [
+        2.1073417428851826,
+        5.648763590215822,
+        9.052246014107368,
+        2.0639647573261755
+      ],
+      "policyMicroseconds": [
+        10.70817188519868,
+        16.418048971900134,
+        9.256023304260452,
+        8.614175612819963
+      ],
+      "valueMedianMicroseconds": 3.878052666550502,
+      "policyMedianMicroseconds": 9.982097594729566
+    },
+    "v1.10-deep": {
+      "modelSha256": "235bed6b569b87313fd1382a9bb34d9cf7134254fa9754aa86939f075a068dc6",
+      "librarySha256": "c97a16cebc66a4432fe0e1f12d645aa9b122a0ed918609516072354f270fa9d2",
+      "valueMicroseconds": [
+        15.888509778960724,
+        29.839437502232613,
+        22.657308591078618,
+        15.53019137645606
+      ],
+      "policyMicroseconds": [
+        38.03841013905185,
+        38.71305261782254,
+        34.95222836136236,
+        19.8296718281199
+      ],
+      "valueMedianMicroseconds": 19.27290918501967,
+      "policyMedianMicroseconds": 36.4953192502071
+    }
+  },
+  "deepValueRatio": 4.969738897889382,
+  "deepPolicyRatio": 3.656077182562933
+}

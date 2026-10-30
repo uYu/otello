@@ -136,3 +136,405 @@ v1.7 默认使用冻结的 v1.2 行棋方 NNUE 权重、v1.3 开局策略和 MCT
 ## v1.7：默认交付
 
 不重新训练。将已验证的 v1.3 NNUE＋MCTS 接入浏览器及原生默认入口；熟练档 100ms，高级档 1 秒，入门保留弱启发式。权重与 v1.6 对战完全相同，通过内嵌字节和 SHA-256 校验保证一致。`ot_search` 等显式 AB 接口保留，历史报告按原始源码归档校验。发布配置见 `models/v1.7-default.json`。
+
+## v1.8 策略头候选
+
+本实验保留 v1.7 的量化特征变换和价值输出字节，冻结原参数，只训练新增的 `512→32→65` 策略分支（32 维 clipped ReLU，65 维为棋盘落点和 pass）。共享当前行棋方/对方的 512 维特征；新增 18,561 个参数，总计 52,098 个参数、104,936 字节。没有阶段头，没有修改子差价值目标。
+
+`prepare-policy-data.py` 给原百万训练局面和各 6,000 个验证/测试局面补齐棋谱中的下一步落点；棋盘、行棋方、最终结果和原划分都必须匹配。没有移动局面到其他划分。训练对棋盘、合法走法掩码和落点标签同步做 D4 变换，在合法走法上计算交叉熵。记录落点是棋谱监督，不是最优落点证明，也不是 MCTS 访问分布。原缓存排除了 pass 样本，推理时强制停着直接返回 pass 概率 1，终局返回全零。
+
+格式 `OTNNUE3\0` 先保存完整的 `OTNNUE2` 价值模型（替换 magic），再保存两个 uint32 维度 32、65，以及 row-major 的 32×512 int16 权重、32 个 int32 偏置、65×32 int16 权重和 65 个 int32 偏置。权重缩放 256，新增偏置缩放 65,536。策略输出在合法走法上做稳定 softmax。模型加载仍兼容旧格式。
+
+MCTS 对带策略头的模型使用学到的先验，价值模型继续使用原均匀先验。保留原规则：所有未访问分支先各访问一次；策略版按先验排序，同先验再按种子决胜。随后使用 `Q + 1.5 × P × sqrt(N)/(1+n)`，根节点仍按访问数选择。强制停着、精确求解、树复用及原开局选步策略保持原语义。原 v1.7 模型在 30 个局面、每局面固定 512 次模拟下，与旧库的落点、评分和根访问次数逐项一致。
+
+```sh
+.build/venv/bin/python scripts/prepare-policy-data.py
+.build/venv/bin/python scripts/train-policy.py
+# 先从 archive/v1.7-sources.tar.gz 恢复独立源码并编译参考库：
+mkdir -p .build/frozen-v1.7
+tar -xzf models/archive/v1.7-sources.tar.gz -C .build/frozen-v1.7
+cmake -S .build/frozen-v1.7 -B .build/frozen-v1.7/build -DCMAKE_BUILD_TYPE=Release
+cmake --build .build/frozen-v1.7/build -j 2
+.build/venv/bin/python scripts/compare-nnue-candidate.py \
+  --model .build/training/policy/nnue-policy-v1.8.otnnue \
+  --baseline-manifest models/v1.7-default.json \
+  --baseline-library .build/frozen-v1.7/build/libothello.dylib \
+  --games 100 --milliseconds 100 \
+  --output .build/training/policy/new-match.json
+```
+
+Linux 将动态库后缀改为 `.so`。标签缓存、训练和对战输出都要求新路径，避免覆盖实验记录；重跑标签生成使用 `--output`，训练使用 `--labels`/`--output`。实验模型仅在显式加载时使用；默认和已批准基线仍是 v1.7。只有用户明确要求“作为默认模型”时，才更新默认并将该版本冻结为后续比较的新基线。
+
+### 1 秒补充试验与实时监控
+
+同一候选对原 v1.7，20 局、每步各 1 秒，独立记录，未重新训练：
+
+```sh
+.build/venv/bin/python scripts/compare-nnue-candidate.py \
+  --model models/nnue256-policy-v1.8.otnnue --label v1.8-policy-candidate-1s \
+  --baseline-manifest models/v1.7-default.json \
+  --baseline-library .build/frozen-v1.7/build/libothello.dylib \
+  --games 20 --milliseconds 1000 --output .build/training/policy/new-1s-match.json
+
+# 当前这轮 1 秒试验的监控，默认每秒刷新：
+sh scripts/watch-policy.sh
+sh scripts/watch-policy.sh --once
+```
+
+监控显示累计胜平负、得分率、平均子差和搜索量，以及当前局的步数、执子版本、黑白棋子数和行棋方。运行时优先读取 `.build` 中的实时文件，没有运行时文件则读取已发布的完整报告。Ctrl+C 只关闭监控。棋子数是当前局面比分，不是最终胜负预测。
+
+对局每步写入小型实时状态，每局完成后才写完整可重放报告。进程中断后，可在原命令加 `--resume`：它核对模型、原生库、预算、种子、源码与已完成棋谱，保留完成的对局，当前未完成局从标准初始棋盘重开；已完成报告拒绝续跑。不同预算不能用续跑混入同一报告。
+
+## v1.8：用户批准的默认基线
+
+用户明确要求将策略模型作为默认，现由 `models/default-model.json` 选择 `models/nnue256-policy-v1.8.otnnue`，冻结记录为 `models/v1.8-default.json`。提升仅更新交付入口和版本记录，不重新训练、不改写两组候选实验。原生和 Wasm 使用相同内嵌策略／价值权重，100ms／1 秒预算保持原设置；候选比较脚本不指定 `--baseline-manifest` 时自动选择该新基线。
+
+子差价值目标保持不变。后续若改为胜／平／负分类，训练标签可由原完整棋谱结果转换；MCTS 终局值也必须相应改为胜 1、平 0、负 −1，不能与原子差/64 混用。三分类可给出 `P(胜)`、`P(平)`、`P(负)`，搜索用 `P(胜)−P(负)`；`(v+1)/2` 是含平局半分的期望得分，不一定等于胜率。该方案尚未训练和部署，需另建版本并与 v1.8 比较。
+
+原论文核对与下一项单标量胜负价值实验设计见 [AlphaGo 价值头借鉴](ALPHAGO_VALUE.md)。三分类保留为可选扩展，先按原论文的单 tanh 输出做控制变量实验；尚未训练或部署。
+
+## v1.9：单标量胜负候选
+
+随后按用户要求训练上述单 tanh 方案，冻结 v1.8 特征和策略，只训练 `512→1` 的 513 个参数。标签由原百万局面缓存的最终子差取符号得到，仍使用原验证／测试集。模型为 `models/nnue256-outcome-v1.9.otnnue`，格式 `OTNNUE4`；搜索的终局与精确证明同时适配胜负语义，旧子差模型保持原分支。它尚未提升为默认。
+
+```sh
+cmake -S . -B .build/native-outcome -DCMAKE_BUILD_TYPE=Release
+cmake --build .build/native-outcome -j 2
+.build/venv/bin/python scripts/train-outcome.py \
+  --parent models/nnue256-policy-v1.8.otnnue --baseline-manifest models/v1.8-default.json \
+  --output .build/training/outcome/retrained.otnnue \
+  --library .build/native-outcome/libothello.dylib
+
+# 参考库来自冻结的 v1.8 源码；使用独立目录构建。
+mkdir -p .build/frozen-v1.8
+tar -xzf models/archive/v1.8-default-sources.tar.gz -C .build/frozen-v1.8
+cmake -S .build/frozen-v1.8 -B .build/frozen-v1.8/build -DCMAKE_BUILD_TYPE=Release
+cmake --build .build/frozen-v1.8/build -j 2
+.build/venv/bin/python scripts/compare-nnue-candidate.py \
+  --model models/nnue256-outcome-v1.9.otnnue --label v1.9-outcome-candidate \
+  --baseline-manifest models/v1.8-default.json \
+  --library .build/native-outcome/libothello.dylib \
+  --baseline-library .build/frozen-v1.8/build/libothello.dylib \
+  --games 20 --milliseconds 1000 --output .build/training/outcome/new-match.json
+
+sh scripts/watch-outcome.sh
+sh scripts/watch-outcome.sh --details
+```
+
+Linux 改用 `.so`。重跑使用新输出路径。监控默认只显示候选视角的一行胜平负与当前局黑白棋子数；`--details` 展开耗时、平均子差和搜索量。不同价值目标的模拟数不能直接比较棋力；胜负奖励、终局证明停止和同一探索系数下的搜索行为也属于本次实验的变化。
+
+## v1.9：用户批准的默认基线
+
+用户在 1 秒、20 局对照得到 18 胜、2 平、0 负后明确要求换基线。因此默认选择器现指向 `models/v1.9-default.json` 和 `models/nnue256-outcome-v1.9.otnnue`，原生及 Wasm 嵌入同一胜负模型。提升不重训、不新增对战、不改写候选时期记录；后续比较默认使用 v1.9。v1.8 及其源码、模型与实测结果继续冻结。
+
+## v1.10：更深共享主干候选
+
+在冻结 v1.9 第一层特征与策略头权重后，给两个颜色视角共用的 256 维激活增加 `256→32→256` 残差块；下投影后 clipped ReLU，上投影与原激活相加后再 clipped ReLU。上投影从零开始，使 epoch 0 精确保留原模型行为。新增 16,672 个主干参数，与 513 个价值头参数一起训练；总计 68,770 参数、138,864 字节。策略头权重字节不变，但其输入经过新主干，因此策略输出会变化。
+
+训练使用相同百万局面、冻结验证／测试划分和 D4 对称，损失为胜负 MSE 加合法落点交叉熵，权重各 1。棋谱落点标签仍来自记录走法，不是 MCTS 分布。本次因此同时涉及更深特征与价值／策略联合监督，不是单纯增加空层或完全相同训练目标的消融。30 轮中按验证总损失选第 23 轮。新格式 `OTNNUE5` 保留 v1.9 载荷布局，再附加 uint32 维度 256、32、下投影 int16 权重及 int32 偏置、上投影 int16 权重及 int32 偏置；权重／偏置缩放分别为 256／65,536，中间激活不再取整。胜负回传、PUCT、开局规则与时限沿用 v1.9。
+
+```sh
+cmake -S . -B .build/native-deep -DCMAKE_BUILD_TYPE=Release
+cmake --build .build/native-deep -j 2
+.build/venv/bin/python scripts/train-deep.py \
+  --parent models/nnue256-outcome-v1.9.otnnue --baseline-manifest models/v1.9-default.json \
+  --output .build/training/deep/retrained.otnnue --library .build/native-deep/libothello.dylib
+
+mkdir -p .build/frozen-v1.9
+tar -xzf models/archive/v1.9-default-sources.tar.gz -C .build/frozen-v1.9
+cmake -S .build/frozen-v1.9 -B .build/frozen-v1.9/build -DCMAKE_BUILD_TYPE=Release
+cmake --build .build/frozen-v1.9/build -j 2
+.build/venv/bin/python scripts/compare-nnue-candidate.py \
+  --model models/nnue256-deep-v1.10.otnnue --label v1.10-deep-candidate \
+  --baseline-manifest models/v1.9-default.json \
+  --library .build/native-deep/libothello.dylib \
+  --baseline-library .build/frozen-v1.9/build/libothello.dylib \
+  --games 20 --milliseconds 1000 --output .build/training/deep/new-match.json
+
+sh scripts/watch-match.sh
+```
+
+Linux 改用 `.so`。使用新输出路径重跑；原始实测代码在 `models/archive/v1.10-deep-sources.*`。统一监控入口读取 `models/current-experiment.json`，每轮对比都更新该指向并提供同一命令；显示单行候选战绩、ASCII `*` 黑棋／`o` 白棋／`.` 空位和终局棋盘。默认依然是 v1.9，只有用户批准才提升。
+
+本轮后按用户要求停止继续对战：实际完成 9 局，更深候选 0 胜 4 平 5 负。未完成的第 10 局不计入，完整记录见 `models/v1.10-deep-comparison.md`，默认保持 v1.9。
+
+## 独立扩展数据：Egaroucid 5,200 万局
+
+新增官方 v0002 棋谱的本地下载、SHA-256 校验、流式合法性检查和分阶段抽样流程。
+随机前缀不生成训练标签；新缓存保留经验胜负和走法分布，冻结验证／测试数组原样保留。
+另提供固定 500 万局的全部非随机局面展开、精确去重和稀疏标签聚合流程，不做局面抽样或阶段限额。
+数据及派生结果禁止再分发，仅保存在 `.build/training/egaroucid-v0002/`，不加入数据快照。
+命令、格式、软标签使用方式和限制见 [预处理说明](EGAROUCID_DATA.md)。此次仅准备数据，默认模型仍为 v1.9。
+
+## 500 万局与原训练集混合训练
+
+`scripts/train-mixed-5m.py` 在 v1.9 结构上冻结共享特征层，联合拟合价值头和策略头。
+完整一轮遍历 104,627,926 个 `split == 0 && !frozen` 的新增聚合局面，
+并将原有 1,000,000 个训练局面分散穿插到 64 个分片后，各使用一次。
+每个聚合局面等权；新增价值使用 `(win-loss)/count`，策略使用经验走法概率，
+原数据使用胜负硬标签与记录走法。各来源之间不额外去重或重加权。
+棋盘、合法掩码和策略标签同步作随机 D4 变换。
+
+```sh
+.build/venv/bin/python scripts/train-mixed-5m.py \
+  --output .build/training/mixed-5m-new-run \
+  --library .build/native-engineering/libothello.dylib
+sh scripts/watch-match.sh
+.build/venv/bin/python -m unittest discover -s tests -p 'mixed_5m_training_test.py' -v
+```
+
+默认完整训练 1 轮，batch 8192，AdamW 学习率 0.0003、weight decay 0.001。
+每 8 个分片评估原有冻结验证集，以胜负 MSE＋记录走法交叉熵选择已训练检查点；
+初始 v1.9 单独记录，不纳入候选选择。原有 6,000 个测试局面只在训练及选择结束后评估。
+训练脚本核对每个分片、原缓存和冻结评估集的 SHA-256，以及原评估数组的一致性。
+最终分别报告浮点候选和原生量化推理结果，并在验证和测试全集检查 Python／C++ 一致性。
+输出目录保留逐分片进度、最新／最佳检查点、模型、报告和测试逐条 CSV／NPZ 预测。
+完整一轮结束时的权重另行导出与评估，避免把较早的最佳检查点误认为已见过全部数据：
+
+```sh
+.build/venv/bin/python scripts/evaluate-mixed-5m-final.py --run .build/training/mixed-5m-new-run
+```
+
+它保存 `nnue256-mixed-5m-full-epoch.otnnue`、`full-epoch-report.json` 和
+`full-epoch-test-predictions.csv`／`.npz`；该最终检查点不按测试指标重新挑选。
+这是固定测试集预测实验；不自动启动搜索对局，也不提升默认模型。
+
+## v1.12：两层 CNN 原始数据离线模型组
+
+`scripts/train-cnn-policy-suite.py` 使用原始 v1 百万局面缓存及原策略标签，
+核对 SHA-256，并逐项核对原有 6,000 验证／6,000 测试局面。
+不使用 Egaroucid 新增训练分片。输入为行棋方／对手两张棋盘图，
+两层 3×3 卷积的通道数分别训练 8、16、32 三版，保持 8×8 空间大小；
+展平后共享 Linear64/ReLU，再接 Linear1/tanh 胜负价值头和 Linear65 策略头。
+所有参数从头训练，没有冻结、BN、池化或残差块。
+
+训练目标为原棋谱胜负 MSE＋合法走法掩码下的记录走法交叉熵，两项等权。
+数据排列／D4 增强使用独立且相同的随机数流；所有模型同步变换棋盘、合法掩码和走法坐标。
+默认 batch 1024、AdamW 学习率 0.001、weight decay 0.001，最多 30 轮，至少 10 轮；
+连续 5 轮验证总损失无改善时早停，按验证总损失选择各模型检查点和整体候选。
+全部模型训练结束后才评估测试集，不按测试集指标调整训练。
+
+```sh
+.build/venv/bin/python scripts/train-cnn-policy-suite.py --device mps --publish
+sh scripts/watch-match.sh
+.build/venv/bin/python -m unittest discover -s tests -p 'cnn_policy_training_test.py' -v
+```
+
+`--device cpu` 可在无 MPS 的机器运行。重跑请指定新的 `--output` 并省略 `--publish`，
+避免覆盖原实测版本。输出包括 PyTorch 权重、CPU TorchScript、逐轮日志、验证／测试指标和
+包含完整走法概率的逐条测试预测 NPZ；版本化产物发布到 `models/cnn2-c{8,16,32}-v1.12.*`。
+导出模型重新加载后在两个评估全集检查一致性。当前为离线模型，尚未接入 C++／Wasm 推理或搜索；
+不启动对战，默认继续为 v1.9。历史 v1.4 是子差价值单头 CNN，不能与本轮胜负／策略联合目标混算。
+
+## v1.13：固定 32 通道调参
+
+在 v1.12 宽度对照后，`scripts/tune-cnn-policy.py` 固定原始训练／验证／测试划分、
+32 通道两层 CNN、batch 1024、weight decay 0.001 和随机序列，从头训练四组：
+
+- `low-lr`：学习率 0.0003 恒定，价值／策略损失权重 1:1。
+- `cosine`：学习率从 0.001 余弦衰减至 0.00001，损失权重 1:1。
+- `cosine-v2`：相同衰减，损失权重 2:1。
+- `cosine-v4`：相同衰减，损失权重 4:1。
+
+四组均完整训练 30 轮；每组同时保存验证 MSE+CE 最低和价值 MSE 最低的检查点，
+主候选按相同的未加权验证 MSE+CE 比较，价值标准候选另行标注。
+全部训练结束后才统一评估原测试集，不按测试结果选择权重或调整配置。
+本轮未加入开局库标签或新增棋谱，也未接入搜索。
+
+```sh
+.build/venv/bin/python scripts/tune-cnn-policy.py --device mps
+sh scripts/watch-match.sh
+```
+
+默认等待 v1.12 汇总报告存在后串行使用 GPU。输出为独立的
+`.build/training/cnn2-v1.13-tuning-run1/`；完成后自动发布唯一 v1.13 候选权重、
+TorchScript、评估报告和源码指纹，默认 v1.9 不变。
+
+## v1.14：两套 CNN 的原生对战接线
+
+从 v1.13 验证集选择 `cosine-joint` 和 `cosine-v4-value`，分别代表联合损失最低和价值 MSE 最低。
+原 PyTorch FP32 权重直接导出为 `OTCNN2`：magic 8 字节，随后五个 little-endian uint32
+（8、2、通道数、64、65），再保存两层卷积、共享全连接、价值头、策略头的权重／偏置。
+与历史 `OTCNN1` 子差单头格式隔离，`OTCNN2` 固定采用胜负价值语义。
+原生加载器只接受 8/16/32 通道，拒绝尺寸异常、非有限／过大权重、截断和尾随字节。
+双头共享一次卷积主干，策略仅在合法落点上归一化；强制停着为索引 64，终局策略为空。
+MCTS 使用学习先验与一致的胜／和／负终局备份；模型快照独立持有权重，模型变化使搜索缓存失效。
+
+原生及 ASan／UBSan 测试通过；每套模型在验证／测试各 6,000 局面核对 Python 与原生输出。
+新库加载 v1.9，与原工程优化库在 24 个冷搜索局面和连续 16 步复用搜索中，固定 512 次模拟结果一致。
+两组对战按相同引擎、每步双方各 2 秒、各 20 局、交替颜色和配对种子顺序运行，不使用开局库。
+统一监控仍为 `sh scripts/watch-match.sh`，结束后保留终盘。
+
+```sh
+cmake -S . -B .build/native-cnnpolicy -DCMAKE_BUILD_TYPE=Release
+cmake --build .build/native-cnnpolicy -j 2
+ctest --test-dir .build/native-cnnpolicy --output-on-failure
+.build/venv/bin/python scripts/verify-cnn-policy-native.py
+```
+
+本次运行器为 `scripts/run-cnn-policy-matches.py`，唯一实验前缀 `v1.14`，拒绝覆盖已有结果。
+运行数据位于 `.build/training/cnn-policy-matches-v1.14/`，每完成一组自动重放审计、发布对战报告。
+源码和模型校验记录在 `models/v1.14-cnn-policy-integration.json` 及对应 source archive。
+此次不改变默认模型、内嵌权重或网页发布产物。
+
+## v1.15–v1.18：搜索采样与双方共同 batch 诊断
+
+实验实现分别隔离在 `experiments/`，不替换 v1.14 正在运行的库和默认搜索。
+逐步扩展原型只作用于 CNN 内部节点，根节点和精确证明保留全部合法分支。
+GPU 原型由 C++ 收集不同待评估树节点，临时增加访问次数防止重复选叶，
+Python/MPS 批量前向后统一回传；每次返回前排空队列，失败时撤销预留并重置搜索树。
+该小网络的 Python/MPS 调度／传输成本超过收益，实测保存在 v1.16 诊断报告。
+
+v1.17 使用纯 C++ 与单线程 Apple Accelerate SGEMM，避免 Python/GPU 往返。
+v1.18 进一步让 CNN 与 v1.9 NNUE 共用该后端、批次调度、线程数和采样设置。
+NNUE 特征矩阵保留整数精确性，策略隐藏层检查精确运算界限，超界回退 int64；
+价值头用 int64，策略输出用 double。v1.9 的 batch 1 固定模拟搜索与原算法一致。
+原生接口 `ot_cnn_set_native_batch_evaluator(size)` 在 v1.18 中同时支持两种模型；
+`size` 为 1..128，必须在相同搜索线程配置；默认不启用，原 C ABI 仍可使用。
+该历史命名接口是实验接口，不是已发布的通用 API。
+
+```sh
+cmake -S experiments/common-native-batch-v1.18 -B .build/native-common-batch-v1.18 -DCMAKE_BUILD_TYPE=Release
+cmake --build .build/native-common-batch-v1.18 -j 2
+VECLIB_MAXIMUM_THREADS=1 ctest --test-dir .build/native-common-batch-v1.18 --output-on-failure
+```
+
+`benchmark-common-native-batch.py` 对双方使用同一验证局面，比较固定 8,192 模拟及 2 秒预算；
+保存统一 batch 32 和每方吞吐最佳的设置。当前短诊断中两边最佳均为 32。
+原生与 ASan／UBSan 的规则和 batch 合同测试通过，包括各 CNN 宽度、NNUE 精确输出、
+模拟预算边界、回调失败清理及精确残局证明。基准源码与报告保持版本化，重跑应使用独立输出版本。
+记录和限制见 `models/v1.18-common-batch-comparison.md`；这些吞吐诊断不是正式胜率或 Elo 结果。
+
+## v1.25：在 v1.9 基础上的 Pattern 胜负价值实验
+
+2026-10-29 将合并进来的补充棋形实验迁移到当前批准的 v1.9 基础上。
+历史 `pattern32-v1.8.otpat` 和原 60 局报告保持原样，它们仍是子差价值实验，
+其旧对手为 v1.3，不能作为对当前 v1.9 的胜率结论。
+
+新候选为 `pattern32-outcome-v1.25.otpat`，使用独立的 `OTPAT2` 格式。
+沿用 38 个三值棋形、32 维嵌入及多头结构，从随机参数重训全部网络，
+不继承 v1.9 的 NNUE 权重。沿用冻结百万局面和各 6,000 个验证／测试局面，
+将记录终局子差取符号作为行棋方胜 +1、平 0、负 −1 的标量标签。
+损失为胜负 MSE + 0.1 WDL 交叉熵 + 0.1 合法落点策略交叉熵，
+15 轮，以最低验证胜负 MSE 选权重，不按测试集或对战结果选择。
+WDL 分类头仍仅作为辅助；搜索使用重新训练的标量头。
+
+C++ 按文件格式区分子差与胜负目标。`OTPAT1` 保留原子差终局回传，
+`OTPAT2` 使用 v1.9 的胜负终局回传与证明停止。
+Pattern 策略先验与有限 FPU（父均值减 0.15）保留，
+因此对战比较的是完整候选系统，不能单独归因于棋形特征。
+v1.9 对手使用冻结参考库及其已批准权重；双方不使用开局库，
+每步 100ms、20 局配对颜色，保留 v1.3 前 12 次落子的开局多样性策略。
+这是独立的 100ms 实验，不与历史 1 秒组混算。
+
+```sh
+# 训练环境需 requirements-training.txt；本机可用 .build/venv/bin/python。
+cmake -S . -B .build/native -DCMAKE_BUILD_TYPE=Release
+cmake --build .build/native -j 2
+python3 scripts/train-pattern-outcome.py
+# 参考库须由 models/archive/v1.9-default-sources.tar.gz 的冻结源码构建。
+# macOS；Linux 将两处 .dylib 改为 .so。
+python3 scripts/compare-nnue-candidate.py \
+  --model models/pattern32-outcome-v1.25.otpat --label v1.25-pattern-outcome \
+  --baseline-manifest models/v1.9-default.json \
+  --baseline-library .build/native-v1.9-reference/libothello.dylib \
+  --library .build/native/libothello.dylib --games 20 --milliseconds 100 \
+  --seed 20261029 --output .build/training/pattern-outcome-v1.25/match.json
+sh scripts/watch-match.sh
+```
+
+原训练／历史验证入口继续保留；新训练入口为
+`npm run training:run:pattern:outcome`。重跑必须指定新的模型和报告路径，
+不得覆盖冻结产物。默认选择器和已冻结的 v1.9 浏览器引擎保持不变；
+即使候选对战更好，也需用户另行批准才可提升为默认。
+
+本轮已完成：100ms／20 局，候选 **18 胜、0 平、2 负**，得分率 90%，
+平均子差 +15.5；1,230 个动作已独立重放。
+测试胜负 MSE 从 v1.9 的 0.712699 降至 0.687821，实战下一手命中率从
+35.87% 提升至 40.57%。完整结果、限制和源码校验见
+[Pattern outcome 实验报告](../models/v1.25-pattern-outcome-comparison.md)。
+
+### Pattern v1.25：每步 2 秒的补充对照
+
+沿用相同模型、候选库及冻结 v1.9 参考库，每步 2,000ms、20 局、
+10 组种子交换黑白，未重训、未使用开局库。
+候选取得 **12 胜、5 平、3 负，得分率 72.5%，平均子差 +13.4**。
+全部 1,215 个动作通过独立逐手重放和选择审计。
+候选有 11 次搜索触及既有节点上限，相关统计单独保存在报告中。
+此组与原 100ms／20 局结果分开记录，默认继续为 v1.9。
+见 [2 秒实验报告](../models/v1.25-pattern-outcome-2s-20-run1-comparison.md)；
+复核命令为 `python3 scripts/finalize-pattern-outcome-2s.py --verify`。
+
+## v1.25：已批准的新默认基线
+
+2026-10-29 用户批准将已测量的 Pattern outcome 模型替换为默认，
+冻结记录为 `models/v1.25-default.json`，上一个基线 `models/v1.9-default.json` 保留。
+本次提升仅更新交付与基线记录，不重新训练，不追加对战；100ms／20 局
+18W/0D/2L、2s／20 局 12W/5D/3L 的原始候选报告均保持不变。
+网页开局库继续默认启用，出库后使用同一内嵌 Pattern 模型。
+未来比较通过 `models/default-model.json` 默认选择 v1.25；它的策略先验、
+有限 FPU、胜负终局回传和证明停止都属于新基线。
+历史重训复现脚本中的 v1.9 引用仍表示当时的训练／比较起点。
+
+运行 `python3 scripts/verify-baseline.py` 校验现默认和历史基线，
+原候选验证命令继续可用：可变交付文件改从提升前的校验快照读取，
+历史模型、对战记录及当时的源码哈希仍按原值核对。
+
+## v1.29：简单主干宽度与推理实现对照
+
+已确认 Pattern 原训练具备 4 种旋转 × 镜像／不镜像的八种随机增强，
+棋盘、下一手和合法着掩码同步变换。本轮继续使用该增强，H32/H64
+的样本顺序及对称序列完全一致，分别训练 15 轮。
+H64 的测试胜负 MSE 为 0.689270，较同轮 H32 对照的 0.691565 略低，
+但未超过已批准 v1.25 的 0.687821；融合推理耗时约 3.016µs，
+慢于 H32 对照的 2.121µs，因而本轮不提升 H64。
+
+同时实现价值／策略联合推理，复用棋形编码与查表结果，只汇总行棋方，
+并预计算格点计数与位置桶。同一批准模型的原生联合推理从约 2.546µs
+降至 2.127µs（九轮交错测量，包含 Python/C ABI 开销）；64 个验证局面
+全输出及固定模拟次数 MCTS 结果完全一致，原生测试与内存检查通过。
+新实现和模型存于独立原生候选库，默认 v1.25 及浏览器 Wasm 保持冻结。
+详见 [完整报告](../models/v1.29-pattern-width-comparison.md)，
+复核命令为 `python3 scripts/finalize-pattern-width.py`。
+
+## Pattern INT8 / 整数 SIMD（v1.32）
+
+本轮只做训练后棋形表量化，未重训；见 `models/v1.32-pattern-int8-comparison.md`。`OTELLO_PATTERN_SIMD=ON` 启用编译期整数内核选择：ARM64 NEON、x86-64 SSE2，其他目标普通回退；默认 OFF，不要求 `-march=native`。模型格式 OTPAT3 保留压缩 INT8 表，加载后仅按需解码行，累加器为 INT32。v1.25 及浏览器 Wasm 保持冻结。Linux CI 新增 GCC/Clang × ON/OFF 任务，Linux 实机性能尚未测量。Docker 网页服务仍运行浏览器 Wasm，不受服务端 NEON/SSE2 影响。
+
+## Pattern 精确热点优化（v1.33）
+
+棋形编码通过行/列/对角线位压缩、镜像及 512 项二进制到三进制小表生成同样的 38 个编号；四行整数 SIMD 共用输入加载并保留 INT64 等价结果。试验整数舍入亦通过一致性，但测得较慢，选中组合不启用它。保持 v1.25 默认、权重及 Wasm 不变。Linux 原生候选可用 `-DOTELLO_PATTERN_SIMD=ON -DOTELLO_PATTERN_FAST_CODES=ON -DOTELLO_PATTERN_BLOCK4=ON -DOTELLO_PATTERN_INTEGER_ROUNDING=OFF` 构建，详见 `models/v1.33-pattern-hotpath-comparison.md`。新增 GCC/Clang 的普通/SIMD 与整数/原舍入 CI 组合；尚无 Linux 实机性能数据。
+
+## Pattern 合法着策略投影稀疏计算（v1.34）
+
+已有合法着 softmax、树先验复用保持不变。原生实验开关 `-DOTELLO_PATTERN_LEGAL_POLICY=ON` 在 v1.33 选中优化基础上，仅为触及合法落点的棋形做策略投影；仍读取全部价值特征，保持值与合法策略精确相等。完整刷新、增量缓存、强制停着和终局均检查；具体计时、波动和平台边界见 `models/v1.34-pattern-legal-comparison.md`。默认与浏览器 Wasm 保持冻结。
+
+## v1.35 提速策略集汇总
+
+启用 `OTELLO_PATTERN_SIMD / FAST_CODES / BLOCK4 / LEGAL_POLICY`，关闭 `INTEGER_ROUNDING`，增量状态缓存为 0。同局面 2s 吞吐直接比较批准 v1.25 原库，INT16 模拟吞吐 2.158×、网络评估 1.868×；按预先定义的 >5% 门槛未选 INT8。20 局 2s 对战为 5W/8D/7L，保持原模型、开局多样性、PUCT 与节点上限，未提升默认。节点触顶明显影响候选对 2s 预算的利用。所有模型、库、源码及脚本哈希、逐步记录和终盘均保留，详见 `models/v1.35-pattern-speed-suite-comparison.md`。监控默认聚焦当前实验，`sh scripts/watch-match.sh --all` 显示历史。
+
+## v1.36 MCTS 节点扩容
+
+新增 `ot_nnue_mcts_play_budget`，显式传入 65..16,777,216 的节点上限，仍按需分配；所有旧 C ABI/默认配置继续使用 2,097,152。实验预检选中 4,194,304，并保留原模型、推理优化、时间与搜索规则。对战记录包含每步 maxNodes、treeNodes、memoryLimited 和每个工作进程的峰值 RSS（macOS 字节、Linux ru_maxrss KiB 转字节）。
+
+2s/20 局结果 7W/7D/6L、52.5%，相对上一轮 45% 有小幅改善，但不是确定的容量因果结论。候选触顶降至 0/603，未证明/未触顶思考平均约 2000ms；峰值内存约 2.44 GiB（预检约 2.60 GiB），部署时应另验目标平台内存。详见 `models/v1.36-pattern-capacity-comparison.md`；未替换默认或网页 Wasm。
+
+
+## User-approved v1.36 engineering baseline (2026-10-30)
+
+The active baseline is `models/v1.36-default.json`, selected by
+`models/default-model.json`. It retains the exact v1.25 INT16 Pattern outcome
+weights and enables fused current-side inference, NEON/SSE2 with portable fallback,
+packed shape encoding, four-row reuse and legal-only policy projection. The default
+node budget is 4,194,304; incremental cache and integer rounding remain disabled.
+The previous v1.25 baseline and candidate-era reports stay frozen.
+
+Controlled 2s sampling measured 2.158x simulations/s and 1.868x evaluations/s.
+The 4M capacity match against frozen v1.25 at 2s/20 games finished 7W/7D/6L
+(52.5%, mean discs +2.4), with 0/603 candidate decisions hitting the node cap.
+This is engineering parity, not evidence of statistically significant strength gain.
+Candidate process peak RSS was 2493.9 MiB; provision memory accordingly on Linux.
+Native kernels select AArch64 NEON or x86-64 SSE2; actual Linux throughput remains
+unmeasured. Browser budgets stay 100ms/1s and the verified opening book stays enabled.
+See `models/v1.36-pattern-capacity-comparison.md` and
+`models/v1.35-pattern-speed-suite-comparison.md` for separate measured results.

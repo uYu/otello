@@ -13,7 +13,11 @@
 using namespace othello;
 namespace {
 const char* evaluator(const nnue::Network* network){
-    if(network&&network->architecture==nnue::Architecture::Pattern)return "othello-pattern32-v1.8";
+    if(network&&network->architecture==nnue::Architecture::Pattern)return network->valueTarget==nnue::ValueTarget::Outcome?"othello-pattern32-outcome-v2":"othello-pattern32-v1.8";
+    if(network&&network->cnnPolicy)return "othello-cnn-policy-outcome-v2";
+    if(network&&network->trunkBlock)return "othello-nnue-deep-outcome-v5";
+    if(network&&network->valueTarget==nnue::ValueTarget::Outcome)return "othello-nnue-outcome-v4";
+    if(network&&network->policyHead)return "othello-nnue-policy-v3";
     if(network&&network->architecture==nnue::Architecture::Residual)return "othello-resnet32-v1";
     if(network&&network->architecture==nnue::Architecture::Cnn)return "othello-cnn8x8-v1";
     return !network?"heuristic":network->architecture==nnue::Architecture::Turn?"othello-nnue-v2":"othello-nnue-v1";

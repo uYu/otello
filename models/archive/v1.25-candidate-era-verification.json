@@ -1,0 +1,11 @@
+{
+  "status": "frozen-candidate-era-verification",
+  "archive": "models/archive/v1.25-candidate-era-verification.tar.gz",
+  "sha256": "17875295f89c449e72e7e0af114c76216ca8758fe3e0bb976ab676b9d5a1f3f5",
+  "files": {
+    "models/default-model.json": "abf3afce523b6457f180fcc9d6801187974d747f694ace6c4722e63a7ba0b467",
+    "src/game/wasm/othello.mjs": "67392be6478213a04d55889124301a7f4a6a9858f4f3bc1d2b43c166324851a1",
+    "scripts/finalize-pattern-outcome.py": "f9af9f33619092c151701053b30556334d15e21689c5e54c0fbb1d131810d397",
+    "scripts/finalize-pattern-outcome-2s.py": "d32398f69efd8cfaa0d92f9940eef710597b8cce1ce99a96fc83178e2c685c40"
+  }
+}

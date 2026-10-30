@@ -1,0 +1,76 @@
+{
+  "version": "v1.8-policy-candidate-1s",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "protocol": {
+    "games": 20,
+    "millisecondsPerMove": 1000
+  },
+  "baselineManifest": "models/v1.7-default.json",
+  "model": "models/nnue256-policy-v1.8.otnnue",
+  "trainingReport": "models/nnue256-policy-v1.8.json",
+  "matchReport": "models/v1.8-policy-vs-v1.7-1s.json",
+  "sourceManifest": "models/archive/v1.8-policy-1s-sources.json",
+  "priorRunnerManifest": "models/archive/v1.8-policy-candidate-sources.json",
+  "resumeCheckpoint": "models/v1.8-policy-1s-checkpoint.json",
+  "artifactSha256": {
+    "models/nnue256-policy-v1.8.otnnue": "78c37b5b94c0a8cbd4c8b1225641784d6e7ae14755295245ec28f2e3888d4914",
+    "models/nnue256-policy-v1.8.pt": "3b072958376718b9350859396c1e30d7ce38c1b47e8fb0b03eb87fad8115ace5",
+    "models/nnue256-policy-v1.8.json": "61e505b6b34e10a0ed85cc71555f150e3f30ddd4c2f8b7784ea77d603a86a08b",
+    "models/v1.8-policy-vs-v1.7-1s.json": "4a76eac34e19f02fae2224eb8c4a8799c684e6d441e85c4f5b65c118d165f0f5",
+    "models/v1.8-policy-1s-checkpoint.json": "2ad7a0ba9415d79c3f021b1c93dabdaa7ad8669031f19c471afcf0d591edb510",
+    "models/v1.8-policy-1s-comparison.md": "2d9b3ec06cb3d1c98d12ad9d3eae241fb68e2b6784483681d5235bed8397d0c4",
+    "models/archive/v1.8-policy-1s-sources.json": "b91e312e8cf82ebead943f6552f489fe2414638bd77e8084e90db0312e00286c",
+    "models/archive/v1.8-policy-1s-sources.tar.gz": "00b50c16dd4a401e99ac44df95844748b3af8402c8fd19c3b15d4b99c4f281e3",
+    "models/archive/v1.8-policy-candidate-sources.json": "a8a69d296a86b4821402c4dde9c8f123396d69e7e357be10dd7c3e3b2e2b36c7",
+    "models/archive/v1.8-policy-candidate-sources.tar.gz": "39abce3c6f41e5a02da72567037a98b74d63773c1cbefedd5d5d70a66f4cbda0"
+  },
+  "results": {
+    "baseline": {
+      "games": 20,
+      "win": 7,
+      "draw": 2,
+      "loss": 11,
+      "discDifference": 10,
+      "scoreRate": 0.4,
+      "meanDiscDifference": 0.5,
+      "moves": 600,
+      "meanWallMs": 869.2459747416665,
+      "meanSearchUnits": 4305306.441666666,
+      "searchUnit": "simulations",
+      "meanNonExactDepth": 30.077634011090574,
+      "depthKind": "maximumVisited",
+      "meanSimulationDepth": 6.21032413037312,
+      "memoryLimitedSearches": 41,
+      "reusedMctsSearches": 580,
+      "exactMoves": 59
+    },
+    "candidate": {
+      "games": 20,
+      "win": 11,
+      "draw": 2,
+      "loss": 7,
+      "discDifference": -10,
+      "scoreRate": 0.6,
+      "meanDiscDifference": -0.5,
+      "moves": 600,
+      "meanWallMs": 917.018460316667,
+      "meanSearchUnits": 3494620.7383333333,
+      "searchUnit": "simulations",
+      "meanNonExactDepth": 25.054545454545455,
+      "depthKind": "maximumVisited",
+      "meanSimulationDepth": 4.574311168586834,
+      "memoryLimitedSearches": 0,
+      "reusedMctsSearches": 580,
+      "exactMoves": 50
+    }
+  },
+  "replayedActions": 1210,
+  "runtimeReportSha256": "a5202e2cdbd9e85638936ca84390ec914680b4dfb11c5fc5ac74d4933d7b2338",
+  "checks": {
+    "replayed": true,
+    "checkpointPreserved": true,
+    "modelsAndLibrariesUnchanged": true
+  },
+  "conclusion": "11W/2D/7L at 1s in a 20-game sample; promising relative to the 100ms experiment, insufficient to establish stable superiority; retain v1.7 default."
+}

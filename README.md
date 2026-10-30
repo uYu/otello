@@ -84,7 +84,7 @@ npm run build:wasm        # 修改 C++ 后重新编译网页适配层
 
 ## AI 与哈希
 
-默认对弈为 **v1.3 NNUE＋MCTS**，权重直接嵌入原生库和浏览器 Wasm，无需额外模型文件或下载。MCTS 使用均匀先验 PUCT 与神经网络估值，并复用实际走到的子树。仍可用 `--search ab` 选择原 PVS/α–β、aspiration window、迭代加深和 NNUE 增量评估；`--network heuristic` 显式使用较弱的启发式。
+默认对弈为 **v1.36 Pattern 策略／胜负价值模型＋MCTS**，权重直接嵌入原生库和浏览器 Wasm，无需额外模型文件或下载。MCTS 使用学习到的合法落点先验与神经网络胜负估值，并复用实际走到的子树。当前模型与冻结基线由 `models/default-model.json` 和 `models/v1.36-default.json` 记录。仍可用 `--search ab` 选择原 PVS/α–β、aspiration window、迭代加深和 NNUE 增量评估；`--network heuristic` 显式使用较弱的启发式。
 
 **Zobrist 哈希**包含棋子颜色、格子和行棋方，落子/翻子/停着时增量异或更新。固定 SplitMix64 种子保证跨进程、原生和 Wasm 结果稳定。v1.1 的 262,144 项置换表分为四项一桶，在同一线程内跨请求复用，按深度、准确性和代数替换；命中后比较完整双方位棋盘，切换评估器或修改模型参数时自动清表。递归搜索使用固定数组排序，NNUE 累加器延迟到需要评分时更新。[v1.1 性能记录](models/v1.1-search.md)包含对比结果和复现命令。
 
@@ -100,7 +100,7 @@ npm run build:wasm        # 修改 C++ 后重新编译网页适配层
 python3 examples/nnue_ffi.py
 ```
 
-v1 测试集平均子差误差为 10.58 子，原型为 11.24 子。基线记录两组实验：纯搜索 vs 模型搜索、模型搜索 vs 模型搜索＋开局库，双方每步 50ms，从初始局面交换黑白。网页默认已在 v1.7 切换到 NNUE＋MCTS，Egaroucid 保留为可选项。详见 [训练与数据](docs/TRAINING.md)、[Stockfish 方法适配](docs/STOCKFISH_FRAMEWORK.md)和[v1 基线](models/comparison.md)。
+v1 测试集平均子差误差为 10.58 子，原型为 11.24 子。基线记录两组实验：纯搜索 vs 模型搜索、模型搜索 vs 模型搜索＋开局库，双方每步 50ms，从初始局面交换黑白。网页默认在 v1.7 切换到 NNUE＋MCTS，并在 v1.8 按用户决定启用新增策略头；Egaroucid 保留为可选项。详见 [训练与数据](docs/TRAINING.md)、[Stockfish 方法适配](docs/STOCKFISH_FRAMEWORK.md)和[v1 基线](models/comparison.md)。
 
 **v1.3** 在 v1.2 NNUE 上增加开局近分加权选步：前 12 次落子逐渐收紧随机范围，之后恢复最高分走法。原生 NNUE 自对弈默认启用，分析接口可显式开关，每局记录种子。[v1.3 对战与多样性记录](models/v1.3-comparison.md)比较该策略对原版 v1.1 的表现。模型权重不变，启发式引擎保留为较弱的玩家对手。
 
@@ -112,7 +112,7 @@ v1.5 的 32 通道、2 个残差块模型将测试集误差降到 9.83 子，但
 
 v1.2 新增考虑行棋方的 NNUE 模型，使用同一百万局面缓存重新训练，保留 v1.1 的搜索优化。共享特征层是 128→256，当前行棋方与对方的特征按顺序拼接后输出评分，参数为 33,537，模型约 67.6KB。[v1.2 对战结果](models/v1.2-comparison.md)记录原最高分选步对 v1.1 的 100 局测试；双方从标准初始棋盘自行走棋，不使用开局库，每步各 50ms，交替执黑白。
 
-v1.1 的工程优化与原模型保持冻结，见 [v1.1 对战结果](models/v1.1-comparison.md)及[性能记录](models/v1.1-search.md)。新旧模型使用独立文件，原生 CLI 可通过 `--network models/nnue256-v1.2.otnnue` 选择新模型；浏览器的内置对手仍使用启发式评估或可选原生 Egaroucid。
+v1.1 的工程优化与原模型保持冻结，见 [v1.1 对战结果](models/v1.1-comparison.md)及[性能记录](models/v1.1-search.md)。新旧模型使用独立文件，原生 CLI 可通过 `--network models/nnue256-v1.2.otnnue` 选择新模型；浏览器内置对手默认使用 v1.36 Pattern 策略／胜负价值模型＋MCTS，入门档保留较弱启发式，可选原生 Egaroucid。
 
 ```sh
 npm run training:baseline    # 仅供原始 v1 源码；当前 v1.1 会拒绝覆盖冻结报告
@@ -136,8 +136,10 @@ npm run training:watch:v1.3  # 开局随机选步对原版 v1.1 的对战进度
 
 ```sh
 docker compose up --build
-# http://localhost:8206
+# http://localhost:8207
 ```
+
+默认端口为 8207，可用 `OTELLO_PORT` 覆盖。开局库默认固定启用，每步先查库，出库后继续 v1.36 Pattern＋MCTS，不提供关闭选项。Docker 构建会验证已批准的 v1.36 基线、冻结 Wasm 和开局库；部署版本可由 `/release.json` 核对，健康检查为 `/healthz`。已有本地构建可使用 `docker compose -f compose.yaml -f compose.prebuilt.yaml up -d --build`，先运行 `npm run build` 即会自动准备并校验发布资产。服务器部署说明见 [部署记录](docs/DEPLOYMENT.md)。
 
 或者将 `dist/` 放到静态服务器；Vite 使用相对路径，支持子目录。Docker 只构建网页并提供内置 AI。Egaroucid 原生对战可用 `npm run build && npm run native:serve`，由同一个本机服务提供网页与原生接口。
 
@@ -159,3 +161,54 @@ tests/native.cpp         独立逐格规则 oracle、perft、残局、哈希、C
 tests/game.test.ts       Wasm/存档/原生差分/HTTP 测试
 examples/ffi.py          Python 原生库调用示例
 ```
+
+## v1.8 默认基线
+
+用户于 2026-10-27 批准将策略头模型作为默认，并作为后续优化的新基线。共享 NNUE 特征和子差价值头保持原权重，新增 `512→32→65` 合法落点策略分支，共 52,098 参数、104,936 字节，原生与网页均离线内嵌。熟练／高级档仍为 100ms／1 秒，入门保留弱启发式。
+
+1 秒组为 11 胜、2 平、7 负（20 局，60%）；100ms 组为 29 胜、2 平、69 负（100 局，30%）。提升为默认是用户的版本选择，不改写这些结果，也不表示各时限都优于 v1.7。见 [默认基线](models/v1.8-default.json)、[1 秒实验](models/v1.8-policy-1s-comparison.md)及 [100ms 实验](models/v1.8-policy-comparison.md)。
+
+当时价值输出仍预测最终子差；后续 v1.9 已独立训练并获批准提升为默认。
+
+## v1.9 默认基线
+
+用户于 2026-10-27 批准将胜负价值候选作为默认，并冻结为后续优化的新基线。沿用 v1.8 共享特征和策略分支，只重训 513 个价值头参数；单 tanh 输出拟合行棋方终局胜 +1、平 0、负 −1，MCTS 终局回传和精确证明采用相同语义。`(v+1)/2` 表示含和棋半分的期望得分。格式为 `OTNNUE4`，原生和网页均离线内嵌。
+
+对冻结 v1.8，每步各 1 秒、20 局取得 **18 胜、2 平、0 负，得分率 95%，平均子差 +2.8**。保持原有 100ms／1 秒难度预算；本次没有新增 100ms 对照。见 [新默认基线](models/v1.9-default.json)及[实测结果](models/v1.9-outcome-comparison.md)。之前的 v1.8 基线和候选时期报告保持冻结。
+
+补充棋形实验现已另建以 **v1.9 为基线的胜负价值重训**（v1.25），
+使用 `OTPAT2` 区分旧子差模型，训练和对战独立记录。
+运行 `sh scripts/watch-match.sh` 查看训练进度、候选视角战绩和逐手棋盘。
+复现方式见 [训练说明](docs/TRAINING.md#v125在-v19-基础上的-pattern-胜负价值实验)。
+
+## v1.25：用户批准的 Pattern 默认基线
+
+用户于 2026-10-29 明确批准“可以替换基线了”，因此将
+`pattern32-outcome-v1.25.otpat` 提升为默认，冻结记录为
+[models/v1.25-default.json](models/v1.25-default.json)。原生和 Wasm 内嵌相同
+OTPAT2 权重，使用学习先验及有限 FPU 的 PUCT MCTS，终局回传胜 +1、平 0、负 −1。
+网页保留默认启用的开局库，出库后使用新模型；熟练／高级档仍为 100ms／1 秒。
+
+对冻结 v1.9 的两组模型对照独立保存：100ms／20 局为 **18 胜、0 平、2 负**；
+2 秒／20 局为 **12 胜、5 平、3 负**。本次提升不重训、不增加对战、不改写原报告。
+v1.9 及所有候选时期记录继续保留，后续候选默认对照 v1.25。
+
+
+## User-approved v1.36 engineering baseline (2026-10-30)
+
+The active baseline is `models/v1.36-default.json`, selected by
+`models/default-model.json`. It retains the exact v1.25 INT16 Pattern outcome
+weights and enables fused current-side inference, NEON/SSE2 with portable fallback,
+packed shape encoding, four-row reuse and legal-only policy projection. The default
+node budget is 4,194,304; incremental cache and integer rounding remain disabled.
+The previous v1.25 baseline and candidate-era reports stay frozen.
+
+Controlled 2s sampling measured 2.158x simulations/s and 1.868x evaluations/s.
+The 4M capacity match against frozen v1.25 at 2s/20 games finished 7W/7D/6L
+(52.5%, mean discs +2.4), with 0/603 candidate decisions hitting the node cap.
+This is engineering parity, not evidence of statistically significant strength gain.
+Candidate process peak RSS was 2493.9 MiB; provision memory accordingly on Linux.
+Native kernels select AArch64 NEON or x86-64 SSE2; actual Linux throughput remains
+unmeasured. Browser budgets stay 100ms/1s and the verified opening book stays enabled.
+See `models/v1.36-pattern-capacity-comparison.md` and
+`models/v1.35-pattern-speed-suite-comparison.md` for separate measured results.

@@ -1,0 +1,67 @@
+{
+  "version": "v1.11-mixed-5m-1s-50-run1",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "stopped": true,
+  "stopReason": "User requested stopping the experiment on 2026-10-28",
+  "protocol": {
+    "games": 50,
+    "completedGames": 11,
+    "millisecondsPerMove": 1000
+  },
+  "model": "models/nnue256-mixed-5m-full-v1.11.otnnue",
+  "baselineManifest": "models/v1.9-default.json",
+  "matchReport": "models/v1.11-mixed-5m-vs-v1.9-1s-50-run1.json",
+  "sourceManifest": "models/archive/v1.11-mixed-5m-1s-50-run1-sources.json",
+  "artifactSha256": {
+    "models/nnue256-mixed-5m-full-v1.11.otnnue": "2586906b78c62da9d2a9c9a8b747db17a80dafc73382f4f4d83c2aee8efb7294",
+    "models/v1.11-mixed-5m-full.json": "d065dd27c756a19b2a223dbf100f50e664ed0d549ce9d6db6372a6329f7de43c",
+    "models/v1.9-default.json": "3bc0188f583263d1abaf5b7337ee28a849eac91a5a3707e50da6a32c2e854b5d",
+    "models/v1.11-mixed-5m-vs-v1.9-1s-50-run1.json": "911c17c96292627fb67cee361eb6f45a646a4f55e6a36837aa52ffa1e3e8ae19",
+    "models/v1.11-mixed-5m-1s-50-run1-comparison.md": "30ca59d6429ff5c3e62249585d8cb2b992adcf006205e8e11a9116c9dac764ba",
+    "models/archive/v1.11-mixed-5m-1s-50-run1-sources.json": "a62609c933c3b2fa2198dd9802ebb96ab74250d4b2703f5df9d6e2b319ef27ab",
+    "models/archive/v1.11-mixed-5m-1s-50-run1-sources.tar.gz": "6644aa7d596d039820ab9100bb2f9b3f917b01ab6ed6c03e4859c1b8423ac92f"
+  },
+  "results": {
+    "baseline": {
+      "games": 11,
+      "win": 10,
+      "draw": 0,
+      "loss": 1,
+      "discDifference": 216,
+      "scoreRate": 0.9090909090909091,
+      "meanDiscDifference": 19.636363636363637,
+      "moves": 335,
+      "meanWallMs": 733.8186655522387,
+      "meanSearchUnits": 75332.15820895522,
+      "searchUnit": "simulations",
+      "meanNonExactDepth": 34.62551440329218,
+      "depthKind": "maximumVisited",
+      "meanSimulationDepth": 17.876950253311968,
+      "memoryLimitedSearches": 0,
+      "reusedMctsSearches": 324,
+      "exactMoves": 92
+    },
+    "candidate": {
+      "games": 11,
+      "win": 1,
+      "draw": 0,
+      "loss": 10,
+      "discDifference": -216,
+      "scoreRate": 0.09090909090909091,
+      "meanDiscDifference": -19.636363636363637,
+      "moves": 325,
+      "meanWallMs": 777.9275590676923,
+      "meanSearchUnits": 116618.95076923077,
+      "searchUnit": "simulations",
+      "meanNonExactDepth": 36.54435483870968,
+      "depthKind": "maximumVisited",
+      "meanSimulationDepth": 17.808230983121124,
+      "memoryLimitedSearches": 0,
+      "reusedMctsSearches": 314,
+      "exactMoves": 77
+    }
+  },
+  "replayedActions": 674,
+  "runtimeReportSha256": "911c17c96292627fb67cee361eb6f45a646a4f55e6a36837aa52ffa1e3e8ae19"
+}

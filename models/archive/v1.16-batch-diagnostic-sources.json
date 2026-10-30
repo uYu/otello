@@ -1,0 +1,13 @@
+{
+  "archive": "models/archive/v1.16-batch-diagnostic-sources.tar.gz",
+  "sha256": "f8774b1cc612276ff0d848ee4b308375b05366df2071f71b1f9966ca0d5c0c9f",
+  "files": {
+    "experiments/cnn-batch-v1.16/mcts.cpp": "d0c81cb7af0bd85da714e37943592c154ce151158b9f05b841db278155cff015",
+    "experiments/cnn-batch-v1.16/CMakeLists.txt": "d4c4043669d23fbcdd231c96ac40fe014368f8e872ffde61b47f1c88c6feebc8",
+    "experiments/cnn-widening-v1.15/mcts.cpp": "51e75d81e15d20e37b3e892d6a445ef135a061e92b22787f0b1d6e8325f364ee",
+    "scripts/benchmark-cnn-batch.py": "7d8f6fe152849fe76d9f6389960fad55969d8d6b1e6c5c413bfdda26e2241062"
+  },
+  "report": "v1.16-cnn-batch-diagnostic.json",
+  "reportSha256": "5053b46bc30e4c654492ccbecefbeb9c135aff4b5185aed9984f656515d33972",
+  "note": "v1.17 preserves the exact measured CMake plus the later additional test target separately; algorithm sources unchanged"
+}

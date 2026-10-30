@@ -1,0 +1,160 @@
+{
+  "model": "models/pattern32-outcome-v1.25.otpat",
+  "modelSha256": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0",
+  "scriptSha256": "6e833175b7495f4f48441d01c11d20a28b53bb0d1371003c9cb978ea2603299e",
+  "positions": 64,
+  "rounds": 9,
+  "callsPerRound": 8192,
+  "jointOutputsExactlyEqual": true,
+  "fixedSimulationMctsExactlyEqual": true,
+  "simulationsPerPosition": 1024,
+  "results": [
+    {
+      "name": "approved v1.25",
+      "library": ".build/native-v1.25-reference/libothello.dylib",
+      "librarySha256": "b45ae6effcda3fa364dbf41bfbf0f1d897de2b7918dd028b15350a90f5f4d2d1",
+      "medianMicroseconds": 2.5455982666015626,
+      "samples": [
+        {
+          "microseconds": 3.02352392578125,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.5455982666015626,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.54168701171875,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.5370941162109375,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.54345703125,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.5614725341796873,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.5409443359375,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.592620849609375,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.571624755859375,
+          "checksum": 910.5753404100938
+        }
+      ],
+      "fixedSimulationSearch": {
+        "milliseconds": 187.390584,
+        "simulations": 62087
+      }
+    },
+    {
+      "name": "H64-capable before fusion",
+      "library": ".build/native-pattern-h64-v1.29/libothello-pre-fusion.dylib",
+      "librarySha256": "0de68ef1d70040728aa22ff63f0896a4340ad388bc186837a8309fcfddf34beb",
+      "medianMicroseconds": 2.415079833984375,
+      "samples": [
+        {
+          "microseconds": 2.591796875,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.4165191650390625,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.3849945068359375,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.4113311767578125,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.3882293701171875,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.44283544921875,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.4439849853515625,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.4025472412109377,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.415079833984375,
+          "checksum": 910.5753404100938
+        }
+      ],
+      "fixedSimulationSearch": {
+        "milliseconds": 149.188292,
+        "simulations": 62087
+      }
+    },
+    {
+      "name": "fused inference",
+      "library": ".build/native-pattern-h64-v1.29/libothello.dylib",
+      "librarySha256": "8aa42d6a73c26392bf7e545b34c3ef6cc00895a98d7553f0b4d4c5eb6395e442",
+      "medianMicroseconds": 2.1274974365234374,
+      "samples": [
+        {
+          "microseconds": 2.1274974365234374,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.1214954833984376,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.1289927978515624,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.1258697509765625,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.122395751953125,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.145624755859375,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.1383717041015626,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.125849365234375,
+          "checksum": 910.5753404100938
+        },
+        {
+          "microseconds": 2.1641336669921873,
+          "checksum": 910.5753404100938
+        }
+      ],
+      "fixedSimulationSearch": {
+        "milliseconds": 128.460083,
+        "simulations": 62087
+      }
+    }
+  ],
+  "speedupVsApproved": 1.1965223660910012,
+  "speedupVsPreFusion": 1.135174027720982,
+  "limits": "Python/C ABI full-joint prediction overhead included; interleaved warm-cache timing; fixed-simulation timings are single passes, not strength matches"
+}

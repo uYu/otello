@@ -1,0 +1,26 @@
+cmake_minimum_required(VERSION 3.16)
+project(otello_light_cnn LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+get_filename_component(OTELLO_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../.." ABSOLUTE)
+set(OTELLO_CPP "${CMAKE_CURRENT_SOURCE_DIR}/cpp")
+if(APPLE)
+  execute_process(COMMAND xcrun --show-sdk-path OUTPUT_VARIABLE OTELLO_MACOS_SDK OUTPUT_STRIP_TRAILING_WHITESPACE)
+  if(EXISTS "${OTELLO_MACOS_SDK}/usr/include/c++/v1")
+    include_directories(SYSTEM "${OTELLO_MACOS_SDK}/usr/include/c++/v1")
+  endif()
+endif()
+add_library(othello SHARED
+  ${OTELLO_CPP}/search.cpp ${OTELLO_CPP}/move_policy.cpp
+  ${OTELLO_CPP}/nnue.cpp ${OTELLO_CPP}/cnn.cpp
+  ${OTELLO_CPP}/resnet.cpp ${CMAKE_CURRENT_SOURCE_DIR}/mcts.cpp ${CMAKE_CURRENT_SOURCE_DIR}/native_batch.cpp
+  ${OTELLO_CPP}/default_engine.cpp ${OTELLO_CPP}/api.cpp)
+target_include_directories(othello PUBLIC ${OTELLO_CPP})
+target_link_libraries(othello PRIVATE "-framework Accelerate")
+add_executable(otello_tests ${CMAKE_CURRENT_SOURCE_DIR}/native_tests.cpp)
+target_link_libraries(otello_tests PRIVATE othello)
+enable_testing()
+add_test(NAME rules_and_search COMMAND otello_tests)
+add_executable(otello_batch_tests ${CMAKE_CURRENT_SOURCE_DIR}/batch_tests.cpp)
+target_link_libraries(otello_batch_tests PRIVATE othello)
+add_test(NAME native_batch_contract COMMAND otello_batch_tests "${OTELLO_ROOT}/models/nnue256-outcome-v1.9.otnnue")

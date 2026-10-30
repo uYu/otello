@@ -1,0 +1,33 @@
+{
+  "archive": "models/archive/v1.13-cnn2-tuning-sources.tar.gz",
+  "sha256": "d622937fdc688b8e94b7479937d3c84ff03818e1717d8d42ba7a9423a6c51205",
+  "files": {
+    "scripts/tune-cnn-policy.py": "4e2a2ef456c47db815da6bd14e93c0745a4b3fafad8f7ea7940e972bac0742ca",
+    "scripts/train-cnn-policy-suite.py": "54bf56c90446adb15204433f0a2c2ac47f4223539880ee6c7793ef94d77bdb3b",
+    "scripts/train-mixed-5m.py": "85c4de72ffa1fd196136ef0381953167946b1386e5bb7422ff60de1ddb1e7b5b",
+    "scripts/train-deep.py": "5a1d8ae4ee62be04657aeb2d2c0cbd95b6d66414c20d1cec2a5e6ddd57fff62e",
+    "scripts/train-outcome.py": "bbcffe7e07a161068f832b97d03309bb3319c3cd527d8120bbd7337b3a009aee",
+    "scripts/train-policy.py": "2a0550a6b8d06edb2b09773cbb8d3abbf108bc2a61bbb2a14a5cf6339295c9a4",
+    "scripts/train-nnue.py": "f4977077cb890f4bb8d714532f762398268e89999fc329a65f6fd8dfb5074313"
+  },
+  "artifactSha256": {
+    "models/v1.13-cnn2-tuning.json": "4102c79f84597b681c112dfb728da43b6c560090b8aa7a0c3d27f3ed405826eb",
+    "models/v1.13-cnn2-tuning-comparison.md": "6e2810073b96162ab65dbeb3d00f613bb4fa215192c629787fbe469e14de4637",
+    "models/cnn2-c32-cosine-v4-value-v1.13.pt": "842865863b698c693efd50c60bb2f6d292fcb972b484201dcce9743e6c4dad42",
+    "models/cnn2-c32-low-lr-value-v1.13.torchscript.pt": "e66de7d3815e996ffcb917ce32b4573300ea37578efb16ade865b58601a3ff3b",
+    "models/cnn2-c32-cosine-v2-joint-v1.13.pt": "973a8c7843e3576c06278ca5e9c5d1f36d5909f7246033a310280ccea04bf224",
+    "models/cnn2-c32-cosine-value-v1.13.pt": "443a949ab3b12c6adf53eacf1828457e57ca3535d256178f483161d66bffc342",
+    "models/cnn2-c32-cosine-v4-value-v1.13.torchscript.pt": "a6d71a548d10e174f07cb8fe67830585f4950c7df8f7b5fcae03b3739c97e0b3",
+    "models/cnn2-c32-cosine-v4-joint-v1.13.pt": "a349c11efb24fc96c86e0aae8b65e827fb8ad6c48c0481280860a165b3b1800f",
+    "models/cnn2-c32-cosine-v2-value-v1.13.pt": "ae0b5c8d42a256d989ceb4fa2929cc5a289b56824e8a2dc40eadaa5366344fac",
+    "models/cnn2-c32-cosine-joint-v1.13.torchscript.pt": "fe82843168407a07557c68b33d5b743c49ca3c03f487dc7703d4ac9d8d8310cf",
+    "models/cnn2-c32-cosine-joint-v1.13.pt": "74e67d4df6d7f1967fc6fdfdda717ce5221bc3fcfc9f21207c09dc32020adc68",
+    "models/cnn2-c32-cosine-v2-value-v1.13.torchscript.pt": "e23f158e2ef4d9a93b1d085119c4e87f09dff0472988a974ccf9573bcb6dcfeb",
+    "models/cnn2-c32-low-lr-value-v1.13.pt": "ef731390cb942b3cc37962fcee215128fe7d3cb968025eec9b475f512bb1d4eb",
+    "models/cnn2-c32-low-lr-joint-v1.13.pt": "f1ebcd220fec69a6ac672a22809f81958105fea2c0043f377cc8be4fed422879",
+    "models/cnn2-c32-cosine-v2-joint-v1.13.torchscript.pt": "1cda17491c6c76b2bc15150ef6fd43ad9df1bd619eb4dcd0672d0f725c429a8c",
+    "models/cnn2-c32-low-lr-joint-v1.13.torchscript.pt": "af806c4389a5d38207754eca62dc3082e4c9e88e23187920aaa5b0ad7329faed",
+    "models/cnn2-c32-cosine-v4-joint-v1.13.torchscript.pt": "ab630e1740c0221c8432b812759b927831a2fa9b1f404b51cf9d55b5aa150bcd",
+    "models/cnn2-c32-cosine-value-v1.13.torchscript.pt": "1053249e91b3911ae23dc6d7d2b369ec7f6826473565d4623362f0a7d2d01612"
+  }
+}

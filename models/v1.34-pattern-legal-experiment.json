@@ -1,0 +1,30 @@
+{
+  "version": "v1.34-pattern-legal",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "sourceManifest": "models/archive/v1.34-pattern-legal-sources.json",
+  "artifactSha256": {
+    "models/v1.34-pattern-legal.json": "47cc88c946d144765e9114b95d91aeb4d8aaff466f678f2cf3be08c6a848a315",
+    "models/v1.34-pattern-legal-comparison.md": "5f85c89de1f5ce6157fe88d2661cb1c5fc4c78f54c8737c11e7f9b6a9ff0b3cd",
+    "models/v1.34-pattern-legal-experiments.json": "8a6e4a5ce6f1f38f51d64c6a31580b43954f44b89118045d8fe936e8acca079c"
+  },
+  "preservedSha256": {
+    "models/default-model.json": "8b82bf89b2afeebdcd1b2c056dee7ce21789aea9291cae11b0a480862ad37b01",
+    "models/v1.25-default.json": "730b4a83b9e0495e7f1a4beaa6da8b2a31c8d72ceb9b39e54a9218cbb381c14f",
+    "src/game/wasm/othello.mjs": "a1584f0244858efcf19d807dee2dd79e628cda2ee509371162cbc64c94c949e0",
+    "models/pattern32-outcome-v1.25.otpat": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0",
+    "models/pattern32-int8-step1-v1.32.otpat": "da33b0237d0b99a5bcecb0f57c9aa18f51ea7537adfd683e8d8364d553b68f91"
+  },
+  "localEvidenceSha256": {
+    ".build/pattern-legal-v1.34-sanitizers.log": "cc9afdc24b4aacbab3e5f461577ff2be8fa38af3db846dd2e84c6b566cf17287",
+    ".build/pattern-legal-v1.34-python-tests.log": "95372458801a0f43248c5b5709fa8122ceeb897df5f32a6b3d9fee6500bdcf47"
+  },
+  "checks": {
+    "nativeNeon": true,
+    "translatedX86Sse2": true,
+    "portable": true,
+    "arm64Sanitizers": true,
+    "patternTests": 4,
+    "linuxCiAddedNotExecuted": true
+  }
+}

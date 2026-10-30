@@ -1,0 +1,21 @@
+{
+  "version": "Pattern outcome vs v1.9 · 2秒",
+  "experiments": [
+    {
+      "name": "Pattern outcome vs v1.9 · 2秒/步 · 20局",
+      "shortName": "Pattern outcome vs v1.9 · 2秒/步 · 20局",
+      "focus": "Pattern outcome",
+      "displayNames": {
+        "candidate": "Pattern outcome",
+        "baseline": "v1.9"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/pattern-outcome-v1.25/match-2s-20-run1.json",
+      "report": "models/v1.25-pattern-outcome-vs-v1.9-2s-20-run1.json"
+    }
+  ]
+}

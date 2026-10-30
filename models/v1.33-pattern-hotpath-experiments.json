@@ -1,0 +1,11 @@
+{
+  "version": "v1.33 Pattern 推理热点",
+  "experiments": [
+    {
+      "name": "Pattern 精确优化：整数舍入 / 位压缩编码 / 四行 SIMD · v1.33",
+      "games": 0,
+      "runtimeReport": ".build/training/pattern-hotpath-v1.33/progress.json",
+      "report": "models/v1.33-pattern-selected.json"
+    }
+  ]
+}

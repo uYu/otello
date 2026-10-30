@@ -1,0 +1,6 @@
+{
+  "version": "v1.36",
+  "baselineManifest": "models/v1.36-default.json",
+  "defaultModel": "models/pattern32-outcome-v1.25.otpat",
+  "modelSha256": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0"
+}

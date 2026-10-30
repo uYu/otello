@@ -1,0 +1,29 @@
+{
+  "version": "v1.14-cnn-policy-native",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "format": "OTCNN2",
+  "architecture": "two 3x3 convolutions; shared dense64; outcome and learned-policy heads; FP32",
+  "library": ".build/native-cnnpolicy/libothello.dylib",
+  "librarySha256": "92ba43bb978a5b491830cd4bbed1436e295973017ec717d7c264e092608fc4b9",
+  "baselineManifest": "models/v1.9-default.json",
+  "sourceManifest": "models/archive/v1.14-cnn-policy-match-sources.json",
+  "checks": {
+    "nativeCTest": true,
+    "addressAndUndefinedSanitizers": true,
+    "pythonNativePositionsPerModel": 12000,
+    "v19ColdSearchParityPositions": 24,
+    "v19WarmSearchParityPositions": 16,
+    "fixedSimulations": 512,
+    "malformedFilesRejectedPerModel": 6
+  },
+  "artifactSha256": {
+    "models/v1.14-cnn-policy-native-verification.json": "f6de22441e301798cc8af89fcc40cf82850d605e214560fe3feb2785496a7810",
+    "models/archive/v1.14-cnn-policy-match-sources.json": "c87070039eeef9dc3b7a7cfabfd5db07d77368a7774bf87f8f540d8ba6ac8f9a",
+    "models/archive/v1.14-cnn-policy-match-sources.tar.gz": "627452b4b5ed7f748bc487a3eb2d4b65c961e41592b41d249bfb030186bac797",
+    "models/cnn2-c32-cosine-joint-v1.13.otcnn": "066591dfa83b8f7155a51ac66e7ea93876ceab5f9c12a7e0d16b3c222d470a31",
+    "models/cnn2-c32-cosine-joint-v1.13.export.json": "cdb73a63dda2c87e19197fa1ccd8323e470a6f5d83a5ec3b1f39f5e512ecd7cd",
+    "models/cnn2-c32-cosine-v4-value-v1.13.otcnn": "e7fddc6892fc86bb7c63e9af8e1c8fa0bbb1c92f39d6af50eaf3b0c467f1260e",
+    "models/cnn2-c32-cosine-v4-value-v1.13.export.json": "cd65c6dd6b0771394c64a81255c9d5cfdfbb2d6458be819b2c4f92888fd3d68a"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "version": "v1.32-pattern-int8-simd",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "sourceManifest": "models/archive/v1.32-pattern-int8-sources.json",
+  "artifactSha256": {
+    "models/v1.32-pattern-int8.json": "8c7fc579fc68f056b9e4b2a0d10806cfe73a4a61c4d301d7f9c45be1a3a041d1",
+    "models/v1.32-pattern-int8-comparison.md": "aa9fff11c3800a878094e1d9f0f5850bfdc6af60d266765364611ab7813c7221",
+    "models/v1.32-pattern-int8-experiments.json": "317e5f95dc09ad4843033fde678cb30a241ec9fb6a5730cc3d8f5e6b2bc954a1",
+    "models/pattern32-int8-step1-v1.32.otpat": "da33b0237d0b99a5bcecb0f57c9aa18f51ea7537adfd683e8d8364d553b68f91",
+    "models/pattern32-int8-step2-v1.32.otpat": "170baa221633886bb4df29f7fca84766b7d8cd837d8d7039c4cde27aba1d5b87",
+    "models/pattern32-int8-step4-v1.32.otpat": "9ccf4b878259e70d0791b3671a04de9ee1d8416fe9c4f8ef1225efa83d301414"
+  },
+  "preservedSha256": {
+    "models/default-model.json": "8b82bf89b2afeebdcd1b2c056dee7ce21789aea9291cae11b0a480862ad37b01",
+    "models/v1.25-default.json": "730b4a83b9e0495e7f1a4beaa6da8b2a31c8d72ceb9b39e54a9218cbb381c14f",
+    "models/pattern32-outcome-v1.25.otpat": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0",
+    "src/game/wasm/othello.mjs": "a1584f0244858efcf19d807dee2dd79e628cda2ee509371162cbc64c94c949e0"
+  },
+  "checks": {
+    "arm64Neon": true,
+    "x86Sse2UnderRosetta": true,
+    "arm64Sanitizers": true,
+    "patternTests": 4,
+    "linuxCiAddedButNotExecuted": true
+  },
+  "localEvidenceSha256": {
+    ".build/pattern-int8-v1.32-sanitizers.log": "cc9afdc24b4aacbab3e5f461577ff2be8fa38af3db846dd2e84c6b566cf17287",
+    ".build/pattern-int8-v1.32-python-tests.log": "4ab70ef784cba622a97887721d6e15c7fe72c4077529cdab4fbcd7d22efe57a5",
+    ".build/native-pattern-int8-v1.32/Testing/Temporary/LastTest.log": "ac5927cbbe8c41b1878f463994c825bc83d33d03c667383f7bced42893ffd64a",
+    ".build/native-pattern-simd-v1.32/Testing/Temporary/LastTest.log": "e6381961ef934cf672122525a43c4fa1e84c87f464509cdcfd4d638ebb6b6ee9",
+    ".build/native-pattern-sse2-v1.32/Testing/Temporary/LastTest.log": "80b50fa0dc00fddf9dde922ec75a36ac5433b87c5bbda16472fd77e9c1578e48"
+  }
+}

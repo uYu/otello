@@ -1,0 +1,176 @@
+{
+  "version": "v1.8-policy-candidate",
+  "status": "candidate",
+  "architecture": "frozen 128->256 dual-view NNUE; value 512->1 unchanged; policy 512->32 clipped ReLU->65",
+  "parameters": 52098,
+  "trainableParameters": 18561,
+  "bytes": 104936,
+  "sha256": "78c37b5b94c0a8cbd4c8b1225641784d6e7ae14755295245ec28f2e3888d4914",
+  "parent": "models/nnue256-v1.2.otnnue",
+  "parentSha256": "8805ce125579869cdca99c9efe85aeaa9ec92a0b1d0cbd7ddcf438fad1d20159",
+  "valueBytesUnchanged": true,
+  "epochs": 15,
+  "batchSize": 1024,
+  "seed": 20261027,
+  "bestEpoch": 13,
+  "history": [
+    {
+      "epoch": 1,
+      "crossEntropy": 1.769700527191162,
+      "top1": 0.33416666666666667,
+      "uniformCrossEntropy": 2.0921316559038803,
+      "uniformTop1": 0.14703605201200015
+    },
+    {
+      "epoch": 2,
+      "crossEntropy": 1.7316426038742065,
+      "top1": 0.3541666666666667,
+      "uniformCrossEntropy": 2.0921316559038803,
+      "uniformTop1": 0.14703605201200015
+    },
+    {
+      "epoch": 3,
+      "crossEntropy": 1.7174160480499268,
+      "top1": 0.35733333333333334,
+      "uniformCrossEntropy": 2.0921316559038803,
+      "uniformTop1": 0.14703605201200015
+    },
+    {
+      "epoch": 4,
+      "crossEntropy": 1.7105199098587036,
+      "top1": 0.3606666666666667,
+      "uniformCrossEntropy": 2.0921316559038803,
+      "uniformTop1": 0.14703605201200015
+    },
+    {
+      "epoch": 5,
+      "crossEntropy": 1.7043070793151855,
+      "top1": 0.3675,
+      "uniformCrossEntropy": 2.0921316559038803,
+      "uniformTop1": 0.14703605201200015
+    },
+    {
+      "epoch": 6,
+      "crossEntropy": 1.699518084526062,
+      "top1": 0.3695,
+      "uniformCrossEntropy": 2.0921316559038803,
+      "uniformTop1": 0.14703605201200015
+    },
+    {
+      "epoch": 7,
+      "crossEntropy": 1.6970354318618774,
+      "top1": 0.36783333333333335,
+      "uniformCrossEntropy": 2.0921316559038803,
+      "uniformTop1": 0.14703605201200015
+    },
+    {
+      "epoch": 8,
+      "crossEntropy": 1.6949846744537354,
+      "top1": 0.372,
+      "uniformCrossEntropy": 2.0921316559038803,
+      "uniformTop1": 0.14703605201200015
+    },
+    {
+      "epoch": 9,
+      "crossEntropy": 1.690732479095459,
+      "top1": 0.3705,
+      "uniformCrossEntropy": 2.0921316559038803,
+      "uniformTop1": 0.14703605201200015
+    },
+    {
+      "epoch": 10,
+      "crossEntropy": 1.6919435262680054,
+      "top1": 0.37383333333333335,
+      "uniformCrossEntropy": 2.0921316559038803,
+      "uniformTop1": 0.14703605201200015
+    },
+    {
+      "epoch": 11,
+      "crossEntropy": 1.6915687322616577,
+      "top1": 0.37516666666666665,
+      "uniformCrossEntropy": 2.0921316559038803,
+      "uniformTop1": 0.14703605201200015
+    },
+    {
+      "epoch": 12,
+      "crossEntropy": 1.6900107860565186,
+      "top1": 0.38083333333333336,
+      "uniformCrossEntropy": 2.0921316559038803,
+      "uniformTop1": 0.14703605201200015
+    },
+    {
+      "epoch": 13,
+      "crossEntropy": 1.6851410865783691,
+      "top1": 0.3785,
+      "uniformCrossEntropy": 2.0921316559038803,
+      "uniformTop1": 0.14703605201200015
+    },
+    {
+      "epoch": 14,
+      "crossEntropy": 1.6870296001434326,
+      "top1": 0.37483333333333335,
+      "uniformCrossEntropy": 2.0921316559038803,
+      "uniformTop1": 0.14703605201200015
+    },
+    {
+      "epoch": 15,
+      "crossEntropy": 1.6867213249206543,
+      "top1": 0.37866666666666665,
+      "uniformCrossEntropy": 2.0921316559038803,
+      "uniformTop1": 0.14703605201200015
+    }
+  ],
+  "seconds": 29.316226250026375,
+  "labels": {
+    "cacheSha256": "be557c1bcec0cc39d5baec462d50d84aeb4942c4759611dcba2bdcd04f042dc2",
+    "positionsSha256": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6",
+    "gamesSha256": "6332fd01b27c11a81f3fbd344e52aaf8f70e60c644780fb453cc7ef64ae359ac",
+    "positions": {
+      "train": 1000000,
+      "validation": 6000,
+      "test": 6000
+    },
+    "label": "first same-split, same-board/turn and same-outcome recorded next move",
+    "split": "unchanged frozen opening-group splits and symmetry-deduplicated positions",
+    "passPolicy": "existing cache excludes pass targets; forced pass is deterministic at inference",
+    "scriptSha256": "5f31023df9cbbed2c6b9ff1818b48047edc1d63a5c487d49a53507d004ca1705"
+  },
+  "trainingScriptSha256": "2a0550a6b8d06edb2b09773cbb8d3abbf108bc2a61bbb2a14a5cf6339295c9a4",
+  "torchVersion": "2.10.0",
+  "numpyVersion": "1.26.4",
+  "metrics": {
+    "validation": {
+      "float": {
+        "crossEntropy": 1.6851410865783691,
+        "top1": 0.3785,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "quantized": {
+        "crossEntropy": 1.6851637772283223,
+        "top1": 0.37933333333333336,
+        "uniformCrossEntropy": 2.0921316559038803,
+        "uniformTop1": 0.14703605201200015
+      },
+      "maxQuantizationError": 0.011783971962285977
+    },
+    "test": {
+      "float": {
+        "crossEntropy": 1.712706208229065,
+        "top1": 0.359,
+        "uniformCrossEntropy": 2.1044416287103247,
+        "uniformTop1": 0.14458325754053308
+      },
+      "quantized": {
+        "crossEntropy": 1.7125798947170472,
+        "top1": 0.3586666666666667,
+        "uniformCrossEntropy": 2.1044416287103247,
+        "uniformTop1": 0.14458325754053308
+      },
+      "maxQuantizationError": 0.01090630922394853
+    }
+  },
+  "cppParityPositions": 1024,
+  "cppMaxProbabilityError": 2.220446049250313e-16,
+  "valueParity": true
+}

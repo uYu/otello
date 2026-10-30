@@ -1,0 +1,56 @@
+{
+  "version": "v1.30",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "name": "avg-last-3",
+  "epochs": [
+    13,
+    14,
+    15
+  ],
+  "model": "models/pattern32-avg-last-3-v1.30.otpat",
+  "sha256": "58a1691fd8dc6654ca048fdda31ab3ac0770b5f94c5cc3424bdf6608985fd729",
+  "checkpointSha256": [
+    "985fec5d8432c4bcb0213a51a3f9658a9747c8dbb5061ebe41621eecf712bfd1",
+    "357583385d36e371920842046bdb18a7fbc8410548d37dc14a39e9ac538d69dd",
+    "312e0dab1497ff47f6803759e155109add209cf9785ad4ef5009891454c995cb"
+  ],
+  "bytes": 3576088,
+  "parameters": 1787950,
+  "metrics": {
+    "validation": {
+      "mse": 0.7252683639526367,
+      "outcomeMae": 0.7269516587257385,
+      "nonDrawSignAccuracy": 0.6557817902420284,
+      "wdlAccuracy": 0.5703333333333334,
+      "wdlCrossEntropy": 0.9009873270988464,
+      "policyTop1": 0.41133333333333333,
+      "policyCrossEntropy": 1.599299430847168,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    "test": {
+      "mse": 0.6879680156707764,
+      "outcomeMae": 0.7098174095153809,
+      "nonDrawSignAccuracy": 0.6793143297380585,
+      "wdlAccuracy": 0.5883333333333334,
+      "wdlCrossEntropy": 0.8902539014816284,
+      "policyTop1": 0.4065,
+      "policyCrossEntropy": 1.6182438135147095,
+      "uniformPolicyCrossEntropy": 2.1044416287103247
+    }
+  },
+  "validationParity": {
+    "positions": 6000,
+    "maxWdlError": 1.3307943358409347e-07,
+    "maxPolicyLogitError": 5.855170819302202e-07,
+    "maxScoreRoundingError": 0.49896240234375,
+    "maxOutcomeError": 2.9840748871912126e-08
+  },
+  "testParity": {
+    "positions": 6000,
+    "maxWdlError": 1.3868951043161104e-07,
+    "maxPolicyLogitError": 5.277538033254814e-07,
+    "maxScoreRoundingError": 0.49896240234375,
+    "maxOutcomeError": 2.9840748871912126e-08
+  }
+}

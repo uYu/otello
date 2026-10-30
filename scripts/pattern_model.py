@@ -79,12 +79,14 @@ def quant(x, scale=256):
 
 
 class PatternNet(nn.Module):
-    def __init__(self):
+    def __init__(self, hidden=HIDDEN):
         super().__init__()
+        if hidden not in (32,64):
+            raise ValueError("Pattern hidden width must be 32 or 64")
         self.embedding = nn.Embedding(ROWS, DIM)
         nn.init.normal_(self.embedding.weight, std=0.05)
-        self.trunk = nn.Linear(INPUTS, HIDDEN)
-        self.head = nn.Linear(HIDDEN, OUTPUTS)
+        self.trunk = nn.Linear(INPUTS, hidden)
+        self.head = nn.Linear(hidden, OUTPUTS)
         self.register_buffer('pool', torch.from_numpy(POOL))
         self.register_buffer('counts', torch.from_numpy(COUNTS))
         self.register_buffer('members', torch.from_numpy(MEMBERS))
@@ -103,7 +105,7 @@ class PatternNet(nn.Module):
         return torch.tanh(out[:, 0]), out[:, 1:4], policy
 
 
-def export(net, path):
+def export(net, path, *, outcome=False):
     def array(tensor, dtype, scale):
         value = tensor.detach().cpu().numpy()*scale
         value = np.sign(value)*np.floor(np.abs(value)+0.5)
@@ -114,7 +116,10 @@ def export(net, path):
     arrays = [array(net.embedding.weight, '<i2', 256), array(net.trunk.weight, '<i2', 256),
               array(net.trunk.bias, '<i4', 65536), array(net.head.weight, '<i2', 256),
               array(net.head.bias, '<i4', 65536)]
-    binary = struct.pack('<8s6I', b'OTPAT1\0\0', ROWS, DIM, HIDDEN, INPUTS, OUTPUTS, 256)
+    hidden = net.trunk.out_features
+    if hidden != 32 and not outcome:
+        raise ValueError('Wide Pattern requires outcome format OTPAT2')
+    binary = struct.pack('<8s6I', b'OTPAT2\0\0' if outcome else b'OTPAT1\0\0', ROWS, DIM, hidden, INPUTS, OUTPUTS, 256)
     binary += b''.join(x.tobytes() for x in arrays)
     Path(path).parent.mkdir(parents=True, exist_ok=True)
     Path(path).write_bytes(binary)

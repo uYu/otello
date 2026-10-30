@@ -2,6 +2,7 @@
 #include "../cpp/api.h"
 #include "../cpp/nnue.hpp"
 #include "../cpp/pattern.hpp"
+#include "../cpp/pattern_kernels.hpp"
 #include "../cpp/cnn.hpp"
 #include "../cpp/resnet.hpp"
 #include "../cpp/mcts.hpp"
@@ -9,6 +10,7 @@
 #include <iostream>
 #include <random>
 #include <cstdlib>
+#include <sstream>
 using namespace othello;
 void check(bool yes,const char* why) {if(!yes){std::cerr<<"FAIL: "<<why<<'\n';std::exit(1);}}
 Bits referenceFlips(const Position& p,int m) {
@@ -72,6 +74,72 @@ void checkSearch(const Position& p,int depth,const nnue::Network* net=nullptr){
     check(r.score==referenceValue(p,depth,net),"persistent TT preserves fixed-depth minimax");
     for(auto c:r.candidates)check(c.score==-referenceValue(play(p,c.move),depth-1,net),"persistent TT preserves every candidate score");
 }
+void patternInt8Checks(){
+    std::mt19937 rng(3218);
+    for(int trial=0;trial<20000;++trial){
+        Bits own=(Bits(rng())<<32)|rng(),opponent=(Bits(rng())<<32)|rng();
+        auto codes=nnue::Pattern::encode(own,opponent);
+        for(int i=0;i<nnue::Pattern::Count;++i)
+            check(codes[i]==nnue::Pattern::code(nnue::Pattern::shapes()[i],own,opponent),"packed Pattern codes equal generic ternary encoding including overlapping masks");
+    }
+    for(int value=-983040;value<=983040;++value){
+        check(nnue::pattern_kernels::roundedDivide<4>(value)==std::round(double(value)/4),"integer pool rounding matches FP including negative ties");
+        check(nnue::pattern_kernels::roundedDivide<30>(value)==std::round(double(value)/30),"integer interior rounding matches FP");
+    }
+    for(int empty=0;empty<=64;++empty)
+        check(nnue::pattern_kernels::roundedDivide<60>(empty*256)==std::round(double(empty)*256/60),"integer phase rounding matches FP");
+    for(std::int64_t quotient:{-17000000LL,-1LL,0LL,1LL,17000000LL})for(int remainder=-257;remainder<=257;++remainder){
+        auto value=quotient*256+remainder;
+        check(nnue::pattern_kernels::roundedDivide<256>(value)==std::round(double(value)/256),"integer dense rounding matches FP at extreme legal dot magnitudes");
+    }
+    std::array<std::int16_t,129> a{},b{};
+    std::array<std::int16_t,4*129> matrix{};
+    for(int trial=0;trial<100;++trial){
+        for(int i=0;i<129;++i){a[i]=std::int16_t(rng());b[i]=std::int16_t(int(rng()%2049)-1024);}
+        if(trial==0){a.fill(-32768);b.fill(-1024);}
+        for(int n:{1,7,8,31,32,64,97,128}){
+            std::int64_t expected=0;for(int i=0;i<n;++i)expected+=std::int64_t(a[i])*b[i];
+            check(nnue::pattern_kernels::dot(a.data(),b.data(),n)==expected,"integer SIMD dot equals INT64 reference including tails and extreme weights");
+            for(int row=0;row<4;++row)for(int i=0;i<129;++i)matrix[row*129+i]=trial==0?-32768:std::int16_t(rng());
+            std::int64_t actual[4];nnue::pattern_kernels::dot4(matrix.data(),b.data(),n,129,actual);
+            for(int row=0;row<4;++row){std::int64_t reference=0;for(int i=0;i<n;++i)reference+=std::int64_t(matrix[row*129+i])*b[i];
+                check(actual[row]==reference,"four-row SIMD layout equals INT64 reference including odd strides and tails");}
+        }
+    }
+    for(int width:{32,64})for(int step:{1,2,4,8}){
+        nnue::Pattern full;full.hidden=width;full.embedding.resize(full.Rows*full.Dim);
+        std::string binary("OTPAT3\0\0",8);
+        auto append=[&](std::uint32_t v,int bytes){for(int i=0;i<bytes;++i)binary.push_back(char((v>>(8*i))&255));};
+        for(auto v:{full.Rows,full.Dim,width,full.Inputs,full.Outputs,256,step})append(v,4);
+        for(auto& v:full.embedding){int raw=int(rng()%256)-128;v=std::int16_t(raw*step);append(std::uint32_t(raw),1);}
+        for(int i=0;i<width*full.Inputs;++i){full.trunk[i]=std::int16_t(int(rng()%513)-256);append(std::uint32_t(full.trunk[i]),2);}
+        for(int i=0;i<width;++i){full.trunkBias[i]=int(rng()%10000)-5000;append(std::uint32_t(full.trunkBias[i]),4);}
+        for(int i=0;i<width*full.Outputs;++i){full.head[i]=std::int16_t(int(rng()%513)-256);append(std::uint32_t(full.head[i]),2);}
+        for(auto& v:full.headBias){v=int(rng()%10000)-5000;append(std::uint32_t(v),4);}
+        std::istringstream stream(binary);auto net=nnue::Network::load(stream);auto q=std::const_pointer_cast<nnue::Pattern>(net.pattern);
+        check(q&&q->embedding.empty()&&q->embedding8.size()==full.embedding.size(),"INT8 loader keeps compressed table in memory");
+        check(net.valueTarget==nnue::ValueTarget::Outcome&&q->hidden==width,"OTPAT3 preserves outcome semantics and width");
+        Position p;auto acc=q->refresh(p);auto state=q->refreshState(p);
+        for(int ply=0;ply<60&&!over(p);++ply){
+            auto expected=full.predict(p),actual=q->predict(p),cached=q->predict(state,p.turn);
+            check(actual.values==expected.values&&actual.logits==expected.logits,"INT8 decode and SIMD predict equal expanded INT16 reference exactly");
+            check(actual.values==cached.values&&actual.logits==cached.logits,"INT8 cache prediction equals full prediction");
+            Bits randomMask=(Bits(rng())<<32)|rng();
+            for(Bits mask:{legal(p),Bits(0),~Bits(0),Bits(1)<<63,randomMask}){
+                auto masked=q->predictLegal(p,mask),cachedMasked=q->predictLegal(state,p.turn,mask);
+                check(masked.values==actual.values&&cachedMasked.values==actual.values,"legal-only policy preserves all 46 value and gate outputs");
+                for(int square=0;square<64;++square){double wanted=mask&(Bits(1)<<square)?actual.logits[square]:0;
+                    check(masked.logits[square]==wanted&&cachedMasked.logits[square]==wanted,"masked full and incremental policy logits exactly match full inference at every selected square");}
+            }
+            auto ref=full.refresh(p);check(acc.black==ref.black&&acc.white==ref.white,"INT8 incremental accumulator equals expanded table");
+            Bits moves=legal(p);int move=-1;if(moves){int skip=rng()%count(moves);while(skip--)moves&=moves-1;move=first(moves);}
+            auto next=play(p,move);acc=q->update(acc,p,next);state=q->updateState(state,next);p=next;
+        }
+        auto copy=net.snapshot();++q->embedding8[0];check(!net.sameParameters(*copy),"INT8 mutation invalidates model snapshot");
+        auto rejects=[&](const std::string& bytes){bool rejected=false;try{std::istringstream bad(bytes);nnue::Network::load(bad);}catch(...){rejected=true;}check(rejected,"OTPAT3 rejects invalid scale, truncation and trailing bytes");};
+        rejects(binary.substr(0,binary.size()-1));rejects(binary+"x");binary[32]=3;rejects(binary);
+    }
+}
 void patternChecks(){
     auto weights=std::make_shared<nnue::Pattern>();weights->embedding.resize(nnue::Pattern::Rows*nnue::Pattern::Dim);
     std::mt19937 rng(1832);
@@ -80,20 +148,65 @@ void patternChecks(){
     for(auto& x:weights->head)x=int(rng()%129)-64;
     nnue::Network net;net.architecture=nnue::Architecture::Pattern;net.hidden=0;net.pattern=weights;
     for(int game=0;game<8;++game){
-        Position p;auto acc=net.refresh(p);
+        Position p;auto acc=net.refresh(p);auto state=weights->refreshState(p);const auto rootState=state;
         while(!over(p)){
             Bits moves=legal(p);int m=-1;
             if(moves){int skip=rng()%count(moves);while(skip--)moves&=moves-1;m=first(moves);}
             auto after=play(p,m);auto updated=net.update(acc,p,after),fresh=net.refresh(after);
+            auto incremental=weights->updateState(state,after),stateFresh=weights->refreshState(after);
+            check(incremental.codes==stateFresh.codes&&incremental.sums==stateFresh.sums,"compact Pattern incremental codes and sums match full refresh");
+            auto skipped=weights->updateState(rootState,after);
+            check(skipped.codes==stateFresh.codes&&skipped.sums==stateFresh.sums,"Pattern direct update from a distant ancestor is exact");
+            auto cachedPrediction=weights->predict(incremental,after.turn),fullPrediction=weights->predict(after);
+            check(cachedPrediction.values==fullPrediction.values&&cachedPrediction.logits==fullPrediction.logits,"incremental Pattern joint prediction is exactly equal");
+            state=incremental;
             check(updated.black==fresh.black&&updated.white==fresh.white,"pattern incremental sums match refresh after every flip/pass");
             check(net.evaluate(updated,after.turn)==net.evaluate(after),"pattern incremental score matches refresh");
             auto swapped=after;std::swap(swapped.black,swapped.white);swapped.turn=-after.turn;
             check(net.evaluate(after)==net.evaluate(swapped),"pattern color-relative value invariance");
             auto policy=weights->policy(after),other=weights->policy(swapped);
+            auto fused=weights->predict(after);
+            check(fused.values==weights->outputs(weights->refresh(after),after.turn),"fused Pattern value/WDL/gates equal full refresh");
+            check(fused.logits==policy,"fused Pattern policy equals separate inference exactly");
             for(int i=0;i<64;++i)check(std::isfinite(policy[i])&&policy[i]==other[i],"pattern policy is finite and color-relative");
             acc=updated;p=after;
         }
     }
+    auto compareResults=[](const MctsResult& a,const MctsResult& b){
+        check(a.analysis.move==b.analysis.move&&a.analysis.score==b.analysis.score&&a.analysis.exact==b.analysis.exact&&a.analysis.nodes==b.analysis.nodes,"incremental MCTS preserves move, value, proof and simulation count");
+        check(a.visits==b.visits&&a.values==b.values,"incremental MCTS preserves all root visits and means");
+    };
+    for(std::size_t entries:{64u,4096u}){
+        Position root;clearMctsCache();auto cold=mcts(root,{0,512,1832,&net});auto next=play(root,cold.analysis.move);
+        auto fullWarm=mcts(next,{0,512,1832,&net});
+        clearMctsCache();auto incremental=mcts(root,{0,512,1832,&net,1.5,2097152,true,entries});
+        compareResults(cold,incremental);
+        check(incremental.patternUpdates>0&&incremental.patternRefreshes>0,"MCTS exercises incremental updates and refresh fallback");
+        check(incremental.patternCacheBytes<=entries*1024,"incremental MCTS cache remains bounded below 1KiB per entry");
+        auto cachedWarm=mcts(next,{0,512,1832,&net,1.5,2097152,true,entries});compareResults(fullWarm,cachedWarm);
+        check(cachedWarm.reusedNodes>0,"incremental cache invalidation preserves reached-subtree reuse");
+    }
+    clearMctsCache();mcts(Position{},{0,128,1832,&net,1.5,2097152,true,64});
+    ++weights->embedding[0];auto mutated=mcts(Position{},{0,128,1832,&net,1.5,2097152,true,64});
+    check(mutated.reusedNodes==0&&mutated.patternRefreshes>0,"model mutation invalidates incremental state cache");
+    clearMctsCache();auto freshMutated=mcts(Position{},{0,128,1832,&net});compareResults(mutated,freshMutated);
+    --weights->embedding[0];weights->hidden=64;
+    clearMctsCache();auto wideFull=mcts(Position{},{0,128,1832,&net});
+    clearMctsCache();auto wideCached=mcts(Position{},{0,128,1832,&net,1.5,2097152,true,64});compareResults(wideFull,wideCached);
+    weights->hidden=32;
+    auto disabled=mcts(Position{},{0,128,1832,&net,1.5,2097152,false,64});
+    check(disabled.patternUpdates==0&&disabled.patternCacheBytes==0,"uniform-policy ablation disables incremental Pattern cache");
+    Position forced=parse("WWBBBWBBBBBBBWBBBBWWWWWBBBBWBWBBBBWBWWBBBBWWWBWBBWWWWWBBBW.BBBBB",-1);
+    auto passPrediction=weights->predictLegal(forced,legal(forced));
+    check(passPrediction.values==weights->predict(forced).values&&passPrediction.logits==std::array<double,64>{},"forced pass skips all policy logits and preserves value outputs");
+    unsigned affected=99;auto beforePass=weights->refreshState(forced),afterPass=weights->updateState(beforePass,play(forced,-1),&affected);
+    check(affected==0&&beforePass.codes==afterPass.codes&&beforePass.sums==afterPass.sums,"forced pass reuses unchanged Pattern accumulators");
+    net.valueTarget=nnue::ValueTarget::Outcome;
+    clearMctsCache();auto fullPass=mcts(forced,{0,1024,1832,&net});
+    clearMctsCache();auto cachedPass=mcts(forced,{0,1024,1832,&net,1.5,2097152,true,64});compareResults(fullPass,cachedPass);
+    bool rejectedCache=false;try{mcts(Position{},{0,1,1832,&net,1.5,2097152,true,63});}catch(...){rejectedCache=true;}
+    check(rejectedCache,"incremental MCTS rejects unsupported cache sizes");
+    net.valueTarget=nnue::ValueTarget::DiscDifference;
     Position p;clearSearchCache();checkSearch(p,2,&net);
     clearMctsCache();auto firstRun=mcts(p,{0,128,1832,&net});
     clearMctsCache();auto second=mcts(p,{0,128,1832,&net});
@@ -112,10 +225,53 @@ void patternChecks(){
     check((Bits(1)<<prioritized.analysis.move)&corners,"learned policy actually prioritizes high-prior legal moves");
 }
 void mctsChecks(){
+    {
+        nnue::Network policyNet;policyNet.architecture=nnue::Architecture::Turn;policyNet.hidden=256;
+        auto head=std::make_shared<nnue::PolicyHead>();head->outputBias[19]=4*256*256;
+        policyNet.policyHead=head;Position start;
+        auto probs=policyNet.policy(start);double sum=0;
+        for(int i=0;i<65;++i){sum+=probs[i];check(probs[i]==0||((legal(start)>>i)&1),"policy masks illegal moves");}
+        check(std::abs(sum-1)<1e-12&&probs[19]>.9,"policy legal softmax normalization");
+        auto snapshot=policyNet.snapshot();head->outputBias[19]=3*256*256;
+        check(!policyNet.sameParameters(*snapshot),"policy snapshot is independent and affects cache identity");
+        clearMctsCache();auto guided=mcts(start,{0,2,19,&policyNet});
+        check(guided.analysis.move==19,"learned priors order first unvisited expansion");
+        auto warm=mcts(play(start,guided.analysis.move),{0,16,19,&policyNet});
+        check(warm.reusedNodes>0&&flips(play(start,guided.analysis.move),warm.analysis.move),"NNUE policy priors survive subtree compaction");
+        auto uniform=mcts(play(start,guided.analysis.move),{0,16,19,&policyNet,1.5,2097152,false});
+        check(uniform.reusedNodes==0,"NNUE policy ablation invalidates MCTS tree");
+        head->outputBias[19]=0;head->outputBias[44]=4*256*256;
+        auto changed=mcts(start,{0,2,19,&policyNet});
+        check(changed.reusedNodes==0&&changed.analysis.move==44,"policy-only changes invalidate MCTS tree");
+        auto terminal=policyNet.policy(parse(std::string(64,'B'),-1));
+        check(std::all_of(terminal.begin(),terminal.end(),[](double x){return x==0;}),"terminal policy is zero");
+        auto forced=parse("WWBBBWBBBBBBBWBBBBWWWWWBBBBWBWBBBBWBWWBBBBWWWBWBBWWWWWBBBW.BBBBB",-1);
+        auto forcedPolicy=policyNet.policy(forced);
+        check(forcedPolicy[64]==1&&std::count(forcedPolicy.begin(),forcedPolicy.end(),0.0)==64,"policy gives forced pass probability one");
+        clearMctsCache();auto solved=mcts(forced,{0,1000,19,&policyNet});
+        int diff=exactDiff(forced);int exact=diff>0?100000+diff*100:diff<0?-100000+diff*100:0;
+        check(solved.analysis.exact&&solved.analysis.move==-1&&solved.analysis.score==exact,"learned policy preserves exact pass/endgame backups");
+        auto flipped=start;std::swap(flipped.black,flipped.white);flipped.turn=-start.turn;
+        flipped.hash=hashBoard(flipped.black,flipped.white,flipped.turn);
+        check(policyNet.policy(start)==policyNet.policy(flipped),"policy preserves color relabeling");
+        auto block=std::make_shared<nnue::TrunkBlock>();policyNet.trunkBlock=block;
+        auto deepSnapshot=policyNet.snapshot();clearMctsCache();mcts(start,{0,8,19,&policyNet});
+        block->upBias[0]=256;
+        check(!policyNet.sameParameters(*deepSnapshot),"deep trunk snapshot is independent and part of cache identity");
+        auto deepChanged=mcts(start,{0,8,19,&policyNet});
+        check(deepChanged.reusedNodes==0,"trunk-only changes invalidate MCTS tree");
+        clearMctsCache();
+    }
     Position p;clearMctsCache();
     auto firstRun=mcts(p,{0,128,19});
     check(firstRun.analysis.nodes==128&&flips(p,firstRun.analysis.move),"MCTS fixed simulation budget and legal move");
     auto rootVisits=firstRun.visits;auto rootCandidates=firstRun.analysis.candidates;
+    clearMctsCache();auto bigger=mcts(p,{0,128,19,nullptr,1.5,8388608});
+    check(bigger.visits==rootVisits&&bigger.analysis.move==firstRun.analysis.move,"larger capacity preserves fixed-budget search when neither capacity binds");
+    clearMctsCache();auto capped=mcts(p,{0,1000,19,nullptr,1.5,65});
+    check(capped.memoryLimited&&capped.treeNodes==65,"explicit small node budget stops at its exact bound");
+    bool rejectedCapacity=false;try{mcts(p,{0,1,19,nullptr,1.5,16777217});}catch(...){rejectedCapacity=true;}
+    check(rejectedCapacity,"node budget above experimental safety bound rejected");
     check(firstRun.analysis.candidates.size()==4&&firstRun.visits.size()==4,"MCTS exposes all root visits");
     clearMctsCache();auto repeated=mcts(p,{0,128,19});
     check(repeated.analysis.move==firstRun.analysis.move&&repeated.visits==rootVisits,"MCTS seeded simulation runs reproduce");
@@ -130,6 +286,8 @@ void mctsChecks(){
     check(bounded.memoryLimited&&bounded.treeNodes<=65,"MCTS bounds node storage");
     bool rejected=false;try{mcts(p,{0,0});}catch(...){rejected=true;}check(rejected,"MCTS requires a budget");
     std::mt19937 rng(1606);int passes=0;
+    nnue::Network outcomeNet;outcomeNet.architecture=nnue::Architecture::Turn;outcomeNet.hidden=256;
+    outcomeNet.valueTarget=nnue::ValueTarget::Outcome;outcomeNet.policyHead=std::make_shared<nnue::PolicyHead>();
     for(int game=0;game<12;++game){
         p=Position{};
         while(!over(p)&&p.empty()>4){auto moves=legal(p);
@@ -141,16 +299,60 @@ void mctsChecks(){
         check(exact.analysis.score==target,"MCTS terminal backups agree with independent minimax");
         if(legal(p))check(-exactDiff(play(p,exact.analysis.move))==expected,"MCTS chooses minimax endgame move");
         else if(!over(p)){++passes;check(exact.analysis.move==-1,"MCTS returns forced pass");}
+        clearMctsCache();auto outcome=mcts(p,{0,200000,23,&outcomeNet});int sign=(expected>0)-(expected<0);
+        check(outcome.analysis.exact&&outcome.analysis.score==sign*100000,"outcome MCTS exact backups match independent minimax winner");
+        if(legal(p)){int child=-exactDiff(play(p,outcome.analysis.move));check((child>0)-(child<0)==sign,"outcome MCTS picks a minimax outcome");}
     }
     p=parse(std::string(64,'B'),-1);clearMctsCache();auto terminal=mcts(p,{0,1});
     check(terminal.analysis.exact&&terminal.analysis.move==-1&&terminal.analysis.score==-106400,"MCTS terminal value uses current player's view");
+    clearMctsCache();auto outcomeLoss=mcts(p,{0,1,1,&outcomeNet});
+    check(outcomeLoss.analysis.exact&&outcomeLoss.analysis.score==-100000,"outcome terminal loss is not a fictitious 64-disc margin");
+    auto drawn=parse(std::string(32,'B')+std::string(32,'W'),1);clearMctsCache();auto outcomeDraw=mcts(drawn,{0,1,1,&outcomeNet});
+    check(outcomeDraw.analysis.exact&&outcomeDraw.analysis.score==0,"outcome terminal draw is zero");
+    auto identity=outcomeNet.snapshot();outcomeNet.valueTarget=nnue::ValueTarget::DiscDifference;
+    check(!outcomeNet.sameParameters(*identity),"value target participates in model/cache identity");
+    auto targetChanged=mcts(drawn,{0,1,1,&outcomeNet});check(targetChanged.reusedNodes==0,"changing only value semantics invalidates tree");
+    outcomeNet.valueTarget=nnue::ValueTarget::Outcome;
     p=parse("WWBBBWBBBBBBBWBBBBWWWWWBBBBWBWBBBBWBWWBBBBWWWBWBBWWWWWBBBW.BBBBB",-1);
     check(!legal(p)&&legal(p.opponent(),p.own()),"MCTS forced-pass fixture");
     clearMctsCache();auto passed=mcts(p,{0,1000});int passValue=exactDiff(p);
     check(passed.analysis.move==-1&&passed.analysis.exact&&passed.analysis.score==(passValue>0?100000+passValue*100:passValue<0?-100000+passValue*100:0),"MCTS backs up forced passes correctly");
+    clearMctsCache();auto outcomePass=mcts(p,{0,1000,1,&outcomeNet});
+    check(outcomePass.analysis.move==-1&&outcomePass.analysis.exact&&outcomePass.analysis.score==((passValue>0)-(passValue<0))*100000,"outcome forced pass reverses winner perspective correctly");
     clearMctsCache();auto timed=mcts(Position{},{5});check(flips(Position{},timed.analysis.move),"timed MCTS returns a legal move");
     int cells[64]{},output[136]{},policy[6]{},visits[64]{};double stats[72]{};
     check(ot_nnue_mcts_play(nullptr,cells,1,1,0,1,12,32,64,output,policy,visits,stats)==-1,"MCTS C ABI rejects null model");
+    clearMctsCache();
+}
+void cnnPolicyChecks(){
+    for(int c:{8,16,32}){
+        auto weights=std::make_shared<nnue::CnnPolicy>();weights->channels=c;
+        weights->weights.resize(c*18+c+c*c*9+c+64*c*64+64+65+65*65);
+        std::mt19937 rng(725+c);for(auto& w:weights->weights)w=float(int(rng()%101)-50)/1000;
+        nnue::Network model;model.architecture=nnue::Architecture::CnnPolicy;
+        model.valueTarget=nnue::ValueTarget::Outcome;model.hidden=0;model.cnnPolicy=weights;
+        check(model.hasPolicy()&&model.spatial(),"CNN uses learned policy and spatial state");
+        Position p;
+        for(int ply=0;ply<8;++ply){
+            if(!legal(p))p=play(p,-1);
+            auto fast=model.infer(p);auto slow=weights->infer(p.black,p.white,p.turn,legal(p),false,true);
+            check(std::abs(fast.score-slow.score)<=1,"policy CNN SIMD and scalar value agree");
+            double sum=0;for(int i=0;i<65;++i){sum+=fast.probabilities[i];
+                check(std::abs(fast.probabilities[i]-slow.probabilities[i])<1e-6,"policy CNN SIMD and scalar policy agree");
+                if(i<64&&!(legal(p)&(1ULL<<i)))check(fast.probabilities[i]==0,"CNN masks illegal moves");}
+            check(std::abs(sum-1)<1e-12,"CNN legal probabilities sum to one");
+            auto swapped=p;std::swap(swapped.black,swapped.white);swapped.turn=-swapped.turn;
+            auto renamed=model.infer(swapped);check(renamed.score==fast.score&&renamed.probabilities==fast.probabilities,"CNN color relabeling");
+            auto next=play(p,first(legal(p)));
+            check(model.evaluate(model.update(model.refresh(p),p,next),next.turn)==model.evaluate(next),"policy CNN accumulator update");p=next;
+        }
+        auto snapshot=model.snapshot();check(snapshot->sameParameters(model),"CNN snapshot matches");
+        weights->weights.back()+=.1f;check(!snapshot->sameParameters(model),"CNN snapshot owns independent weights");
+        clearMctsCache();auto searched=mcts(Position{},{0,32,17,&model});
+        check(flips(Position{},searched.analysis.move)!=0&&searched.analysis.evaluations>0,"CNN executes learned-prior MCTS");
+        auto terminal=parse(std::string(64,'B'),-1);clearMctsCache();
+        check(mcts(terminal,{0,1,1,&model}).analysis.score==-100000,"CNN MCTS terminal backup uses outcome");
+    }
     clearMctsCache();
 }
 void cnnChecks(){
@@ -244,7 +446,7 @@ void cacheChecks(nnue::Network& model){
     ot_search_clear_cache();model=originalModel;
 }
 int main() {
-    cnnChecks();residualChecks();mctsChecks();patternChecks();
+    cnnChecks();cnnPolicyChecks();residualChecks();mctsChecks();patternChecks();patternInt8Checks();
     policyChecks();
     Position p;
     check(legal(p)==((1ULL<<19)|(1ULL<<26)|(1ULL<<37)|(1ULL<<44)),"initial legal squares");
@@ -302,6 +504,11 @@ int main() {
             }
             std::vector<int> list;while(b){list.push_back(first(b));b&=b-1;}int m=list[rng()%list.size()];
             auto next=play(p,m);check(ot_play(cells,p.turn,m,out)==1,"C API play");
+            int flippedSquares[64];std::fill(std::begin(flippedSquares),std::end(flippedSquares),-2);
+            check(ot_play_with_flips(cells,p.turn,m,out,flippedSquares)==1,"C API play returns its computed flip list");
+            Bits flippedMask=0;for(int i=0;i<out[66];++i)flippedMask|=1ULL<<flippedSquares[i];
+            check(flippedMask==flips(p,m)&&out[66]==count(flippedMask),"flip list and count match the validated transition");
+            if(out[66]<64)check(flippedSquares[out[66]]==-2,"C API flip list writes only its documented count");
             auto updated=model.update(model.refresh(p),p,next),refreshed=model.refresh(next);
             check(updated.black==refreshed.black&&updated.white==refreshed.white,"quantized NNUE incremental update equals full refresh");
             check(model.evaluate(updated,next.turn)==-model.evaluate(updated,-next.turn),"NNUE turn antisymmetry");

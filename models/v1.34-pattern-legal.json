@@ -1,0 +1,1632 @@
+{
+  "version": "v1.34-pattern-legal",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "implementation": "Legal-only Pattern projection: pack only rows touching requested legal mask, project active rows in original shape order, aggregate/average only requested squares. Value pools/head unchanged. Existing legal-only softmax and stored tree priors untouched.",
+  "results": [
+    {
+      "precision": "INT16",
+      "name": "v1.33 selected",
+      "library": ".build/native-pattern-selected-v1.33/libothello.dylib",
+      "librarySha256": "265538ad91135664dba9e4f4a3df9fdf31393a8900992c3d17666c0085a8bf30",
+      "model": "models/pattern32-outcome-v1.25.otpat",
+      "fixedSearchMedianMilliseconds": 98.003834,
+      "fixedSearchSamples": [
+        121.545333,
+        97.788417,
+        98.003834,
+        103.923,
+        102.748541,
+        108.037125,
+        86.316,
+        96.446709,
+        85.482625,
+        100.55275,
+        91.426041
+      ],
+      "timed100msTotalSimulations": 1432738,
+      "timed100msSamples": [
+        49625,
+        57057,
+        52380,
+        50528,
+        44323,
+        54922,
+        53494,
+        54482,
+        53009,
+        52987,
+        40667,
+        46929,
+        44275,
+        50212,
+        55080,
+        64974,
+        46774,
+        56305,
+        45915,
+        55035,
+        43043,
+        44349,
+        58296,
+        53500,
+        50996,
+        51412,
+        50383,
+        51786
+      ],
+      "nativeSamples": [],
+      "fixedThroughputVsV133": 1.0,
+      "fixedThroughputVsControl": 1.0367676942108204,
+      "timedSimulationsVsV133": 1.0,
+      "timedSimulationsVsControl": 1.0138849083267698
+    },
+    {
+      "precision": "INT16",
+      "name": "v1.34 control",
+      "library": ".build/native-pattern-legal-control-v1.34/libothello.dylib",
+      "librarySha256": "4dfb5cf975b043ba2b32a2213be1ee31562a88f9148b5187c9172f02d74a4bc1",
+      "model": "models/pattern32-outcome-v1.25.otpat",
+      "fixedSearchMedianMilliseconds": 101.607209,
+      "fixedSearchSamples": [
+        102.0125,
+        93.559334,
+        90.8655,
+        107.576292,
+        110.369,
+        101.607209,
+        102.845833,
+        104.505458,
+        94.487625,
+        87.618125,
+        85.595167
+      ],
+      "timed100msTotalSimulations": 1413117,
+      "timed100msSamples": [
+        44836,
+        47961,
+        41751,
+        56914,
+        50500,
+        46345,
+        45375,
+        45248,
+        50894,
+        55889,
+        51174,
+        56260,
+        55192,
+        56111,
+        54218,
+        46587,
+        52903,
+        46977,
+        44034,
+        47917,
+        49884,
+        46637,
+        55049,
+        54761,
+        48001,
+        53389,
+        52053,
+        56257
+      ],
+      "nativeSamples": [
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 819.804,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -242295
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 833.244,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 59038.6
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 788.457,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 66498.5
+            }
+          ],
+          "checksum": -224068110
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 837.916,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -242295
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 838.042,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 59038.6
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 768.631,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 66498.5
+            }
+          ],
+          "checksum": -224068110
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 971.951,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -242295
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 983.602,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 59038.6
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 892.175,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 66498.5
+            }
+          ],
+          "checksum": -224068110
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 717.815,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -242295
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 799.364,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 59038.6
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 816.312,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 66498.5
+            }
+          ],
+          "checksum": -224068110
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 731.366,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -242295
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 759.898,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 59038.6
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 822.433,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 66498.5
+            }
+          ],
+          "checksum": -224068110
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 819.456,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -242295
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 754.728,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 59038.6
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 852.486,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 66498.5
+            }
+          ],
+          "checksum": -224068110
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 719.192,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -242295
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 960.923,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 59038.6
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 889.559,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 66498.5
+            }
+          ],
+          "checksum": -224068110
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 870.016,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -242295
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 857.347,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 59038.6
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 922.288,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 66498.5
+            }
+          ],
+          "checksum": -224068110
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 935.612,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -242295
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 944.5,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 59038.6
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 744.741,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 66498.5
+            }
+          ],
+          "checksum": -224068110
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 832.95,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -242295
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 901.08,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 59038.6
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 769.01,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 66498.5
+            }
+          ],
+          "checksum": -224068110
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 793.904,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -242295
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 842.564,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 59038.6
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 863.051,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 66498.5
+            }
+          ],
+          "checksum": -224068110
+        }
+      ],
+      "stageMedians": [
+        {
+          "stage": 0,
+          "medianNanoseconds": 819.804,
+          "meanActivePatterns": 20.7514,
+          "meanLegalMoves": 7.28177
+        },
+        {
+          "stage": 1,
+          "medianNanoseconds": 842.564,
+          "meanActivePatterns": 27.745,
+          "meanLegalMoves": 11.1
+        },
+        {
+          "stage": 2,
+          "medianNanoseconds": 822.433,
+          "meanActivePatterns": 16.1527,
+          "meanLegalMoves": 5.49618
+        }
+      ],
+      "fixedThroughputVsV133": 0.9645362269521643,
+      "fixedThroughputVsControl": 1.0,
+      "timedSimulationsVsV133": 0.9863052421308013,
+      "timedSimulationsVsControl": 1.0
+    },
+    {
+      "precision": "INT16",
+      "name": "legal-only projection",
+      "library": ".build/native-pattern-legal-v1.34/libothello.dylib",
+      "librarySha256": "d4f1ce1ab26cf66d68264a3453464132123d534bd4157e8fdff758935ca3d8a8",
+      "model": "models/pattern32-outcome-v1.25.otpat",
+      "fixedSearchMedianMilliseconds": 94.53775,
+      "fixedSearchSamples": [
+        90.206334,
+        105.2395,
+        95.689291,
+        94.53775,
+        77.427542,
+        96.185208,
+        96.202916,
+        100.42025,
+        86.642583,
+        83.008375,
+        91.737292
+      ],
+      "timed100msTotalSimulations": 1483801,
+      "timed100msSamples": [
+        40983,
+        51563,
+        60489,
+        58074,
+        53783,
+        52572,
+        48060,
+        58842,
+        54158,
+        58653,
+        45411,
+        52407,
+        46506,
+        48990,
+        53187,
+        53203,
+        62362,
+        52760,
+        51101,
+        50042,
+        47279,
+        56824,
+        56276,
+        53892,
+        51948,
+        53726,
+        53657,
+        57053
+      ],
+      "nativeSamples": [
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 562.745,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -242295
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 731.803,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 59038.6
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 498.131,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 66498.5
+            }
+          ],
+          "checksum": -224068110
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 555.646,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -242295
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 743.964,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 59038.6
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 634.601,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 66498.5
+            }
+          ],
+          "checksum": -224068110
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 762.256,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -242295
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 808.559,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 59038.6
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 590.065,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 66498.5
+            }
+          ],
+          "checksum": -224068110
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 612.2,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -242295
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 949.09,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 59038.6
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 526.323,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 66498.5
+            }
+          ],
+          "checksum": -224068110
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 664.788,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -242295
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 592.303,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 59038.6
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 516.503,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 66498.5
+            }
+          ],
+          "checksum": -224068110
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 558.126,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -242295
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 611.778,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 59038.6
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 569.477,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 66498.5
+            }
+          ],
+          "checksum": -224068110
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 667.67,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -242295
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 622.189,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 59038.6
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 592.532,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 66498.5
+            }
+          ],
+          "checksum": -224068110
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 732.43,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -242295
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 820.134,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 59038.6
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 594.055,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 66498.5
+            }
+          ],
+          "checksum": -224068110
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 582.8,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -242295
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 694.85,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 59038.6
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 554.795,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 66498.5
+            }
+          ],
+          "checksum": -224068110
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 539.001,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -242295
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 616.796,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 59038.6
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 585.261,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 66498.5
+            }
+          ],
+          "checksum": -224068110
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 723.488,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -242295
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 620.265,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 59038.6
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 607.456,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 66498.5
+            }
+          ],
+          "checksum": -224068110
+        }
+      ],
+      "stageMedians": [
+        {
+          "stage": 0,
+          "medianNanoseconds": 612.2,
+          "meanActivePatterns": 20.7514,
+          "meanLegalMoves": 7.28177
+        },
+        {
+          "stage": 1,
+          "medianNanoseconds": 694.85,
+          "meanActivePatterns": 27.745,
+          "meanLegalMoves": 11.1
+        },
+        {
+          "stage": 2,
+          "medianNanoseconds": 585.261,
+          "meanActivePatterns": 16.1527,
+          "meanLegalMoves": 5.49618
+        }
+      ],
+      "fixedThroughputVsV133": 1.036663491568183,
+      "fixedThroughputVsControl": 1.0747792178256834,
+      "timedSimulationsVsV133": 1.0356401519328726,
+      "timedSimulationsVsControl": 1.0500199205019825
+    },
+    {
+      "precision": "INT8",
+      "name": "v1.33 selected",
+      "library": ".build/native-pattern-selected-v1.33/libothello.dylib",
+      "librarySha256": "265538ad91135664dba9e4f4a3df9fdf31393a8900992c3d17666c0085a8bf30",
+      "model": "models/pattern32-int8-step1-v1.32.otpat",
+      "fixedSearchMedianMilliseconds": 92.917417,
+      "fixedSearchSamples": [
+        85.800625,
+        86.424166,
+        105.667625,
+        93.019833,
+        91.453125,
+        98.713542,
+        92.917417,
+        91.881125,
+        99.4605,
+        95.566083,
+        83.70025
+      ],
+      "timed100msTotalSimulations": 1441711,
+      "timed100msSamples": [
+        46217,
+        51618,
+        55537,
+        43517,
+        45208,
+        51667,
+        58364,
+        61371,
+        50983,
+        56065,
+        52212,
+        51932,
+        47755,
+        50418,
+        58947,
+        54745,
+        50129,
+        45291,
+        51887,
+        48736,
+        41980,
+        52400,
+        47553,
+        53577,
+        50174,
+        56219,
+        55503,
+        51706
+      ],
+      "nativeSamples": [],
+      "fixedThroughputVsV133": 1.0,
+      "fixedThroughputVsControl": 1.1112103127016542,
+      "timedSimulationsVsV133": 1.0,
+      "timedSimulationsVsControl": 0.9991544987251643
+    },
+    {
+      "precision": "INT8",
+      "name": "v1.34 control",
+      "library": ".build/native-pattern-legal-control-v1.34/libothello.dylib",
+      "librarySha256": "4dfb5cf975b043ba2b32a2213be1ee31562a88f9148b5187c9172f02d74a4bc1",
+      "model": "models/pattern32-int8-step1-v1.32.otpat",
+      "fixedSearchMedianMilliseconds": 103.250792,
+      "fixedSearchSamples": [
+        85.354417,
+        103.250792,
+        103.906125,
+        91.955834,
+        104.017458,
+        87.05275,
+        84.936833,
+        103.719709,
+        105.633375,
+        113.108708,
+        93.274083
+      ],
+      "timed100msTotalSimulations": 1442931,
+      "timed100msSamples": [
+        49449,
+        46974,
+        55419,
+        46349,
+        51578,
+        55649,
+        55632,
+        53293,
+        48053,
+        57823,
+        46450,
+        54599,
+        51842,
+        51778,
+        54074,
+        54744,
+        45105,
+        50053,
+        61427,
+        50475,
+        46864,
+        48182,
+        54707,
+        48822,
+        49854,
+        49823,
+        50742,
+        53171
+      ],
+      "nativeSamples": [
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 793.699,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -236742
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 946.995,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 60818.8
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 834.793,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 68827.6
+            }
+          ],
+          "checksum": -207765072
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 706.617,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -236742
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 665.933,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 60818.8
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 634.442,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 68827.6
+            }
+          ],
+          "checksum": -207765072
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 731.831,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -236742
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 886.392,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 60818.8
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 739.032,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 68827.6
+            }
+          ],
+          "checksum": -207765072
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 847.14,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -236742
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 883.456,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 60818.8
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 942.109,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 68827.6
+            }
+          ],
+          "checksum": -207765072
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 841.36,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -236742
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 849.997,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 60818.8
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 831.01,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 68827.6
+            }
+          ],
+          "checksum": -207765072
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 817.868,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -236742
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 870.938,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 60818.8
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 759.138,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 68827.6
+            }
+          ],
+          "checksum": -207765072
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 924.305,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -236742
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 756.212,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 60818.8
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 921.605,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 68827.6
+            }
+          ],
+          "checksum": -207765072
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 790.229,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -236742
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 799.783,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 60818.8
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 764.762,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 68827.6
+            }
+          ],
+          "checksum": -207765072
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 780.914,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -236742
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 816.111,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 60818.8
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 717.555,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 68827.6
+            }
+          ],
+          "checksum": -207765072
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 830.709,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -236742
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 884.995,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 60818.8
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 834,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 68827.6
+            }
+          ],
+          "checksum": -207765072
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 759.114,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -236742
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 1006.73,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 60818.8
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 791.6,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 68827.6
+            }
+          ],
+          "checksum": -207765072
+        }
+      ],
+      "stageMedians": [
+        {
+          "stage": 0,
+          "medianNanoseconds": 793.699,
+          "meanActivePatterns": 20.7514,
+          "meanLegalMoves": 7.28177
+        },
+        {
+          "stage": 1,
+          "medianNanoseconds": 870.938,
+          "meanActivePatterns": 27.745,
+          "meanLegalMoves": 11.1
+        },
+        {
+          "stage": 2,
+          "medianNanoseconds": 791.6,
+          "meanActivePatterns": 16.1527,
+          "meanLegalMoves": 5.49618
+        }
+      ],
+      "fixedThroughputVsV133": 0.8999196538850762,
+      "fixedThroughputVsControl": 1.0,
+      "timedSimulationsVsV133": 1.0008462167521786,
+      "timedSimulationsVsControl": 1.0
+    },
+    {
+      "precision": "INT8",
+      "name": "legal-only projection",
+      "library": ".build/native-pattern-legal-v1.34/libothello.dylib",
+      "librarySha256": "d4f1ce1ab26cf66d68264a3453464132123d534bd4157e8fdff758935ca3d8a8",
+      "model": "models/pattern32-int8-step1-v1.32.otpat",
+      "fixedSearchMedianMilliseconds": 91.439292,
+      "fixedSearchSamples": [
+        76.39275,
+        91.439292,
+        90.95525,
+        96.219875,
+        102.518667,
+        100.695,
+        86.90475,
+        78.259708,
+        79.896541,
+        100.809375,
+        100.141292
+      ],
+      "timed100msTotalSimulations": 1491716,
+      "timed100msSamples": [
+        44565,
+        58036,
+        53013,
+        59104,
+        53910,
+        50612,
+        54579,
+        60922,
+        43315,
+        55593,
+        56027,
+        51255,
+        45235,
+        55610,
+        56825,
+        55015,
+        45096,
+        52943,
+        58251,
+        51635,
+        53593,
+        49371,
+        53753,
+        57834,
+        51736,
+        53105,
+        57875,
+        52908
+      ],
+      "nativeSamples": [
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 709.793,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -236742
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 633.788,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 60818.8
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 544.852,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 68827.6
+            }
+          ],
+          "checksum": -207765072
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 560.654,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -236742
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 688.52,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 60818.8
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 610.336,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 68827.6
+            }
+          ],
+          "checksum": -207765072
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 653.278,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -236742
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 652.033,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 60818.8
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 601.494,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 68827.6
+            }
+          ],
+          "checksum": -207765072
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 648.385,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -236742
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 630.185,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 60818.8
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 538.303,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 68827.6
+            }
+          ],
+          "checksum": -207765072
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 591.326,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -236742
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 676.713,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 60818.8
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 609.783,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 68827.6
+            }
+          ],
+          "checksum": -207765072
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 654.19,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -236742
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 666.65,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 60818.8
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 469.348,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 68827.6
+            }
+          ],
+          "checksum": -207765072
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 635.874,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -236742
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 558.36,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 60818.8
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 569.477,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 68827.6
+            }
+          ],
+          "checksum": -207765072
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 592.108,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -236742
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 725.242,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 60818.8
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 658.662,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 68827.6
+            }
+          ],
+          "checksum": -207765072
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 720.544,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -236742
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 667.577,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 60818.8
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 539.847,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 68827.6
+            }
+          ],
+          "checksum": -207765072
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 598.046,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -236742
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 732.905,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 60818.8
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 515.828,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 68827.6
+            }
+          ],
+          "checksum": -207765072
+        },
+        {
+          "groups": [
+            {
+              "stage": 0,
+              "nanoseconds": 495.942,
+              "meanActivePatterns": 20.7514,
+              "meanLegalMoves": 7.28177,
+              "logitChecksum": -236742
+            },
+            {
+              "stage": 1,
+              "nanoseconds": 680.253,
+              "meanActivePatterns": 27.745,
+              "meanLegalMoves": 11.1,
+              "logitChecksum": 60818.8
+            },
+            {
+              "stage": 2,
+              "nanoseconds": 471.447,
+              "meanActivePatterns": 16.1527,
+              "meanLegalMoves": 5.49618,
+              "logitChecksum": 68827.6
+            }
+          ],
+          "checksum": -207765072
+        }
+      ],
+      "stageMedians": [
+        {
+          "stage": 0,
+          "medianNanoseconds": 635.874,
+          "meanActivePatterns": 20.7514,
+          "meanLegalMoves": 7.28177
+        },
+        {
+          "stage": 1,
+          "medianNanoseconds": 667.577,
+          "meanActivePatterns": 27.745,
+          "meanLegalMoves": 11.1
+        },
+        {
+          "stage": 2,
+          "medianNanoseconds": 544.852,
+          "meanActivePatterns": 16.1527,
+          "meanLegalMoves": 5.49618
+        }
+      ],
+      "fixedThroughputVsV133": 1.0161650967288767,
+      "fixedThroughputVsControl": 1.129173134892602,
+      "timedSimulationsVsV133": 1.034684482534988,
+      "timedSimulationsVsControl": 1.033809655485952
+    }
+  ],
+  "parity": {
+    "fullDiagnosticOutputExactlyEqual": true,
+    "legalMaskedLogitsNativeTestExactlyEqual": true,
+    "coldSearchExactlyEqual": true,
+    "reusedSubtreeSearchExactlyEqual": true,
+    "incrementalStateSearchExactlyEqual": true,
+    "forcedPassAndTerminal": true,
+    "validationPositions": 6000,
+    "testPositions": 6000,
+    "precisions": 2,
+    "coldRoots": 34,
+    "warmRoots": 16,
+    "simulationsPerRoot": 2048
+  },
+  "crossArchitectureChecks": [
+    {
+      "target": "x86",
+      "model": "models/pattern32-outcome-v1.25.otpat",
+      "checksum": -224068110
+    },
+    {
+      "target": "x86",
+      "model": "models/pattern32-int8-step1-v1.32.otpat",
+      "checksum": -207765072
+    },
+    {
+      "target": "portable",
+      "model": "models/pattern32-outcome-v1.25.otpat",
+      "checksum": -224068110
+    },
+    {
+      "target": "portable",
+      "model": "models/pattern32-int8-step1-v1.32.otpat",
+      "checksum": -207765072
+    }
+  ],
+  "timing": {
+    "rounds": 11,
+    "nativeCallsPerStage": 100000,
+    "timedRounds": 7,
+    "timedRoots": 4,
+    "timedBudgetMs": 100
+  },
+  "preservedSha256": {
+    "models/default-model.json": "8b82bf89b2afeebdcd1b2c056dee7ce21789aea9291cae11b0a480862ad37b01",
+    "models/v1.25-default.json": "730b4a83b9e0495e7f1a4beaa6da8b2a31c8d72ceb9b39e54a9218cbb381c14f",
+    "src/game/wasm/othello.mjs": "a1584f0244858efcf19d807dee2dd79e628cda2ee509371162cbc64c94c949e0",
+    "models/pattern32-outcome-v1.25.otpat": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0",
+    "models/pattern32-int8-step1-v1.32.otpat": "da33b0237d0b99a5bcecb0f57c9aa18f51ea7537adfd683e8d8364d553b68f91"
+  },
+  "datasetSha256": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6",
+  "scriptSha256": "74f8348ee9d8ab73e977f33b900f583df5548bf092f0dac56e38e1f46c61a269",
+  "seconds": 41.142187999910675,
+  "limits": "Apple Silicon performance; x86-64 correctness under Rosetta and portable fallback. Linux native timing unavailable. No training, strength match or default promotion. Illegal-square logits are zero in the new masked API only; original full diagnostic API unchanged."
+}

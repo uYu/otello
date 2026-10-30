@@ -1,0 +1,12 @@
+{
+  "version": "v1.31 Pattern MCTS 增量推理",
+  "experiments": [
+    {
+      "name": "Pattern MCTS 增量累加器：速度／内存／一致性",
+      "focus": "incremental",
+      "games": 0,
+      "runtimeReport": ".build/training/pattern-incremental-v1.31/progress.json",
+      "report": "models/v1.31-pattern-incremental-benchmark.json"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "archive": "models/archive/v1.18-batch-diagnostic-sources.tar.gz",
+  "sha256": "a490d99905bbcb20a66f72446878a7d7faa55d4bd835cb2389038a0189514686",
+  "files": {
+    "experiments/common-native-batch-v1.18/CMakeLists.txt": "61e77de43de72a0bb4a0d6cda1dc8f2df7bc01263976820923766666a4b983fd",
+    "experiments/common-native-batch-v1.18/native_batch.hpp": "ae408c04ab293145735e4863eec72983c395cd784b983f1c921d1e0439857037",
+    "experiments/common-native-batch-v1.18/mcts.cpp": "cd546513570cf0b5550248680bbbc4f6d54c868688ff46a3e23a807dddce35ad",
+    "experiments/common-native-batch-v1.18/batch_tests.cpp": "a042ba2537df875c2c84cb495e7e1f8595b9d90dc23dd5d9e315d7d60032672b",
+    "experiments/common-native-batch-v1.18/native_batch.cpp": "eaf36a235182e38d85ad9d8b3705a63931a6493d7d7c86be70e4cdd00c4613df",
+    "scripts/benchmark-common-native-batch.py": "3583f92ba4939598d61ad8920f28dd49dae43b430be38bb4053073a8ac3001cd"
+  },
+  "report": "v1.18-common-native-batch-diagnostic.json",
+  "reportSha256": "ed9f10f8837dd74583ae6637451334fb9a307eb4f80dc9300d156f7584c4f218",
+  "note": "v1.17 preserves the exact measured CMake plus the later additional test target separately; algorithm sources unchanged"
+}

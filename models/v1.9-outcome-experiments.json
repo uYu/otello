@@ -1,0 +1,15 @@
+{
+  "version": "v1.9 胜负价值候选 vs v1.8 · 1 秒",
+  "experiments": [
+    {
+      "name": "胜负价值头 vs 子差价值头；每步各 1 秒，20 局交换黑白",
+      "focus": "v1.9 胜负价值候选",
+      "shortName": "胜负模型 vs v1.8 · 1 秒/步",
+      "displayNames": {"baseline": "v1.8", "candidate": "胜负模型"},
+      "displayOrder": ["candidate", "baseline"],
+      "games": 20,
+      "runtimeReport": ".build/training/outcome/v1.9-outcome-vs-v1.8-1s.json",
+      "report": "models/v1.9-outcome-vs-v1.8-1s.json"
+    }
+  ]
+}

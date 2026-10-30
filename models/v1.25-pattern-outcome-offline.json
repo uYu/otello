@@ -1,0 +1,43 @@
+{
+  "baselineVersion": "v1.9",
+  "librarySha256": "3a5e31ef282f2050f2fddf7a80aade80bc6217773503551cd8c935ec0b1bbafa",
+  "rounding": "v1.9 integer C ABI scores / 1000; candidate Python quantized float output",
+  "baseline": {
+    "validation": {
+      "positions": 6000,
+      "outcomeMse": 0.7302913298333333,
+      "nonDrawSignAccuracy": 0.6563580484056858,
+      "policyTop1": 0.37933333333333336,
+      "policyCrossEntropy": 1.6851637772283223
+    },
+    "test": {
+      "positions": 6000,
+      "outcomeMse": 0.7126994258333335,
+      "nonDrawSignAccuracy": 0.6710323574730355,
+      "policyTop1": 0.3586666666666667,
+      "policyCrossEntropy": 1.7125798947170472
+    }
+  },
+  "candidate": {
+    "validation": {
+      "mse": 0.7249130606651306,
+      "outcomeMae": 0.726279616355896,
+      "nonDrawSignAccuracy": 0.6552055320783711,
+      "wdlAccuracy": 0.5685,
+      "wdlCrossEntropy": 0.9000649452209473,
+      "policyTop1": 0.414,
+      "policyCrossEntropy": 1.5960545539855957,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    "test": {
+      "mse": 0.6878209114074707,
+      "outcomeMae": 0.7095891833305359,
+      "nonDrawSignAccuracy": 0.6770030816640986,
+      "wdlAccuracy": 0.5871666666666666,
+      "wdlCrossEntropy": 0.8900972604751587,
+      "policyTop1": 0.4056666666666667,
+      "policyCrossEntropy": 1.6159687042236328,
+      "uniformPolicyCrossEntropy": 2.1044416287103247
+    }
+  }
+}

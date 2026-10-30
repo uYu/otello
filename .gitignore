@@ -12,3 +12,7 @@ __pycache__/
 *.log
 *.tmp
 *.live.json
+public/release.json
+public/model-data-notices.md
+public/training-data-manifest.json
+public/opening-book/

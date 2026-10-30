@@ -1,0 +1,5737 @@
+{
+  "version": "Big-CNN-C256-R8-H256-batch32",
+  "experiment": "candidate-vs-approved-baseline",
+  "baselineVersion": "v1.9",
+  "baselineManifest": "/Users/franzyu/Documents/script/otello/models/v1.9-default.json",
+  "baselineManifestSha256": "3bc0188f583263d1abaf5b7337ee28a849eac91a5a3707e50da6a32c2e854b5d",
+  "configs": [
+    {
+      "id": "baseline",
+      "name": "v1.9",
+      "search": "mcts",
+      "model": "models/nnue256-outcome-v1.9.otnnue",
+      "prior": "learned",
+      "valueTarget": "outcome",
+      "modelSha256": "72294450ce5eb180703e05048df6e7ce7078f031c4e94464198192432d618bb0"
+    },
+    {
+      "id": "candidate",
+      "name": "Big-CNN-C256-R8-H256-batch32",
+      "search": "mcts",
+      "model": "/Users/franzyu/Documents/script/otello/.build/training/teacher-cache/big-cnn-v1.24-joint-snapshot1/teacher.pt",
+      "prior": "learned",
+      "valueTarget": "outcome",
+      "inference": "frozen CNN via Python MPS callback; native v1.9 handle supplies outcome-search protocol only",
+      "modelSha256": "97398c59a09692ac6ff6ccee250c9463184347091141c40cd1c9e71a68a78669"
+    }
+  ],
+  "millisecondsPerMove": 2000,
+  "plannedGames": 20,
+  "baseSeed": 20261028,
+  "openingPolicy": {
+    "plies": 12,
+    "temperature": 32,
+    "max_loss": 64
+  },
+  "start": "initial",
+  "useBook": false,
+  "search": "PUCT MCTS; per-config priors; exploration 1.5; reached-subtree reuse; maximum visits root choice",
+  "librarySha256": "b8363ebdd611fa40c536ce6264b3a95a3908fcd181227a2817ac5997eadaa885",
+  "runnerSha256": "8d48f5a67d50e406a41c4af4af407f6a1ca3495b96528c156540ad06b30494bb",
+  "baselineLibrarySha256": "b8363ebdd611fa40c536ce6264b3a95a3908fcd181227a2817ac5997eadaa885",
+  "sharedRunnerSha256": "e6ad01d3d7192d62856e6c647f33d5c9fbfae5fddbc4d96f39f2a8bb6e5f6b31",
+  "rulesSha256": "f3e794feb32a09d7c3629d969ae6d5c5b394d823764065b120da8e72fea723e7",
+  "policyAuditSha256": "da5adf2fa2ff17cc54081ac26ca984f9f6aaf2a0f40d302d8bc0ee400d54453a",
+  "sourceSha256": {
+    "cpp/api.cpp": "3ea60664ca2f2ac194ba030c43f0308a18441442c6f00c1e93efd6dfa3989e81",
+    "cpp/api.h": "8fd854d0505e156c97e204633c729117166ecb4ceee0977ce318840122759431",
+    "cpp/cnn.cpp": "240e792f12a3f1a7770cc68b0dca1792421d6980242f3229c8a8b62ff2728fc5",
+    "cpp/cnn.hpp": "d4f189ab068893e06bc1526c868fe67c5756ee22f7134593c8909e8f3477ca5e",
+    "cpp/dataset.cpp": "12cce8ca17a751433503e983b824de87e8fddc21de7a1dfba047f8201356354b",
+    "cpp/default_engine.cpp": "f314408ecc1bee7810cfb8d45dd6b13c5ed88a1036eb34002dc4b6e54d80babd",
+    "cpp/default_engine.hpp": "71257f27deaf3cecda44b21a47f996e6d1aa4341b46de1d0d9cfacd2cb7a2b1c",
+    "cpp/egaroucid.cpp": "ac750510b136c21e271f1195dee5716b47362e7883af509be8ed2e3beb65ce29",
+    "cpp/egaroucid.hpp": "6e93deb32736a10a3edb2fd030e1e1586c6a929889d17663c09dd44d0ea6b07e",
+    "cpp/egaroucid_api.h": "efa6dd4fdb3cefebb2400ca3b98823ac78de83572268a93f57f960f0d1c2f640",
+    "cpp/egaroucid_bridge.cpp": "a12e52246f0fa14f69403eb2212f52a1ed4a6940749b16bf027ea50bd3a1f230",
+    "cpp/main.cpp": "5ea39a1178a27c97abd19a54e64030542211eb2e57aa3a991bc64adb65f102d5",
+    "cpp/mcts.cpp": "5e51247f02f0274500c304cc817dc838c0bbb81d8a96d33ffdcf678c8ade00f3",
+    "cpp/mcts.hpp": "edb37dcb9fa08b726c90807f947224a3b3443753f7599f7ebb7344cbc13bbbfb",
+    "cpp/model/default_nnue.inc": "580f21a0eecb9c624b17dcb0d391d17a0c96ba4c65e949d57ac35aad33aaa6b2",
+    "cpp/model/tiny_nn.h": "5900a0125246045fa4536df2e4a47f09690c944a017c7f4a9ce7f05eba8f3d0e",
+    "cpp/move_policy.cpp": "51275ebd1340286997510553fde17262f87da838b8fb332f9052c00ffe4df996",
+    "cpp/nnue.cpp": "fbb281118ee49801f35fbfcf7b479ae345af49c65d47266d694dbc375e0225dd",
+    "cpp/nnue.hpp": "1b19345a5480c021261aede717a04d5cb6b44f67594df85fc19218c4c3e00bec",
+    "cpp/othello.hpp": "a4759d199eb5e5a13f9150abe0e570e1ae7dccf1b6b6a68d7ffe40a75e6fb239",
+    "cpp/pattern.cpp": "fae9c9a7e99444f7c5a4159bf429820fbd8cac2874d2d9cbffad9d3b4394e268",
+    "cpp/pattern.hpp": "8da81c939e111396d64eff731eff159e7524ea46a7323f3a2fdb23cb8082cc2b",
+    "cpp/resnet.cpp": "179ed430a4ac473742cb670ec923bb20eca295ff000c2a91ba815336e17e85ab",
+    "cpp/resnet.hpp": "142091eb4e267b22fb427247b2659ec2b653b547e7879f066f9a60cd55dbec85",
+    "cpp/search.cpp": "12f17042ff5e9afb075d57add7b06d6110fe8939c5eb24243eb53a0411bfdc5f",
+    "cpp/search_table.hpp": "fbb8c057a36e8b83adaee4232bc8e3764ec54e283fe980888b36a6cca6371624"
+  },
+  "platform": "macOS-15.1.1-arm64-arm-64bit",
+  "limits": "Paired colors and shared seeds from the initial board; repeated paths possible. No Elo inference.",
+  "complete": false,
+  "games": 1,
+  "seconds": 86.21586887503508,
+  "results": {
+    "baseline": {
+      "games": 1,
+      "win": 1,
+      "draw": 0,
+      "loss": 0,
+      "discDifference": 8,
+      "scoreRate": 1.0,
+      "meanDiscDifference": 8.0,
+      "moves": 31,
+      "meanWallMs": 1081.375301129032,
+      "meanSearchUnits": 568406.5161290322,
+      "searchUnit": "simulations",
+      "meanNonExactDepth": 41.09090909090909,
+      "depthKind": "maximumVisited",
+      "meanSimulationDepth": 21.912167700059282,
+      "memoryLimitedSearches": 9,
+      "reusedMctsSearches": 30,
+      "exactMoves": 9
+    },
+    "candidate": {
+      "games": 1,
+      "win": 0,
+      "draw": 0,
+      "loss": 1,
+      "discDifference": -8,
+      "scoreRate": 0.0,
+      "meanDiscDifference": -8.0,
+      "moves": 29,
+      "meanWallMs": 1729.1473965517246,
+      "meanSearchUnits": 5741.0,
+      "searchUnit": "simulations",
+      "meanNonExactDepth": 16.6,
+      "depthKind": "maximumVisited",
+      "meanSimulationDepth": 9.40408675648241,
+      "memoryLimitedSearches": 0,
+      "reusedMctsSearches": 28,
+      "exactMoves": 4
+    }
+  },
+  "matrix": {
+    "baseline": {
+      "candidate": {
+        "win": 1,
+        "draw": 0,
+        "loss": 0
+      }
+    },
+    "candidate": {
+      "baseline": {
+        "win": 0,
+        "draw": 0,
+        "loss": 1
+      }
+    }
+  },
+  "replayedActions": 61,
+  "records": [
+    {
+      "number": 1,
+      "black": "baseline",
+      "white": "candidate",
+      "seed": 520245533,
+      "openingPolicy": {
+        "plies": 12,
+        "temperature": 32,
+        "max_loss": 64
+      },
+      "opening": [],
+      "moves": [
+        37,
+        43,
+        26,
+        19,
+        18,
+        29,
+        34,
+        17,
+        10,
+        25,
+        20,
+        44,
+        42,
+        45,
+        32,
+        24,
+        33,
+        40,
+        51,
+        50,
+        52,
+        60,
+        41,
+        61,
+        22,
+        53,
+        38,
+        3,
+        46,
+        11,
+        58,
+        13,
+        12,
+        48,
+        4,
+        5,
+        59,
+        57,
+        1,
+        14,
+        9,
+        2,
+        8,
+        30,
+        21,
+        31,
+        7,
+        6,
+        39,
+        55,
+        47,
+        54,
+        15,
+        49,
+        23,
+        0,
+        63,
+        16,
+        56,
+        -1,
+        62
+      ],
+      "decisions": [
+        {
+          "ply": 0,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 37,
+          "score": 114,
+          "depth": 62,
+          "elapsedMs": 2000,
+          "nodes": 948675,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.046375,
+          "candidates": [
+            {
+              "move": 19,
+              "score": 66,
+              "visits": 8258,
+              "value": 0.06588956163720036
+            },
+            {
+              "move": 26,
+              "score": 85,
+              "visits": 8619,
+              "value": 0.08522496809374609
+            },
+            {
+              "move": 37,
+              "score": 114,
+              "visits": 925419,
+              "value": 0.11446986932405404
+            },
+            {
+              "move": 44,
+              "score": 51,
+              "visits": 6378,
+              "value": 0.05123283160865471
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 948675,
+            "evaluations": 947851,
+            "meanDepth": 26.179443961314465,
+            "reusedNodes": 0,
+            "treeNodes": 947928,
+            "memoryLimited": false,
+            "batchCalls": 33211,
+            "batchLeaves": 947851,
+            "actualBatchMean": 28.540272801180333
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 4,
+            "temperatureMilli": 32000,
+            "lossLimit": 64,
+            "bestScore": 114,
+            "scoreLoss": 0,
+            "sampled": true
+          }
+        },
+        {
+          "ply": 1,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 43,
+          "score": -15,
+          "depth": 11,
+          "elapsedMs": 2013,
+          "nodes": 1623,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2013.988458,
+          "candidates": [
+            {
+              "move": 29,
+              "score": -193,
+              "visits": 231,
+              "value": -0.19259307359307365
+            },
+            {
+              "move": 43,
+              "score": -15,
+              "visits": 1320,
+              "value": -0.015084090909090908
+            },
+            {
+              "move": 45,
+              "score": -156,
+              "visits": 71,
+              "value": -0.15608450704225352
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 1623,
+            "evaluations": 1623,
+            "meanDepth": 6.0985828712261245,
+            "reusedNodes": 0,
+            "treeNodes": 1623,
+            "memoryLimited": false,
+            "batchCalls": 59,
+            "batchLeaves": 1623,
+            "actualBatchMean": 27.508474576271187
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 29333,
+            "lossLimit": 58,
+            "bestScore": -15,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 2,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 26,
+          "score": 125,
+          "depth": 61,
+          "elapsedMs": 2000,
+          "nodes": 791023,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.067666,
+          "candidates": [
+            {
+              "move": 18,
+              "score": 98,
+              "visits": 112358,
+              "value": 0.09750687089481819
+            },
+            {
+              "move": 26,
+              "score": 125,
+              "visits": 1593074,
+              "value": 0.12490722402097412
+            },
+            {
+              "move": 34,
+              "score": -20,
+              "visits": 2010,
+              "value": -0.01982089552238804
+            },
+            {
+              "move": 42,
+              "score": -123,
+              "visits": 839,
+              "value": -0.12306436233611438
+            },
+            {
+              "move": 50,
+              "score": -473,
+              "visits": 460,
+              "value": -0.47303478260869564
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 791023,
+            "evaluations": 789380,
+            "meanDepth": 37.49852153477206,
+            "reusedNodes": 916972,
+            "treeNodes": 1706908,
+            "memoryLimited": false,
+            "batchCalls": 31577,
+            "batchLeaves": 789380,
+            "actualBatchMean": 24.99857491211958
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 2,
+            "temperatureMilli": 26666,
+            "lossLimit": 53,
+            "bestScore": 125,
+            "scoreLoss": 0,
+            "sampled": true
+          }
+        },
+        {
+          "ply": 3,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 19,
+          "score": -6,
+          "depth": 12,
+          "elapsedMs": 2010,
+          "nodes": 3579,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2010.074833,
+          "candidates": [
+            {
+              "move": 17,
+              "score": -66,
+              "visits": 133,
+              "value": -0.06630075187969924
+            },
+            {
+              "move": 19,
+              "score": -6,
+              "visits": 1748,
+              "value": -0.0064199084668192154
+            },
+            {
+              "move": 21,
+              "score": -67,
+              "visits": 121,
+              "value": -0.06725619834710746
+            },
+            {
+              "move": 29,
+              "score": -16,
+              "visits": 1561,
+              "value": -0.015992312620115315
+            },
+            {
+              "move": 38,
+              "score": -56,
+              "visits": 169,
+              "value": -0.0564201183431953
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 3579,
+            "evaluations": 3579,
+            "meanDepth": 6.546521374685667,
+            "reusedNodes": 154,
+            "treeNodes": 3733,
+            "memoryLimited": false,
+            "batchCalls": 116,
+            "batchLeaves": 3579,
+            "actualBatchMean": 30.853448275862068
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 2,
+            "temperatureMilli": 24000,
+            "lossLimit": 48,
+            "bestScore": -6,
+            "scoreLoss": 0,
+            "sampled": true
+          }
+        },
+        {
+          "ply": 4,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 18,
+          "score": 125,
+          "depth": 61,
+          "elapsedMs": 1774,
+          "nodes": 717344,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 1774.955541,
+          "candidates": [
+            {
+              "move": 10,
+              "score": -393,
+              "visits": 117,
+              "value": -0.39318803418803433
+            },
+            {
+              "move": 12,
+              "score": -427,
+              "visits": 209,
+              "value": -0.42713875598086143
+            },
+            {
+              "move": 18,
+              "score": 125,
+              "visits": 2108721,
+              "value": 0.12516884689818747
+            },
+            {
+              "move": 34,
+              "score": -108,
+              "visits": 2106,
+              "value": -0.10756267806267814
+            },
+            {
+              "move": 42,
+              "score": -84,
+              "visits": 728,
+              "value": -0.08365384615384598
+            },
+            {
+              "move": 44,
+              "score": -86,
+              "visits": 3917,
+              "value": -0.08633980086801119
+            },
+            {
+              "move": 50,
+              "score": -511,
+              "visits": 46,
+              "value": -0.511391304347826
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 717344,
+            "evaluations": 699006,
+            "meanDepth": 36.67643278538609,
+            "reusedNodes": 1396667,
+            "treeNodes": 2097152,
+            "memoryLimited": true,
+            "batchCalls": 29133,
+            "batchLeaves": 699006,
+            "actualBatchMean": 23.99361548759139
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 21333,
+            "lossLimit": 42,
+            "bestScore": 125,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 5,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 29,
+          "score": -70,
+          "depth": 15,
+          "elapsedMs": 2008,
+          "nodes": 3733,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2008.333583,
+          "candidates": [
+            {
+              "move": 17,
+              "score": -138,
+              "visits": 162,
+              "value": -0.1376975308641975
+            },
+            {
+              "move": 21,
+              "score": -307,
+              "visits": 81,
+              "value": -0.3072222222222222
+            },
+            {
+              "move": 29,
+              "score": -70,
+              "visits": 4399,
+              "value": -0.07015435326210509
+            },
+            {
+              "move": 33,
+              "score": -286,
+              "visits": 200,
+              "value": -0.28607499999999997
+            },
+            {
+              "move": 38,
+              "score": -294,
+              "visits": 19,
+              "value": -0.29378947368421054
+            },
+            {
+              "move": 46,
+              "score": -348,
+              "visits": 14,
+              "value": -0.34750000000000003
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 3733,
+            "evaluations": 3733,
+            "meanDepth": 7.905437985534423,
+            "reusedNodes": 1143,
+            "treeNodes": 4876,
+            "memoryLimited": false,
+            "batchCalls": 131,
+            "batchLeaves": 3733,
+            "actualBatchMean": 28.49618320610687
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 18666,
+            "lossLimit": 37,
+            "bestScore": -70,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 6,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 34,
+          "score": 129,
+          "depth": 44,
+          "elapsedMs": 151,
+          "nodes": 11517,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 151.393375,
+          "candidates": [
+            {
+              "move": 10,
+              "score": -417,
+              "visits": 307,
+              "value": -0.41722801302931556
+            },
+            {
+              "move": 11,
+              "score": -290,
+              "visits": 627,
+              "value": -0.2897033492822963
+            },
+            {
+              "move": 12,
+              "score": -395,
+              "visits": 234,
+              "value": -0.3950470085470084
+            },
+            {
+              "move": 20,
+              "score": -52,
+              "visits": 3571,
+              "value": -0.05212377485298228
+            },
+            {
+              "move": 21,
+              "score": -394,
+              "visits": 279,
+              "value": -0.39418996415770563
+            },
+            {
+              "move": 30,
+              "score": -406,
+              "visits": 180,
+              "value": -0.40552777777777754
+            },
+            {
+              "move": 34,
+              "score": 129,
+              "visits": 1992508,
+              "value": 0.12917810166884783
+            },
+            {
+              "move": 42,
+              "score": -200,
+              "visits": 268,
+              "value": -0.20036567164179106
+            },
+            {
+              "move": 44,
+              "score": -6,
+              "visits": 1225,
+              "value": -0.0063616326530612525
+            },
+            {
+              "move": 45,
+              "score": 64,
+              "visits": 116603,
+              "value": 0.063521641810245
+            },
+            {
+              "move": 51,
+              "score": -590,
+              "visits": 42,
+              "value": -0.5903809523809525
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 11517,
+            "evaluations": 11517,
+            "meanDepth": 34.733350698966746,
+            "reusedNodes": 2085635,
+            "treeNodes": 2097152,
+            "memoryLimited": true,
+            "batchCalls": 409,
+            "batchLeaves": 11517,
+            "actualBatchMean": 28.158924205378973
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 16000,
+            "lossLimit": 32,
+            "bestScore": 129,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 7,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 17,
+          "score": 14,
+          "depth": 14,
+          "elapsedMs": 2000,
+          "nodes": 4417,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.958042,
+          "candidates": [
+            {
+              "move": 17,
+              "score": 14,
+              "visits": 4488,
+              "value": 0.014402406417112396
+            },
+            {
+              "move": 25,
+              "score": -197,
+              "visits": 45,
+              "value": -0.1967555555555555
+            },
+            {
+              "move": 33,
+              "score": -320,
+              "visits": 114,
+              "value": -0.32036842105263164
+            },
+            {
+              "move": 45,
+              "score": -277,
+              "visits": 56,
+              "value": -0.27728571428571425
+            },
+            {
+              "move": 46,
+              "score": -331,
+              "visits": 27,
+              "value": -0.3305925925925926
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 4417,
+            "evaluations": 4417,
+            "meanDepth": 6.984378537468871,
+            "reusedNodes": 314,
+            "treeNodes": 4731,
+            "memoryLimited": false,
+            "batchCalls": 149,
+            "batchLeaves": 4417,
+            "actualBatchMean": 29.644295302013422
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 13333,
+            "lossLimit": 26,
+            "bestScore": 14,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 8,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 10,
+          "score": 123,
+          "depth": 46,
+          "elapsedMs": 400,
+          "nodes": 142855,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 400.614334,
+          "candidates": [
+            {
+              "move": 8,
+              "score": -234,
+              "visits": 51,
+              "value": -0.2340392156862745
+            },
+            {
+              "move": 9,
+              "score": -380,
+              "visits": 5,
+              "value": -0.3804
+            },
+            {
+              "move": 10,
+              "score": 123,
+              "visits": 2108983,
+              "value": 0.12338153318447861
+            },
+            {
+              "move": 11,
+              "score": -61,
+              "visits": 2200,
+              "value": -0.06117727272727263
+            },
+            {
+              "move": 12,
+              "score": -80,
+              "visits": 1185,
+              "value": -0.07972236286919836
+            },
+            {
+              "move": 21,
+              "score": -357,
+              "visits": 1117,
+              "value": -0.3572444046553269
+            },
+            {
+              "move": 22,
+              "score": -295,
+              "visits": 239,
+              "value": -0.2949414225941423
+            },
+            {
+              "move": 30,
+              "score": -404,
+              "visits": 517,
+              "value": -0.40379303675048367
+            },
+            {
+              "move": 50,
+              "score": -222,
+              "visits": 526,
+              "value": -0.22184790874524699
+            },
+            {
+              "move": 51,
+              "score": -201,
+              "visits": 696,
+              "value": -0.20142097701149436
+            },
+            {
+              "move": 52,
+              "score": -152,
+              "visits": 325,
+              "value": -0.15242769230769224
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 142855,
+            "evaluations": 142855,
+            "meanDepth": 22.330096951454273,
+            "reusedNodes": 1954297,
+            "treeNodes": 2097152,
+            "memoryLimited": true,
+            "batchCalls": 4827,
+            "batchLeaves": 142855,
+            "actualBatchMean": 29.594986534079137
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 10666,
+            "lossLimit": 21,
+            "bestScore": 123,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 9,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 25,
+          "score": -68,
+          "depth": 15,
+          "elapsedMs": 2004,
+          "nodes": 4170,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2004.506708,
+          "candidates": [
+            {
+              "move": 3,
+              "score": -122,
+              "visits": 622,
+              "value": -0.12240192926045011
+            },
+            {
+              "move": 11,
+              "score": -183,
+              "visits": 235,
+              "value": -0.1834170212765957
+            },
+            {
+              "move": 20,
+              "score": -122,
+              "visits": 1189,
+              "value": -0.12217830109335584
+            },
+            {
+              "move": 25,
+              "score": -68,
+              "visits": 2320,
+              "value": -0.06812844827586205
+            },
+            {
+              "move": 44,
+              "score": -180,
+              "visits": 391,
+              "value": -0.18048849104859352
+            },
+            {
+              "move": 45,
+              "score": -100,
+              "visits": 2188,
+              "value": -0.10047714808043871
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 4170,
+            "evaluations": 4170,
+            "meanDepth": 7.193045563549161,
+            "reusedNodes": 2776,
+            "treeNodes": 6946,
+            "memoryLimited": false,
+            "batchCalls": 152,
+            "batchLeaves": 4170,
+            "actualBatchMean": 27.43421052631579
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 8000,
+            "lossLimit": 16,
+            "bestScore": -68,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 10,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 20,
+          "score": 160,
+          "depth": 53,
+          "elapsedMs": 2000,
+          "nodes": 895547,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.026125,
+          "candidates": [
+            {
+              "move": 8,
+              "score": -288,
+              "visits": 41,
+              "value": -0.28831707317073163
+            },
+            {
+              "move": 16,
+              "score": -62,
+              "visits": 540,
+              "value": -0.06178518518518514
+            },
+            {
+              "move": 20,
+              "score": 160,
+              "visits": 1024087,
+              "value": 0.15988407234931798
+            },
+            {
+              "move": 21,
+              "score": -389,
+              "visits": 232,
+              "value": -0.3886465517241379
+            },
+            {
+              "move": 22,
+              "score": -308,
+              "visits": 44,
+              "value": -0.3083863636363637
+            },
+            {
+              "move": 24,
+              "score": -161,
+              "visits": 273,
+              "value": -0.1605238095238095
+            },
+            {
+              "move": 32,
+              "score": -168,
+              "visits": 183,
+              "value": -0.16776502732240436
+            },
+            {
+              "move": 33,
+              "score": -107,
+              "visits": 419,
+              "value": -0.10713603818615755
+            },
+            {
+              "move": 42,
+              "score": 102,
+              "visits": 3498,
+              "value": 0.10186306460834821
+            },
+            {
+              "move": 50,
+              "score": -269,
+              "visits": 33,
+              "value": -0.26939393939393946
+            },
+            {
+              "move": 51,
+              "score": -223,
+              "visits": 96,
+              "value": -0.22255208333333332
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 895547,
+            "evaluations": 895142,
+            "meanDepth": 27.14098534191952,
+            "reusedNodes": 133900,
+            "treeNodes": 1029299,
+            "memoryLimited": false,
+            "batchCalls": 32697,
+            "batchLeaves": 895142,
+            "actualBatchMean": 27.376884729485887
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 5333,
+            "lossLimit": 10,
+            "bestScore": 160,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 11,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 44,
+          "score": 117,
+          "depth": 14,
+          "elapsedMs": 2003,
+          "nodes": 4097,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2003.435917,
+          "candidates": [
+            {
+              "move": 2,
+              "score": -234,
+              "visits": 75,
+              "value": -0.23402666666666674
+            },
+            {
+              "move": 3,
+              "score": -275,
+              "visits": 6,
+              "value": -0.2745
+            },
+            {
+              "move": 9,
+              "score": -634,
+              "visits": 1,
+              "value": -0.634
+            },
+            {
+              "move": 11,
+              "score": -178,
+              "visits": 21,
+              "value": -0.1777619047619048
+            },
+            {
+              "move": 12,
+              "score": -113,
+              "visits": 123,
+              "value": -0.1132926829268293
+            },
+            {
+              "move": 13,
+              "score": -348,
+              "visits": 7,
+              "value": -0.34814285714285714
+            },
+            {
+              "move": 21,
+              "score": -427,
+              "visits": 1,
+              "value": -0.427
+            },
+            {
+              "move": 38,
+              "score": -690,
+              "visits": 1,
+              "value": -0.69
+            },
+            {
+              "move": 44,
+              "score": 117,
+              "visits": 4455,
+              "value": 0.11729203142536469
+            },
+            {
+              "move": 45,
+              "score": -527,
+              "visits": 3,
+              "value": -0.5273333333333333
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 4097,
+            "evaluations": 4097,
+            "meanDepth": 7.245057359043202,
+            "reusedNodes": 597,
+            "treeNodes": 4694,
+            "memoryLimited": false,
+            "batchCalls": 146,
+            "batchLeaves": 4097,
+            "actualBatchMean": 28.061643835616437
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 2666,
+            "lossLimit": 5,
+            "bestScore": 117,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 12,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 42,
+          "score": 121,
+          "depth": 53,
+          "elapsedMs": 2000,
+          "nodes": 650255,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.057875,
+          "candidates": [
+            {
+              "move": 16,
+              "score": -264,
+              "visits": 374,
+              "value": -0.2638903743315507
+            },
+            {
+              "move": 21,
+              "score": -59,
+              "visits": 3061,
+              "value": -0.05938680169879124
+            },
+            {
+              "move": 22,
+              "score": -240,
+              "visits": 267,
+              "value": -0.24004868913857674
+            },
+            {
+              "move": 24,
+              "score": -618,
+              "visits": 123,
+              "value": -0.6180731707317072
+            },
+            {
+              "move": 30,
+              "score": -340,
+              "visits": 974,
+              "value": -0.34019301848049244
+            },
+            {
+              "move": 32,
+              "score": -160,
+              "visits": 241,
+              "value": -0.15970124481327794
+            },
+            {
+              "move": 33,
+              "score": -26,
+              "visits": 854,
+              "value": -0.026265807962529242
+            },
+            {
+              "move": 38,
+              "score": -317,
+              "visits": 386,
+              "value": -0.316979274611399
+            },
+            {
+              "move": 41,
+              "score": -251,
+              "visits": 154,
+              "value": -0.25079220779220796
+            },
+            {
+              "move": 42,
+              "score": 121,
+              "visits": 1660296,
+              "value": 0.12079393915302068
+            },
+            {
+              "move": 50,
+              "score": -236,
+              "visits": 27,
+              "value": -0.23574074074074075
+            },
+            {
+              "move": 51,
+              "score": -419,
+              "visits": 65,
+              "value": -0.4188461538461539
+            },
+            {
+              "move": 52,
+              "score": -108,
+              "visits": 154,
+              "value": -0.10767532467532467
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 650255,
+            "evaluations": 645608,
+            "meanDepth": 31.157661225211648,
+            "reusedNodes": 1016574,
+            "treeNodes": 1663114,
+            "memoryLimited": false,
+            "batchCalls": 24308,
+            "batchLeaves": 645608,
+            "actualBatchMean": 26.559486588777357
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 121,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 13,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 45,
+          "score": 27,
+          "depth": 20,
+          "elapsedMs": 2009,
+          "nodes": 3739,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2009.841708,
+          "candidates": [
+            {
+              "move": 3,
+              "score": -109,
+              "visits": 26,
+              "value": -0.10873076923076923
+            },
+            {
+              "move": 9,
+              "score": -420,
+              "visits": 1,
+              "value": -0.42
+            },
+            {
+              "move": 11,
+              "score": -139,
+              "visits": 105,
+              "value": -0.13920000000000005
+            },
+            {
+              "move": 12,
+              "score": -219,
+              "visits": 104,
+              "value": -0.21925
+            },
+            {
+              "move": 13,
+              "score": -44,
+              "visits": 233,
+              "value": -0.043506437768240355
+            },
+            {
+              "move": 21,
+              "score": -105,
+              "visits": 24,
+              "value": -0.10475000000000001
+            },
+            {
+              "move": 30,
+              "score": 1,
+              "visits": 697,
+              "value": 0.0013357245337158733
+            },
+            {
+              "move": 41,
+              "score": -121,
+              "visits": 32,
+              "value": -0.12071875
+            },
+            {
+              "move": 45,
+              "score": 27,
+              "visits": 4754,
+              "value": 0.026594657130837168
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 3739,
+            "evaluations": 3739,
+            "meanDepth": 10.278416688954266,
+            "reusedNodes": 2238,
+            "treeNodes": 5977,
+            "memoryLimited": false,
+            "batchCalls": 124,
+            "batchLeaves": 3739,
+            "actualBatchMean": 30.153225806451612
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 27,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 14,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 32,
+          "score": 115,
+          "depth": 49,
+          "elapsedMs": 1251,
+          "nodes": 462324,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 1251.355292,
+          "candidates": [
+            {
+              "move": 8,
+              "score": -249,
+              "visits": 74,
+              "value": -0.24894594594594596
+            },
+            {
+              "move": 16,
+              "score": -323,
+              "visits": 683,
+              "value": -0.32310102489019055
+            },
+            {
+              "move": 24,
+              "score": -505,
+              "visits": 449,
+              "value": -0.5051202672605785
+            },
+            {
+              "move": 30,
+              "score": -222,
+              "visits": 1156,
+              "value": -0.2219256055363323
+            },
+            {
+              "move": 32,
+              "score": 115,
+              "visits": 2097553,
+              "value": 0.11495402118564242
+            },
+            {
+              "move": 38,
+              "score": -240,
+              "visits": 260,
+              "value": -0.24024230769230756
+            },
+            {
+              "move": 46,
+              "score": -636,
+              "visits": 20,
+              "value": -0.6364000000000001
+            },
+            {
+              "move": 51,
+              "score": -43,
+              "visits": 2337,
+              "value": -0.04343560119811729
+            },
+            {
+              "move": 52,
+              "score": -220,
+              "visits": 428,
+              "value": -0.2203084112149535
+            },
+            {
+              "move": 53,
+              "score": -153,
+              "visits": 56,
+              "value": -0.15292857142857147
+            },
+            {
+              "move": 54,
+              "score": -381,
+              "visits": 1,
+              "value": -0.381
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 462324,
+            "evaluations": 459629,
+            "meanDepth": 29.143351848487207,
+            "reusedNodes": 1636831,
+            "treeNodes": 2097152,
+            "memoryLimited": true,
+            "batchCalls": 18521,
+            "batchLeaves": 459629,
+            "actualBatchMean": 24.8166405701636
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 115,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 15,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 24,
+          "score": -32,
+          "depth": 17,
+          "elapsedMs": 2003,
+          "nodes": 4211,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2003.314042,
+          "candidates": [
+            {
+              "move": 1,
+              "score": -710,
+              "visits": 1,
+              "value": -0.71
+            },
+            {
+              "move": 3,
+              "score": -252,
+              "visits": 37,
+              "value": -0.25162162162162166
+            },
+            {
+              "move": 9,
+              "score": -669,
+              "visits": 1,
+              "value": -0.669
+            },
+            {
+              "move": 11,
+              "score": -132,
+              "visits": 140,
+              "value": -0.13152142857142857
+            },
+            {
+              "move": 12,
+              "score": -165,
+              "visits": 87,
+              "value": -0.16504597701149423
+            },
+            {
+              "move": 13,
+              "score": -104,
+              "visits": 314,
+              "value": -0.10410828025477716
+            },
+            {
+              "move": 16,
+              "score": -246,
+              "visits": 123,
+              "value": -0.24582926829268298
+            },
+            {
+              "move": 21,
+              "score": -295,
+              "visits": 31,
+              "value": -0.29503225806451616
+            },
+            {
+              "move": 24,
+              "score": -32,
+              "visits": 4650,
+              "value": -0.03150344086021508
+            },
+            {
+              "move": 33,
+              "score": -314,
+              "visits": 77,
+              "value": -0.31392207792207794
+            },
+            {
+              "move": 41,
+              "score": -27,
+              "visits": 2752,
+              "value": -0.02669004360465117
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 4211,
+            "evaluations": 4211,
+            "meanDepth": 8.513417240560438,
+            "reusedNodes": 4003,
+            "treeNodes": 8214,
+            "memoryLimited": false,
+            "batchCalls": 142,
+            "batchLeaves": 4211,
+            "actualBatchMean": 29.654929577464788
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -32,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 16,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 33,
+          "score": 116,
+          "depth": 45,
+          "elapsedMs": 211,
+          "nodes": 31343,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 211.285625,
+          "candidates": [
+            {
+              "move": 8,
+              "score": -346,
+              "visits": 216,
+              "value": -0.3459675925925926
+            },
+            {
+              "move": 16,
+              "score": -116,
+              "visits": 1751,
+              "value": -0.1164854368932037
+            },
+            {
+              "move": 30,
+              "score": -206,
+              "visits": 529,
+              "value": -0.2064253308128543
+            },
+            {
+              "move": 33,
+              "score": 116,
+              "visits": 2096463,
+              "value": 0.11562852528282302
+            },
+            {
+              "move": 38,
+              "score": -447,
+              "visits": 78,
+              "value": -0.44683333333333347
+            },
+            {
+              "move": 46,
+              "score": -769,
+              "visits": 11,
+              "value": -0.7694545454545453
+            },
+            {
+              "move": 51,
+              "score": 61,
+              "visits": 3764,
+              "value": 0.06073060573857618
+            },
+            {
+              "move": 52,
+              "score": -218,
+              "visits": 186,
+              "value": -0.21790860215053776
+            },
+            {
+              "move": 53,
+              "score": -154,
+              "visits": 30,
+              "value": -0.15366666666666665
+            },
+            {
+              "move": 54,
+              "score": -577,
+              "visits": 1,
+              "value": -0.577
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 31343,
+            "evaluations": 31318,
+            "meanDepth": 24.871486456306034,
+            "reusedNodes": 2065821,
+            "treeNodes": 2097152,
+            "memoryLimited": true,
+            "batchCalls": 1221,
+            "batchLeaves": 31318,
+            "actualBatchMean": 25.64946764946765
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 116,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 17,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 40,
+          "score": -59,
+          "depth": 17,
+          "elapsedMs": 2003,
+          "nodes": 3658,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2003.53925,
+          "candidates": [
+            {
+              "move": 1,
+              "score": -802,
+              "visits": 1,
+              "value": -0.802
+            },
+            {
+              "move": 3,
+              "score": -307,
+              "visits": 30,
+              "value": -0.30670000000000003
+            },
+            {
+              "move": 9,
+              "score": -561,
+              "visits": 1,
+              "value": -0.561
+            },
+            {
+              "move": 11,
+              "score": -390,
+              "visits": 23,
+              "value": -0.38965217391304346
+            },
+            {
+              "move": 12,
+              "score": -377,
+              "visits": 40,
+              "value": -0.3767750000000001
+            },
+            {
+              "move": 13,
+              "score": -186,
+              "visits": 91,
+              "value": -0.18567032967032968
+            },
+            {
+              "move": 21,
+              "score": -194,
+              "visits": 14,
+              "value": -0.19364285714285714
+            },
+            {
+              "move": 40,
+              "score": -59,
+              "visits": 7887,
+              "value": -0.058971091669836426
+            },
+            {
+              "move": 41,
+              "score": -194,
+              "visits": 14,
+              "value": -0.19435714285714287
+            },
+            {
+              "move": 51,
+              "score": -317,
+              "visits": 42,
+              "value": -0.31719047619047624
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 3658,
+            "evaluations": 3658,
+            "meanDepth": 9.830508474576272,
+            "reusedNodes": 4486,
+            "treeNodes": 8144,
+            "memoryLimited": false,
+            "batchCalls": 129,
+            "batchLeaves": 3658,
+            "actualBatchMean": 28.356589147286822
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -59,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 18,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 51,
+          "score": 116,
+          "depth": 40,
+          "elapsedMs": 145,
+          "nodes": 13637,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 145.545167,
+          "candidates": [
+            {
+              "move": 8,
+              "score": -262,
+              "visits": 224,
+              "value": -0.26215625000000004
+            },
+            {
+              "move": 9,
+              "score": -567,
+              "visits": 12,
+              "value": -0.5670833333333333
+            },
+            {
+              "move": 16,
+              "score": -268,
+              "visits": 1244,
+              "value": -0.2680112540192927
+            },
+            {
+              "move": 30,
+              "score": -189,
+              "visits": 1954,
+              "value": -0.1890757420675536
+            },
+            {
+              "move": 38,
+              "score": -469,
+              "visits": 458,
+              "value": -0.4693165938864629
+            },
+            {
+              "move": 46,
+              "score": -755,
+              "visits": 49,
+              "value": -0.7549183673469386
+            },
+            {
+              "move": 51,
+              "score": 116,
+              "visits": 2098190,
+              "value": 0.11637267359009507
+            },
+            {
+              "move": 52,
+              "score": -271,
+              "visits": 771,
+              "value": -0.271041504539559
+            },
+            {
+              "move": 53,
+              "score": -137,
+              "visits": 123,
+              "value": -0.13720325203252037
+            },
+            {
+              "move": 54,
+              "score": -378,
+              "visits": 4,
+              "value": -0.3775
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 13637,
+            "evaluations": 13637,
+            "meanDepth": 26.215076629757277,
+            "reusedNodes": 2083515,
+            "treeNodes": 2097152,
+            "memoryLimited": true,
+            "batchCalls": 563,
+            "batchLeaves": 13637,
+            "actualBatchMean": 24.22202486678508
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 116,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 19,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 50,
+          "score": -77,
+          "depth": 16,
+          "elapsedMs": 2000,
+          "nodes": 4177,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.414334,
+          "candidates": [
+            {
+              "move": 1,
+              "score": -676,
+              "visits": 1,
+              "value": -0.676
+            },
+            {
+              "move": 3,
+              "score": -227,
+              "visits": 61,
+              "value": -0.22731147540983607
+            },
+            {
+              "move": 9,
+              "score": -459,
+              "visits": 1,
+              "value": -0.459
+            },
+            {
+              "move": 11,
+              "score": -178,
+              "visits": 155,
+              "value": -0.17795483870967746
+            },
+            {
+              "move": 12,
+              "score": -464,
+              "visits": 22,
+              "value": -0.4641818181818182
+            },
+            {
+              "move": 13,
+              "score": -119,
+              "visits": 840,
+              "value": -0.11865595238095249
+            },
+            {
+              "move": 21,
+              "score": -287,
+              "visits": 50,
+              "value": -0.28728000000000004
+            },
+            {
+              "move": 41,
+              "score": -121,
+              "visits": 59,
+              "value": -0.12061016949152543
+            },
+            {
+              "move": 50,
+              "score": -77,
+              "visits": 7724,
+              "value": -0.07660072501294696
+            },
+            {
+              "move": 52,
+              "score": -157,
+              "visits": 652,
+              "value": -0.156998466257669
+            },
+            {
+              "move": 58,
+              "score": -59,
+              "visits": 1712,
+              "value": -0.05911623831775706
+            },
+            {
+              "move": 59,
+              "score": -87,
+              "visits": 389,
+              "value": -0.0865449871465296
+            },
+            {
+              "move": 60,
+              "score": -322,
+              "visits": 33,
+              "value": -0.32218181818181824
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 4177,
+            "evaluations": 4177,
+            "meanDepth": 8.543931050993535,
+            "reusedNodes": 7523,
+            "treeNodes": 11700,
+            "memoryLimited": false,
+            "batchCalls": 142,
+            "batchLeaves": 4177,
+            "actualBatchMean": 29.41549295774648
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -77,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 20,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 52,
+          "score": 130,
+          "depth": 42,
+          "elapsedMs": 950,
+          "nodes": 372053,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 950.022959,
+          "candidates": [
+            {
+              "move": 8,
+              "score": -342,
+              "visits": 129,
+              "value": -0.34240310077519387
+            },
+            {
+              "move": 9,
+              "score": -742,
+              "visits": 6,
+              "value": -0.7423333333333333
+            },
+            {
+              "move": 16,
+              "score": -222,
+              "visits": 1644,
+              "value": -0.22191666666666585
+            },
+            {
+              "move": 30,
+              "score": -638,
+              "visits": 275,
+              "value": -0.6381018181818179
+            },
+            {
+              "move": 38,
+              "score": -445,
+              "visits": 196,
+              "value": -0.44538775510204087
+            },
+            {
+              "move": 46,
+              "score": -657,
+              "visits": 56,
+              "value": -0.6566428571428572
+            },
+            {
+              "move": 49,
+              "score": -587,
+              "visits": 51,
+              "value": -0.5870980392156864
+            },
+            {
+              "move": 52,
+              "score": 130,
+              "visits": 2099382,
+              "value": 0.1298805305561405
+            },
+            {
+              "move": 53,
+              "score": -137,
+              "visits": 212,
+              "value": -0.13695754716981132
+            },
+            {
+              "move": 54,
+              "score": -319,
+              "visits": 8,
+              "value": -0.31887499999999996
+            },
+            {
+              "move": 58,
+              "score": -218,
+              "visits": 1178,
+              "value": -0.218378607809847
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 372053,
+            "evaluations": 371709,
+            "meanDepth": 22.73304878606005,
+            "reusedNodes": 1725263,
+            "treeNodes": 2097152,
+            "memoryLimited": true,
+            "batchCalls": 15444,
+            "batchLeaves": 371709,
+            "actualBatchMean": 24.068181818181817
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 130,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 21,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 60,
+          "score": -83,
+          "depth": 15,
+          "elapsedMs": 2001,
+          "nodes": 4086,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2001.62075,
+          "candidates": [
+            {
+              "move": 1,
+              "score": -693,
+              "visits": 1,
+              "value": -0.693
+            },
+            {
+              "move": 2,
+              "score": -221,
+              "visits": 122,
+              "value": -0.22069672131147536
+            },
+            {
+              "move": 3,
+              "score": -93,
+              "visits": 218,
+              "value": -0.0930733944954129
+            },
+            {
+              "move": 9,
+              "score": -319,
+              "visits": 1,
+              "value": -0.319
+            },
+            {
+              "move": 11,
+              "score": -43,
+              "visits": 2822,
+              "value": -0.04287349397590354
+            },
+            {
+              "move": 12,
+              "score": -149,
+              "visits": 284,
+              "value": -0.1494577464788733
+            },
+            {
+              "move": 13,
+              "score": -122,
+              "visits": 342,
+              "value": -0.12243274853801162
+            },
+            {
+              "move": 21,
+              "score": -242,
+              "visits": 70,
+              "value": -0.24172857142857138
+            },
+            {
+              "move": 41,
+              "score": -167,
+              "visits": 279,
+              "value": -0.16721863799283154
+            },
+            {
+              "move": 53,
+              "score": -402,
+              "visits": 24,
+              "value": -0.40220833333333333
+            },
+            {
+              "move": 58,
+              "score": -91,
+              "visits": 1028,
+              "value": -0.0906225680933852
+            },
+            {
+              "move": 59,
+              "score": -186,
+              "visits": 57,
+              "value": -0.1858421052631579
+            },
+            {
+              "move": 60,
+              "score": -83,
+              "visits": 6010,
+              "value": -0.08294159733777043
+            },
+            {
+              "move": 61,
+              "score": -119,
+              "visits": 207,
+              "value": -0.11882608695652175
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 4086,
+            "evaluations": 4086,
+            "meanDepth": 8.450562897699461,
+            "reusedNodes": 7380,
+            "treeNodes": 11466,
+            "memoryLimited": false,
+            "batchCalls": 138,
+            "batchLeaves": 4086,
+            "actualBatchMean": 29.608695652173914
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -83,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 22,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 41,
+          "score": 116,
+          "depth": 42,
+          "elapsedMs": 2000,
+          "nodes": 929790,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.062125,
+          "candidates": [
+            {
+              "move": 8,
+              "score": -314,
+              "visits": 67,
+              "value": -0.31417910447761194
+            },
+            {
+              "move": 16,
+              "score": -286,
+              "visits": 833,
+              "value": -0.286016806722689
+            },
+            {
+              "move": 22,
+              "score": -153,
+              "visits": 191,
+              "value": -0.15314659685863874
+            },
+            {
+              "move": 30,
+              "score": -265,
+              "visits": 179,
+              "value": -0.26491620111731834
+            },
+            {
+              "move": 38,
+              "score": -549,
+              "visits": 139,
+              "value": -0.5489280575539562
+            },
+            {
+              "move": 41,
+              "score": 116,
+              "visits": 1008043,
+              "value": 0.11633356612763428
+            },
+            {
+              "move": 46,
+              "score": -330,
+              "visits": 288,
+              "value": -0.33010416666666675
+            },
+            {
+              "move": 49,
+              "score": -542,
+              "visits": 21,
+              "value": -0.5415714285714285
+            },
+            {
+              "move": 54,
+              "score": -71,
+              "visits": 19,
+              "value": -0.07105263157894737
+            },
+            {
+              "move": 57,
+              "score": -196,
+              "visits": 98,
+              "value": -0.19609183673469396
+            },
+            {
+              "move": 58,
+              "score": -453,
+              "visits": 214,
+              "value": -0.4529345794392526
+            },
+            {
+              "move": 59,
+              "score": -89,
+              "visits": 1013,
+              "value": -0.08852023692003945
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 929790,
+            "evaluations": 925830,
+            "meanDepth": 22.295957151614882,
+            "reusedNodes": 81316,
+            "treeNodes": 1008970,
+            "memoryLimited": false,
+            "batchCalls": 39286,
+            "batchLeaves": 925830,
+            "actualBatchMean": 23.566410426105993
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 116,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 23,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 61,
+          "score": -108,
+          "depth": 14,
+          "elapsedMs": 2006,
+          "nodes": 4147,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2006.690416,
+          "candidates": [
+            {
+              "move": 1,
+              "score": -741,
+              "visits": 1,
+              "value": -0.741
+            },
+            {
+              "move": 2,
+              "score": -279,
+              "visits": 71,
+              "value": -0.27852112676056334
+            },
+            {
+              "move": 3,
+              "score": -275,
+              "visits": 53,
+              "value": -0.275056603773585
+            },
+            {
+              "move": 9,
+              "score": -508,
+              "visits": 1,
+              "value": -0.508
+            },
+            {
+              "move": 11,
+              "score": -332,
+              "visits": 56,
+              "value": -0.3323035714285714
+            },
+            {
+              "move": 12,
+              "score": -877,
+              "visits": 1,
+              "value": -0.877
+            },
+            {
+              "move": 13,
+              "score": -205,
+              "visits": 76,
+              "value": -0.20547368421052628
+            },
+            {
+              "move": 21,
+              "score": -509,
+              "visits": 1,
+              "value": -0.509
+            },
+            {
+              "move": 48,
+              "score": -146,
+              "visits": 421,
+              "value": -0.14635629453681703
+            },
+            {
+              "move": 49,
+              "score": -500,
+              "visits": 1,
+              "value": -0.5
+            },
+            {
+              "move": 53,
+              "score": -305,
+              "visits": 63,
+              "value": -0.30536507936507934
+            },
+            {
+              "move": 59,
+              "score": -97,
+              "visits": 4454,
+              "value": -0.09651369555455777
+            },
+            {
+              "move": 61,
+              "score": -108,
+              "visits": 4667,
+              "value": -0.10842939790015017
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 4147,
+            "evaluations": 4147,
+            "meanDepth": 8.659030624547865,
+            "reusedNodes": 5720,
+            "treeNodes": 9867,
+            "memoryLimited": false,
+            "batchCalls": 149,
+            "batchLeaves": 4147,
+            "actualBatchMean": 27.83221476510067
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -108,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 24,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 22,
+          "score": 192,
+          "depth": 40,
+          "elapsedMs": 2000,
+          "nodes": 1053096,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.105083,
+          "candidates": [
+            {
+              "move": 8,
+              "score": -111,
+              "visits": 380,
+              "value": -0.11104210526315787
+            },
+            {
+              "move": 9,
+              "score": -338,
+              "visits": 14,
+              "value": -0.33792857142857147
+            },
+            {
+              "move": 16,
+              "score": -356,
+              "visits": 1294,
+              "value": -0.35607109737248815
+            },
+            {
+              "move": 22,
+              "score": 192,
+              "visits": 1055803,
+              "value": 0.19192583843765182
+            },
+            {
+              "move": 30,
+              "score": -237,
+              "visits": 265,
+              "value": -0.23651698113207567
+            },
+            {
+              "move": 38,
+              "score": -160,
+              "visits": 425,
+              "value": -0.1604258823529412
+            },
+            {
+              "move": 46,
+              "score": -281,
+              "visits": 214,
+              "value": -0.2807196261682243
+            },
+            {
+              "move": 54,
+              "score": 18,
+              "visits": 19,
+              "value": 0.017842105263157892
+            },
+            {
+              "move": 57,
+              "score": -51,
+              "visits": 74,
+              "value": -0.050608108108108105
+            },
+            {
+              "move": 58,
+              "score": -261,
+              "visits": 269,
+              "value": -0.2611561338289962
+            },
+            {
+              "move": 59,
+              "score": -388,
+              "visits": 203,
+              "value": -0.3877389162561577
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 1053096,
+            "evaluations": 976178,
+            "meanDepth": 22.061371422928204,
+            "reusedNodes": 5865,
+            "treeNodes": 985301,
+            "memoryLimited": false,
+            "batchCalls": 49486,
+            "batchLeaves": 976178,
+            "actualBatchMean": 19.726346845572486
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 192,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 25,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 53,
+          "score": -175,
+          "depth": 14,
+          "elapsedMs": 2009,
+          "nodes": 3926,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2009.244417,
+          "candidates": [
+            {
+              "move": 1,
+              "score": -718,
+              "visits": 1,
+              "value": -0.718
+            },
+            {
+              "move": 2,
+              "score": -163,
+              "visits": 751,
+              "value": -0.16315845539280974
+            },
+            {
+              "move": 3,
+              "score": -256,
+              "visits": 72,
+              "value": -0.2560277777777778
+            },
+            {
+              "move": 9,
+              "score": -503,
+              "visits": 1,
+              "value": -0.503
+            },
+            {
+              "move": 11,
+              "score": -160,
+              "visits": 2070,
+              "value": -0.16034396135265697
+            },
+            {
+              "move": 12,
+              "score": -642,
+              "visits": 1,
+              "value": -0.642
+            },
+            {
+              "move": 13,
+              "score": -175,
+              "visits": 103,
+              "value": -0.17497087378640774
+            },
+            {
+              "move": 15,
+              "score": -323,
+              "visits": 10,
+              "value": -0.32349999999999995
+            },
+            {
+              "move": 21,
+              "score": -557,
+              "visits": 1,
+              "value": -0.557
+            },
+            {
+              "move": 30,
+              "score": -236,
+              "visits": 58,
+              "value": -0.2357413793103448
+            },
+            {
+              "move": 48,
+              "score": -199,
+              "visits": 432,
+              "value": -0.1991643518518519
+            },
+            {
+              "move": 49,
+              "score": -487,
+              "visits": 1,
+              "value": -0.487
+            },
+            {
+              "move": 53,
+              "score": -175,
+              "visits": 4800,
+              "value": -0.17533416666666599
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 3926,
+            "evaluations": 3926,
+            "meanDepth": 7.72287315333673,
+            "reusedNodes": 4376,
+            "treeNodes": 8302,
+            "memoryLimited": false,
+            "batchCalls": 161,
+            "batchLeaves": 3926,
+            "actualBatchMean": 24.385093167701864
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -175,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 26,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 38,
+          "score": 163,
+          "depth": 37,
+          "elapsedMs": 2000,
+          "nodes": 1074290,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.0355,
+          "candidates": [
+            {
+              "move": 9,
+              "score": -599,
+              "visits": 27,
+              "value": -0.5988518518518517
+            },
+            {
+              "move": 16,
+              "score": -380,
+              "visits": 1367,
+              "value": -0.3797871250914402
+            },
+            {
+              "move": 38,
+              "score": 163,
+              "visits": 1059900,
+              "value": 0.1627470685913653
+            },
+            {
+              "move": 46,
+              "score": -345,
+              "visits": 594,
+              "value": -0.3448063973063974
+            },
+            {
+              "move": 54,
+              "score": -183,
+              "visits": 27,
+              "value": -0.18255555555555555
+            },
+            {
+              "move": 57,
+              "score": -252,
+              "visits": 71,
+              "value": -0.25177464788732395
+            },
+            {
+              "move": 58,
+              "score": 161,
+              "visits": 1039616,
+              "value": 0.16115768225959423
+            },
+            {
+              "move": 59,
+              "score": -293,
+              "visits": 400,
+              "value": -0.2930875000000001
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 1074290,
+            "evaluations": 989668,
+            "meanDepth": 19.582636904374052,
+            "reusedNodes": 954053,
+            "treeNodes": 1945521,
+            "memoryLimited": false,
+            "batchCalls": 44402,
+            "batchLeaves": 989668,
+            "actualBatchMean": 22.28881581910725
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 163,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 27,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 3,
+          "score": -150,
+          "depth": 18,
+          "elapsedMs": 2002,
+          "nodes": 4016,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2002.278875,
+          "candidates": [
+            {
+              "move": 2,
+              "score": -250,
+              "visits": 665,
+              "value": -0.24983308270676677
+            },
+            {
+              "move": 3,
+              "score": -150,
+              "visits": 4992,
+              "value": -0.14976842948717994
+            },
+            {
+              "move": 9,
+              "score": -247,
+              "visits": 33,
+              "value": -0.24724242424242426
+            },
+            {
+              "move": 11,
+              "score": -183,
+              "visits": 1280,
+              "value": -0.18285234374999987
+            },
+            {
+              "move": 12,
+              "score": -296,
+              "visits": 42,
+              "value": -0.29590476190476195
+            },
+            {
+              "move": 13,
+              "score": -181,
+              "visits": 254,
+              "value": -0.18081496062992117
+            },
+            {
+              "move": 15,
+              "score": -443,
+              "visits": 1,
+              "value": -0.443
+            },
+            {
+              "move": 21,
+              "score": -610,
+              "visits": 1,
+              "value": -0.61
+            },
+            {
+              "move": 30,
+              "score": -353,
+              "visits": 22,
+              "value": -0.3530454545454546
+            },
+            {
+              "move": 31,
+              "score": -187,
+              "visits": 246,
+              "value": -0.18693089430894314
+            },
+            {
+              "move": 39,
+              "score": -345,
+              "visits": 85,
+              "value": -0.34467058823529406
+            },
+            {
+              "move": 48,
+              "score": -217,
+              "visits": 873,
+              "value": -0.21658648339060724
+            },
+            {
+              "move": 49,
+              "score": -330,
+              "visits": 1,
+              "value": -0.33
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 4016,
+            "evaluations": 4016,
+            "meanDepth": 10.312001992031872,
+            "reusedNodes": 4480,
+            "treeNodes": 8496,
+            "memoryLimited": false,
+            "batchCalls": 158,
+            "batchLeaves": 4016,
+            "actualBatchMean": 25.417721518987342
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -150,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 28,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 46,
+          "score": 213,
+          "depth": 36,
+          "elapsedMs": 2000,
+          "nodes": 1107332,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.031167,
+          "candidates": [
+            {
+              "move": 1,
+              "score": -193,
+              "visits": 38,
+              "value": -0.1928421052631579
+            },
+            {
+              "move": 2,
+              "score": 163,
+              "visits": 3349,
+              "value": 0.16316064496864757
+            },
+            {
+              "move": 9,
+              "score": -222,
+              "visits": 17,
+              "value": -0.2218235294117647
+            },
+            {
+              "move": 16,
+              "score": -251,
+              "visits": 563,
+              "value": -0.2506536412078155
+            },
+            {
+              "move": 46,
+              "score": 213,
+              "visits": 1104356,
+              "value": 0.213090083270256
+            },
+            {
+              "move": 54,
+              "score": 5,
+              "visits": 29,
+              "value": 0.005379310344827602
+            },
+            {
+              "move": 57,
+              "score": -53,
+              "visits": 33,
+              "value": -0.053272727272727256
+            },
+            {
+              "move": 58,
+              "score": 118,
+              "visits": 1028,
+              "value": 0.11817509727626462
+            },
+            {
+              "move": 59,
+              "score": -537,
+              "visits": 92,
+              "value": -0.5365978260869565
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 1107332,
+            "evaluations": 1004688,
+            "meanDepth": 20.837611484179995,
+            "reusedNodes": 2174,
+            "treeNodes": 1011936,
+            "memoryLimited": false,
+            "batchCalls": 51955,
+            "batchLeaves": 1004688,
+            "actualBatchMean": 19.337657588297564
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 213,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 29,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 11,
+          "score": -138,
+          "depth": 19,
+          "elapsedMs": 2010,
+          "nodes": 4013,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2010.034125,
+          "candidates": [
+            {
+              "move": 9,
+              "score": -417,
+              "visits": 42,
+              "value": -0.4170238095238095
+            },
+            {
+              "move": 11,
+              "score": -138,
+              "visits": 7826,
+              "value": -0.1376612573473033
+            },
+            {
+              "move": 12,
+              "score": -471,
+              "visits": 43,
+              "value": -0.47053488372093016
+            },
+            {
+              "move": 13,
+              "score": -279,
+              "visits": 52,
+              "value": -0.278923076923077
+            },
+            {
+              "move": 15,
+              "score": -636,
+              "visits": 1,
+              "value": -0.636
+            },
+            {
+              "move": 21,
+              "score": -786,
+              "visits": 1,
+              "value": -0.786
+            },
+            {
+              "move": 30,
+              "score": -554,
+              "visits": 30,
+              "value": -0.5540333333333334
+            },
+            {
+              "move": 31,
+              "score": -420,
+              "visits": 45,
+              "value": -0.4199555555555555
+            },
+            {
+              "move": 39,
+              "score": -366,
+              "visits": 14,
+              "value": -0.3662857142857142
+            },
+            {
+              "move": 47,
+              "score": -667,
+              "visits": 48,
+              "value": -0.667125
+            },
+            {
+              "move": 48,
+              "score": -197,
+              "visits": 380,
+              "value": -0.19663947368421045
+            },
+            {
+              "move": 49,
+              "score": -594,
+              "visits": 1,
+              "value": -0.594
+            },
+            {
+              "move": 54,
+              "score": -382,
+              "visits": 58,
+              "value": -0.38196551724137917
+            },
+            {
+              "move": 55,
+              "score": -866,
+              "visits": 1,
+              "value": -0.866
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 4013,
+            "evaluations": 4013,
+            "meanDepth": 11.21729379516571,
+            "reusedNodes": 4530,
+            "treeNodes": 8543,
+            "memoryLimited": false,
+            "batchCalls": 160,
+            "batchLeaves": 4013,
+            "actualBatchMean": 25.08125
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -138,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 30,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 58,
+          "score": 205,
+          "depth": 34,
+          "elapsedMs": 2000,
+          "nodes": 1072488,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.021917,
+          "candidates": [
+            {
+              "move": 1,
+              "score": -74,
+              "visits": 99,
+              "value": -0.07356565656565658
+            },
+            {
+              "move": 2,
+              "score": 99,
+              "visits": 2528,
+              "value": 0.0992733386075948
+            },
+            {
+              "move": 8,
+              "score": 172,
+              "visits": 16126,
+              "value": 0.17177663400719329
+            },
+            {
+              "move": 9,
+              "score": -269,
+              "visits": 88,
+              "value": -0.26925000000000004
+            },
+            {
+              "move": 16,
+              "score": -277,
+              "visits": 1696,
+              "value": -0.2774528301886794
+            },
+            {
+              "move": 57,
+              "score": -160,
+              "visits": 137,
+              "value": -0.16023357664233578
+            },
+            {
+              "move": 58,
+              "score": 205,
+              "visits": 2148637,
+              "value": 0.20535041237770704
+            },
+            {
+              "move": 59,
+              "score": -54,
+              "visits": 1318,
+              "value": -0.05360242792109249
+            },
+            {
+              "move": 62,
+              "score": -436,
+              "visits": 77,
+              "value": -0.4364285714285713
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 1072488,
+            "evaluations": 969036,
+            "meanDepth": 21.086031731823574,
+            "reusedNodes": 1000649,
+            "treeNodes": 1977542,
+            "memoryLimited": false,
+            "batchCalls": 57612,
+            "batchLeaves": 969036,
+            "actualBatchMean": 16.820037492189126
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 205,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 31,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 13,
+          "score": -138,
+          "depth": 21,
+          "elapsedMs": 2005,
+          "nodes": 3275,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2005.304625,
+          "candidates": [
+            {
+              "move": 12,
+              "score": -431,
+              "visits": 67,
+              "value": -0.4313731343283583
+            },
+            {
+              "move": 13,
+              "score": -138,
+              "visits": 9098,
+              "value": -0.13842657726972987
+            },
+            {
+              "move": 21,
+              "score": -285,
+              "visits": 25,
+              "value": -0.285
+            },
+            {
+              "move": 30,
+              "score": -318,
+              "visits": 75,
+              "value": -0.31752
+            },
+            {
+              "move": 31,
+              "score": -199,
+              "visits": 93,
+              "value": -0.1993548387096774
+            },
+            {
+              "move": 39,
+              "score": -424,
+              "visits": 27,
+              "value": -0.4244074074074074
+            },
+            {
+              "move": 47,
+              "score": -729,
+              "visits": 11,
+              "value": -0.7293636363636363
+            },
+            {
+              "move": 48,
+              "score": -225,
+              "visits": 649,
+              "value": -0.22523266563944533
+            },
+            {
+              "move": 49,
+              "score": -760,
+              "visits": 1,
+              "value": -0.76
+            },
+            {
+              "move": 54,
+              "score": -241,
+              "visits": 56,
+              "value": -0.24083928571428578
+            },
+            {
+              "move": 55,
+              "score": -695,
+              "visits": 1,
+              "value": -0.695
+            },
+            {
+              "move": 59,
+              "score": -310,
+              "visits": 93,
+              "value": -0.3096881720430107
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 3275,
+            "evaluations": 3275,
+            "meanDepth": 11.771297709923664,
+            "reusedNodes": 6922,
+            "treeNodes": 10197,
+            "memoryLimited": false,
+            "batchCalls": 151,
+            "batchLeaves": 3275,
+            "actualBatchMean": 21.688741721854306
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -138,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 32,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 12,
+          "score": 246,
+          "depth": 31,
+          "elapsedMs": 751,
+          "nodes": 326001,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 751.214125,
+          "candidates": [
+            {
+              "move": 1,
+              "score": -247,
+              "visits": 21,
+              "value": -0.24733333333333332
+            },
+            {
+              "move": 2,
+              "score": -448,
+              "visits": 83,
+              "value": -0.4478313253012047
+            },
+            {
+              "move": 4,
+              "score": 164,
+              "visits": 628664,
+              "value": 0.16393756283165342
+            },
+            {
+              "move": 6,
+              "score": -348,
+              "visits": 30,
+              "value": -0.3483
+            },
+            {
+              "move": 8,
+              "score": -207,
+              "visits": 121,
+              "value": -0.20729752066115706
+            },
+            {
+              "move": 9,
+              "score": -462,
+              "visits": 34,
+              "value": -0.46167647058823524
+            },
+            {
+              "move": 12,
+              "score": 246,
+              "visits": 1201236,
+              "value": 0.24600938866300948
+            },
+            {
+              "move": 16,
+              "score": 45,
+              "visits": 1149,
+              "value": 0.045107049608355085
+            },
+            {
+              "move": 54,
+              "score": -449,
+              "visits": 29,
+              "value": -0.4492068965517242
+            },
+            {
+              "move": 59,
+              "score": 163,
+              "visits": 458259,
+              "value": 0.1629340263911881
+            },
+            {
+              "move": 62,
+              "score": -500,
+              "visits": 150,
+              "value": -0.49951333333333336
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 326001,
+            "evaluations": 321289,
+            "meanDepth": 19.47698319943804,
+            "reusedNodes": 1773198,
+            "treeNodes": 2097152,
+            "memoryLimited": true,
+            "batchCalls": 18511,
+            "batchLeaves": 321289,
+            "actualBatchMean": 17.35665280103722
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 246,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 33,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 48,
+          "score": -189,
+          "depth": 16,
+          "elapsedMs": 2001,
+          "nodes": 3781,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2001.106,
+          "candidates": [
+            {
+              "move": 4,
+              "score": -427,
+              "visits": 65,
+              "value": -0.4273846153846155
+            },
+            {
+              "move": 5,
+              "score": -201,
+              "visits": 2522,
+              "value": -0.2008243457573358
+            },
+            {
+              "move": 21,
+              "score": -292,
+              "visits": 40,
+              "value": -0.29165
+            },
+            {
+              "move": 30,
+              "score": -311,
+              "visits": 58,
+              "value": -0.31120689655172407
+            },
+            {
+              "move": 31,
+              "score": -363,
+              "visits": 32,
+              "value": -0.36303124999999997
+            },
+            {
+              "move": 39,
+              "score": -434,
+              "visits": 31,
+              "value": -0.43441935483870975
+            },
+            {
+              "move": 47,
+              "score": -777,
+              "visits": 35,
+              "value": -0.7767142857142859
+            },
+            {
+              "move": 48,
+              "score": -189,
+              "visits": 3730,
+              "value": -0.18889678284182307
+            },
+            {
+              "move": 49,
+              "score": -837,
+              "visits": 1,
+              "value": -0.837
+            },
+            {
+              "move": 54,
+              "score": -375,
+              "visits": 86,
+              "value": -0.3754302325581395
+            },
+            {
+              "move": 55,
+              "score": -758,
+              "visits": 1,
+              "value": -0.758
+            },
+            {
+              "move": 59,
+              "score": -292,
+              "visits": 84,
+              "value": -0.2917380952380952
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 3781,
+            "evaluations": 3781,
+            "meanDepth": 8.799788415763025,
+            "reusedNodes": 2905,
+            "treeNodes": 6686,
+            "memoryLimited": false,
+            "batchCalls": 177,
+            "batchLeaves": 3781,
+            "actualBatchMean": 21.361581920903955
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -189,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 34,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 4,
+          "score": 210,
+          "depth": 29,
+          "elapsedMs": 2000,
+          "nodes": 1420071,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.022375,
+          "candidates": [
+            {
+              "move": 1,
+              "score": -72,
+              "visits": 95,
+              "value": -0.0724
+            },
+            {
+              "move": 2,
+              "score": -250,
+              "visits": 282,
+              "value": -0.25041134751773036
+            },
+            {
+              "move": 4,
+              "score": 210,
+              "visits": 785125,
+              "value": 0.20958484954625659
+            },
+            {
+              "move": 6,
+              "score": -30,
+              "visits": 23,
+              "value": -0.029869565217391307
+            },
+            {
+              "move": 8,
+              "score": -280,
+              "visits": 207,
+              "value": -0.28042028985507245
+            },
+            {
+              "move": 9,
+              "score": -324,
+              "visits": 182,
+              "value": -0.3242307692307693
+            },
+            {
+              "move": 14,
+              "score": -138,
+              "visits": 36,
+              "value": -0.13830555555555557
+            },
+            {
+              "move": 16,
+              "score": -36,
+              "visits": 1161,
+              "value": -0.036195521102497845
+            },
+            {
+              "move": 54,
+              "score": -315,
+              "visits": 19,
+              "value": -0.3154210526315789
+            },
+            {
+              "move": 59,
+              "score": 277,
+              "visits": 642900,
+              "value": 0.2766577508166097
+            },
+            {
+              "move": 62,
+              "score": -416,
+              "visits": 110,
+              "value": -0.4162999999999998
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 1420071,
+            "evaluations": 1019206,
+            "meanDepth": 17.300117388496773,
+            "reusedNodes": 10070,
+            "treeNodes": 1035016,
+            "memoryLimited": false,
+            "batchCalls": 60164,
+            "batchLeaves": 1019206,
+            "actualBatchMean": 16.94046273519048
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 210,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 35,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 5,
+          "score": -60,
+          "depth": 20,
+          "elapsedMs": 2007,
+          "nodes": 3783,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2007.547583,
+          "candidates": [
+            {
+              "move": 5,
+              "score": -60,
+              "visits": 3224,
+              "value": -0.06015663771712178
+            },
+            {
+              "move": 6,
+              "score": -355,
+              "visits": 42,
+              "value": -0.3545000000000001
+            },
+            {
+              "move": 14,
+              "score": -532,
+              "visits": 1,
+              "value": -0.532
+            },
+            {
+              "move": 21,
+              "score": -413,
+              "visits": 29,
+              "value": -0.41296551724137937
+            },
+            {
+              "move": 30,
+              "score": -678,
+              "visits": 1,
+              "value": -0.678
+            },
+            {
+              "move": 31,
+              "score": -217,
+              "visits": 28,
+              "value": -0.21692857142857142
+            },
+            {
+              "move": 39,
+              "score": -548,
+              "visits": 1,
+              "value": -0.548
+            },
+            {
+              "move": 47,
+              "score": -628,
+              "visits": 31,
+              "value": -0.6281290322580645
+            },
+            {
+              "move": 49,
+              "score": -636,
+              "visits": 1,
+              "value": -0.636
+            },
+            {
+              "move": 54,
+              "score": -353,
+              "visits": 61,
+              "value": -0.3529016393442622
+            },
+            {
+              "move": 55,
+              "score": -795,
+              "visits": 1,
+              "value": -0.795
+            },
+            {
+              "move": 59,
+              "score": -157,
+              "visits": 538,
+              "value": -0.15730297397769516
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 3783,
+            "evaluations": 3783,
+            "meanDepth": 9.171028284430346,
+            "reusedNodes": 176,
+            "treeNodes": 3959,
+            "memoryLimited": false,
+            "batchCalls": 176,
+            "batchLeaves": 3783,
+            "actualBatchMean": 21.494318181818183
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -60,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 36,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 59,
+          "score": 282,
+          "depth": 29,
+          "elapsedMs": 2000,
+          "nodes": 2020130,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.027667,
+          "candidates": [
+            {
+              "move": 1,
+              "score": -193,
+              "visits": 324,
+              "value": -0.19281481481481474
+            },
+            {
+              "move": 2,
+              "score": -99,
+              "visits": 1993,
+              "value": -0.09893075765178108
+            },
+            {
+              "move": 8,
+              "score": -393,
+              "visits": 416,
+              "value": -0.3928533653846155
+            },
+            {
+              "move": 9,
+              "score": -481,
+              "visits": 334,
+              "value": -0.4814880239520959
+            },
+            {
+              "move": 16,
+              "score": -153,
+              "visits": 2228,
+              "value": -0.15340798922800733
+            },
+            {
+              "move": 54,
+              "score": -277,
+              "visits": 47,
+              "value": -0.2773617021276596
+            },
+            {
+              "move": 59,
+              "score": 282,
+              "visits": 2439755,
+              "value": 0.2816823074448361
+            },
+            {
+              "move": 62,
+              "score": -377,
+              "visits": 145,
+              "value": -0.3771034482758621
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 2020130,
+            "evaluations": 854687,
+            "meanDepth": 18.70296713577839,
+            "reusedNodes": 153697,
+            "treeNodes": 1028529,
+            "memoryLimited": false,
+            "batchCalls": 58841,
+            "batchLeaves": 854687,
+            "actualBatchMean": 14.525364966604918
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 282,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 37,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 57,
+          "score": -145,
+          "depth": 23,
+          "elapsedMs": 2008,
+          "nodes": 3035,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2008.072125,
+          "candidates": [
+            {
+              "move": 6,
+              "score": -561,
+              "visits": 8,
+              "value": -0.560625
+            },
+            {
+              "move": 14,
+              "score": -274,
+              "visits": 21,
+              "value": -0.27371428571428574
+            },
+            {
+              "move": 21,
+              "score": -648,
+              "visits": 10,
+              "value": -0.6478
+            },
+            {
+              "move": 30,
+              "score": -503,
+              "visits": 22,
+              "value": -0.5025454545454546
+            },
+            {
+              "move": 31,
+              "score": -321,
+              "visits": 10,
+              "value": -0.32109999999999994
+            },
+            {
+              "move": 39,
+              "score": -616,
+              "visits": 12,
+              "value": -0.6156666666666667
+            },
+            {
+              "move": 47,
+              "score": -883,
+              "visits": 1,
+              "value": -0.883
+            },
+            {
+              "move": 49,
+              "score": -468,
+              "visits": 1,
+              "value": -0.468
+            },
+            {
+              "move": 54,
+              "score": -178,
+              "visits": 69,
+              "value": -0.17768115942028984
+            },
+            {
+              "move": 55,
+              "score": -805,
+              "visits": 1,
+              "value": -0.805
+            },
+            {
+              "move": 57,
+              "score": -145,
+              "visits": 5938,
+              "value": -0.14537942068036397
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 3035,
+            "evaluations": 3031,
+            "meanDepth": 10.540691927512356,
+            "reusedNodes": 3059,
+            "treeNodes": 6094,
+            "memoryLimited": false,
+            "batchCalls": 175,
+            "batchLeaves": 3031,
+            "actualBatchMean": 17.32
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -145,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 38,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 1,
+          "score": 410,
+          "depth": 26,
+          "elapsedMs": 2000,
+          "nodes": 1170119,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.054375,
+          "candidates": [
+            {
+              "move": 1,
+              "score": 410,
+              "visits": 3568868,
+              "value": 0.409991632360758
+            },
+            {
+              "move": 2,
+              "score": -6,
+              "visits": 11578,
+              "value": -0.005637847642079822
+            },
+            {
+              "move": 8,
+              "score": 30,
+              "visits": 19902,
+              "value": 0.030179027233443283
+            },
+            {
+              "move": 9,
+              "score": -316,
+              "visits": 541,
+              "value": -0.3156007393715342
+            },
+            {
+              "move": 16,
+              "score": -242,
+              "visits": 1632,
+              "value": -0.24191421568627478
+            },
+            {
+              "move": 54,
+              "score": -365,
+              "visits": 308,
+              "value": -0.36516883116883136
+            },
+            {
+              "move": 62,
+              "score": -328,
+              "visits": 147,
+              "value": -0.3284489795918367
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 1170119,
+            "evaluations": 1044686,
+            "meanDepth": 17.01618467865234,
+            "reusedNodes": 1016144,
+            "treeNodes": 2076287,
+            "memoryLimited": false,
+            "batchCalls": 63909,
+            "batchLeaves": 1044686,
+            "actualBatchMean": 16.346461374767248
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 410,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 39,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 14,
+          "score": -195,
+          "depth": 22,
+          "elapsedMs": 2005,
+          "nodes": 2912,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2005.878083,
+          "candidates": [
+            {
+              "move": 2,
+              "score": -357,
+              "visits": 187,
+              "value": -0.35727272727272713
+            },
+            {
+              "move": 6,
+              "score": -454,
+              "visits": 92,
+              "value": -0.4540543478260869
+            },
+            {
+              "move": 9,
+              "score": -506,
+              "visits": 20,
+              "value": -0.5063500000000001
+            },
+            {
+              "move": 14,
+              "score": -195,
+              "visits": 5270,
+              "value": -0.19516755218216303
+            },
+            {
+              "move": 15,
+              "score": -326,
+              "visits": 28,
+              "value": -0.3262142857142857
+            },
+            {
+              "move": 21,
+              "score": -411,
+              "visits": 71,
+              "value": -0.411056338028169
+            },
+            {
+              "move": 30,
+              "score": -383,
+              "visits": 82,
+              "value": -0.3831707317073171
+            },
+            {
+              "move": 31,
+              "score": -513,
+              "visits": 10,
+              "value": -0.5132999999999999
+            },
+            {
+              "move": 39,
+              "score": -458,
+              "visits": 24,
+              "value": -0.45791666666666675
+            },
+            {
+              "move": 47,
+              "score": -592,
+              "visits": 58,
+              "value": -0.5924482758620688
+            },
+            {
+              "move": 49,
+              "score": -488,
+              "visits": 18,
+              "value": -0.48750000000000004
+            },
+            {
+              "move": 54,
+              "score": -241,
+              "visits": 391,
+              "value": -0.24090537084398986
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 2912,
+            "evaluations": 2896,
+            "meanDepth": 11.649381868131869,
+            "reusedNodes": 3340,
+            "treeNodes": 6250,
+            "memoryLimited": false,
+            "batchCalls": 250,
+            "batchLeaves": 2896,
+            "actualBatchMean": 11.584
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -195,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 40,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 9,
+          "score": 491,
+          "depth": 23,
+          "elapsedMs": 2000,
+          "nodes": 1262110,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2000.037375,
+          "candidates": [
+            {
+              "move": 2,
+              "score": 141,
+              "visits": 1839,
+              "value": 0.14093529091897788
+            },
+            {
+              "move": 6,
+              "score": -505,
+              "visits": 36,
+              "value": -0.5054444444444446
+            },
+            {
+              "move": 8,
+              "score": 146,
+              "visits": 1251,
+              "value": 0.145734612310152
+            },
+            {
+              "move": 9,
+              "score": 491,
+              "visits": 1604261,
+              "value": 0.4905305558135317
+            },
+            {
+              "move": 15,
+              "score": -574,
+              "visits": 18,
+              "value": -0.5736111111111112
+            },
+            {
+              "move": 16,
+              "score": -137,
+              "visits": 618,
+              "value": -0.13666666666666658
+            },
+            {
+              "move": 54,
+              "score": -169,
+              "visits": 134,
+              "value": -0.16906716417910442
+            },
+            {
+              "move": 62,
+              "score": -332,
+              "visits": 51,
+              "value": -0.33198039215686276
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 1262110,
+            "evaluations": 1142600,
+            "meanDepth": 15.222712758792815,
+            "reusedNodes": 304678,
+            "treeNodes": 1468774,
+            "memoryLimited": false,
+            "batchCalls": 73440,
+            "batchLeaves": 1142600,
+            "actualBatchMean": 15.558278867102397
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 491,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 41,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 2,
+          "score": -176,
+          "depth": 19,
+          "elapsedMs": 2001,
+          "nodes": 2934,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2001.35575,
+          "candidates": [
+            {
+              "move": 2,
+              "score": -176,
+              "visits": 7822,
+              "value": -0.1762714139606235
+            },
+            {
+              "move": 8,
+              "score": -816,
+              "visits": 1,
+              "value": -0.816
+            },
+            {
+              "move": 15,
+              "score": -538,
+              "visits": 33,
+              "value": -0.5380909090909092
+            },
+            {
+              "move": 21,
+              "score": -512,
+              "visits": 1,
+              "value": -0.512
+            },
+            {
+              "move": 30,
+              "score": -746,
+              "visits": 1,
+              "value": -0.746
+            },
+            {
+              "move": 31,
+              "score": -443,
+              "visits": 36,
+              "value": -0.4434722222222222
+            },
+            {
+              "move": 39,
+              "score": -460,
+              "visits": 33,
+              "value": -0.4597575757575757
+            },
+            {
+              "move": 47,
+              "score": -727,
+              "visits": 37,
+              "value": -0.7265135135135136
+            },
+            {
+              "move": 49,
+              "score": -592,
+              "visits": 1,
+              "value": -0.592
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 2934,
+            "evaluations": 2911,
+            "meanDepth": 11.0439672801636,
+            "reusedNodes": 5030,
+            "treeNodes": 7952,
+            "memoryLimited": false,
+            "batchCalls": 254,
+            "batchLeaves": 2911,
+            "actualBatchMean": 11.460629921259843
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -176,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 42,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 8,
+          "score": 553,
+          "depth": 21,
+          "elapsedMs": 1678,
+          "nodes": 1010720,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 1678.738,
+          "candidates": [
+            {
+              "move": 6,
+              "score": -312,
+              "visits": 135,
+              "value": -0.31243703703703685
+            },
+            {
+              "move": 8,
+              "score": 553,
+              "visits": 2287176,
+              "value": 0.5531393486989667
+            },
+            {
+              "move": 15,
+              "score": -591,
+              "visits": 126,
+              "value": -0.5913809523809521
+            },
+            {
+              "move": 16,
+              "score": -56,
+              "visits": 935,
+              "value": -0.05612620320855619
+            },
+            {
+              "move": 49,
+              "score": -858,
+              "visits": 295,
+              "value": -0.857976271186441
+            },
+            {
+              "move": 54,
+              "score": -354,
+              "visits": 177,
+              "value": -0.35415819209039534
+            },
+            {
+              "move": 62,
+              "score": -622,
+              "visits": 114,
+              "value": -0.6221315789473683
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 1010720,
+            "evaluations": 933142,
+            "meanDepth": 13.780554456229222,
+            "reusedNodes": 1146122,
+            "treeNodes": 2097152,
+            "memoryLimited": true,
+            "batchCalls": 55469,
+            "batchLeaves": 933142,
+            "actualBatchMean": 16.822765869224252
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 553,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 43,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 30,
+          "score": -10,
+          "depth": 18,
+          "elapsedMs": 2003,
+          "nodes": 2957,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2003.115417,
+          "candidates": [
+            {
+              "move": 0,
+              "score": -585,
+              "visits": 84,
+              "value": -0.5849166666666666
+            },
+            {
+              "move": 15,
+              "score": -237,
+              "visits": 464,
+              "value": -0.23695474137931039
+            },
+            {
+              "move": 16,
+              "score": -501,
+              "visits": 28,
+              "value": -0.5007142857142858
+            },
+            {
+              "move": 21,
+              "score": -261,
+              "visits": 445,
+              "value": -0.2611460674157306
+            },
+            {
+              "move": 30,
+              "score": -10,
+              "visits": 4867,
+              "value": -0.009566262584754513
+            },
+            {
+              "move": 31,
+              "score": -217,
+              "visits": 3476,
+              "value": -0.21695483314154224
+            },
+            {
+              "move": 39,
+              "score": -227,
+              "visits": 958,
+              "value": -0.22743110647181644
+            },
+            {
+              "move": 47,
+              "score": -367,
+              "visits": 78,
+              "value": -0.36733333333333323
+            },
+            {
+              "move": 49,
+              "score": -454,
+              "visits": 87,
+              "value": -0.45365517241379316
+            },
+            {
+              "move": 54,
+              "score": -313,
+              "visits": 129,
+              "value": -0.3129302325581396
+            },
+            {
+              "move": 55,
+              "score": -335,
+              "visits": 28,
+              "value": -0.3348571428571428
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 2957,
+            "evaluations": 2438,
+            "meanDepth": 11.863375042272576,
+            "reusedNodes": 7674,
+            "treeNodes": 10159,
+            "memoryLimited": false,
+            "batchCalls": 332,
+            "batchLeaves": 2438,
+            "actualBatchMean": 7.343373493975903
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -10,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 44,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 21,
+          "score": 100000,
+          "depth": 19,
+          "elapsedMs": 199,
+          "nodes": 137882,
+          "exact": true,
+          "ttHits": 0,
+          "wallMs": 200.020291,
+          "candidates": [
+            {
+              "move": 6,
+              "score": -673,
+              "visits": 15,
+              "value": -0.6734666666666668
+            },
+            {
+              "move": 15,
+              "score": -474,
+              "visits": 13,
+              "value": -0.47415384615384615
+            },
+            {
+              "move": 16,
+              "score": -267,
+              "visits": 217,
+              "value": -0.26690322580645165
+            },
+            {
+              "move": 21,
+              "score": 100000,
+              "visits": 551418,
+              "value": 1.0
+            },
+            {
+              "move": 49,
+              "score": -443,
+              "visits": 23,
+              "value": -0.44256521739130433
+            },
+            {
+              "move": 54,
+              "score": -328,
+              "visits": 26,
+              "value": -0.3276538461538462
+            },
+            {
+              "move": 62,
+              "score": -218,
+              "visits": 18,
+              "value": -0.2181666666666667
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 137882,
+            "evaluations": 134174,
+            "meanDepth": 11.837781581352171,
+            "reusedNodes": 366450,
+            "treeNodes": 501621,
+            "memoryLimited": false,
+            "batchCalls": 4592,
+            "batchLeaves": 134174,
+            "actualBatchMean": 29.219076655052266
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 100000,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 45,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 31,
+          "score": -2,
+          "depth": 16,
+          "elapsedMs": 2006,
+          "nodes": 25720,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2006.053084,
+          "candidates": [
+            {
+              "move": 0,
+              "score": -593,
+              "visits": 78,
+              "value": -0.5927179487179488
+            },
+            {
+              "move": 16,
+              "score": -424,
+              "visits": 28,
+              "value": -0.42375
+            },
+            {
+              "move": 31,
+              "score": -2,
+              "visits": 29596,
+              "value": -0.0023059872955805
+            },
+            {
+              "move": 39,
+              "score": -158,
+              "visits": 246,
+              "value": -0.15765040650406503
+            },
+            {
+              "move": 47,
+              "score": -233,
+              "visits": 117,
+              "value": -0.2332991452991453
+            },
+            {
+              "move": 49,
+              "score": -261,
+              "visits": 371,
+              "value": -0.2608382749326146
+            },
+            {
+              "move": 54,
+              "score": -535,
+              "visits": 12,
+              "value": -0.5348333333333334
+            },
+            {
+              "move": 55,
+              "score": -306,
+              "visits": 100,
+              "value": -0.3064799999999999
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 25720,
+            "evaluations": 2483,
+            "meanDepth": 11.578149300155522,
+            "reusedNodes": 4357,
+            "treeNodes": 6939,
+            "memoryLimited": false,
+            "batchCalls": 337,
+            "batchLeaves": 2483,
+            "actualBatchMean": 7.367952522255193
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -2,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 46,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 7,
+          "score": 100000,
+          "depth": 0,
+          "elapsedMs": 4,
+          "nodes": 0,
+          "exact": true,
+          "ttHits": 0,
+          "wallMs": 4.886084,
+          "candidates": [
+            {
+              "move": 6,
+              "score": -506,
+              "visits": 16,
+              "value": -0.5057499999999999
+            },
+            {
+              "move": 7,
+              "score": 100000,
+              "visits": 136999,
+              "value": 1.0
+            },
+            {
+              "move": 15,
+              "score": 1,
+              "visits": 230,
+              "value": 0.0007434782608695814
+            },
+            {
+              "move": 16,
+              "score": -110,
+              "visits": 233,
+              "value": -0.10981974248927036
+            },
+            {
+              "move": 23,
+              "score": 3,
+              "visits": 1229,
+              "value": 0.0026932465419040093
+            },
+            {
+              "move": 39,
+              "score": 6,
+              "visits": 2371,
+              "value": 0.006379164909321023
+            },
+            {
+              "move": 47,
+              "score": 22,
+              "visits": 17971,
+              "value": 0.02194713705414294
+            },
+            {
+              "move": 49,
+              "score": -421,
+              "visits": 34,
+              "value": -0.4210588235294119
+            },
+            {
+              "move": 54,
+              "score": -7,
+              "visits": 883,
+              "value": -0.006561721404303536
+            },
+            {
+              "move": 62,
+              "score": -147,
+              "visits": 48,
+              "value": -0.14672916666666666
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 0,
+            "evaluations": 0,
+            "meanDepth": 0.0,
+            "reusedNodes": 122791,
+            "treeNodes": 122791,
+            "memoryLimited": false,
+            "batchCalls": 0,
+            "batchLeaves": 0,
+            "actualBatchMean": 0
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 100000,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 47,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 6,
+          "score": -10,
+          "depth": 16,
+          "elapsedMs": 2002,
+          "nodes": 57120,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2002.194916,
+          "candidates": [
+            {
+              "move": 0,
+              "score": -441,
+              "visits": 37,
+              "value": -0.4413243243243242
+            },
+            {
+              "move": 6,
+              "score": -10,
+              "visits": 60353,
+              "value": -0.009887810050867401
+            },
+            {
+              "move": 15,
+              "score": -581,
+              "visits": 30,
+              "value": -0.5806666666666668
+            },
+            {
+              "move": 16,
+              "score": -970,
+              "visits": 1,
+              "value": -0.97
+            },
+            {
+              "move": 23,
+              "score": -272,
+              "visits": 86,
+              "value": -0.27245348837209293
+            },
+            {
+              "move": 39,
+              "score": -597,
+              "visits": 43,
+              "value": -0.597186046511628
+            },
+            {
+              "move": 47,
+              "score": -492,
+              "visits": 38,
+              "value": -0.4918684210526316
+            },
+            {
+              "move": 49,
+              "score": -483,
+              "visits": 10,
+              "value": -0.4833
+            },
+            {
+              "move": 54,
+              "score": -745,
+              "visits": 1,
+              "value": -0.745
+            },
+            {
+              "move": 55,
+              "score": -304,
+              "visits": 15,
+              "value": -0.30433333333333334
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 57120,
+            "evaluations": 2144,
+            "meanDepth": 9.03890056022409,
+            "reusedNodes": 1166,
+            "treeNodes": 3396,
+            "memoryLimited": false,
+            "batchCalls": 380,
+            "batchLeaves": 2144,
+            "actualBatchMean": 5.6421052631578945
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -10,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 48,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 39,
+          "score": 100000,
+          "depth": 0,
+          "elapsedMs": 1,
+          "nodes": 0,
+          "exact": true,
+          "ttHits": 0,
+          "wallMs": 1.473625,
+          "candidates": [
+            {
+              "move": 15,
+              "score": 14,
+              "visits": 16259,
+              "value": 0.014354019312380862
+            },
+            {
+              "move": 16,
+              "score": -277,
+              "visits": 181,
+              "value": -0.27702209944751394
+            },
+            {
+              "move": 23,
+              "score": -195,
+              "visits": 175,
+              "value": -0.19521714285714292
+            },
+            {
+              "move": 39,
+              "score": 100000,
+              "visits": 22907,
+              "value": 1.0
+            },
+            {
+              "move": 47,
+              "score": -57,
+              "visits": 441,
+              "value": -0.05677777777777778
+            },
+            {
+              "move": 49,
+              "score": -260,
+              "visits": 26,
+              "value": -0.2597307692307692
+            },
+            {
+              "move": 54,
+              "score": -69,
+              "visits": 359,
+              "value": -0.06874373259052924
+            },
+            {
+              "move": 62,
+              "score": -100,
+              "visits": 77,
+              "value": -0.09985714285714284
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 0,
+            "evaluations": 0,
+            "meanDepth": 0.0,
+            "reusedNodes": 16741,
+            "treeNodes": 16741,
+            "memoryLimited": false,
+            "batchCalls": 0,
+            "batchLeaves": 0,
+            "actualBatchMean": 0
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 100000,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 49,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 55,
+          "score": -100000,
+          "depth": 13,
+          "elapsedMs": 2004,
+          "nodes": 3374,
+          "exact": false,
+          "ttHits": 0,
+          "wallMs": 2004.252125,
+          "candidates": [
+            {
+              "move": 0,
+              "score": -576,
+              "visits": 128,
+              "value": -0.5759609375000001
+            },
+            {
+              "move": 16,
+              "score": -585,
+              "visits": 37,
+              "value": -0.5850810810810809
+            },
+            {
+              "move": 23,
+              "score": -596,
+              "visits": 311,
+              "value": -0.5960739549839232
+            },
+            {
+              "move": 47,
+              "score": -499,
+              "visits": 394,
+              "value": -0.4991116751269034
+            },
+            {
+              "move": 49,
+              "score": -462,
+              "visits": 798,
+              "value": -0.46167543859649146
+            },
+            {
+              "move": 54,
+              "score": -447,
+              "visits": 523,
+              "value": -0.4467227533460806
+            },
+            {
+              "move": 55,
+              "score": -100000,
+              "visits": 7267,
+              "value": -1.0
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 3374,
+            "evaluations": 2227,
+            "meanDepth": 7.461173681090694,
+            "reusedNodes": 1268,
+            "treeNodes": 3598,
+            "memoryLimited": false,
+            "batchCalls": 420,
+            "batchLeaves": 2227,
+            "actualBatchMean": 5.302380952380952
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -100000,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 50,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 47,
+          "score": 100000,
+          "depth": 0,
+          "elapsedMs": 0,
+          "nodes": 0,
+          "exact": true,
+          "ttHits": 0,
+          "wallMs": 0.302375,
+          "candidates": [
+            {
+              "move": 15,
+              "score": -308,
+              "visits": 153,
+              "value": -0.308156862745098
+            },
+            {
+              "move": 16,
+              "score": -332,
+              "visits": 41,
+              "value": -0.33195121951219514
+            },
+            {
+              "move": 23,
+              "score": -188,
+              "visits": 232,
+              "value": -0.1879698275862069
+            },
+            {
+              "move": 47,
+              "score": 100000,
+              "visits": 10005,
+              "value": 1.0
+            },
+            {
+              "move": 49,
+              "score": -488,
+              "visits": 19,
+              "value": -0.4877894736842105
+            },
+            {
+              "move": 54,
+              "score": -111,
+              "visits": 41,
+              "value": -0.11136585365853656
+            },
+            {
+              "move": 62,
+              "score": -215,
+              "visits": 17,
+              "value": -0.2151176470588235
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 0,
+            "evaluations": 0,
+            "meanDepth": 0.0,
+            "reusedNodes": 2396,
+            "treeNodes": 2396,
+            "memoryLimited": false,
+            "batchCalls": 0,
+            "batchLeaves": 0,
+            "actualBatchMean": 0
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 100000,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 51,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 54,
+          "score": -100000,
+          "depth": 0,
+          "elapsedMs": 0,
+          "nodes": 0,
+          "exact": true,
+          "ttHits": 0,
+          "wallMs": 0.0415,
+          "candidates": [
+            {
+              "move": 0,
+              "score": -100000,
+              "visits": 249,
+              "value": -1.0
+            },
+            {
+              "move": 16,
+              "score": -100000,
+              "visits": 269,
+              "value": -1.0
+            },
+            {
+              "move": 23,
+              "score": -100000,
+              "visits": 890,
+              "value": -1.0
+            },
+            {
+              "move": 49,
+              "score": -100000,
+              "visits": 509,
+              "value": -1.0
+            },
+            {
+              "move": 54,
+              "score": -100000,
+              "visits": 5283,
+              "value": -1.0
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 0,
+            "evaluations": 0,
+            "meanDepth": 0.0,
+            "reusedNodes": 1478,
+            "treeNodes": 1478,
+            "memoryLimited": false,
+            "batchCalls": 0,
+            "batchLeaves": 0,
+            "actualBatchMean": 0
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -100000,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 52,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 15,
+          "score": 100000,
+          "depth": 0,
+          "elapsedMs": 0,
+          "nodes": 0,
+          "exact": true,
+          "ttHits": 0,
+          "wallMs": 0.049417,
+          "candidates": [
+            {
+              "move": 15,
+              "score": 100000,
+              "visits": 253,
+              "value": 1.0
+            },
+            {
+              "move": 16,
+              "score": -225,
+              "visits": 23,
+              "value": -0.22460869565217392
+            },
+            {
+              "move": 23,
+              "score": -1,
+              "visits": 7824,
+              "value": -0.0008234918200409001
+            },
+            {
+              "move": 49,
+              "score": -468,
+              "visits": 3,
+              "value": -0.46799999999999997
+            },
+            {
+              "move": 62,
+              "score": -292,
+              "visits": 9,
+              "value": -0.29233333333333333
+            },
+            {
+              "move": 63,
+              "score": -100000,
+              "visits": 259,
+              "value": -1.0
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 0,
+            "evaluations": 0,
+            "meanDepth": 0.0,
+            "reusedNodes": 675,
+            "treeNodes": 675,
+            "memoryLimited": false,
+            "batchCalls": 0,
+            "batchLeaves": 0,
+            "actualBatchMean": 0
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 100000,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 53,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 49,
+          "score": -100000,
+          "depth": 0,
+          "elapsedMs": 0,
+          "nodes": 0,
+          "exact": true,
+          "ttHits": 0,
+          "wallMs": 0.676875,
+          "candidates": [
+            {
+              "move": 0,
+              "score": -100000,
+              "visits": 202,
+              "value": -1.0
+            },
+            {
+              "move": 16,
+              "score": -100000,
+              "visits": 65,
+              "value": -1.0
+            },
+            {
+              "move": 23,
+              "score": -100000,
+              "visits": 377,
+              "value": -1.0
+            },
+            {
+              "move": 49,
+              "score": -100000,
+              "visits": 34,
+              "value": -1.0
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 0,
+            "evaluations": 0,
+            "meanDepth": 0.0,
+            "reusedNodes": 157,
+            "treeNodes": 157,
+            "memoryLimited": false,
+            "batchCalls": 0,
+            "batchLeaves": 0,
+            "actualBatchMean": 0
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -100000,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 54,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 23,
+          "score": 100000,
+          "depth": 0,
+          "elapsedMs": 0,
+          "nodes": 0,
+          "exact": true,
+          "ttHits": 0,
+          "wallMs": 0.05425,
+          "candidates": [
+            {
+              "move": 16,
+              "score": 66,
+              "visits": 2,
+              "value": 0.066
+            },
+            {
+              "move": 23,
+              "score": 100000,
+              "visits": 40,
+              "value": 1.0
+            },
+            {
+              "move": 56,
+              "score": -40,
+              "visits": 3,
+              "value": -0.04033333333333333
+            },
+            {
+              "move": 62,
+              "score": -131,
+              "visits": 1,
+              "value": -0.131
+            },
+            {
+              "move": 63,
+              "score": -4,
+              "visits": 4,
+              "value": -0.0040000000000000036
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 0,
+            "evaluations": 0,
+            "meanDepth": 0.0,
+            "reusedNodes": 38,
+            "treeNodes": 38,
+            "memoryLimited": false,
+            "batchCalls": 0,
+            "batchLeaves": 0,
+            "actualBatchMean": 0
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 100000,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 55,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 0,
+          "score": -100000,
+          "depth": 0,
+          "elapsedMs": 0,
+          "nodes": 0,
+          "exact": true,
+          "ttHits": 0,
+          "wallMs": 0.011334,
+          "candidates": [
+            {
+              "move": 0,
+              "score": -100000,
+              "visits": 18,
+              "value": -1.0
+            },
+            {
+              "move": 16,
+              "score": -100000,
+              "visits": 10,
+              "value": -1.0
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 0,
+            "evaluations": 0,
+            "meanDepth": 0.0,
+            "reusedNodes": 29,
+            "treeNodes": 29,
+            "memoryLimited": false,
+            "batchCalls": 0,
+            "batchLeaves": 0,
+            "actualBatchMean": 0
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -100000,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 56,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 63,
+          "score": 100000,
+          "depth": 0,
+          "elapsedMs": 0,
+          "nodes": 0,
+          "exact": true,
+          "ttHits": 0,
+          "wallMs": 0.09775,
+          "candidates": [
+            {
+              "move": 16,
+              "score": 717,
+              "visits": 4,
+              "value": 0.7170000000000001
+            },
+            {
+              "move": 56,
+              "score": 31,
+              "visits": 2,
+              "value": 0.0305
+            },
+            {
+              "move": 62,
+              "score": 450,
+              "visits": 1,
+              "value": 0.45
+            },
+            {
+              "move": 63,
+              "score": 100000,
+              "visits": 6,
+              "value": 1.0
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 0,
+            "evaluations": 0,
+            "meanDepth": 0.0,
+            "reusedNodes": 14,
+            "treeNodes": 14,
+            "memoryLimited": false,
+            "batchCalls": 0,
+            "batchLeaves": 0,
+            "actualBatchMean": 0
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 100000,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 57,
+          "turn": -1,
+          "engine": "candidate",
+          "valueTarget": "outcome",
+          "move": 16,
+          "score": -100000,
+          "depth": 4,
+          "elapsedMs": 11,
+          "nodes": 6,
+          "exact": true,
+          "ttHits": 0,
+          "wallMs": 11.389625,
+          "candidates": [
+            {
+              "move": 16,
+              "score": -100000,
+              "visits": 6,
+              "value": -1.0
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 6,
+            "evaluations": 5,
+            "meanDepth": 2.5,
+            "reusedNodes": 1,
+            "treeNodes": 7,
+            "memoryLimited": false,
+            "batchCalls": 3,
+            "batchLeaves": 5,
+            "actualBatchMean": 1.6666666666666667
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": -100000,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 58,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 56,
+          "score": 100000,
+          "depth": 0,
+          "elapsedMs": 0,
+          "nodes": 0,
+          "exact": true,
+          "ttHits": 0,
+          "wallMs": 0.018,
+          "candidates": [
+            {
+              "move": 56,
+              "score": 100000,
+              "visits": 3,
+              "value": 1.0
+            },
+            {
+              "move": 62,
+              "score": 598,
+              "visits": 1,
+              "value": 0.598
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 0,
+            "evaluations": 0,
+            "meanDepth": 0.0,
+            "reusedNodes": 5,
+            "treeNodes": 5,
+            "memoryLimited": false,
+            "batchCalls": 0,
+            "batchLeaves": 0,
+            "actualBatchMean": 0
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 100000,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        },
+        {
+          "ply": 60,
+          "turn": 1,
+          "engine": "baseline",
+          "valueTarget": "outcome",
+          "move": 62,
+          "score": 100000,
+          "depth": 0,
+          "elapsedMs": 0,
+          "nodes": 0,
+          "exact": true,
+          "ttHits": 0,
+          "wallMs": 0.0125,
+          "candidates": [
+            {
+              "move": 62,
+              "score": 100000,
+              "visits": 1,
+              "value": 1.0
+            }
+          ],
+          "search": "mcts",
+          "mcts": {
+            "simulations": 0,
+            "evaluations": 0,
+            "meanDepth": 0.0,
+            "reusedNodes": 2,
+            "treeNodes": 2,
+            "memoryLimited": false,
+            "batchCalls": 0,
+            "batchLeaves": 0,
+            "actualBatchMean": 0
+          },
+          "selection": {
+            "seed": 520245533,
+            "eligible": 1,
+            "temperatureMilli": 0,
+            "lossLimit": 0,
+            "bestScore": 100000,
+            "scoreLoss": 0,
+            "sampled": false
+          }
+        }
+      ],
+      "finalBoard": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1,
+        1,
+        1,
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        -1,
+        1,
+        1,
+        -1,
+        1,
+        -1,
+        -1,
+        -1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "blackDiscDifference": 8,
+      "winner": "baseline"
+    }
+  ],
+  "currentGame": null,
+  "batchProtocol": {
+    "version": "v1.26-big-cnn-2s-20",
+    "batchSize": 32,
+    "blasThreads": 1,
+    "bothSides": true,
+    "backend": "same C++ outcome MCTS and batch32 scheduler; v1.9 native single-thread Accelerate; CNN FP32 MPS callback",
+    "candidateInference": {
+      "modelSha256": "97398c59a09692ac6ff6ccee250c9463184347091141c40cd1c9e71a68a78669",
+      "device": "mps",
+      "nativeHandle": "v1.9 only for outcome protocol and policy-presence flag; every nonterminal candidate evaluation uses CNN callback"
+    },
+    "callbackVerificationSha256": "0b8b8d876356706de446b3d2bbb1b1765b7397e5ecf603a768a9ececf3156c2b",
+    "cacheManifestSha256": "cfdf8bec4056104a7ab8dafbc19b3f8bf76d47ed9e971555e23dd530baefcbf4",
+    "trainingPausedDuringMatch": true,
+    "modelSelection": "v1.24 big CNN validation joint-loss minimum, epoch11; exact frozen teacher-cache checkpoint",
+    "sourceManifest": "models/archive/v1.26-big-cnn-match-sources.json",
+    "adapterSha256": "bf91ee8bb3de7451c64da72d07820ead6e949aa8d08dd9ad44560edf7cd36d41",
+    "inferenceSourceOverride": {
+      "experiments/product-nnue-v1.22/CMakeLists.txt": "0371bfa7c59378e664a5fe793a05d75230e3a12afeec4e4bef1d8877daeefb83",
+      "experiments/product-nnue-v1.22/batch_tests.cpp": "4966ba500be61771f403c09e262c56396f45d2ecf55a37ccdde9e31088f849b0",
+      "experiments/product-nnue-v1.22/cpp/api.cpp": "441a9500e9d7a3127d698678a96e108b7b877c74ec2fbd7c7cfdb6e526fbfc05",
+      "experiments/product-nnue-v1.22/cpp/api.h": "9dadbd7a1923c5c2dbcfbfec94358761d2d50b87ef2f3983491156e82d41db25",
+      "experiments/product-nnue-v1.22/cpp/cnn.cpp": "ff7f811d3cda77f6eda899ab590f4b00db800542af988f5e0f3693fde145d47f",
+      "experiments/product-nnue-v1.22/cpp/cnn.hpp": "af11be8d86a3f43919f837f5ee023d2a4fcdca8e5495c6d7cb244e8de5edc018",
+      "experiments/product-nnue-v1.22/cpp/dataset.cpp": "12cce8ca17a751433503e983b824de87e8fddc21de7a1dfba047f8201356354b",
+      "experiments/product-nnue-v1.22/cpp/default_engine.cpp": "f314408ecc1bee7810cfb8d45dd6b13c5ed88a1036eb34002dc4b6e54d80babd",
+      "experiments/product-nnue-v1.22/cpp/default_engine.hpp": "71257f27deaf3cecda44b21a47f996e6d1aa4341b46de1d0d9cfacd2cb7a2b1c",
+      "experiments/product-nnue-v1.22/cpp/egaroucid.cpp": "ac750510b136c21e271f1195dee5716b47362e7883af509be8ed2e3beb65ce29",
+      "experiments/product-nnue-v1.22/cpp/egaroucid.hpp": "6e93deb32736a10a3edb2fd030e1e1586c6a929889d17663c09dd44d0ea6b07e",
+      "experiments/product-nnue-v1.22/cpp/egaroucid_api.h": "efa6dd4fdb3cefebb2400ca3b98823ac78de83572268a93f57f960f0d1c2f640",
+      "experiments/product-nnue-v1.22/cpp/egaroucid_bridge.cpp": "a12e52246f0fa14f69403eb2212f52a1ed4a6940749b16bf027ea50bd3a1f230",
+      "experiments/product-nnue-v1.22/cpp/main.cpp": "6cad238fa2ef73a0f007ade9852a8ff26273b34287ba81e581c837806e1fa1b6",
+      "experiments/product-nnue-v1.22/cpp/mcts.cpp": "ce4dea2d5641f537a0f3783a35581af7d486b5899e3c804984de8fc0697514bc",
+      "experiments/product-nnue-v1.22/cpp/mcts.hpp": "71f7172389f9017f7b159162b9b01f3ffb17e2d288b0f335215ea4351913db2a",
+      "experiments/product-nnue-v1.22/cpp/model/README.md": "ec94c2386787778e27524b6989f27b44ba1b94d46cffd6abb71833b7925e1cd0",
+      "experiments/product-nnue-v1.22/cpp/model/default_nnue.inc": "580f21a0eecb9c624b17dcb0d391d17a0c96ba4c65e949d57ac35aad33aaa6b2",
+      "experiments/product-nnue-v1.22/cpp/model/tiny_nn.h": "5900a0125246045fa4536df2e4a47f09690c944a017c7f4a9ce7f05eba8f3d0e",
+      "experiments/product-nnue-v1.22/cpp/move_policy.cpp": "51275ebd1340286997510553fde17262f87da838b8fb332f9052c00ffe4df996",
+      "experiments/product-nnue-v1.22/cpp/nnue.cpp": "cb8f3a1e97ea4e875f943b19c18026f4daf5cbf42b920cbd0d289e6aea9a4dd6",
+      "experiments/product-nnue-v1.22/cpp/nnue.hpp": "cd102c3a86ad36cd1eab422e249b2a1d41d172b748df5b486ee7cbebdaef49b4",
+      "experiments/product-nnue-v1.22/cpp/othello.hpp": "a4759d199eb5e5a13f9150abe0e570e1ae7dccf1b6b6a68d7ffe40a75e6fb239",
+      "experiments/product-nnue-v1.22/cpp/resnet.cpp": "179ed430a4ac473742cb670ec923bb20eca295ff000c2a91ba815336e17e85ab",
+      "experiments/product-nnue-v1.22/cpp/resnet.hpp": "142091eb4e267b22fb427247b2659ec2b653b547e7879f066f9a60cd55dbec85",
+      "experiments/product-nnue-v1.22/cpp/search.cpp": "12f17042ff5e9afb075d57add7b06d6110fe8939c5eb24243eb53a0411bfdc5f",
+      "experiments/product-nnue-v1.22/cpp/search_table.hpp": "fbb8c057a36e8b83adaee4232bc8e3764ec54e283fe980888b36a6cca6371624",
+      "experiments/product-nnue-v1.22/mcts.cpp": "cd546513570cf0b5550248680bbbc4f6d54c868688ff46a3e23a807dddce35ad",
+      "experiments/product-nnue-v1.22/native_batch.cpp": "6334b307f3c83fc8d240caa9abfbc0f77f216be30c0c36a8c6f6b5486077761e",
+      "experiments/product-nnue-v1.22/native_batch.hpp": "ae408c04ab293145735e4863eec72983c395cd784b983f1c921d1e0439857037",
+      "experiments/product-nnue-v1.22/native_tests.cpp": "7a4c9e52e6d63c28abc78c0f652510e7567f406f606b6dffe6529b285bdfc5c6"
+    },
+    "checksSha256": "9dbbda7921d6c683fd362f71786dfd7eaba701b519c8405b240f97e3bfbb002a",
+    "defaultPromoted": false
+  },
+  "stopped": true,
+  "stopReason": "User requested stopping: CNN search sampling rate is much lower than v1.9",
+  "interruptedGame": {
+    "number": 2,
+    "black": "Big-CNN-C256-R8-H256-batch32",
+    "white": "v1.9",
+    "ply": 27,
+    "blackCount": 22,
+    "whiteCount": 9,
+    "turn": -1,
+    "lastMove": 38,
+    "board": [
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      -1,
+      1,
+      -1,
+      -1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      -1,
+      1,
+      -1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      -1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      -1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "publication": {
+    "auditedActions": 61,
+    "defaultPromoted": false,
+    "finalizerSha256": "a1b1634178afa49428e3a59a2ef940ba2e59f4b9d6e50938d977096cfa186a28",
+    "originalReportSha256": "3751af7ea3a87e72b0d806f8f183995cb46361fa71b6ba0912c9c50d4902b31e",
+    "originalLiveSha256": "06f750ed97936251c36cd272ffef5767db11b79c10a3576d9ab4279f3b5cc9e3"
+  }
+}

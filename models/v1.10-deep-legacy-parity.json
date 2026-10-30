@@ -1,0 +1,11 @@
+{
+  "positions": 24,
+  "simulationsPerPosition": 512,
+  "modelSha256": "72294450ce5eb180703e05048df6e7ce7078f031c4e94464198192432d618bb0",
+  "librarySha256": [
+    "6f593a25a0d52f1846e29db35b10fa5423505fd820eb124d4a474489f412c188",
+    "c97a16cebc66a4432fe0e1f12d645aa9b122a0ed918609516072354f270fa9d2"
+  ],
+  "identical": true,
+  "compared": "move, score, root candidates, selection, visits and search statistics; excludes wall clock"
+}

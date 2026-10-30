@@ -1,0 +1,411 @@
+{
+  "version": "v1.32-pattern-int8-simd",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "platform": "macOS-15.1.1-arm64-arm-64bit",
+  "machine": "arm64",
+  "quantization": "Embedding only INT8; shared integer step in original 1/256 units; round away from zero; clip [-128,127]. Trunk/head INT16 and biases/accumulators INT32 retained. No retraining.",
+  "selection": "Minimum validation outcome MSE over steps 1,2,4; test evaluated only after all candidates exported and selected step frozen",
+  "selectedStep": 1,
+  "baselineMetrics": {
+    "validation": {
+      "mse": 0.7249131329365864,
+      "nonDrawSignAccuracy": 0.6552055320783711,
+      "wdlCrossEntropy": 0.900064890237069,
+      "policyTop1": 0.414,
+      "policyCrossEntropy": 1.5960544991226324
+    },
+    "test": {
+      "mse": 0.687820879516176,
+      "nonDrawSignAccuracy": 0.6770030816640986,
+      "wdlCrossEntropy": 0.8900972774799457,
+      "policyTop1": 0.4056666666666667,
+      "policyCrossEntropy": 1.6159686851600528
+    }
+  },
+  "variants": [
+    {
+      "step": 1,
+      "model": "models/pattern32-int8-step1-v1.32.otpat",
+      "modelSha256": "da33b0237d0b99a5bcecb0f57c9aa18f51ea7537adfd683e8d8364d553b68f91",
+      "bytes": 1792796,
+      "clippedEntries": 4494,
+      "embeddingRmseInOriginalUnits": 1.875473071720973,
+      "validation": {
+        "mse": 0.7249093749102727,
+        "nonDrawSignAccuracy": 0.6563580484056858,
+        "wdlCrossEntropy": 0.8983892688460111,
+        "policyTop1": 0.4131666666666667,
+        "policyCrossEntropy": 1.5983576793381713
+      },
+      "parity": {
+        "positions": 6000,
+        "maximumError": 8.881784197001252e-16
+      },
+      "valueDeltaRmse": 0.011267354971591561,
+      "maximumValueDelta": 0.15581706067044904,
+      "test": {
+        "mse": 0.6875890453858048,
+        "nonDrawSignAccuracy": 0.6789291217257319,
+        "wdlCrossEntropy": 0.8880800735215413,
+        "policyTop1": 0.4068333333333333,
+        "policyCrossEntropy": 1.6183617346696926
+      },
+      "testParity": {
+        "positions": 6000,
+        "maximumError": 8.881784197001252e-16
+      }
+    },
+    {
+      "step": 2,
+      "model": "models/pattern32-int8-step2-v1.32.otpat",
+      "modelSha256": "170baa221633886bb4df29f7fca84766b7d8cd837d8d7039c4cde27aba1d5b87",
+      "bytes": 1792796,
+      "clippedEntries": 76,
+      "embeddingRmseInOriginalUnits": 0.7610470983473738,
+      "validation": {
+        "mse": 0.7259704789538969,
+        "nonDrawSignAccuracy": 0.6540530157510565,
+        "wdlCrossEntropy": 0.9014694286364292,
+        "policyTop1": 0.413,
+        "policyCrossEntropy": 1.5958962438651736
+      },
+      "parity": {
+        "positions": 6000,
+        "maximumError": 8.881784197001252e-16
+      },
+      "valueDeltaRmse": 0.01096095776013571,
+      "maximumValueDelta": 0.0668993226158136
+    },
+    {
+      "step": 4,
+      "model": "models/pattern32-int8-step4-v1.32.otpat",
+      "modelSha256": "9ccf4b878259e70d0791b3671a04de9ee1d8416fe9c4f8ef1225efa83d301414",
+      "bytes": 1792796,
+      "clippedEntries": 0,
+      "embeddingRmseInOriginalUnits": 1.224948143534941,
+      "validation": {
+        "mse": 0.7257856730638154,
+        "nonDrawSignAccuracy": 0.6552055320783711,
+        "wdlCrossEntropy": 0.9011987784522819,
+        "policyTop1": 0.4126666666666667,
+        "policyCrossEntropy": 1.5955162085808912
+      },
+      "parity": {
+        "positions": 6000,
+        "maximumError": 8.881784197001252e-16
+      },
+      "valueDeltaRmse": 0.011752351070189033,
+      "maximumValueDelta": 0.06090556843833639
+    }
+  ],
+  "results": [
+    {
+      "name": "v1.29 fused INT16",
+      "library": ".build/native-pattern-h64-v1.29/libothello.dylib",
+      "librarySha256": "8aa42d6a73c26392bf7e545b34c3ef6cc00895a98d7553f0b4d4c5eb6395e442",
+      "model": "models/pattern32-outcome-v1.25.otpat",
+      "medianMicroseconds": 3.5312652587890625,
+      "latencySamples": [
+        3.2061614990234375,
+        4.436686279296875,
+        4.1072540283203125,
+        4.2180633544921875,
+        2.71309912109375,
+        4.389668701171875,
+        2.8435872802734377,
+        3.5312652587890625,
+        2.8751322021484373
+      ],
+      "fixedSearchMedianMilliseconds": 108.495333,
+      "searchSamples": [
+        115.912417,
+        140.57725,
+        107.819833,
+        165.339708,
+        96.29775,
+        108.495333,
+        103.533209,
+        120.708292,
+        99.442792
+      ],
+      "timed100msSimulations": 562556,
+      "timed100msSamples": [
+        25806,
+        27124,
+        26302,
+        23971,
+        29214,
+        29360,
+        26124,
+        27837,
+        26207,
+        28596,
+        33920,
+        29809,
+        27238,
+        28018,
+        29189,
+        30676,
+        25054,
+        32975,
+        29065,
+        26071
+      ],
+      "jointThroughputVsFused": 1.0,
+      "fixedSearchThroughputVsFused": 1.0,
+      "timedSimulationRatioVsFused": 1.0
+    },
+    {
+      "name": "portable INT16",
+      "library": ".build/native-pattern-int8-v1.32/libothello.dylib",
+      "librarySha256": "d90e101666d3868caf129aef38d7b60e629d04a1129d1f2ccd3bc45161b7a085",
+      "model": "models/pattern32-outcome-v1.25.otpat",
+      "medianMicroseconds": 4.49126171875,
+      "latencySamples": [
+        3.3824564208984373,
+        4.742792846679688,
+        4.49126171875,
+        5.253392578125,
+        3.70196533203125,
+        4.210530639648438,
+        3.898869873046875,
+        4.499959228515625,
+        4.784078002929688
+      ],
+      "fixedSearchMedianMilliseconds": 135.544875,
+      "searchSamples": [
+        154.072875,
+        135.544875,
+        147.373875,
+        142.36725,
+        136.1145,
+        105.231292,
+        127.556709,
+        118.900792,
+        120.300625
+      ],
+      "timed100msSimulations": 473504,
+      "timed100msSamples": [
+        23814,
+        28201,
+        23541,
+        27174,
+        20566,
+        21399,
+        23954,
+        22430,
+        22420,
+        21441,
+        22416,
+        21873,
+        24247,
+        27218,
+        23934,
+        23127,
+        23645,
+        25546,
+        23872,
+        22686
+      ],
+      "jointThroughputVsFused": 0.786252389622905,
+      "fixedSearchThroughputVsFused": 0.8004384747117883,
+      "timedSimulationRatioVsFused": 0.8417010928689767
+    },
+    {
+      "name": "SIMD INT16",
+      "library": ".build/native-pattern-simd-v1.32/libothello.dylib",
+      "librarySha256": "fd9b5be4daa480400593287fb265e918f9364c60a94cc314d926578ba10d43d3",
+      "model": "models/pattern32-outcome-v1.25.otpat",
+      "medianMicroseconds": 1.978876708984375,
+      "latencySamples": [
+        1.7073720703125,
+        1.978876708984375,
+        2.59473681640625,
+        2.4367218017578125,
+        1.71160888671875,
+        1.3005574951171874,
+        2.035710693359375,
+        1.5701446533203125,
+        2.078252197265625
+      ],
+      "fixedSearchMedianMilliseconds": 71.790333,
+      "searchSamples": [
+        85.067833,
+        86.991291,
+        86.113541,
+        71.790333,
+        60.407583,
+        52.179292,
+        50.833834,
+        75.045584,
+        63.238917
+      ],
+      "timed100msSimulations": 920866,
+      "timed100msSamples": [
+        47335,
+        49931,
+        43416,
+        44331,
+        39719,
+        46477,
+        43431,
+        50357,
+        39207,
+        55700,
+        44392,
+        46395,
+        42154,
+        53959,
+        47650,
+        43851,
+        46725,
+        42349,
+        49129,
+        44358
+      ],
+      "jointThroughputVsFused": 1.7844796710965507,
+      "fixedSearchThroughputVsFused": 1.511280536893456,
+      "timedSimulationRatioVsFused": 1.636932145421967
+    },
+    {
+      "name": "portable INT8",
+      "library": ".build/native-pattern-int8-v1.32/libothello.dylib",
+      "librarySha256": "d90e101666d3868caf129aef38d7b60e629d04a1129d1f2ccd3bc45161b7a085",
+      "model": "models/pattern32-int8-step1-v1.32.otpat",
+      "medianMicroseconds": 4.1780853271484375,
+      "latencySamples": [
+        6.478993774414063,
+        4.284647583007812,
+        4.035491943359375,
+        3.951019287109375,
+        4.5766754150390625,
+        4.402852416992188,
+        3.62596630859375,
+        3.4847767333984376,
+        4.1780853271484375
+      ],
+      "fixedSearchMedianMilliseconds": 112.206708,
+      "searchSamples": [
+        127.246125,
+        132.093083,
+        149.4835,
+        100.138583,
+        315.427917,
+        101.342333,
+        112.206708,
+        108.175916,
+        108.180834
+      ],
+      "timed100msSimulations": 499211,
+      "timed100msSamples": [
+        22472,
+        26193,
+        23847,
+        23867,
+        25768,
+        26882,
+        25894,
+        24254,
+        21523,
+        22696,
+        23855,
+        23966,
+        24534,
+        26274,
+        26219,
+        25046,
+        24702,
+        27910,
+        25299,
+        28010
+      ],
+      "jointThroughputVsFused": 0.8451874440772054,
+      "fixedSearchThroughputVsFused": 0.966923768942584,
+      "timedSimulationRatioVsFused": 0.8873978768335953
+    },
+    {
+      "name": "SIMD INT8",
+      "library": ".build/native-pattern-simd-v1.32/libothello.dylib",
+      "librarySha256": "fd9b5be4daa480400593287fb265e918f9364c60a94cc314d926578ba10d43d3",
+      "model": "models/pattern32-int8-step1-v1.32.otpat",
+      "medianMicroseconds": 1.7943521728515626,
+      "latencySamples": [
+        1.5545654296875,
+        1.6842752685546876,
+        1.87459814453125,
+        1.6502330322265626,
+        2.86544287109375,
+        2.5029857177734374,
+        1.3524576416015626,
+        1.7943521728515626,
+        2.292938232421875
+      ],
+      "fixedSearchMedianMilliseconds": 60.034334,
+      "searchSamples": [
+        77.529,
+        58.930667,
+        69.030792,
+        82.354084,
+        60.590917,
+        47.634542,
+        60.034334,
+        58.054709,
+        54.968125
+      ],
+      "timed100msSimulations": 899381,
+      "timed100msSamples": [
+        38182,
+        40378,
+        39031,
+        47353,
+        41761,
+        42702,
+        41118,
+        46084,
+        46487,
+        40315,
+        48706,
+        48371,
+        45254,
+        50240,
+        43424,
+        46492,
+        44600,
+        51657,
+        47506,
+        49720
+      ],
+      "jointThroughputVsFused": 1.96798895568935,
+      "fixedSearchThroughputVsFused": 1.807221397675537,
+      "timedSimulationRatioVsFused": 1.5987403920676342
+    }
+  ],
+  "parity": {
+    "validationPositions": 6000,
+    "testPositions": 6000,
+    "simdInt16ExactlyEqual": true,
+    "simdInt8ExactlyEqual": true,
+    "fixedSimulationMctsExactlyEqualWithinEachPrecision": true,
+    "searchPositions": 32,
+    "simulationsPerPosition": 1024
+  },
+  "timing": {
+    "rounds": 9,
+    "callsPerRound": 8192,
+    "timedRounds": 5,
+    "timedPositions": 4,
+    "budgetMs": 100
+  },
+  "preservedSha256": {
+    "models/default-model.json": "8b82bf89b2afeebdcd1b2c056dee7ce21789aea9291cae11b0a480862ad37b01",
+    "models/v1.25-default.json": "730b4a83b9e0495e7f1a4beaa6da8b2a31c8d72ceb9b39e54a9218cbb381c14f",
+    "models/pattern32-outcome-v1.25.otpat": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0",
+    "src/game/wasm/othello.mjs": "a1584f0244858efcf19d807dee2dd79e628cda2ee509371162cbc64c94c949e0"
+  },
+  "datasetSha256": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6",
+  "policyDatasetSha256": "d5712464ea92f34019de2ca9427d95cfa9aa985ff9d854801c9eb7362a7b587a",
+  "scriptSha256": "020f745f9163c4f23fc462026b9a6fcbc9339b534797f383219a3ad91d28eafb",
+  "seconds": 21.5796334160259,
+  "limits": "Apple Silicon native measurement; SSE2 correctness separately under Rosetta, not Linux performance. No strength match. Python/C ABI prediction overhead included. Comparator v1.29 fused INT16; INT8 changes values and search trajectories, fixed-simulation parity asserted only within same precision."
+}

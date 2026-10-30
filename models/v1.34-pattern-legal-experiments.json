@@ -1,0 +1,11 @@
+{
+  "version": "v1.34 Pattern 合法着策略",
+  "experiments": [
+    {
+      "name": "Pattern 合法着策略投影稀疏计算 · v1.34",
+      "games": 0,
+      "runtimeReport": ".build/training/pattern-legal-v1.34/progress.json",
+      "report": "models/v1.34-pattern-legal.json"
+    }
+  ]
+}

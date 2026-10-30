@@ -1,0 +1,129 @@
+{
+  "date": "2026-10-27",
+  "platform": "macOS-15.1.1-arm64-arm-64bit-Mach-O",
+  "nodeVersion": "v26.9.0",
+  "compiler": "Apple clang version 16.0.0 (clang-1600.0.26.6)",
+  "nativeFlags": "-std=c++17 -O3 -I cpp",
+  "wasmFlags": "-std=c++17 -O3 -msimd128 -I cpp -sENVIRONMENT=node -sSINGLE_FILE=1 -sEXIT_RUNTIME=1",
+  "measuredCallsPerRound": 9830400,
+  "rounds": 5,
+  "correctness": "8192 reachable positions (all 64 moves for flips), plus 100000 random disjoint bitboards against existing core",
+  "compilerBarrier": "atomic_signal_fence between repetitions",
+  "scope": "Isolated move generation and flip routines. Wasm executed in Node, not an actual browser or full MCTS. Report ratios within each target only.",
+  "sourceSha256": {
+    "benchmarks/movegen.cpp": "3b4ab1546ea0a5d2d620db5f422fecb632a0ba709a1c6f2303d879b4028e73f7",
+    "cpp/othello.hpp": "58305fc837c2cd50bab0c51ab8676350c91d79072803361a1874cede9f2bc47e"
+  },
+  "results": {
+    "native": {
+      "raw": {
+        "positions": 8192,
+        "randomBoards": 100000,
+        "rounds": [
+          {
+            "legalCurrentNs": 9.284,
+            "legalPrefixNs": 5.196,
+            "flipsCurrentNs": 13.189,
+            "flipsPrefixNs": 6.583,
+            "flipsRayTableNs": 3.938
+          },
+          {
+            "legalCurrentNs": 8.776,
+            "legalPrefixNs": 5.074,
+            "flipsCurrentNs": 12.703,
+            "flipsPrefixNs": 6.611,
+            "flipsRayTableNs": 3.919
+          },
+          {
+            "legalCurrentNs": 8.809,
+            "legalPrefixNs": 5.146,
+            "flipsCurrentNs": 12.057,
+            "flipsPrefixNs": 6.553,
+            "flipsRayTableNs": 3.932
+          },
+          {
+            "legalCurrentNs": 8.606,
+            "legalPrefixNs": 5.096,
+            "flipsCurrentNs": 11.733,
+            "flipsPrefixNs": 6.328,
+            "flipsRayTableNs": 3.81
+          },
+          {
+            "legalCurrentNs": 8.527,
+            "legalPrefixNs": 4.944,
+            "flipsCurrentNs": 11.605,
+            "flipsPrefixNs": 6.437,
+            "flipsRayTableNs": 3.85
+          }
+        ]
+      },
+      "medianNanoseconds": {
+        "legalCurrentNs": 8.776,
+        "legalPrefixNs": 5.096,
+        "flipsCurrentNs": 12.057,
+        "flipsPrefixNs": 6.553,
+        "flipsRayTableNs": 3.919
+      },
+      "speedup": {
+        "legalPrefix": 1.7221350078492934,
+        "flipsPrefix": 1.8399206470318938,
+        "flipsRayTable": 3.076550140341924
+      }
+    },
+    "wasm": {
+      "raw": {
+        "positions": 8192,
+        "randomBoards": 100000,
+        "rounds": [
+          {
+            "legalCurrentNs": 7.793,
+            "legalPrefixNs": 6.179,
+            "flipsCurrentNs": 31.206,
+            "flipsPrefixNs": 8.47,
+            "flipsRayTableNs": 8.696
+          },
+          {
+            "legalCurrentNs": 7.678,
+            "legalPrefixNs": 6.128,
+            "flipsCurrentNs": 32.193,
+            "flipsPrefixNs": 8.667,
+            "flipsRayTableNs": 7.419
+          },
+          {
+            "legalCurrentNs": 7.832,
+            "legalPrefixNs": 6.154,
+            "flipsCurrentNs": 32.533,
+            "flipsPrefixNs": 8.516,
+            "flipsRayTableNs": 7.155
+          },
+          {
+            "legalCurrentNs": 7.887,
+            "legalPrefixNs": 6.216,
+            "flipsCurrentNs": 39.486,
+            "flipsPrefixNs": 8.472,
+            "flipsRayTableNs": 7.051
+          },
+          {
+            "legalCurrentNs": 7.729,
+            "legalPrefixNs": 6.25,
+            "flipsCurrentNs": 30.583,
+            "flipsPrefixNs": 8.364,
+            "flipsRayTableNs": 6.882
+          }
+        ]
+      },
+      "medianNanoseconds": {
+        "legalCurrentNs": 7.793,
+        "legalPrefixNs": 6.179,
+        "flipsCurrentNs": 32.193,
+        "flipsPrefixNs": 8.472,
+        "flipsRayTableNs": 7.155
+      },
+      "speedup": {
+        "legalPrefix": 1.2612073150995307,
+        "flipsPrefix": 3.799929178470255,
+        "flipsRayTable": 4.49937106918239
+      }
+    }
+  }
+}

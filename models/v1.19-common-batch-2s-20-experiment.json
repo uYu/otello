@@ -1,0 +1,81 @@
+{
+  "status": "candidate",
+  "defaultPromoted": false,
+  "batchProtocol": {
+    "version": "v1.19-common-batch-2s-20",
+    "batchSize": 32,
+    "blasThreads": 1,
+    "bothSides": true,
+    "backend": "C++ virtual-visit MCTS + Apple Accelerate, same library on both sides",
+    "modelSelection": "v1.13 validation joint-loss winner cosine-joint, original weights",
+    "sourceManifest": "models/archive/v1.19-common-batch-match-sources.json",
+    "adapterSha256": "a192599a0247c1376e95f2f71a9b0dc1d28b8fe6adce522de4a329ea164a1635",
+    "inferenceSourceOverride": {
+      "experiments/common-native-batch-v1.18/CMakeLists.txt": "61e77de43de72a0bb4a0d6cda1dc8f2df7bc01263976820923766666a4b983fd",
+      "experiments/common-native-batch-v1.18/batch_tests.cpp": "a042ba2537df875c2c84cb495e7e1f8595b9d90dc23dd5d9e315d7d60032672b",
+      "experiments/common-native-batch-v1.18/mcts.cpp": "cd546513570cf0b5550248680bbbc4f6d54c868688ff46a3e23a807dddce35ad",
+      "experiments/common-native-batch-v1.18/native_batch.cpp": "eaf36a235182e38d85ad9d8b3705a63931a6493d7d7c86be70e4cdd00c4613df",
+      "experiments/common-native-batch-v1.18/native_batch.hpp": "ae408c04ab293145735e4863eec72983c395cd784b983f1c921d1e0439857037"
+    },
+    "checksSha256": "5bef3dd3267a6ebbfdd979417774e34e8e5f3208370ba8290488d5e6da3b0e2b",
+    "defaultPromoted": false
+  },
+  "protocol": {
+    "games": 20,
+    "completedGames": 20,
+    "millisecondsPerMove": 2000
+  },
+  "model": "models/cnn2-c32-cosine-joint-v1.13.otcnn",
+  "baselineManifest": "models/v1.9-default.json",
+  "matchReport": "models/v1.19-cnn-vs-v1.9-b32-2s-20-run1.json",
+  "artifactSha256": {
+    "models/v1.19-cnn-vs-v1.9-b32-2s-20-run1.json": "81b0dca91c4058a45e596e2c0e516dfd98ffec22e2399a88f2e128ed724d5ef6",
+    "models/v1.19-common-batch-2s-20-comparison.md": "41c622044a4296e6b15c66f78ce88351a7150b4f32acafeb3a574f91b28a4808",
+    "models/cnn2-c32-cosine-joint-v1.13.otcnn": "066591dfa83b8f7155a51ac66e7ea93876ceab5f9c12a7e0d16b3c222d470a31",
+    "models/nnue256-outcome-v1.9.otnnue": "72294450ce5eb180703e05048df6e7ce7078f031c4e94464198192432d618bb0",
+    "models/archive/v1.19-common-batch-match-sources.json": "209653c06f01c0fbc847a2455a2d64288f6011c7d20acc71e20e246a74bbe5b9",
+    "models/archive/v1.19-common-batch-match-sources.tar.gz": "ddfbafcacbf3a0ae57f3fd4facd39054a8c65353c9aa9b640d4700960fa12d9d",
+    "models/v1.18-common-native-batch-checks.json": "5bef3dd3267a6ebbfdd979417774e34e8e5f3208370ba8290488d5e6da3b0e2b"
+  },
+  "results": {
+    "baseline": {
+      "games": 20,
+      "win": 12,
+      "draw": 5,
+      "loss": 3,
+      "discDifference": 203,
+      "scoreRate": 0.725,
+      "meanDiscDifference": 10.15,
+      "moves": 597,
+      "meanWallMs": 1337.9391279581228,
+      "meanSearchUnits": 1511013.0469011725,
+      "searchUnit": "simulations",
+      "meanNonExactDepth": 40.86036036036036,
+      "depthKind": "maximumVisited",
+      "meanSimulationDepth": 13.804549090441325,
+      "memoryLimitedSearches": 97,
+      "reusedMctsSearches": 577,
+      "exactMoves": 153
+    },
+    "candidate": {
+      "games": 20,
+      "win": 3,
+      "draw": 5,
+      "loss": 12,
+      "discDifference": -203,
+      "scoreRate": 0.275,
+      "meanDiscDifference": -10.15,
+      "moves": 602,
+      "meanWallMs": 1577.3772068488374,
+      "meanSearchUnits": 1085123.1129568107,
+      "searchUnit": "simulations",
+      "meanNonExactDepth": 35.33475479744136,
+      "depthKind": "maximumVisited",
+      "meanSimulationDepth": 6.174030057927165,
+      "memoryLimitedSearches": 0,
+      "reusedMctsSearches": 582,
+      "exactMoves": 133
+    }
+  },
+  "replayedActions": 1211
+}

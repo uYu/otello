@@ -1,0 +1,158 @@
+{
+  "version": "v1.23-search-distill",
+  "status": "stopped",
+  "complete": false,
+  "defaultPromoted": false,
+  "reason": "User corrected teacher choice: use stronger offline CNNs, not v1.9 search self-distillation",
+  "teacherCompletedLastProgress": 9025,
+  "completeTeacherShards": 70,
+  "trainingStarted": false,
+  "progress": ".build/training/search-distill-v1.23-run1/progress.json",
+  "protocol": {
+    "version": "v1.23-search-distill",
+    "status": "candidate",
+    "defaultPromoted": false,
+    "architecture": "shared 128->256 transform; side-to-move ordered 512 features; 512->1 tanh outcome value; policy 512->32 clipped ReLU->65 legal softmax",
+    "parameters": 52098,
+    "modelFormat": "OTNNUE4",
+    "configs": [
+      {
+        "name": "finetune-control",
+        "alpha": 0.0
+      },
+      {
+        "name": "search-distilled",
+        "alpha": 0.5
+      }
+    ],
+    "epochs": 15,
+    "seed": 20261027,
+    "dataSeed": 20261028,
+    "batchSize": 1024,
+    "supplementalBatchSize": 256,
+    "learningRate": 0.0001,
+    "cosineEtaMin": 1e-06,
+    "weightDecay": 0.001,
+    "valueWeight": 4.0,
+    "policyWeight": 1.0,
+    "initialization": "both start with exact approved v1.9 bytes, all layers jointly fine-tuned with QAT",
+    "training": "original million supervised rows plus supplemental256 sampled from same teacher subset for BOTH variants; supplemental target alpha0 control vs alpha0.5 search-value/visit-policy; combined loss weighted by1024/256 counts",
+    "teacherPositions": 10000,
+    "teacherSimulationBudget": 32768,
+    "teacherUsesBook": false,
+    "teacherModelSha256": "72294450ce5eb180703e05048df6e7ce7078f031c4e94464198192432d618bb0",
+    "librarySha256": "b8363ebdd611fa40c536ce6264b3a95a3908fcd181227a2817ac5997eadaa885",
+    "dataset": {
+      "seed": 20261027,
+      "inputSha256": "6332fd01b27c11a81f3fbd344e52aaf8f70e60c644780fb453cc7ef64ae359ac",
+      "games": {
+        "logistello:test": 300,
+        "wthor:test": 300,
+        "wthor:validation": 300,
+        "logistello:validation": 300,
+        "logistello:train": 60775,
+        "wthor:train": 80561
+      },
+      "positions": {
+        "test": 6000,
+        "validation": 6000,
+        "train": 1000000
+      },
+      "filters": "complete games; placements 8..56, stride 3; 8-symmetry/color-relative position dedup; test/validation ownership before train",
+      "split": "native converter canonical first 8 moves; no move-wise split",
+      "target": "recorded final black disc difference / 64, from side-to-move view",
+      "maxGames": 6000,
+      "maxPositions": 60000,
+      "allTrainingGames": true,
+      "trainPositions": 1000000,
+      "frozenHoldout": {
+        "path": "/Users/franzyu/Documents/script/otello/.build/training/positions.npz",
+        "sha256": "ac3941a55613abc92944062b49c6b9c71883a93ce02973cf3dc8fc2be670ef4c"
+      },
+      "cacheSha256": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6"
+    },
+    "labels": {
+      "cacheSha256": "be557c1bcec0cc39d5baec462d50d84aeb4942c4759611dcba2bdcd04f042dc2",
+      "positionsSha256": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6",
+      "gamesSha256": "6332fd01b27c11a81f3fbd344e52aaf8f70e60c644780fb453cc7ef64ae359ac",
+      "positions": {
+        "train": 1000000,
+        "validation": 6000,
+        "test": 6000
+      },
+      "label": "first same-split, same-board/turn and same-outcome recorded next move",
+      "split": "unchanged frozen opening-group splits and symmetry-deduplicated positions",
+      "passPolicy": "existing cache excludes pass targets; forced pass is deterministic at inference",
+      "scriptSha256": "5f31023df9cbbed2c6b9ff1818b48047edc1d63a5c487d49a53507d004ca1705"
+    },
+    "device": "mps",
+    "selection": "save validation MSE+CE minimum and value MSE minimum, including epoch0 baseline; test after both freeze",
+    "validationAndTestUnchanged": true,
+    "verification": {
+      "complete": true,
+      "parentExactByteRoundtrip": true,
+      "teacherPositions": 8,
+      "teacherRepeatIdentical": true,
+      "forcedPassChecked": true,
+      "d4SoftPolicySymmetries": 8,
+      "checks": [
+        {
+          "alpha": 0.0,
+          "loss": 3.7839393615722656,
+          "maxValueError": 0.0004907094144818158,
+          "maxPolicyError": 1.1102230246251565e-16
+        },
+        {
+          "alpha": 0.5,
+          "loss": 2.5053024291992188,
+          "maxValueError": 0.0004907094144818158,
+          "maxPolicyError": 1.1102230246251565e-16
+        }
+      ]
+    },
+    "sourceSha256": {
+      "scripts/train-search-distill.py": "807f494526d2ec0d1fd820fe7aee8c86b72d77150c9a19df3dfa5678a22a375c",
+      "scripts/verify-search-distill.py": "f2c7493ad0ed421d46be6520db914d3659323592ba70b6f430d626a2d509ef71",
+      "scripts/benchmark-search-distill.py": "fca45989c7fa6d069107e5679716c9937a5f825abd2151bc3f44c7025332e547",
+      "scripts/train-product-nnue.py": "3e5738466db6cf31a8e35fd5961616b3ed6ab498cded2c5f10653d555997f929",
+      "scripts/train-cnn-policy-suite.py": "54bf56c90446adb15204433f0a2c2ac47f4223539880ee6c7793ef94d77bdb3b",
+      "scripts/train-mixed-5m.py": "85c4de72ffa1fd196136ef0381953167946b1386e5bb7422ff60de1ddb1e7b5b",
+      "scripts/train-deep.py": "5a1d8ae4ee62be04657aeb2d2c0cbd95b6d66414c20d1cec2a5e6ddd57fff62e",
+      "scripts/train-outcome.py": "bbcffe7e07a161068f832b97d03309bb3319c3cd527d8120bbd7337b3a009aee",
+      "scripts/train-policy.py": "2a0550a6b8d06edb2b09773cbb8d3abbf108bc2a61bbb2a14a5cf6339295c9a4",
+      "scripts/train-nnue.py": "f4977077cb890f4bb8d714532f762398268e89999fc329a65f6fd8dfb5074313",
+      "scripts/check-engineering.py": "9cf912d86dc8f9f427ceaf6d8356144e172dc9222b5a11187cc2597f60a7f7d5",
+      "experiments/product-nnue-v1.22/CMakeLists.txt": "0371bfa7c59378e664a5fe793a05d75230e3a12afeec4e4bef1d8877daeefb83",
+      "experiments/product-nnue-v1.22/native_batch.hpp": "ae408c04ab293145735e4863eec72983c395cd784b983f1c921d1e0439857037",
+      "experiments/product-nnue-v1.22/native_tests.cpp": "7a4c9e52e6d63c28abc78c0f652510e7567f406f606b6dffe6529b285bdfc5c6",
+      "experiments/product-nnue-v1.22/mcts.cpp": "cd546513570cf0b5550248680bbbc4f6d54c868688ff46a3e23a807dddce35ad",
+      "experiments/product-nnue-v1.22/batch_tests.cpp": "4966ba500be61771f403c09e262c56396f45d2ecf55a37ccdde9e31088f849b0",
+      "experiments/product-nnue-v1.22/native_batch.cpp": "6334b307f3c83fc8d240caa9abfbc0f77f216be30c0c36a8c6f6b5486077761e",
+      "experiments/product-nnue-v1.22/cpp/egaroucid.cpp": "ac750510b136c21e271f1195dee5716b47362e7883af509be8ed2e3beb65ce29",
+      "experiments/product-nnue-v1.22/cpp/resnet.cpp": "179ed430a4ac473742cb670ec923bb20eca295ff000c2a91ba815336e17e85ab",
+      "experiments/product-nnue-v1.22/cpp/api.cpp": "441a9500e9d7a3127d698678a96e108b7b877c74ec2fbd7c7cfdb6e526fbfc05",
+      "experiments/product-nnue-v1.22/cpp/egaroucid_api.h": "efa6dd4fdb3cefebb2400ca3b98823ac78de83572268a93f57f960f0d1c2f640",
+      "experiments/product-nnue-v1.22/cpp/search_table.hpp": "fbb8c057a36e8b83adaee4232bc8e3764ec54e283fe980888b36a6cca6371624",
+      "experiments/product-nnue-v1.22/cpp/othello.hpp": "a4759d199eb5e5a13f9150abe0e570e1ae7dccf1b6b6a68d7ffe40a75e6fb239",
+      "experiments/product-nnue-v1.22/cpp/default_engine.cpp": "f314408ecc1bee7810cfb8d45dd6b13c5ed88a1036eb34002dc4b6e54d80babd",
+      "experiments/product-nnue-v1.22/cpp/cnn.cpp": "ff7f811d3cda77f6eda899ab590f4b00db800542af988f5e0f3693fde145d47f",
+      "experiments/product-nnue-v1.22/cpp/nnue.hpp": "cd102c3a86ad36cd1eab422e249b2a1d41d172b748df5b486ee7cbebdaef49b4",
+      "experiments/product-nnue-v1.22/cpp/egaroucid_bridge.cpp": "a12e52246f0fa14f69403eb2212f52a1ed4a6940749b16bf027ea50bd3a1f230",
+      "experiments/product-nnue-v1.22/cpp/move_policy.cpp": "51275ebd1340286997510553fde17262f87da838b8fb332f9052c00ffe4df996",
+      "experiments/product-nnue-v1.22/cpp/mcts.hpp": "71f7172389f9017f7b159162b9b01f3ffb17e2d288b0f335215ea4351913db2a",
+      "experiments/product-nnue-v1.22/cpp/api.h": "9dadbd7a1923c5c2dbcfbfec94358761d2d50b87ef2f3983491156e82d41db25",
+      "experiments/product-nnue-v1.22/cpp/default_engine.hpp": "71257f27deaf3cecda44b21a47f996e6d1aa4341b46de1d0d9cfacd2cb7a2b1c",
+      "experiments/product-nnue-v1.22/cpp/nnue.cpp": "cb8f3a1e97ea4e875f943b19c18026f4daf5cbf42b920cbd0d289e6aea9a4dd6",
+      "experiments/product-nnue-v1.22/cpp/cnn.hpp": "af11be8d86a3f43919f837f5ee023d2a4fcdca8e5495c6d7cb244e8de5edc018",
+      "experiments/product-nnue-v1.22/cpp/search.cpp": "12f17042ff5e9afb075d57add7b06d6110fe8939c5eb24243eb53a0411bfdc5f",
+      "experiments/product-nnue-v1.22/cpp/mcts.cpp": "ce4dea2d5641f537a0f3783a35581af7d486b5899e3c804984de8fc0697514bc",
+      "experiments/product-nnue-v1.22/cpp/egaroucid.hpp": "6e93deb32736a10a3edb2fd030e1e1586c6a929889d17663c09dd44d0ea6b07e",
+      "experiments/product-nnue-v1.22/cpp/resnet.hpp": "142091eb4e267b22fb427247b2659ec2b653b547e7879f066f9a60cd55dbec85",
+      "experiments/product-nnue-v1.22/cpp/dataset.cpp": "12cce8ca17a751433503e983b824de87e8fddc21de7a1dfba047f8201356354b",
+      "experiments/product-nnue-v1.22/cpp/main.cpp": "6cad238fa2ef73a0f007ade9852a8ff26273b34287ba81e581c837806e1fa1b6",
+      "experiments/product-nnue-v1.22/cpp/model/tiny_nn.h": "5900a0125246045fa4536df2e4a47f09690c944a017c7f4a9ce7f05eba8f3d0e",
+      "experiments/product-nnue-v1.22/cpp/model/README.md": "ec94c2386787778e27524b6989f27b44ba1b94d46cffd6abb71833b7925e1cd0",
+      "experiments/product-nnue-v1.22/cpp/model/default_nnue.inc": "580f21a0eecb9c624b17dcb0d391d17a0c96ba4c65e949d57ac35aad33aaa6b2"
+    }
+  }
+}

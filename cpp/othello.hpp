@@ -30,7 +30,7 @@ inline Bits hashBoard(Bits black, Bits white, int turn) {
 }
 inline int count(Bits b) { return __builtin_popcountll(b); }
 inline int first(Bits b) { return __builtin_ctzll(b); }
-inline Bits shift(Bits b, int d) {
+constexpr Bits shift(Bits b, int d) {
     switch(d) {
         case 0: return (b & notH) << 1;
         case 1: return (b & notA) >> 1;
@@ -51,35 +51,55 @@ struct Position {
     Bits opponent() const { return turn == 1 ? white : black; }
     int empty() const { return 64 - count(black | white); }
 };
+namespace detail {
+template<int Direction,int Distance=1> inline Bits shiftBy(Bits b){
+    if constexpr(Distance==1)return shift(b,Direction);
+    else return shiftBy<Direction,Distance/2>(shiftBy<Direction,Distance/2>(b));
+}
+template<int Direction> inline Bits legalRay(Bits own,Bits opp){
+    Bits generated=own,propagate=opp;
+    generated|=propagate&shiftBy<Direction>(generated);propagate&=shiftBy<Direction>(propagate);
+    generated|=propagate&shiftBy<Direction,2>(generated);propagate&=shiftBy<Direction,2>(propagate);
+    generated|=propagate&shiftBy<Direction,4>(generated);
+    return shiftBy<Direction>(generated&opp);
+}
+constexpr std::array<std::array<Bits,8>,64> makeFlipRays(){
+    std::array<std::array<Bits,8>,64> rays{};
+    for(int square=0;square<64;++square)for(int direction=0;direction<8;++direction){
+        Bits ray=shift(1ULL<<square,direction);
+        while(ray){rays[square][direction]|=ray;ray=shift(ray,direction);}
+    }return rays;
+}
+inline constexpr auto flipRays=makeFlipRays();
+}
 inline Bits legal(Bits own, Bits opp) {
-    Bits result = 0, empty = ~(own | opp);
-    for(int d = 0; d < 8; ++d) {
-        Bits captured = shift(own, d) & opp;
-        for(int n = 0; n < 5; ++n) captured |= shift(captured, d) & opp;
-        result |= shift(captured, d) & empty;
-    }
-    return result;
+    return (detail::legalRay<0>(own,opp)|detail::legalRay<1>(own,opp)|detail::legalRay<2>(own,opp)|detail::legalRay<3>(own,opp)
+        |detail::legalRay<4>(own,opp)|detail::legalRay<5>(own,opp)|detail::legalRay<6>(own,opp)|detail::legalRay<7>(own,opp))&~(own|opp);
 }
 inline Bits legal(const Position& p) { return legal(p.own(), p.opponent()); }
 inline Bits flips(const Position& p, int move) {
     if(move < 0 || move > 63 || ((p.black | p.white) & (1ULL << move))) return 0;
     Bits result = 0, own = p.own(), opp = p.opponent();
     for(int d = 0; d < 8; ++d) {
-        Bits ray = shift(1ULL << move, d), captured = 0;
-        while(ray & opp) { captured |= ray; ray = shift(ray, d); }
-        if(ray & own) result |= captured;
+        Bits ray=detail::flipRays[move][d],blockers=ray&~opp;
+        if(!blockers)continue;
+        bool ascending=d==0||d==2||d==4||d==5;
+        Bits bound=ascending?blockers&-blockers:1ULL<<(63-__builtin_clzll(blockers));
+        if(bound&own)result|=ray&(ascending?bound-1:~(bound|(bound-1)));
     }
     return result;
 }
 inline bool over(const Position& p) { return !legal(p.black, p.white) && !legal(p.white, p.black); }
 // A pass is explicit in the API and accepted only when the current side cannot move.
-inline Position play(const Position& p, int move) {
+inline Position play(const Position& p, int move, Bits* flipped=nullptr) {
     Position next = p;
+    if(flipped)*flipped=0;
     if(move == -1) {
         if(legal(p) || over(p)) throw std::invalid_argument("Pass is not legal");
     } else {
         Bits f = flips(p, move);
         if(!f) throw std::invalid_argument("Illegal move");
+        if(flipped)*flipped=f;
         if(p.turn == 1) { next.black |= f | (1ULL << move); next.white &= ~f; }
         else { next.white |= f | (1ULL << move); next.black &= ~f; }
         next.hash ^= zobristKeys[(p.turn==1?0:64)+move];

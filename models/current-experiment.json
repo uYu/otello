@@ -1,0 +1,123 @@
+{
+  "version": "v1.36 Pattern 节点扩容",
+  "experiments": [
+    {
+      "name": "策略集 4M 节点 vs v1.25 · 2秒/步 · 20局",
+      "shortName": "策略集 4M 节点 vs v1.25 · 2秒/步 · 20局",
+      "displayNames": {
+        "candidate": "策略集 4M 节点",
+        "baseline": "v1.25"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/pattern-capacity-v1.36/match-2s-20.json",
+      "report": "models/v1.36-capacity-vs-v1.25-2s-20.json"
+    }
+  ],
+  "archivedExperiments": [
+    {
+      "name": "策略集 INT16 vs v1.25 · 2秒/步 · 20局",
+      "shortName": "策略集 INT16 vs v1.25 · 2秒/步 · 20局",
+      "displayNames": {
+        "candidate": "策略集 INT16",
+        "baseline": "v1.25"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/pattern-speed-suite-v1.35/match-2s-20.json",
+      "report": "models/v1.35-speed-suite-vs-v1.25-2s-20.json"
+    },
+    {
+      "name": "Pattern 合法着策略投影稀疏计算 · v1.34",
+      "games": 0,
+      "runtimeReport": ".build/training/pattern-legal-v1.34/progress.json",
+      "report": "models/v1.34-pattern-legal.json"
+    },
+    {
+      "name": "Pattern 精确优化：整数舍入 / 位压缩编码 / 四行 SIMD · v1.33",
+      "games": 0,
+      "runtimeReport": ".build/training/pattern-hotpath-v1.33/progress.json",
+      "report": "models/v1.33-pattern-selected.json"
+    },
+    {
+      "name": "Pattern INT8 棋形表 + NEON/SSE2 内核 · v1.32",
+      "games": 0,
+      "runtimeReport": ".build/training/pattern-int8-v1.32/progress.json",
+      "report": "models/v1.32-pattern-int8.json"
+    },
+    {
+      "name": "Pattern MCTS 增量累加器：速度／内存／一致性",
+      "focus": "incremental",
+      "games": 0,
+      "runtimeReport": ".build/training/pattern-incremental-v1.31/progress.json",
+      "report": "models/v1.31-pattern-incremental-benchmark.json"
+    },
+    {
+      "name": "Pattern 单次训练 checkpoint 平均 · v1.30",
+      "focus": "checkpoint average",
+      "games": 0,
+      "runtimeReport": ".build/training/pattern-average-v1.30/progress.json",
+      "report": "models/v1.30-pattern-average.json"
+    },
+    {
+      "name": "Pattern：融合推理 + H32/H64 对照",
+      "focus": "Pattern H64",
+      "games": 0,
+      "runtimeReport": ".build/training/pattern-width-v1.29/progress.json",
+      "report": "models/v1.29-pattern-width.json"
+    },
+    {
+      "name": "Pattern outcome vs v1.9 · 2秒/步 · 20局",
+      "shortName": "Pattern outcome vs v1.9 · 2秒/步 · 20局",
+      "focus": "Pattern outcome",
+      "displayNames": {
+        "candidate": "Pattern outcome",
+        "baseline": "v1.9"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/pattern-outcome-v1.25/match-2s-20-run1.json",
+      "report": "models/v1.25-pattern-outcome-vs-v1.9-2s-20-run1.json"
+    },
+    {
+      "name": "C256/R8/H256 CNN vs v1.9 · 双方 batch32 · 2秒/步",
+      "shortName": "C256/R8/H256 CNN vs v1.9 · batch32 · 2秒/步",
+      "focus": "C256/R8/H256 batch32",
+      "displayNames": {
+        "baseline": "v1.9 batch32",
+        "candidate": "C256/R8/H256 batch32"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/big-cnn-match-v1.26/bigcnn-vs-v1.9-b32-2s-20-run1.json",
+      "report": "models/v1.26-bigcnn-vs-v1.9-b32-2s-20-run1.json",
+      "status": "stopped"
+    },
+    {
+      "name": "CNN → outcome Pattern 蒸馏 · 3组离线对照",
+      "focus": "pattern distillation",
+      "games": 0,
+      "runtimeReport": ".build/training/pattern-cnn-distill-v1.27-run1/progress.json",
+      "report": "models/v1.27-pattern-cnn-distill.json"
+    },
+    {
+      "name": "CNN → outcome Pattern 蒸馏 · 100%教师",
+      "focus": "pattern distillation",
+      "games": 0,
+      "runtimeReport": ".build/training/pattern-cnn-distill-v1.28-run1/progress.json",
+      "report": "models/v1.28-pattern-cnn-distill.json"
+    }
+  ]
+}

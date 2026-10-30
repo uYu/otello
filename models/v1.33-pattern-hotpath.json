@@ -1,0 +1,1215 @@
+{
+  "version": "v1.33-pattern-hotpath",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "platform": "macOS-15.1.1-arm64-arm-64bit",
+  "machine": "arm64",
+  "preservedSha256": {
+    "models/default-model.json": "8b82bf89b2afeebdcd1b2c056dee7ce21789aea9291cae11b0a480862ad37b01",
+    "models/v1.25-default.json": "730b4a83b9e0495e7f1a4beaa6da8b2a31c8d72ceb9b39e54a9218cbb381c14f",
+    "src/game/wasm/othello.mjs": "a1584f0244858efcf19d807dee2dd79e628cda2ee509371162cbc64c94c949e0",
+    "models/pattern32-outcome-v1.25.otpat": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0",
+    "models/pattern32-int8-step1-v1.32.otpat": "da33b0237d0b99a5bcecb0f57c9aa18f51ea7537adfd683e8d8364d553b68f91"
+  },
+  "datasetSha256": "ed971def0db9636494a8c1fe46f9b86fb053adfe546b62e699b463282c4c8ec6",
+  "results": [
+    {
+      "precision": "INT16",
+      "name": "v1.32 SIMD",
+      "library": ".build/native-pattern-simd-v1.32/libothello.dylib",
+      "librarySha256": "fd9b5be4daa480400593287fb265e918f9364c60a94cc314d926578ba10d43d3",
+      "model": "models/pattern32-outcome-v1.25.otpat",
+      "jointCAbiMicroseconds": 1.916015625,
+      "latencySamples": [
+        1.41917919921875,
+        2.086344482421875,
+        1.8927459716796875,
+        1.4670562744140625,
+        1.9298197021484376,
+        1.916015625,
+        2.174077392578125,
+        1.2801563720703124,
+        2.0507913818359373
+      ],
+      "fixedSearchMilliseconds": 60.672584,
+      "fixedSearchSamples": [
+        60.672584,
+        54.978333,
+        66.430292,
+        58.7705,
+        46.003459,
+        51.591083,
+        77.39175,
+        84.268833,
+        71.406583
+      ],
+      "timed100msSamples": [
+        17962,
+        32514,
+        39475,
+        35954,
+        46964,
+        49220,
+        37847,
+        46575,
+        49400,
+        48756,
+        39638,
+        42830,
+        38676,
+        53037,
+        43290,
+        44909,
+        40498,
+        32738,
+        36207,
+        33600
+      ],
+      "nativeSamples": [],
+      "timed100msTotalSimulations": 810090,
+      "jointThroughputVsV132": 1.0,
+      "fixedSearchThroughputVsV132": 1.0
+    },
+    {
+      "precision": "INT16",
+      "name": "v1.33 control",
+      "library": ".build/native-pattern-control-v1.33/libothello.dylib",
+      "librarySha256": "2a7ea4be0a24488d1123e302ca6e8cb0d3d135208b2b01183c2ed7c4303d4fa0",
+      "model": "models/pattern32-outcome-v1.25.otpat",
+      "jointCAbiMicroseconds": 1.8219248046875,
+      "latencySamples": [
+        1.9991201171875,
+        2.4462940673828126,
+        2.084065673828125,
+        1.4934591064453124,
+        1.4849344482421876,
+        1.8219248046875,
+        1.754419921875,
+        1.2940826416015625,
+        2.7013397216796875
+      ],
+      "fixedSearchMilliseconds": 63.854167,
+      "fixedSearchSamples": [
+        58.677583,
+        58.064333,
+        55.154791,
+        68.82475,
+        60.121625,
+        84.983666,
+        63.854167,
+        68.836834,
+        81.342625
+      ],
+      "timed100msSamples": [
+        41081,
+        40195,
+        46587,
+        41519,
+        34711,
+        44185,
+        45034,
+        44755,
+        49415,
+        41121,
+        51451,
+        49998,
+        44622,
+        47470,
+        41730,
+        55483,
+        40135,
+        47881,
+        49554,
+        50531
+      ],
+      "nativeSamples": [
+        {
+          "encodingNs": 227.488,
+          "denseNs": 401.695,
+          "jointNs": 1045.7,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 188.449,
+          "denseNs": 399.685,
+          "jointNs": 941.033,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 194.367,
+          "denseNs": 358.322,
+          "jointNs": 1313.43,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 216.006,
+          "denseNs": 380.967,
+          "jointNs": 908.098,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 163.586,
+          "denseNs": 351.189,
+          "jointNs": 906.832,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 239.47,
+          "denseNs": 287.727,
+          "jointNs": 971.458,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 220.993,
+          "denseNs": 433.953,
+          "jointNs": 942.712,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 301.317,
+          "denseNs": 280.254,
+          "jointNs": 1018.88,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 272.618,
+          "denseNs": 464.295,
+          "jointNs": 1138.91,
+          "checksum": 86156094355
+        }
+      ],
+      "nativeMedianNanoseconds": {
+        "encodingNs": 220.993,
+        "denseNs": 380.967,
+        "jointNs": 971.458
+      },
+      "timed100msTotalSimulations": 907458,
+      "jointThroughputVsV132": 1.051643635385182,
+      "fixedSearchThroughputVsV132": 0.9501742306026795
+    },
+    {
+      "precision": "INT16",
+      "name": "integer rounding",
+      "library": ".build/native-pattern-rounding-v1.33/libothello.dylib",
+      "librarySha256": "7ed32542a979f49283c49fcd10d0a683c46f3d38e060ef447218696f867838e2",
+      "model": "models/pattern32-outcome-v1.25.otpat",
+      "jointCAbiMicroseconds": 2.1501668701171877,
+      "latencySamples": [
+        1.7619171142578125,
+        2.11119580078125,
+        2.1454061279296877,
+        3.2202047119140627,
+        1.8897144775390624,
+        2.209101318359375,
+        3.18485009765625,
+        2.473515869140625,
+        2.1501668701171877
+      ],
+      "fixedSearchMilliseconds": 63.51775,
+      "fixedSearchSamples": [
+        65.462625,
+        64.714916,
+        53.815958,
+        81.885375,
+        64.771333,
+        52.9625,
+        60.899458,
+        62.979125,
+        63.51775
+      ],
+      "timed100msSamples": [],
+      "nativeSamples": [
+        {
+          "encodingNs": 216.607,
+          "denseNs": 687.651,
+          "jointNs": 1324.84,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 277.618,
+          "denseNs": 524.38,
+          "jointNs": 1102.64,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 322.148,
+          "denseNs": 752.485,
+          "jointNs": 1301.87,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 163.272,
+          "denseNs": 581.854,
+          "jointNs": 1120.07,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 194.179,
+          "denseNs": 689.917,
+          "jointNs": 1141.13,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 294.948,
+          "denseNs": 639.02,
+          "jointNs": 1275.6,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 250.638,
+          "denseNs": 496.97,
+          "jointNs": 1085.5,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 273.652,
+          "denseNs": 553.148,
+          "jointNs": 1087.92,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 227.897,
+          "denseNs": 1092.14,
+          "jointNs": 1374.5,
+          "checksum": 86156094355
+        }
+      ],
+      "nativeMedianNanoseconds": {
+        "encodingNs": 250.638,
+        "denseNs": 639.02,
+        "jointNs": 1141.13
+      },
+      "jointThroughputVsV132": 0.8911008962274514,
+      "fixedSearchThroughputVsV132": 0.9552067571663039
+    },
+    {
+      "precision": "INT16",
+      "name": "packed encoding",
+      "library": ".build/native-pattern-codes-v1.33/libothello.dylib",
+      "librarySha256": "9a77ba24ef5f623634ef712809168b938dfaed07fc807213616b19e527fd754e",
+      "model": "models/pattern32-outcome-v1.25.otpat",
+      "jointCAbiMicroseconds": 2.17898046875,
+      "latencySamples": [
+        1.3061168212890626,
+        1.3527171630859376,
+        3.1624552001953123,
+        2.532196044921875,
+        1.8745472412109374,
+        2.17898046875,
+        2.416483642578125,
+        1.31610107421875,
+        2.4184417724609375
+      ],
+      "fixedSearchMilliseconds": 59.239584,
+      "fixedSearchSamples": [
+        52.230542,
+        61.85475,
+        59.239584,
+        65.36825,
+        55.671875,
+        69.481375,
+        63.538125,
+        54.257083,
+        56.286292
+      ],
+      "timed100msSamples": [],
+      "nativeSamples": [
+        {
+          "encodingNs": 29.8504,
+          "denseNs": 444.14,
+          "jointNs": 805.817,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 47.7296,
+          "denseNs": 434.235,
+          "jointNs": 1116.69,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 39.185,
+          "denseNs": 442.887,
+          "jointNs": 875.556,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 29.615,
+          "denseNs": 303.731,
+          "jointNs": 1092.77,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 31.3383,
+          "denseNs": 293.49,
+          "jointNs": 991.468,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 29.655,
+          "denseNs": 304.001,
+          "jointNs": 1090.02,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 28.4758,
+          "denseNs": 311.453,
+          "jointNs": 862.505,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 29.8183,
+          "denseNs": 421.86,
+          "jointNs": 973.527,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 46.2858,
+          "denseNs": 322.674,
+          "jointNs": 882.17,
+          "checksum": 86156094355
+        }
+      ],
+      "nativeMedianNanoseconds": {
+        "encodingNs": 29.8504,
+        "denseNs": 322.674,
+        "jointNs": 973.527
+      },
+      "jointThroughputVsV132": 0.8793174847038198,
+      "fixedSearchThroughputVsV132": 1.024189906532767
+    },
+    {
+      "precision": "INT16",
+      "name": "four-row SIMD",
+      "library": ".build/native-pattern-block4-v1.33/libothello.dylib",
+      "librarySha256": "4eb7e98ca431f308e3138401007104a365e106161dd12badc2b95027b721631e",
+      "model": "models/pattern32-outcome-v1.25.otpat",
+      "jointCAbiMicroseconds": 1.62625634765625,
+      "latencySamples": [
+        1.32916259765625,
+        1.62625634765625,
+        2.1204427490234377,
+        1.5666351318359375,
+        1.6690673828125,
+        1.3593902587890625,
+        1.9653065185546874,
+        1.60183203125,
+        2.8983865966796873
+      ],
+      "fixedSearchMilliseconds": 55.029417,
+      "fixedSearchSamples": [
+        44.140375,
+        60.97475,
+        50.405291,
+        60.156333,
+        51.647792,
+        52.843958,
+        62.526041,
+        55.029417,
+        92.183625
+      ],
+      "timed100msSamples": [],
+      "nativeSamples": [
+        {
+          "encodingNs": 169.951,
+          "denseNs": 199.434,
+          "jointNs": 732.81,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 185.127,
+          "denseNs": 252.373,
+          "jointNs": 729.538,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 222.445,
+          "denseNs": 241.662,
+          "jointNs": 772.396,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 225.642,
+          "denseNs": 232.415,
+          "jointNs": 852.076,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 272.001,
+          "denseNs": 223.65,
+          "jointNs": 779.272,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 233.57,
+          "denseNs": 293.173,
+          "jointNs": 929,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 196.106,
+          "denseNs": 213.292,
+          "jointNs": 836.688,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 213.575,
+          "denseNs": 240.468,
+          "jointNs": 857.048,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 227.243,
+          "denseNs": 219.187,
+          "jointNs": 877.698,
+          "checksum": 86156094355
+        }
+      ],
+      "nativeMedianNanoseconds": {
+        "encodingNs": 222.445,
+        "denseNs": 232.415,
+        "jointNs": 836.688
+      },
+      "jointThroughputVsV132": 1.1781756472534906,
+      "fixedSearchThroughputVsV132": 1.1025481879991568
+    },
+    {
+      "precision": "INT16",
+      "name": "all three",
+      "library": ".build/native-pattern-fast-v1.33/libothello.dylib",
+      "librarySha256": "bb20b879f81a68fffcae22bf0a57004357665b368c6561e8614806589c96f39e",
+      "model": "models/pattern32-outcome-v1.25.otpat",
+      "jointCAbiMicroseconds": 1.8679656982421875,
+      "latencySamples": [
+        2.6330770263671877,
+        1.8679656982421875,
+        1.206720947265625,
+        2.6477000732421874,
+        1.3072509765625,
+        2.6976724853515623,
+        1.7549947509765624,
+        1.9983062744140625,
+        1.801691650390625
+      ],
+      "fixedSearchMilliseconds": 56.66325,
+      "fixedSearchSamples": [
+        61.018083,
+        55.826458,
+        57.867667,
+        49.523625,
+        55.036583,
+        56.66325,
+        57.863333,
+        73.255542,
+        50.392667
+      ],
+      "timed100msSamples": [
+        31495,
+        39391,
+        39945,
+        46997,
+        44664,
+        54841,
+        48453,
+        47158,
+        43749,
+        52833,
+        46644,
+        50218,
+        42138,
+        54294,
+        48025,
+        49842,
+        45808,
+        47656,
+        44300,
+        54148
+      ],
+      "nativeSamples": [
+        {
+          "encodingNs": 42.4379,
+          "denseNs": 345.138,
+          "jointNs": 821.456,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 28.6112,
+          "denseNs": 287.456,
+          "jointNs": 718.301,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 29.6479,
+          "denseNs": 305.931,
+          "jointNs": 842.293,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 40.3546,
+          "denseNs": 352.036,
+          "jointNs": 925.83,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 29.7171,
+          "denseNs": 283.727,
+          "jointNs": 738.838,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 72.3317,
+          "denseNs": 324.005,
+          "jointNs": 901.632,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 34.3621,
+          "denseNs": 319.75,
+          "jointNs": 787.191,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 61.3683,
+          "denseNs": 335.222,
+          "jointNs": 943.928,
+          "checksum": 86156094355
+        },
+        {
+          "encodingNs": 49.2004,
+          "denseNs": 298.89,
+          "jointNs": 851.635,
+          "checksum": 86156094355
+        }
+      ],
+      "nativeMedianNanoseconds": {
+        "encodingNs": 40.3546,
+        "denseNs": 319.75,
+        "jointNs": 842.293
+      },
+      "timed100msTotalSimulations": 932599,
+      "jointThroughputVsV132": 1.025723131213292,
+      "fixedSearchThroughputVsV132": 1.0707572191852746
+    },
+    {
+      "precision": "INT8",
+      "name": "v1.32 SIMD",
+      "library": ".build/native-pattern-simd-v1.32/libothello.dylib",
+      "librarySha256": "fd9b5be4daa480400593287fb265e918f9364c60a94cc314d926578ba10d43d3",
+      "model": "models/pattern32-int8-step1-v1.32.otpat",
+      "jointCAbiMicroseconds": 1.9597574462890626,
+      "latencySamples": [
+        1.449564697265625,
+        1.819122314453125,
+        2.129450439453125,
+        1.3501790771484374,
+        1.9597574462890626,
+        1.3205159912109374,
+        2.685028076171875,
+        2.2276407470703123,
+        2.345458984375
+      ],
+      "fixedSearchMilliseconds": 58.568667,
+      "fixedSearchSamples": [
+        52.256958,
+        48.239291,
+        66.985917,
+        52.04475,
+        65.054,
+        45.507209,
+        58.568667,
+        61.177542,
+        77.836916
+      ],
+      "timed100msSamples": [
+        26761,
+        27821,
+        15191,
+        550,
+        40458,
+        51954,
+        45952,
+        50783,
+        46719,
+        43622,
+        40456,
+        47064,
+        36011,
+        45543,
+        40984,
+        53736,
+        43559,
+        49562,
+        44595,
+        45256
+      ],
+      "nativeSamples": [],
+      "timed100msTotalSimulations": 796577,
+      "jointThroughputVsV132": 1.0,
+      "fixedSearchThroughputVsV132": 1.0
+    },
+    {
+      "precision": "INT8",
+      "name": "v1.33 control",
+      "library": ".build/native-pattern-control-v1.33/libothello.dylib",
+      "librarySha256": "2a7ea4be0a24488d1123e302ca6e8cb0d3d135208b2b01183c2ed7c4303d4fa0",
+      "model": "models/pattern32-int8-step1-v1.32.otpat",
+      "jointCAbiMicroseconds": 1.99693798828125,
+      "latencySamples": [
+        1.6652679443359375,
+        1.7391561279296874,
+        2.60985302734375,
+        1.8677469482421876,
+        1.685455322265625,
+        2.5796610107421873,
+        1.99693798828125,
+        2.5586700439453125,
+        3.1088155517578127
+      ],
+      "fixedSearchMilliseconds": 58.687583,
+      "fixedSearchSamples": [
+        68.031875,
+        58.687583,
+        60.896084,
+        44.50275,
+        45.305083,
+        46.090125,
+        62.907916,
+        46.628958,
+        67.830875
+      ],
+      "timed100msSamples": [
+        44883,
+        46852,
+        51623,
+        37098,
+        44077,
+        38967,
+        45618,
+        48599,
+        50158,
+        47572,
+        44280,
+        44713,
+        47920,
+        45813,
+        47998,
+        40631,
+        44407,
+        44166,
+        35425,
+        46873
+      ],
+      "nativeSamples": [
+        {
+          "encodingNs": 257.576,
+          "denseNs": 390.934,
+          "jointNs": 902.754,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 331.695,
+          "denseNs": 444.399,
+          "jointNs": 1136.8,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 303.638,
+          "denseNs": 336.12,
+          "jointNs": 1222.98,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 182.857,
+          "denseNs": 371.815,
+          "jointNs": 981.969,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 182.213,
+          "denseNs": 487.217,
+          "jointNs": 950.349,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 239.115,
+          "denseNs": 389.45,
+          "jointNs": 1109.36,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 173.021,
+          "denseNs": 411.023,
+          "jointNs": 975.27,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 202.127,
+          "denseNs": 326.007,
+          "jointNs": 877.219,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 160.418,
+          "denseNs": 348.027,
+          "jointNs": 1066.71,
+          "checksum": 86155966393
+        }
+      ],
+      "nativeMedianNanoseconds": {
+        "encodingNs": 202.127,
+        "denseNs": 389.45,
+        "jointNs": 981.969
+      },
+      "timed100msTotalSimulations": 897673,
+      "jointThroughputVsV132": 0.981381223548064,
+      "fixedSearchThroughputVsV132": 0.9979737451446927
+    },
+    {
+      "precision": "INT8",
+      "name": "integer rounding",
+      "library": ".build/native-pattern-rounding-v1.33/libothello.dylib",
+      "librarySha256": "7ed32542a979f49283c49fcd10d0a683c46f3d38e060ef447218696f867838e2",
+      "model": "models/pattern32-int8-step1-v1.32.otpat",
+      "jointCAbiMicroseconds": 1.80517578125,
+      "latencySamples": [
+        1.3892364501953125,
+        2.1365306396484374,
+        2.1537830810546876,
+        1.4836781005859374,
+        1.7823436279296876,
+        1.9482828369140626,
+        1.6458892822265625,
+        1.80517578125,
+        1.9534810791015624
+      ],
+      "fixedSearchMilliseconds": 67.191208,
+      "fixedSearchSamples": [
+        54.736125,
+        69.185917,
+        56.347959,
+        60.277542,
+        62.210375,
+        67.191208,
+        67.467416,
+        74.2805,
+        84.731583
+      ],
+      "timed100msSamples": [],
+      "nativeSamples": [
+        {
+          "encodingNs": 283.772,
+          "denseNs": 595.81,
+          "jointNs": 1154.59,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 173.808,
+          "denseNs": 529.699,
+          "jointNs": 1298.61,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 233.332,
+          "denseNs": 740.766,
+          "jointNs": 1079.13,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 261.442,
+          "denseNs": 586.436,
+          "jointNs": 1136.6,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 213.606,
+          "denseNs": 453.313,
+          "jointNs": 1090.64,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 254.618,
+          "denseNs": 619.101,
+          "jointNs": 1005.81,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 277.248,
+          "denseNs": 533.76,
+          "jointNs": 1196.49,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 202.644,
+          "denseNs": 636.938,
+          "jointNs": 1308.11,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 212.73,
+          "denseNs": 611.995,
+          "jointNs": 1230.19,
+          "checksum": 86155966393
+        }
+      ],
+      "nativeMedianNanoseconds": {
+        "encodingNs": 233.332,
+        "denseNs": 595.81,
+        "jointNs": 1154.59
+      },
+      "jointThroughputVsV132": 1.0856324722748174,
+      "fixedSearchThroughputVsV132": 0.8716715883423318
+    },
+    {
+      "precision": "INT8",
+      "name": "packed encoding",
+      "library": ".build/native-pattern-codes-v1.33/libothello.dylib",
+      "librarySha256": "9a77ba24ef5f623634ef712809168b938dfaed07fc807213616b19e527fd754e",
+      "model": "models/pattern32-int8-step1-v1.32.otpat",
+      "jointCAbiMicroseconds": 1.6157430419921874,
+      "latencySamples": [
+        2.3680675048828124,
+        1.425699951171875,
+        1.7473856201171876,
+        2.2455902099609375,
+        1.33053076171875,
+        2.538324951171875,
+        1.4576619873046874,
+        1.6157430419921874,
+        1.5451405029296874
+      ],
+      "fixedSearchMilliseconds": 56.671875,
+      "fixedSearchSamples": [
+        56.671875,
+        56.767875,
+        44.88575,
+        43.830292,
+        67.601208,
+        49.169958,
+        61.698166,
+        49.596084,
+        61.66525
+      ],
+      "timed100msSamples": [],
+      "nativeSamples": [
+        {
+          "encodingNs": 29.5379,
+          "denseNs": 405.84,
+          "jointNs": 805.495,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 73.4871,
+          "denseNs": 447.188,
+          "jointNs": 848.39,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 61.3588,
+          "denseNs": 388.892,
+          "jointNs": 865.15,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 60.47,
+          "denseNs": 303.406,
+          "jointNs": 727.313,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 43.2279,
+          "denseNs": 415.464,
+          "jointNs": 921.793,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 65.4033,
+          "denseNs": 420.9,
+          "jointNs": 903.997,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 28.9867,
+          "denseNs": 368.232,
+          "jointNs": 929.792,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 28.5862,
+          "denseNs": 489.59,
+          "jointNs": 986.987,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 52.42,
+          "denseNs": 416.783,
+          "jointNs": 1236.98,
+          "checksum": 86155966393
+        }
+      ],
+      "nativeMedianNanoseconds": {
+        "encodingNs": 52.42,
+        "denseNs": 415.464,
+        "jointNs": 903.997
+      },
+      "jointThroughputVsV132": 1.2129140558592229,
+      "fixedSearchThroughputVsV132": 1.033469723738627
+    },
+    {
+      "precision": "INT8",
+      "name": "four-row SIMD",
+      "library": ".build/native-pattern-block4-v1.33/libothello.dylib",
+      "librarySha256": "4eb7e98ca431f308e3138401007104a365e106161dd12badc2b95027b721631e",
+      "model": "models/pattern32-int8-step1-v1.32.otpat",
+      "jointCAbiMicroseconds": 1.49178564453125,
+      "latencySamples": [
+        2.3154449462890625,
+        1.49178564453125,
+        1.553924560546875,
+        1.18106591796875,
+        1.678253173828125,
+        1.446416259765625,
+        1.1929066162109374,
+        1.4372965087890626,
+        2.00211083984375
+      ],
+      "fixedSearchMilliseconds": 50.652709,
+      "fixedSearchSamples": [
+        50.658625,
+        49.185167,
+        51.202,
+        40.695917,
+        44.530958,
+        51.031542,
+        50.652709,
+        52.670291,
+        47.194208
+      ],
+      "timed100msSamples": [],
+      "nativeSamples": [
+        {
+          "encodingNs": 205.357,
+          "denseNs": 222.071,
+          "jointNs": 843.716,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 190.793,
+          "denseNs": 292.2,
+          "jointNs": 781.512,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 203.796,
+          "denseNs": 281.63,
+          "jointNs": 833.255,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 225.917,
+          "denseNs": 234.833,
+          "jointNs": 694.158,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 222.29,
+          "denseNs": 208.5,
+          "jointNs": 902.192,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 170.542,
+          "denseNs": 231.551,
+          "jointNs": 837.787,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 159.674,
+          "denseNs": 247.21,
+          "jointNs": 798.99,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 263.385,
+          "denseNs": 234.627,
+          "jointNs": 892.439,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 335.254,
+          "denseNs": 330.076,
+          "jointNs": 710.689,
+          "checksum": 86155966393
+        }
+      ],
+      "nativeMedianNanoseconds": {
+        "encodingNs": 205.357,
+        "denseNs": 234.833,
+        "jointNs": 833.255
+      },
+      "jointThroughputVsV132": 1.3136990917383837,
+      "fixedSearchThroughputVsV132": 1.1562790649558348
+    },
+    {
+      "precision": "INT8",
+      "name": "all three",
+      "library": ".build/native-pattern-fast-v1.33/libothello.dylib",
+      "librarySha256": "bb20b879f81a68fffcae22bf0a57004357665b368c6561e8614806589c96f39e",
+      "model": "models/pattern32-int8-step1-v1.32.otpat",
+      "jointCAbiMicroseconds": 1.743281005859375,
+      "latencySamples": [
+        3.0770263671875,
+        2.007781982421875,
+        1.667572021484375,
+        1.8823497314453126,
+        1.74088037109375,
+        1.2313232421875,
+        1.7460123291015626,
+        1.743281005859375,
+        1.4295399169921874
+      ],
+      "fixedSearchMilliseconds": 49.707125,
+      "fixedSearchSamples": [
+        54.500125,
+        48.031084,
+        49.707125,
+        58.142542,
+        42.792125,
+        59.186791,
+        44.969916,
+        48.61025,
+        64.674792
+      ],
+      "timed100msSamples": [
+        47853,
+        56240,
+        54618,
+        54606,
+        46389,
+        40851,
+        56620,
+        55237,
+        43819,
+        48445,
+        54442,
+        48440,
+        42623,
+        41900,
+        50762,
+        52472,
+        45443,
+        50181,
+        52351,
+        48935
+      ],
+      "nativeSamples": [
+        {
+          "encodingNs": 49.5383,
+          "denseNs": 281.95,
+          "jointNs": 878.06,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 78.3008,
+          "denseNs": 278.343,
+          "jointNs": 751.472,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 52.5542,
+          "denseNs": 294.561,
+          "jointNs": 714.237,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 28.6217,
+          "denseNs": 235.012,
+          "jointNs": 939.274,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 66.0975,
+          "denseNs": 300.411,
+          "jointNs": 867.313,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 38.6804,
+          "denseNs": 299.212,
+          "jointNs": 738.904,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 32.3783,
+          "denseNs": 327.592,
+          "jointNs": 871.395,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 29.5087,
+          "denseNs": 358.581,
+          "jointNs": 811.695,
+          "checksum": 86155966393
+        },
+        {
+          "encodingNs": 42.6392,
+          "denseNs": 322.996,
+          "jointNs": 983.312,
+          "checksum": 86155966393
+        }
+      ],
+      "nativeMedianNanoseconds": {
+        "encodingNs": 42.6392,
+        "denseNs": 299.212,
+        "jointNs": 867.313
+      },
+      "timed100msTotalSimulations": 992227,
+      "jointThroughputVsV132": 1.1241775936880425,
+      "fixedSearchThroughputVsV132": 1.1782750863181084
+    }
+  ],
+  "crossArchitectureChecks": [
+    {
+      "target": "portable",
+      "model": "models/pattern32-outcome-v1.25.otpat",
+      "checksum": 86156094355
+    },
+    {
+      "target": "portable",
+      "model": "models/pattern32-int8-step1-v1.32.otpat",
+      "checksum": 86155966393
+    },
+    {
+      "target": "x86",
+      "model": "models/pattern32-outcome-v1.25.otpat",
+      "checksum": 86156094355
+    },
+    {
+      "target": "x86",
+      "model": "models/pattern32-int8-step1-v1.32.otpat",
+      "checksum": 86155966393
+    }
+  ],
+  "parity": {
+    "validationPositions": 6000,
+    "testPositions": 6000,
+    "precisions": 2,
+    "implementations": 6,
+    "all68JointOutputsExactlyEqual": true,
+    "fixedSimulationSearchExactlyEqual": true,
+    "reusedSubtreeSearchExactlyEqual": true,
+    "coldRoots": 32,
+    "warmRoots": 16,
+    "simulationsPerRoot": 1024,
+    "nativeChecksumsExactlyEqual": true
+  },
+  "timing": {
+    "rounds": 9,
+    "nativeCallsPerPhase": 100000,
+    "cAbiCallsPerRound": 8192,
+    "timedBudgetMs": 100,
+    "timedRounds": 5,
+    "timedRoots": 4
+  },
+  "scriptSha256": "01a729021637509ff05ccf7a82725873828f557ecbd59670dcbb0ef7775b6fd5",
+  "seconds": 50.531676208018325,
+  "limits": "Apple Silicon performance. x86-64 correctness under Rosetta and portable fallback checked; no Linux native timing. No training, strength match, model-byte changes or default promotion. All timing samples retained; same-model comparisons only."
+}

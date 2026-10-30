@@ -1,0 +1,1491 @@
+{
+  "version": "v1.31-pattern-incremental",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "model": "models/pattern32-outcome-v1.25.otpat",
+  "modelSha256": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0",
+  "baselineManifest": "models/v1.25-default.json",
+  "baselineManifestSha256": "730b4a83b9e0495e7f1a4beaa6da8b2a31c8d72ceb9b39e54a9218cbb381c14f",
+  "libraries": {
+    ".build/native-pattern-incremental-v1.31/libothello.dylib": "11749310551d91a51c295bf7494f9599e41b94655327de76a0e00c150b422927",
+    ".build/native-pattern-h64-v1.29/libothello.dylib": "8aa42d6a73c26392bf7e545b34c3ef6cc00895a98d7553f0b4d4c5eb6395e442"
+  },
+  "scriptSha256": "dd4824b7c7b0eee48311a3db4d1ac38a0198333a22fddff04a20e10e3e139856",
+  "rounds": 7,
+  "simulationsPerPosition": 4096,
+  "coldPositions": 32,
+  "warmPositions": 16,
+  "allFixedSimulationOutputsExactlyEqual": true,
+  "cacheEntriesLimit": 16384,
+  "results": [
+    {
+      "entries": 0,
+      "cold": {
+        "medianMilliseconds": 343.019833,
+        "simulationsPerSecond": 362360.9717050967,
+        "evaluationsPerSecond": 329698.13730857946,
+        "cacheBytes": 0,
+        "incrementalFraction": 0.0,
+        "meanChangedPatterns": 0,
+        "meanAncestorDistance": 0,
+        "samples": [
+          {
+            "milliseconds": 244.03175,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 113093,
+            "updates": 0,
+            "hits": 0,
+            "changedPatterns": 0,
+            "cacheBytes": 0,
+            "probes": 0,
+            "ancestorDistance": 0
+          },
+          {
+            "milliseconds": 380.862542,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 113093,
+            "updates": 0,
+            "hits": 0,
+            "changedPatterns": 0,
+            "cacheBytes": 0,
+            "probes": 0,
+            "ancestorDistance": 0
+          },
+          {
+            "milliseconds": 340.142458,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 113093,
+            "updates": 0,
+            "hits": 0,
+            "changedPatterns": 0,
+            "cacheBytes": 0,
+            "probes": 0,
+            "ancestorDistance": 0
+          },
+          {
+            "milliseconds": 366.658292,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 113093,
+            "updates": 0,
+            "hits": 0,
+            "changedPatterns": 0,
+            "cacheBytes": 0,
+            "probes": 0,
+            "ancestorDistance": 0
+          },
+          {
+            "milliseconds": 328.7785,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 113093,
+            "updates": 0,
+            "hits": 0,
+            "changedPatterns": 0,
+            "cacheBytes": 0,
+            "probes": 0,
+            "ancestorDistance": 0
+          },
+          {
+            "milliseconds": 343.019833,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 113093,
+            "updates": 0,
+            "hits": 0,
+            "changedPatterns": 0,
+            "cacheBytes": 0,
+            "probes": 0,
+            "ancestorDistance": 0
+          },
+          {
+            "milliseconds": 386.847167,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 113093,
+            "updates": 0,
+            "hits": 0,
+            "changedPatterns": 0,
+            "cacheBytes": 0,
+            "probes": 0,
+            "ancestorDistance": 0
+          }
+        ],
+        "throughputRatioVsFused": 1.0
+      },
+      "warm": {
+        "medianMilliseconds": 261.539834,
+        "simulationsPerSecond": 250577.50858708585,
+        "evaluationsPerSecond": 250577.50858708585,
+        "cacheBytes": 0,
+        "incrementalFraction": 0.0,
+        "meanChangedPatterns": 0,
+        "meanAncestorDistance": 0,
+        "samples": [
+          {
+            "milliseconds": 175.281,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 65536,
+            "updates": 0,
+            "hits": 0,
+            "changedPatterns": 0,
+            "cacheBytes": 0,
+            "probes": 0,
+            "ancestorDistance": 0
+          },
+          {
+            "milliseconds": 261.539834,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 65536,
+            "updates": 0,
+            "hits": 0,
+            "changedPatterns": 0,
+            "cacheBytes": 0,
+            "probes": 0,
+            "ancestorDistance": 0
+          },
+          {
+            "milliseconds": 248.77275,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 65536,
+            "updates": 0,
+            "hits": 0,
+            "changedPatterns": 0,
+            "cacheBytes": 0,
+            "probes": 0,
+            "ancestorDistance": 0
+          },
+          {
+            "milliseconds": 286.379125,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 65536,
+            "updates": 0,
+            "hits": 0,
+            "changedPatterns": 0,
+            "cacheBytes": 0,
+            "probes": 0,
+            "ancestorDistance": 0
+          },
+          {
+            "milliseconds": 269.171416,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 65536,
+            "updates": 0,
+            "hits": 0,
+            "changedPatterns": 0,
+            "cacheBytes": 0,
+            "probes": 0,
+            "ancestorDistance": 0
+          },
+          {
+            "milliseconds": 258.412459,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 65536,
+            "updates": 0,
+            "hits": 0,
+            "changedPatterns": 0,
+            "cacheBytes": 0,
+            "probes": 0,
+            "ancestorDistance": 0
+          },
+          {
+            "milliseconds": 326.365166,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 65536,
+            "updates": 0,
+            "hits": 0,
+            "changedPatterns": 0,
+            "cacheBytes": 0,
+            "probes": 0,
+            "ancestorDistance": 0
+          }
+        ],
+        "throughputRatioVsFused": 1.0
+      }
+    },
+    {
+      "entries": 64,
+      "cold": {
+        "medianMilliseconds": 513.073583,
+        "simulationsPerSecond": 242259.59807406418,
+        "evaluationsPerSecond": 220422.57435811113,
+        "cacheBytes": 60928,
+        "incrementalFraction": 0.22386000901912584,
+        "meanChangedPatterns": 10.686613737804636,
+        "meanAncestorDistance": 1.0014614685784256,
+        "samples": [
+          {
+            "milliseconds": 349.93275,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 87776,
+            "updates": 25317,
+            "hits": 25317,
+            "changedPatterns": 270553,
+            "cacheBytes": 60928,
+            "probes": 815141,
+            "ancestorDistance": 25354
+          },
+          {
+            "milliseconds": 528.776542,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 87776,
+            "updates": 25317,
+            "hits": 25317,
+            "changedPatterns": 270553,
+            "cacheBytes": 60928,
+            "probes": 815141,
+            "ancestorDistance": 25354
+          },
+          {
+            "milliseconds": 502.944666,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 87776,
+            "updates": 25317,
+            "hits": 25317,
+            "changedPatterns": 270553,
+            "cacheBytes": 60928,
+            "probes": 815141,
+            "ancestorDistance": 25354
+          },
+          {
+            "milliseconds": 564.93575,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 87776,
+            "updates": 25317,
+            "hits": 25317,
+            "changedPatterns": 270553,
+            "cacheBytes": 60928,
+            "probes": 815141,
+            "ancestorDistance": 25354
+          },
+          {
+            "milliseconds": 507.07525,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 87776,
+            "updates": 25317,
+            "hits": 25317,
+            "changedPatterns": 270553,
+            "cacheBytes": 60928,
+            "probes": 815141,
+            "ancestorDistance": 25354
+          },
+          {
+            "milliseconds": 529.20425,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 87776,
+            "updates": 25317,
+            "hits": 25317,
+            "changedPatterns": 270553,
+            "cacheBytes": 60928,
+            "probes": 815141,
+            "ancestorDistance": 25354
+          },
+          {
+            "milliseconds": 513.073583,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 87776,
+            "updates": 25317,
+            "hits": 25317,
+            "changedPatterns": 270553,
+            "cacheBytes": 60928,
+            "probes": 815141,
+            "ancestorDistance": 25354
+          }
+        ],
+        "throughputRatioVsFused": 0.6685587493987193
+      },
+      "warm": {
+        "medianMilliseconds": 402.727667,
+        "simulationsPerSecond": 162730.31472655194,
+        "evaluationsPerSecond": 162730.31472655194,
+        "cacheBytes": 60928,
+        "incrementalFraction": 0.0964813232421875,
+        "meanChangedPatterns": 9.43080816068322,
+        "meanAncestorDistance": 1.0,
+        "samples": [
+          {
+            "milliseconds": 235.768334,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 59213,
+            "updates": 6323,
+            "hits": 6323,
+            "changedPatterns": 59631,
+            "cacheBytes": 60928,
+            "probes": 760879,
+            "ancestorDistance": 6323
+          },
+          {
+            "milliseconds": 355.868375,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 59213,
+            "updates": 6323,
+            "hits": 6323,
+            "changedPatterns": 59631,
+            "cacheBytes": 60928,
+            "probes": 760879,
+            "ancestorDistance": 6323
+          },
+          {
+            "milliseconds": 331.873875,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 59213,
+            "updates": 6323,
+            "hits": 6323,
+            "changedPatterns": 59631,
+            "cacheBytes": 60928,
+            "probes": 760879,
+            "ancestorDistance": 6323
+          },
+          {
+            "milliseconds": 1126.281542,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 59213,
+            "updates": 6323,
+            "hits": 6323,
+            "changedPatterns": 59631,
+            "cacheBytes": 60928,
+            "probes": 760879,
+            "ancestorDistance": 6323
+          },
+          {
+            "milliseconds": 459.11325,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 59213,
+            "updates": 6323,
+            "hits": 6323,
+            "changedPatterns": 59631,
+            "cacheBytes": 60928,
+            "probes": 760879,
+            "ancestorDistance": 6323
+          },
+          {
+            "milliseconds": 414.332834,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 59213,
+            "updates": 6323,
+            "hits": 6323,
+            "changedPatterns": 59631,
+            "cacheBytes": 60928,
+            "probes": 760879,
+            "ancestorDistance": 6323
+          },
+          {
+            "milliseconds": 402.727667,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 59213,
+            "updates": 6323,
+            "hits": 6323,
+            "changedPatterns": 59631,
+            "cacheBytes": 60928,
+            "probes": 760879,
+            "ancestorDistance": 6323
+          }
+        ],
+        "throughputRatioVsFused": 0.649421073918917
+      }
+    },
+    {
+      "entries": 256,
+      "cold": {
+        "medianMilliseconds": 466.748708,
+        "simulationsPerSecond": 266303.8972997007,
+        "evaluationsPerSecond": 242299.5459046884,
+        "cacheBytes": 243712,
+        "incrementalFraction": 0.43685285561440584,
+        "meanChangedPatterns": 10.690213541139562,
+        "meanAncestorDistance": 1.0017811962351988,
+        "samples": [
+          {
+            "milliseconds": 342.856125,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 63688,
+            "updates": 49405,
+            "hits": 49405,
+            "changedPatterns": 528150,
+            "cacheBytes": 243712,
+            "probes": 643204,
+            "ancestorDistance": 49493
+          },
+          {
+            "milliseconds": 465.07175,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 63688,
+            "updates": 49405,
+            "hits": 49405,
+            "changedPatterns": 528150,
+            "cacheBytes": 243712,
+            "probes": 643204,
+            "ancestorDistance": 49493
+          },
+          {
+            "milliseconds": 455.22775,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 63688,
+            "updates": 49405,
+            "hits": 49405,
+            "changedPatterns": 528150,
+            "cacheBytes": 243712,
+            "probes": 643204,
+            "ancestorDistance": 49493
+          },
+          {
+            "milliseconds": 516.335083,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 63688,
+            "updates": 49405,
+            "hits": 49405,
+            "changedPatterns": 528150,
+            "cacheBytes": 243712,
+            "probes": 643204,
+            "ancestorDistance": 49493
+          },
+          {
+            "milliseconds": 493.162166,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 63688,
+            "updates": 49405,
+            "hits": 49405,
+            "changedPatterns": 528150,
+            "cacheBytes": 243712,
+            "probes": 643204,
+            "ancestorDistance": 49493
+          },
+          {
+            "milliseconds": 507.162459,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 63688,
+            "updates": 49405,
+            "hits": 49405,
+            "changedPatterns": 528150,
+            "cacheBytes": 243712,
+            "probes": 643204,
+            "ancestorDistance": 49493
+          },
+          {
+            "milliseconds": 466.748708,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 63688,
+            "updates": 49405,
+            "hits": 49405,
+            "changedPatterns": 528150,
+            "cacheBytes": 243712,
+            "probes": 643204,
+            "ancestorDistance": 49493
+          }
+        ],
+        "throughputRatioVsFused": 0.7349132994279225
+      },
+      "warm": {
+        "medianMilliseconds": 356.876875,
+        "simulationsPerSecond": 183637.5640758455,
+        "evaluationsPerSecond": 183637.5640758455,
+        "cacheBytes": 243712,
+        "incrementalFraction": 0.1860809326171875,
+        "meanChangedPatterns": 9.400574005740058,
+        "meanAncestorDistance": 1.0,
+        "samples": [
+          {
+            "milliseconds": 231.247083,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 53341,
+            "updates": 12195,
+            "hits": 12195,
+            "changedPatterns": 114640,
+            "cacheBytes": 243712,
+            "probes": 690915,
+            "ancestorDistance": 12195
+          },
+          {
+            "milliseconds": 365.056792,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 53341,
+            "updates": 12195,
+            "hits": 12195,
+            "changedPatterns": 114640,
+            "cacheBytes": 243712,
+            "probes": 690915,
+            "ancestorDistance": 12195
+          },
+          {
+            "milliseconds": 325.540292,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 53341,
+            "updates": 12195,
+            "hits": 12195,
+            "changedPatterns": 114640,
+            "cacheBytes": 243712,
+            "probes": 690915,
+            "ancestorDistance": 12195
+          },
+          {
+            "milliseconds": 351.265125,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 53341,
+            "updates": 12195,
+            "hits": 12195,
+            "changedPatterns": 114640,
+            "cacheBytes": 243712,
+            "probes": 690915,
+            "ancestorDistance": 12195
+          },
+          {
+            "milliseconds": 367.841792,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 53341,
+            "updates": 12195,
+            "hits": 12195,
+            "changedPatterns": 114640,
+            "cacheBytes": 243712,
+            "probes": 690915,
+            "ancestorDistance": 12195
+          },
+          {
+            "milliseconds": 360.600917,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 53341,
+            "updates": 12195,
+            "hits": 12195,
+            "changedPatterns": 114640,
+            "cacheBytes": 243712,
+            "probes": 690915,
+            "ancestorDistance": 12195
+          },
+          {
+            "milliseconds": 356.876875,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 53341,
+            "updates": 12195,
+            "hits": 12195,
+            "changedPatterns": 114640,
+            "cacheBytes": 243712,
+            "probes": 690915,
+            "ancestorDistance": 12195
+          }
+        ],
+        "throughputRatioVsFused": 0.7328573306970366
+      }
+    },
+    {
+      "entries": 1024,
+      "cold": {
+        "medianMilliseconds": 489.774792,
+        "simulationsPerSecond": 253783.98813142674,
+        "evaluationsPerSecond": 230908.1680953478,
+        "cacheBytes": 974848,
+        "incrementalFraction": 0.7592158665876756,
+        "meanChangedPatterns": 10.70149775220703,
+        "meanAncestorDistance": 1.0024923714798164,
+        "samples": [
+          {
+            "milliseconds": 338.854667,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 27231,
+            "updates": 85862,
+            "hits": 85862,
+            "changedPatterns": 918852,
+            "cacheBytes": 974848,
+            "probes": 391844,
+            "ancestorDistance": 86076
+          },
+          {
+            "milliseconds": 470.512459,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 27231,
+            "updates": 85862,
+            "hits": 85862,
+            "changedPatterns": 918852,
+            "cacheBytes": 974848,
+            "probes": 391844,
+            "ancestorDistance": 86076
+          },
+          {
+            "milliseconds": 463.939125,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 27231,
+            "updates": 85862,
+            "hits": 85862,
+            "changedPatterns": 918852,
+            "cacheBytes": 974848,
+            "probes": 391844,
+            "ancestorDistance": 86076
+          },
+          {
+            "milliseconds": 489.774792,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 27231,
+            "updates": 85862,
+            "hits": 85862,
+            "changedPatterns": 918852,
+            "cacheBytes": 974848,
+            "probes": 391844,
+            "ancestorDistance": 86076
+          },
+          {
+            "milliseconds": 507.1615,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 27231,
+            "updates": 85862,
+            "hits": 85862,
+            "changedPatterns": 918852,
+            "cacheBytes": 974848,
+            "probes": 391844,
+            "ancestorDistance": 86076
+          },
+          {
+            "milliseconds": 522.627417,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 27231,
+            "updates": 85862,
+            "hits": 85862,
+            "changedPatterns": 918852,
+            "cacheBytes": 974848,
+            "probes": 391844,
+            "ancestorDistance": 86076
+          },
+          {
+            "milliseconds": 666.400167,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 27231,
+            "updates": 85862,
+            "hits": 85862,
+            "changedPatterns": 918852,
+            "cacheBytes": 974848,
+            "probes": 391844,
+            "ancestorDistance": 86076
+          }
+        ],
+        "throughputRatioVsFused": 0.7003623677716758
+      },
+      "warm": {
+        "medianMilliseconds": 349.23275,
+        "simulationsPerSecond": 187657.08542512121,
+        "evaluationsPerSecond": 187657.08542512121,
+        "cacheBytes": 974848,
+        "incrementalFraction": 0.337738037109375,
+        "meanChangedPatterns": 9.392879732538177,
+        "meanAncestorDistance": 1.0,
+        "samples": [
+          {
+            "milliseconds": 237.3995,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 43402,
+            "updates": 22134,
+            "hits": 22134,
+            "changedPatterns": 207902,
+            "cacheBytes": 974848,
+            "probes": 575850,
+            "ancestorDistance": 22134
+          },
+          {
+            "milliseconds": 357.307709,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 43402,
+            "updates": 22134,
+            "hits": 22134,
+            "changedPatterns": 207902,
+            "cacheBytes": 974848,
+            "probes": 575850,
+            "ancestorDistance": 22134
+          },
+          {
+            "milliseconds": 318.437292,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 43402,
+            "updates": 22134,
+            "hits": 22134,
+            "changedPatterns": 207902,
+            "cacheBytes": 974848,
+            "probes": 575850,
+            "ancestorDistance": 22134
+          },
+          {
+            "milliseconds": 331.474583,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 43402,
+            "updates": 22134,
+            "hits": 22134,
+            "changedPatterns": 207902,
+            "cacheBytes": 974848,
+            "probes": 575850,
+            "ancestorDistance": 22134
+          },
+          {
+            "milliseconds": 353.79125,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 43402,
+            "updates": 22134,
+            "hits": 22134,
+            "changedPatterns": 207902,
+            "cacheBytes": 974848,
+            "probes": 575850,
+            "ancestorDistance": 22134
+          },
+          {
+            "milliseconds": 349.23275,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 43402,
+            "updates": 22134,
+            "hits": 22134,
+            "changedPatterns": 207902,
+            "cacheBytes": 974848,
+            "probes": 575850,
+            "ancestorDistance": 22134
+          },
+          {
+            "milliseconds": 365.846083,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 43402,
+            "updates": 22134,
+            "hits": 22134,
+            "changedPatterns": 207902,
+            "cacheBytes": 974848,
+            "probes": 575850,
+            "ancestorDistance": 22134
+          }
+        ],
+        "throughputRatioVsFused": 0.7488983607637026
+      }
+    },
+    {
+      "entries": 4096,
+      "cold": {
+        "medianMilliseconds": 496.922917,
+        "simulationsPerSecond": 250133.362233322,
+        "evaluationsPerSecond": 227586.60575116926,
+        "cacheBytes": 3899392,
+        "incrementalFraction": 0.9997170470320886,
+        "meanChangedPatterns": 10.720451791510778,
+        "meanAncestorDistance": 1.0,
+        "samples": [
+          {
+            "milliseconds": 333.015125,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 32,
+            "updates": 113061,
+            "hits": 113061,
+            "changedPatterns": 1212065,
+            "cacheBytes": 3899392,
+            "probes": 226154,
+            "ancestorDistance": 113061
+          },
+          {
+            "milliseconds": 485.088375,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 32,
+            "updates": 113061,
+            "hits": 113061,
+            "changedPatterns": 1212065,
+            "cacheBytes": 3899392,
+            "probes": 226154,
+            "ancestorDistance": 113061
+          },
+          {
+            "milliseconds": 496.922917,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 32,
+            "updates": 113061,
+            "hits": 113061,
+            "changedPatterns": 1212065,
+            "cacheBytes": 3899392,
+            "probes": 226154,
+            "ancestorDistance": 113061
+          },
+          {
+            "milliseconds": 534.759209,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 32,
+            "updates": 113061,
+            "hits": 113061,
+            "changedPatterns": 1212065,
+            "cacheBytes": 3899392,
+            "probes": 226154,
+            "ancestorDistance": 113061
+          },
+          {
+            "milliseconds": 538.628542,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 32,
+            "updates": 113061,
+            "hits": 113061,
+            "changedPatterns": 1212065,
+            "cacheBytes": 3899392,
+            "probes": 226154,
+            "ancestorDistance": 113061
+          },
+          {
+            "milliseconds": 483.157292,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 32,
+            "updates": 113061,
+            "hits": 113061,
+            "changedPatterns": 1212065,
+            "cacheBytes": 3899392,
+            "probes": 226154,
+            "ancestorDistance": 113061
+          },
+          {
+            "milliseconds": 497.25025,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 32,
+            "updates": 113061,
+            "hits": 113061,
+            "changedPatterns": 1212065,
+            "cacheBytes": 3899392,
+            "probes": 226154,
+            "ancestorDistance": 113061
+          }
+        ],
+        "throughputRatioVsFused": 0.69028781178148
+      },
+      "warm": {
+        "medianMilliseconds": 355.517209,
+        "simulationsPerSecond": 184339.8809985595,
+        "evaluationsPerSecond": 184339.8809985595,
+        "cacheBytes": 3899392,
+        "incrementalFraction": 0.4570159912109375,
+        "meanChangedPatterns": 9.400353911388601,
+        "meanAncestorDistance": 1.0,
+        "samples": [
+          {
+            "milliseconds": 231.464541,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 35585,
+            "updates": 29951,
+            "hits": 29951,
+            "changedPatterns": 281550,
+            "cacheBytes": 3899392,
+            "probes": 488519,
+            "ancestorDistance": 29951
+          },
+          {
+            "milliseconds": 364.084834,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 35585,
+            "updates": 29951,
+            "hits": 29951,
+            "changedPatterns": 281550,
+            "cacheBytes": 3899392,
+            "probes": 488519,
+            "ancestorDistance": 29951
+          },
+          {
+            "milliseconds": 355.517209,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 35585,
+            "updates": 29951,
+            "hits": 29951,
+            "changedPatterns": 281550,
+            "cacheBytes": 3899392,
+            "probes": 488519,
+            "ancestorDistance": 29951
+          },
+          {
+            "milliseconds": 329.929875,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 35585,
+            "updates": 29951,
+            "hits": 29951,
+            "changedPatterns": 281550,
+            "cacheBytes": 3899392,
+            "probes": 488519,
+            "ancestorDistance": 29951
+          },
+          {
+            "milliseconds": 364.412209,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 35585,
+            "updates": 29951,
+            "hits": 29951,
+            "changedPatterns": 281550,
+            "cacheBytes": 3899392,
+            "probes": 488519,
+            "ancestorDistance": 29951
+          },
+          {
+            "milliseconds": 436.452125,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 35585,
+            "updates": 29951,
+            "hits": 29951,
+            "changedPatterns": 281550,
+            "cacheBytes": 3899392,
+            "probes": 488519,
+            "ancestorDistance": 29951
+          },
+          {
+            "milliseconds": 350.793084,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 35585,
+            "updates": 29951,
+            "hits": 29951,
+            "changedPatterns": 281550,
+            "cacheBytes": 3899392,
+            "probes": 488519,
+            "ancestorDistance": 29951
+          }
+        ],
+        "throughputRatioVsFused": 0.7356601238394623
+      }
+    },
+    {
+      "entries": 16384,
+      "cold": {
+        "medianMilliseconds": 478.881208,
+        "simulationsPerSecond": 259557.06326233625,
+        "evaluationsPerSecond": 236160.86434529707,
+        "cacheBytes": 15597568,
+        "incrementalFraction": 0.9997170470320886,
+        "meanChangedPatterns": 10.720451791510778,
+        "meanAncestorDistance": 1.0,
+        "samples": [
+          {
+            "milliseconds": 330.613416,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 32,
+            "updates": 113061,
+            "hits": 113061,
+            "changedPatterns": 1212065,
+            "cacheBytes": 15597568,
+            "probes": 226154,
+            "ancestorDistance": 113061
+          },
+          {
+            "milliseconds": 477.622833,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 32,
+            "updates": 113061,
+            "hits": 113061,
+            "changedPatterns": 1212065,
+            "cacheBytes": 15597568,
+            "probes": 226154,
+            "ancestorDistance": 113061
+          },
+          {
+            "milliseconds": 460.274,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 32,
+            "updates": 113061,
+            "hits": 113061,
+            "changedPatterns": 1212065,
+            "cacheBytes": 15597568,
+            "probes": 226154,
+            "ancestorDistance": 113061
+          },
+          {
+            "milliseconds": 480.391,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 32,
+            "updates": 113061,
+            "hits": 113061,
+            "changedPatterns": 1212065,
+            "cacheBytes": 15597568,
+            "probes": 226154,
+            "ancestorDistance": 113061
+          },
+          {
+            "milliseconds": 478.881208,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 32,
+            "updates": 113061,
+            "hits": 113061,
+            "changedPatterns": 1212065,
+            "cacheBytes": 15597568,
+            "probes": 226154,
+            "ancestorDistance": 113061
+          },
+          {
+            "milliseconds": 491.64125,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 32,
+            "updates": 113061,
+            "hits": 113061,
+            "changedPatterns": 1212065,
+            "cacheBytes": 15597568,
+            "probes": 226154,
+            "ancestorDistance": 113061
+          },
+          {
+            "milliseconds": 510.996334,
+            "simulations": 124297,
+            "evaluations": 113093,
+            "refreshes": 32,
+            "updates": 113061,
+            "hits": 113061,
+            "changedPatterns": 1212065,
+            "cacheBytes": 15597568,
+            "probes": 226154,
+            "ancestorDistance": 113061
+          }
+        ],
+        "throughputRatioVsFused": 0.716294202548871
+      },
+      "warm": {
+        "medianMilliseconds": 342.752583,
+        "simulationsPerSecond": 191204.97773170684,
+        "evaluationsPerSecond": 191204.97773170684,
+        "cacheBytes": 15597568,
+        "incrementalFraction": 0.4570159912109375,
+        "meanChangedPatterns": 9.400353911388601,
+        "meanAncestorDistance": 1.0,
+        "samples": [
+          {
+            "milliseconds": 230.598875,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 35585,
+            "updates": 29951,
+            "hits": 29951,
+            "changedPatterns": 281550,
+            "cacheBytes": 15597568,
+            "probes": 488519,
+            "ancestorDistance": 29951
+          },
+          {
+            "milliseconds": 364.879125,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 35585,
+            "updates": 29951,
+            "hits": 29951,
+            "changedPatterns": 281550,
+            "cacheBytes": 15597568,
+            "probes": 488519,
+            "ancestorDistance": 29951
+          },
+          {
+            "milliseconds": 355.81275,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 35585,
+            "updates": 29951,
+            "hits": 29951,
+            "changedPatterns": 281550,
+            "cacheBytes": 15597568,
+            "probes": 488519,
+            "ancestorDistance": 29951
+          },
+          {
+            "milliseconds": 342.752583,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 35585,
+            "updates": 29951,
+            "hits": 29951,
+            "changedPatterns": 281550,
+            "cacheBytes": 15597568,
+            "probes": 488519,
+            "ancestorDistance": 29951
+          },
+          {
+            "milliseconds": 311.532083,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 35585,
+            "updates": 29951,
+            "hits": 29951,
+            "changedPatterns": 281550,
+            "cacheBytes": 15597568,
+            "probes": 488519,
+            "ancestorDistance": 29951
+          },
+          {
+            "milliseconds": 337.553667,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 35585,
+            "updates": 29951,
+            "hits": 29951,
+            "changedPatterns": 281550,
+            "cacheBytes": 15597568,
+            "probes": 488519,
+            "ancestorDistance": 29951
+          },
+          {
+            "milliseconds": 372.660375,
+            "simulations": 65536,
+            "evaluations": 65536,
+            "refreshes": 35585,
+            "updates": 29951,
+            "hits": 29951,
+            "changedPatterns": 281550,
+            "cacheBytes": 15597568,
+            "probes": 488519,
+            "ancestorDistance": 29951
+          }
+        ],
+        "throughputRatioVsFused": 0.7630572225330245
+      }
+    }
+  ],
+  "bestCachedEntries": 16384,
+  "timed100ms": [
+    {
+      "entries": 0,
+      "totalSimulations": 578369,
+      "totalEvaluations": 578369,
+      "samples": [
+        {
+          "simulations": 24320,
+          "evaluations": 24320,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 27963,
+          "evaluations": 27963,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 29145,
+          "evaluations": 29145,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 30169,
+          "evaluations": 30169,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 24078,
+          "evaluations": 24078,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 26932,
+          "evaluations": 26932,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 29928,
+          "evaluations": 29928,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 29249,
+          "evaluations": 29249,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 35011,
+          "evaluations": 35011,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 30942,
+          "evaluations": 30942,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 27868,
+          "evaluations": 27868,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 33669,
+          "evaluations": 33669,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 28505,
+          "evaluations": 28505,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 28898,
+          "evaluations": 28898,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 29492,
+          "evaluations": 29492,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 33086,
+          "evaluations": 33086,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 26552,
+          "evaluations": 26552,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 29537,
+          "evaluations": 29537,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 28996,
+          "evaluations": 28996,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 24029,
+          "evaluations": 24029,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        }
+      ]
+    },
+    {
+      "entries": 16384,
+      "totalSimulations": 492933,
+      "totalEvaluations": 492933,
+      "samples": [
+        {
+          "simulations": 23743,
+          "evaluations": 23743,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 25388,
+          "evaluations": 25388,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 26642,
+          "evaluations": 26642,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 25053,
+          "evaluations": 25053,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 22933,
+          "evaluations": 22933,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 21147,
+          "evaluations": 21147,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 8071,
+          "evaluations": 8071,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 24296,
+          "evaluations": 24296,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 24323,
+          "evaluations": 24323,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 29476,
+          "evaluations": 29476,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 26338,
+          "evaluations": 26338,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 23903,
+          "evaluations": 23903,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 27299,
+          "evaluations": 27299,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 29726,
+          "evaluations": 29726,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 25406,
+          "evaluations": 25406,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 26135,
+          "evaluations": 26135,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 24220,
+          "evaluations": 24220,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 26820,
+          "evaluations": 26820,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 22522,
+          "evaluations": 22522,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        },
+        {
+          "simulations": 29492,
+          "evaluations": 29492,
+          "elapsedMs": 100,
+          "exact": false,
+          "memoryLimited": false
+        }
+      ]
+    }
+  ],
+  "seconds": 41.13680466695223,
+  "limits": "Native experiment only; no training or strength matches. Same model, priors, FPU and proof rules. All fixed-budget outputs exclude elapsed fields only. Warm-cache allocation excluded from timing; per-root model snapshot and ancestor cache operations included."
+}

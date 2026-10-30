@@ -1,0 +1,52 @@
+{
+  "version": "v1.30",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "name": "single-best",
+  "epochs": [
+    15
+  ],
+  "model": "models/pattern32-single-best-v1.30.otpat",
+  "sha256": "ec77cf89c716777f78bdd21d5e574334a54856f5d15b571102aed1055a8b71b0",
+  "checkpointSha256": [
+    "312e0dab1497ff47f6803759e155109add209cf9785ad4ef5009891454c995cb"
+  ],
+  "bytes": 3576088,
+  "parameters": 1787950,
+  "metrics": {
+    "validation": {
+      "mse": 0.7249130606651306,
+      "outcomeMae": 0.726279616355896,
+      "nonDrawSignAccuracy": 0.6552055320783711,
+      "wdlAccuracy": 0.5685,
+      "wdlCrossEntropy": 0.9000649452209473,
+      "policyTop1": 0.414,
+      "policyCrossEntropy": 1.5960545539855957,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    "test": {
+      "mse": 0.6878209114074707,
+      "outcomeMae": 0.7095891833305359,
+      "nonDrawSignAccuracy": 0.6770030816640986,
+      "wdlAccuracy": 0.5871666666666666,
+      "wdlCrossEntropy": 0.8900972604751587,
+      "policyTop1": 0.4056666666666667,
+      "policyCrossEntropy": 1.6159687042236328,
+      "uniformPolicyCrossEntropy": 2.1044416287103247
+    }
+  },
+  "validationParity": {
+    "positions": 6000,
+    "maxWdlError": 1.2727802312095804e-07,
+    "maxPolicyLogitError": 5.215797100888153e-07,
+    "maxScoreRoundingError": 0.49896240234375,
+    "maxOutcomeError": 2.9840748871912126e-08
+  },
+  "testParity": {
+    "positions": 6000,
+    "maxWdlError": 1.3289762634816071e-07,
+    "maxPolicyLogitError": 5.291626310466313e-07,
+    "maxScoreRoundingError": 0.49896240234375,
+    "maxOutcomeError": 2.9840748871912126e-08
+  }
+}

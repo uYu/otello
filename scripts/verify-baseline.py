@@ -15,6 +15,57 @@ def sha(path):
 
 
 def verify():
+    active_path=ROOT/'models/default-model.json'
+    if active_path.exists():
+        active=json.loads(active_path.read_text())
+        release_path=ROOT/active['baselineManifest']
+        release=json.loads(release_path.read_text())
+        assert release['status']=='frozen' and release['userApproved']
+        assert active['version']==release['version']
+        assert active['defaultModel']==release['defaultModel']
+        assert active['modelSha256']==release['modelSha256']==sha(ROOT/release['defaultModel'])
+        frozen=json.loads((ROOT/release['sourceManifest']).read_text())
+        assert frozen['baselineSha256']==sha(release_path)
+        assert sha(ROOT/frozen['archive'])==frozen['sha256']
+        assert frozen['files']=={**release['sourceSha256'],**release['artifactSha256']}
+        with tarfile.open(ROOT/frozen['archive'],'r:gz') as archive:
+            assert len(archive.getmembers())==len(frozen['files'])
+            for name,expected in frozen['files'].items():
+                assert hashlib.sha256(archive.extractfile(name).read()).hexdigest()==expected,name
+        assert all(sha(ROOT/name)==expected for name,expected in release['artifactSha256'].items())
+        assert all(sha(ROOT/r['path'])==r['sha256'] for r in release['referenceExperiments'])
+        print(f"{release['version']} active default verified: user-approved model, frozen sources and current Wasm artifact")
+    # Previous defaults retain their own archived Wasm and sources after promotion.
+    for previous_version in ('v1.8','v1.9','v1.25'):
+        previous_manifest=ROOT/f'models/archive/{previous_version}-default-sources.json'
+        if not previous_manifest.exists() or (active_path.exists() and active['version']==previous_version):
+            continue
+        frozen=json.loads(previous_manifest.read_text())
+        release_path=ROOT/f'models/{previous_version}-default.json'
+        release=json.loads(release_path.read_text())
+        assert sha(release_path)==frozen['baselineSha256']
+        assert sha(ROOT/frozen['archive'])==frozen['sha256']
+        assert frozen['files']=={**release['sourceSha256'],**release['artifactSha256']}
+        with tarfile.open(ROOT/frozen['archive'],'r:gz') as archive:
+            assert len(archive.getmembers())==len(frozen['files'])
+            for name,expected in frozen['files'].items():
+                assert hashlib.sha256(archive.extractfile(name).read()).hexdigest()==expected,name
+        assert sha(ROOT/release['defaultModel'])==release['modelSha256']
+        assert all(sha(ROOT/r['path'])==r['sha256'] for r in release['referenceExperiments'])
+        print(f'{previous_version} previous default verified: original source/artifact snapshot and unchanged frozen weights')
+    v17_archive = ROOT / 'models/archive/v1.7-sources.json'
+    if v17_archive.exists():
+        frozen = json.loads(v17_archive.read_text())
+        default = json.loads((ROOT / frozen['baseline']).read_text())
+        assert sha(ROOT / frozen['baseline']) == frozen['baselineSha256']
+        assert sha(ROOT / frozen['archive']) == frozen['sha256']
+        assert sha(ROOT / default['defaultModel']) == default['modelSha256']
+        assert frozen['files'] == {**default['sourceSha256'], **default['artifactSha256'], **frozen['buildSupportSha256']}
+        with tarfile.open(ROOT / frozen['archive'], 'r:gz') as archive:
+            assert len(archive.getmembers()) == len(frozen['files'])
+            for name, expected in frozen['files'].items():
+                assert hashlib.sha256(archive.extractfile(name).read()).hexdigest() == expected, name
+        print('v1.7 default verified: original source/artifact snapshot and unchanged frozen weights')
     baseline = json.loads((ROOT / 'models/v1-baseline.json').read_text())
     metadata = json.loads((ROOT / 'models/nnue256-v1.json').read_text())
     # v1 measurements stay frozen when the working tree advances to v1.1. Check

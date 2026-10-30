@@ -1,0 +1,76 @@
+{
+  "version": "v1.9-outcome-candidate",
+  "status": "candidate",
+  "defaultPromoted": false,
+  "protocol": {
+    "games": 20,
+    "millisecondsPerMove": 1000
+  },
+  "baselineManifest": "models/v1.8-default.json",
+  "model": "models/nnue256-outcome-v1.9.otnnue",
+  "trainingReport": "models/nnue256-outcome-v1.9.json",
+  "matchReport": "models/v1.9-outcome-vs-v1.8-1s.json",
+  "sourceManifest": "models/archive/v1.9-outcome-sources.json",
+  "artifactSha256": {
+    "models/nnue256-outcome-v1.9.otnnue": "72294450ce5eb180703e05048df6e7ce7078f031c4e94464198192432d618bb0",
+    "models/nnue256-outcome-v1.9.pt": "b435433a3e84468761ce9a1e8ac0ba4c857e4a98148ea3f601447a1a9431e557",
+    "models/nnue256-outcome-v1.9.json": "a736b1522157af706075f9169eb4eabab45dc18fc34ceaaaa500e91b332bcca5",
+    "models/v1.9-outcome-vs-v1.8-1s.json": "ca4cd28c8d52bc5227904126273bdf98b610e5022ac2fc0d5ea103e8b571d02c",
+    "models/v1.9-outcome-comparison.md": "4c1ca928f170f2c1fa37fd012377ee25556c4dd7e6e02621f7facbb9131c265e",
+    "models/v1.9-outcome-legacy-parity.json": "f9d11a5bc95b8acbc73a0adf06f56ee1374afd653aab80f6dd6285fb8db33da5",
+    "models/archive/v1.9-outcome-sources.json": "b67add48abe7134bf6423fd1b06082d1cdd966c3bf9401b22a834999e608eb9f",
+    "models/archive/v1.9-outcome-sources.tar.gz": "2da3e39be0fa34568319bd91432a7736f99a558d1fb8edb3b885b997c34c988b"
+  },
+  "results": {
+    "baseline": {
+      "games": 20,
+      "win": 0,
+      "draw": 2,
+      "loss": 18,
+      "discDifference": -56,
+      "scoreRate": 0.05,
+      "meanDiscDifference": -2.8,
+      "moves": 598,
+      "meanWallMs": 921.4381973076923,
+      "meanSearchUnits": 3332346.491638796,
+      "searchUnit": "simulations",
+      "meanNonExactDepth": 25.39201451905626,
+      "depthKind": "maximumVisited",
+      "meanSimulationDepth": 4.662311735739646,
+      "memoryLimitedSearches": 0,
+      "reusedMctsSearches": 578,
+      "exactMoves": 47
+    },
+    "candidate": {
+      "games": 20,
+      "win": 18,
+      "draw": 2,
+      "loss": 0,
+      "discDifference": 56,
+      "scoreRate": 0.95,
+      "meanDiscDifference": 2.8,
+      "moves": 602,
+      "meanWallMs": 759.4370643621259,
+      "meanSearchUnits": 307791.84551495017,
+      "searchUnit": "simulations",
+      "meanNonExactDepth": 35.21854304635762,
+      "depthKind": "maximumVisited",
+      "meanSimulationDepth": 11.172780110145954,
+      "memoryLimitedSearches": 0,
+      "reusedMctsSearches": 582,
+      "exactMoves": 149
+    }
+  },
+  "replayedActions": 1206,
+  "runtimeReportSha256": "8508162e97ab2ee721a7f7345b850a681c7528bef126d21b3852c9173148832a",
+  "checks": {
+    "replayed": true,
+    "frozenFeatures": true,
+    "frozenPolicy": true,
+    "legacyParityPositions": 24,
+    "nativeTests": true,
+    "sanitizers": true,
+    "trainingTests": 11
+  },
+  "conclusion": "18W/2D/0L at 1s over 20 games; candidate only; approved v1.8 default preserved."
+}

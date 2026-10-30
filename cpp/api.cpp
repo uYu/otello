@@ -33,9 +33,14 @@ int ot_legal(const int* cells,int turn,int* moves) {
     } catch(...) {return -1;}
 }
 int ot_play(const int* cells,int turn,int move,int* output) {
-    try { if(!output) return 0; auto p=decode(cells,turn);auto next=othello::play(p,move);
+    return ot_play_with_flips(cells,turn,move,output,nullptr);
+}
+int ot_play_with_flips(const int* cells,int turn,int move,int* output,int* flippedSquares) {
+    try { if(!output) return 0; auto p=decode(cells,turn);othello::Bits flipped=0;auto next=othello::play(p,move,&flipped);
         for(int i=0;i<64;++i) output[i]=(next.black>>i&1)?1:(next.white>>i&1)?-1:0;
-        output[64]=next.turn;output[65]=othello::over(next);output[66]=othello::count(othello::flips(p,move));return 1;
+        output[64]=next.turn;output[65]=othello::over(next);output[66]=othello::count(flipped);
+        if(flippedSquares){int n=0;while(flipped){flippedSquares[n++]=othello::first(flipped);flipped&=flipped-1;}}
+        return 1;
     } catch(...) {return 0;}
 }
 int ot_search(const int* cells,int turn,int ms,int depth,int level,unsigned seed,int* output) {
@@ -57,7 +62,7 @@ int ot_nnue_evaluate(const ot_nnue* model,const int* cells,int turn,int* score){
 }
 int ot_pattern_predict(const ot_nnue* model,const int* cells,int turn,double* output){
     try{nnueError.clear();if(!model||!model->network.pattern||!output)throw std::invalid_argument("Pattern model/output required");
-        auto p=decode(cells,turn);const auto& net=*model->network.pattern;auto values=net.outputs(net.refresh(p),turn);auto policy=net.policy(p,values);
+        auto p=decode(cells,turn);auto prediction=model->network.pattern->predict(p);const auto& values=prediction.values;const auto& policy=prediction.logits;
         output[0]=std::tanh(double(values[0])/256);double maximum=std::max({values[1],values[2],values[3]})/256.0,total=0;
         for(int i=0;i<3;++i){output[i+1]=std::exp(values[i+1]/256.0-maximum);total+=output[i+1];}
         for(int i=0;i<3;++i)output[i+1]/=total;
@@ -70,6 +75,17 @@ int ot_nnue_search(const ot_nnue* model,const int* cells,int turn,int ms,int dep
     }catch(const std::exception& e){nnueError=e.what();return -1;}catch(...){nnueError="NNUE search failed";return -1;}
 }
 const char* ot_nnue_error(){return nnueError.c_str();}
+int ot_nnue_policy(const ot_nnue* model,const int* cells,int turn,double* probabilities){
+    try{nnueError.clear();if(!model||!probabilities)throw std::invalid_argument("Null NNUE policy argument");
+        auto result=model->network.policy(decode(cells,turn));std::copy(result.begin(),result.end(),probabilities);return 1;
+    }catch(const std::exception& e){nnueError=e.what();return -1;}catch(...){nnueError="NNUE policy failed";return -1;}
+}
+int ot_nnue_infer(const ot_nnue* model,const int* cells,int turn,int* score,double* probabilities){
+    try{nnueError.clear();if(!model||!score||!probabilities)throw std::invalid_argument("Null joint inference argument");
+        auto result=model->network.infer(decode(cells,turn));*score=result.score;
+        std::copy(result.probabilities.begin(),result.probabilities.end(),probabilities);return 1;
+    }catch(const std::exception& e){nnueError=e.what();return -1;}catch(...){nnueError="Joint NNUE inference failed";return -1;}
+}
 const char* ot_default_model_sha256(){return othello::defaultNetworkSha256();}
 int ot_default_evaluate(const int* cells,int turn,int* score){
     try{nnueError.clear();if(!score)throw std::invalid_argument("Null default score");
@@ -90,11 +106,19 @@ int ot_nnue_mcts_play(const ot_nnue* model,const int* cells,int turn,int ms,unsi
 }
 int ot_nnue_mcts_play_ex(const ot_nnue* model,const int* cells,int turn,int ms,unsigned simulations,unsigned seed,
                       int plies,int temperature,int maxLoss,int usePolicy,int* output,int* policyOutput,int* visits,double* stats){
+    return ot_nnue_mcts_play_cached(model,cells,turn,ms,simulations,seed,plies,temperature,maxLoss,usePolicy,0,output,policyOutput,visits,stats,nullptr);
+}
+int ot_nnue_mcts_play_cached(const ot_nnue* model,const int* cells,int turn,int ms,unsigned simulations,unsigned seed,
+                      int plies,int temperature,int maxLoss,int usePolicy,unsigned cacheEntries,int* output,int* policyOutput,int* visits,double* stats,double* cacheStats){
+    return ot_nnue_mcts_play_budget(model,cells,turn,ms,simulations,seed,plies,temperature,maxLoss,usePolicy,cacheEntries,4194304,output,policyOutput,visits,stats,cacheStats);
+}
+int ot_nnue_mcts_play_budget(const ot_nnue* model,const int* cells,int turn,int ms,unsigned simulations,unsigned seed,
+                      int plies,int temperature,int maxLoss,int usePolicy,unsigned cacheEntries,unsigned maxNodes,int* output,int* policyOutput,int* visits,double* stats,double* cacheStats){
     try{
         nnueError.clear();if(!model||!output||!policyOutput||!visits||!stats)throw std::invalid_argument("Null MCTS argument");
         auto p=decode(cells,turn);othello::selectMove(p,{}, {plies,temperature,maxLoss},seed);
         if(usePolicy!=0&&usePolicy!=1)throw std::invalid_argument("Expected use_policy 0 or 1");
-        auto r=othello::mcts(p,{ms,simulations,seed,&model->network,1.5,2097152,bool(usePolicy)});
+        auto r=othello::mcts(p,{ms,simulations,seed,&model->network,1.5,maxNodes,bool(usePolicy),cacheEntries});
         auto selected=othello::selectMove(p,r.analysis,{plies,temperature,maxLoss},seed);
         r.analysis.move=selected.move;r.analysis.score=selected.score;encode(r.analysis,output);
         for(std::size_t i=0;i<r.visits.size();++i){visits[i]=int(std::min<std::uint64_t>(INT_MAX,r.visits[i]));stats[8+i]=r.values[i];}
@@ -102,7 +126,11 @@ int ot_nnue_mcts_play_ex(const ot_nnue* model,const int* cells,int turn,int ms,u
         policyOutput[3]=selected.bestScore;policyOutput[4]=selected.bestScore-selected.score;policyOutput[5]=selected.sampled;
         stats[0]=double(r.analysis.nodes);stats[1]=double(r.analysis.evaluations);stats[2]=r.meanDepth*1000;
         stats[3]=double(r.reusedNodes);stats[4]=double(r.treeNodes);stats[5]=r.analysis.elapsed;
-        stats[6]=r.analysis.exact;stats[7]=r.memoryLimited;return 1;
+        stats[6]=r.analysis.exact;stats[7]=r.memoryLimited;
+        if(cacheStats){cacheStats[0]=double(r.patternRefreshes);cacheStats[1]=double(r.patternUpdates);cacheStats[2]=double(r.patternCacheHits);
+            cacheStats[3]=double(r.patternChangedPatterns);cacheStats[4]=double(r.patternCacheBytes);cacheStats[5]=double(cacheEntries);
+            cacheStats[6]=double(r.patternCacheLookups);cacheStats[7]=double(r.patternAncestorDistance);}
+        return 1;
     }catch(const std::exception& e){nnueError=e.what();return -1;}catch(...){nnueError="MCTS failed";return -1;}
 }
 int ot_nnue_play(const ot_nnue* model,const int* cells,int turn,int ms,int depth,int level,unsigned seed,

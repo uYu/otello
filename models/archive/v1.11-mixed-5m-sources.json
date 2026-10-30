@@ -1,0 +1,34 @@
+{
+  "version": "v1.11-mixed-5m-candidate",
+  "archive": "models/archive/v1.11-mixed-5m-sources.tar.gz",
+  "archiveSha256": "c16115ffabf6464e5965a5af0a4aba2690cf65bf864bc45b1af56d360a56151f",
+  "sources": {
+    "scripts/train-mixed-5m.py": "85c4de72ffa1fd196136ef0381953167946b1386e5bb7422ff60de1ddb1e7b5b",
+    "scripts/evaluate-mixed-5m-final.py": "83cd05f5877e5bc15361c0f31325c03b1b0b819c46841caa7b727d98240e6e59",
+    "scripts/train-deep.py": "5a1d8ae4ee62be04657aeb2d2c0cbd95b6d66414c20d1cec2a5e6ddd57fff62e",
+    "scripts/train-outcome.py": "bbcffe7e07a161068f832b97d03309bb3319c3cd527d8120bbd7337b3a009aee",
+    "scripts/train-policy.py": "2a0550a6b8d06edb2b09773cbb8d3abbf108bc2a61bbb2a14a5cf6339295c9a4",
+    "scripts/train-nnue.py": "f4977077cb890f4bb8d714532f762398268e89999fc329a65f6fd8dfb5074313",
+    "scripts/watch-match.sh": "ab16bc011439cf6cc489a821cc57c0129e01b52a2b08d203257ae49df8add78b",
+    "scripts/watch-matches.py": "417832059c96d0e3a6381a008127282e2377d8c071f167722d1af7a91c8b5dc1",
+    "tests/mixed_5m_training_test.py": "ee79dc62c41739715bcb2c6bfaab1d6b1aa405502b6420a5dcc7e7067fafc451",
+    "docs/TRAINING.md": "5ce1939a983574e4c29d3d9b894f955638099b5640e33360f7a804d44890be27",
+    "docs/EGAROUCID_DATA.md": "096186753421b8c893e4dc736b2cbc8139eea6efa9ce2e723ee8e4e4786c79c0",
+    "models/current-experiment.json": "a96842e56609736f6017601a8f493512d2b81e2dea6bdb2a005fe9aff8c898b5"
+  },
+  "artifacts": {
+    "models/nnue256-mixed-5m-best-v1.11.otnnue": "7e4d1e4e62af54359ec183aa0da816b7cc56cef9be3ee285e044026d4d926f42",
+    "models/nnue256-mixed-5m-best-v1.11.pt": "a0bcbeba26d1c85c4d59b118a18f5646696575503bb224c8383c330bfb507740",
+    "models/nnue256-mixed-5m-full-v1.11.otnnue": "2586906b78c62da9d2a9c9a8b747db17a80dafc73382f4f4d83c2aee8efb7294",
+    "models/nnue256-mixed-5m-full-v1.11.pt": "c2c20a4798910a2e1602856c8b6524137383987822d15e1bc05b38c774510a69",
+    "models/v1.11-mixed-5m.json": "20c549f0ed8ec11ec5cbc940ffe50752d76604b9192cef8cbc66e0b18b3e5746",
+    "models/v1.11-mixed-5m-full.json": "d065dd27c756a19b2a223dbf100f50e664ed0d549ce9d6db6372a6329f7de43c",
+    "models/v1.11-mixed-5m-comparison.md": "fcecd19ccf9acf1053db6b921c0126f25140c25f545ce43adabaa684a7163ab0"
+  },
+  "predictions": {
+    ".build/training/mixed-5m-v1/test-predictions.csv": "7109bc7f14d425e1e95e369aa88087eaf666c235086ee68d93f724fa4b794b4f",
+    ".build/training/mixed-5m-v1/full-epoch-test-predictions.csv": "6168016c5f219796efc0d539f3c82e2ff915e4659c0ed798400542e03a2ea36e",
+    ".build/training/mixed-5m-v1/test-predictions.npz": "24f7be1c24fce7b7fbb99b0a5ac32a09e731e561834ac64fe24463377499d501",
+    ".build/training/mixed-5m-v1/full-epoch-test-predictions.npz": "8e7ef67fc4d19002d3816731614f08ad2e7164806acb65cec8562ce440d42560"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "name": "finetune-control",
+  "alpha": 0.0,
+  "epoch": 1,
+  "model": "models/pattern32-finetune-control-v1.27.otpat",
+  "sha256": "1850d06d6508ae4f9c4ad02be620a3b11de3164404806ceea0b9931a5a092819",
+  "parameters": 1787950,
+  "bytes": 3576088,
+  "metrics": {
+    "validation": {
+      "mse": 0.723262369632721,
+      "outcomeMae": 0.7237314581871033,
+      "nonDrawSignAccuracy": 0.6578947368421053,
+      "wdlAccuracy": 0.5733333333333334,
+      "wdlCrossEntropy": 0.9015712738037109,
+      "policyTop1": 0.4155,
+      "policyCrossEntropy": 1.5946044921875,
+      "uniformPolicyCrossEntropy": 2.0921316559038803
+    },
+    "test": {
+      "mse": 0.6863603591918945,
+      "outcomeMae": 0.7071444392204285,
+      "nonDrawSignAccuracy": 0.6800847457627118,
+      "wdlAccuracy": 0.5885,
+      "wdlCrossEntropy": 0.8921173214912415,
+      "policyTop1": 0.407,
+      "policyCrossEntropy": 1.6146725416183472,
+      "uniformPolicyCrossEntropy": 2.1044416287103247
+    }
+  },
+  "cppParity": {
+    "validation": {
+      "positions": 6000,
+      "maxWdlError": 1.311877936283068e-07,
+      "maxPolicyLogitError": 6.687368614421985e-07,
+      "maxScoreRoundingError": 0.49896240234375,
+      "maxOutcomeError": 2.9840748871912126e-08
+    },
+    "test": {
+      "positions": 6000,
+      "maxWdlError": 1.2765147683335698e-07,
+      "maxPolicyLogitError": 5.537693228419016e-07,
+      "maxScoreRoundingError": 0.49896240234375,
+      "maxOutcomeError": 2.9840748871912126e-08
+    }
+  }
+}
