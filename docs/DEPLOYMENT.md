@@ -55,3 +55,11 @@ docker compose -f compose.yaml -f compose.prebuilt.yaml up -d --build
 旧服务文件、解析后的 Compose 配置和容器信息保留在 `/root/app/otello/.deployment-backups/v1.9-before-v2-20261031T045902Z`；发布暂存目录为 `/root/app/otello/releases/v2-20261031`。未发布逐点特征等实验候选，正式模型仍为批准的 v2。
 
 验证：19 项网页测试、2 项原生测试；12,000 个局面的嵌入/显式推理一致，32 个固定模拟根局面一致。历史 v1.49 动态库在本机已不存在，因此原生默认检查使用已保留并校验源码的 v2 reference rebuild，原始基线记录不变。完整记录见 `models/v2-server-deployment-20261031.json`。
+
+## 2026-11-01 四档正式发布
+
+已提交并推送代码 `a2259da2cdc8e3ea35b10fae77bb7079f5cd8d9a`，部署到 [线上游戏](http://162.14.123.217:8207/)。四档为入门独立模型、初级 v2 策略概率采样、中级查库后搜索200ms、高级查库后搜索2s；提示使用高级档。冻结v2权重和原搜索Wasm未变。
+
+发布目录：`/root/app/otello/releases/v2-four-levels-20261101T123359Z`。回滚配置和旧静态文件：`/root/app/otello/.deployment-backups/before-v2-four-levels-20261101T123359Z`，旧镜像保留为 `otello:before-v2-four-levels-20261101T123359Z`。当前容器健康；公网首页、全部JS/CSS/Worker、release.json及healthz已核对。29项网页测试、2项原生测试通过；干净提交快照另通过构建和27项网页测试（2项依赖本机原生可执行文件的测试跳过）。可选独立Egaroucid集成测试因缺少专用可执行文件未运行，网页四档不调用它。
+
+公网首页和`release.json`返回`Cache-Control: no-cache`，每次重新访问或刷新会重新校验；JS/CSS/Worker使用内容哈希文件名和一年immutable缓存。新版本生成新文件名，因此普通刷新即可更新。已打开的页面保留当前执行代码，需要用户刷新一次；同一站点的localStorage存档保留。详细发布记录见 `models/four-level-server-deployment-20261101.json`。

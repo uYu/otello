@@ -6,7 +6,12 @@
     "adjacentMatches": 60,
     "beginnerHistoricalMatchesReplayed": 100,
     "productionBuildPassed": true,
-    "localBrowserFourLevelMenuVerified": true
+    "localBrowserFourLevelMenuVerified": true,
+    "cleanCommittedSourceBuildPassed": true,
+    "cleanSourceWebTestsPassed": 27,
+    "cleanSourceNativeDependentTestsSkipped": 2,
+    "publicAssetsVerified": 4,
+    "publicCacheHeadersVerified": true
   },
   "limitations": [
     "Optional standalone Egaroucid integration test unavailable: .build/native-egaroucid/otello is absent. Web ladder does not use this interface."

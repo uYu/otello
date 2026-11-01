@@ -1,0 +1,121 @@
+{
+  "name": "v2-four-levels-20261101T123359Z",
+  "work": ".build/v2-four-levels-20261101T123359Z",
+  "archive": ".build/v2-four-levels-20261101T123359Z/bundle.tar.gz",
+  "archiveSha256": "3aaa2455706984c7d47460830d335444f6fa121b663a9413f412ca9e0cbc6375",
+  "remoteStage": "/root/app/otello/releases/v2-four-levels-20261101T123359Z",
+  "backup": "/root/app/otello/.deployment-backups/before-v2-four-levels-20261101T123359Z",
+  "commit": "a2259da2cdc8e3ea35b10fae77bb7079f5cd8d9a",
+  "release": {
+    "version": "v2",
+    "release": "v2-four-levels-v1",
+    "levels": [
+      {
+        "id": "easy",
+        "name": "入门",
+        "model": "models/beginner-error-policy-80-e2-lr0003-v1.json",
+        "searchMilliseconds": 0,
+        "openingBook": false,
+        "selection": "learned-policy sampling",
+        "temperature": 1
+      },
+      {
+        "id": "normal",
+        "name": "初级",
+        "model": "models/pattern32-global-policy-v2.otpat",
+        "searchMilliseconds": 0,
+        "openingBook": false,
+        "selection": "learned-policy sampling",
+        "temperature": 1
+      },
+      {
+        "id": "medium",
+        "name": "中级",
+        "model": "models/pattern32-global-policy-v2.otpat",
+        "searchMilliseconds": 200,
+        "openingBook": true,
+        "selection": "frozen v2 MCTS"
+      },
+      {
+        "id": "hard",
+        "name": "高级",
+        "model": "models/pattern32-global-policy-v2.otpat",
+        "searchMilliseconds": 2000,
+        "openingBook": true,
+        "selection": "frozen v2 MCTS"
+      }
+    ],
+    "modelSha256": "df11f7b9eed358fff33a426e2f0cb1a290083d2bc8e0781a2fbd1efdaf4270c3",
+    "modelFormat": "OTPAT9",
+    "wasmSha256": "5ac1742d9d778ea9acda984c35e4faa686da6c410e61f05e4756481a5d10deb2",
+    "baselineManifestSha256": "109b6d13b9672fcde92414e2d96716f9e9a98eb251260abcccbe9782ac00fd6e",
+    "engine": "Four levels: beginner policy, v2 policy, book+v2 MCTS 200ms, book+v2 MCTS 2s",
+    "execution": "browser Web Worker",
+    "normalMilliseconds": 0,
+    "mediumMilliseconds": 200,
+    "hardMilliseconds": 2000,
+    "openingBook": {
+      "enabled": true,
+      "version": "0dd454d84aa6-v1",
+      "sourceSha256": "0dd454d84aa656a64329930bad796c4a48a4322b7693d50b7040006383db5012",
+      "sourceRecords": 1302322,
+      "playablePositions": 938502,
+      "shards": 4096,
+      "difficulties": [
+        "medium",
+        "hard"
+      ],
+      "hintsEnabled": true
+    },
+    "beginner": {
+      "version": "beginner-error-policy-80-e2-lr0003-v1",
+      "modelSha256": "17dc197f62352c3b9e4c61c038be1192f5f85a82564356af92d6071fe42c2621",
+      "parameters": 12352,
+      "temperature": 1,
+      "openingBook": false,
+      "selection": "learned-policy sampling",
+      "search": false
+    },
+    "secondLevel": {
+      "version": "v2-policy-only-T1",
+      "modelSha256": "df11f7b9eed358fff33a426e2f0cb1a290083d2bc8e0781a2fbd1efdaf4270c3",
+      "temperature": 1,
+      "openingBook": false,
+      "search": false,
+      "selection": "learned-policy sampling",
+      "wasmSha256": "3418bdc18946f71a4f56a15911c474eb556e0e4fdda290f882c46f139534d92f"
+    }
+  },
+  "url": "http://162.14.123.217:8207/",
+  "date": "2026-11-01",
+  "timezone": "Asia/Shanghai",
+  "status": "deployed-and-publicly-verified",
+  "checks": {
+    "webTestsPassed": 29,
+    "nativeTestsPassed": 2,
+    "cleanCommittedSourceBuild": true,
+    "cleanSourceWebTestsPassed": 27,
+    "cleanSourceNativeDependentTestsSkipped": 2,
+    "adjacentMatchesValidated": 60,
+    "allStagedFileHashesVerified": true,
+    "containerHealthy": true,
+    "publicReleaseExactlyMatches": true,
+    "publicIndexAndAssetsExactlyMatch": true,
+    "publicHealth": "ok",
+    "publicAssetFilesVerified": 4
+  },
+  "image": "otello:v2-four-levels-v1",
+  "imageId": "sha256:8cdff2a6251db943393c6febcc87201dbdf3521123fc22cfbe4e4ab0753681db",
+  "limitations": [
+    "Optional standalone Egaroucid integration unavailable locally: missing .build/native-egaroucid/otello. The four-tier web application does not call that interface."
+  ],
+  "modelWeightsChanged": false,
+  "cacheHeaders": {
+    "/": "no-cache",
+    "release.json": "no-cache",
+    "assets/__vite-browser-external-BIHI7g3E.js": "public, max-age=31536000, immutable",
+    "assets/ai.worker-DORcyXSY.js": "public, max-age=31536000, immutable",
+    "assets/index-DrkVBHrh.css": "public, max-age=31536000, immutable",
+    "assets/index-hX5VkFWB.js": "public, max-age=31536000, immutable"
+  }
+}
