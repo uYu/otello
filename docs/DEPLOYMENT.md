@@ -2,7 +2,7 @@
 
 目标服务器：`root@162.14.123.217`。应用位于 `/root/app/otello`，与其他桌游项目同级；对外端口 8207，Homepage 位于 80 端口的“桌游”分类。
 
-此部署使用冻结的 v2 全局策略浏览器 Wasm 和 `pattern32-global-policy-v2.otpat`，模型 SHA-256 为 `df11f7b9eed358fff33a426e2f0cb1a290083d2bc8e0781a2fbd1efdaf4270c3`。开局库固定默认启用，不提供关闭选项；每步先查库，命中直接走库，未命中继续 v2 搜索。AI 在客户端 Web Worker 中运行；容器提供静态页面和按需查询的开局库分片，正常／高级档搜索仍为 100ms／1 秒。
+此部署使用冻结的 v2 全局策略浏览器 Wasm 和 `pattern32-global-policy-v2.otpat`，模型 SHA-256 为 `df11f7b9eed358fff33a426e2f0cb1a290083d2bc8e0781a2fbd1efdaf4270c3`。中级、高级和提示固定启用开局库，不提供关闭选项；每步先查库，命中直接走库，未命中继续 v2 搜索。入门固定使用嵌入前端的 beginner-error-policy-80-e2-lr0003-v1 策略模型，按学到的概率选步，不使用开局库或 MCTS。AI 在客户端 Web Worker 中运行；容器提供静态页面和按需查询的开局库分片，初级复用高级版 v2 权重，直接按策略概率选步，不搜索、不使用开局库；中级搜索200ms，高级搜索2s。
 
 ## 构建和运行
 
@@ -47,3 +47,11 @@ docker compose -f compose.yaml -f compose.prebuilt.yaml up -d --build
 ```
 
 镜像名为 `otello:v2`，Compose 项目名为 `otello`，服务为 `otello`。使用 `docker compose ps` 查看运行及健康状态，`docker compose logs --tail 50` 查看日志。
+
+## 2026-10-31 实际发布记录
+
+服务器从 v1.9 更新到已批准的 v2，镜像 `otello:v2`，使用本地测试通过的 prebuilt 资产。公网 `/release.json` 的模型、Wasm 和开局库元数据与本地发布包一致，`/healthz` 返回 `ok`，容器状态 healthy。Homepage 版本说明已更新。
+
+旧服务文件、解析后的 Compose 配置和容器信息保留在 `/root/app/otello/.deployment-backups/v1.9-before-v2-20261031T045902Z`；发布暂存目录为 `/root/app/otello/releases/v2-20261031`。未发布逐点特征等实验候选，正式模型仍为批准的 v2。
+
+验证：19 项网页测试、2 项原生测试；12,000 个局面的嵌入/显式推理一致，32 个固定模拟根局面一致。历史 v1.49 动态库在本机已不存在，因此原生默认检查使用已保留并校验源码的 v2 reference rebuild，原始基线记录不变。完整记录见 `models/v2-server-deployment-20261031.json`。

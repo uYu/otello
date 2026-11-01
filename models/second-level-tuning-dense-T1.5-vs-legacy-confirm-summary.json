@@ -1,0 +1,30 @@
+{
+  "stage": "vs-legacy-confirm",
+  "seed": 20261123,
+  "comparisons": [
+    {
+      "profile": "dense-T1.5",
+      "temperature": 1.5,
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/second-level-tuning-dense-T1.5-vs-legacy-confirm-50.json",
+      "results": {
+        "win": 33,
+        "draw": 1,
+        "loss": 16,
+        "scoreRate": 0.67,
+        "meanDiscDifference": 9.160000000000002
+      },
+      "diagnostics": {
+        "decisions": 1311,
+        "cornersAvailable": 492,
+        "cornersTaken": 125,
+        "avoidableCornerGifts": 85,
+        "passes": 37,
+        "ms": 44.46794800000046
+      },
+      "cornerChoiceRate": 0.2540650406504065,
+      "meanMoveMs": 0.03391910602593475
+    }
+  ],
+  "limits": "Screening results are used to select low strength; confirmation uses fresh openings. No human win-rate claim."
+}

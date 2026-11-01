@@ -1,0 +1,30 @@
+{
+  "stage": "confirm",
+  "seed": 20261104,
+  "comparisons": [
+    {
+      "profile": "local-T2",
+      "temperature": 2,
+      "model": "models/beginner-low-elo1300-local4-v1.json",
+      "report": "models/beginner-calibrated-local-T2-confirm-50.json",
+      "results": {
+        "win": 24,
+        "draw": 3,
+        "loss": 23,
+        "scoreRate": 0.51,
+        "meanDiscDifference": 0.36000000000000043
+      },
+      "diagnostics": {
+        "decisions": 1315,
+        "cornersAvailable": 561,
+        "cornersTaken": 96,
+        "avoidableCornerGifts": 106,
+        "passes": 26,
+        "ms": 20.33371099999981
+      },
+      "cornerChoiceRate": 0.1711229946524064,
+      "meanMoveMs": 0.01546289809885917
+    }
+  ],
+  "limits": "Screening results are used to select low strength; confirmation uses fresh openings. No human win-rate claim."
+}

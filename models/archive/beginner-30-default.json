@@ -1,0 +1,40 @@
+{
+  "version": "beginner-error-policy-80-v1",
+  "status": "selected-beginner",
+  "defaultModel": "models/beginner-error-policy-80-v1.json",
+  "modelSha256": "c8950eccf581167a4c15390e9bd7d5c3c903ea42ce00f2eacfe303b761e80dd6",
+  "temperature": 1,
+  "parameters": 12352,
+  "trainPositions": 10000,
+  "generalBaseline": "models/v2-default.json",
+  "openingBook": false,
+  "search": "sample learned policy only",
+  "selectionAuthorization": "\u9009\u4e00\u4e2a\u5f31\u7684\u4f46\u4e0d\u79bb\u8c31\u7684\uff1b\u5141\u8bb8\u6309\u6a21\u578b\u6982\u7387\u9009\u6b65\uff0c\u7ee7\u7eed\u5b9e\u6d4b\u964d\u4f4e\u5f3a\u5ea6",
+  "trainingReport": "models/beginner-error-policy-80-v1-training.json",
+  "trainingTarget": "20% actual low-Elo move +80% synthetic error-target distribution; distinct from pure imitation",
+  "comparisonReports": [
+    "models/beginner-calibrated-error80-T1-screening-50.json",
+    "models/beginner-calibrated-error80-T1-confirm-50.json"
+  ],
+  "results": {
+    "win": 23,
+    "draw": 8,
+    "loss": 69,
+    "scoreRate": 0.27
+  },
+  "evaluationSourceManifest": "models/archive/beginner-error80-evaluation-sources.json",
+  "sourceSha256": {
+    "src/game/engine.ts": "dc9d1ba25cf787947b3ed3b6ec1e3993130b95b2d12ca3060e87fc2773004957",
+    "src/game/beginner-policy.ts": "8b6b4d1359014b6df6a3bcc210f855c4844791cd871e8d0436f221df089dd0bc",
+    "src/game/ai.ts": "a475f0a9b2402c39af1f3a48fd233a40aacef3f4b25b8f3a0240a2101272f188",
+    "src/game/ai.worker.ts": "1a28d0794c1e8a86f7419dd24f1a5d199d6c7e09d5f049a9052de00a942ac74f",
+    "src/game/seeds.ts": "14daa513dfdc4e8b9b72555b5af6912115d4ebd9b1388bc7b68615e1d0548e61",
+    "src/game/types.ts": "814fcc0f529c8eaf117c32282a33f36c13cfed1f45278b9c8072020f78f53d0b",
+    "src/App.tsx": "fdd85e7fe4dd52283623b88bdaa3183eb6688f288d0d14f9f75f719b98f1d933"
+  },
+  "trainingReportSha256": "dab2ee89ff50464e9e934a8e26b163ac1720ffe42233b6556ad4554c49d8b0be",
+  "referenceReportsSha256": {
+    "models/beginner-calibrated-error80-T1-screening-50.json": "8f29e0f7e32796b9a6aaac22b93146d68756e03f78c28acda9cb1a2f88e925f2",
+    "models/beginner-calibrated-error80-T1-confirm-50.json": "f5b88d14e5fbff53c08b5382105e086cb282611976915a416a462ecca24573e7"
+  }
+}

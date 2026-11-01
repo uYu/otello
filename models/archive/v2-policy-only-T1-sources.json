@@ -1,0 +1,23 @@
+{
+  "archive": "models/archive/v2-policy-only-T1-sources.tar.gz",
+  "sha256": "1ba13359a261fc1b8cca17b5b76d529d60aef0a6a11c885df4824f4d4e1f245b",
+  "files": {
+    "cpp/direct_policy.cpp": "bd040c0d5a914db72f242191f074e97dd4bd896327aef818c93b626f0300633a",
+    "scripts/build-direct-policy-wasm.sh": "47a68ef923bc7798ed102c111b573a1606d666ec4862581cced76bf0e95ac5ea",
+    "src/game/wasm/direct-policy.d.mts": "131dc726ef94ebd79968e055ec6def323343db4488b239d5a294e39e6aee1830",
+    "src/game/direct-policy.ts": "6e448d69e5deec2f22b43f544aa5d86e461920e71045ac5ae118cd08d7cfd248",
+    "src/game/engine.ts": "409ee2817fb60625c8fe4a336cbb4e4f186f690eb77dfe3b26368830c99deff0",
+    "src/game/ai.ts": "e6e45e85788d5857c516d9a6a06b07d262144e8f7b824112fe86acb741b375c1",
+    "src/App.tsx": "5b08542876f19313d8e9974fcfcf0b235db5e3b14473a761ba66c54287a34332",
+    "scripts/check-web-release.mjs": "bcaecfe163e9ca7fca340cdf5dae0f9f87207c6ebb6f68c77ab48d8ebab54e13",
+    "scripts/compare-v2-policy-only.ts": "91f391751c4fdab83f99060048576ca2d3f965c99e90ddaffb0d296aa45696db",
+    "scripts/verify-second-v2-native.py": "6f93f27140e4decbea58e97283825199ede26f9d390643a95aa8584bdda01157",
+    "tests/direct-policy.test.ts": "8225174bedc9b206d0088e1273eefe998eb2c3fcf3b465aa6cc9abb4bb376a1c",
+    "tests/game.test.ts": "ad310e6d552a370d5e571c5ddc7cf927bdf1517c98fb7bd04ce5255c314ba0ad",
+    "tests/opening-book.test.ts": "8f4205342bc74728a129a8acf0cd02e0bbe56987a565377622cb66c5b48300ab",
+    "models/second-level-default.json": "2efdc8c36c18ba3012444ca82dc9aaa9f9365a8e3fc5d2c529a25701a9e30ce2",
+    "models/second-level-v2-policy-runtime.json": "703800cfa77ae2bb8a5550f5510f1742921c5f8e36a0a66c162d3ad16db17561",
+    "models/second-level-v2-policy-parity.json": "1c800c9be3cf6311c95eadc38a2730f069adc88ab5bfbc00c4d4339dd5eea32f",
+    "models/v2-policy-only-T1-comparison.json": "7828c1b69333405729a678745865f188604cb2e2a44eb580a20f52e95021540b"
+  }
+}

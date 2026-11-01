@@ -17,7 +17,7 @@ export function parseSave(text: string): Save {
   if (!value || typeof value !== 'object') throw new Error('棋谱格式无效');
   const s = value as Partial<Save>;
   if (s.engine !== undefined && s.engine !== 'builtin' && s.engine !== 'egaroucid') throw new Error('棋谱引擎字段无效');
-  if (s.version !== 1 || !['ai', 'local', 'watch'].includes(s.mode ?? '') || !['easy', 'normal', 'hard'].includes(s.difficulty ?? '') || (s.human !== 1 && s.human !== -1) || typeof s.createdAt !== 'string' || !Number.isFinite(Date.parse(s.createdAt)) || !Array.isArray(s.actions) || s.actions.length > 60 || s.actions.some(m => !Number.isInteger(m) || m < 0 || m > 63)) throw new Error('棋谱版本或字段无效');
+  if (s.version !== 1 || !['ai', 'local', 'watch'].includes(s.mode ?? '') || !['easy', 'normal', 'medium', 'hard'].includes(s.difficulty ?? '') || (s.human !== 1 && s.human !== -1) || typeof s.createdAt !== 'string' || !Number.isFinite(Date.parse(s.createdAt)) || !Array.isArray(s.actions) || s.actions.length > 60 || s.actions.some(m => !Number.isInteger(m) || m < 0 || m > 63)) throw new Error('棋谱版本或字段无效');
   const save: Save = { version: 1, mode: s.mode!, difficulty: s.difficulty!, human: s.human, createdAt: s.createdAt, actions: [...s.actions] };
   if (s.engine !== undefined) save.engine = s.engine;
   try { history(save); } catch { throw new Error('棋谱含有非法落子，无法导入'); }

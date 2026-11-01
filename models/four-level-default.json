@@ -1,0 +1,50 @@
+{
+  "version": "v2-four-levels-v1",
+  "status": "user-approved",
+  "userAuthorization": "提交代码;push; 上线。",
+  "baseline": "models/v2-default.json",
+  "levels": [
+    {
+      "id": "easy",
+      "name": "入门",
+      "model": "models/beginner-error-policy-80-e2-lr0003-v1.json",
+      "searchMilliseconds": 0,
+      "openingBook": false,
+      "selection": "learned-policy sampling",
+      "temperature": 1
+    },
+    {
+      "id": "normal",
+      "name": "初级",
+      "model": "models/pattern32-global-policy-v2.otpat",
+      "searchMilliseconds": 0,
+      "openingBook": false,
+      "selection": "learned-policy sampling",
+      "temperature": 1
+    },
+    {
+      "id": "medium",
+      "name": "中级",
+      "model": "models/pattern32-global-policy-v2.otpat",
+      "searchMilliseconds": 200,
+      "openingBook": true,
+      "selection": "frozen v2 MCTS"
+    },
+    {
+      "id": "hard",
+      "name": "高级",
+      "model": "models/pattern32-global-policy-v2.otpat",
+      "searchMilliseconds": 2000,
+      "openingBook": true,
+      "selection": "frozen v2 MCTS"
+    }
+  ],
+  "hints": {
+    "difficulty": "hard",
+    "openingBook": true,
+    "searchMilliseconds": 2000
+  },
+  "comparison": "models/four-level-ladder-v1-comparison.json",
+  "validation": "models/four-level-ladder-v1-validation.json",
+  "limits": "Observed adjacent score rates95%,100%,65%; 20-game screening per pair, not a human win-rate claim"
+}

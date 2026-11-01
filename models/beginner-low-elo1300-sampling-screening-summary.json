@@ -1,0 +1,73 @@
+{
+  "stage": "screening",
+  "seed": 20261101,
+  "comparisons": [
+    {
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "temperature": 1,
+      "report": "models/beginner-low-elo1300-policy-v1-T1-legacy-screening-50.json",
+      "results": {
+        "win": 35,
+        "draw": 2,
+        "loss": 13,
+        "scoreRate": 0.72,
+        "meanDiscDifference": 15.84
+      },
+      "diagnostics": {
+        "decisions": 1321,
+        "cornersAvailable": 465,
+        "cornersTaken": 163,
+        "avoidableCornerGifts": 40,
+        "passes": 42,
+        "ms": 39.56794600000093
+      },
+      "cornerChoiceRate": 0.35053763440860214,
+      "meanMoveMs": 0.029953024981075646
+    },
+    {
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "temperature": 1.5,
+      "report": "models/beginner-low-elo1300-policy-v1-T1.5-legacy-screening-50.json",
+      "results": {
+        "win": 38,
+        "draw": 2,
+        "loss": 10,
+        "scoreRate": 0.78,
+        "meanDiscDifference": 13.399999999999999
+      },
+      "diagnostics": {
+        "decisions": 1310,
+        "cornersAvailable": 491,
+        "cornersTaken": 140,
+        "avoidableCornerGifts": 39,
+        "passes": 35,
+        "ms": 37.388998000002516
+      },
+      "cornerChoiceRate": 0.285132382892057,
+      "meanMoveMs": 0.028541219847330164
+    },
+    {
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "temperature": 2,
+      "report": "models/beginner-low-elo1300-policy-v1-T2-legacy-screening-50.json",
+      "results": {
+        "win": 35,
+        "draw": 2,
+        "loss": 13,
+        "scoreRate": 0.72,
+        "meanDiscDifference": 11.580000000000002
+      },
+      "diagnostics": {
+        "decisions": 1318,
+        "cornersAvailable": 515,
+        "cornersTaken": 134,
+        "avoidableCornerGifts": 50,
+        "passes": 29,
+        "ms": 37.637914000000364
+      },
+      "cornerChoiceRate": 0.26019417475728157,
+      "meanMoveMs": 0.028556839150227893
+    }
+  ],
+  "limits": "Screening results are used to select low strength; confirmation uses fresh openings. No human win-rate claim."
+}

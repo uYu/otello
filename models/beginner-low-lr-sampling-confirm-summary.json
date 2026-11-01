@@ -1,0 +1,30 @@
+{
+  "stage": "confirm",
+  "seed": 20261104,
+  "comparisons": [
+    {
+      "profile": "error80e2lowLR-T1",
+      "temperature": 1,
+      "model": "models/beginner-error-policy-80-e2-lr0003-v1.json",
+      "report": "models/beginner-calibrated-error80e2lowLR-T1-confirm-50.json",
+      "results": {
+        "win": 10,
+        "draw": 3,
+        "loss": 37,
+        "scoreRate": 0.23,
+        "meanDiscDifference": -10.58
+      },
+      "diagnostics": {
+        "decisions": 1297,
+        "cornersAvailable": 462,
+        "cornersTaken": 56,
+        "avoidableCornerGifts": 146,
+        "passes": 20,
+        "ms": 43.46482499999978
+      },
+      "cornerChoiceRate": 0.12121212121212122,
+      "meanMoveMs": 0.0335118157286043
+    }
+  ],
+  "limits": "Screening results are used to select low strength; confirmation uses fresh openings. No human win-rate claim."
+}

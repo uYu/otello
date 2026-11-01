@@ -55,7 +55,7 @@ class NativeClient {
         try {
           const data = JSON.parse(line);
           if (data.error) this.finish(new Error(String(data.error)));
-          else if (data.engine !== 'egaroucid' || data.useBook !== true) this.finish(new Error('Native engine did not enable use_book'));
+          else if (data.engine !== 'egaroucid' || data.useBook !== !/(?:^|\s)--book off(?:\s|$)/.test(this.active.command) || (!data.useBook && data.bookHit !== false)) this.finish(new Error('Native engine book mode mismatch'));
           else this.finish(null, data);
         } catch { this.reset(); this.finish(new Error('Invalid native response')); }
       });
@@ -106,9 +106,10 @@ const server = createServer(async (req, res) => {
         send(res, 400, { error: 'Invalid position or difficulty' }); return;
       }
       const level = { easy: 1, normal: 5, hard: 10 }[input.difficulty];
-      const variety = input.difficulty === 'easy' ? 2 : 1;
-      const result = await native.request(`analyze --engine egaroucid --board ${input.board} --turn ${input.turn} --eg-level ${level} --book on --book-variety ${variety}`, controller.signal);
-      send(res, 200, { move: result.moveIndex, score: result.score, depth: result.depth, elapsed: result.elapsedMs, nodes: result.nodes, ttHits: null, exact: result.exact, candidates: [], engine: 'egaroucid', engineVersion: result.engineVersion, bookHit: result.bookHit, bookVariety: result.bookVariety, useBook: true }); return;
+      const useBook = input.difficulty !== 'easy';
+      const variety = 1;
+      const result = await native.request(`analyze --engine egaroucid --board ${input.board} --turn ${input.turn} --eg-level ${level} --book ${useBook ? 'on' : 'off'} --book-variety ${variety}`, controller.signal);
+      send(res, 200, { move: result.moveIndex, score: result.score, depth: result.depth, elapsed: result.elapsedMs, nodes: result.nodes, ttHits: null, exact: result.exact, candidates: [], engine: 'egaroucid', engineVersion: result.engineVersion, bookHit: result.bookHit, bookVariety: result.bookVariety, useBook }); return;
     }
     if (url.pathname.startsWith('/api/')) { send(res, 404, { error: 'Unknown endpoint' }); return; }
     if (req.method !== 'GET' && req.method !== 'HEAD') { send(res, 405, { error: 'Method not allowed' }); return; }

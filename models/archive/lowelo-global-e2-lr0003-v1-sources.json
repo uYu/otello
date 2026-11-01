@@ -1,0 +1,21 @@
+{
+  "archive": "models/archive/lowelo-global-e2-lr0003-v1-sources.tar.gz",
+  "sha256": "b2b4caf1627e860198a6583dac49c6d8cfcae5e0f72666166db6fa676ce6b138",
+  "files": {
+    "scripts/train-lowelo-global-e2.py": "d1706176dc374ae76ada8c06268e3ed49769e441f947d0f087288ad644eb2353",
+    "scripts/lowelo-global-policy-worker.py": "5b1cf5ef059a3260b7886431042a2583fc7a1af20c6d07de46b92faf7bfc140c",
+    "scripts/compare-lowelo-global-e2.ts": "6905d74c099ed35671a3b4d9167ca973daf02ac9c8932a67e5d528a9c83108ed",
+    "scripts/pattern_model.py": "4bd0fbf1360ad2d9c385ac16ec4a9aa7748fd6787f507317d85d320080bf30d5",
+    "scripts/pattern_structure.py": "58673f74d802fe8432d9dd385c8c98dc250139d78516a126f2e20557f3dd31d3",
+    "scripts/pattern_global_policy.py": "a15da14082c035698af64e5a08365b071cd4775f5a96b0a1ed5fd2cb7c887e8d",
+    "src/game/beginner-policy.ts": "8b6b4d1359014b6df6a3bcc210f855c4844791cd871e8d0436f221df089dd0bc",
+    "src/game/engine.ts": "bc0d9e29275507df0571858860e24b89756f7eeba047807b1e8aed8cc7a0860e",
+    "benchmarks/beginner-legacy.ts": "382e79fdcc343b694ea766fbae366e373555cc296bb27d00944c57b4780043ac",
+    "src/game/wasm/othello.mjs": "5ac1742d9d778ea9acda984c35e4faa686da6c410e61f05e4756481a5d10deb2",
+    "models/beginner-low-elo1300-v1-data.json": "c8f4a7a427d0e8aa6b44902442766477e998d65d5c1f913be2b2ed6885fb5aeb",
+    "models/second-level-selection-v2.json": "040c2c60eb019ef32971b0b0c8b2b34136ebe0891adeca24d6ace6d5578be40c",
+    "models/beginner-default.json": "8c46bc7d59e5972dca8838f2b55f2cd73acfb77e1dd0a8b2c0cf7bf2aaf63b0d",
+    "models/lowelo-global-e2-lr0003-v1-training.json": "fd8ba5c9831b6161a5593e1894c79134bf4f0fc581e2328c3a4ef8009cc277c4",
+    "models/lowelo-global-e2-lr0003-v1-comparison.json": "b64fc118130f96d41cde456147b3766bd586d480b2be898a97957386ed9670c9"
+  }
+}

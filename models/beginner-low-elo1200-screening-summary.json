@@ -1,0 +1,91 @@
+{
+  "stage": "screening",
+  "seed": 20261101,
+  "comparisons": [
+    {
+      "model": "models/beginner-low-elo1200-policy-e1-v1.json",
+      "report": "models/beginner-low-elo1200-policy-e1-v1-legacy-screening-50.json",
+      "results": {
+        "win": 40,
+        "draw": 2,
+        "loss": 8,
+        "scoreRate": 0.82,
+        "meanDiscDifference": 14.72
+      },
+      "diagnostics": {
+        "decisions": 1312,
+        "cornersAvailable": 466,
+        "cornersTaken": 184,
+        "avoidableCornerGifts": 34,
+        "passes": 21,
+        "ms": 39.34259199999977
+      },
+      "cornerChoiceRate": 0.3948497854077253,
+      "meanMoveMs": 0.0299867317073169
+    },
+    {
+      "model": "models/beginner-low-elo1200-policy-e5-v1.json",
+      "report": "models/beginner-low-elo1200-policy-e5-v1-legacy-screening-50.json",
+      "results": {
+        "win": 37,
+        "draw": 3,
+        "loss": 10,
+        "scoreRate": 0.77,
+        "meanDiscDifference": 14.520000000000007
+      },
+      "diagnostics": {
+        "decisions": 1310,
+        "cornersAvailable": 214,
+        "cornersTaken": 191,
+        "avoidableCornerGifts": 21,
+        "passes": 29,
+        "ms": 37.015340999998216
+      },
+      "cornerChoiceRate": 0.8925233644859814,
+      "meanMoveMs": 0.028255985496181843
+    },
+    {
+      "model": "models/beginner-low-elo1200-policy-e15-v1.json",
+      "report": "models/beginner-low-elo1200-policy-e15-v1-legacy-screening-50.json",
+      "results": {
+        "win": 44,
+        "draw": 1,
+        "loss": 5,
+        "scoreRate": 0.89,
+        "meanDiscDifference": 16.160000000000004
+      },
+      "diagnostics": {
+        "decisions": 1316,
+        "cornersAvailable": 200,
+        "cornersTaken": 189,
+        "avoidableCornerGifts": 22,
+        "passes": 32,
+        "ms": 37.54676400000312
+      },
+      "cornerChoiceRate": 0.945,
+      "meanMoveMs": 0.02853097568389295
+    },
+    {
+      "model": "models/beginner-low-elo1200-policy-e30-v1.json",
+      "report": "models/beginner-low-elo1200-policy-e30-v1-legacy-screening-50.json",
+      "results": {
+        "win": 40,
+        "draw": 0,
+        "loss": 10,
+        "scoreRate": 0.8,
+        "meanDiscDifference": 15.08
+      },
+      "diagnostics": {
+        "decisions": 1310,
+        "cornersAvailable": 217,
+        "cornersTaken": 179,
+        "avoidableCornerGifts": 34,
+        "passes": 25,
+        "ms": 36.542762999997876
+      },
+      "cornerChoiceRate": 0.8248847926267281,
+      "meanMoveMs": 0.027895238931296088
+    }
+  ],
+  "limits": "Screening results are used to select low strength; confirmation uses fresh openings. No human win-rate claim."
+}

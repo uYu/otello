@@ -16,12 +16,15 @@ COPY index.html tsconfig.json vite.config.ts ./
 COPY src/ ./src/
 COPY public/ ./public/
 COPY models/default-model.json models/v2-default.json models/pattern32-global-policy-v2.json models/pattern32-global-policy-v2.otpat models/training-data-manifest.json ./models/
+COPY models/beginner-default.json models/beginner-error-policy-80-e2-lr0003-v1.json models/second-level-default.json models/second-level-v2-policy-runtime.json models/second-level-v2-policy-parity.json models/four-level-default.json ./models/
 COPY data/README.md ./data/README.md
 COPY data/manifest.json ./data/manifest.json
 COPY data/opening-book/egaroucid-2a65c87860be.tar.gz ./data/opening-book/egaroucid-2a65c87860be.tar.gz
 COPY cpp/othello.hpp ./cpp/othello.hpp
+COPY cpp/pattern.cpp cpp/direct_policy.cpp ./cpp/
 COPY tools/export-web-book.cpp ./tools/export-web-book.cpp
 COPY scripts/check-web-release.mjs scripts/prepare-web-release.mjs scripts/prepare-web-book.py scripts/data-assets.py ./scripts/
+COPY scripts/build-direct-policy-wasm.sh ./scripts/
 RUN npm run build
 
 FROM web-base AS production

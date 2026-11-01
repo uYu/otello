@@ -1,0 +1,102 @@
+{
+  "version": "beginner-architecture-v1",
+  "trainingReports": [
+    "models/beginner8-v1-training.json",
+    "models/beginner-board-heads-v1-training.json"
+  ],
+  "comparisons": [
+    {
+      "name": "\u5c0f\u4ef7\u503c 64\u21928\u21921 vs \u6539\u52a8\u524d\u5165\u95e8 \u00b7 75%\u968f\u673a+25%\u4e00\u624b\u542f\u53d1\u5f0f",
+      "report": "models/beginner-tiny-vs-legacy-50.json",
+      "results": {
+        "win": 29,
+        "draw": 0,
+        "loss": 21,
+        "scoreRate": 0.58,
+        "meanDiscDifference": 5.439999999999999,
+        "meanWallMs": 0.0648905282442749,
+        "meanSearchUnits": 9.516030534351145
+      }
+    },
+    {
+      "name": "\u76f4\u63a5\u7b56\u7565 8\u00d78\u00d73\u21928\u00d78 vs \u6539\u52a8\u524d\u5165\u95e8 \u00b7 75%\u968f\u673a+25%\u4e00\u624b\u542f\u53d1\u5f0f",
+      "report": "models/beginner-policy-vs-legacy-50.json",
+      "results": {
+        "win": 45,
+        "draw": 2,
+        "loss": 3,
+        "scoreRate": 0.92,
+        "meanDiscDifference": 26.84,
+        "meanWallMs": 0.03145315435745663,
+        "meanSearchUnits": 1
+      }
+    },
+    {
+      "name": "\u4ef7\u503c 8\u00d78\u00d73\u219232\u21921 vs \u6539\u52a8\u524d\u5165\u95e8 \u00b7 75%\u968f\u673a+25%\u4e00\u624b\u542f\u53d1\u5f0f",
+      "report": "models/beginner-value-vs-legacy-50.json",
+      "results": {
+        "win": 37,
+        "draw": 1,
+        "loss": 12,
+        "scoreRate": 0.75,
+        "meanDiscDifference": 12.32,
+        "meanWallMs": 0.21329650970149117,
+        "meanSearchUnits": 10.097014925373134
+      }
+    }
+  ],
+  "seconds": 2.1617931249999995,
+  "selectionPending": false,
+  "limits": "Screening only. Suitable human beginner win rates require user playtesting; v2 remains the approved general baseline.",
+  "audit": [
+    {
+      "mode": "tiny",
+      "report": "models/beginner-tiny-vs-legacy-50.json",
+      "reportSha256": "1aacdf583a0939e62a36b1165bce49b874e8e37744aed24df687ab255c377197",
+      "games": 50,
+      "decisions": 1310,
+      "passes": 33,
+      "cornersAvailable": 126,
+      "cornersTaken": 120,
+      "cornerChoiceRate": 0.9523809523809523,
+      "opponentCornerGiftsWithoutOwnCorner": 241,
+      "avoidableCornerGifts": 127,
+      "limits": "Corner opportunity and one-step gift counts are diagnostics, not a proof of optimal play; passing a corner can be correct."
+    },
+    {
+      "mode": "policy",
+      "report": "models/beginner-policy-vs-legacy-50.json",
+      "reportSha256": "9528114611f6ba753e7f3faf2a882c9edcd04029b820e060e58b92805ef8d95d",
+      "games": 50,
+      "decisions": 1354,
+      "passes": 105,
+      "cornersAvailable": 235,
+      "cornersTaken": 179,
+      "cornerChoiceRate": 0.7617021276595745,
+      "opponentCornerGiftsWithoutOwnCorner": 46,
+      "avoidableCornerGifts": 31,
+      "limits": "Corner opportunity and one-step gift counts are diagnostics, not a proof of optimal play; passing a corner can be correct."
+    },
+    {
+      "mode": "value",
+      "report": "models/beginner-value-vs-legacy-50.json",
+      "reportSha256": "be4feda24857702bb32a951ff3968ca1e689abf2bda01393c8b9ad15495e01ac",
+      "games": 50,
+      "decisions": 1340,
+      "passes": 74,
+      "cornersAvailable": 136,
+      "cornersTaken": 135,
+      "cornerChoiceRate": 0.9926470588235294,
+      "opponentCornerGiftsWithoutOwnCorner": 275,
+      "avoidableCornerGifts": 135,
+      "limits": "Corner opportunity and one-step gift counts are diagnostics, not a proof of optimal play; passing a corner can be correct."
+    }
+  ],
+  "selected": "tiny",
+  "selectedModel": "models/beginner8-v1.json",
+  "reason": "Lowest score among all three candidates against the same old beginner: 58% vs 75% and 92%. The model has held-out learning signal, legal deterministic argmax, D4 symmetry and verified pass handling. Human beginner suitability still needs playtesting; this is not evidence of being weaker than the old beginner.",
+  "auditScriptSha256": "32a98f84d0c9e815b7394707c1f2dff4fbd871576bd2923d6ce4bda55a8cca1c",
+  "selectionStatus": "rejected-by-user",
+  "rejection": "\u66f4\u5f3a\u4e86\u554a\uff0c\u4e0d\u592a\u884c",
+  "currentBeginnerManifest": "models/beginner-default.json"
+}

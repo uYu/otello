@@ -1,6 +1,1702 @@
 {
-  "version": "v1.49 vs v1.9 · 200ms/50局",
+  "version": "拟定四档相邻验证 · 每组20局 · 实际开局库流程",
   "experiments": [
+    {
+      "candidate": "policy",
+      "baseline": "easy",
+      "games": 20,
+      "name": "初级 · v2策略 vs 入门 · 20局",
+      "report": "models/four-level-ladder-v1-policy-vs-easy-20.json",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "初级 · v2策略",
+        "baseline": "入门"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "candidate": "search200",
+      "baseline": "policy",
+      "games": 20,
+      "name": "中级 · 200ms+开局库 vs 初级 · v2策略 · 20局",
+      "report": "models/four-level-ladder-v1-search200-vs-policy-20.json",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "中级 · 200ms+开局库",
+        "baseline": "初级 · v2策略"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "candidate": "search2000",
+      "baseline": "search200",
+      "games": 20,
+      "name": "高级 · 2s+开局库 vs 中级 · 200ms+开局库 · 20局",
+      "report": "models/four-level-ladder-v1-search2000-vs-search200-20.json",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "高级 · 2s+开局库",
+        "baseline": "中级 · 200ms+开局库"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    }
+  ],
+  "archivedExperiments": [
+    {
+      "id": "second",
+      "games": 100,
+      "name": "当前高级权重 · 不搜索 vs 新第二档",
+      "baseline": "models/beginner-low-elo1300-policy-v1.json",
+      "temperature": 1.5,
+      "report": "models/v2-policy-only-T1-vs-second-100.json",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "v2策略 · 不搜索",
+        "baseline": "第二档 · 低Elo T1.5"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "id": "legacy",
+      "games": 50,
+      "name": "当前高级权重 · 不搜索 vs 旧入门",
+      "baseline": null,
+      "temperature": 1,
+      "report": "models/v2-policy-only-T1-vs-legacy-50.json",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "v2策略 · 不搜索",
+        "baseline": "旧入门"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "id": "beginner",
+      "games": 50,
+      "name": "当前高级权重 · 不搜索 vs 当前入门",
+      "baseline": "models/beginner-error-policy-80-e2-lr0003-v1.json",
+      "temperature": 1,
+      "report": "models/v2-policy-only-T1-vs-beginner-50.json",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "v2策略 · 不搜索",
+        "baseline": "当前入门"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "id": "second",
+      "games": 100,
+      "name": "v2结构低Elo两轮 vs 新第二档",
+      "baseline": "models/beginner-low-elo1300-policy-v1.json",
+      "temperature": 1.5,
+      "report": "models/lowelo-global-e2-lr0003-v1-vs-second-100.json",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "v2结构 · 低Elo两轮",
+        "baseline": "第二档 · 低Elo T1.5"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "id": "legacy",
+      "games": 50,
+      "name": "v2结构低Elo两轮 vs 旧入门",
+      "baseline": null,
+      "temperature": 1,
+      "report": "models/lowelo-global-e2-lr0003-v1-vs-legacy-50.json",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "v2结构 · 低Elo两轮",
+        "baseline": "旧入门"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "id": "beginner",
+      "games": 50,
+      "name": "v2结构低Elo两轮 vs 当前入门",
+      "baseline": "models/beginner-error-policy-80-e2-lr0003-v1.json",
+      "temperature": 1,
+      "report": "models/lowelo-global-e2-lr0003-v1-vs-beginner-50.json",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "v2结构 · 低Elo两轮",
+        "baseline": "当前入门"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "dense-T1.5",
+      "temperature": 1.5,
+      "name": "第二档候选 dense-T1.5 vs 旧入门 · 50局",
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/second-level-tuning-dense-T1.5-vs-legacy-confirm-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo dense-T1.5",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "dense-T1.5",
+      "temperature": 1.5,
+      "name": "第二档候选 dense-T1.5 vs 此前第二档 · 100局",
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/second-level-tuning-dense-T1.5-vs-previous-second-confirm-100.json",
+      "games": 100,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo dense-T1.5",
+        "baseline": "此前第二档 · 纯低Elo两轮"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "dense-T2",
+      "temperature": 2,
+      "name": "第二档候选 dense-T2 vs 旧入门 · 50局",
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/second-level-tuning-dense-T2-vs-legacy-confirm-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo dense-T2",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "dense-T2",
+      "temperature": 2,
+      "name": "第二档候选 dense-T2 vs 此前第二档 · 100局",
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/second-level-tuning-dense-T2-vs-previous-second-confirm-100.json",
+      "games": 100,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo dense-T2",
+        "baseline": "此前第二档 · 纯低Elo两轮"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "dense-T1.5",
+      "temperature": 1.5,
+      "name": "第二档候选 dense-T1.5 vs 此前第二档 · 100局",
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/second-level-tuning-dense-T1.5-vs-previous-second-100.json",
+      "games": 100,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo dense-T1.5",
+        "baseline": "此前第二档 · 纯低Elo两轮"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "dense-T2",
+      "temperature": 2,
+      "name": "第二档候选 dense-T2 vs 此前第二档 · 100局",
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/second-level-tuning-dense-T2-vs-previous-second-100.json",
+      "games": 100,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo dense-T2",
+        "baseline": "此前第二档 · 纯低Elo两轮"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "dense-T3",
+      "temperature": 3,
+      "name": "第二档候选 dense-T3 vs 此前第二档 · 100局",
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/second-level-tuning-dense-T3-vs-previous-second-100.json",
+      "games": 100,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo dense-T3",
+        "baseline": "此前第二档 · 纯低Elo两轮"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "dense-T4",
+      "temperature": 4,
+      "name": "第二档候选 dense-T4 vs 此前第二档 · 100局",
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/second-level-tuning-dense-T4-vs-previous-second-100.json",
+      "games": 100,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo dense-T4",
+        "baseline": "此前第二档 · 纯低Elo两轮"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "dense-T5",
+      "temperature": 5,
+      "name": "第二档候选 dense-T5 vs 此前第二档 · 100局",
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/second-level-tuning-dense-T5-vs-previous-second-100.json",
+      "games": 100,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo dense-T5",
+        "baseline": "此前第二档 · 纯低Elo两轮"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "puree2lowLR-T1",
+      "temperature": 1,
+      "name": "第二档候选 puree2lowLR-T1 vs 当前入门 · 100局",
+      "model": "models/beginner-pure-lowelo-e2-lr0003-v1.json",
+      "report": "models/second-level-puree2lowLR-T1-vs-current-100.json",
+      "games": 100,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo puree2lowLR-T1",
+        "baseline": "当前入门 · 2轮低学习率"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "puree2lowLR-T1",
+      "temperature": 1,
+      "name": "第二档候选 puree2lowLR-T1 vs 旧入门 · 50局",
+      "model": "models/beginner-pure-lowelo-e2-lr0003-v1.json",
+      "report": "models/second-level-puree2lowLR-T1-vs-legacy-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo puree2lowLR-T1",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "error80e2-T1",
+      "temperature": 1,
+      "name": "第二档候选 error80e2-T1 vs 当前入门 · 100局",
+      "model": "models/beginner-error-policy-80-e2-v1.json",
+      "report": "models/second-level-error80e2-T1-vs-current-100.json",
+      "games": 100,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo error80e2-T1",
+        "baseline": "当前入门 · 2轮低学习率"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "error80e2-T1",
+      "temperature": 1,
+      "name": "第二档候选 error80e2-T1 vs 旧入门 · 50局",
+      "model": "models/beginner-error-policy-80-e2-v1.json",
+      "report": "models/second-level-error80e2-T1-vs-legacy-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo error80e2-T1",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "error80e2lowLR-T1",
+      "temperature": 1,
+      "name": "低Elo模型 error80e2lowLR-T1 vs 旧入门 · 确认50局",
+      "model": "models/beginner-error-policy-80-e2-lr0003-v1.json",
+      "report": "models/beginner-calibrated-error80e2lowLR-T1-confirm-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo error80e2lowLR-T1",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "error80e2lowLR-T1",
+      "temperature": 1,
+      "name": "低Elo模型 error80e2lowLR-T1 vs 旧入门 · 筛查50局",
+      "model": "models/beginner-error-policy-80-e2-lr0003-v1.json",
+      "report": "models/beginner-calibrated-error80e2lowLR-T1-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo error80e2lowLR-T1",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "puree2lowLR-T1",
+      "temperature": 1,
+      "name": "低Elo模型 puree2lowLR-T1 vs 旧入门 · 筛查50局",
+      "model": "models/beginner-pure-lowelo-e2-lr0003-v1.json",
+      "report": "models/beginner-calibrated-puree2lowLR-T1-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo puree2lowLR-T1",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "error80e2-T1",
+      "temperature": 1,
+      "name": "低Elo模型 error80e2-T1 vs 旧入门 · 筛查50局",
+      "model": "models/beginner-error-policy-80-e2-v1.json",
+      "report": "models/beginner-calibrated-error80e2-T1-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo error80e2-T1",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "error80-T1",
+      "temperature": 1,
+      "name": "低Elo模型 error80-T1 vs 旧入门 · 确认50局",
+      "model": "models/beginner-error-policy-80-v1.json",
+      "report": "models/beginner-calibrated-error80-T1-confirm-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo error80-T1",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "error50-T1",
+      "temperature": 1,
+      "name": "低Elo模型 error50-T1 vs 旧入门 · 筛查50局",
+      "model": "models/beginner-error-policy-50-v1.json",
+      "report": "models/beginner-calibrated-error50-T1-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo error50-T1",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "error80-T1",
+      "temperature": 1,
+      "name": "低Elo模型 error80-T1 vs 旧入门 · 筛查50局",
+      "model": "models/beginner-error-policy-80-v1.json",
+      "report": "models/beginner-calibrated-error80-T1-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo error80-T1",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "mistakes-T3",
+      "temperature": 3,
+      "name": "低Elo模型 mistakes-T3 vs 旧入门 · 确认50局",
+      "model": "models/beginner-mistakes-policy-e30-v2.json",
+      "report": "models/beginner-calibrated-mistakes-T3-confirm100-100.json",
+      "games": 100,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo mistakes-T3",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "mistakes-T3",
+      "temperature": 3,
+      "name": "低Elo模型 mistakes-T3 vs 旧入门 · 确认50局",
+      "model": "models/beginner-mistakes-policy-e30-v2.json",
+      "report": "models/beginner-calibrated-mistakes-T3-confirm-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo mistakes-T3",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "mistakes-T0.5",
+      "temperature": 0.5,
+      "name": "低Elo模型 mistakes-T0.5 vs 旧入门 · 筛查50局",
+      "model": "models/beginner-mistakes-policy-e30-v2.json",
+      "report": "models/beginner-calibrated-mistakes-T0.5-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo mistakes-T0.5",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "mistakes-T1",
+      "temperature": 1,
+      "name": "低Elo模型 mistakes-T1 vs 旧入门 · 筛查50局",
+      "model": "models/beginner-mistakes-policy-e30-v2.json",
+      "report": "models/beginner-calibrated-mistakes-T1-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo mistakes-T1",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "mistakes-T2",
+      "temperature": 2,
+      "name": "低Elo模型 mistakes-T2 vs 旧入门 · 筛查50局",
+      "model": "models/beginner-mistakes-policy-e30-v2.json",
+      "report": "models/beginner-calibrated-mistakes-T2-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo mistakes-T2",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "mistakes-T3",
+      "temperature": 3,
+      "name": "低Elo模型 mistakes-T3 vs 旧入门 · 筛查50局",
+      "model": "models/beginner-mistakes-policy-e30-v2.json",
+      "report": "models/beginner-calibrated-mistakes-T3-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo mistakes-T3",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "local-T2",
+      "temperature": 2,
+      "name": "低Elo模型 local-T2 vs 旧入门 · 确认50局",
+      "model": "models/beginner-low-elo1300-local4-v1.json",
+      "report": "models/beginner-calibrated-local-T2-confirm-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo local-T2",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "dense-T8",
+      "temperature": 8,
+      "name": "低Elo模型 dense-T8 vs 旧入门 · 筛查50局",
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/beginner-calibrated-dense-T8-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo dense-T8",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "dense-T12",
+      "temperature": 12,
+      "name": "低Elo模型 dense-T12 vs 旧入门 · 筛查50局",
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/beginner-calibrated-dense-T12-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo dense-T12",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "dense-T20",
+      "temperature": 20,
+      "name": "低Elo模型 dense-T20 vs 旧入门 · 筛查50局",
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/beginner-calibrated-dense-T20-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo dense-T20",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "local-T2",
+      "temperature": 2,
+      "name": "低Elo模型 local-T2 vs 旧入门 · 筛查50局",
+      "model": "models/beginner-low-elo1300-local4-v1.json",
+      "report": "models/beginner-calibrated-local-T2-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo local-T2",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "local-T5",
+      "temperature": 5,
+      "name": "低Elo模型 local-T5 vs 旧入门 · 筛查50局",
+      "model": "models/beginner-low-elo1300-local4-v1.json",
+      "report": "models/beginner-calibrated-local-T5-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo local-T5",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "dense-T1",
+      "temperature": 1,
+      "name": "低Elo模型 dense-T1 vs 旧入门 · 筛查50局",
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/beginner-calibrated-dense-T1-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo dense-T1",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "dense-T2",
+      "temperature": 2,
+      "name": "低Elo模型 dense-T2 vs 旧入门 · 筛查50局",
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/beginner-calibrated-dense-T2-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo dense-T2",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "dense-T3",
+      "temperature": 3,
+      "name": "低Elo模型 dense-T3 vs 旧入门 · 筛查50局",
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/beginner-calibrated-dense-T3-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo dense-T3",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "dense-T5",
+      "temperature": 5,
+      "name": "低Elo模型 dense-T5 vs 旧入门 · 筛查50局",
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/beginner-calibrated-dense-T5-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo dense-T5",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "profile": "local-T1",
+      "temperature": 1,
+      "name": "低Elo模型 local-T1 vs 旧入门 · 筛查50局",
+      "model": "models/beginner-low-elo1300-local4-v1.json",
+      "report": "models/beginner-calibrated-local-T1-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "低Elo local-T1",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "name": "beginner-low-elo1300-local1-v1 vs 改动前入门 · 筛查50局",
+      "model": "models/beginner-low-elo1300-local1-v1.json",
+      "report": "models/beginner-low-elo1300-local1-v1-legacy-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "beginner-low-elo1300-local1-v1",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "name": "beginner-low-elo1300-local4-v1 vs 改动前入门 · 筛查50局",
+      "model": "models/beginner-low-elo1300-local4-v1.json",
+      "report": "models/beginner-low-elo1300-local4-v1-legacy-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "beginner-low-elo1300-local4-v1",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "name": "原结构w=1、T=1.5 vs v2 · 2s/20局",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "w=1、T=1.5",
+        "baseline": "冻结v2、T=1"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/v2-policy-temperature-1p5-2s-20/match.json",
+      "report": "models/v2-policy-temperature-1p5-2s-20-match.json"
+    },
+    {
+      "name": "beginner-low-elo1300-policy-v1-T100 vs 改动前入门 · 筛查50局",
+      "temperature": 100,
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/beginner-low-elo1300-policy-v1-T100-legacy-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "beginner-low-elo1300-policy-v1-T100",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "name": "beginner-low-elo1300-policy-v1-T10 vs 改动前入门 · 筛查50局",
+      "temperature": 10,
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/beginner-low-elo1300-policy-v1-T10-legacy-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "beginner-low-elo1300-policy-v1-T10",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "name": "beginner-low-elo1300-policy-v1-T5 vs 改动前入门 · 筛查50局",
+      "temperature": 5,
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/beginner-low-elo1300-policy-v1-T5-legacy-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "beginner-low-elo1300-policy-v1-T5",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "name": "beginner-low-elo1300-policy-v1-single vs 改动前入门 · 筛查50局",
+      "model": "models/beginner-low-elo1300-policy-v1-single.json",
+      "report": "models/beginner-low-elo1300-policy-v1-single-legacy-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "beginner-low-elo1300-policy-v1-single",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "name": "beginner-low-elo1300-value1-v1-single vs 改动前入门 · 筛查50局",
+      "model": "models/beginner-low-elo1300-value1-v1-single.json",
+      "report": "models/beginner-low-elo1300-value1-v1-single-legacy-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "beginner-low-elo1300-value1-v1-single",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "name": "beginner-low-elo1300-value2-v1-single vs 改动前入门 · 筛查50局",
+      "model": "models/beginner-low-elo1300-value2-v1-single.json",
+      "report": "models/beginner-low-elo1300-value2-v1-single-legacy-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "beginner-low-elo1300-value2-v1-single",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "name": "beginner-low-elo1300-value4-v1-single vs 改动前入门 · 筛查50局",
+      "model": "models/beginner-low-elo1300-value4-v1-single.json",
+      "report": "models/beginner-low-elo1300-value4-v1-single-legacy-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "beginner-low-elo1300-value4-v1-single",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "name": "beginner-low-elo1300-value8-v1-single vs 改动前入门 · 筛查50局",
+      "model": "models/beginner-low-elo1300-value8-v1-single.json",
+      "report": "models/beginner-low-elo1300-value8-v1-single-legacy-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "beginner-low-elo1300-value8-v1-single",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "name": "beginner-low-elo1300-value32-v1-single vs 改动前入门 · 筛查50局",
+      "model": "models/beginner-low-elo1300-value32-v1-single.json",
+      "report": "models/beginner-low-elo1300-value32-v1-single-legacy-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "beginner-low-elo1300-value32-v1-single",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "name": "beginner-low-elo1300-policy-v1-T1 vs 改动前入门 · 筛查50局",
+      "temperature": 1,
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/beginner-low-elo1300-policy-v1-T1-legacy-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "beginner-low-elo1300-policy-v1-T1",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "name": "beginner-low-elo1300-policy-v1-T1.5 vs 改动前入门 · 筛查50局",
+      "temperature": 1.5,
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/beginner-low-elo1300-policy-v1-T1.5-legacy-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "beginner-low-elo1300-policy-v1-T1.5",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "name": "beginner-low-elo1300-policy-v1-T2 vs 改动前入门 · 筛查50局",
+      "temperature": 2,
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/beginner-low-elo1300-policy-v1-T2-legacy-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "beginner-low-elo1300-policy-v1-T2",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "name": "beginner-low-elo1300-value1-v1 vs 改动前入门 · 筛查50局",
+      "model": "models/beginner-low-elo1300-value1-v1.json",
+      "report": "models/beginner-low-elo1300-value1-v1-legacy-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "beginner-low-elo1300-value1-v1",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "name": "beginner-low-elo1300-value2-v1 vs 改动前入门 · 筛查50局",
+      "model": "models/beginner-low-elo1300-value2-v1.json",
+      "report": "models/beginner-low-elo1300-value2-v1-legacy-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "beginner-low-elo1300-value2-v1",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "name": "beginner-low-elo1300-value4-v1 vs 改动前入门 · 筛查50局",
+      "model": "models/beginner-low-elo1300-value4-v1.json",
+      "report": "models/beginner-low-elo1300-value4-v1-legacy-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "beginner-low-elo1300-value4-v1",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "name": "beginner-low-elo1300-policy-v1 vs 改动前入门 · 筛查50局",
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/beginner-low-elo1300-policy-v1-legacy-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "beginner-low-elo1300-policy-v1",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "name": "beginner-low-elo1300-value8-v1 vs 改动前入门 · 筛查50局",
+      "model": "models/beginner-low-elo1300-value8-v1.json",
+      "report": "models/beginner-low-elo1300-value8-v1-legacy-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "beginner-low-elo1300-value8-v1",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "name": "beginner-low-elo1300-value32-v1 vs 改动前入门 · 筛查50局",
+      "model": "models/beginner-low-elo1300-value32-v1.json",
+      "report": "models/beginner-low-elo1300-value32-v1-legacy-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "beginner-low-elo1300-value32-v1",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "name": "beginner-low-elo1200-policy-e1-v1 vs 改动前入门 · 筛查50局",
+      "model": "models/beginner-low-elo1200-policy-e1-v1.json",
+      "report": "models/beginner-low-elo1200-policy-e1-v1-legacy-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "beginner-low-elo1200-policy-e1-v1",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "name": "beginner-low-elo1200-policy-e5-v1 vs 改动前入门 · 筛查50局",
+      "model": "models/beginner-low-elo1200-policy-e5-v1.json",
+      "report": "models/beginner-low-elo1200-policy-e5-v1-legacy-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "beginner-low-elo1200-policy-e5-v1",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "name": "beginner-low-elo1200-policy-e15-v1 vs 改动前入门 · 筛查50局",
+      "model": "models/beginner-low-elo1200-policy-e15-v1.json",
+      "report": "models/beginner-low-elo1200-policy-e15-v1-legacy-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "beginner-low-elo1200-policy-e15-v1",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "name": "beginner-low-elo1200-policy-e30-v1 vs 改动前入门 · 筛查50局",
+      "model": "models/beginner-low-elo1200-policy-e30-v1.json",
+      "report": "models/beginner-low-elo1200-policy-e30-v1-legacy-screening-50.json",
+      "games": 50,
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "beginner-low-elo1200-policy-e30-v1",
+        "baseline": "旧入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ]
+    },
+    {
+      "candidate": "tiny",
+      "opponent": "legacy",
+      "report": "models/beginner-tiny-vs-legacy-50.json",
+      "name": "小价值 64→8→1 vs 改动前入门 · 75%随机+25%一手启发式",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "小价值 64→8→1",
+        "baseline": "改动前入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 50
+    },
+    {
+      "candidate": "policy",
+      "opponent": "legacy",
+      "report": "models/beginner-policy-vs-legacy-50.json",
+      "name": "直接策略 8×8×3→8×8 vs 改动前入门 · 75%随机+25%一手启发式",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "直接策略 8×8×3→8×8",
+        "baseline": "改动前入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 50
+    },
+    {
+      "candidate": "value",
+      "opponent": "legacy",
+      "report": "models/beginner-value-vs-legacy-50.json",
+      "name": "价值 8×8×3→32→1 vs 改动前入门 · 75%随机+25%一手启发式",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "价值 8×8×3→32→1",
+        "baseline": "改动前入门 · 75%随机+25%一手启发式"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 50
+    },
+    {
+      "candidate": "tiny",
+      "opponent": "v2",
+      "report": "models/beginner-tiny-vs-v2-20.json",
+      "name": "小价值 64→8→1 vs 冻结 v2 · 100ms",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "小价值 64→8→1",
+        "baseline": "冻结 v2 · 100ms"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "status": "stopped"
+    },
+    {
+      "candidate": "policy",
+      "opponent": "v2",
+      "report": "models/beginner-policy-vs-v2-20.json",
+      "name": "直接策略 8×8×3→8×8 vs 冻结 v2 · 100ms",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "直接策略 8×8×3→8×8",
+        "baseline": "冻结 v2 · 100ms"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "status": "stopped"
+    },
+    {
+      "candidate": "value",
+      "opponent": "v2",
+      "report": "models/beginner-value-vs-v2-20.json",
+      "name": "价值 8×8×3→32→1 vs 冻结 v2 · 100ms",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "价值 8×8×3→32→1",
+        "baseline": "冻结 v2 · 100ms"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "status": "stopped"
+    },
+    {
+      "candidate": "policy",
+      "opponent": "tiny",
+      "report": "models/beginner-policy-vs-tiny-20.json",
+      "name": "直接策略 8×8×3→8×8 vs 小价值 64→8→1",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "直接策略 8×8×3→8×8",
+        "baseline": "小价值 64→8→1"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "status": "stopped"
+    },
+    {
+      "candidate": "value",
+      "opponent": "tiny",
+      "report": "models/beginner-value-vs-tiny-20.json",
+      "name": "价值 8×8×3→32→1 vs 小价值 64→8→1",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "价值 8×8×3→32→1",
+        "baseline": "小价值 64→8→1"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "status": "stopped"
+    },
+    {
+      "candidate": "policy",
+      "opponent": "value",
+      "report": "models/beginner-policy-vs-value-20.json",
+      "name": "直接策略 8×8×3→8×8 vs 价值 8×8×3→32→1",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "直接策略 8×8×3→8×8",
+        "baseline": "价值 8×8×3→32→1"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "status": "stopped"
+    },
+    {
+      "name": "原结构w=1、T=1.25 vs v2 · 2s/20局",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "w=1、T=1.25",
+        "baseline": "冻结v2、T=1"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/v2-policy-temperature-1p25-2s-20/match.json",
+      "report": "models/v2-policy-temperature-1p25-2s-20-match.json"
+    },
+    {
+      "name": "原结构w=1、T=1 vs v2 · 2s/20局",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "w=1、T=1",
+        "baseline": "冻结v2、T=1"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/v2-policy-temperature-1-2s-20/match.json",
+      "report": "models/v2-policy-temperature-1-2s-20-match.json"
+    },
+    {
+      "name": "原结构w=1、T=1.5 vs v2 · 200ms/20局",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "w=1、T=1.5",
+        "baseline": "冻结v2、T=1"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/v2-policy-temperature-1p5-200ms-20/match.json",
+      "report": "models/v2-policy-temperature-1p5-200ms-20-match.json"
+    },
+    {
+      "name": "原结构w=1、T=1.25 vs v2 · 200ms/20局",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "w=1、T=1.25",
+        "baseline": "冻结v2、T=1"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/v2-policy-temperature-1p25-200ms-20/match.json",
+      "report": "models/v2-policy-temperature-1p25-200ms-20-match.json"
+    },
+    {
+      "name": "原结构w=1、T=1 vs v2 · 200ms/20局",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "w=1、T=1",
+        "baseline": "冻结v2、T=1"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/v2-policy-temperature-1-200ms-20/match.json",
+      "report": "models/v2-policy-temperature-1-200ms-20-match.json"
+    },
+    {
+      "name": "原结构策略1.0 vs v2 · 2s/20局 · 10均势库开局",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "原结构＋策略1.0",
+        "baseline": "冻结v2"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/v2-plain-policy1-balanced10-2s/match.json",
+      "report": "models/v2-plain-policy1-balanced10-2s-match.json"
+    },
+    {
+      "name": "原结构策略1.0 vs v2 · 200ms/40局 · 20均势库开局",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "原结构＋策略1.0",
+        "baseline": "冻结v2"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 40,
+      "runtimeReport": ".build/training/v2-plain-policy1-balanced20-200ms/match.json",
+      "report": "models/v2-plain-policy1-balanced20-200ms-match.json"
+    },
+    {
+      "name": "原结构策略1.0 vs v2 · 200ms/100局 · 50均势库开局",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "原结构＋策略1.0",
+        "baseline": "冻结v2"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 100,
+      "runtimeReport": ".build/training/v2-plain-policy1-balanced50-200ms/match.json",
+      "report": "models/v2-plain-policy1-balanced50-200ms-match.json"
+    },
+    {
+      "name": "原v2结构＋策略1.0 vs v2 · 2s/20局",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "原结构＋策略1.0",
+        "baseline": "冻结v2"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/v2-plain-policy1/2s/match.json",
+      "report": "models/v2-plain-policy1-2s-20-match.json"
+    },
+    {
+      "name": "原v2结构＋策略1.0 vs v2 · 200ms/20局",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "原结构＋策略1.0",
+        "baseline": "冻结v2"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/v2-plain-policy1/200ms/match.json",
+      "report": "models/v2-plain-policy1-200ms-20-match.json"
+    },
+    {
+      "name": "v2 plain-policy10-fixed30 · 30轮 · policy=1.0 WDL=0.1",
+      "focus": "plain-policy10-fixed30",
+      "games": 0,
+      "runtimeReport": ".build/training/v2-recipe/plain-policy10-fixed30/progress.json",
+      "report": "models/v2-recipe-plain-policy10-fixed30-training.json"
+    },
+    {
+      "name": "逐点＋策略1.0 vs v2 · 2s/20局",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "逐点＋策略1.0",
+        "baseline": "冻结v2"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/v2-point-policy10-2s-20/match.json",
+      "report": "models/v2-point-policy10-2s-20-match.json"
+    },
+    {
+      "name": "逐点＋策略1.0 vs v2 · 200ms/20局",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "逐点＋策略1.0",
+        "baseline": "冻结v2"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "runtimeReport": ".build/training/v2-point-policy10-200ms-20/match.json",
+      "report": "models/v2-point-policy10-200ms-20-match.json"
+    },
+    {
+      "name": "v2 point-value-private32x16 · 30轮 · policy=1.0 WDL=0.1",
+      "focus": "point-value-private32x16",
+      "games": 0,
+      "runtimeReport": ".build/training/v2-recipe/point-value-private32x16/progress.json",
+      "report": "models/v2-recipe-point-value-private32x16-training.json"
+    },
+    {
+      "name": "v2 point-policy10-smooth10 · 30轮 · policy=1.0 WDL=0.1",
+      "focus": "point-policy10-smooth10",
+      "games": 0,
+      "runtimeReport": ".build/training/v2-recipe/point-policy10-smooth10/progress.json",
+      "report": "models/v2-recipe-point-policy10-smooth10-training.json"
+    },
+    {
+      "name": "v2 point-policy10-smooth05 · 30轮 · policy=1.0 WDL=0.1",
+      "focus": "point-policy10-smooth05",
+      "games": 0,
+      "runtimeReport": ".build/training/v2-recipe/point-policy10-smooth05/progress.json",
+      "report": "models/v2-recipe-point-policy10-smooth05-training.json"
+    },
+    {
+      "name": "v2 point-policy10-cosine30 · 30轮 · policy=1.0 WDL=0.1",
+      "focus": "point-policy10-cosine30",
+      "games": 0,
+      "runtimeReport": ".build/training/v2-recipe/point-policy10-cosine30/progress.json",
+      "report": "models/v2-recipe-point-policy10-cosine30-training.json"
+    },
+    {
+      "name": "v2 point-policy10-fixed30 · 30轮 · policy=1.0 WDL=0.1",
+      "focus": "point-policy10-fixed30",
+      "games": 0,
+      "runtimeReport": ".build/training/v2-recipe/point-policy10-fixed30/progress.json",
+      "report": "models/v2-recipe-point-policy10-fixed30-training.json"
+    },
+    {
+      "name": "v2 point-policy3-cosine30 · 30轮 · policy=0.3 WDL=0.1",
+      "focus": "point-policy3-cosine30",
+      "games": 0,
+      "runtimeReport": ".build/training/v2-recipe/point-policy3-cosine30/progress.json",
+      "report": "models/v2-recipe-point-policy3-cosine30-training.json"
+    },
+    {
+      "name": "v2 point-policy2-cosine30 · 30轮 · policy=0.2 WDL=0.1",
+      "focus": "point-policy2-cosine30",
+      "games": 0,
+      "runtimeReport": ".build/training/v2-recipe/point-policy2-cosine30/progress.json",
+      "report": "models/v2-recipe-point-policy2-cosine30-training.json"
+    },
+    {
+      "name": "v2 point-policy3-fixed30 · 30轮 · policy=0.3 WDL=0.1",
+      "focus": "point-policy3-fixed30",
+      "games": 0,
+      "runtimeReport": ".build/training/v2-recipe/point-policy3-fixed30/progress.json",
+      "report": "models/v2-recipe-point-policy3-fixed30-training.json"
+    },
+    {
+      "name": "v2 point-policy2-fixed30 · 30轮 · policy=0.2 WDL=0.1",
+      "focus": "point-policy2-fixed30",
+      "games": 0,
+      "runtimeReport": ".build/training/v2-recipe/point-policy2-fixed30/progress.json",
+      "report": "models/v2-recipe-point-policy2-fixed30-training.json"
+    },
+    {
+      "name": "v2 mobility-cosine30 · 30轮 · policy=0.1 WDL=0.1",
+      "focus": "mobility-cosine30",
+      "games": 0,
+      "runtimeReport": ".build/training/v2-recipe/mobility-cosine30/progress.json",
+      "report": "models/v2-recipe-mobility-cosine30-training.json"
+    },
+    {
+      "name": "v2 mobility-fixed30 · 30轮 · policy=0.1 WDL=0.1",
+      "focus": "mobility-fixed30",
+      "games": 0,
+      "runtimeReport": ".build/training/v2-recipe/mobility-fixed30/progress.json",
+      "report": "models/v2-recipe-mobility-fixed30-training.json"
+    },
+    {
+      "name": "v2 point-cosine30 · 30轮 · policy=0.1 WDL=0.1",
+      "focus": "point-cosine30",
+      "games": 0,
+      "runtimeReport": ".build/training/v2-recipe/point-cosine30/progress.json",
+      "report": "models/v2-recipe-point-cosine30-training.json"
+    },
+    {
+      "name": "v2 point-fixed30 · 30轮 · policy=0.1 WDL=0.1",
+      "focus": "point-fixed30",
+      "games": 0,
+      "runtimeReport": ".build/training/v2-recipe/point-fixed30/progress.json",
+      "report": "models/v2-recipe-point-fixed30-training.json"
+    },
+    {
+      "name": "v2 lr003 · 30轮 · policy=0.1 WDL=0.1",
+      "focus": "lr003",
+      "games": 0,
+      "runtimeReport": ".build/training/v2-recipe/lr003/progress.json",
+      "report": "models/v2-recipe-lr003-training.json"
+    },
+    {
+      "name": "v2 lr0003 · 30轮 · policy=0.1 WDL=0.1",
+      "focus": "lr0003",
+      "games": 0,
+      "runtimeReport": ".build/training/v2-recipe/lr0003/progress.json",
+      "report": "models/v2-recipe-lr0003-training.json"
+    },
+    {
+      "name": "v2 wdl0 · 30轮 · policy=0.1 WDL=0.0",
+      "focus": "wdl0",
+      "games": 0,
+      "runtimeReport": ".build/training/v2-recipe/wdl0/progress.json",
+      "report": "models/v2-recipe-wdl0-training.json"
+    },
+    {
+      "name": "v2 wdl005 · 30轮 · policy=0.1 WDL=0.05",
+      "focus": "wdl005",
+      "games": 0,
+      "runtimeReport": ".build/training/v2-recipe/wdl005/progress.json",
+      "report": "models/v2-recipe-wdl005-training.json"
+    },
+    {
+      "name": "v2 policy03 · 30轮 · policy=0.3 WDL=0.1",
+      "focus": "policy03",
+      "games": 0,
+      "runtimeReport": ".build/training/v2-recipe/policy03/progress.json",
+      "report": "models/v2-recipe-policy03-training.json"
+    },
+    {
+      "name": "v2 policy02 · 30轮 · policy=0.2 WDL=0.1",
+      "focus": "policy02",
+      "games": 0,
+      "runtimeReport": ".build/training/v2-recipe/policy02/progress.json",
+      "report": "models/v2-recipe-policy02-training.json"
+    },
+    {
+      "name": "v2 cosine30 · 30轮 · policy=0.1 WDL=0.1",
+      "focus": "cosine30",
+      "games": 0,
+      "runtimeReport": ".build/training/v2-recipe/cosine30/progress.json",
+      "report": "models/v2-recipe-cosine30-training.json"
+    },
+    {
+      "name": "v2 fixed30 · 30轮 · policy=0.1 WDL=0.1",
+      "focus": "fixed30",
+      "games": 0,
+      "runtimeReport": ".build/training/v2-recipe/fixed30/progress.json",
+      "report": "models/v2-recipe-fixed30-training.json"
+    },
+    {
+      "name": "已停止：棋盘逐点特征 · 全网从头训练 vs v2 · 100ms/步 · 20局",
+      "focus": "candidate",
+      "displayNames": {
+        "candidate": "棋盘逐点特征 · 全网从头训练",
+        "baseline": "冻结 v2"
+      },
+      "displayOrder": [
+        "candidate",
+        "baseline"
+      ],
+      "games": 20,
+      "report": "models/v2.3-point-scratch-match-cancelled.json",
+      "status": "stopped"
+    },
+    {
+      "name": "显式双方行动力 · 全网从头训练",
+      "focus": "mobility",
+      "games": 0,
+      "runtimeReport": ".build/training/pattern-mobility-scratch-v2.4/progress.json",
+      "report": "models/v2.4-mobility-scratch-training.json"
+    },
+    {
+      "name": "棋盘逐点特征 · 全网从头训练",
+      "focus": "point",
+      "games": 0,
+      "runtimeReport": ".build/training/pattern-point-scratch-v2.3/progress.json",
+      "report": "models/v2.3-point-scratch-training.json"
+    },
+    {
+      "name": "棋盘8×8×4→64点特征→主干 · 全部917,420参数训练",
+      "focus": "board-point",
+      "games": 0,
+      "runtimeReport": ".build/training/pattern-board-point-v2.2/progress.json",
+      "report": "models/v2.2-board-point-training.json"
+    },
+    {
+      "name": "8×8×8 空间策略 · 全部917,460参数训练",
+      "focus": "spatial-joint",
+      "games": 0,
+      "runtimeReport": ".build/training/pattern-spatial-joint-v2.1/progress.json",
+      "report": "models/v2.1-spatial-joint-interrupted.json"
+    },
+    {
+      "name": "8×8×8 空间策略分支 · 473 参数",
+      "focus": "spatial-policy",
+      "games": 0,
+      "runtimeReport": ".build/training/pattern-spatial-v2.1/progress.json",
+      "report": "models/v2.1-spatial-frozen-pilot-interrupted.json"
+    },
     {
       "name": "最新v1.49 vs 冻结v1.9 · 200ms/步 · 50局",
       "focus": "candidate",
@@ -15,9 +1711,7 @@
       "games": 50,
       "runtimeReport": ".build/training/global-policy-vs-v1.9-200ms-50/match.json",
       "report": "models/v1.49-global-policy-vs-v1.9-200ms-50.json"
-    }
-  ],
-  "archivedExperiments": [
+    },
     {
       "name": "v1.9冻结参考引擎准备",
       "games": 0,

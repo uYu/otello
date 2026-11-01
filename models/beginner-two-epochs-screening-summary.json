@@ -1,0 +1,30 @@
+{
+  "stage": "screening",
+  "seed": 20261101,
+  "comparisons": [
+    {
+      "profile": "error80e2-T1",
+      "temperature": 1,
+      "model": "models/beginner-error-policy-80-e2-v1.json",
+      "report": "models/beginner-calibrated-error80e2-T1-screening-50.json",
+      "results": {
+        "win": 21,
+        "draw": 3,
+        "loss": 26,
+        "scoreRate": 0.45,
+        "meanDiscDifference": -5.8
+      },
+      "diagnostics": {
+        "decisions": 1297,
+        "cornersAvailable": 591,
+        "cornersTaken": 60,
+        "avoidableCornerGifts": 95,
+        "passes": 19,
+        "ms": 45.79508999999999
+      },
+      "cornerChoiceRate": 0.10152284263959391,
+      "meanMoveMs": 0.035308473400154194
+    }
+  ],
+  "limits": "Screening results are used to select low strength; confirmation uses fresh openings. No human win-rate claim."
+}

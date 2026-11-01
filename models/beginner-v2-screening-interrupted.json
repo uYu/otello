@@ -1,0 +1,33 @@
+{
+  "reason": "User requested all three models vs the pre-model beginner for 50 games each instead of v2 screening.",
+  "completed": [
+    {
+      "report": "models/beginner-tiny-vs-v2-20.json",
+      "games": 20,
+      "results": {
+        "win": 0,
+        "draw": 0,
+        "loss": 20,
+        "scoreRate": 0,
+        "meanDiscDifference": -40.2,
+        "meanWallMs": 0.04998926987444258,
+        "meanSearchUnits": 5.640167364016737
+      }
+    }
+  ],
+  "interrupted": [
+    {
+      "report": "models/beginner-policy-vs-v2-20.json",
+      "games": 3,
+      "results": {
+        "win": 0,
+        "draw": 0,
+        "loss": 3,
+        "scoreRate": 0,
+        "meanDiscDifference": -43,
+        "meanWallMs": 0.07580748484851386,
+        "meanSearchUnits": 1
+      }
+    }
+  ]
+}

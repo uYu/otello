@@ -1,0 +1,77 @@
+{
+  "complete": true,
+  "games": 60,
+  "audits": [
+    {
+      "report": "models/four-level-ladder-v1-policy-vs-easy-20.json",
+      "sha256": "3e5a571aea19d10875b454d2a9b0b1a80ac7756d20fa9e3a4fa36af7d6aa37a0",
+      "games": 20,
+      "actions": 1200,
+      "policies": 1200,
+      "bookMoves": 0,
+      "searches": 0,
+      "colors": {
+        "black": {
+          "win": 10,
+          "draw": 0,
+          "loss": 0
+        },
+        "white": {
+          "win": 9,
+          "draw": 0,
+          "loss": 1
+        }
+      },
+      "allPoliciesAndBookMovesExactlyReplayed": true,
+      "allMovesLegalAndFinalBoardsVerified": true
+    },
+    {
+      "report": "models/four-level-ladder-v1-search200-vs-policy-20.json",
+      "sha256": "aee2f1e99f96bcb4e09c21c1b8edc41d82359197e832a129cd100befb599cc7d",
+      "games": 20,
+      "actions": 1106,
+      "policies": 509,
+      "bookMoves": 59,
+      "searches": 538,
+      "colors": {
+        "black": {
+          "win": 10,
+          "draw": 0,
+          "loss": 0
+        },
+        "white": {
+          "win": 10,
+          "draw": 0,
+          "loss": 0
+        }
+      },
+      "allPoliciesAndBookMovesExactlyReplayed": true,
+      "allMovesLegalAndFinalBoardsVerified": true
+    },
+    {
+      "report": "models/four-level-ladder-v1-search2000-vs-search200-20.json",
+      "sha256": "36d0b9f32e01b6d4038ca4215f034e72fafb45bad6f6bfb0cb44ea9b1929df33",
+      "games": 20,
+      "actions": 1200,
+      "policies": 0,
+      "bookMoves": 614,
+      "searches": 586,
+      "colors": {
+        "black": {
+          "win": 2,
+          "draw": 8,
+          "loss": 0
+        },
+        "white": {
+          "win": 4,
+          "draw": 6,
+          "loss": 0
+        }
+      },
+      "allPoliciesAndBookMovesExactlyReplayed": true,
+      "allMovesLegalAndFinalBoardsVerified": true
+    }
+  ],
+  "scriptSha256": "4c544aa4f71a85124cecbcbca3a2baf4dd7a87ae5a7bd1f6704ade9f7764bd49",
+  "limits": "Time-budgeted MCTS choices cannot be replayed exactly; search moves checked against legality, execution logs and book-miss status."
+}

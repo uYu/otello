@@ -1,0 +1,53 @@
+{
+  "stage": "screening",
+  "seed": 20261101,
+  "comparisons": [
+    {
+      "profile": "error80e2lowLR-T1",
+      "temperature": 1,
+      "model": "models/beginner-error-policy-80-e2-lr0003-v1.json",
+      "report": "models/beginner-calibrated-error80e2lowLR-T1-screening-50.json",
+      "results": {
+        "win": 10,
+        "draw": 2,
+        "loss": 38,
+        "scoreRate": 0.22,
+        "meanDiscDifference": -11.52
+      },
+      "diagnostics": {
+        "decisions": 1300,
+        "cornersAvailable": 457,
+        "cornersTaken": 55,
+        "avoidableCornerGifts": 125,
+        "passes": 15,
+        "ms": 42.55890699999851
+      },
+      "cornerChoiceRate": 0.12035010940919037,
+      "meanMoveMs": 0.032737620769229626
+    },
+    {
+      "profile": "puree2lowLR-T1",
+      "temperature": 1,
+      "model": "models/beginner-pure-lowelo-e2-lr0003-v1.json",
+      "report": "models/beginner-calibrated-puree2lowLR-T1-screening-50.json",
+      "results": {
+        "win": 28,
+        "draw": 3,
+        "loss": 19,
+        "scoreRate": 0.59,
+        "meanDiscDifference": 5.16
+      },
+      "diagnostics": {
+        "decisions": 1306,
+        "cornersAvailable": 469,
+        "cornersTaken": 129,
+        "avoidableCornerGifts": 83,
+        "passes": 26,
+        "ms": 69.7088450000009
+      },
+      "cornerChoiceRate": 0.27505330490405117,
+      "meanMoveMs": 0.05337583843797925
+    }
+  ],
+  "limits": "Screening results are used to select low strength; confirmation uses fresh openings. No human win-rate claim."
+}

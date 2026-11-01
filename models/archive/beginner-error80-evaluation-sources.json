@@ -1,0 +1,24 @@
+{
+  "archive": "models/archive/beginner-error80-evaluation-sources.tar.gz",
+  "sha256": "a07304c591e1cde7094c312825eeff2c85ada809e63bb4275b23875b6190e032",
+  "files": {
+    "benchmarks/beginner-legacy.ts": "382e79fdcc343b694ea766fbae366e373555cc296bb27d00944c57b4780043ac",
+    "models/beginner-calibrated-error80-T1-confirm-50.json": "f5b88d14e5fbff53c08b5382105e086cb282611976915a416a462ecca24573e7",
+    "models/beginner-calibrated-error80-T1-screening-50.json": "8f29e0f7e32796b9a6aaac22b93146d68756e03f78c28acda9cb1a2f88e925f2",
+    "models/beginner-error-policy-80-v1-training.json": "dab2ee89ff50464e9e934a8e26b163ac1720ffe42233b6556ad4554c49d8b0be",
+    "models/beginner-error-policy-80-v1.json": "c8950eccf581167a4c15390e9bd7d5c3c903ea42ce00f2eacfe303b761e80dd6",
+    "models/beginner-low-elo-mistakes-v2-data.json": "9a98f5080637de204ba213fb041382c6bf91018fdfed0d43f3c14bbc600257ec",
+    "models/beginner-low-elo-v1-data.json": "0e9a6826c5b9c67f5b12e2fb521f743f81d8ca4ae0ad39fcfe2ef5fc22e85209",
+    "scripts/compare-beginner-error-policy.ts": "b31f8e39d146a1fbdf7118afba5016503f2af055ef9025397fcadcf071214505",
+    "scripts/prepare-beginner-low-elo.py": "23e9fbbe3d2b8c92634473b552091834b7712ccf414bee1657bc5c27fd6e2dec",
+    "scripts/prepare-beginner-mistakes-v2.py": "2e10c6ce0b70d366a0da480bbcea625f98945add09ee8dc3a4f4a9d9d131a3c3",
+    "scripts/train-beginner-error-policy.py": "8e4f8a1ba7ec40d42dc6e7cc97c5ba6a3629c662a566ce4a7b6c8b2014075058",
+    "scripts/training_consensus.py": "2969614f441622106e232aa7bffd4b8a471aa2b7b0cd135632016b126c7ff0e6",
+    "src/game/beginner-local.ts": "0eb3630641fd89d3df791c1fd18550087f6b106b08ac1f5cafce141e64958306",
+    "src/game/beginner-policy.ts": "d0dfc1648fae9bfd82be3f253b1f6fdd8b7f297688d8cf6e73a172697f48197f",
+    "src/game/beginner.ts": "4682625da06b6d02fbed45453776b8251df1b3a78fda06f45711d9899b3c9279",
+    "src/game/engine.ts": "d66ad10a5474edb163801fac53d528d9c656fbbc2d13999a64aaf24be3c3c3a7",
+    "src/game/types.ts": "814fcc0f529c8eaf117c32282a33f36c13cfed1f45278b9c8072020f78f53d0b",
+    "src/game/wasm/othello.mjs": "5ac1742d9d778ea9acda984c35e4faa686da6c410e61f05e4756481a5d10deb2"
+  }
+}

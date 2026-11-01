@@ -1,0 +1,10 @@
+{
+  "trainPositions": 10000,
+  "uniqueCanonicalTrainPositions": 10000,
+  "actors": 85,
+  "allActorsEstablishedBelow1350": true,
+  "allRecordedTargetsLegal": true,
+  "crossHoldoutCanonicalOverlap": 0,
+  "evaluationArchiveVerified": true,
+  "cacheSha256": "143e9d50231a1244efce4a97532c310e42019aa611ed7a331f6d96a73db63d32"
+}

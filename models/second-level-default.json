@@ -1,0 +1,15 @@
+{
+  "version": "v2-policy-only-T1",
+  "status": "user-selected-local-playtest",
+  "defaultModel": "models/pattern32-global-policy-v2.otpat",
+  "modelSha256": "df11f7b9eed358fff33a426e2f0cb1a290083d2bc8e0781a2fbd1efdaf4270c3",
+  "temperature": 1,
+  "parameters": 916987,
+  "openingBook": false,
+  "search": false,
+  "selection": "Legal masked trained v2 policy softmax sampling, one network evaluation, no value lookahead",
+  "userAuthorization": "就按现在的高档模型，不搜索，作为第二档呢",
+  "baseline": "models/v2-default.json",
+  "retraining": false,
+  "previousCandidate": "models/second-level-selection-v2.json"
+}

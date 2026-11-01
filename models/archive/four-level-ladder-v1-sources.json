@@ -1,0 +1,20 @@
+{
+  "archive": "models/archive/four-level-ladder-v1-sources.tar.gz",
+  "sha256": "9ebf5ff3f119d3a7e4c9fec66c8f0639345384cc18f6acdd7f578d340179b92e",
+  "files": {
+    "scripts/verify-four-level-ladder.ts": "93dd43bc50c5a5b1fa223d120ab97a54b498f8a89e2fcd0c93dfc8a7dce54245",
+    "scripts/audit-four-level-ladder.ts": "4c544aa4f71a85124cecbcbca3a2baf4dd7a87ae5a7bd1f6704ade9f7764bd49",
+    "src/game/engine.ts": "409ee2817fb60625c8fe4a336cbb4e4f186f690eb77dfe3b26368830c99deff0",
+    "src/game/direct-policy.ts": "6e448d69e5deec2f22b43f544aa5d86e461920e71045ac5ae118cd08d7cfd248",
+    "src/game/beginner-policy.ts": "8b6b4d1359014b6df6a3bcc210f855c4844791cd871e8d0436f221df089dd0bc",
+    "src/game/opening-book.ts": "0714c4a5cbd649240e4843ab22fb9308c9a63c756c88cd284d6c56587bd85b8f",
+    "models/beginner-default.json": "cd8cdcb56fa19cf72ef419fb5f73fab60859e1159b80ff5d31fbf9cf16888bd7",
+    "models/second-level-default.json": "2efdc8c36c18ba3012444ca82dc9aaa9f9365a8e3fc5d2c529a25701a9e30ce2",
+    "models/v2-default.json": "109b6d13b9672fcde92414e2d96716f9e9a98eb251260abcccbe9782ac00fd6e",
+    "models/four-level-ladder-v1-comparison.json": "b66830f580ec55860ecf2d534dba3133b8a20daf3424327b67371e8c7b714de6",
+    "models/four-level-ladder-v1-validation.json": "9487550ef302a3588ca9dc8a6ac606d7c54dc7036f1e065ef5412dcb31fc9b51",
+    "models/four-level-ladder-v1-policy-vs-easy-20.json": "3e5a571aea19d10875b454d2a9b0b1a80ac7756d20fa9e3a4fa36af7d6aa37a0",
+    "models/four-level-ladder-v1-search200-vs-policy-20.json": "aee2f1e99f96bcb4e09c21c1b8edc41d82359197e832a129cd100befb599cc7d",
+    "models/four-level-ladder-v1-search2000-vs-search200-20.json": "36d0b9f32e01b6d4038ca4215f034e72fafb45bad6f6bfb0cb44ea9b1929df33"
+  }
+}

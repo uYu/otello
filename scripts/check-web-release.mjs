@@ -9,6 +9,21 @@ const read=name=>readFileSync(resolve(root,name));
 const json=name=>JSON.parse(read(name));
 const sha=name=>createHash('sha256').update(read(name)).digest('hex');
 const active=json('models/default-model.json'),baseline=json(active.baselineManifest);
+const beginner=json('models/beginner-default.json');
+const second=json('models/second-level-default.json');
+const secondRuntime=json('models/second-level-v2-policy-runtime.json');
+const ladder=json('models/four-level-default.json');
+assert.deepEqual(ladder.levels.map(x=>[x.id,x.searchMilliseconds,x.openingBook]),[
+ ['easy',0,false],['normal',0,false],['medium',200,true],['hard',2000,true]
+]);
+assert.equal(sha(second.defaultModel),second.modelSha256);
+assert.equal(second.modelSha256,baseline.modelSha256);
+assert.equal(second.search,false);assert.equal(second.openingBook,false);
+for(const [name,digest] of Object.entries(secondRuntime.sourceSha256))assert.equal(sha(name),digest,`Second-level source mismatch: ${name}`);
+assert.equal(sha(beginner.defaultModel),beginner.modelSha256,'Beginner weights differ from selected artifact');
+assert.equal(json(beginner.defaultModel).version,beginner.version);
+assert.equal(beginner.openingBook,false);
+for(const [name,digest] of Object.entries(beginner.sourceSha256))assert.equal(sha(name),digest,`Beginner source mismatch: ${name}`);
 assert.equal(active.version,'v2','This deployment is pinned to the approved v2 baseline');
 assert.equal(active.baselineManifest,'models/v2-default.json');
 assert.equal(active.defaultModel,baseline.defaultModel);
@@ -33,7 +48,10 @@ assert.equal(book.sourceSha256,'0dd454d84aa656a64329930bad796c4a48a4322b7693d50b
 assert.equal(book.sourceRecords,1302322);
 const checks=json(bookBase+'checksums.json');
 for(const [name,digest] of Object.entries(checks))assert.equal(sha(bookBase+name),digest,`Opening-book asset mismatch: ${name}`);
-const release={version:active.version,modelSha256:baseline.modelSha256,modelFormat:baseline.modelFormat,wasmSha256:sha(wasm),baselineManifestSha256:sha(active.baselineManifest),engine:'Opening book, then v2 Pattern outcome + learned-prior PUCT MCTS',execution:'browser Web Worker',normalMilliseconds:100,hardMilliseconds:1000,openingBook:{enabled:true,version:book.version,sourceSha256:book.sourceSha256,sourceRecords:book.sourceRecords,playablePositions:book.entries,shards:book.shards}};
+const release={version:active.version,release:ladder.version,levels:ladder.levels,modelSha256:baseline.modelSha256,modelFormat:baseline.modelFormat,wasmSha256:sha(wasm),baselineManifestSha256:sha(active.baselineManifest),engine:'Four levels: beginner policy, v2 policy, book+v2 MCTS 200ms, book+v2 MCTS 2s',execution:'browser Web Worker',normalMilliseconds:0,mediumMilliseconds:200,hardMilliseconds:2000,openingBook:{enabled:true,version:book.version,sourceSha256:book.sourceSha256,sourceRecords:book.sourceRecords,playablePositions:book.entries,shards:book.shards}};
+release.beginner={version:beginner.version,modelSha256:beginner.modelSha256,parameters:beginner.parameters,temperature:beginner.temperature,openingBook:false,selection:'learned-policy sampling',search:false};
+release.secondLevel={version:second.version,modelSha256:second.modelSha256,temperature:second.temperature,openingBook:false,search:false,selection:'learned-policy sampling',wasmSha256:sha('src/game/wasm/direct-policy.mjs')};
+release.openingBook.difficulties=['medium','hard'];release.openingBook.hintsEnabled=true;
 if(process.argv.includes('--write')){
  writeFileSync(resolve(root,'public/release.json'),JSON.stringify(release,null,2)+'\n');
  copyFileSync(resolve(root,'data/README.md'),resolve(root,'public/model-data-notices.md'));

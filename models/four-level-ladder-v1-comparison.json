@@ -1,0 +1,124 @@
+{
+  "version": "four-level-ladder-v1",
+  "complete": true,
+  "summaries": [
+    {
+      "candidate": "policy",
+      "baseline": "easy",
+      "report": "models/four-level-ladder-v1-policy-vs-easy-20.json",
+      "reportSha256": "3e5a571aea19d10875b454d2a9b0b1a80ac7756d20fa9e3a4fa36af7d6aa37a0",
+      "games": 20,
+      "results": {
+        "win": 19,
+        "draw": 0,
+        "loss": 1,
+        "scoreRate": 0.95,
+        "meanDiscDifference": 30.2
+      },
+      "diagnostics": {
+        "candidate": {
+          "decisions": 613,
+          "bookHits": 0,
+          "searchDecisions": 0,
+          "policyDecisions": 613,
+          "wallMs": 61.22803100000067,
+          "searchWallMs": 0,
+          "nodes": 613,
+          "exact": 0
+        },
+        "baseline": {
+          "decisions": 587,
+          "bookHits": 0,
+          "searchDecisions": 0,
+          "policyDecisions": 587,
+          "wallMs": 22.916279999999574,
+          "searchWallMs": 0,
+          "nodes": 587,
+          "exact": 0
+        }
+      },
+      "allGamesReplayed": true
+    },
+    {
+      "candidate": "search200",
+      "baseline": "policy",
+      "report": "models/four-level-ladder-v1-search200-vs-policy-20.json",
+      "reportSha256": "aee2f1e99f96bcb4e09c21c1b8edc41d82359197e832a129cd100befb599cc7d",
+      "games": 20,
+      "results": {
+        "win": 20,
+        "draw": 0,
+        "loss": 0,
+        "scoreRate": 1,
+        "meanDiscDifference": 40.4
+      },
+      "diagnostics": {
+        "candidate": {
+          "decisions": 597,
+          "bookHits": 59,
+          "searchDecisions": 538,
+          "policyDecisions": 0,
+          "wallMs": 68207.54728899995,
+          "searchWallMs": 68189.37724399996,
+          "nodes": 18045081,
+          "exact": 205
+        },
+        "baseline": {
+          "decisions": 509,
+          "bookHits": 0,
+          "searchDecisions": 0,
+          "policyDecisions": 509,
+          "wallMs": 14.237008000005062,
+          "searchWallMs": 0,
+          "nodes": 509,
+          "exact": 0
+        }
+      },
+      "allGamesReplayed": true
+    },
+    {
+      "candidate": "search2000",
+      "baseline": "search200",
+      "report": "models/four-level-ladder-v1-search2000-vs-search200-20.json",
+      "reportSha256": "36d0b9f32e01b6d4038ca4215f034e72fafb45bad6f6bfb0cb44ea9b1929df33",
+      "games": 20,
+      "results": {
+        "win": 6,
+        "draw": 14,
+        "loss": 0,
+        "scoreRate": 0.65,
+        "meanDiscDifference": 6.7
+      },
+      "diagnostics": {
+        "candidate": {
+          "decisions": 603,
+          "bookHits": 307,
+          "searchDecisions": 296,
+          "policyDecisions": 0,
+          "wallMs": 391600.2142400001,
+          "searchWallMs": 391532.51066099986,
+          "nodes": 1106891135,
+          "exact": 102
+        },
+        "baseline": {
+          "decisions": 597,
+          "bookHits": 307,
+          "searchDecisions": 290,
+          "policyDecisions": 0,
+          "wallMs": 42723.21102699933,
+          "searchWallMs": 42656.18074999943,
+          "nodes": 108063222,
+          "exact": 81
+        }
+      },
+      "allGamesReplayed": true
+    }
+  ],
+  "limits": "Adjacent-pair screening; book-assisted proposed ladder; no runtime/default changes or human strength estimates",
+  "validation": "models/four-level-ladder-v1-validation.json",
+  "findings": {
+    "ordering": "Observed adjacent ordering matches the proposed four tiers in this 20-game-per-pair screening sample",
+    "spacing": "Large gaps at easy→policy (95%) and policy→200ms+book (100%); smaller gap at 200ms+book→2s+book (65%, 14 draws)",
+    "limits": "Search tiers include the opening book; policy vs search comparison does not isolate search alone. Only 10 color-swapped pairs per comparison, not a human difficulty or statistical-significance claim. No runtime/default modifications."
+  }
+}

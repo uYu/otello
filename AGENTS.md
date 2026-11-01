@@ -10,6 +10,11 @@
 - Train and evaluate candidates against the latest user-approved default. Keep
   candidate artifacts/reports separate; better validation or match results alone
   do not authorize changing the default.
+- User instruction (2026-10-30): architecture candidates, including direct-board
+  point features and explicit mobility, train the entire network from random
+  initialization. Do not freeze parameters or initialize from pretrained v2
+  weights unless the user later explicitly requests it. Frozen v2 remains the
+  comparison opponent; earlier fine-tuning/pilot records stay separate.
 - When the user says to make a candidate the default (for example,
   “作为默认模型”), that authorizes promoting it and freezing it as the new
   baseline. Update default entry points, embedded weights when applicable,
@@ -178,3 +183,62 @@ miss; browser budgets stay 100ms/1s. Earlier baselines and candidate-era records
 remain immutable. Future comparisons use v2. Historical preservation verification:
 `python3 scripts/verify-v2-history.py`; current default verification:
 `python3 scripts/verify-v2-default.py` and `npm run test:baseline`.
+
+## Beginner difficulty exception (2026-11-01)
+
+User approval: “开局库也没必要了”, in the context of weakening beginner difficulty.
+Browser and optional native beginner play skip the opening book from the first move.
+Normal, hard and hints retain mandatory verified book lookup and error/retry semantics.
+The approved v2 model and historical baseline records remain frozen.
+
+## Selected beginner model (2026-11-01)
+
+User requested an independently trained weak beginner and authorized choosing it,
+then allowed sampling from the learned probability distribution. Browser easy
+uses `models/beginner-error-policy-80-v1.json`, selected by
+`models/beginner-default.json`: 8×8×3 own/opponent/empty →64 logits, 12,352
+parameters. All parameters trained from random initialization on 10,000 distinct
+canonical low-Elo actor positions for30 epochs. The final training target is20%
+recorded low-Elo move plus80% synthetic error distribution from inverse frozen
+v2 Pattern priors; this is deliberate weak-target training, not pure imitation.
+v2 participates only during data preparation. Inference uses only the new model,
+D4-mean logits, softmax temperature1 and board/game-seeded sampling. No uniform
+random mixture, hand-coded heuristic, value lookahead, book or MCTS. Browser
+beginner is fixed to this model, including old native easy saves. Hints remain
+hard; normal/hard and the approved v2 general baseline remain unchanged.
+
+Against the exact old75%-random/25%-top-three heuristic beginner, preserve
+separate paired-color results: screening50 games13W/4D/33L (30%); new-opening
+confirmation50 games10W/4D/36L (24%). Combined23W/8D/69L (27%) is an empirical
+screening result, not a human win-rate, Elo or significance claim. Replay audit
+verified all5,999 actions and2,588 candidate decisions. Keep the stronger tiny,
+dense-policy/value, pure low-Elo and calibration candidates/reports separate;
+the earlier tiny58% candidate was rejected by the user. See
+`models/beginner-comparison.md` and `models/beginner-default-validation.json`.
+
+## Local beginner playtest selection (2026-11-01)
+
+User selected the 20W/5D/75L candidate to play: “这个我玩玩看”.
+`models/beginner-default.json` now selects
+`models/beginner-error-policy-80-e2-lr0003-v1.json` for local easy play:
+2 epochs, Adam LR0.0003, batch250, 10,000 distinct low-Elo positions,
+80 optimizer updates, same 20% recorded/80% error-target training and
+D4-mean policy sampling at temperature1. All weights trained from random
+initialization. No book/MCTS/heuristic/uniform mixing. Preserve the former
+30-epoch beginner in `models/archive/beginner-30-default.json` and its
+checksummed source archive. Preserve separate screening10W/2D/38L (22%)
+and confirmation10W/3D/37L (23%); combined22.5% is screening evidence,
+not a human win rate. This local playtest does not change the approved v2
+general baseline or deploy the site to the server.
+
+## 当前第二档：高级 v2 权重直接采样（2026-11-01）
+
+用户选择“就按现在的高档模型，不搜索，作为第二档”。网页熟练档 `normal` 复用冻结 `pattern32-global-policy-v2.otpat`，没有重训；一次策略评估后合法步 softmax(T=1) 概率选步，不调用搜索、价值选步、启发式或开局库。高级档和提示仍强制查库，未命中后用原冻结 Wasm 搜索；入门模型保持不变。旧原生熟练存档按新的内置策略处理。当前仅本地构建，尚未更新线上服务。
+
+第二档选择记录 `models/second-level-default.json`，新策略适配器 `src/game/wasm/direct-policy.mjs`；原高级 Wasm 及完整模型字节未变。对上一版第二档100局76W/3D/21L（77.5%），对旧入门50局43W/1D/6L（87%），对当前入门50局46W/0D/4L（92%）。这是模型对战分数，不表示人类胜率。见 `models/v2-policy-only-T1-comparison.json`。先前低Elo候选及其结果全部保留。
+
+## User-approved four-level web release (2026-11-01)
+
+User authorized commit, push and deployment after the adjacent-pair matches. The current web ladder is `easy` 入门 (unchanged independent model), `normal` 初级 (approved full v2 policy sampling at T=1 without search/book), `medium` 中级 (mandatory verified book then frozen v2 MCTS200ms), `hard` 高级 (mandatory verified book then frozen v2 MCTS2s). Hints use hard. All web tiers use builtin engines, including imported native-engine saves; the standalone Egaroucid HTTP compatibility API remains separate. General v2 weights, baseline and original search Wasm remain byte-identical.
+
+`models/four-level-default.json` records the approved ladder. Each adjacent pair played20 games, ten per color: policy vs beginner19W/0D/1L;200ms vs policy20W/0D/0L;2s vs200ms6W/14D/0L. These book-assisted screening samples establish observed ordering, with uneven gaps; no Elo or human win-rate claim. Preserve reports, validation and archived evaluation sources; changing runtime entry points must not rewrite the frozen match reports.

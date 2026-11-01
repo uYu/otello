@@ -1,0 +1,53 @@
+{
+  "stage": "screening",
+  "seed": 20261101,
+  "comparisons": [
+    {
+      "profile": "error50-T1",
+      "temperature": 1,
+      "model": "models/beginner-error-policy-50-v1.json",
+      "report": "models/beginner-calibrated-error50-T1-screening-50.json",
+      "results": {
+        "win": 23,
+        "draw": 2,
+        "loss": 25,
+        "scoreRate": 0.48,
+        "meanDiscDifference": -4.1999999999999975
+      },
+      "diagnostics": {
+        "decisions": 1298,
+        "cornersAvailable": 558,
+        "cornersTaken": 77,
+        "avoidableCornerGifts": 111,
+        "passes": 29,
+        "ms": 45.221435000000625
+      },
+      "cornerChoiceRate": 0.13799283154121864,
+      "meanMoveMs": 0.034839318181818665
+    },
+    {
+      "profile": "error80-T1",
+      "temperature": 1,
+      "model": "models/beginner-error-policy-80-v1.json",
+      "report": "models/beginner-calibrated-error80-T1-screening-50.json",
+      "results": {
+        "win": 13,
+        "draw": 4,
+        "loss": 33,
+        "scoreRate": 0.3,
+        "meanDiscDifference": -9.02
+      },
+      "diagnostics": {
+        "decisions": 1297,
+        "cornersAvailable": 518,
+        "cornersTaken": 50,
+        "avoidableCornerGifts": 125,
+        "passes": 16,
+        "ms": 40.89324699999963
+      },
+      "cornerChoiceRate": 0.09652509652509653,
+      "meanMoveMs": 0.03152910331534282
+    }
+  ],
+  "limits": "Screening results are used to select low strength; confirmation uses fresh openings. No human win-rate claim."
+}

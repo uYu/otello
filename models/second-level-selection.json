@@ -1,0 +1,75 @@
+{
+  "status": "recommended-candidate-not-promoted",
+  "name": "第二档 · 初级",
+  "model": "models/beginner-pure-lowelo-e2-lr0003-v1.json",
+  "modelSha256": "4d66ca548bff099fefc62a95fad7ef1d06cf330d98b48788be2ecd53a6485d17",
+  "epochs": 2,
+  "learningRate": 0.0003,
+  "temperature": 1,
+  "openingBook": false,
+  "search": false,
+  "selection": "Sample legal moves from trained policy probabilities",
+  "trainingTarget": "Pure recorded low-Elo moves, without synthetic error targets",
+  "legacyReports": [
+    "models/beginner-calibrated-puree2lowLR-T1-screening-50.json",
+    "models/second-level-puree2lowLR-T1-vs-legacy-50.json"
+  ],
+  "legacyResults": {
+    "win": 54,
+    "draw": 6,
+    "loss": 40,
+    "scoreRate": 0.57
+  },
+  "currentBeginnerReport": "models/second-level-puree2lowLR-T1-vs-current-100.json",
+  "currentBeginnerResults": {
+    "win": 79,
+    "draw": 1,
+    "loss": 20,
+    "scoreRate": 0.795
+  },
+  "rejectedCandidate": {
+    "model": "models/beginner-error-policy-80-e2-v1.json",
+    "reason": "42.5% direct score against current beginner does not establish the intended second level"
+  },
+  "validation": [
+    {
+      "report": "models/second-level-error80e2-T1-vs-legacy-50.json",
+      "sha256": "2df6d56ef90541f019e3b4dbb3b528acc523b318ac4a665265c00d03a124c397",
+      "games": 50,
+      "actions": 3000,
+      "win": 15,
+      "draw": 4,
+      "loss": 31
+    },
+    {
+      "report": "models/second-level-error80e2-T1-vs-current-100.json",
+      "sha256": "88b9acfdfb54071ffbd850eb77f85e7a72a35a02eb0120305e60e3669eefc464",
+      "games": 100,
+      "actions": 6000,
+      "win": 40,
+      "draw": 5,
+      "loss": 55
+    },
+    {
+      "report": "models/second-level-puree2lowLR-T1-vs-legacy-50.json",
+      "sha256": "16fb07035600cc687ee5dadd4e42c71e4a086535f9d2b101a2927a4508b9c10b",
+      "games": 50,
+      "actions": 3000,
+      "win": 26,
+      "draw": 3,
+      "loss": 21
+    },
+    {
+      "report": "models/second-level-puree2lowLR-T1-vs-current-100.json",
+      "sha256": "6c91a323f6fe591449f46a9701dc864f12fe2ab273eaeceedd789cc28f322e81",
+      "games": 100,
+      "actions": 5999,
+      "win": 79,
+      "draw": 1,
+      "loss": 20
+    }
+  ],
+  "runnerSha256": "582bde0672e2496d34244a7cc502f6dc85de401e36ac083c928ce0d04e7fcbdd",
+  "firstRunnerArchive": "models/archive/second-level-first-candidate-runner.ts",
+  "limits": "Paired colors, eight random legal opening plies; no book. Match scores do not estimate human win rates. Beginner default and v2 default unchanged."
+}

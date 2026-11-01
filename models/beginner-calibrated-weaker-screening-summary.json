@@ -1,0 +1,122 @@
+{
+  "stage": "screening",
+  "seed": 20261101,
+  "comparisons": [
+    {
+      "profile": "dense-T8",
+      "temperature": 8,
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/beginner-calibrated-dense-T8-screening-50.json",
+      "results": {
+        "win": 25,
+        "draw": 4,
+        "loss": 21,
+        "scoreRate": 0.54,
+        "meanDiscDifference": -0.96
+      },
+      "diagnostics": {
+        "decisions": 1302,
+        "cornersAvailable": 522,
+        "cornersTaken": 93,
+        "avoidableCornerGifts": 101,
+        "passes": 18,
+        "ms": 46.24630299999981
+      },
+      "cornerChoiceRate": 0.1781609195402299,
+      "meanMoveMs": 0.035519433947772516
+    },
+    {
+      "profile": "dense-T12",
+      "temperature": 12,
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/beginner-calibrated-dense-T12-screening-50.json",
+      "results": {
+        "win": 22,
+        "draw": 4,
+        "loss": 24,
+        "scoreRate": 0.48,
+        "meanDiscDifference": -0.64
+      },
+      "diagnostics": {
+        "decisions": 1304,
+        "cornersAvailable": 529,
+        "cornersTaken": 96,
+        "avoidableCornerGifts": 91,
+        "passes": 14,
+        "ms": 42.737765000000195
+      },
+      "cornerChoiceRate": 0.18147448015122875,
+      "meanMoveMs": 0.03277435966257684
+    },
+    {
+      "profile": "dense-T20",
+      "temperature": 20,
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/beginner-calibrated-dense-T20-screening-50.json",
+      "results": {
+        "win": 22,
+        "draw": 2,
+        "loss": 26,
+        "scoreRate": 0.46,
+        "meanDiscDifference": -1.16
+      },
+      "diagnostics": {
+        "decisions": 1312,
+        "cornersAvailable": 594,
+        "cornersTaken": 91,
+        "avoidableCornerGifts": 91,
+        "passes": 28,
+        "ms": 43.29874799999811
+      },
+      "cornerChoiceRate": 0.1531986531986532,
+      "meanMoveMs": 0.033002094512193686
+    },
+    {
+      "profile": "local-T2",
+      "temperature": 2,
+      "model": "models/beginner-low-elo1300-local4-v1.json",
+      "report": "models/beginner-calibrated-local-T2-screening-50.json",
+      "results": {
+        "win": 22,
+        "draw": 1,
+        "loss": 27,
+        "scoreRate": 0.45,
+        "meanDiscDifference": -4.04
+      },
+      "diagnostics": {
+        "decisions": 1304,
+        "cornersAvailable": 554,
+        "cornersTaken": 73,
+        "avoidableCornerGifts": 97,
+        "passes": 21,
+        "ms": 20.073279999999613
+      },
+      "cornerChoiceRate": 0.13176895306859207,
+      "meanMoveMs": 0.015393619631901544
+    },
+    {
+      "profile": "local-T5",
+      "temperature": 5,
+      "model": "models/beginner-low-elo1300-local4-v1.json",
+      "report": "models/beginner-calibrated-local-T5-screening-50.json",
+      "results": {
+        "win": 24,
+        "draw": 0,
+        "loss": 26,
+        "scoreRate": 0.48,
+        "meanDiscDifference": -1.0399999999999998
+      },
+      "diagnostics": {
+        "decisions": 1302,
+        "cornersAvailable": 568,
+        "cornersTaken": 86,
+        "avoidableCornerGifts": 97,
+        "passes": 21,
+        "ms": 18.751016000007667
+      },
+      "cornerChoiceRate": 0.15140845070422534,
+      "meanMoveMs": 0.014401701996933691
+    }
+  ],
+  "limits": "Screening results are used to select low strength; confirmation uses fresh openings. No human win-rate claim."
+}

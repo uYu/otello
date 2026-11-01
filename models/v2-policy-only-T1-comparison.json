@@ -1,0 +1,57 @@
+{
+  "version": "v2-policy-only-T1",
+  "status": "user-selected-local-playtest",
+  "model": "models/pattern32-global-policy-v2.otpat",
+  "modelSha256": "df11f7b9eed358fff33a426e2f0cb1a290083d2bc8e0781a2fbd1efdaf4270c3",
+  "temperature": 1,
+  "trainingReport": "models/second-level-default.json",
+  "summaries": [
+    {
+      "opponent": "second",
+      "report": "models/v2-policy-only-T1-vs-second-100.json",
+      "reportSha256": "213547a1a103568764b3ddced8a497065dea167adf6718adb53a29839d5e4d35",
+      "results": {
+        "win": 76,
+        "draw": 3,
+        "loss": 21,
+        "scoreRate": 0.775,
+        "meanDiscDifference": 17.2
+      },
+      "validatedGames": 100,
+      "candidateInference": "Actual browser normal path; native explicit approved v2 logits checked at every candidate decision",
+      "actions": 5196
+    },
+    {
+      "opponent": "legacy",
+      "report": "models/v2-policy-only-T1-vs-legacy-50.json",
+      "reportSha256": "0d5a76715f47b9192eefe6c4c602d65ef778f35972545f0475ff70972a55afc5",
+      "results": {
+        "win": 43,
+        "draw": 1,
+        "loss": 6,
+        "scoreRate": 0.87,
+        "meanDiscDifference": 21.84
+      },
+      "validatedGames": 50,
+      "candidateInference": "Actual browser normal path; native explicit approved v2 logits checked at every candidate decision",
+      "actions": 2598
+    },
+    {
+      "opponent": "beginner",
+      "report": "models/v2-policy-only-T1-vs-beginner-50.json",
+      "reportSha256": "888362157affec0011ab51fa71d97993a3d30b5e0f02f709f88f1e11bbcd12da",
+      "results": {
+        "win": 46,
+        "draw": 0,
+        "loss": 4,
+        "scoreRate": 0.92,
+        "meanDiscDifference": 25.6
+      },
+      "validatedGames": 50,
+      "candidateInference": "Actual browser normal path; native explicit approved v2 logits checked at every candidate decision",
+      "actions": 2598
+    }
+  ],
+  "preservedDefaultsVerified": true,
+  "limits": "No MCTS, book, value lookahead or uniform mixture. Second level selected locally; no online deployment."
+}

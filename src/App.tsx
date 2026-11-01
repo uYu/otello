@@ -5,10 +5,10 @@ import { classicPosition, INAUGURAL_FINAL } from './game/classic-games.ts';
 import { Dialog } from './components/Dialog.tsx';
 import { initial, legal, score } from './game/engine.ts';
 import { downloadSave, history, MAX_SAVE_BYTES, parseSave, SAVE_KEY } from './game/storage.ts';
-import { nativeEngineReady, requestNativeAnalysis } from './game/remote.ts';
+import { beginnerGameSeed } from './game/seeds.ts';
 import { AI_MIN_THINK_MS, PASS_PAUSE_MS, presentedPosition, REPLAY_STEP_MS, TURN_SETTLE_MS } from './game/presentation.ts';
 import { colorName, coordinate, LEVELS, MODES } from './game/types.ts';
-import type { Analysis, Color, Difficulty, Engine, Mode, Save } from './game/types.ts';
+import type { Analysis, Color, Difficulty, Mode, Save } from './game/types.ts';
 
 function load() {
   try { const text = localStorage.getItem(SAVE_KEY); return { save: text ? parseSave(text) : null, error: '' }; }
@@ -30,10 +30,6 @@ export default function App() {
   const [modal, setModal] = useState<'new' | 'rules' | 'pause' | 'result' | null>(null);
   const [mode, setMode] = useState<Mode>('ai');
   const [difficulty, setDifficulty] = useState<Difficulty>('normal');
-  const [engine, setEngine] = useState<Engine>('builtin');
-  const [nativeReady, setNativeReady] = useState(false);
-  const [nativeCheck, setNativeCheck] = useState(0);
-  const choosingEngine = modal === 'new' || modal === 'pause';
   const [human, setHuman] = useState<Color>(1);
   const [showLegal, setShowLegal] = useState(true);
   const [error, setError] = useState(loaded.error);
@@ -93,13 +89,6 @@ export default function App() {
     return () => clearTimeout(timer);
   }, [position, screen, modal, isReplay, save?.mode, watchPaused]);
   useEffect(() => {
-    const controller = new AbortController();
-    nativeEngineReady(controller.signal).then(ready => {
-      if (!controller.signal.aborted) { setNativeReady(ready); }
-    });
-    return () => controller.abort();
-  }, [nativeCheck, choosingEngine]);
-  useEffect(() => {
     if (!save) return;
     try { localStorage.setItem(SAVE_KEY, JSON.stringify(save)); }
     catch { setError('自动保存失败，请导出棋谱备份。'); }
@@ -111,9 +100,7 @@ export default function App() {
     const hintTask = task === 'hint' && active && humanTurn && !passPending;
     if ((!automatic && !hintTask) || !save) { setThinking(false); return; }
     setThinking(true); setAIError('');
-    const useNative = save.engine === 'egaroucid';
-    const worker = useNative ? null : (builtinWorker.current ??= new Worker(new URL('./game/ai.worker.ts', import.meta.url), { type: 'module' }));
-    const controller = new AbortController();
+    const worker = (builtinWorker.current ??= new Worker(new URL('./game/ai.worker.ts', import.meta.url), { type: 'module' }));
     let cancelled = false;
     let completed = false;
     let resultTimer: ReturnType<typeof setTimeout> | undefined;
@@ -137,11 +124,13 @@ export default function App() {
       worker.onerror = () => finishError('AI 引擎运行失败，请重试。');
     }
     const timer = setTimeout(() => {
-      if (useNative) requestNativeAnalysis(position, hintTask ? 'hard' : save.difficulty, controller.signal).then(result => acceptResult(result)).catch(e => finishError(e instanceof Error ? e.message : '本机引擎调用失败'));
-      else worker?.postMessage({ position, difficulty: hintTask ? 'hard' : save.difficulty, seed: (save.actions.length + 1) * 7919 });
+      worker.postMessage({ position, difficulty: hintTask ? 'hard' : save.difficulty,
+        seed: !hintTask && (save.difficulty === 'easy' || save.difficulty === 'normal')
+          ? (beginnerGameSeed(save.createdAt) + (save.actions.length + 1) * 7919) >>> 0
+          : (save.actions.length + 1) * 7919 });
     }, 0);
     return () => {
-      cancelled = true; clearTimeout(timer); clearTimeout(resultTimer); controller.abort();
+      cancelled = true; clearTimeout(timer); clearTimeout(resultTimer);
       if (worker) { worker.onmessage = null; worker.onerror = null; if (!completed) stopWorker(); }
     };
     // Position and moves are derived solely from save/replay; keep the worker stable during UI renders.
@@ -158,7 +147,7 @@ export default function App() {
   }, [replayPlaying, replay, entries.length, modal, screen, position.passed]);
   const start = () => {
     builtinWorker.current?.terminate(); builtinWorker.current = null;
-    setSave({ version: 1, mode, difficulty, human, engine: mode === 'local' ? 'builtin' : engine, actions: [], createdAt: new Date().toISOString() });
+    setSave({ version: 1, mode, difficulty, human, engine: 'builtin', actions: [], createdAt: new Date().toISOString() });
     setReplay(null); setReplayPlaying(false); setWatchPaused(false); setModal(null); setScreen('game'); setError('');
   };
   const undo = () => {
@@ -169,7 +158,7 @@ export default function App() {
     setWatchPaused(true); setSave({ ...save, actions: save.actions.slice(0, index) });
   };
   const enterReplay = (index: number) => { setTask(null); setHint(null); setReplay(Math.max(0, Math.min(entries.length, index))); setReplayPlaying(false); };
-  const aiName = save?.engine === 'egaroucid' ? 'Egaroucid' : `${LEVELS[save?.difficulty ?? 'normal']} AI`;
+  const aiName = `${LEVELS[save?.difficulty ?? 'normal']} AI`;
   const who = (color: Color) => !save ? '' : save.mode === 'local' ? (color === 1 ? '玩家一' : '玩家二') : save.mode === 'watch' ? aiName : color === save.human ? '你' : aiName;
   const canUndo = !!save && !!entries.length && (save.mode !== 'ai' || entries.some(e => e.color === save.human));
   const title = position.over ? counts.black === counts.white ? '棋逢对手，平分秋色' : `${counts.black > counts.white ? '黑棋' : '白棋'}获胜` : isReplay ? '重温每一个转折' : passPending ? humanPassed ? '你的回合：无子可走' : `${colorName(position.passed!)}无子可走` : thinking ? task === 'hint' ? '正在寻找好棋…' : 'AI 正在思考…' : `${colorName(position.turn)}行棋`;
@@ -188,7 +177,7 @@ export default function App() {
         <h1>黑白之间，<br /><em>自有天地。</em></h1><p className="intro-copy">一枚棋子，八个方向。<br />在翻转与取舍之间，发现简单规则里的深邃。</p>
         <div className="menu-actions"><button className="primary large" onClick={() => setModal('new')}>开始新对局<ArrowRight size={18} /></button>{save && <button className="secondary large" onClick={() => { setScreen('game'); setReplay(null); }}>继续对局 <span className="count-badge">{save.actions.length}</span></button>}</div>
         <div className="menu-links"><button onClick={() => file.current?.click()}><Upload size={14} />导入棋谱</button>{save && <button onClick={() => downloadSave(save)}><Download size={14} />导出棋谱</button>}</div>
-        <div className="intro-facts"><div><b>8 × 8</b><span>经典棋盘</span></div><div><b>3 档</b><span>开局库 AI</span></div><div><b>∞</b><span>对弈的乐趣</span></div></div>
+        <div className="intro-facts"><div><b>8 × 8</b><span>经典棋盘</span></div><div><b>4 档</b><span>循序渐进</span></div><div><b>∞</b><span>对弈的乐趣</span></div></div>
       </section><DemoBoard /></main>
       <div className="mode-preview"><div className="mode-preview-intro"><span className="eyebrow">YOUR TABLE, YOUR PACE</span><h2>选一种方式，坐下来。</h2></div>{(['ai', 'local', 'watch'] as Mode[]).map(m => { const Icon = m === 'ai' ? Cpu : m === 'local' ? Users : Eye; return <button className="mode-preview-card" key={m} onClick={() => { setMode(m); setModal('new'); }}><Icon size={21} strokeWidth={1.4} /><div><h3>{MODES[m]}</h3><p>{m === 'ai' ? '与 AI 切磋，慢慢精进' : m === 'local' ? '与身边的人，面对面对弈' : '暂歇片刻，看好棋发生'}</p></div><ArrowUpRight size={16} /></button>; })}</div>
     </> : <main className="game">
@@ -208,21 +197,21 @@ export default function App() {
         <div className="score-bar"><i style={{ width: `${counts.black / (counts.black + counts.white) * 100}%` }} /></div><div className="score-caption"><span>黑 {counts.black}</span><span>空位 {64 - counts.black - counts.white}</span><span>白 {counts.white}</span></div>
       </section>
       <section className="panel insight-panel"><div className="panel-title"><h2><Leaf size={15} />一手之间</h2>{thinking && <span className="thinking-dots"><i /><i /><i /></span>}</div><p>{hint !== null ? `试试 ${coordinate(hint)}。提示会综合行动力、角位和前沿子，不只看眼前的翻子数。` : position.over ? counts.black === counts.white ? '这盘棋平分秋色。回放棋谱，找找那些改变走向的瞬间。' : `最终比分 ${counts.black} : ${counts.white}。回到棋谱里，看看局势是从哪一步开始改变的。` : '角位无法被翻转。比起一时的子数，保留选择的余地往往更重要。'}</p>
-        {stats && !stats.bookHit && !isReplay && <div className="engine-stats"><span>{stats.exact ? '精确终局' : stats.search === 'mcts' ? 'MCTS 搜索' : `${stats.depth} 层搜索`}</span><span>{stats.nodes.toLocaleString()} {stats.search === 'mcts' ? '次模拟' : '节点'}</span>{stats.ttHits !== null && <span>缓存命中 {stats.ttHits.toLocaleString()}</span>}{stats.engine === 'egaroucid' && <span>Egaroucid</span>}<span>{(stats.elapsed / 1000).toFixed(2)}s</span></div>}
+        {stats && !stats.bookHit && !isReplay && <div className="engine-stats"><span>{stats.search === 'direct-policy' ? (stats.evaluator === 'beginner' ? '入门模型 · 概率选步' : 'v2 策略 · 概率选步') : stats.exact ? '精确终局' : stats.search === 'mcts' ? 'MCTS 搜索' : `${stats.depth} 层搜索`}</span><span>{stats.nodes.toLocaleString()} {stats.search === 'mcts' ? '次模拟' : stats.search === 'direct-policy' ? '次策略评估' : '节点'}</span>{stats.ttHits !== null && <span>缓存命中 {stats.ttHits.toLocaleString()}</span>}{stats.engine === 'egaroucid' && <span>Egaroucid</span>}<span>{(stats.elapsed / 1000).toFixed(2)}s</span></div>}
       </section>
       <section className="panel history-panel"><div className="panel-title"><h2>落子记录 <span>{entries.length}</span></h2><button className="icon-btn" aria-label="导出棋谱" onClick={() => save && downloadSave(save)}><Download size={16} /></button></div>
         <div className="history-list">{entries.length === 0 ? <div className="history-empty"><span className="tiny-discs"><i /><i /></span><p>好棋，从第一手开始。</p><small>黑棋先行，点击棋盘上的可落点。</small></div> : entries.map((entry, i) => <button key={i} className={`history-item ${shown === i + 1 ? 'active' : ''}`} onClick={() => enterReplay(i + 1)} aria-label={`回放第${i + 1}手 ${colorName(entry.color)} ${coordinate(entry.move)}`}><span className="history-number">{String(i + 1).padStart(2, '0')}</span><i className={`mini-disc ${entry.color === 1 ? 'black' : 'white'}`} /><b>{coordinate(entry.move)}</b><small>翻 {entry.flipped.length} 子</small>{entry.after.passed && <span className="pass-mark" title={`${colorName(entry.after.passed)}停着`}>停</span>}</button>)}</div>
         <div className="replay-controls"><div className="replay-buttons"><button className="icon-btn" disabled={!entries.length} aria-label="回到开局" onClick={() => enterReplay(0)}><ChevronsLeft size={17} /></button><button className="icon-btn" disabled={!entries.length || shown === 0} aria-label="上一步" onClick={() => enterReplay(shown - 1)}><ChevronLeft size={17} /></button><button className="icon-btn playback" disabled={!entries.length} aria-label={replayPlaying ? '暂停回放' : '播放棋谱'} onClick={() => { if (replay === null || shown === entries.length) setReplay(0); setReplayPlaying(p => !p); }}>{replayPlaying ? <Pause size={16} /> : <Play size={16} />}</button><button className="icon-btn" disabled={!entries.length || shown >= entries.length} aria-label="下一步" onClick={() => enterReplay(shown + 1)}><ChevronRight size={17} /></button><button className="icon-btn" disabled={!entries.length} aria-label="最后一步" onClick={() => enterReplay(entries.length)}><ChevronsRight size={17} /></button></div><input aria-label="棋谱进度" type="range" min="0" max={entries.length} value={shown} disabled={!entries.length} onChange={e => enterReplay(Number(e.target.value))} />{isReplay && <button className="return-live" onClick={() => { setReplay(null); setReplayPlaying(false); }}>退出回放，返回棋局 <ArrowRight size={13} /></button>}</div>
       </section></aside></div>
     </main>}
-    <footer><span>落子有声，思考无界。</span><span><i className="online-dot" /> {screen === 'game' && save?.engine === 'egaroucid' ? 'Egaroucid 原生引擎' : 'v2 开局库引擎'}{screen === 'game' && !isReplay && stats?.bookHit && <span className="book-hit-indicator" role="img" title="开局库命中" aria-label="开局库命中"> · 开局库命中</span>} <span className="footer-separator">/</span> 开局库默认启用</span><span>OTHELLO ATELIER · 2026</span></footer>
+    <footer><span>落子有声，思考无界。</span><span><i className="online-dot" /> {screen === 'game' && save?.difficulty === 'easy' ? '入门小模型' : screen === 'game' && save?.difficulty === 'normal' ? 'v2 策略模型' : 'v2 开局库引擎'}{screen === 'game' && !isReplay && stats?.bookHit && <span className="book-hit-indicator" role="img" title="开局库命中" aria-label="开局库命中"> · 开局库命中</span>} <span className="footer-separator">/</span> {screen === 'game' && (save?.difficulty === 'easy' || save?.difficulty === 'normal') ? '不使用开局库' : '开局库默认启用'}</span><span>OTHELLO ATELIER · 2026</span></footer>
     {modal === 'new' && <Dialog title="开启一局好棋" onClose={() => setModal(null)}><p className="dialog-copy">不必匆忙，给下一步留一点时间。</p><label className="field-label">对局方式</label><div className="mode-options">{(['ai', 'local', 'watch'] as Mode[]).map(m => { const Icon = m === 'ai' ? Cpu : m === 'local' ? Users : Eye; return <button key={m} className={`choice mode-choice ${mode === m ? 'chosen' : ''}`} onClick={() => setMode(m)}><Icon size={21} /><b>{MODES[m]}</b><small>{m === 'ai' ? '挑战电脑' : m === 'local' ? '同屏轮流' : '欣赏对弈'}</small>{mode === m && <Check className="choice-check" size={13} />}</button>; })}</div>
-      {mode !== 'local' && <><label className="field-label">对战引擎 <small>{nativeReady ? '开局库默认启用 · 原生引擎已连接' : '开局库默认启用'}</small></label><div className="engine-options"><button className={`choice ${engine === 'egaroucid' ? 'chosen' : ''}`} disabled={!nativeReady} onClick={() => setEngine('egaroucid')}><b>Egaroucid</b><small>原生引擎 · 开局库已启用</small></button><button className={`choice ${engine === 'builtin' ? 'chosen' : ''}`} onClick={() => setEngine('builtin')}><b>开局库 + v2</b><small>默认启用 · 出库后 Pattern + MCTS</small></button></div>{!nativeReady && <button className="native-reconnect" onClick={() => setNativeCheck(n => n + 1)}>连接可选原生引擎</button>}<label className="field-label">AI 难度</label><div className="difficulty-options">{(['easy', 'normal', 'hard'] as Difficulty[]).map((d, i) => <button key={d} className={`choice ${difficulty === d ? 'chosen' : ''}`} onClick={() => setDifficulty(d)}><span className="level-bars">{[0, 1, 2].map(n => <i className={n <= i ? 'filled' : ''} key={n} />)}</span><b>{LEVELS[d]}</b><small>{i === 0 ? '轻松入门' : i === 1 ? '有来有回' : '深思熟虑'}</small></button>)}</div><p className="field-help">{engine === 'egaroucid' ? `Egaroucid 等级 ${{ easy: 1, normal: 5, hard: 10 }[difficulty]} · 优先查询开局库，出库后原生搜索。` : difficulty === 'hard' ? '开局库优先，出库后 v2 每手最多思考 1 秒。' : difficulty === 'normal' ? '开局库优先，出库后 v2 每手最多思考 100 毫秒。' : '开局库优先，出库后使用较弱的启发式 AI，适合熟悉规则。'}</p></>}
+      {mode !== 'local' && <><label className="field-label">AI 难度</label><div className="difficulty-options">{(['easy', 'normal', 'medium', 'hard'] as Difficulty[]).map((d, i) => <button key={d} className={`choice ${difficulty === d ? 'chosen' : ''}`} onClick={() => setDifficulty(d)}><span className="level-bars">{[0, 1, 2, 3].map(n => <i className={n <= i ? 'filled' : ''} key={n} />)}</span><b>{LEVELS[d]}</b><small>{['轻松入门', '直觉落子', '思考 200ms', '思考 2 秒'][i]}</small></button>)}</div><p className="field-help">{difficulty === 'easy' ? '独立入门模型，按概率选步；不搜索、不使用开局库。' : difficulty === 'normal' ? '使用高级版模型，按策略概率选步；不搜索、不使用开局库。' : difficulty === 'medium' ? '开局库优先，出库后每手最多思考 200 毫秒。' : '开局库优先，出库后每手最多思考 2 秒。'}</p></>}
       {mode === 'ai' && <><label className="field-label">选择执子 <small>黑棋先行</small></label><div className="color-options">{([1, -1] as Color[]).map(c => <button key={c} className={`choice ${human === c ? 'chosen' : ''}`} onClick={() => setHuman(c)}><i className={`mini-disc ${c === 1 ? 'black' : 'white'}`} />{colorName(c)}{human === c && <Check size={14} />}</button>)}</div></>}
       {save && <p className="replace-note">开始新局会替换当前存档。<button onClick={() => downloadSave(save)}>先导出棋谱</button></p>}<button className="primary dialog-start" onClick={start}>坐下来，开始吧<ArrowRight size={17} /></button>
     </Dialog>}
     {modal === 'rules' && <Dialog title="一分钟，学会黑白棋" onClose={() => setModal(null)}><div className="rules-lead"><span className="tiny-discs"><i /><i /></span><p>规则很简单，好棋值得慢慢想。</p></div><ol className="rules-list"><li><b>黑棋先行，轮流落子</b><p>棋盘为 8 × 8 格。开局中央四子交错摆放，双方轮流下一枚棋子。</p></li><li><b>夹住对方，全部翻转</b><p>新棋子与己方棋子之间，若在横、竖或斜线方向连续夹住对方棋子，必须将这些棋子全部翻成己方颜色。一手可同时翻转多个方向。</p></li><li><b>每一手，必须有所翻转</b><p>不能下在已有棋子的格子，也不能下在无法翻转任何对手棋子的位置。小圆点标出了所有合法落点，悬停可预览将要翻转的棋子。</p></li><li><b>无处可下，自动停着</b><p>一方无合法落点时，需要停着，由对手继续。对局会先显示提示，点击“确定，继续”后进入下一回合。双方都无合法落点即终局，即使棋盘还没填满。</p></li><li><b>终局子多者胜</b><p>以盘面上实际棋子数量计分，子数相同则平局。中盘领先不代表胜利，角位和行动力尤其重要。</p></li></ol><div className="rules-tip"><Lightbulb size={18} /><p>人机模式的悔棋会退回到你上一次落子之前；点击落子记录即可回放。手机也可以直接点击棋盘操作。</p></div><button className="primary dialog-start" onClick={() => setModal(null)}>明白了，落子吧<ArrowRight size={16} /></button></Dialog>}
-    {modal === 'pause' && <Dialog title="让思考歇一会儿" onClose={() => setModal(null)}><p className="dialog-copy">棋局已暂停，进度会自动保存在这个浏览器。</p>{save && save.mode !== 'local' && <><label className="field-label">当前对战引擎</label><div className="engine-options"><button disabled={!nativeReady} className={`choice ${save.engine === 'egaroucid' ? 'chosen' : ''}`} onClick={() => setSave({ ...save, engine: 'egaroucid' })}><b>Egaroucid</b><small>原生引擎 · 开局库已启用</small></button><button className={`choice ${save.engine !== 'egaroucid' ? 'chosen' : ''}`} onClick={() => setSave({ ...save, engine: 'builtin' })}><b>开局库 + v2</b><small>默认启用 · 出库后 Pattern + MCTS</small></button></div><p className="field-help">切换引擎会保留当前棋谱。</p>{!nativeReady && <button className="native-reconnect" onClick={() => setNativeCheck(n => n + 1)}>连接可选原生引擎</button>}</>}<div className="pause-actions"><button className="primary" onClick={() => setModal(null)}><Play size={17} />继续对局</button><button className="secondary" onClick={() => save && downloadSave(save)}><Download size={17} />导出棋谱</button><button className="secondary" onClick={() => file.current?.click()}><Upload size={17} />导入棋谱</button><button className="secondary" onClick={() => setModal('new')}><RotateCcw size={17} />开启新局</button><button className="text-btn" onClick={() => { setModal(null); setScreen('menu'); }}><Home size={16} />返回首页</button></div></Dialog>}
+    {modal === 'pause' && <Dialog title="让思考歇一会儿" onClose={() => setModal(null)}><p className="dialog-copy">棋局已暂停，进度会自动保存在这个浏览器。</p><div className="pause-actions"><button className="primary" onClick={() => setModal(null)}><Play size={17} />继续对局</button><button className="secondary" onClick={() => save && downloadSave(save)}><Download size={17} />导出棋谱</button><button className="secondary" onClick={() => file.current?.click()}><Upload size={17} />导入棋谱</button><button className="secondary" onClick={() => setModal('new')}><RotateCcw size={17} />开启新局</button><button className="text-btn" onClick={() => { setModal(null); setScreen('menu'); }}><Home size={16} />返回首页</button></div></Dialog>}
     {modal === 'result' && <Dialog title="一局终了，余味悠长" onClose={() => setModal(null)}><div className="result"><span className="eyebrow">WELL PLAYED</span><h2>{score(finalPosition).black === score(finalPosition).white ? '平分秋色' : `${score(finalPosition).black > score(finalPosition).white ? '黑棋' : '白棋'}获胜`}</h2><div className="result-score"><span><i className="score-disc black" />{score(finalPosition).black}</span><small>:</small><span><i className="score-disc white" />{score(finalPosition).white}</span></div><p>共 {entries.length} 手。每一次翻转，都是新的可能。</p></div><div className="result-actions"><button className="secondary" onClick={() => { setModal(null); enterReplay(0); }}>回看棋谱</button><button className="primary" onClick={() => setModal('new')}>再来一局<ArrowRight size={16} /></button></div></Dialog>}
   </div>;
 }

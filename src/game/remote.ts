@@ -8,7 +8,7 @@ export async function nativeEngineReady(signal?: AbortSignal): Promise<boolean> 
     return data.available === true && data.engine === 'egaroucid' && data.useBook === true && data.bookReady === true;
   } catch { return false; }
 }
-export async function requestNativeAnalysis(position: Position, difficulty: Difficulty, signal: AbortSignal): Promise<Analysis> {
+export async function requestNativeAnalysis(position: Position, difficulty: Exclude<Difficulty,'medium'>, signal: AbortSignal): Promise<Analysis> {
   let response: Response;
   try {
     response = await fetch('/api/native/move', {
@@ -19,7 +19,7 @@ export async function requestNativeAnalysis(position: Position, difficulty: Diff
   } catch { throw new Error('本机 Egaroucid 未响应，请检查引擎服务后重试。'); }
   if (!response.ok) throw new Error('本机 Egaroucid 暂时不可用，请检查引擎服务后重试。');
   const data = await response.json() as Analysis;
-  if (!data || data.engine !== 'egaroucid' || data.useBook !== true || typeof data.bookHit !== 'boolean' || !Number.isInteger(data.move) || !legal(position).includes(data.move) || !Number.isFinite(data.score) || !Number.isInteger(data.depth) || !Number.isFinite(data.elapsed) || !Number.isFinite(data.nodes)) throw new Error('本机 Egaroucid 返回了无效结果。');
+  if (!data || data.engine !== 'egaroucid' || data.useBook !== (difficulty !== 'easy') || (difficulty === 'easy' && data.bookHit !== false) || typeof data.bookHit !== 'boolean' || !Number.isInteger(data.move) || !legal(position).includes(data.move) || !Number.isFinite(data.score) || !Number.isInteger(data.depth) || !Number.isFinite(data.elapsed) || !Number.isFinite(data.nodes)) throw new Error('本机 Egaroucid 返回了无效结果。');
   return data;
 }
 // Adapter contract for a future self-hosted Edax / Egaroucid HTTP bridge.

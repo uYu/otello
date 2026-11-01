@@ -88,7 +88,7 @@ npm run build:wasm        # 修改 C++ 后重新编译网页适配层
 
 **Zobrist 哈希**包含棋子颜色、格子和行棋方，落子/翻子/停着时增量异或更新。固定 SplitMix64 种子保证跨进程、原生和 Wasm 结果稳定。v1.1 的 262,144 项置换表分为四项一桶，在同一线程内跨请求复用，按深度、准确性和代数替换；命中后比较完整双方位棋盘，切换评估器或修改模型参数时自动清表。递归搜索使用固定数组排序，NNUE 累加器延迟到需要评分时更新。[v1.1 性能记录](models/v1.1-search.md)包含对比结果和复现命令。
 
-网页入门档保留较弱的启发式；熟练档为 NNUE＋MCTS、每手最多 100ms，高级档每手最多 1 秒。正常连续对弈保留 worker 和 MCTS 子树；取消思考或重开棋局会清理。检测到本机 Egaroucid 时也不自动切换默认选择，仍可手动选用其原生引擎与开局库（等级 1/5/10）。MCTS 的最大访问路径与 AB 的完整搜索深度不同，界面分别显示模拟次数或搜索节点。
+网页入门档固定使用独立训练的 **beginner-error-policy-80-e2-lr0003-v1**（8×8×3→64 策略，12,352 参数），按模型概率选步。使用 1 万个低 Elo 棋手局面，全网从随机权重开始训练；目标包含 20% 实战走法和 80% 刻意失误倾向分布，因此并非纯模仿棋谱。训练时的 v2 策略只用于构造目标，走子时只运行入门模型，不混均匀随机、启发式、开局库或 MCTS。选择记录见 `models/beginner-default.json`，当前本地试玩版训练 2 轮、学习率 0.0003；筛查／确认各 50 局对旧入门分别为 10W/2D/38L、10W/3D/37L，详情见 [入门模型比较](models/beginner-comparison.md)。网页四档固定为：入门小模型、初级 v2 策略概率采样、中级开局库＋v2 搜索200ms、高级开局库＋v2 搜索2s。前两档不查库；提示使用高级档。旧存档继续可导入，网页统一使用内置模型；独立 Egaroucid HTTP 兼容接口仍保留。
 
 ## 训练模型与对战验证
 
@@ -259,3 +259,15 @@ miss; browser budgets stay 100ms/1s. Earlier baselines and candidate-era records
 remain immutable. Future comparisons use v2. Historical preservation verification:
 `python3 scripts/verify-v2-history.py`; current default verification:
 `python3 scripts/verify-v2-default.py` and `npm run test:baseline`.
+
+## 当前第二档：高级 v2 权重直接采样（2026-11-01）
+
+用户选择“就按现在的高档模型，不搜索，作为第二档”。网页熟练档 `normal` 复用冻结 `pattern32-global-policy-v2.otpat`，没有重训；一次策略评估后合法步 softmax(T=1) 概率选步，不调用搜索、价值选步、启发式或开局库。高级档和提示仍强制查库，未命中后用原冻结 Wasm 搜索；入门模型保持不变。旧原生熟练存档按新的内置策略处理。该阶段记录保留；后续四档发布见下文。
+
+第二档选择记录 `models/second-level-default.json`，新策略适配器 `src/game/wasm/direct-policy.mjs`；原高级 Wasm 及完整模型字节未变。对上一版第二档100局76W/3D/21L（77.5%），对旧入门50局43W/1D/6L（87%），对当前入门50局46W/0D/4L（92%）。这是模型对战分数，不表示人类胜率。见 `models/v2-policy-only-T1-comparison.json`。先前低Elo候选及其结果全部保留。
+
+## User-approved four-level web release (2026-11-01)
+
+User authorized commit, push and deployment after the adjacent-pair matches. The current web ladder is `easy` 入门 (unchanged independent model), `normal` 初级 (approved full v2 policy sampling at T=1 without search/book), `medium` 中级 (mandatory verified book then frozen v2 MCTS200ms), `hard` 高级 (mandatory verified book then frozen v2 MCTS2s). Hints use hard. All web tiers use builtin engines, including imported native-engine saves; the standalone Egaroucid HTTP compatibility API remains separate. General v2 weights, baseline and original search Wasm remain byte-identical.
+
+`models/four-level-default.json` records the approved ladder. Each adjacent pair played20 games, ten per color: policy vs beginner19W/0D/1L;200ms vs policy20W/0D/0L;2s vs200ms6W/14D/0L. These book-assisted screening samples establish observed ordering, with uneven gaps; no Elo or human win-rate claim. Preserve reports, validation and archived evaluation sources; changing runtime entry points must not rewrite the frozen match reports.

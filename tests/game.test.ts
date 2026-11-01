@@ -50,14 +50,20 @@ test('corrupt, oversized, unsupported and illegal saves are rejected', () => {
   assert.throws(() => parseSave(JSON.stringify({ ...s, engine: 'unknown' })));
   for (const bad of ['not json', 'null', '{}', 'x'.repeat(MAX_SAVE_BYTES + 1), JSON.stringify({ ...s, version: 2 }), JSON.stringify({ ...s, actions: [0] }), JSON.stringify({ ...s, actions: [19, 19] }), JSON.stringify({ ...s, human: 0 }), JSON.stringify({ ...s, createdAt: 'bad' }), JSON.stringify({ ...s, actions: [1.5] })]) assert.throws(() => parseSave(bad));
 });
-test('normal and hard use NNUE/MCTS while easy keeps the weak heuristic', () => {
-  for (const difficulty of ['easy', 'normal', 'hard'] as const) {
+test('four levels use independent beginner, v2 policy, 200ms search and 2s search', () => {
+  for (const difficulty of ['easy', 'normal', 'medium', 'hard'] as const) {
     const result = analyze(initial(), difficulty, 123);
-    assert.ok(legal(initial()).includes(result.move)); assert.ok(result.depth >= 1);
-    if (difficulty !== 'easy') {
+    assert.ok(legal(initial()).includes(result.move)); assert.ok(result.depth >= (difficulty === 'hard' || difficulty === 'medium' ? 1 : 0));
+    if (difficulty === 'hard' || difficulty === 'medium') {
       assert.equal(result.search, 'mcts'); assert.equal(result.evaluator, 'nnue'); assert.equal(result.ttHits, null);
-    } else { assert.equal(result.search, 'ab'); assert.equal(result.evaluator, 'heuristic'); }
+    } else { assert.equal(result.search, 'direct-policy'); assert.equal(result.evaluator, difficulty==='easy'?'beginner':'nnue'); }
     assert.ok(result.candidates.every(c => legal(initial()).includes(c.move)));
+  }
+});
+test('new middle difficulty and previous saves import without changing their moves',()=>{
+  for(const difficulty of ['easy','normal','medium','hard'] as const){
+    const save={...fresh(),difficulty,actions:[19]};
+    assert.deepEqual(parseSave(JSON.stringify(save)),save);
   }
 });
 test('native client requires a real book-enabled engine and rejects illegal moves', async () => {
@@ -68,6 +74,10 @@ test('native client requires a real book-enabled engine and rejects illegal move
     assert.equal((await requestNativeAnalysis(initial(), 'normal', new AbortController().signal)).bookHit, true);
     globalThis.fetch = async () => new Response(JSON.stringify({ ...valid, useBook: false }));
     await assert.rejects(requestNativeAnalysis(initial(), 'normal', new AbortController().signal), /无效/);
+    globalThis.fetch = async () => new Response(JSON.stringify({ ...valid, useBook: false, bookHit: false }));
+    assert.equal((await requestNativeAnalysis(initial(), 'easy', new AbortController().signal)).useBook, false);
+    globalThis.fetch = async () => new Response(JSON.stringify(valid));
+    await assert.rejects(requestNativeAnalysis(initial(), 'easy', new AbortController().signal), /无效/);
     globalThis.fetch = async () => new Response(JSON.stringify({ ...valid, move: 0 }));
     await assert.rejects(requestNativeAnalysis(initial(), 'normal', new AbortController().signal), /无效/);
     globalThis.fetch = async () => new Response(JSON.stringify({ available: true, engine: 'egaroucid', useBook: true, bookReady: true }));

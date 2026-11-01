@@ -1,0 +1,31 @@
+{
+  "audits": [
+    {
+      "report": "models/second-level-tuning-dense-T1.5-vs-previous-second-100.json",
+      "sha256": "c00c75d85b3b391bdb73af2724bf5908ba991b766be618ce7c38f72e6de2bd91",
+      "games": 100,
+      "actions": 5995,
+      "win": 59,
+      "draw": 5,
+      "loss": 36
+    },
+    {
+      "report": "models/second-level-tuning-dense-T1.5-vs-previous-second-confirm-100.json",
+      "sha256": "204d04114d8db681fa4e5f594a8e3d77fa3c1096311dec17c341e1ca66a2261c",
+      "games": 100,
+      "actions": 5994,
+      "win": 59,
+      "draw": 3,
+      "loss": 38
+    },
+    {
+      "report": "models/second-level-tuning-dense-T1.5-vs-legacy-confirm-50.json",
+      "sha256": "e6de93ff3262a4b7739c88503c26be2ed2902ffe8fb5cc4084240da0a8a9b416",
+      "games": 50,
+      "actions": 3000,
+      "win": 33,
+      "draw": 1,
+      "loss": 16
+    }
+  ]
+}

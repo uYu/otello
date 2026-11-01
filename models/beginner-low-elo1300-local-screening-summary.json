@@ -1,0 +1,49 @@
+{
+  "stage": "screening",
+  "seed": 20261101,
+  "comparisons": [
+    {
+      "model": "models/beginner-low-elo1300-local1-v1.json",
+      "report": "models/beginner-low-elo1300-local1-v1-legacy-screening-50.json",
+      "results": {
+        "win": 30,
+        "draw": 2,
+        "loss": 18,
+        "scoreRate": 0.62,
+        "meanDiscDifference": 8.12
+      },
+      "diagnostics": {
+        "decisions": 1325,
+        "cornersAvailable": 566,
+        "cornersTaken": 112,
+        "avoidableCornerGifts": 91,
+        "passes": 72,
+        "ms": 8.301422000000116
+      },
+      "cornerChoiceRate": 0.1978798586572438,
+      "meanMoveMs": 0.006265224150943484
+    },
+    {
+      "model": "models/beginner-low-elo1300-local4-v1.json",
+      "report": "models/beginner-low-elo1300-local4-v1-legacy-screening-50.json",
+      "results": {
+        "win": 32,
+        "draw": 1,
+        "loss": 17,
+        "scoreRate": 0.65,
+        "meanDiscDifference": 5.34
+      },
+      "diagnostics": {
+        "decisions": 1340,
+        "cornersAvailable": 644,
+        "cornersTaken": 100,
+        "avoidableCornerGifts": 104,
+        "passes": 79,
+        "ms": 18.155833999998208
+      },
+      "cornerChoiceRate": 0.15527950310559005,
+      "meanMoveMs": 0.013549129850744931
+    }
+  ],
+  "limits": "Screening results are used to select low strength; confirmation uses fresh openings. No human win-rate claim."
+}

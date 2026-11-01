@@ -483,3 +483,22 @@ miss; browser budgets stay 100ms/1s. Earlier baselines and candidate-era records
 remain immutable. Future comparisons use v2. Historical preservation verification:
 `python3 scripts/verify-v2-history.py`; current default verification:
 `python3 scripts/verify-v2-default.py` and `npm run test:baseline`.
+
+## Beginner model (2026-11-01)
+
+Browser easy uses the independently trained 12,352-parameter `beginner-error-policy-80-e2-lr0003-v1.json`,
+selected in `beginner-default.json`. This is separate from the approved v2
+general baseline. See [beginner comparison](beginner-comparison.md) for all
+architecture comparisons, the final 100-game result, deliberate error-target training and inference checks.
+
+## 当前第二档：高级 v2 权重直接采样（2026-11-01）
+
+用户选择“就按现在的高档模型，不搜索，作为第二档”。网页熟练档 `normal` 复用冻结 `pattern32-global-policy-v2.otpat`，没有重训；一次策略评估后合法步 softmax(T=1) 概率选步，不调用搜索、价值选步、启发式或开局库。高级档和提示仍强制查库，未命中后用原冻结 Wasm 搜索；入门模型保持不变。旧原生熟练存档按新的内置策略处理。当前仅本地构建，尚未更新线上服务。
+
+第二档选择记录 `models/second-level-default.json`，新策略适配器 `src/game/wasm/direct-policy.mjs`；原高级 Wasm 及完整模型字节未变。对上一版第二档100局76W/3D/21L（77.5%），对旧入门50局43W/1D/6L（87%），对当前入门50局46W/0D/4L（92%）。这是模型对战分数，不表示人类胜率。见 `models/v2-policy-only-T1-comparison.json`。先前低Elo候选及其结果全部保留。
+
+## User-approved four-level web release (2026-11-01)
+
+User authorized commit, push and deployment after the adjacent-pair matches. The current web ladder is `easy` 入门 (unchanged independent model), `normal` 初级 (approved full v2 policy sampling at T=1 without search/book), `medium` 中级 (mandatory verified book then frozen v2 MCTS200ms), `hard` 高级 (mandatory verified book then frozen v2 MCTS2s). Hints use hard. All web tiers use builtin engines, including imported native-engine saves; the standalone Egaroucid HTTP compatibility API remains separate. General v2 weights, baseline and original search Wasm remain byte-identical.
+
+`models/four-level-default.json` records the approved ladder. Each adjacent pair played20 games, ten per color: policy vs beginner19W/0D/1L;200ms vs policy20W/0D/0L;2s vs200ms6W/14D/0L. These book-assisted screening samples establish observed ordering, with uneven gaps; no Elo or human win-rate claim. Preserve reports, validation and archived evaluation sources; changing runtime entry points must not rewrite the frozen match reports.

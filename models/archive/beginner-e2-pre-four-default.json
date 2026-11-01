@@ -1,0 +1,45 @@
+{
+  "version": "beginner-error-policy-80-e2-lr0003-v1",
+  "status": "local-playtest",
+  "defaultModel": "models/beginner-error-policy-80-e2-lr0003-v1.json",
+  "modelSha256": "17dc197f62352c3b9e4c61c038be1192f5f85a82564356af92d6071fe42c2621",
+  "temperature": 1,
+  "parameters": 12352,
+  "trainPositions": 10000,
+  "generalBaseline": "models/v2-default.json",
+  "openingBook": false,
+  "search": "sample learned policy only",
+  "selectionAuthorization": "这个我玩玩看",
+  "trainingReport": "models/beginner-error-policy-80-e2-lr0003-v1-training.json",
+  "trainingTarget": "20% actual low-Elo move +80% synthetic error-target distribution; distinct from pure imitation",
+  "comparisonReports": [
+    "models/beginner-calibrated-error80e2lowLR-T1-screening-50.json",
+    "models/beginner-calibrated-error80e2lowLR-T1-confirm-50.json"
+  ],
+  "results": {
+    "win": 20,
+    "draw": 5,
+    "loss": 75,
+    "scoreRate": 0.225
+  },
+  "evaluationSourceManifest": "models/archive/beginner-e2-low-lr-evaluation-sources.json",
+  "sourceSha256": {
+    "src/game/engine.ts": "409ee2817fb60625c8fe4a336cbb4e4f186f690eb77dfe3b26368830c99deff0",
+    "src/game/beginner-policy.ts": "8b6b4d1359014b6df6a3bcc210f855c4844791cd871e8d0436f221df089dd0bc",
+    "src/game/ai.ts": "e6e45e85788d5857c516d9a6a06b07d262144e8f7b824112fe86acb741b375c1",
+    "src/game/ai.worker.ts": "1a28d0794c1e8a86f7419dd24f1a5d199d6c7e09d5f049a9052de00a942ac74f",
+    "src/game/seeds.ts": "14daa513dfdc4e8b9b72555b5af6912115d4ebd9b1388bc7b68615e1d0548e61",
+    "src/game/types.ts": "814fcc0f529c8eaf117c32282a33f36c13cfed1f45278b9c8072020f78f53d0b",
+    "src/App.tsx": "5b08542876f19313d8e9974fcfcf0b235db5e3b14473a761ba66c54287a34332"
+  },
+  "trainingReportSha256": "c2c817ea813010e28ea534adf7fc60c26054d1e51bfb0cd8babb60bd30f2d076",
+  "referenceReportsSha256": {
+    "models/beginner-calibrated-error80e2lowLR-T1-screening-50.json": "2c6a1b14b5b630e75d54e5c737783c2e2dda53728623be8888251a25692bfa38",
+    "models/beginner-calibrated-error80e2lowLR-T1-confirm-50.json": "4c5342d9b34b02cfa0973be81c3c9c5c9629e4a256efe99280da1fa0decbdb4e"
+  },
+  "epochs": 2,
+  "learningRate": 0.0003,
+  "previousBeginnerManifest": "models/archive/beginner-30-default.json",
+  "previousBeginnerSourceManifest": "models/archive/beginner-30-default-sources.json",
+  "previousRuntimeManifest": "models/archive/beginner-e2-pre-second-default.json"
+}

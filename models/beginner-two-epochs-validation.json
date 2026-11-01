@@ -1,0 +1,13 @@
+{
+  "version": "beginner-error-policy-80-e2-v1",
+  "games": 50,
+  "actions": 3000,
+  "results": {
+    "win": 21,
+    "draw": 3,
+    "loss": 26
+  },
+  "maxPythonTypescriptLogitError": 2.651577233336866e-7,
+  "allRecordedDecisionsReplayed": true,
+  "defaultUnchanged": true
+}

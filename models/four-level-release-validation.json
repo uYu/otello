@@ -1,0 +1,15 @@
+{
+  "release": "v2-four-levels-v1",
+  "checks": {
+    "webTestsPassed": 29,
+    "nativeTestsPassed": 2,
+    "adjacentMatches": 60,
+    "beginnerHistoricalMatchesReplayed": 100,
+    "productionBuildPassed": true,
+    "localBrowserFourLevelMenuVerified": true
+  },
+  "limitations": [
+    "Optional standalone Egaroucid integration test unavailable: .build/native-egaroucid/otello is absent. Web ladder does not use this interface."
+  ],
+  "scope": "No new model training or baseline weight change; four-tier frontend and book/search budgets"
+}

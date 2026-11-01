@@ -1,0 +1,32 @@
+{
+  "version": "beginner-low-elo-mistakes-v2",
+  "threshold": 1350,
+  "minPriorTrainGames": 20,
+  "trainPositions": 10000,
+  "uniqueCanonicalTrainPositions": 10000,
+  "seed": 20261101,
+  "strata": {
+    "largestPolicyDisagreement": 7500,
+    "unfilteredLowElo": 2500
+  },
+  "sourceReport": "models/beginner-low-elo-v1-data.json",
+  "sourceReportSha256": "0e9a6826c5b9c67f5b12e2fb521f743f81d8ca4ae0ad39fcfe2ef5fc22e85209",
+  "sourceCacheSha256": "8f1b4dfb9dd79da491c12cca88020e0424ee69ce3db0491fec4763de2b6a3424",
+  "cacheSha256": "143e9d50231a1244efce4a97532c310e42019aa611ed7a331f6d96a73db63d32",
+  "provenanceSha256": "2dca494f15eb2425c9204f72fdbbd43e07d3cb1abdedf545459bff0d02b4d750",
+  "sourceSha256": "2e10c6ce0b70d366a0da480bbcea625f98945add09ee8dc3a4f4a9d9d131a3c3",
+  "v2ModelSha256": "df11f7b9eed358fff33a426e2f0cb1a290083d2bc8e0781a2fbd1efdaf4270c3",
+  "v2LibrarySha256": "351fd1390aa4f747cbe4dd070df48730812625999f427700caa642b44553d827",
+  "target": "Unchanged recorded low-Elo actor legal move; no relabeling to engine choice",
+  "filtering": "Prefer large best legal v2 Pattern logit minus actual-move Pattern logit; retain 25% unfiltered low-Elo states for basic play",
+  "filterOnly": "Frozen v2 is used once before training. The new network starts randomly and inference uses only its own logits.",
+  "policyGapQuantiles": [
+    0.0,
+    0.8354503193658538,
+    1.2059529585454634,
+    1.7685934954214,
+    5.947539475914667
+  ],
+  "dataNotices": "data/README.md",
+  "limits": "Disagreement with a learned prior is a mistake proxy, not a proven search blunder. Heldouts unchanged from low-Elo1350 data; excludes their canonical states before selection. Strength/coherence measured separately."
+}

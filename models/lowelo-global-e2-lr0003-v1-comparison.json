@@ -1,0 +1,57 @@
+{
+  "version": "lowelo-global-e2-lr0003-v1",
+  "status": "candidate-not-promoted",
+  "model": "models/lowelo-global-e2-lr0003-v1.otpat",
+  "modelSha256": "5dc99db1caa1e4458ec90ef9fc39ac4725f4211b196e20f940d391dfc01a7c6c",
+  "temperature": 1,
+  "trainingReport": "models/lowelo-global-e2-lr0003-v1-training.json",
+  "summaries": [
+    {
+      "opponent": "second",
+      "report": "models/lowelo-global-e2-lr0003-v1-vs-second-100.json",
+      "reportSha256": "0f51dbff8b5a64d51068d8a9578b534aecb35ce04b5839baf476577610b78697",
+      "results": {
+        "win": 36,
+        "draw": 4,
+        "loss": 60,
+        "scoreRate": 0.38,
+        "meanDiscDifference": -7.169999999999998
+      },
+      "validatedGames": 100,
+      "candidateInference": "Native explicit candidate model; fixture parity checked",
+      "actions": 5151
+    },
+    {
+      "opponent": "legacy",
+      "report": "models/lowelo-global-e2-lr0003-v1-vs-legacy-50.json",
+      "reportSha256": "57579de16c935ffc81b3502259975763de98c1100b108624190a17c327ca4162",
+      "results": {
+        "win": 15,
+        "draw": 3,
+        "loss": 32,
+        "scoreRate": 0.33,
+        "meanDiscDifference": -7.74
+      },
+      "validatedGames": 50,
+      "candidateInference": "Native explicit candidate model; fixture parity checked",
+      "actions": 2547
+    },
+    {
+      "opponent": "beginner",
+      "report": "models/lowelo-global-e2-lr0003-v1-vs-beginner-50.json",
+      "reportSha256": "2cb65c9dbd422c2d7372d4e7eea555d39a4e2e835a78d81419c189be4aa62e79",
+      "results": {
+        "win": 34,
+        "draw": 6,
+        "loss": 10,
+        "scoreRate": 0.74,
+        "meanDiscDifference": 8.539999999999997
+      },
+      "validatedGames": 50,
+      "candidateInference": "Native explicit candidate model; fixture parity checked",
+      "actions": 2549
+    }
+  ],
+  "preservedDefaultsVerified": true,
+  "limits": "No MCTS, book, value lookahead, uniform mixture, promotion or deployment"
+}

@@ -1,0 +1,76 @@
+{
+  "stage": "vs-previous-second",
+  "seed": 20261119,
+  "comparisons": [
+    {
+      "profile": "dense-T3",
+      "temperature": 3,
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/second-level-tuning-dense-T3-vs-previous-second-100.json",
+      "results": {
+        "win": 50,
+        "draw": 3,
+        "loss": 47,
+        "scoreRate": 0.515,
+        "meanDiscDifference": -0.9799999999999999
+      },
+      "diagnostics": {
+        "decisions": 2598,
+        "cornersAvailable": 755,
+        "cornersTaken": 175,
+        "avoidableCornerGifts": 208,
+        "passes": 57,
+        "ms": 80.61260199999803
+      },
+      "cornerChoiceRate": 0.23178807947019867,
+      "meanMoveMs": 0.031028715165511176
+    },
+    {
+      "profile": "dense-T4",
+      "temperature": 4,
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/second-level-tuning-dense-T4-vs-previous-second-100.json",
+      "results": {
+        "win": 34,
+        "draw": 3,
+        "loss": 63,
+        "scoreRate": 0.355,
+        "meanDiscDifference": -4.400000000000001
+      },
+      "diagnostics": {
+        "decisions": 2595,
+        "cornersAvailable": 744,
+        "cornersTaken": 164,
+        "avoidableCornerGifts": 251,
+        "passes": 46,
+        "ms": 79.4650369999963
+      },
+      "cornerChoiceRate": 0.22043010752688172,
+      "meanMoveMs": 0.030622364932561194
+    },
+    {
+      "profile": "dense-T5",
+      "temperature": 5,
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/second-level-tuning-dense-T5-vs-previous-second-100.json",
+      "results": {
+        "win": 44,
+        "draw": 3,
+        "loss": 53,
+        "scoreRate": 0.455,
+        "meanDiscDifference": -2.869999999999999
+      },
+      "diagnostics": {
+        "decisions": 2600,
+        "cornersAvailable": 836,
+        "cornersTaken": 178,
+        "avoidableCornerGifts": 215,
+        "passes": 51,
+        "ms": 79.61396099999001
+      },
+      "cornerChoiceRate": 0.21291866028708134,
+      "meanMoveMs": 0.03062075423076539
+    }
+  ],
+  "limits": "Screening results are used to select low strength; confirmation uses fresh openings. No human win-rate claim."
+}

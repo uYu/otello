@@ -1,0 +1,30 @@
+{
+  "stage": "vs-legacy",
+  "seed": 20261117,
+  "comparisons": [
+    {
+      "profile": "puree2lowLR-T1",
+      "temperature": 1,
+      "model": "models/beginner-pure-lowelo-e2-lr0003-v1.json",
+      "report": "models/second-level-puree2lowLR-T1-vs-legacy-50.json",
+      "results": {
+        "win": 26,
+        "draw": 3,
+        "loss": 21,
+        "scoreRate": 0.55,
+        "meanDiscDifference": 4.800000000000001
+      },
+      "diagnostics": {
+        "decisions": 1300,
+        "cornersAvailable": 541,
+        "cornersTaken": 130,
+        "avoidableCornerGifts": 78,
+        "passes": 19,
+        "ms": 45.79088399999924
+      },
+      "cornerChoiceRate": 0.24029574861367836,
+      "meanMoveMs": 0.03522375692307634
+    }
+  ],
+  "limits": "Screening results are used to select low strength; confirmation uses fresh openings. No human win-rate claim."
+}

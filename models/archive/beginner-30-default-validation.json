@@ -1,0 +1,16 @@
+{
+  "version": "beginner-error-policy-80-v1",
+  "modelSha256": "c8950eccf581167a4c15390e9bd7d5c3c903ea42ce00f2eacfe303b761e80dd6",
+  "games": 100,
+  "actions": 5999,
+  "decisions": 2588,
+  "results": {
+    "win": 23,
+    "draw": 8,
+    "loss": 69
+  },
+  "scoreRate": 0.27,
+  "allRecordedActionsExactlyReplayed": true,
+  "allFinalBoardsVerified": true,
+  "scriptSha256": "423a330b94642243467ea996c33106819fa154b3e1ee954e54754c7d00078b56"
+}

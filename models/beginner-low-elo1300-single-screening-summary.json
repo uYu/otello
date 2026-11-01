@@ -1,0 +1,133 @@
+{
+  "stage": "screening",
+  "seed": 20261101,
+  "comparisons": [
+    {
+      "model": "models/beginner-low-elo1300-policy-v1-single.json",
+      "report": "models/beginner-low-elo1300-policy-v1-single-legacy-screening-50.json",
+      "results": {
+        "win": 45,
+        "draw": 0,
+        "loss": 5,
+        "scoreRate": 0.9,
+        "meanDiscDifference": 22.56
+      },
+      "diagnostics": {
+        "decisions": 1339,
+        "cornersAvailable": 218,
+        "cornersTaken": 159,
+        "avoidableCornerGifts": 42,
+        "passes": 81,
+        "ms": 9.914964000001177
+      },
+      "cornerChoiceRate": 0.7293577981651376,
+      "meanMoveMs": 0.00740475280059834
+    },
+    {
+      "model": "models/beginner-low-elo1300-value1-v1-single.json",
+      "report": "models/beginner-low-elo1300-value1-v1-single-legacy-screening-50.json",
+      "results": {
+        "win": 26,
+        "draw": 3,
+        "loss": 21,
+        "scoreRate": 0.55,
+        "meanDiscDifference": 1.6
+      },
+      "diagnostics": {
+        "decisions": 1303,
+        "cornersAvailable": 110,
+        "cornersTaken": 105,
+        "avoidableCornerGifts": 154,
+        "passes": 6,
+        "ms": 27.16563699999881
+      },
+      "cornerChoiceRate": 0.9545454545454546,
+      "meanMoveMs": 0.020848531849576985
+    },
+    {
+      "model": "models/beginner-low-elo1300-value2-v1-single.json",
+      "report": "models/beginner-low-elo1300-value2-v1-single-legacy-screening-50.json",
+      "results": {
+        "win": 28,
+        "draw": 2,
+        "loss": 20,
+        "scoreRate": 0.58,
+        "meanDiscDifference": 4.16
+      },
+      "diagnostics": {
+        "decisions": 1300,
+        "cornersAvailable": 128,
+        "cornersTaken": 121,
+        "avoidableCornerGifts": 146,
+        "passes": 6,
+        "ms": 26.936646999995787
+      },
+      "cornerChoiceRate": 0.9453125,
+      "meanMoveMs": 0.02072049769230445
+    },
+    {
+      "model": "models/beginner-low-elo1300-value4-v1-single.json",
+      "report": "models/beginner-low-elo1300-value4-v1-single-legacy-screening-50.json",
+      "results": {
+        "win": 32,
+        "draw": 1,
+        "loss": 17,
+        "scoreRate": 0.65,
+        "meanDiscDifference": 5.16
+      },
+      "diagnostics": {
+        "decisions": 1306,
+        "cornersAvailable": 115,
+        "cornersTaken": 111,
+        "avoidableCornerGifts": 168,
+        "passes": 23,
+        "ms": 29.20833699999889
+      },
+      "cornerChoiceRate": 0.9652173913043478,
+      "meanMoveMs": 0.022364729709034373
+    },
+    {
+      "model": "models/beginner-low-elo1300-value8-v1-single.json",
+      "report": "models/beginner-low-elo1300-value8-v1-single-legacy-screening-50.json",
+      "results": {
+        "win": 35,
+        "draw": 1,
+        "loss": 14,
+        "scoreRate": 0.71,
+        "meanDiscDifference": 7.320000000000001
+      },
+      "diagnostics": {
+        "decisions": 1301,
+        "cornersAvailable": 127,
+        "cornersTaken": 122,
+        "avoidableCornerGifts": 162,
+        "passes": 5,
+        "ms": 39.1511430000005
+      },
+      "cornerChoiceRate": 0.9606299212598425,
+      "meanMoveMs": 0.030093115295926596
+    },
+    {
+      "model": "models/beginner-low-elo1300-value32-v1-single.json",
+      "report": "models/beginner-low-elo1300-value32-v1-single-legacy-screening-50.json",
+      "results": {
+        "win": 32,
+        "draw": 2,
+        "loss": 16,
+        "scoreRate": 0.66,
+        "meanDiscDifference": 8.08
+      },
+      "diagnostics": {
+        "decisions": 1305,
+        "cornersAvailable": 135,
+        "cornersTaken": 123,
+        "avoidableCornerGifts": 176,
+        "passes": 15,
+        "ms": 77.79441999999472
+      },
+      "cornerChoiceRate": 0.9111111111111111,
+      "meanMoveMs": 0.05961258237547488
+    }
+  ],
+  "limits": "Screening results are used to select low strength; confirmation uses fresh openings. No human win-rate claim."
+}

@@ -4,6 +4,7 @@ import {readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {initEngine,initial,legal,play,analyze} from '../src/game/engine.ts';
 import {BOOK_SOURCE_SHA,BOOK_VERSION,bookShard,canonicalBookPosition,createOpeningBookClient,openingBookAssetBase} from '../src/game/opening-book.ts';
+import { analyzeGame } from '../src/game/ai.ts';
 import type {Position} from '../src/game/types.ts';
 const prefix=`/opening-book/${BOOK_VERSION}/`;
 const reads:string[]=[];
@@ -43,7 +44,7 @@ test('only a verified miss returns to the approved default search; terminals ski
   const result=await client.lookup(p,ply+1);if(!result){miss=p;break;}
   const moves=legal(p);p=play(p,moves[(ply*13+3)%moves.length]);
  }
- assert.ok(miss,'An off-book reachable line should be found');const result=analyze(miss,'normal',91);assert.ok(legal(miss).includes(result.move));assert.equal(result.evaluator,'nnue');
+ assert.ok(miss,'An off-book reachable line should be found');const result=analyze(miss,'hard',91);assert.ok(legal(miss).includes(result.move));assert.equal(result.evaluator,'nnue');assert.equal(result.search,'mcts');
  const terminal={...initial(),cells:Array(64).fill(1),over:true};assert.equal(await client.lookup(terminal,1),null);
 });
 test('missing or corrupt book is an error and a failed load can be retried',async()=>{
@@ -52,4 +53,19 @@ test('missing or corrupt book is an error and a failed load can be retried',asyn
  const corrupt=createOpeningBookClient(async ()=>new Response(JSON.stringify({format:'otello-web-book-v1',enabled:false,shards:4096,sourceSha256:BOOK_SOURCE_SHA})));
  await assert.rejects(()=>corrupt.lookup(initial(),1),/校验失败/);
  const key=canonicalBookPosition(initial()).key;assert.match(bookShard(key),/^[0-9a-f]{3}$/);
+});
+
+test('easy and normal skip the book, while both search tiers require it', async () => {
+ let calls=0;
+ const client=createOpeningBookClient(async () => {calls++;throw new Error('book unavailable');});
+ const result=await analyzeGame(initial(),'easy',71,client);
+ assert.equal(calls,0);assert.equal(result.useBook,false);assert.equal(result.bookHit,false);
+ assert.ok(legal(initial()).includes(result.move));
+ for(const difficulty of ['easy','normal'] as const){
+  const policy=await analyzeGame(initial(),difficulty,71,client);
+  assert.equal(policy.search,'direct-policy');assert.equal(policy.useBook,false);
+ }
+ assert.equal(calls,0);
+ for(const difficulty of ['medium','hard'] as const)await assert.rejects(()=>analyzeGame(initial(),difficulty,71,client),/book unavailable/);
+ assert.equal(calls,2);
 });

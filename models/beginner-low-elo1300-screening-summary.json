@@ -1,0 +1,70 @@
+{
+  "stage": "screening",
+  "seed": 20261101,
+  "comparisons": [
+    {
+      "model": "models/beginner-low-elo1300-value1-v1.json",
+      "report": "models/beginner-low-elo1300-value1-v1-legacy-screening-50.json",
+      "results": {
+        "win": 33,
+        "draw": 2,
+        "loss": 15,
+        "scoreRate": 0.68,
+        "meanDiscDifference": 7.92
+      },
+      "diagnostics": {
+        "decisions": 1308,
+        "cornersAvailable": 118,
+        "cornersTaken": 114,
+        "avoidableCornerGifts": 148,
+        "passes": 12,
+        "ms": 43.18984599999975
+      },
+      "cornerChoiceRate": 0.9661016949152542,
+      "meanMoveMs": 0.033019759938837726
+    },
+    {
+      "model": "models/beginner-low-elo1300-value2-v1.json",
+      "report": "models/beginner-low-elo1300-value2-v1-legacy-screening-50.json",
+      "results": {
+        "win": 35,
+        "draw": 3,
+        "loss": 12,
+        "scoreRate": 0.73,
+        "meanDiscDifference": 7.979999999999999
+      },
+      "diagnostics": {
+        "decisions": 1302,
+        "cornersAvailable": 112,
+        "cornersTaken": 111,
+        "avoidableCornerGifts": 154,
+        "passes": 4,
+        "ms": 52.28650600000026
+      },
+      "cornerChoiceRate": 0.9910714285714286,
+      "meanMoveMs": 0.04015860675883277
+    },
+    {
+      "model": "models/beginner-low-elo1300-value4-v1.json",
+      "report": "models/beginner-low-elo1300-value4-v1-legacy-screening-50.json",
+      "results": {
+        "win": 32,
+        "draw": 2,
+        "loss": 16,
+        "scoreRate": 0.66,
+        "meanDiscDifference": 7.479999999999997
+      },
+      "diagnostics": {
+        "decisions": 1305,
+        "cornersAvailable": 112,
+        "cornersTaken": 112,
+        "avoidableCornerGifts": 180,
+        "passes": 19,
+        "ms": 73.69157600000199
+      },
+      "cornerChoiceRate": 1,
+      "meanMoveMs": 0.056468640613028344
+    }
+  ],
+  "limits": "Screening results are used to select low strength; confirmation uses fresh openings. No human win-rate claim."
+}

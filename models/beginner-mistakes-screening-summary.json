@@ -1,0 +1,99 @@
+{
+  "stage": "screening",
+  "seed": 20261101,
+  "comparisons": [
+    {
+      "profile": "mistakes-T0.5",
+      "temperature": 0.5,
+      "model": "models/beginner-mistakes-policy-e30-v2.json",
+      "report": "models/beginner-calibrated-mistakes-T0.5-screening-50.json",
+      "results": {
+        "win": 36,
+        "draw": 1,
+        "loss": 13,
+        "scoreRate": 0.73,
+        "meanDiscDifference": 10.039999999999997
+      },
+      "diagnostics": {
+        "decisions": 1312,
+        "cornersAvailable": 620,
+        "cornersTaken": 129,
+        "avoidableCornerGifts": 70,
+        "passes": 23,
+        "ms": 48.67102699999867
+      },
+      "cornerChoiceRate": 0.20806451612903226,
+      "meanMoveMs": 0.03709681935975509
+    },
+    {
+      "profile": "mistakes-T1",
+      "temperature": 1,
+      "model": "models/beginner-mistakes-policy-e30-v2.json",
+      "report": "models/beginner-calibrated-mistakes-T1-screening-50.json",
+      "results": {
+        "win": 30,
+        "draw": 3,
+        "loss": 17,
+        "scoreRate": 0.63,
+        "meanDiscDifference": 5.360000000000001
+      },
+      "diagnostics": {
+        "decisions": 1307,
+        "cornersAvailable": 552,
+        "cornersTaken": 112,
+        "avoidableCornerGifts": 86,
+        "passes": 23,
+        "ms": 42.52065099999868
+      },
+      "cornerChoiceRate": 0.2028985507246377,
+      "meanMoveMs": 0.03253301530221781
+    },
+    {
+      "profile": "mistakes-T2",
+      "temperature": 2,
+      "model": "models/beginner-mistakes-policy-e30-v2.json",
+      "report": "models/beginner-calibrated-mistakes-T2-screening-50.json",
+      "results": {
+        "win": 29,
+        "draw": 2,
+        "loss": 19,
+        "scoreRate": 0.6,
+        "meanDiscDifference": 0.43999999999999995
+      },
+      "diagnostics": {
+        "decisions": 1305,
+        "cornersAvailable": 518,
+        "cornersTaken": 92,
+        "avoidableCornerGifts": 86,
+        "passes": 22,
+        "ms": 42.93597400000067
+      },
+      "cornerChoiceRate": 0.1776061776061776,
+      "meanMoveMs": 0.032901129501916225
+    },
+    {
+      "profile": "mistakes-T3",
+      "temperature": 3,
+      "model": "models/beginner-mistakes-policy-e30-v2.json",
+      "report": "models/beginner-calibrated-mistakes-T3-screening-50.json",
+      "results": {
+        "win": 16,
+        "draw": 1,
+        "loss": 33,
+        "scoreRate": 0.33,
+        "meanDiscDifference": -7.519999999999999
+      },
+      "diagnostics": {
+        "decisions": 1298,
+        "cornersAvailable": 525,
+        "cornersTaken": 84,
+        "avoidableCornerGifts": 108,
+        "passes": 29,
+        "ms": 40.70009599999935
+      },
+      "cornerChoiceRate": 0.16,
+      "meanMoveMs": 0.0313560061633277
+    }
+  ],
+  "limits": "Screening results are used to select low strength; confirmation uses fresh openings. No human win-rate claim."
+}

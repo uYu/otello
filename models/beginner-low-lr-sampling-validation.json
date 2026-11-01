@@ -1,0 +1,31 @@
+{
+  "defaultUnchanged": true,
+  "comparisons": [
+    {
+      "model": "beginner-error-policy-80-e2-lr0003-v1",
+      "games": 100,
+      "actions": 5999,
+      "results": {
+        "win": 20,
+        "draw": 5,
+        "loss": 75
+      },
+      "scoreRate": 0.225,
+      "maxPythonTypescriptLogitError": 1.6594640328548849e-7,
+      "allRecordedDecisionsReplayed": true
+    },
+    {
+      "model": "beginner-pure-lowelo-e2-lr0003-v1",
+      "games": 50,
+      "actions": 3000,
+      "results": {
+        "win": 28,
+        "draw": 3,
+        "loss": 19
+      },
+      "scoreRate": 0.59,
+      "maxPythonTypescriptLogitError": 2.3326720111072063e-7,
+      "allRecordedDecisionsReplayed": true
+    }
+  ]
+}

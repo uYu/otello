@@ -1,0 +1,30 @@
+{
+  "stage": "vs-previous-second",
+  "seed": 20261119,
+  "comparisons": [
+    {
+      "profile": "dense-T2",
+      "temperature": 2,
+      "model": "models/beginner-low-elo1300-policy-v1.json",
+      "report": "models/second-level-tuning-dense-T2-vs-previous-second-100.json",
+      "results": {
+        "win": 57,
+        "draw": 2,
+        "loss": 41,
+        "scoreRate": 0.58,
+        "meanDiscDifference": 2.5200000000000005
+      },
+      "diagnostics": {
+        "decisions": 2598,
+        "cornersAvailable": 668,
+        "cornersTaken": 190,
+        "avoidableCornerGifts": 196,
+        "passes": 48,
+        "ms": 81.09422300000085
+      },
+      "cornerChoiceRate": 0.2844311377245509,
+      "meanMoveMs": 0.03121409661277939
+    }
+  ],
+  "limits": "Screening results are used to select low strength; confirmation uses fresh openings. No human win-rate claim."
+}

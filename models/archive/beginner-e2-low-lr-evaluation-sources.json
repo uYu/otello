@@ -1,0 +1,16 @@
+{
+  "archive": "models/archive/beginner-e2-low-lr-evaluation-sources.tar.gz",
+  "sha256": "e780f82a113c4666a0e742de63cb81b5fc04f503f62432923d2014fe578300c2",
+  "files": {
+    "benchmarks/beginner-legacy.ts": "382e79fdcc343b694ea766fbae366e373555cc296bb27d00944c57b4780043ac",
+    "models/beginner-calibrated-error80e2lowLR-T1-confirm-50.json": "4c5342d9b34b02cfa0973be81c3c9c5c9629e4a256efe99280da1fa0decbdb4e",
+    "models/beginner-calibrated-error80e2lowLR-T1-screening-50.json": "2c6a1b14b5b630e75d54e5c737783c2e2dda53728623be8888251a25692bfa38",
+    "models/beginner-error-policy-80-e2-lr0003-v1-training.json": "c2c817ea813010e28ea534adf7fc60c26054d1e51bfb0cd8babb60bd30f2d076",
+    "models/beginner-error-policy-80-e2-lr0003-v1.json": "17dc197f62352c3b9e4c61c038be1192f5f85a82564356af92d6071fe42c2621",
+    "models/beginner-low-lr-sampling-validation.json": "fc9176d646f2a2527d982856994f5068993d44cf2fed27521cde27d0f3019931",
+    "scripts/compare-beginner-low-lr-sampling.ts": "284c0d9e802f45acd94165f39bf430ff1d542455c316426f20eca3eae1eb2293",
+    "scripts/train-beginner-low-lr-argmax.py": "698a7fae302eb87bcee73d9c54d98da698f587882b1e7d1cd76daa36bf7992f2",
+    "src/game/beginner-policy.ts": "8b6b4d1359014b6df6a3bcc210f855c4844791cd871e8d0436f221df089dd0bc",
+    "src/game/wasm/othello.mjs": "5ac1742d9d778ea9acda984c35e4faa686da6c410e61f05e4756481a5d10deb2"
+  }
+}

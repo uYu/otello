@@ -37,8 +37,8 @@ test('real native CLI, persistent protocol and local HTTP bridge', { timeout: 12
     const payload = (board = initial()) => ({ version: 1, board: board.cells.map(c => c === 1 ? 'B' : c === -1 ? 'W' : '.').join(''), turn: board.turn, difficulty: 'easy' });
     const request = (data: unknown, headers: Record<string,string> = {}) => fetch(base + '/api/native/move', { method: 'POST', headers: { 'Content-Type': 'application/json', ...headers }, body: JSON.stringify(data) });
     const first = await request(payload()); const result = await first.json();
-    assert.equal(first.status, 200); assert.equal(result.bookHit, true); assert.equal(result.useBook, true); assert.ok(legal(initial()).includes(result.move));
-    assert.equal(result.bookVariety, 2);
+    assert.equal(first.status, 200); assert.equal(result.bookHit, false); assert.equal(result.useBook, false); assert.ok(legal(initial()).includes(result.move));
+    assert.equal(result.bookVariety, 1);
     for (const difficulty of ['normal', 'hard']) {
       const r = await (await request({ ...payload(), difficulty })).json();
       assert.equal(r.bookVariety, 1); assert.equal(r.bookHit, true);
@@ -46,7 +46,7 @@ test('real native CLI, persistent protocol and local HTTP bridge', { timeout: 12
     const next = play(initial(), result.move), reply = await (await request(payload(next))).json();
     assert.ok(legal(next).includes(reply.move)); // Opposite color and coordinate translation.
     const concurrent = await Promise.all(Array.from({ length: 3 }, () => request(payload()).then(r => r.json())));
-    assert.ok(concurrent.every(r => r.bookHit && legal(initial()).includes(r.move)));
+    assert.ok(concurrent.every(r => !r.bookHit && !r.useBook && legal(initial()).includes(r.move)));
     assert.equal((await request({ ...payload(), board: 'bad' })).status, 400);
     assert.equal((await request({ ...payload(), difficulty: 'unbounded' })).status, 400);
     assert.equal((await request(payload(), { Origin: 'https://example.com' })).status, 403);

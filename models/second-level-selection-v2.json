@@ -1,0 +1,36 @@
+{
+  "status": "recommended-candidate-not-promoted",
+  "name": "第二档 · 初级（小幅增强）",
+  "model": "models/beginner-low-elo1300-policy-v1.json",
+  "modelSha256": "f71a5a9d186daf496e5a0a251bcd08e3bda046a3cd95531830deb19d5b68ffb7",
+  "temperature": 1.5,
+  "selection": "Sample legal moves from trained low-Elo policy softmax(logits/1.5); no uniform mixture",
+  "openingBook": false,
+  "search": false,
+  "previousSelection": "models/second-level-selection.json",
+  "comparisonReports": [
+    "models/second-level-tuning-dense-T1.5-vs-previous-second-100.json",
+    "models/second-level-tuning-dense-T1.5-vs-previous-second-confirm-100.json"
+  ],
+  "resultsAgainstPreviousSecond": {
+    "win": 118,
+    "draw": 8,
+    "loss": 74,
+    "scoreRate": 0.61,
+    "meanDiscDifference": 5.125
+  },
+  "legacyConfirmation": {
+    "report": "models/second-level-tuning-dense-T1.5-vs-legacy-confirm-50.json",
+    "win": 33,
+    "draw": 1,
+    "loss": 16,
+    "scoreRate": 0.67
+  },
+  "validation": "models/second-level-tuning-validation.json",
+  "sourceSha256": {
+    "scripts/tune-second-level.ts": "3ad5c5363655409d7f4f6f4bdb774e9193e612d4bbe629f37d2c4e1427a18065",
+    "scripts/verify-second-level-tuning.ts": "aa8b5baee311d643b5feb80a1343b0b99697199c951598ea7d32cc18676d8129",
+    "src/game/beginner-policy.ts": "8b6b4d1359014b6df6a3bcc210f855c4844791cd871e8d0436f221df089dd0bc"
+  },
+  "limits": "Paired colors and random eight-ply openings. Candidate selection, not a human win-rate estimate; no runtime/default change."
+}

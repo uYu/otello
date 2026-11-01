@@ -1,0 +1,15 @@
+{
+  "sourceSha256": {
+    "cpp/direct_policy.cpp": "bd040c0d5a914db72f242191f074e97dd4bd896327aef818c93b626f0300633a",
+    "cpp/pattern.cpp": "fcf692c0cc5a386d7214cae7190ae834ef3df387480f74a77c94fa2b1e46aff5",
+    "scripts/build-direct-policy-wasm.sh": "47a68ef923bc7798ed102c111b573a1606d666ec4862581cced76bf0e95ac5ea",
+    "src/game/wasm/direct-policy.mjs": "3418bdc18946f71a4f56a15911c474eb556e0e4fdda290f882c46f139534d92f",
+    "src/game/wasm/direct-policy.d.mts": "131dc726ef94ebd79968e055ec6def323343db4488b239d5a294e39e6aee1830",
+    "src/game/direct-policy.ts": "6e448d69e5deec2f22b43f544aa5d86e461920e71045ac5ae118cd08d7cfd248",
+    "src/game/engine.ts": "00e987fc2539b9fcc185ce4601edff9014b77efb433cbd161e567e3507095002",
+    "src/game/ai.ts": "7f698ae79efad70b04a655908e50eb46c1cf6ab0ab51e5e08f46b6ff14a32746",
+    "src/App.tsx": "8570d830c57d450df0a9d3a1311033dc1b256b33ea2350aa66320d6539f8c253",
+    "models/second-level-default.json": "2efdc8c36c18ba3012444ca82dc9aaa9f9365a8e3fc5d2c529a25701a9e30ce2",
+    "models/second-level-v2-policy-parity.json": "1c800c9be3cf6311c95eadc38a2730f069adc88ab5bfbc00c4d4339dd5eea32f"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "stage": "confirm100",
+  "seed": 20261111,
+  "comparisons": [
+    {
+      "profile": "mistakes-T3",
+      "temperature": 3,
+      "model": "models/beginner-mistakes-policy-e30-v2.json",
+      "report": "models/beginner-calibrated-mistakes-T3-confirm100-100.json",
+      "results": {
+        "win": 51,
+        "draw": 0,
+        "loss": 49,
+        "scoreRate": 0.51,
+        "meanDiscDifference": 0.7400000000000001
+      },
+      "diagnostics": {
+        "decisions": 2613,
+        "cornersAvailable": 1181,
+        "cornersTaken": 200,
+        "avoidableCornerGifts": 203,
+        "passes": 43,
+        "ms": 87.63847000000524
+      },
+      "cornerChoiceRate": 0.1693480101608806,
+      "meanMoveMs": 0.033539406812095385
+    }
+  ],
+  "limits": "Screening results are used to select low strength; confirmation uses fresh openings. No human win-rate claim."
+}

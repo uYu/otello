@@ -1,0 +1,18 @@
+{
+  "archive": "models/archive/beginner-30-default-sources.tar.gz",
+  "sha256": "f109b29a3cbfa1388f80b192f56e85b5fbf8657900daf43f36c0558acc21b13e",
+  "files": {
+    "models/beginner-default-validation.json": "c52d874263d6a02b00d3fcd5808249a2b3dcd8fb8b18a788da76eafa0f03d137",
+    "models/beginner-default.json": "0256bf5cfaa4b70cb9f7fe0d862650139f37e7761d4d5120764e9064d17e3371",
+    "models/beginner-error-policy-80-v1-training.json": "dab2ee89ff50464e9e934a8e26b163ac1720ffe42233b6556ad4554c49d8b0be",
+    "models/beginner-error-policy-80-v1.json": "c8950eccf581167a4c15390e9bd7d5c3c903ea42ce00f2eacfe303b761e80dd6",
+    "scripts/check-web-release.mjs": "699bf64b5cf10111c013c6da20d84afc6503ea455e81413ad7ccf6623c2b4401",
+    "src/App.tsx": "fdd85e7fe4dd52283623b88bdaa3183eb6688f288d0d14f9f75f719b98f1d933",
+    "src/game/ai.ts": "a475f0a9b2402c39af1f3a48fd233a40aacef3f4b25b8f3a0240a2101272f188",
+    "src/game/ai.worker.ts": "1a28d0794c1e8a86f7419dd24f1a5d199d6c7e09d5f049a9052de00a942ac74f",
+    "src/game/beginner-policy.ts": "8b6b4d1359014b6df6a3bcc210f855c4844791cd871e8d0436f221df089dd0bc",
+    "src/game/engine.ts": "dc9d1ba25cf787947b3ed3b6ec1e3993130b95b2d12ca3060e87fc2773004957",
+    "src/game/seeds.ts": "14daa513dfdc4e8b9b72555b5af6912115d4ebd9b1388bc7b68615e1d0548e61",
+    "src/game/types.ts": "814fcc0f529c8eaf117c32282a33f36c13cfed1f45278b9c8072020f78f53d0b"
+  }
+}
